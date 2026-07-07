@@ -65,18 +65,6 @@ function formatRecord(player: Player) {
   return `${player.wins}승 ${player.losses}패`;
 }
 
-function getPodiumClass(rank: number) {
-  if (rank === 1) {
-    return "podium-card is-gold";
-  }
-
-  if (rank === 2) {
-    return "podium-card is-silver";
-  }
-
-  return "podium-card is-bronze";
-}
-
 function RecentForm({ recent5 }: { recent5: string[] }) {
   const form = recent5.slice(-5);
   const blanks = Array.from({ length: Math.max(0, 5 - form.length) });
@@ -206,8 +194,8 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
   }, [players]);
 
   return (
-    <main className="ranking-page">
-      <section className="summary-band">
+    <main className="ranking-page campus-ranking-page">
+      <section className="summary-band campus-hero-band">
         <div className="summary-inner">
           <header className="topbar">
             <div className="brand-lockup">
@@ -219,6 +207,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                 priority
               />
               <div>
+                <span className="campus-kicker">캠퍼스 랭킹</span>
                 <span className="org-label">{club.organization}</span>
                 <h1>{club.title}</h1>
               </div>
@@ -255,19 +244,25 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
               </div>
               <p className="live-stamp">
                 <span />
-                {formatLoadedAt(loadedAt)}
+                마지막 업데이트 {formatLoadedAt(loadedAt)}
               </p>
             </div>
 
-            <div className="podium-grid" aria-label="상위 랭킹">
+            <section className="campus-top-feed" aria-label="상위 랭킹">
+              <div className="campus-feed-heading">
+                <span>Top board</span>
+                <h2>오늘의 랭킹</h2>
+              </div>
               {topPlayers.map((player) => (
-                <article key={player.name} className={getPodiumClass(player.rank)}>
-                  <span className="podium-rank">{player.rank}</span>
-                  <strong>{player.name}</strong>
-                  <span>{formatRecord(player)}</span>
+                <article key={player.name} className="campus-top-card">
+                  <span className="podium-rank">{player.rank}위</span>
+                  <div>
+                    <strong>{player.name}</strong>
+                    <span>{formatRecord(player)}</span>
+                  </div>
                 </article>
               ))}
-            </div>
+            </section>
           </div>
         </div>
       </section>
@@ -325,6 +320,10 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
 
             {hotPlayers.length > 0 ? (
               <section className="activity-strip" aria-label="활동 선수">
+                <div className="activity-heading">
+                  <span>Campus feed</span>
+                  <h2>활동 피드</h2>
+                </div>
                 {hotPlayers.map((player) => (
                   <article key={player.name} className="activity-card">
                     <span>{player.rank}위</span>
@@ -335,7 +334,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
               </section>
             ) : null}
 
-            <section className="ranking-board" aria-label={`${club.title} 순위표`}>
+            <section className="ranking-board" aria-label="캠퍼스 랭킹 피드">
               <div className="ranking-head">
                 <span>순위</span>
                 <span>선수</span>

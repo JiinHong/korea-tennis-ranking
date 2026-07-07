@@ -586,6 +586,287 @@ button:disabled {
   font-weight: 750;
 }
 
+.campus-ranking-page {
+  --campus-red: #c62917;
+  --campus-red-soft: #fff0ee;
+  --campus-ink: #1f2328;
+  --campus-muted: #707780;
+  --campus-line: #e7e9ee;
+  --campus-bg: #f5f6f8;
+  --campus-shadow: 0 10px 26px rgba(31, 35, 40, 0.06);
+  background: var(--campus-bg);
+}
+
+.campus-ranking-page .summary-inner,
+.campus-ranking-page .content-shell {
+  width: min(980px, calc(100% - 28px));
+}
+
+.campus-hero-band {
+  color: var(--campus-ink);
+  background: var(--campus-bg);
+  border-bottom: 1px solid var(--campus-line);
+}
+
+.campus-ranking-page .summary-inner {
+  padding: 20px 0 18px;
+}
+
+.campus-ranking-page .topbar {
+  margin-bottom: 14px;
+}
+
+.campus-ranking-page .brand-lockup img {
+  background: white;
+  border: 1px solid var(--campus-line);
+  border-radius: 8px;
+  filter: none;
+}
+
+.campus-kicker {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 24px;
+  margin-bottom: 7px;
+  padding: 0 8px;
+  color: var(--campus-red);
+  background: var(--campus-red-soft);
+  border: 1px solid #ffd8d2;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.campus-ranking-page .org-label {
+  color: var(--campus-muted);
+}
+
+.campus-ranking-page .brand-lockup h1 {
+  color: var(--campus-ink);
+  font-size: 34px;
+}
+
+.campus-ranking-page .refresh-button {
+  color: var(--campus-red);
+  background: white;
+  border-color: #ffd8d2;
+}
+
+.campus-ranking-page .refresh-button:hover:not(:disabled) {
+  background: var(--campus-red-soft);
+}
+
+.campus-ranking-page .hero-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+  align-items: stretch;
+  gap: 12px;
+}
+
+.campus-ranking-page .hero-copy,
+.campus-top-feed,
+.campus-ranking-page .state-panel,
+.campus-ranking-page .toolbar-section,
+.campus-ranking-page .ranking-board {
+  background: white;
+  border: 1px solid var(--campus-line);
+  border-radius: 8px;
+  box-shadow: var(--campus-shadow);
+}
+
+.campus-ranking-page .hero-copy {
+  padding: 20px;
+}
+
+.campus-ranking-page .subtitle {
+  margin-bottom: 18px;
+  color: var(--campus-ink);
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+.campus-ranking-page .hero-stats {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.campus-ranking-page .hero-stats div {
+  padding: 12px;
+  background: #fafbfc;
+  border: 1px solid var(--campus-line);
+  border-radius: 8px;
+}
+
+.campus-ranking-page .hero-stats strong {
+  color: var(--campus-ink);
+  font-size: 30px;
+}
+
+.campus-ranking-page .hero-stats span,
+.campus-ranking-page .live-stamp {
+  color: var(--campus-muted);
+}
+
+.campus-ranking-page .live-stamp span {
+  background: var(--campus-red);
+  box-shadow: 0 0 0 5px rgba(198, 41, 23, 0.1);
+}
+
+.campus-top-feed {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 16px;
+}
+
+.campus-feed-heading span,
+.activity-heading span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--campus-red);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.campus-feed-heading h2,
+.activity-heading h2 {
+  margin: 0;
+  color: var(--campus-ink);
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.campus-top-card {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  min-height: 64px;
+  padding: 10px;
+  background: #fafbfc;
+  border: 1px solid var(--campus-line);
+  border-radius: 8px;
+}
+
+.campus-top-card .podium-rank {
+  width: 42px;
+  height: 42px;
+  margin: 0;
+  color: var(--campus-red);
+  background: var(--campus-red-soft);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.campus-top-card strong {
+  display: block;
+  overflow: hidden;
+  color: var(--campus-ink);
+  font-size: 16px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.campus-top-card span:last-child {
+  display: block;
+  margin-top: 4px;
+  color: var(--campus-muted);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.campus-ranking-page .content-shell {
+  padding-top: 14px;
+}
+
+.campus-ranking-page .toolbar-section {
+  padding: 16px;
+}
+
+.campus-ranking-page .toolbar-section h2 {
+  color: var(--campus-ink);
+  font-size: 21px;
+}
+
+.campus-ranking-page .search-field input {
+  background: #fafbfc;
+  border-color: var(--campus-line);
+}
+
+.campus-ranking-page .search-field input:focus {
+  border-color: var(--campus-red);
+  box-shadow: 0 0 0 3px rgba(198, 41, 23, 0.1);
+}
+
+.campus-ranking-page .segment-control {
+  background: #f0f2f4;
+  border-color: var(--campus-line);
+}
+
+.campus-ranking-page .segment-control button[aria-pressed="true"] {
+  color: white;
+  background: var(--campus-ink);
+}
+
+.campus-ranking-page .activity-strip {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.campus-ranking-page .activity-heading {
+  grid-column: 1 / -1;
+  margin-bottom: 2px;
+}
+
+.campus-ranking-page .activity-card {
+  background: white;
+  border-color: var(--campus-line);
+  box-shadow: var(--campus-shadow);
+}
+
+.campus-ranking-page .activity-card strong {
+  color: var(--campus-ink);
+}
+
+.campus-ranking-page .ranking-board {
+  box-shadow: var(--campus-shadow);
+}
+
+.campus-ranking-page .ranking-head {
+  color: var(--campus-muted);
+  background: #fafbfc;
+}
+
+.campus-ranking-page .ranking-row {
+  min-height: 76px;
+}
+
+.campus-ranking-page .ranking-row:hover {
+  background: #fffafa;
+}
+
+.campus-ranking-page .rank-cell span {
+  color: var(--campus-red);
+  background: var(--campus-red-soft);
+  border-radius: 8px;
+}
+
+.campus-ranking-page .player-name-line strong,
+.campus-ranking-page .record-cell strong {
+  color: var(--campus-ink);
+}
+
+.campus-ranking-page .form-dot.is-win {
+  background: #111827;
+}
+
+.campus-ranking-page .form-dot.is-loss {
+  background: var(--campus-red);
+}
+
 .national-page {
   min-height: 100vh;
   background:
@@ -711,6 +992,10 @@ button:disabled {
   }
 
   .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .campus-ranking-page .hero-grid {
     grid-template-columns: 1fr;
   }
 
@@ -841,6 +1126,17 @@ button:disabled {
 
   .activity-card {
     min-width: 158px;
+  }
+
+  .campus-ranking-page .activity-strip {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: visible;
+    padding-bottom: 0;
+  }
+
+  .campus-ranking-page .activity-card {
+    min-width: 0;
   }
 
   .ranking-row {
