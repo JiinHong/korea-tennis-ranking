@@ -397,7 +397,10 @@ button:disabled {
 
 .activity-card {
   min-height: 82px;
+  width: 100%;
   padding: 14px;
+  color: inherit;
+  text-align: left;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -452,6 +455,11 @@ button:disabled {
 
 .ranking-row {
   min-height: 70px;
+  width: 100%;
+  color: inherit;
+  text-align: left;
+  background: transparent;
+  border: 0;
   border-bottom: 1px solid var(--line);
   transition: background 140ms ease;
 }
@@ -462,6 +470,13 @@ button:disabled {
 
 .ranking-row:hover {
   background: #fbfdfb;
+}
+
+.ranking-row:focus-visible,
+.campus-top-card:focus-visible,
+.activity-card:focus-visible {
+  outline: 3px solid rgba(198, 41, 23, 0.2);
+  outline-offset: -3px;
 }
 
 .rank-cell,
@@ -613,10 +628,13 @@ button:disabled {
 }
 
 .campus-ranking-page .topbar {
-  margin-bottom: 14px;
+  align-items: flex-start;
+  margin-bottom: 12px;
 }
 
 .campus-ranking-page .brand-lockup img {
+  width: 48px;
+  height: 48px;
   background: white;
   border: 1px solid var(--campus-line);
   border-radius: 8px;
@@ -644,15 +662,23 @@ button:disabled {
 
 .campus-ranking-page .brand-lockup h1 {
   color: var(--campus-ink);
-  font-size: 34px;
-  line-height: 1.08;
+  font-size: 28px;
+  line-height: 1.12;
   word-break: keep-all;
 }
 
+.club-title-line {
+  display: block;
+}
+
 .campus-ranking-page .refresh-button {
+  min-height: 34px;
+  padding: 0 10px;
   color: var(--campus-red);
   background: white;
   border-color: #ffd8d2;
+  font-size: 13px;
+  font-weight: 850;
 }
 
 .campus-ranking-page .refresh-button:hover:not(:disabled) {
@@ -681,10 +707,11 @@ button:disabled {
 }
 
 .campus-ranking-page .subtitle {
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   color: var(--campus-ink);
-  font-size: 24px;
-  line-height: 1.35;
+  font-size: 20px;
+  line-height: 1.38;
+  font-weight: 850;
 }
 
 .campus-ranking-page .hero-stats {
@@ -713,6 +740,17 @@ button:disabled {
 .campus-ranking-page .live-stamp span {
   background: var(--campus-red);
   box-shadow: 0 0 0 5px rgba(198, 41, 23, 0.1);
+}
+
+.update-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.update-row .live-stamp {
+  min-width: 0;
 }
 
 .campus-top-feed {
@@ -745,8 +783,11 @@ button:disabled {
   grid-template-columns: 54px minmax(0, 1fr);
   gap: 10px;
   align-items: center;
+  width: 100%;
   min-height: 64px;
   padding: 10px;
+  color: inherit;
+  text-align: left;
   background: #fafbfc;
   border: 1px solid var(--campus-line);
   border-radius: 8px;
@@ -846,8 +887,23 @@ button:disabled {
   min-height: 76px;
 }
 
+.campus-ranking-page .ranking-row.is-featured {
+  min-height: 86px;
+  background: white;
+}
+
+.campus-ranking-page .ranking-row.is-compact {
+  grid-template-columns: 64px minmax(180px, 1fr) 112px 126px;
+  min-height: 54px;
+}
+
 .campus-ranking-page .ranking-row:hover {
   background: #fffafa;
+}
+
+.campus-ranking-page .ranking-row.is-selected {
+  background: var(--campus-red-soft);
+  box-shadow: inset 3px 0 0 var(--campus-red);
 }
 
 .campus-ranking-page .rank-cell span {
@@ -856,9 +912,63 @@ button:disabled {
   border-radius: 8px;
 }
 
+.campus-ranking-page .ranking-row.is-featured .rank-cell span {
+  width: 42px;
+  height: 42px;
+  font-size: 17px;
+  font-weight: 950;
+}
+
+.campus-ranking-page .ranking-row.is-compact .rank-cell span {
+  width: 30px;
+  height: 30px;
+  font-size: 13px;
+  font-weight: 900;
+}
+
 .campus-ranking-page .player-name-line strong,
 .campus-ranking-page .record-cell strong {
   color: var(--campus-ink);
+}
+
+.campus-ranking-page .ranking-row.is-featured .player-name-line strong {
+  font-size: 19px;
+}
+
+.campus-ranking-page .ranking-row.is-featured .record-cell strong {
+  font-size: 18px;
+}
+
+.campus-ranking-page .ranking-row.is-featured .form-dot {
+  width: 26px;
+  height: 26px;
+}
+
+.campus-ranking-page .ranking-row.is-compact .player-name-line strong {
+  font-size: 14px;
+}
+
+.campus-ranking-page .ranking-row.is-compact .player-sub {
+  margin-top: 2px;
+  font-size: 11px;
+}
+
+.campus-ranking-page .ranking-row.is-compact .record-cell {
+  gap: 2px;
+}
+
+.campus-ranking-page .ranking-row.is-compact .record-cell strong {
+  font-size: 13px;
+}
+
+.campus-ranking-page .ranking-row.is-compact .record-cell span {
+  font-size: 11px;
+}
+
+.campus-ranking-page .ranking-row.is-compact .form-dot {
+  width: 18px;
+  height: 18px;
+  font-size: 8px;
 }
 
 .campus-ranking-page .form-dot.is-win {
@@ -867,6 +977,211 @@ button:disabled {
 
 .campus-ranking-page .form-dot.is-loss {
   background: var(--campus-red);
+}
+
+.player-detail-panel {
+  margin-bottom: 18px;
+  padding: 18px;
+  background: white;
+  border: 1px solid var(--campus-line);
+  border-radius: 8px;
+  box-shadow: var(--campus-shadow);
+}
+
+.player-detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.player-detail-header h2 {
+  margin: 6px 0 4px;
+  color: var(--campus-ink);
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.player-detail-header p {
+  margin: 0;
+  color: var(--campus-muted);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.player-detail-header button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--campus-muted);
+  background: #f4f5f7;
+  border: 1px solid var(--campus-line);
+  border-radius: 8px;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.detail-rank {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 8px;
+  color: var(--campus-red);
+  background: var(--campus-red-soft);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.detail-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.detail-metrics div {
+  min-height: 78px;
+  padding: 12px;
+  background: #fafbfc;
+  border: 1px solid var(--campus-line);
+  border-radius: 8px;
+}
+
+.detail-metrics strong {
+  display: block;
+  color: var(--campus-ink);
+  font-size: 24px;
+  line-height: 1.05;
+}
+
+.detail-metrics span {
+  display: block;
+  margin-top: 8px;
+  color: var(--campus-muted);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.detail-section {
+  padding: 14px;
+  background: #fafbfc;
+  border: 1px solid var(--campus-line);
+  border-radius: 8px;
+}
+
+.detail-section-title {
+  margin-bottom: 12px;
+}
+
+.detail-section-title span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--campus-red);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.detail-section-title h3 {
+  margin: 0;
+  color: var(--campus-ink);
+  font-size: 17px;
+  line-height: 1.2;
+}
+
+.season-record-list,
+.opponent-record-list,
+.recent-match-list {
+  display: grid;
+  gap: 7px;
+}
+
+.season-record-item,
+.opponent-record-item,
+.recent-match-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  padding: 10px;
+  background: white;
+  border: 1px solid var(--campus-line);
+  border-radius: 8px;
+}
+
+.season-record-item strong,
+.opponent-record-item strong,
+.recent-match-item strong {
+  display: block;
+  color: var(--campus-ink);
+  font-size: 14px;
+  line-height: 1.15;
+}
+
+.season-record-item span,
+.opponent-record-item span,
+.recent-match-item span {
+  display: block;
+  margin-top: 4px;
+  color: var(--campus-muted);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.opponent-record-item em {
+  flex: 0 0 auto;
+  color: var(--campus-ink);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.recent-detail-section {
+  margin-bottom: 0;
+}
+
+.recent-match-item {
+  justify-content: flex-start;
+}
+
+.result-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin: 0;
+  color: white;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.result-pill.is-win {
+  background: var(--campus-ink);
+}
+
+.result-pill.is-loss {
+  background: var(--campus-red);
+}
+
+.detail-empty {
+  margin: 0;
+  color: var(--campus-muted);
+  font-size: 13px;
+  font-weight: 750;
 }
 
 .national-page {
@@ -1001,6 +1316,15 @@ button:disabled {
     grid-template-columns: 1fr;
   }
 
+  .campus-ranking-page .brand-lockup h1 {
+    font-size: 27px;
+    line-height: 1.13;
+  }
+
+  .campus-ranking-page .subtitle {
+    font-size: 19px;
+  }
+
   .subtitle {
     margin-bottom: 22px;
     font-size: 24px;
@@ -1046,6 +1370,16 @@ button:disabled {
     padding: 10px 0;
   }
 
+  .campus-ranking-page .ranking-row.is-featured {
+    min-height: 90px;
+  }
+
+  .campus-ranking-page .ranking-row.is-compact {
+    grid-template-columns: 52px minmax(0, 1fr) auto;
+    min-height: 58px;
+    padding: 8px 0;
+  }
+
   .rank-cell,
   .player-cell,
   .record-cell,
@@ -1060,6 +1394,39 @@ button:disabled {
   .recent-form {
     grid-column: 2 / 4;
     padding-top: 7px;
+  }
+
+  .campus-ranking-page .ranking-row.is-compact .rank-cell span {
+    width: 31px;
+    height: 31px;
+    font-size: 12px;
+  }
+
+  .campus-ranking-page .ranking-row.is-compact .player-name-line strong {
+    font-size: 14px;
+  }
+
+  .campus-ranking-page .ranking-row.is-compact .player-sub {
+    font-size: 11px;
+  }
+
+  .campus-ranking-page .ranking-row.is-compact .record-cell {
+    grid-column: 3;
+    justify-items: end;
+    margin-top: 0;
+  }
+
+  .campus-ranking-page .ranking-row.is-compact .record-cell strong {
+    font-size: 13px;
+  }
+
+  .campus-ranking-page .ranking-row.is-compact .recent-form {
+    display: none;
+  }
+
+  .detail-grid,
+  .detail-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .national-hero {
@@ -1093,6 +1460,33 @@ button:disabled {
 
   .refresh-button {
     width: 100%;
+  }
+
+  .update-row .refresh-button {
+    width: auto;
+  }
+
+  .campus-ranking-page .brand-lockup {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .campus-ranking-page .brand-lockup img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .campus-ranking-page .brand-lockup h1 {
+    font-size: 25px;
+  }
+
+  .campus-ranking-page .subtitle {
+    margin-bottom: 14px;
+    font-size: 18px;
+  }
+
+  .update-row {
+    align-items: center;
   }
 
   .hero-stats {
@@ -1145,14 +1539,89 @@ button:disabled {
     grid-template-columns: 50px minmax(0, 1fr);
   }
 
+  .campus-ranking-page .ranking-row.is-featured {
+    grid-template-columns: 50px minmax(0, 1fr);
+  }
+
+  .campus-ranking-page .ranking-row.is-featured .player-name-line strong {
+    font-size: 18px;
+  }
+
+  .campus-ranking-page .ranking-row.is-featured .rank-cell span {
+    width: 40px;
+    height: 40px;
+  }
+
+  .campus-ranking-page .ranking-row.is-compact {
+    grid-template-columns: 42px minmax(0, 1fr) auto;
+    min-height: 54px;
+    padding: 7px 0;
+  }
+
+  .campus-ranking-page .ranking-row.is-compact .rank-cell,
+  .campus-ranking-page .ranking-row.is-compact .player-cell,
+  .campus-ranking-page .ranking-row.is-compact .record-cell {
+    padding: 0 10px;
+  }
+
+  .campus-ranking-page .ranking-row.is-compact .rank-cell span {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+
+  .campus-ranking-page .ranking-row.is-compact .player-name-line strong {
+    font-size: 13px;
+  }
+
+  .campus-ranking-page .ranking-row.is-compact .player-sub {
+    font-size: 10px;
+  }
+
   .record-cell {
     grid-column: 2;
     justify-items: start;
     margin-top: 7px;
   }
 
+  .campus-ranking-page .ranking-row.is-compact .record-cell {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    align-self: center;
+    justify-items: end;
+    margin-top: 0;
+    padding-left: 6px;
+  }
+
+  .campus-ranking-page .ranking-row.is-compact .record-cell strong {
+    font-size: 12px;
+  }
+
+  .campus-ranking-page .ranking-row.is-compact .record-cell span {
+    font-size: 10px;
+  }
+
   .recent-form {
     grid-column: 2;
+  }
+
+  .detail-metrics,
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .player-detail-header {
+    display: grid;
+  }
+
+  .player-detail-header button {
+    justify-self: start;
+  }
+
+  .season-record-item,
+  .opponent-record-item {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .national-hero-inner h1 {

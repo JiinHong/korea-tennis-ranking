@@ -1,5 +1,7 @@
 "use client";
 
+import type { PlayerDetail } from "@/lib/playerDetails";
+import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 type Player = {
@@ -14,8 +16,11 @@ type Player = {
 
 type ClubPageConfig = {
   title: string;
+  titleLines: string[];
   organization: string;
   subtitle: string;
+  logoPath: string;
+  logoAlt: string;
   apiPath: string;
 };
 
@@ -23,6 +28,7 @@ type RankingApiResponse =
   | {
       ok: true;
       players: Player[];
+      detailsByPlayer: Record<string, PlayerDetail>;
     }
   | {
       ok: false;
@@ -64,6 +70,10 @@ function formatRecord(player: Player) {
   return `${player.wins}승 ${player.losses}패`;
 }
 
+function formatSummary(wins: number, losses: number) {
+  return `${wins}승 ${losses}패`;
+}
+
 function RecentForm({ recent5 }: { recent5: string[] }) {
   const form = recent5.slice(-5);
   const blanks = Array.from({ length: Math.max(0, 5 - form.length) });
@@ -86,11 +96,25 @@ function RecentForm({ recent5 }: { recent5: string[] }) {
   );
 }
 
-function RankingRow({ player }: { player: Player }) {
+function RankingRow({
+  player,
+  selected,
+  onSelect,
+}: {
+  player: Player;
+  selected: boolean;
+  onSelect: (playerName: string) => void;
+}) {
   const injured = isInjured(player.note);
+  const densityClass = player.rank <= 10 ? "is-featured" : "is-compact";
 
   return (
-    <article className="ranking-row">
+    <button
+      className={`ranking-row ${densityClass} ${selected ? "is-selected" : ""}`}
+      type="button"
+      aria-label={`${player.name} 상세 전적 보기`}
+      onClick={() => onSelect(player.name)}
+    >
       <div className="rank-cell">
         <span>{player.rank}</span>
       </div>
@@ -111,12 +135,153 @@ function RankingRow({ player }: { player: Player }) {
         <span>{player.matches}경기</span>
       </div>
       <RecentForm recent5={player.recent5} />
-    </article>
+    </button>
+  );
+}
+
+function PlayerDetailPanel({
+  detail,
+  onClose,
+}: {
+  detail: PlayerDetail;
+  onClose: () => void;
+}) {
+  const topOpponents = detail.opponentRecords.slice(0, 5);
+  const recentMatches = detail.recentMatches.slice(0, 6);
+
+  return (
+    <section
+      className="player-detail-panel"
+      aria-label={`${detail.name} 상세 전적`}
+    >
+      <header className="player-detail-header">
+        <div>
+          <span className="detail-rank">{detail.rank}위</span>
+          <h2>{detail.name}</h2>
+          <p>통산 {formatSummary(detail.wins, detail.losses)}</p>
+        </div>
+        <button type="button" onClick={onClose} aria-label="선수 상세 닫기">
+          ×
+        </button>
+      </header>
+
+      <div className="detail-metrics" aria-label="선수 통산 요약">
+        <div>
+          <strong>{detail.matches}</strong>
+          <span>통산 경기</span>
+        </div>
+        <div>
+          <strong>{detail.winRate}%</strong>
+          <span>승률</span>
+        </div>
+        <div>
+          <strong>
+            {detail.defenderRecord.wins}/{detail.defenderRecord.matches}
+          </strong>
+          <span>방어 성공</span>
+        </div>
+        <div>
+          <strong>
+            {detail.challengerRecord.wins}/{detail.challengerRecord.matches}
+          </strong>
+          <span>도전 성공</span>
+        </div>
+      </div>
+
+      <div className="detail-grid">
+        <section className="detail-section" aria-label="시즌별 전적">
+          <div className="detail-section-title">
+            <span>Season</span>
+            <h3>시즌별 전적</h3>
+          </div>
+          {detail.seasonRecords.length > 0 ? (
+            <div className="season-record-list">
+              {detail.seasonRecords.map((record) => (
+                <div key={record.season} className="season-record-item">
+                  <strong>{record.season}</strong>
+                  <span>
+                    {formatSummary(record.wins, record.losses)} ·{" "}
+                    {record.winRate}%
+                  </span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="detail-empty">아직 기록된 경기가 없습니다.</p>
+          )}
+        </section>
+
+        <section className="detail-section" aria-label="상대별 전적">
+          <div className="detail-section-title">
+            <span>Head to head</span>
+            <h3>상대별 전적</h3>
+          </div>
+          {topOpponents.length > 0 ? (
+            <div className="opponent-record-list">
+              {topOpponents.map((record) => (
+                <div key={record.opponent} className="opponent-record-item">
+                  <div>
+                    <strong>{record.opponent}</strong>
+                    <span>
+                      최근 {record.latestDate} · {record.latestScore}
+                    </span>
+                  </div>
+                  <em>
+                    {formatSummary(record.wins, record.losses)} ·{" "}
+                    {record.winRate}%
+                  </em>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="detail-empty">상대별 전적이 없습니다.</p>
+          )}
+        </section>
+      </div>
+
+      <section className="detail-section recent-detail-section">
+        <div className="detail-section-title">
+          <span>Recent</span>
+          <h3>최근 경기</h3>
+        </div>
+        {recentMatches.length > 0 ? (
+          <div className="recent-match-list">
+            {recentMatches.map((match, index) => (
+              <div
+                key={`${match.date}-${match.opponent}-${index}`}
+                className="recent-match-item"
+              >
+                <span
+                  className={`result-pill ${
+                    match.result === "W" ? "is-win" : "is-loss"
+                  }`}
+                >
+                  {match.result === "W" ? "승" : "패"}
+                </span>
+                <div>
+                  <strong>{match.opponent}</strong>
+                  <span>
+                    {match.season} · {match.date} · {match.role} ·{" "}
+                    {match.score}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="detail-empty">최근 경기 기록이 없습니다.</p>
+        )}
+      </section>
+    </section>
   );
 }
 
 export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
   const [players, setPlayers] = useState<Player[]>([]);
+  const [detailsByPlayer, setDetailsByPlayer] = useState<
+    Record<string, PlayerDetail>
+  >({});
+  const [selectedPlayerName, setSelectedPlayerName] = useState("");
   const [status, setStatus] = useState<LoadStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [query, setQuery] = useState("");
@@ -142,6 +307,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
       }
 
       setPlayers(data.players);
+      setDetailsByPlayer(data.detailsByPlayer);
       setLoadedAt(new Date());
       setStatus("success");
     } catch (error) {
@@ -192,28 +358,34 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
       .slice(0, 4);
   }, [players]);
 
+  const selectedDetail = selectedPlayerName
+    ? detailsByPlayer[selectedPlayerName]
+    : null;
+
   return (
     <main className="ranking-page campus-ranking-page">
       <section className="summary-band campus-hero-band">
         <div className="summary-inner">
           <header className="topbar">
             <div className="brand-lockup">
+              <Image
+                src={club.logoPath}
+                alt={club.logoAlt}
+                width={48}
+                height={48}
+                priority
+              />
               <div>
                 <span className="campus-kicker">캠퍼스 랭킹</span>
-                <h1>{club.title}</h1>
+                <h1 aria-label={club.title}>
+                  {club.titleLines.map((line) => (
+                    <span key={line} className="club-title-line">
+                      {line}
+                    </span>
+                  ))}
+                </h1>
               </div>
             </div>
-
-            <button
-              className="refresh-button"
-              type="button"
-              onClick={loadRanking}
-              disabled={status === "loading"}
-              aria-label="랭킹 새로고침"
-            >
-              <span aria-hidden="true">↻</span>
-              {status === "loading" ? "불러오는 중" : "새로고침"}
-            </button>
           </header>
 
           <div className="hero-grid">
@@ -233,10 +405,22 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                   <span>출전 선수</span>
                 </div>
               </div>
-              <p className="live-stamp">
-                <span />
-                마지막 업데이트 {formatLoadedAt(loadedAt)}
-              </p>
+              <div className="update-row">
+                <p className="live-stamp">
+                  <span />
+                  마지막 업데이트 {formatLoadedAt(loadedAt)}
+                </p>
+                <button
+                  className="refresh-button"
+                  type="button"
+                  onClick={loadRanking}
+                  disabled={status === "loading"}
+                  aria-label="랭킹 새로고침"
+                >
+                  <span aria-hidden="true">↻</span>
+                  {status === "loading" ? "불러오는 중" : "새로고침"}
+                </button>
+              </div>
             </div>
 
             <section className="campus-top-feed" aria-label="상위 랭킹">
@@ -245,13 +429,19 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                 <h2>오늘의 랭킹</h2>
               </div>
               {topPlayers.map((player) => (
-                <article key={player.name} className="campus-top-card">
+                <button
+                  key={player.name}
+                  className="campus-top-card"
+                  type="button"
+                  aria-label={`상위 랭킹 ${player.name} 상세 전적 보기`}
+                  onClick={() => setSelectedPlayerName(player.name)}
+                >
                   <span className="podium-rank">{player.rank}위</span>
                   <div>
                     <strong>{player.name}</strong>
                     <span>{formatRecord(player)}</span>
                   </div>
-                </article>
+                </button>
               ))}
             </section>
           </div>
@@ -316,13 +506,26 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                   <h2>활동 피드</h2>
                 </div>
                 {hotPlayers.map((player) => (
-                  <article key={player.name} className="activity-card">
+                  <button
+                    key={player.name}
+                    className="activity-card"
+                    type="button"
+                    aria-label={`활동 선수 ${player.name} 상세 전적 보기`}
+                    onClick={() => setSelectedPlayerName(player.name)}
+                  >
                     <span>{player.rank}위</span>
                     <strong>{player.name}</strong>
                     <em>{player.matches}경기</em>
-                  </article>
+                  </button>
                 ))}
               </section>
+            ) : null}
+
+            {selectedDetail ? (
+              <PlayerDetailPanel
+                detail={selectedDetail}
+                onClose={() => setSelectedPlayerName("")}
+              />
             ) : null}
 
             <section className="ranking-board" aria-label="캠퍼스 랭킹 피드">
@@ -335,7 +538,12 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
 
               {filteredPlayers.length > 0 ? (
                 filteredPlayers.map((player) => (
-                  <RankingRow key={player.name} player={player} />
+                  <RankingRow
+                    key={player.name}
+                    player={player}
+                    selected={selectedPlayerName === player.name}
+                    onSelect={setSelectedPlayerName}
+                  />
                 ))
               ) : (
                 <div className="empty-row">조건에 맞는 선수가 없습니다.</div>

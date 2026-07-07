@@ -38,6 +38,7 @@ export async function GET(_request: Request, context: RankingRouteContext) {
         subtitle: club.subtitle,
       },
       players: data.players,
+      detailsByPlayer: data.detailsByPlayer,
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);

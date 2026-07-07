@@ -1,18 +1,63 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import ClubRankingClient from "./ClubRankingClient";
 
 const club = {
   title: "서울과학기술대학교 테니스 단식 랭킹",
+  titleLines: ["서울과학기술대학교", "테니스 단식 랭킹"],
   organization: "서울과학기술대학교 테니스",
   subtitle: "도전과 방어로 만들어가는 우리들의 랭킹",
+  logoPath: "/seoultech-logo.png",
+  logoAlt: "서울과학기술대학교 로고",
   apiPath: "/api/clubs/seoultech/ranking",
 };
 
 describe("ClubRankingClient", () => {
   afterEach(() => {
     vi.unstubAllGlobals();
+  });
+
+  it("10위까지는 큰 랭킹 행으로, 11위부터는 compact 행으로 보여준다", async () => {
+    const players = Array.from({ length: 12 }, (_, index) => {
+      const rank = index + 1;
+
+      return {
+        rank,
+        name: `${rank}위 선수`,
+        note: "",
+        wins: 0,
+        losses: 0,
+        matches: 0,
+        recent5: [],
+      };
+    });
+
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          players,
+          detailsByPlayer: {},
+        }),
+      })
+    );
+
+    render(<ClubRankingClient club={club} />);
+
+    const tenthRow = await screen.findByRole("button", {
+      name: "10위 선수 상세 전적 보기",
+    });
+    const eleventhRow = await screen.findByRole("button", {
+      name: "11위 선수 상세 전적 보기",
+    });
+
+    expect(tenthRow.classList.contains("is-featured")).toBe(true);
+    expect(tenthRow.classList.contains("is-compact")).toBe(false);
+    expect(eleventhRow.classList.contains("is-compact")).toBe(true);
+    expect(eleventhRow.classList.contains("is-featured")).toBe(false);
   });
 
   it("캠퍼스 피드형 랭킹 화면 언어를 보여준다", async () => {
@@ -42,6 +87,96 @@ describe("ClubRankingClient", () => {
               recent5: ["W"],
             },
           ],
+          detailsByPlayer: {
+            오준석: {
+              name: "오준석",
+              rank: 1,
+              note: "",
+              wins: 2,
+              losses: 1,
+              matches: 3,
+              winRate: 67,
+              challengerRecord: {
+                wins: 0,
+                losses: 0,
+                matches: 0,
+              },
+              defenderRecord: {
+                wins: 2,
+                losses: 1,
+                matches: 3,
+              },
+              seasonRecords: [
+                {
+                  season: "시즌3",
+                  wins: 1,
+                  losses: 1,
+                  matches: 2,
+                  winRate: 50,
+                },
+                {
+                  season: "시즌1",
+                  wins: 1,
+                  losses: 0,
+                  matches: 1,
+                  winRate: 100,
+                },
+              ],
+              opponentRecords: [
+                {
+                  opponent: "김도훈",
+                  wins: 2,
+                  losses: 1,
+                  matches: 3,
+                  winRate: 67,
+                  latestDate: "2026. 7. 2",
+                  latestScore: "6:2",
+                  latestResult: "W",
+                },
+              ],
+              recentMatches: [
+                {
+                  date: "2026. 7. 2",
+                  season: "시즌3",
+                  opponent: "김도훈",
+                  result: "W",
+                  score: "6:2",
+                  role: "방어자",
+                  defenseResult: "방어 성공",
+                },
+              ],
+            },
+            박종건: {
+              name: "박종건",
+              rank: 7,
+              note: "",
+              wins: 1,
+              losses: 0,
+              matches: 1,
+              winRate: 100,
+              challengerRecord: {
+                wins: 0,
+                losses: 0,
+                matches: 0,
+              },
+              defenderRecord: {
+                wins: 1,
+                losses: 0,
+                matches: 1,
+              },
+              seasonRecords: [
+                {
+                  season: "시즌3",
+                  wins: 1,
+                  losses: 0,
+                  matches: 1,
+                  winRate: 100,
+                },
+              ],
+              opponentRecords: [],
+              recentMatches: [],
+            },
+          },
         }),
       })
     );
@@ -56,6 +191,22 @@ describe("ClubRankingClient", () => {
     ).toBeDefined();
     expect(container.querySelector('img[src="/court-mark.svg"]')).toBeNull();
     expect(
+      screen.getByRole("img", { name: "서울과학기술대학교 로고" })
+    ).toBeDefined();
+    expect(
+      container.querySelector('img[src*="seoultech-logo"]')
+    ).toBeDefined();
+    expect(
+      Array.from(container.querySelectorAll(".club-title-line")).map(
+        (line) => line.textContent
+      )
+    ).toEqual(["서울과학기술대학교", "테니스 단식 랭킹"]);
+    const refreshButton = screen.getByRole("button", {
+      name: "랭킹 새로고침",
+    });
+    expect(refreshButton.closest(".topbar")).toBeNull();
+    expect(refreshButton.closest(".update-row")).not.toBeNull();
+    expect(
       screen.getByRole("heading", { name: "오늘의 랭킹" })
     ).toBeDefined();
     expect((await screen.findAllByText("박종건")).length).toBeGreaterThan(0);
@@ -63,5 +214,106 @@ describe("ClubRankingClient", () => {
     expect(
       screen.getByRole("region", { name: "캠퍼스 랭킹 피드" })
     ).toBeDefined();
+  });
+
+  it("선수 카드를 클릭하면 통산과 상대별 상세 전적을 보여준다", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          players: [
+            {
+              rank: 1,
+              name: "오준석",
+              note: "",
+              wins: 1,
+              losses: 1,
+              matches: 2,
+              recent5: ["W", "L"],
+            },
+          ],
+          detailsByPlayer: {
+            오준석: {
+              name: "오준석",
+              rank: 1,
+              note: "",
+              wins: 2,
+              losses: 1,
+              matches: 3,
+              winRate: 67,
+              challengerRecord: {
+                wins: 0,
+                losses: 0,
+                matches: 0,
+              },
+              defenderRecord: {
+                wins: 2,
+                losses: 1,
+                matches: 3,
+              },
+              seasonRecords: [
+                {
+                  season: "시즌3",
+                  wins: 1,
+                  losses: 1,
+                  matches: 2,
+                  winRate: 50,
+                },
+                {
+                  season: "시즌1",
+                  wins: 1,
+                  losses: 0,
+                  matches: 1,
+                  winRate: 100,
+                },
+              ],
+              opponentRecords: [
+                {
+                  opponent: "김도훈",
+                  wins: 2,
+                  losses: 1,
+                  matches: 3,
+                  winRate: 67,
+                  latestDate: "2026. 7. 2",
+                  latestScore: "6:2",
+                  latestResult: "W",
+                },
+              ],
+              recentMatches: [
+                {
+                  date: "2026. 7. 2",
+                  season: "시즌3",
+                  opponent: "김도훈",
+                  result: "W",
+                  score: "6:2",
+                  role: "방어자",
+                  defenseResult: "방어 성공",
+                },
+              ],
+            },
+          },
+        }),
+      })
+    );
+
+    render(<ClubRankingClient club={club} />);
+
+    fireEvent.click(
+      await screen.findByRole("button", { name: "오준석 상세 전적 보기" })
+    );
+
+    const detailPanel = screen.getByRole("region", {
+      name: "오준석 상세 전적",
+    });
+
+    expect(detailPanel).toBeDefined();
+    expect(screen.getByRole("heading", { name: "오준석" })).toBeDefined();
+    expect(screen.getByText("통산 2승 1패")).toBeDefined();
+    expect(screen.getAllByText("김도훈").length).toBeGreaterThan(0);
+    expect(detailPanel.textContent).toContain("2승 1패");
+    expect(screen.getByText("시즌1")).toBeDefined();
+    expect(screen.getByText("최근 경기")).toBeDefined();
   });
 });

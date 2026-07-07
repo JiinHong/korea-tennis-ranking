@@ -1,7 +1,9 @@
 import type {ClubConfig} from "@/lib/clubs";
 import {getSpreadsheetId} from "@/lib/googleSheets";
+import {getHistoricalMatchLogTable} from "@/lib/historicalMatchLogTable";
 import {getMatchLogTable} from "@/lib/matchLogTable";
 import type {MatchRecord} from "@/lib/matchLogTable";
+import {buildPlayerDetails} from "@/lib/playerDetails";
 import {getRankingTable} from "@/lib/rankingTable";
 import type {RankingData} from "@/lib/rankingTable";
 
@@ -92,11 +94,19 @@ export async function getRankingDataForClub(club: ClubConfig) {
     const spreadsheetId = getSpreadsheetId(club.sheetIdEnv);
     const ranking = await getRankingTable(spreadsheetId);
     const matches = await getMatchLogTable(spreadsheetId);
+    const historicalMatches = await getHistoricalMatchLogTable(spreadsheetId);
     const players = buildPlayer(ranking, matches);
+    const detailsByPlayer = buildPlayerDetails(
+        players,
+        matches,
+        historicalMatches,
+        "시즌3",
+    );
 
     return {
         club,
         players,
         matches,
+        detailsByPlayer,
     };
 }
