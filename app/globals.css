@@ -633,12 +633,14 @@ button:disabled {
 }
 
 .campus-ranking-page .brand-lockup img {
-  width: 48px;
-  height: 48px;
+  width: 68px;
+  height: 52px;
+  padding: 4px;
   background: white;
   border: 1px solid var(--campus-line);
   border-radius: 8px;
   filter: none;
+  object-fit: contain;
 }
 
 .campus-kicker {
@@ -668,7 +670,11 @@ button:disabled {
 }
 
 .club-title-line {
-  display: block;
+  display: inline;
+}
+
+.club-title-line + .club-title-line::before {
+  content: " ";
 }
 
 .campus-ranking-page .refresh-button {
@@ -1317,7 +1323,7 @@ button:disabled {
   }
 
   .campus-ranking-page .brand-lockup h1 {
-    font-size: 27px;
+    font-size: 24px;
     line-height: 1.13;
   }
 
@@ -1472,12 +1478,21 @@ button:disabled {
   }
 
   .campus-ranking-page .brand-lockup img {
-    width: 42px;
+    width: 54px;
     height: 42px;
+    padding: 3px;
   }
 
   .campus-ranking-page .brand-lockup h1 {
     font-size: 25px;
+  }
+
+  .club-title-line {
+    display: block;
+  }
+
+  .club-title-line + .club-title-line::before {
+    content: "";
   }
 
   .campus-ranking-page .subtitle {

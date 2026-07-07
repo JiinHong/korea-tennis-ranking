@@ -8,7 +8,7 @@ const club = {
   titleLines: ["서울과학기술대학교", "테니스 단식 랭킹"],
   organization: "서울과학기술대학교 테니스",
   subtitle: "도전과 방어로 만들어가는 우리들의 랭킹",
-  logoPath: "/seoultech-logo.png",
+  logoPath: "/seoultech-symbol.png",
   logoAlt: "서울과학기술대학교 로고",
   apiPath: "/api/clubs/seoultech/ranking",
 };
@@ -194,7 +194,7 @@ describe("ClubRankingClient", () => {
       screen.getByRole("img", { name: "서울과학기술대학교 로고" })
     ).toBeDefined();
     expect(
-      container.querySelector('img[src*="seoultech-logo"]')
+      container.querySelector('img[src*="seoultech-symbol"]')
     ).toBeDefined();
     expect(
       Array.from(container.querySelectorAll(".club-title-line")).map(
