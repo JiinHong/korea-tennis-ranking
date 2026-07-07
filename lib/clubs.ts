@@ -12,7 +12,7 @@ export type ClubConfig = {
 const clubConfigs: Record<ClubSlug, ClubConfig> = {
   seoultech: {
     slug: "seoultech",
-    title: "단테랭",
+    title: "서울과학기술대학교 테니스 단식 랭킹",
     organization: "서울과학기술대학교 테니스",
     subtitle: "도전과 방어로 만들어가는 우리들의 랭킹",
     sheetIdEnv: "GOOGLE_SHEET_ID",

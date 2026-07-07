@@ -645,6 +645,8 @@ button:disabled {
 .campus-ranking-page .brand-lockup h1 {
   color: var(--campus-ink);
   font-size: 34px;
+  line-height: 1.08;
+  word-break: keep-all;
 }
 
 .campus-ranking-page .refresh-button {

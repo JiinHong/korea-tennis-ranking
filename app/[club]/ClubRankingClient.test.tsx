@@ -4,7 +4,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import ClubRankingClient from "./ClubRankingClient";
 
 const club = {
-  title: "단테랭",
+  title: "서울과학기술대학교 테니스 단식 랭킹",
   organization: "서울과학기술대학교 테니스",
   subtitle: "도전과 방어로 만들어가는 우리들의 랭킹",
   apiPath: "/api/clubs/seoultech/ranking",
@@ -46,9 +46,15 @@ describe("ClubRankingClient", () => {
       })
     );
 
-    render(<ClubRankingClient club={club} />);
+    const { container } = render(<ClubRankingClient club={club} />);
 
     expect(screen.getByText("캠퍼스 랭킹")).toBeDefined();
+    expect(
+      screen.getByRole("heading", {
+        name: "서울과학기술대학교 테니스 단식 랭킹",
+      })
+    ).toBeDefined();
+    expect(container.querySelector('img[src="/court-mark.svg"]')).toBeNull();
     expect(
       screen.getByRole("heading", { name: "오늘의 랭킹" })
     ).toBeDefined();

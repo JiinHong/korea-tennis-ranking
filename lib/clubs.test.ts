@@ -3,10 +3,10 @@ import { describe, expect, it } from "vitest";
 import { getClubConfig, listClubConfigs } from "@/lib/clubs";
 
 describe("club configuration", () => {
-  it("seoultech slug를 서울과기대 단테랭 설정으로 바꾼다", () => {
+  it("seoultech slug를 서울과기대 단식 랭킹 설정으로 바꾼다", () => {
     expect(getClubConfig("seoultech")).toEqual({
       slug: "seoultech",
-      title: "단테랭",
+      title: "서울과학기술대학교 테니스 단식 랭킹",
       organization: "서울과학기술대학교 테니스",
       subtitle: "도전과 방어로 만들어가는 우리들의 랭킹",
       sheetIdEnv: "GOOGLE_SHEET_ID",

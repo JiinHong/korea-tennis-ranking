@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 type Player = {
@@ -199,16 +198,8 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
         <div className="summary-inner">
           <header className="topbar">
             <div className="brand-lockup">
-              <Image
-                src="/court-mark.svg"
-                width={44}
-                height={44}
-                alt=""
-                priority
-              />
               <div>
                 <span className="campus-kicker">캠퍼스 랭킹</span>
-                <span className="org-label">{club.organization}</span>
                 <h1>{club.title}</h1>
               </div>
             </div>

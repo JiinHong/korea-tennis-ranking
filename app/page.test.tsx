@@ -17,7 +17,7 @@ describe("Home", () => {
     expect(screen.getByText("영월")).toBeDefined();
     expect(screen.getByText("WEMIX OPEN")).toBeDefined();
     const seoultechLink = screen.getByRole("link", {
-      name: "서울과기대 단테랭 보기",
+      name: "서울과기대 단식 랭킹 보기",
     }) as HTMLAnchorElement;
 
     expect(seoultechLink.getAttribute("href")).toBe("/seoultech");

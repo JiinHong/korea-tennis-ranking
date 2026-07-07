@@ -22,7 +22,7 @@ export default function Home() {
           </p>
 
           <div className="national-actions">
-            <Link href="/seoultech">서울과기대 단테랭 보기</Link>
+            <Link href="/seoultech">서울과기대 단식 랭킹 보기</Link>
           </div>
         </div>
       </section>
