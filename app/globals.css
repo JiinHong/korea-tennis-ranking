@@ -65,6 +65,7 @@ button:disabled {
 }
 
 .ranking-page {
+  width: 100%;
   min-height: 100vh;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(244, 247, 245, 0)),
@@ -694,8 +695,8 @@ button:disabled {
 }
 
 .campus-ranking-page .hero-grid {
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
-  align-items: stretch;
+  grid-template-columns: 1fr;
+  align-items: start;
   gap: 12px;
 }
 
@@ -711,6 +712,10 @@ button:disabled {
 }
 
 .campus-ranking-page .hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 142px;
   padding: 20px;
 }
 
@@ -754,6 +759,10 @@ button:disabled {
   color: var(--campus-muted);
 }
 
+.campus-ranking-page .hero-stats span {
+  white-space: nowrap;
+}
+
 .campus-ranking-page .hero-live-actions {
   display: flex;
   align-items: center;
@@ -793,9 +802,14 @@ button:disabled {
 
 .campus-top-feed {
   display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-content: start;
   gap: 8px;
   padding: 16px;
+}
+
+.campus-feed-heading {
+  grid-column: 1 / -1;
 }
 
 .campus-feed-heading span,
@@ -1572,20 +1586,46 @@ button:disabled {
 
   .campus-ranking-page .subtitle {
     margin-bottom: 14px;
-    font-size: 18px;
+    font-size: 17px;
+    line-height: 1.35;
+  }
+
+  .campus-ranking-page .hero-copy {
+    min-height: auto;
+    padding: 16px;
+  }
+
+  .campus-ranking-page .hero-meta-row {
+    gap: 12px;
   }
 
   .campus-ranking-page .hero-stats {
-    gap: 18px;
+    gap: 14px;
   }
 
   .campus-ranking-page .hero-stats strong {
-    font-size: 28px;
+    font-size: 27px;
+  }
+
+  .campus-ranking-page .hero-stats span {
+    font-size: 11px;
   }
 
   .campus-ranking-page .live-stamp {
-    min-height: 34px;
-    padding: 0 12px;
+    min-height: 32px;
+    padding: 0 10px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .campus-ranking-page .hero-live-actions {
+    flex: 0 0 auto;
+    gap: 6px;
+  }
+
+  .campus-ranking-page .refresh-icon-button {
+    width: 32px;
+    min-height: 32px;
   }
 
   .podium-grid {
@@ -1624,6 +1664,10 @@ button:disabled {
 
   .campus-ranking-page .activity-card {
     min-width: 0;
+  }
+
+  .campus-top-feed {
+    grid-template-columns: 1fr;
   }
 
   .ranking-row {

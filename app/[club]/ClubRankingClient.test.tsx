@@ -208,7 +208,8 @@ describe("ClubRankingClient", () => {
       )
     ).toEqual(["서울과학기술대학교", "테니스 단식 랭킹"]);
     expect(screen.queryByText(/마지막 업데이트/)).toBeNull();
-    expect(await screen.findByText(/2026\. 7\. 8 \d{2}:\d{2}/)).toBeDefined();
+    const liveStamp = await screen.findByLabelText("실시간 업데이트 시간");
+    expect(liveStamp.textContent).toMatch(/\d{4}\. \d{1,2}\. \d{1,2} \d{2}:\d{2}/);
     expect(screen.getByText("최근 30일")).toBeDefined();
     const heroStats = container.querySelector(".hero-stats");
     expect(heroStats?.closest(".hero-meta-row")).not.toBeNull();
