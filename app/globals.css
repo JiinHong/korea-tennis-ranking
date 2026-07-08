@@ -64,6 +64,21 @@ button:disabled {
   cursor: not-allowed;
 }
 
+@keyframes live-indicator-pulse {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(0.92);
+    box-shadow: 0 0 0 0 rgba(215, 247, 88, 0.38);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(215, 247, 88, 0);
+  }
+}
+
 .ranking-page {
   width: 100%;
   min-height: 100vh;
@@ -779,7 +794,12 @@ button:disabled {
 
 .campus-ranking-page .live-stamp span {
   background: var(--lime);
-  box-shadow: none;
+}
+
+.campus-ranking-page .live-indicator {
+  flex: 0 0 auto;
+  animation: live-indicator-pulse 1.45s ease-in-out infinite;
+  transform-origin: center;
 }
 
 .campus-ranking-page .refresh-icon-button {

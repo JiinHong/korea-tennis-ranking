@@ -269,7 +269,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
 
                 <div className="hero-live-actions">
                   <p className="live-stamp" aria-label="실시간 업데이트 시간">
-                    <span />
+                    <span className="live-indicator" aria-hidden="true" />
                     {formatLiveTime(loadedAt)}
                   </p>
                   <button
