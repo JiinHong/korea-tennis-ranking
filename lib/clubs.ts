@@ -10,6 +10,7 @@ export type ClubConfig = {
   logoAlt: string;
   sheetIdEnv: string;
   apiPath: string;
+  historicalMatchLogRange?: string;
 };
 
 const clubConfigs: Record<ClubSlug, ClubConfig> = {
@@ -23,6 +24,7 @@ const clubConfigs: Record<ClubSlug, ClubConfig> = {
     logoAlt: "서울과학기술대학교 로고",
     sheetIdEnv: "GOOGLE_SHEET_ID",
     apiPath: "/api/clubs/seoultech/ranking",
+    historicalMatchLogRange: "'시즌1~2 기록'!A1:J1000",
   },
   petc: {
     slug: "petc",

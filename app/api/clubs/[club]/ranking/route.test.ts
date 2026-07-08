@@ -34,6 +34,10 @@ describe("GET /api/clubs/[club]/ranking", () => {
         },
       ],
       matches: [],
+      summary: {
+        totalMatches: 0,
+        recent30Matches: 0,
+      },
       detailsByPlayer: {
         오준석: {
           name: "오준석",
@@ -114,6 +118,10 @@ describe("GET /api/clubs/[club]/ranking", () => {
           recent5: [],
         },
       ],
+      summary: {
+        totalMatches: 0,
+        recent30Matches: 0,
+      },
       detailsByPlayer: {
         오준석: {
           name: "오준석",

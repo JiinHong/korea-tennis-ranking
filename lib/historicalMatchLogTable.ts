@@ -8,13 +8,14 @@ export type HistoricalMatchRecord = MatchRecord & {
 };
 
 export async function getHistoricalMatchLogTable(
-  spreadsheetId = getSpreadsheetId()
+  spreadsheetId = getSpreadsheetId(),
+  range = "'시즌1~2 기록'!A1:J1000"
 ): Promise<HistoricalMatchRecord[]> {
   const sheets = getSheetsClient();
 
   const result = await sheets.spreadsheets.values.get({
     spreadsheetId,
-    range: "'시즌1~2 기록'!A1:J1000",
+    range,
   });
 
   const rows = result.data.values ?? [];

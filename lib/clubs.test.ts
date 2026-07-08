@@ -14,6 +14,7 @@ describe("club configuration", () => {
       logoAlt: "서울과학기술대학교 로고",
       sheetIdEnv: "GOOGLE_SHEET_ID",
       apiPath: "/api/clubs/seoultech/ranking",
+      historicalMatchLogRange: "'시즌1~2 기록'!A1:J1000",
     });
   });
 

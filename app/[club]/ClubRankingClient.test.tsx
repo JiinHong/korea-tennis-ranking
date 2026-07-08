@@ -1,9 +1,10 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import ClubRankingClient from "./ClubRankingClient";
 
 const club = {
+  slug: "seoultech",
   title: "서울과학기술대학교 테니스 단식 랭킹",
   titleLines: ["서울과학기술대학교", "테니스 단식 랭킹"],
   organization: "서울과학기술대학교 테니스",
@@ -16,6 +17,7 @@ const club = {
 describe("ClubRankingClient", () => {
   afterEach(() => {
     vi.unstubAllGlobals();
+    vi.useRealTimers();
   });
 
   it("10위까지는 큰 랭킹 행으로, 11위부터는 compact 행으로 보여준다", async () => {
@@ -47,10 +49,10 @@ describe("ClubRankingClient", () => {
 
     render(<ClubRankingClient club={club} />);
 
-    const tenthRow = await screen.findByRole("button", {
+    const tenthRow = await screen.findByRole("link", {
       name: "10위 선수 상세 전적 보기",
     });
-    const eleventhRow = await screen.findByRole("button", {
+    const eleventhRow = await screen.findByRole("link", {
       name: "11위 선수 상세 전적 보기",
     });
 
@@ -67,6 +69,10 @@ describe("ClubRankingClient", () => {
         ok: true,
         json: async () => ({
           ok: true,
+          summary: {
+            totalMatches: 1,
+            recent30Matches: 1,
+          },
           players: [
             {
               rank: 1,
@@ -201,11 +207,15 @@ describe("ClubRankingClient", () => {
         (line) => line.textContent
       )
     ).toEqual(["서울과학기술대학교", "테니스 단식 랭킹"]);
-    const refreshButton = screen.getByRole("button", {
-      name: "랭킹 새로고침",
-    });
-    expect(refreshButton.closest(".topbar")).toBeNull();
-    expect(refreshButton.closest(".update-row")).not.toBeNull();
+    expect(screen.queryByText(/마지막 업데이트/)).toBeNull();
+    expect(await screen.findByText(/2026\. 7\. 8 \d{2}:\d{2}/)).toBeDefined();
+    expect(screen.getByText("최근 30일")).toBeDefined();
+    const heroStats = container.querySelector(".hero-stats");
+    expect(heroStats?.closest(".hero-meta-row")).not.toBeNull();
+    expect(container.querySelector(".hero-live-actions")).not.toBeNull();
+    expect(
+      screen.getByRole("button", { name: "랭킹 새로고침" }).closest(".topbar")
+    ).toBeNull();
     expect(
       screen.getByRole("heading", { name: "오늘의 랭킹" })
     ).toBeDefined();
@@ -216,7 +226,7 @@ describe("ClubRankingClient", () => {
     ).toBeDefined();
   });
 
-  it("선수 카드를 클릭하면 통산과 상대별 상세 전적을 보여준다", async () => {
+  it("선수 카드는 현재 화면에 패널을 열지 않고 상세 페이지 링크로 이동한다", async () => {
     vi.stubGlobal(
       "fetch",
       vi.fn().mockResolvedValue({
@@ -300,20 +310,15 @@ describe("ClubRankingClient", () => {
 
     render(<ClubRankingClient club={club} />);
 
-    fireEvent.click(
-      await screen.findByRole("button", { name: "오준석 상세 전적 보기" })
-    );
-
-    const detailPanel = screen.getByRole("region", {
-      name: "오준석 상세 전적",
+    const playerLink = await screen.findByRole("link", {
+      name: "오준석 상세 전적 보기",
     });
 
-    expect(detailPanel).toBeDefined();
-    expect(screen.getByRole("heading", { name: "오준석" })).toBeDefined();
-    expect(screen.getByText("통산 2승 1패")).toBeDefined();
-    expect(screen.getAllByText("김도훈").length).toBeGreaterThan(0);
-    expect(detailPanel.textContent).toContain("2승 1패");
-    expect(screen.getByText("시즌1")).toBeDefined();
-    expect(screen.getByText("최근 경기")).toBeDefined();
+    expect(decodeURIComponent(playerLink.getAttribute("href") ?? "")).toBe(
+      "/seoultech/players/오준석"
+    );
+    expect(
+      screen.queryByRole("region", { name: "오준석 상세 전적" })
+    ).toBeNull();
   });
 });

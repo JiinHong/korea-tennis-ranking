@@ -401,6 +401,7 @@ button:disabled {
   padding: 14px;
   color: inherit;
   text-align: left;
+  text-decoration: none;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -458,6 +459,7 @@ button:disabled {
   width: 100%;
   color: inherit;
   text-align: left;
+  text-decoration: none;
   background: transparent;
   border: 0;
   border-bottom: 1px solid var(--line);
@@ -635,10 +637,10 @@ button:disabled {
 .campus-ranking-page .brand-lockup img {
   width: 68px;
   height: 52px;
-  padding: 4px;
-  background: white;
-  border: 1px solid var(--campus-line);
-  border-radius: 8px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
   filter: none;
   object-fit: contain;
 }
@@ -720,22 +722,31 @@ button:disabled {
   font-weight: 850;
 }
 
+.campus-ranking-page .hero-meta-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+}
+
 .campus-ranking-page .hero-stats {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-  margin-bottom: 14px;
+  display: flex;
+  align-items: flex-end;
+  gap: 22px;
+  margin: 0;
 }
 
 .campus-ranking-page .hero-stats div {
-  padding: 12px;
-  background: #fafbfc;
-  border: 1px solid var(--campus-line);
-  border-radius: 8px;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
 }
 
 .campus-ranking-page .hero-stats strong {
   color: var(--campus-ink);
-  font-size: 30px;
+  font-size: 31px;
 }
 
 .campus-ranking-page .hero-stats span,
@@ -743,9 +754,30 @@ button:disabled {
   color: var(--campus-muted);
 }
 
+.campus-ranking-page .hero-live-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.campus-ranking-page .live-stamp {
+  min-height: 38px;
+  padding: 0 14px;
+  background: rgba(47, 125, 91, 0.12);
+  border-radius: 999px;
+}
+
 .campus-ranking-page .live-stamp span {
-  background: var(--campus-red);
-  box-shadow: 0 0 0 5px rgba(198, 41, 23, 0.1);
+  background: var(--lime);
+  box-shadow: none;
+}
+
+.campus-ranking-page .refresh-icon-button {
+  width: 38px;
+  min-height: 38px;
+  padding: 0;
+  border-radius: 999px;
 }
 
 .update-row {
@@ -794,6 +826,7 @@ button:disabled {
   padding: 10px;
   color: inherit;
   text-align: left;
+  text-decoration: none;
   background: #fafbfc;
   border: 1px solid var(--campus-line);
   border-radius: 8px;
@@ -889,6 +922,11 @@ button:disabled {
   background: #fafbfc;
 }
 
+.campus-ranking-page .ranking-head,
+.campus-ranking-page .ranking-row {
+  grid-template-columns: 76px minmax(220px, 1fr) 156px 170px;
+}
+
 .campus-ranking-page .ranking-row {
   min-height: 76px;
 }
@@ -899,17 +937,11 @@ button:disabled {
 }
 
 .campus-ranking-page .ranking-row.is-compact {
-  grid-template-columns: 64px minmax(180px, 1fr) 112px 126px;
   min-height: 54px;
 }
 
 .campus-ranking-page .ranking-row:hover {
   background: #fffafa;
-}
-
-.campus-ranking-page .ranking-row.is-selected {
-  background: var(--campus-red-soft);
-  box-shadow: inset 3px 0 0 var(--campus-red);
 }
 
 .campus-ranking-page .rank-cell span {
@@ -935,6 +967,16 @@ button:disabled {
 .campus-ranking-page .player-name-line strong,
 .campus-ranking-page .record-cell strong {
   color: var(--campus-ink);
+}
+
+.campus-ranking-page .record-cell {
+  justify-items: end;
+  text-align: right;
+}
+
+.campus-ranking-page .recent-form {
+  justify-content: flex-end;
+  min-width: 170px;
 }
 
 .campus-ranking-page .ranking-row.is-featured .player-name-line strong {
@@ -1028,6 +1070,25 @@ button:disabled {
   border-radius: 8px;
   font-size: 22px;
   line-height: 1;
+}
+
+.detail-back-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 10px;
+  color: var(--campus-red);
+  text-decoration: none;
+  background: white;
+  border: 1px solid #ffd8d2;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.detail-back-link:hover {
+  background: var(--campus-red-soft);
 }
 
 .detail-rank {
@@ -1162,24 +1223,25 @@ button:disabled {
   justify-content: flex-start;
 }
 
-.result-pill {
+.result-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  min-width: 28px;
+  height: 24px;
   margin: 0;
+  padding: 0 8px;
   color: white;
-  border-radius: 999px;
+  border-radius: 6px;
   font-size: 12px;
   font-weight: 900;
 }
 
-.result-pill.is-win {
+.result-badge.is-win {
   background: var(--campus-ink);
 }
 
-.result-pill.is-loss {
+.result-badge.is-loss {
   background: var(--campus-red);
 }
 
@@ -1331,6 +1393,16 @@ button:disabled {
     font-size: 19px;
   }
 
+  .campus-ranking-page .hero-meta-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .campus-ranking-page .hero-live-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
   .subtitle {
     margin-bottom: 22px;
     font-size: 24px;
@@ -1381,7 +1453,7 @@ button:disabled {
   }
 
   .campus-ranking-page .ranking-row.is-compact {
-    grid-template-columns: 52px minmax(0, 1fr) auto;
+    grid-template-columns: 52px minmax(0, 1fr) 132px;
     min-height: 58px;
     padding: 8px 0;
   }
@@ -1395,10 +1467,13 @@ button:disabled {
 
   .record-cell {
     justify-items: end;
+    text-align: right;
   }
 
   .recent-form {
     grid-column: 2 / 4;
+    justify-content: flex-end;
+    min-width: 0;
     padding-top: 7px;
   }
 
@@ -1419,6 +1494,7 @@ button:disabled {
   .campus-ranking-page .ranking-row.is-compact .record-cell {
     grid-column: 3;
     justify-items: end;
+    text-align: right;
     margin-top: 0;
   }
 
@@ -1480,7 +1556,6 @@ button:disabled {
   .campus-ranking-page .brand-lockup img {
     width: 54px;
     height: 42px;
-    padding: 3px;
   }
 
   .campus-ranking-page .brand-lockup h1 {
@@ -1500,16 +1575,17 @@ button:disabled {
     font-size: 18px;
   }
 
-  .update-row {
-    align-items: center;
+  .campus-ranking-page .hero-stats {
+    gap: 18px;
   }
 
-  .hero-stats {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .hero-stats strong {
+  .campus-ranking-page .hero-stats strong {
     font-size: 28px;
+  }
+
+  .campus-ranking-page .live-stamp {
+    min-height: 34px;
+    padding: 0 12px;
   }
 
   .podium-grid {
@@ -1568,7 +1644,7 @@ button:disabled {
   }
 
   .campus-ranking-page .ranking-row.is-compact {
-    grid-template-columns: 42px minmax(0, 1fr) auto;
+    grid-template-columns: 42px minmax(0, 1fr) 96px;
     min-height: 54px;
     padding: 7px 0;
   }
@@ -1596,6 +1672,7 @@ button:disabled {
   .record-cell {
     grid-column: 2;
     justify-items: start;
+    text-align: left;
     margin-top: 7px;
   }
 
@@ -1604,6 +1681,7 @@ button:disabled {
     grid-row: 1 / span 2;
     align-self: center;
     justify-items: end;
+    text-align: right;
     margin-top: 0;
     padding-left: 6px;
   }
@@ -1618,6 +1696,7 @@ button:disabled {
 
   .recent-form {
     grid-column: 2;
+    justify-content: flex-start;
   }
 
   .detail-metrics,

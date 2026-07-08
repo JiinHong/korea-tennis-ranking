@@ -17,6 +17,46 @@ export type Player = {
     recent5: string[];
 }
 
+export type RankingSummary = {
+    totalMatches: number;
+    recent30Matches: number;
+}
+
+function parseMatchDate(date: string): Date | null {
+    const numbers = date.match(/\d+/g)?.map(Number) ?? [];
+    const [year, month, day] = numbers;
+
+    if (!year || !month || !day) {
+        return null;
+    }
+
+    return new Date(year, month - 1, day);
+}
+
+export function buildRankingSummary(
+    matches: MatchRecord[],
+    now = new Date()
+): RankingSummary {
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const recentStart = new Date(today);
+    recentStart.setDate(today.getDate() - 30);
+
+    const recent30Matches = matches.filter((match) => {
+        const matchDate = parseMatchDate(match.date);
+
+        if (!matchDate) {
+            return false;
+        }
+
+        return matchDate >= recentStart && matchDate <= today;
+    }).length;
+
+    return {
+        totalMatches: matches.length,
+        recent30Matches,
+    };
+}
+
 function win(player: Player): Player {
     return {
         ...player,
@@ -83,10 +123,12 @@ export async function getRankingData() {
     const ranking = await getRankingTable();
     const matches = await getMatchLogTable();
     const players = buildPlayer(ranking, matches);
+    const summary = buildRankingSummary(matches);
 
     return {
         players,
-        matches
+        matches,
+        summary,
     }
 }
 
@@ -94,8 +136,14 @@ export async function getRankingDataForClub(club: ClubConfig) {
     const spreadsheetId = getSpreadsheetId(club.sheetIdEnv);
     const ranking = await getRankingTable(spreadsheetId);
     const matches = await getMatchLogTable(spreadsheetId);
-    const historicalMatches = await getHistoricalMatchLogTable(spreadsheetId);
+    const historicalMatches = club.historicalMatchLogRange
+        ? await getHistoricalMatchLogTable(
+            spreadsheetId,
+            club.historicalMatchLogRange
+        )
+        : [];
     const players = buildPlayer(ranking, matches);
+    const summary = buildRankingSummary(matches);
     const detailsByPlayer = buildPlayerDetails(
         players,
         matches,
@@ -107,6 +155,7 @@ export async function getRankingDataForClub(club: ClubConfig) {
         club,
         players,
         matches,
+        summary,
         detailsByPlayer,
     };
 }
