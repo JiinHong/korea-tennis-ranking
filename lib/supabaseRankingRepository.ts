@@ -1,9 +1,13 @@
 import type { HistoricalMatchRecord } from "@/lib/historicalMatchLogTable";
 import type { MatchRecord } from "@/lib/matchLogTable";
 import type { RankingData } from "@/lib/rankingTable";
+import type {
+  PlayerStatus,
+  PreviousMatch,
+  RankedPlayer,
+  RankingRuleConfig,
+} from "@/lib/rankingRules";
 import { getSupabaseServerClient } from "@/lib/supabaseServer";
-
-type PlayerStatus = "active" | "injured" | "inactive" | "left";
 
 export type SupabaseClubRow = {
   id: string;
@@ -48,6 +52,10 @@ export type SupabaseRankingAdapter = {
   getCurrentSeason(clubId: string): Promise<SupabaseSeasonRow | null>;
   listSeasonPlayers(seasonId: string): Promise<SupabaseSeasonPlayerRow[]>;
   listConfirmedMatches(clubId: string): Promise<SupabaseMatchRow[]>;
+  getRuleConfig(
+    clubId: string,
+    seasonId: string
+  ): Promise<RankingRuleConfig | null>;
 };
 
 export type SupabaseRankingTables = {
@@ -55,6 +63,18 @@ export type SupabaseRankingTables = {
   ranking: RankingData[];
   matches: MatchRecord[];
   historicalMatches: HistoricalMatchRecord[];
+};
+
+export type SupabaseMatchValidationContext = {
+  players: RankedPlayer[];
+  previousMatches: PreviousMatch[];
+  config: RankingRuleConfig;
+};
+
+const defaultRuleConfig: RankingRuleConfig = {
+  challengeRange: 4,
+  rematchCooldownDays: 14,
+  inactivityPenaltyDrop: 2,
 };
 
 function displayName(player: SupabasePlayerIdentity): string {
@@ -131,6 +151,46 @@ export async function getSupabaseRankingTables(
     ranking,
     matches,
     historicalMatches,
+  };
+}
+
+export async function getSupabaseMatchValidationContext(
+  clubSlug: string,
+  adapter: SupabaseRankingAdapter = createSupabaseRankingAdapter()
+): Promise<SupabaseMatchValidationContext> {
+  const club = await adapter.getClubBySlug(clubSlug);
+
+  if (!club) {
+    throw new Error(`Supabase club not found: ${clubSlug}`);
+  }
+
+  const currentSeason = await adapter.getCurrentSeason(club.id);
+
+  if (!currentSeason) {
+    throw new Error(`Current season not found for club: ${clubSlug}`);
+  }
+
+  const [seasonPlayers, confirmedMatches, ruleConfig] = await Promise.all([
+    adapter.listSeasonPlayers(currentSeason.id),
+    adapter.listConfirmedMatches(club.id),
+    adapter.getRuleConfig(club.id, currentSeason.id),
+  ]);
+
+  return {
+    players: seasonPlayers
+      .filter((seasonPlayer) => seasonPlayer.status !== "left")
+      .map((seasonPlayer) => ({
+        id: seasonPlayer.player.id,
+        name: displayName(seasonPlayer.player),
+        rank: seasonPlayer.rank,
+        status: seasonPlayer.status,
+      })),
+    previousMatches: confirmedMatches.map((match) => ({
+      playerAId: match.challenger.id,
+      playerBId: match.defender.id,
+      playedOn: match.playedOn,
+    })),
+    config: ruleConfig ?? defaultRuleConfig,
   };
 }
 
@@ -266,6 +326,28 @@ export function createSupabaseRankingAdapter(): SupabaseRankingAdapter {
           source: row.source,
         };
       });
+    },
+    async getRuleConfig(clubId, seasonId) {
+      const { data, error } = await supabase
+        .from("rule_configs")
+        .select("challenge_range, rematch_cooldown_days, inactivity_penalty_drop")
+        .eq("club_id", clubId)
+        .eq("season_id", seasonId)
+        .maybeSingle();
+
+      if (error) {
+        throw error;
+      }
+
+      if (!data) {
+        return null;
+      }
+
+      return {
+        challengeRange: data.challenge_range,
+        rematchCooldownDays: data.rematch_cooldown_days,
+        inactivityPenaltyDrop: data.inactivity_penalty_drop,
+      };
     },
   };
 }

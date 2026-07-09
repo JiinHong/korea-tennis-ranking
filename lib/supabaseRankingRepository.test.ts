@@ -7,6 +7,7 @@ vi.mock("@/lib/supabaseServer", () => ({
 }));
 
 import {
+  getSupabaseMatchValidationContext,
   getSupabaseRankingTables,
   type SupabaseRankingAdapter,
 } from "@/lib/supabaseRankingRepository";
@@ -65,6 +66,11 @@ function createAdapter(): SupabaseRankingAdapter {
         source: "import",
       },
     ]),
+    getRuleConfig: vi.fn().mockResolvedValue({
+      challengeRange: 4,
+      rematchCooldownDays: 14,
+      inactivityPenaltyDrop: 2,
+    }),
   };
 }
 
@@ -129,5 +135,34 @@ describe("getSupabaseRankingTables", () => {
     await expect(getSupabaseRankingTables("seoultech", adapter)).rejects.toThrow(
       "Current season not found for club: seoultech"
     );
+  });
+});
+
+describe("getSupabaseMatchValidationContext", () => {
+  test("maps current season players, previous matches, and rule config for validation", async () => {
+    const adapter = createAdapter();
+
+    const result = await getSupabaseMatchValidationContext("seoultech", adapter);
+
+    expect(adapter.getClubBySlug).toHaveBeenCalledWith("seoultech");
+    expect(adapter.getCurrentSeason).toHaveBeenCalledWith("club-1");
+    expect(adapter.listSeasonPlayers).toHaveBeenCalledWith("season-3");
+    expect(adapter.listConfirmedMatches).toHaveBeenCalledWith("club-1");
+    expect(adapter.getRuleConfig).toHaveBeenCalledWith("club-1", "season-3");
+    expect(result).toEqual({
+      players: [
+        { id: "p1", name: "오준석", rank: 1, status: "active" },
+        { id: "p2", name: "김도훈", rank: 2, status: "injured" },
+      ],
+      previousMatches: [
+        { playerAId: "p2", playerBId: "p1", playedOn: "2026-07-08" },
+        { playerAId: "p2", playerBId: "p1", playedOn: "2026-05-26" },
+      ],
+      config: {
+        challengeRange: 4,
+        rematchCooldownDays: 14,
+        inactivityPenaltyDrop: 2,
+      },
+    });
   });
 });
