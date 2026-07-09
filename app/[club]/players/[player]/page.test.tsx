@@ -87,7 +87,7 @@ const detail = {
 };
 
 describe("PlayerPage", () => {
-  it("선수 상세 전적을 별도 페이지에서 보여주고 랭킹으로 돌아갈 수 있다", async () => {
+  it("선수 상세 전적을 별도 페이지에서 보여준다", async () => {
     vi.mocked(getClubConfig).mockReturnValue(club);
     vi.mocked(getRankingDataForClub).mockResolvedValue({
       club,
@@ -107,11 +107,9 @@ describe("PlayerPage", () => {
 
     const { container } = render(ui);
 
-    const backLink = screen.getByRole("link", {
-      name: "랭킹으로 돌아가기",
-    });
-
-    expect(backLink.getAttribute("href")).toBe("/seoultech");
+    expect(
+      screen.queryByRole("link", { name: "랭킹으로 돌아가기" })
+    ).toBeNull();
     expect(
       screen.getByRole("region", { name: "오준석 상세 전적" })
     ).toBeDefined();
@@ -123,7 +121,7 @@ describe("PlayerPage", () => {
     expect(container.querySelectorAll(".detail-stat-item")).toHaveLength(4);
     expect(screen.getByText("시즌1")).toBeDefined();
     expect(screen.getAllByText("김도훈").length).toBeGreaterThan(0);
-    expect(container.querySelector(".result-pill.is-win")).not.toBeNull();
-    expect(container.querySelector(".result-badge")).toBeNull();
+    expect(container.querySelector(".result-letter.is-win")).not.toBeNull();
+    expect(container.querySelector(".result-pill")).toBeNull();
   });
 });

@@ -1,7 +1,6 @@
 import type { ClubConfig } from "@/lib/clubs";
 import type { PlayerDetail } from "@/lib/playerDetails";
 import Image from "next/image";
-import Link from "next/link";
 
 function formatSummary(wins: number, losses: number) {
   return `${wins}승 ${losses}패`;
@@ -43,13 +42,6 @@ export default function PlayerDetailView({
                 </div>
               </div>
             </div>
-            <Link
-              className="detail-back-link"
-              href={`/${club.slug}`}
-              aria-label="랭킹으로 돌아가기"
-            >
-              랭킹으로
-            </Link>
           </header>
         </div>
       </section>
@@ -161,7 +153,7 @@ export default function PlayerDetailView({
                     className="recent-match-item"
                   >
                     <span
-                      className={`result-pill ${
+                      className={`result-letter ${
                         match.result === "W" ? "is-win" : "is-loss"
                       }`}
                       aria-label={match.result === "W" ? "승리" : "패배"}

@@ -39,11 +39,17 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
-  it("선수 상세 최근 경기의 승패 표시는 큰 원형이 아니라 작은 배지로 보여준다", () => {
+  it("선수 상세 최근 경기의 승패 표시는 상자 없이 글자 색으로만 보여준다", () => {
     expect(css).toContain(
-      ".result-pill {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  min-width: 28px;\n  height: 24px;\n  margin: 0;\n  padding: 0 7px;\n  color: white;\n  border-radius: 6px;\n  font-size: 11px;\n  font-weight: 950;\n}"
+      ".result-letter {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  color: var(--campus-muted);\n  font-size: 15px;\n  font-weight: 950;\n  line-height: 1;\n}"
     );
-    expect(css).not.toContain(".result-badge {");
+    expect(css).toContain(
+      ".result-letter.is-win {\n  color: #2563eb;\n}"
+    );
+    expect(css).toContain(
+      ".result-letter.is-loss {\n  color: var(--campus-red);\n}"
+    );
+    expect(css).not.toContain(".result-pill {");
   });
 
   it("PC에서는 클럽 제목 줄을 한 줄로 이어 붙이고 모바일에서만 줄바꿈한다", () => {

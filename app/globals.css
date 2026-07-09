@@ -1161,25 +1161,6 @@ button:disabled {
   line-height: 1;
 }
 
-.detail-back-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 34px;
-  padding: 0 10px;
-  color: var(--campus-red);
-  text-decoration: none;
-  background: white;
-  border: 1px solid #ffd8d2;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 850;
-}
-
-.detail-back-link:hover {
-  background: var(--campus-red-soft);
-}
-
 .detail-rank {
   display: inline-flex;
   align-items: center;
@@ -1330,26 +1311,22 @@ button:disabled {
   min-width: 0;
 }
 
-.result-pill {
+.result-letter {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 28px;
-  height: 24px;
-  margin: 0;
-  padding: 0 7px;
-  color: white;
-  border-radius: 6px;
-  font-size: 11px;
+  color: var(--campus-muted);
+  font-size: 15px;
   font-weight: 950;
+  line-height: 1;
 }
 
-.result-pill.is-win {
-  background: var(--campus-ink);
+.result-letter.is-win {
+  color: #2563eb;
 }
 
-.result-pill.is-loss {
-  background: var(--campus-red);
+.result-letter.is-loss {
+  color: var(--campus-red);
 }
 
 .match-score {
