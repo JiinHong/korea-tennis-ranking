@@ -189,7 +189,12 @@ describe("ClubRankingClient", () => {
 
     const { container } = render(<ClubRankingClient club={club} />);
 
-    expect(screen.getByText("캠퍼스 랭킹")).toBeDefined();
+    const campusKicker = screen.getByText("캠퍼스 랭킹");
+    expect(campusKicker).toBeDefined();
+    expect(campusKicker.closest(".brand-title-stack")).toBeNull();
+    expect(campusKicker.nextElementSibling?.classList.contains("brand-title-row")).toBe(
+      true
+    );
     expect(
       screen.getByRole("heading", {
         name: "서울과학기술대학교 테니스 단식 랭킹",

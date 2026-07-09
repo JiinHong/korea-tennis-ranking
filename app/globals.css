@@ -660,6 +660,9 @@ button:disabled {
 }
 
 .campus-ranking-page .brand-lockup {
+  display: grid;
+  justify-items: start;
+  gap: 10px;
   min-width: 0;
 }
 
@@ -696,14 +699,15 @@ button:disabled {
   display: inline-flex;
   align-items: center;
   width: fit-content;
-  min-height: 24px;
-  padding: 0 8px;
-  color: var(--campus-red);
-  background: var(--campus-red-soft);
-  border: 1px solid #ffd8d2;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 900;
+  min-height: 22px;
+  padding: 0 7px;
+  color: #4b5563;
+  background: transparent;
+  border: 1px solid #d7dce2;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0;
 }
 
 .campus-ranking-page .org-label {

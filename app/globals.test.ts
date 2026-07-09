@@ -12,6 +12,15 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
+  it("캠퍼스 랭킹 라벨은 좌상단의 중립적인 작은 라벨로 보여준다", () => {
+    expect(css).toContain(
+      ".campus-ranking-page .brand-lockup {\n  display: grid;\n  justify-items: start;\n  gap: 10px;\n  min-width: 0;\n}"
+    );
+    expect(css).toContain(
+      ".campus-kicker {\n  display: inline-flex;\n  align-items: center;\n  width: fit-content;\n  min-height: 22px;\n  padding: 0 7px;\n  color: #4b5563;\n  background: transparent;\n  border: 1px solid #d7dce2;\n  border-radius: 999px;\n  font-size: 11px;\n  font-weight: 850;\n  letter-spacing: 0;\n}"
+    );
+  });
+
   it("랭킹 행의 전적과 최근 5경기 컬럼을 오른쪽 기준선에 맞춘다", () => {
     expect(css).toContain(
       ".campus-ranking-page .ranking-head,\n.campus-ranking-page .ranking-row {\n  grid-template-columns: 76px minmax(220px, 1fr) 156px 170px;\n}"
