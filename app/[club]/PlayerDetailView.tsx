@@ -31,14 +31,7 @@ export default function PlayerDetailView({
                   priority
                 />
                 <div className="brand-title-stack">
-                  <span className="campus-kicker">선수 상세</span>
-                  <h1 aria-label={club.title}>
-                    {club.titleLines.map((line) => (
-                      <span key={line} className="club-title-line">
-                        {line}
-                      </span>
-                    ))}
-                  </h1>
+                  <h1>선수 상세</h1>
                 </div>
               </div>
             </div>

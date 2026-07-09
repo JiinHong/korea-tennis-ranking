@@ -645,9 +645,18 @@ button:disabled {
   padding: 20px 0 18px;
 }
 
+.player-detail-hero .summary-inner {
+  padding: 16px 0 10px;
+}
+
 .campus-ranking-page .topbar {
   align-items: flex-start;
   margin-bottom: 14px;
+}
+
+.player-detail-hero .topbar {
+  align-items: center;
+  margin-bottom: 0;
 }
 
 .campus-ranking-page .brand-lockup {
@@ -665,6 +674,10 @@ button:disabled {
   display: grid;
   gap: 7px;
   min-width: 0;
+}
+
+.player-detail-hero .brand-title-stack {
+  gap: 0;
 }
 
 .campus-ranking-page .brand-lockup img {
@@ -703,6 +716,10 @@ button:disabled {
   font-size: 28px;
   line-height: 1.12;
   word-break: keep-all;
+}
+
+.player-detail-hero .brand-lockup h1 {
+  line-height: 1.05;
 }
 
 .club-title-line {
@@ -1275,7 +1292,7 @@ button:disabled {
 
 .season-record-item span,
 .opponent-record-item span,
-.recent-match-item span {
+.recent-match-main span {
   display: block;
   margin-top: 4px;
   color: var(--campus-muted);
@@ -1297,11 +1314,11 @@ button:disabled {
 
 .recent-match-item {
   display: grid;
-  grid-template-columns: 30px minmax(0, 1fr) auto;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   min-height: 54px;
-  padding: 10px;
+  padding: 10px 12px;
   background: white;
   border: 1px solid var(--campus-line);
   border-radius: 8px;
@@ -1311,12 +1328,13 @@ button:disabled {
   min-width: 0;
 }
 
-.result-letter {
+.recent-match-item .result-letter {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  justify-self: center;
   color: var(--campus-muted);
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 950;
   line-height: 1;
 }
@@ -1330,6 +1348,8 @@ button:disabled {
 }
 
 .match-score {
+  justify-self: end;
+  min-width: 42px;
   color: var(--campus-ink);
   background: #f4f5f7;
   border: 1px solid var(--campus-line);
@@ -1867,7 +1887,7 @@ button:disabled {
   }
 
   .recent-match-item {
-    grid-template-columns: 30px minmax(0, 1fr) auto;
+    grid-template-columns: 38px minmax(0, 1fr) auto;
   }
 
   .national-hero-inner h1 {

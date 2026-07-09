@@ -41,7 +41,10 @@ describe("campus ranking responsive title styles", () => {
 
   it("선수 상세 최근 경기의 승패 표시는 상자 없이 글자 색으로만 보여준다", () => {
     expect(css).toContain(
-      ".result-letter {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  color: var(--campus-muted);\n  font-size: 15px;\n  font-weight: 950;\n  line-height: 1;\n}"
+      ".recent-match-item {\n  display: grid;\n  grid-template-columns: 42px minmax(0, 1fr) auto;\n  align-items: center;\n  gap: 10px;\n  min-height: 54px;\n  padding: 10px 12px;\n  background: white;\n  border: 1px solid var(--campus-line);\n  border-radius: 8px;\n}"
+    );
+    expect(css).toContain(
+      ".recent-match-item .result-letter {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  justify-self: center;\n  color: var(--campus-muted);\n  font-size: 18px;\n  font-weight: 950;\n  line-height: 1;\n}"
     );
     expect(css).toContain(
       ".result-letter.is-win {\n  color: #2563eb;\n}"
@@ -49,7 +52,17 @@ describe("campus ranking responsive title styles", () => {
     expect(css).toContain(
       ".result-letter.is-loss {\n  color: var(--campus-red);\n}"
     );
+    expect(css).toContain(
+      ".season-record-item span,\n.opponent-record-item span,\n.recent-match-main span {"
+    );
+    expect(css).not.toContain(".recent-match-item span {");
     expect(css).not.toContain(".result-pill {");
+  });
+
+  it("선수 상세 페이지는 전용 제목과 촘촘한 상단 여백을 사용한다", () => {
+    expect(css).toContain(
+      ".player-detail-hero .summary-inner {\n  padding: 16px 0 10px;\n}"
+    );
   });
 
   it("PC에서는 클럽 제목 줄을 한 줄로 이어 붙이고 모바일에서만 줄바꿈한다", () => {
