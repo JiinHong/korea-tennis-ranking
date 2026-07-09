@@ -5,6 +5,7 @@ import { getHistoricalMatchLogTable } from "@/lib/historicalMatchLogTable";
 import { getMatchLogTable } from "@/lib/matchLogTable";
 import { getRankingDataForClub } from "@/lib/rankingData";
 import { getRankingTable } from "@/lib/rankingTable";
+import { getSupabaseRankingTables } from "@/lib/supabaseRankingRepository";
 
 vi.mock("@/lib/rankingTable", () => ({
   getRankingTable: vi.fn(),
@@ -18,15 +19,21 @@ vi.mock("@/lib/historicalMatchLogTable", () => ({
   getHistoricalMatchLogTable: vi.fn(),
 }));
 
+vi.mock("@/lib/supabaseRankingRepository", () => ({
+  getSupabaseRankingTables: vi.fn(),
+}));
+
 describe("getRankingDataForClub", () => {
   beforeEach(() => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-07-08T12:00:00+09:00"));
+    delete process.env.RANKING_DATA_SOURCE;
     process.env.GOOGLE_SHEET_ID = "seoultech-sheet-id";
     process.env.PETC_GOOGLE_SHEET_ID = "petc-sheet-id";
     vi.mocked(getRankingTable).mockReset();
     vi.mocked(getMatchLogTable).mockReset();
     vi.mocked(getHistoricalMatchLogTable).mockReset();
+    vi.mocked(getSupabaseRankingTables).mockReset();
   });
 
   afterEach(() => {
@@ -176,5 +183,79 @@ describe("getRankingDataForClub", () => {
       totalMatches: 1,
       recent30Matches: 1,
     });
+  });
+
+  it("RANKING_DATA_SOURCE가 supabase이면 시트 대신 Supabase repository에서 랭킹 원천 데이터를 읽는다", async () => {
+    const club = getClubConfig("seoultech");
+    process.env.RANKING_DATA_SOURCE = "supabase";
+
+    vi.mocked(getSupabaseRankingTables).mockResolvedValue({
+      currentSeasonName: "시즌4",
+      ranking: [
+        { rank: 1, name: "오준석", note: "" },
+        { rank: 2, name: "김도훈", note: "" },
+      ],
+      matches: [
+        {
+          date: "2026. 7. 8",
+          challenger: "김도훈",
+          challengerRank: 2,
+          defender: "오준석",
+          defenderRank: 1,
+          winner: "오준석",
+          score: "6:4",
+          defenseResult: "방어 성공",
+        },
+      ],
+      historicalMatches: [
+        {
+          date: "2026. 5. 26",
+          challenger: "김도훈",
+          challengerRank: 4,
+          defender: "오준석",
+          defenderRank: 1,
+          winner: "김도훈",
+          score: "6:5",
+          defenseResult: "방어 실패",
+          season: "시즌2",
+          sourceNote: "import",
+        },
+      ],
+    });
+
+    if (!club) {
+      throw new Error("seoultech club config should exist");
+    }
+
+    const data = await getRankingDataForClub(club);
+
+    expect(getSupabaseRankingTables).toHaveBeenCalledWith("seoultech");
+    expect(getRankingTable).not.toHaveBeenCalled();
+    expect(getMatchLogTable).not.toHaveBeenCalled();
+    expect(getHistoricalMatchLogTable).not.toHaveBeenCalled();
+    expect(data.players).toEqual([
+      {
+        rank: 1,
+        name: "오준석",
+        note: "",
+        wins: 1,
+        losses: 0,
+        matches: 1,
+        recent5: ["W"],
+      },
+      {
+        rank: 2,
+        name: "김도훈",
+        note: "",
+        wins: 0,
+        losses: 1,
+        matches: 1,
+        recent5: ["L"],
+      },
+    ]);
+    expect(data.detailsByPlayer["오준석"].seasonRecords).toEqual([
+      { season: "시즌4", wins: 1, losses: 0, matches: 1, winRate: 100 },
+      { season: "시즌2", wins: 0, losses: 1, matches: 1, winRate: 0 },
+    ]);
   });
 });

@@ -6,6 +6,14 @@ import type {MatchRecord} from "@/lib/matchLogTable";
 import {buildPlayerDetails} from "@/lib/playerDetails";
 import {getRankingTable} from "@/lib/rankingTable";
 import type {RankingData} from "@/lib/rankingTable";
+import {getSupabaseRankingTables} from "@/lib/supabaseRankingRepository";
+
+type RankingSourceTables = {
+    currentSeasonName: string;
+    ranking: RankingData[];
+    matches: MatchRecord[];
+    historicalMatches: Awaited<ReturnType<typeof getHistoricalMatchLogTable>>;
+}
 
 export type Player = {
     rank: number;
@@ -133,6 +141,31 @@ export async function getRankingData() {
 }
 
 export async function getRankingDataForClub(club: ClubConfig) {
+    const {currentSeasonName, ranking, matches, historicalMatches} =
+        await getRankingSourceTables(club);
+    const players = buildPlayer(ranking, matches);
+    const summary = buildRankingSummary(matches);
+    const detailsByPlayer = buildPlayerDetails(
+        players,
+        matches,
+        historicalMatches,
+        currentSeasonName,
+    );
+
+    return {
+        club,
+        players,
+        matches,
+        summary,
+        detailsByPlayer,
+    };
+}
+
+async function getRankingSourceTables(club: ClubConfig): Promise<RankingSourceTables> {
+    if (process.env.RANKING_DATA_SOURCE === "supabase") {
+        return getSupabaseRankingTables(club.slug);
+    }
+
     const spreadsheetId = getSpreadsheetId(club.sheetIdEnv);
     const ranking = await getRankingTable(spreadsheetId);
     const matches = await getMatchLogTable(spreadsheetId);
@@ -142,20 +175,11 @@ export async function getRankingDataForClub(club: ClubConfig) {
             club.historicalMatchLogRange
         )
         : [];
-    const players = buildPlayer(ranking, matches);
-    const summary = buildRankingSummary(matches);
-    const detailsByPlayer = buildPlayerDetails(
-        players,
-        matches,
-        historicalMatches,
-        "시즌3",
-    );
 
     return {
-        club,
-        players,
+        currentSeasonName: "시즌3",
+        ranking,
         matches,
-        summary,
-        detailsByPlayer,
+        historicalMatches,
     };
 }
