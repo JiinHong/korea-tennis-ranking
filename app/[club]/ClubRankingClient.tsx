@@ -235,7 +235,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                 height={48}
                 priority
               />
-              <div>
+              <div className="brand-copy">
                 <span className="campus-kicker">캠퍼스 랭킹</span>
                 <h1 aria-label={club.title}>
                   {club.titleLines.map((line) => (

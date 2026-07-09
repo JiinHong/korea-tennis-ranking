@@ -115,6 +115,7 @@ describe("PlayerPage", () => {
     expect(
       screen.getByRole("region", { name: "오준석 상세 전적" })
     ).toBeDefined();
+    expect(container.querySelector(".brand-copy")).not.toBeNull();
     expect(screen.getByRole("heading", { name: "오준석" })).toBeDefined();
     expect(screen.getByText("통산 2승 1패")).toBeDefined();
     expect(screen.getByText("시즌1")).toBeDefined();

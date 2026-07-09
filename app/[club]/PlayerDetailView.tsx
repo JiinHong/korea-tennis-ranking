@@ -30,7 +30,7 @@ export default function PlayerDetailView({
                 height={48}
                 priority
               />
-              <div>
+              <div className="brand-copy">
                 <span className="campus-kicker">선수 상세</span>
                 <h1 aria-label={club.title}>
                   {club.titleLines.map((line) => (

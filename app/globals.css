@@ -646,8 +646,19 @@ button:disabled {
 }
 
 .campus-ranking-page .topbar {
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 12px;
+}
+
+.campus-ranking-page .brand-lockup {
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+}
+
+.campus-ranking-page .brand-copy {
+  min-width: 0;
 }
 
 .campus-ranking-page .brand-lockup img {
@@ -1583,13 +1594,16 @@ button:disabled {
   }
 
   .campus-ranking-page .brand-lockup {
-    align-items: flex-start;
-    gap: 10px;
+    grid-template-columns: 74px minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
   }
 
   .campus-ranking-page .brand-lockup img {
-    width: 54px;
-    height: 42px;
+    width: 64px;
+    height: 50px;
+    align-self: end;
+    margin-bottom: 1px;
   }
 
   .campus-ranking-page .brand-lockup h1 {
