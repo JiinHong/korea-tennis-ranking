@@ -38,6 +38,7 @@ export async function GET(_request: Request, context: RankingRouteContext) {
         subtitle: club.subtitle,
       },
       players: data.players,
+      matches: data.matches,
       summary: data.summary,
       detailsByPlayer: data.detailsByPlayer,
     });

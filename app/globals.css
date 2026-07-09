@@ -991,6 +991,190 @@ button:disabled {
   color: var(--campus-ink);
 }
 
+.campus-ranking-page .club-match-section {
+  padding: 16px;
+  background: white;
+  border: 1px solid var(--campus-line);
+  border-radius: 8px;
+  box-shadow: var(--campus-shadow);
+}
+
+.club-match-section-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.club-match-section-head span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--campus-red);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.club-match-section-head h2 {
+  margin: 0;
+  color: var(--campus-ink);
+  font-size: 21px;
+  line-height: 1.2;
+}
+
+.club-match-more,
+.matches-back-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 12px;
+  color: var(--campus-red);
+  text-decoration: none;
+  background: var(--campus-red-soft);
+  border: 1px solid #ffd8d2;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.club-match-more:hover,
+.matches-back-link:hover {
+  background: #ffe4df;
+}
+
+.club-match-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.club-match-card {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr) 118px;
+  align-items: center;
+  gap: 12px;
+  min-height: 70px;
+  padding: 12px;
+  background: #fafbfc;
+  border: 1px solid var(--campus-line);
+  border-radius: 8px;
+}
+
+.club-match-date,
+.club-match-score {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.club-match-date strong,
+.club-match-score strong {
+  color: var(--campus-ink);
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.club-match-date span,
+.club-match-score span,
+.club-match-players em {
+  overflow: hidden;
+  color: var(--campus-muted);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 750;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.club-match-players {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.club-match-players div {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  column-gap: 8px;
+  align-items: center;
+  min-width: 0;
+}
+
+.club-match-players strong {
+  overflow: hidden;
+  color: var(--campus-ink);
+  font-size: 15px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.club-match-players em {
+  grid-column: 2;
+}
+
+.match-result-letter {
+  justify-self: center;
+  font-size: 13px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.match-result-letter.is-win {
+  color: #2563eb;
+}
+
+.match-result-letter.is-loss {
+  color: var(--campus-red);
+}
+
+.match-versus {
+  color: var(--campus-muted);
+  font-size: 11px;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.club-match-score {
+  justify-items: end;
+  text-align: right;
+}
+
+.club-match-score strong {
+  font-size: 18px;
+}
+
+.club-match-empty {
+  margin: 0;
+  padding: 18px;
+  color: var(--campus-muted);
+  background: #fafbfc;
+  border: 1px dashed var(--campus-line);
+  border-radius: 8px;
+  font-weight: 750;
+}
+
+.matches-page-subtitle {
+  margin: 2px 0 0;
+  color: var(--campus-muted);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.matches-back-link {
+  width: fit-content;
+  margin-bottom: 10px;
+}
+
 .campus-ranking-page .ranking-board {
   box-shadow: var(--campus-shadow);
 }
@@ -1622,6 +1806,19 @@ button:disabled {
     display: none;
   }
 
+  .club-match-card {
+    grid-template-columns: 112px minmax(0, 1fr) 96px;
+  }
+
+  .club-match-players {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .match-versus {
+    display: none;
+  }
+
   .detail-grid,
   .detail-stat-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1776,6 +1973,41 @@ button:disabled {
 
   .campus-top-feed {
     grid-template-columns: 1fr;
+  }
+
+  .club-match-section-head {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .club-match-more {
+    width: 100%;
+  }
+
+  .club-match-card {
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+  }
+
+  .club-match-date {
+    grid-column: 1 / -1;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+  }
+
+  .club-match-players {
+    grid-column: 1;
+  }
+
+  .club-match-score {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+  }
+
+  .club-match-score strong {
+    font-size: 16px;
   }
 
   .ranking-row {

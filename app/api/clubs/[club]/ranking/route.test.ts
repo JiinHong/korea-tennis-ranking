@@ -33,7 +33,18 @@ describe("GET /api/clubs/[club]/ranking", () => {
           recent5: [],
         },
       ],
-      matches: [],
+      matches: [
+        {
+          date: "2026. 7. 2",
+          challenger: "김도훈",
+          challengerRank: 2,
+          defender: "오준석",
+          defenderRank: 1,
+          winner: "오준석",
+          score: "6:2",
+          defenseResult: "방어 성공",
+        },
+      ],
       summary: {
         totalMatches: 0,
         recent30Matches: 0,
@@ -122,6 +133,18 @@ describe("GET /api/clubs/[club]/ranking", () => {
         totalMatches: 0,
         recent30Matches: 0,
       },
+      matches: [
+        {
+          date: "2026. 7. 2",
+          challenger: "김도훈",
+          challengerRank: 2,
+          defender: "오준석",
+          defenderRank: 1,
+          winner: "오준석",
+          score: "6:2",
+          defenseResult: "방어 성공",
+        },
+      ],
       detailsByPlayer: {
         오준석: {
           name: "오준석",

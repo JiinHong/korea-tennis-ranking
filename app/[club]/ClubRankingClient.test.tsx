@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import ClubRankingClient from "./ClubRankingClient";
@@ -323,5 +323,57 @@ describe("ClubRankingClient", () => {
     expect(
       screen.queryByRole("region", { name: "오준석 상세 전적" })
     ).toBeNull();
+  });
+
+  it("최근 경기 5개와 전체 경기 더보기 링크를 보여준다", async () => {
+    const matches = Array.from({ length: 6 }, (_, index) => {
+      const day = index + 1;
+
+      return {
+        date: `2026. 7. ${day}`,
+        challenger: `도전자${day}`,
+        challengerRank: day + 1,
+        defender: `방어자${day}`,
+        defenderRank: day,
+        winner: `방어자${day}`,
+        score: `6:${day}`,
+        defenseResult: "방어 성공",
+      };
+    });
+
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          summary: {
+            totalMatches: 6,
+            recent30Matches: 6,
+          },
+          players: [],
+          matches,
+          detailsByPlayer: {},
+        }),
+      })
+    );
+
+    render(<ClubRankingClient club={club} />);
+
+    const recentSection = await screen.findByRole("region", {
+      name: "최근 경기",
+    });
+
+    expect(
+      within(recentSection).getByRole("heading", { name: "최근 경기" })
+    ).toBeDefined();
+    expect(within(recentSection).getAllByRole("listitem")).toHaveLength(5);
+    expect(within(recentSection).getByText("도전자6")).toBeDefined();
+    expect(within(recentSection).queryByText("도전자1")).toBeNull();
+    expect(
+      within(recentSection)
+        .getByRole("link", { name: "전체 경기 더보기" })
+        .getAttribute("href")
+    ).toBe("/seoultech/matches");
   });
 });

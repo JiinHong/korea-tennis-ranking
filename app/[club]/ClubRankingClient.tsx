@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { getPlayerDetailPath } from "./playerPaths";
+import MatchListSection from "./MatchListSection";
 
 type Player = {
   rank: number;
@@ -19,6 +20,17 @@ type Player = {
 type RankingSummary = {
   totalMatches: number;
   recent30Matches: number;
+};
+
+type MatchRecord = {
+  date: string;
+  challenger: string;
+  challengerRank: number | null;
+  defender: string;
+  defenderRank: number | null;
+  winner: string;
+  score: string;
+  defenseResult: string;
 };
 
 type ClubPageConfig = {
@@ -36,6 +48,7 @@ type RankingApiResponse =
   | {
       ok: true;
       players: Player[];
+      matches?: MatchRecord[];
       summary?: RankingSummary;
       detailsByPlayer: unknown;
     }
@@ -144,6 +157,7 @@ function RankingRow({
 
 export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
   const [players, setPlayers] = useState<Player[]>([]);
+  const [matches, setMatches] = useState<MatchRecord[]>([]);
   const [summary, setSummary] = useState<RankingSummary | null>(null);
   const [status, setStatus] = useState<LoadStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -170,6 +184,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
       }
 
       setPlayers(data.players);
+      setMatches(data.matches ?? []);
       setSummary(data.summary ?? null);
       setLoadedAt(new Date());
       setStatus("success");
@@ -332,6 +347,15 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
 
         {status !== "error" ? (
           <>
+            <MatchListSection
+              matches={matches}
+              title="최근 경기"
+              eyebrow="Recent matches"
+              ariaLabel="최근 경기"
+              limit={5}
+              moreHref={`/${club.slug}/matches`}
+            />
+
             <section className="toolbar-section" aria-label="랭킹 필터">
               <div>
                 <h2>전체 랭킹</h2>
