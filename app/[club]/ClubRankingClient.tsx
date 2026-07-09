@@ -228,22 +228,24 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
         <div className="summary-inner">
           <header className="topbar">
             <div className="brand-lockup">
-              <Image
-                src={club.logoPath}
-                alt={club.logoAlt}
-                width={48}
-                height={48}
-                priority
-              />
-              <div className="brand-copy">
-                <span className="campus-kicker">캠퍼스 랭킹</span>
-                <h1 aria-label={club.title}>
-                  {club.titleLines.map((line) => (
-                    <span key={line} className="club-title-line">
-                      {line}
-                    </span>
-                  ))}
-                </h1>
+              <div className="brand-title-row">
+                <Image
+                  src={club.logoPath}
+                  alt={club.logoAlt}
+                  width={48}
+                  height={48}
+                  priority
+                />
+                <div className="brand-title-stack">
+                  <span className="campus-kicker">캠퍼스 랭킹</span>
+                  <h1 aria-label={club.title}>
+                    {club.titleLines.map((line) => (
+                      <span key={line} className="club-title-line">
+                        {line}
+                      </span>
+                    ))}
+                  </h1>
+                </div>
               </div>
             </div>
           </header>

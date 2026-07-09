@@ -23,22 +23,24 @@ export default function PlayerDetailView({
         <div className="summary-inner">
           <header className="topbar">
             <div className="brand-lockup">
-              <Image
-                src={club.logoPath}
-                alt={club.logoAlt}
-                width={48}
-                height={48}
-                priority
-              />
-              <div className="brand-copy">
-                <span className="campus-kicker">선수 상세</span>
-                <h1 aria-label={club.title}>
-                  {club.titleLines.map((line) => (
-                    <span key={line} className="club-title-line">
-                      {line}
-                    </span>
-                  ))}
-                </h1>
+              <div className="brand-title-row">
+                <Image
+                  src={club.logoPath}
+                  alt={club.logoAlt}
+                  width={48}
+                  height={48}
+                  priority
+                />
+                <div className="brand-title-stack">
+                  <span className="campus-kicker">선수 상세</span>
+                  <h1 aria-label={club.title}>
+                    {club.titleLines.map((line) => (
+                      <span key={line} className="club-title-line">
+                        {line}
+                      </span>
+                    ))}
+                  </h1>
+                </div>
               </div>
             </div>
             <Link
@@ -57,34 +59,41 @@ export default function PlayerDetailView({
           className="player-detail-panel player-detail-panel-page"
           aria-label={`${detail.name} 상세 전적`}
         >
-          <header className="player-detail-header">
-            <div>
+          <header className="player-detail-header player-profile-header">
+            <div className="player-profile-main">
               <span className="detail-rank">{detail.rank}위</span>
               <h2>{detail.name}</h2>
-              <p>통산 {formatSummary(detail.wins, detail.losses)}</p>
+              <p>
+                통산 {formatSummary(detail.wins, detail.losses)} ·{" "}
+                {detail.matches}경기
+              </p>
             </div>
-          </header>
-
-          <div className="detail-metrics" aria-label="선수 통산 요약">
-            <div>
-              <strong>{detail.matches}</strong>
-              <span>통산 경기</span>
-            </div>
-            <div>
+            <div className="player-profile-record" aria-label="통산 승률">
               <strong>{detail.winRate}%</strong>
               <span>승률</span>
             </div>
-            <div>
+          </header>
+
+          <div className="detail-stat-strip" aria-label="선수 통산 요약">
+            <div className="detail-stat-item">
+              <span>통산 경기</span>
+              <strong>{detail.matches}</strong>
+            </div>
+            <div className="detail-stat-item">
+              <span>승률</span>
+              <strong>{detail.winRate}%</strong>
+            </div>
+            <div className="detail-stat-item">
+              <span>방어 성공</span>
               <strong>
                 {detail.defenderRecord.wins}/{detail.defenderRecord.matches}
               </strong>
-              <span>방어 성공</span>
             </div>
-            <div>
+            <div className="detail-stat-item">
+              <span>도전 성공</span>
               <strong>
                 {detail.challengerRecord.wins}/{detail.challengerRecord.matches}
               </strong>
-              <span>도전 성공</span>
             </div>
           </div>
 
@@ -152,19 +161,20 @@ export default function PlayerDetailView({
                     className="recent-match-item"
                   >
                     <span
-                      className={`result-badge ${
+                      className={`result-pill ${
                         match.result === "W" ? "is-win" : "is-loss"
                       }`}
+                      aria-label={match.result === "W" ? "승리" : "패배"}
                     >
-                      {match.result === "W" ? "승" : "패"}
+                      {match.result}
                     </span>
-                    <div>
+                    <div className="recent-match-main">
                       <strong>{match.opponent}</strong>
                       <span>
-                        {match.season} · {match.date} · {match.role} ·{" "}
-                        {match.score}
+                        {match.season} · {match.date} · {match.role}
                       </span>
                     </div>
+                    <em className="match-score">{match.score}</em>
                   </div>
                 ))}
               </div>

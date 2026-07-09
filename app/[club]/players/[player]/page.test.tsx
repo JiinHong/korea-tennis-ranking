@@ -115,12 +115,15 @@ describe("PlayerPage", () => {
     expect(
       screen.getByRole("region", { name: "오준석 상세 전적" })
     ).toBeDefined();
-    expect(container.querySelector(".brand-copy")).not.toBeNull();
+    expect(container.querySelector(".brand-title-row")).not.toBeNull();
     expect(screen.getByRole("heading", { name: "오준석" })).toBeDefined();
-    expect(screen.getByText("통산 2승 1패")).toBeDefined();
+    expect(screen.getByText(/통산 2승 1패/)).toBeDefined();
+    expect(container.querySelector(".player-profile-header")).not.toBeNull();
+    expect(container.querySelector(".detail-stat-strip")).not.toBeNull();
+    expect(container.querySelectorAll(".detail-stat-item")).toHaveLength(4);
     expect(screen.getByText("시즌1")).toBeDefined();
     expect(screen.getAllByText("김도훈").length).toBeGreaterThan(0);
-    expect(container.querySelector(".result-badge.is-win")).not.toBeNull();
-    expect(container.querySelector(".result-pill")).toBeNull();
+    expect(container.querySelector(".result-pill.is-win")).not.toBeNull();
+    expect(container.querySelector(".result-badge")).toBeNull();
   });
 });

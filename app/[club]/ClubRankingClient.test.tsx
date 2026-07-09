@@ -202,7 +202,7 @@ describe("ClubRankingClient", () => {
     expect(
       container.querySelector('img[src*="seoultech-symbol"]')
     ).toBeDefined();
-    expect(container.querySelector(".brand-copy")).not.toBeNull();
+    expect(container.querySelector(".brand-title-row")).not.toBeNull();
     expect(
       Array.from(container.querySelectorAll(".club-title-line")).map(
         (line) => line.textContent

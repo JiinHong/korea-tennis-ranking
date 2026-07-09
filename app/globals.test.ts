@@ -8,7 +8,7 @@ describe("campus ranking responsive title styles", () => {
 
   it("클럽 로고 주변에 카드형 네모 장식을 만들지 않는다", () => {
     expect(css).toContain(
-      ".campus-ranking-page .brand-lockup img {\n  width: 68px;\n  height: 52px;\n  padding: 0;\n  background: transparent;\n  border: 0;\n  border-radius: 0;\n  filter: none;\n  object-fit: contain;\n}"
+      ".campus-ranking-page .brand-lockup img {\n  width: 68px;\n  height: auto;\n  max-height: 52px;\n  padding: 0;\n  background: transparent;\n  border: 0;\n  border-radius: 0;\n  filter: none;\n  object-fit: contain;\n}"
     );
   });
 
@@ -41,9 +41,9 @@ describe("campus ranking responsive title styles", () => {
 
   it("선수 상세 최근 경기의 승패 표시는 큰 원형이 아니라 작은 배지로 보여준다", () => {
     expect(css).toContain(
-      ".result-badge {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  min-width: 28px;\n  height: 24px;\n  margin: 0;\n  padding: 0 8px;\n  color: white;\n  border-radius: 6px;\n  font-size: 12px;\n  font-weight: 900;\n}"
+      ".result-pill {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  min-width: 28px;\n  height: 24px;\n  margin: 0;\n  padding: 0 7px;\n  color: white;\n  border-radius: 6px;\n  font-size: 11px;\n  font-weight: 950;\n}"
     );
-    expect(css).not.toContain(".result-pill {");
+    expect(css).not.toContain(".result-badge {");
   });
 
   it("PC에서는 클럽 제목 줄을 한 줄로 이어 붙이고 모바일에서만 줄바꿈한다", () => {
