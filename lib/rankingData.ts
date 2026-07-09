@@ -6,7 +6,6 @@ import type {MatchRecord} from "@/lib/matchLogTable";
 import {buildPlayerDetails} from "@/lib/playerDetails";
 import {getRankingTable} from "@/lib/rankingTable";
 import type {RankingData} from "@/lib/rankingTable";
-import {getSupabaseRankingTables} from "@/lib/supabaseRankingRepository";
 
 type RankingSourceTables = {
     currentSeasonName: string;
@@ -163,6 +162,10 @@ export async function getRankingDataForClub(club: ClubConfig) {
 
 async function getRankingSourceTables(club: ClubConfig): Promise<RankingSourceTables> {
     if (process.env.RANKING_DATA_SOURCE === "supabase") {
+        const {getSupabaseRankingTables} = await import(
+            "@/lib/supabaseRankingRepository"
+        );
+
         return getSupabaseRankingTables(club.slug);
     }
 
