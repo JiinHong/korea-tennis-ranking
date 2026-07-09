@@ -107,6 +107,14 @@ describe("PlayerPage", () => {
 
     const { container } = render(ui);
 
+    const nationalBackLink = screen.getByRole("link", {
+      name: "전국 대학 랭킹으로 돌아가기",
+    });
+    expect(nationalBackLink.getAttribute("href")).toBe(
+      "https://koreatennisranking.com/"
+    );
+    expect(nationalBackLink.closest(".summary-inner")).not.toBeNull();
+    expect(nationalBackLink.querySelector(".national-back-icon")).not.toBeNull();
     expect(
       screen.queryByRole("link", { name: "랭킹으로 돌아가기" })
     ).toBeNull();

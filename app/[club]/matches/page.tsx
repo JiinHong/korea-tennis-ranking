@@ -6,6 +6,7 @@ import { getClubConfig, listClubConfigs } from "@/lib/clubs";
 import { getRankingDataForClub } from "@/lib/rankingData";
 
 import MatchListSection from "../MatchListSection";
+import NationalRankingBackLink from "../NationalRankingBackLink";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -36,6 +37,7 @@ export default async function MatchesPage({ params }: MatchesPageProps) {
     <main className="ranking-page campus-ranking-page matches-page">
       <section className="summary-band campus-hero-band player-detail-hero">
         <div className="summary-inner">
+          <NationalRankingBackLink />
           <header className="topbar">
             <div className="brand-lockup">
               <div className="brand-title-row">

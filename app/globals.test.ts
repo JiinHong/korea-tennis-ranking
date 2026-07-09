@@ -74,6 +74,15 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
+  it("좌상단 루트 이동 버튼은 두꺼운 chevron 아이콘으로 보여준다", () => {
+    expect(css).toContain(
+      ".national-back-link {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 38px;\n  height: 38px;\n  margin-bottom: 10px;\n  color: var(--campus-ink);\n  text-decoration: none;\n  background: transparent;\n  border-radius: 999px;\n}"
+    );
+    expect(css).toContain(
+      ".national-back-icon {\n  width: 18px;\n  height: 18px;\n  border-bottom: 5px solid currentColor;\n  border-left: 5px solid currentColor;\n  border-radius: 3px;\n  transform: rotate(45deg);\n}"
+    );
+  });
+
   it("PC에서는 클럽 제목 줄을 한 줄로 이어 붙이고 모바일에서만 줄바꿈한다", () => {
     expect(css).toContain(".club-title-line {\n  display: inline;\n}");
     expect(css).toContain(

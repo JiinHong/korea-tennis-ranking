@@ -75,6 +75,15 @@ describe("MatchesPage", () => {
 
     render(ui);
 
+    const nationalBackLink = screen.getByRole("link", {
+      name: "전국 대학 랭킹으로 돌아가기",
+    });
+    expect(nationalBackLink.getAttribute("href")).toBe(
+      "https://koreatennisranking.com/"
+    );
+    expect(nationalBackLink.closest(".summary-inner")).not.toBeNull();
+    expect(nationalBackLink.querySelector(".national-back-icon")).not.toBeNull();
+
     expect(
       screen.getByRole("heading", { level: 1, name: "전체 경기" })
     ).toBeDefined();

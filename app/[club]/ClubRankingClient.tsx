@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { getPlayerDetailPath } from "./playerPaths";
 import MatchListSection from "./MatchListSection";
+import NationalRankingBackLink from "./NationalRankingBackLink";
 
 type Player = {
   rank: number;
@@ -241,6 +242,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
     <main className="ranking-page campus-ranking-page">
       <section className="summary-band campus-hero-band">
         <div className="summary-inner">
+          <NationalRankingBackLink />
           <header className="topbar">
             <div className="brand-lockup">
               <span className="campus-kicker">캠퍼스 랭킹</span>
