@@ -336,6 +336,27 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
               moreHref={`/${club.slug}/matches`}
             />
 
+            {hotPlayers.length > 0 ? (
+              <section className="activity-strip" aria-label="활동 선수">
+                <div className="activity-heading">
+                  <span>Campus feed</span>
+                  <h2>활동 피드</h2>
+                </div>
+                {hotPlayers.map((player) => (
+                  <Link
+                    key={player.name}
+                    className="activity-card"
+                    href={getPlayerDetailPath(club.slug, player.name)}
+                    aria-label={`활동 선수 ${player.name} 상세 전적 보기`}
+                  >
+                    <span>{player.rank}위</span>
+                    <strong>{player.name}</strong>
+                    <em>{player.matches}경기</em>
+                  </Link>
+                ))}
+              </section>
+            ) : null}
+
             <section className="toolbar-section" aria-label="랭킹 필터">
               <div>
                 <h2>전체 랭킹</h2>
@@ -366,27 +387,6 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                 </div>
               </div>
             </section>
-
-            {hotPlayers.length > 0 ? (
-              <section className="activity-strip" aria-label="활동 선수">
-                <div className="activity-heading">
-                  <span>Campus feed</span>
-                  <h2>활동 피드</h2>
-                </div>
-                {hotPlayers.map((player) => (
-                  <Link
-                    key={player.name}
-                    className="activity-card"
-                    href={getPlayerDetailPath(club.slug, player.name)}
-                    aria-label={`활동 선수 ${player.name} 상세 전적 보기`}
-                  >
-                    <span>{player.rank}위</span>
-                    <strong>{player.name}</strong>
-                    <em>{player.matches}경기</em>
-                  </Link>
-                ))}
-              </section>
-            ) : null}
 
             <section className="ranking-board" aria-label="캠퍼스 랭킹 피드">
               <div className="ranking-head">

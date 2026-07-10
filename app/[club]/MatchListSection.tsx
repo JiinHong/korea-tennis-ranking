@@ -122,11 +122,6 @@ export default function MatchListSection({
           <span>{eyebrow}</span>
           <h2>{title}</h2>
         </div>
-        {moreHref ? (
-          <Link className="club-match-more" href={moreHref}>
-            전체 경기 더보기
-          </Link>
-        ) : null}
       </div>
 
       {visibleMatches.length > 0 ? (
@@ -141,6 +136,17 @@ export default function MatchListSection({
       ) : (
         <p className="club-match-empty">아직 기록된 경기가 없습니다.</p>
       )}
+
+      {moreHref ? (
+        <Link
+          className="club-match-more"
+          href={moreHref}
+          aria-label="전체 경기 더보기"
+          title="전체 경기 더보기"
+        >
+          <span aria-hidden="true">⋯</span>
+        </Link>
+      ) : null}
     </section>
   );
 }

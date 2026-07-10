@@ -249,7 +249,13 @@ describe("ClubRankingClient", () => {
       screen.queryByRole("heading", { name: "오늘의 랭킹" })
     ).toBeNull();
     expect((await screen.findAllByText("박종건")).length).toBeGreaterThan(0);
-    expect(screen.getByRole("heading", { name: "활동 피드" })).toBeDefined();
+    const activityHeading = screen.getByRole("heading", { name: "활동 피드" });
+    const rankingHeading = screen.getByRole("heading", { name: "전체 랭킹" });
+
+    expect(
+      activityHeading.compareDocumentPosition(rankingHeading) &
+        Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy();
     expect(
       screen.getByRole("region", { name: "캠퍼스 랭킹 피드" })
     ).toBeDefined();
@@ -396,10 +402,13 @@ describe("ClubRankingClient", () => {
     expect(within(recentSection).getAllByRole("listitem")).toHaveLength(5);
     expect(within(recentSection).getByText("도전자6")).toBeDefined();
     expect(within(recentSection).queryByText("도전자1")).toBeNull();
-    expect(
-      within(recentSection)
-        .getByRole("link", { name: "전체 경기 더보기" })
-        .getAttribute("href")
-    ).toBe("/seoultech/matches");
+    const matchList = within(recentSection).getByRole("list");
+    const moreLink = within(recentSection).getByRole("link", {
+      name: "전체 경기 더보기",
+    });
+
+    expect(matchList.nextElementSibling).toBe(moreLink);
+    expect(moreLink.textContent).toBe("⋯");
+    expect(moreLink.getAttribute("href")).toBe("/seoultech/matches");
   });
 });
