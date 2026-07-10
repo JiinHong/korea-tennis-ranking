@@ -3,7 +3,7 @@ import { describe, expect, test, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 
 vi.mock("@/lib/supabaseServer", () => ({
-  getSupabaseServerClient: vi.fn(),
+  getSupabaseReadClient: vi.fn(),
 }));
 
 import {

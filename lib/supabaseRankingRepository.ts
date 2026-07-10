@@ -7,7 +7,7 @@ import type {
   RankedPlayer,
   RankingRuleConfig,
 } from "@/lib/rankingRules";
-import { getSupabaseServerClient } from "@/lib/supabaseServer";
+import { getSupabaseReadClient } from "@/lib/supabaseServer";
 
 export type SupabaseClubRow = {
   id: string;
@@ -217,7 +217,7 @@ function toPlayerIdentity(value: unknown): SupabasePlayerIdentity {
 }
 
 export function createSupabaseRankingAdapter(): SupabaseRankingAdapter {
-  const supabase = getSupabaseServerClient();
+  const supabase = getSupabaseReadClient();
 
   return {
     async getClubBySlug(slug) {

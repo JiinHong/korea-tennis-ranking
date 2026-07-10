@@ -12,10 +12,10 @@ function requireServerEnv(name: string): string {
   return value;
 }
 
-export function getSupabaseServerClient() {
+export function getSupabaseReadClient() {
   return createClient(
     requireServerEnv("SUPABASE_URL"),
-    requireServerEnv("SUPABASE_SERVICE_ROLE_KEY"),
+    requireServerEnv("SUPABASE_PUBLISHABLE_KEY"),
     {
       auth: {
         autoRefreshToken: false,

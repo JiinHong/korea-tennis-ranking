@@ -180,7 +180,7 @@ async function getRankingSourceTables(club: ClubConfig): Promise<RankingSourceTa
         : [];
 
     return {
-        currentSeasonName: "시즌3",
+        currentSeasonName: club.currentSeasonName,
         ranking,
         matches,
         historicalMatches,

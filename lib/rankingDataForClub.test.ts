@@ -176,7 +176,7 @@ describe("getRankingDataForClub", () => {
       losses: 0,
       matches: 1,
       seasonRecords: [
-        { season: "시즌3", wins: 1, losses: 0, matches: 1, winRate: 100 },
+        { season: "현재", wins: 1, losses: 0, matches: 1, winRate: 100 },
       ],
     });
     expect(data.summary).toEqual({

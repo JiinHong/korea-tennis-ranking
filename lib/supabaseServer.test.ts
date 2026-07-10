@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
-import { getSupabaseServerClient } from "@/lib/supabaseServer";
+import { getSupabaseReadClient } from "@/lib/supabaseServer";
 
 vi.mock("@supabase/supabase-js", () => ({
   createClient: vi.fn(() => ({ from: vi.fn() })),
@@ -11,7 +11,7 @@ vi.mock("server-only", () => ({}));
 
 const originalEnv = process.env;
 
-describe("getSupabaseServerClient", () => {
+describe("getSupabaseReadClient", () => {
   beforeEach(() => {
     process.env = { ...originalEnv };
     vi.mocked(createClient).mockClear();
@@ -23,29 +23,29 @@ describe("getSupabaseServerClient", () => {
 
   test("throws a clear error when SUPABASE_URL is missing", () => {
     delete process.env.SUPABASE_URL;
-    process.env.SUPABASE_SERVICE_ROLE_KEY = "service-role-key";
+    process.env.SUPABASE_PUBLISHABLE_KEY = "publishable-key";
 
-    expect(() => getSupabaseServerClient()).toThrow("SUPABASE_URL is missing");
+    expect(() => getSupabaseReadClient()).toThrow("SUPABASE_URL is missing");
   });
 
-  test("throws a clear error when SUPABASE_SERVICE_ROLE_KEY is missing", () => {
+  test("throws a clear error when SUPABASE_PUBLISHABLE_KEY is missing", () => {
     process.env.SUPABASE_URL = "https://example.supabase.co";
-    delete process.env.SUPABASE_SERVICE_ROLE_KEY;
+    delete process.env.SUPABASE_PUBLISHABLE_KEY;
 
-    expect(() => getSupabaseServerClient()).toThrow(
-      "SUPABASE_SERVICE_ROLE_KEY is missing"
+    expect(() => getSupabaseReadClient()).toThrow(
+      "SUPABASE_PUBLISHABLE_KEY is missing"
     );
   });
 
-  test("creates a server-only Supabase client without browser session persistence", () => {
+  test("creates an RLS-protected server client with the publishable key", () => {
     process.env.SUPABASE_URL = "https://example.supabase.co";
-    process.env.SUPABASE_SERVICE_ROLE_KEY = "service-role-key";
+    process.env.SUPABASE_PUBLISHABLE_KEY = "publishable-key";
 
-    getSupabaseServerClient();
+    getSupabaseReadClient();
 
     expect(createClient).toHaveBeenCalledWith(
       "https://example.supabase.co",
-      "service-role-key",
+      "publishable-key",
       {
         auth: {
           autoRefreshToken: false,

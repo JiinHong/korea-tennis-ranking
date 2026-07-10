@@ -343,7 +343,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
         {status === "loading" && players.length === 0 ? (
           <section className="state-panel">
             <strong>랭킹 불러오는 중</strong>
-            <p>구글 시트에서 최신 순위를 가져오고 있습니다.</p>
+            <p>최신 순위를 가져오고 있습니다.</p>
           </section>
         ) : null}
 

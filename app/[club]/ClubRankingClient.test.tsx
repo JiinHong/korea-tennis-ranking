@@ -20,6 +20,15 @@ describe("ClubRankingClient", () => {
     vi.useRealTimers();
   });
 
+  it("로딩 상태에서 특정 데이터 저장소 이름을 노출하지 않는다", () => {
+    vi.stubGlobal("fetch", vi.fn(() => new Promise(() => {})));
+
+    render(<ClubRankingClient club={club} />);
+
+    expect(screen.getByText("최신 순위를 가져오고 있습니다.")).toBeDefined();
+    expect(screen.queryByText(/구글 시트/)).toBeNull();
+  });
+
   it("10위까지는 큰 랭킹 행으로, 11위부터는 compact 행으로 보여준다", async () => {
     const players = Array.from({ length: 12 }, (_, index) => {
       const rank = index + 1;

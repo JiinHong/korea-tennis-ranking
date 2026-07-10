@@ -55,7 +55,7 @@ async function main() {
 
   const plan = buildSupabaseSeedPlan({
     club,
-    currentSeasonName: "시즌3",
+    currentSeasonName: club.currentSeasonName,
     ranking,
     matches,
     historicalMatches,
