@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import ClubRankingClient from "./ClubRankingClient";
@@ -358,6 +358,44 @@ describe("ClubRankingClient", () => {
     expect(
       screen.queryByRole("region", { name: "오준석 상세 전적" })
     ).toBeNull();
+  });
+
+  it("비고가 아니라 선수 상태로 부상을 표시하고 필터링한다", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          players: [
+            {
+              rank: 2,
+              name: "김도훈",
+              note: "왼손잡이",
+              status: "injured",
+              wins: 0,
+              losses: 0,
+              matches: 0,
+              recent5: [],
+            },
+          ],
+          detailsByPlayer: {},
+        }),
+      })
+    );
+
+    render(<ClubRankingClient club={club} />);
+
+    const playerLink = await screen.findByRole("link", {
+      name: "김도훈 상세 전적 보기",
+    });
+    expect(within(playerLink).getByText("부상")).toBeDefined();
+
+    fireEvent.click(screen.getByRole("button", { name: "부상" }));
+
+    expect(
+      screen.getByRole("link", { name: "김도훈 상세 전적 보기" })
+    ).toBeDefined();
   });
 
   it("최근 경기 5개와 전체 경기 더보기 링크를 보여준다", async () => {

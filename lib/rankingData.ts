@@ -6,6 +6,7 @@ import type {MatchRecord} from "@/lib/matchLogTable";
 import {buildPlayerDetails} from "@/lib/playerDetails";
 import {getRankingTable} from "@/lib/rankingTable";
 import type {RankingData} from "@/lib/rankingTable";
+import type {PlayerStatus} from "@/lib/rankingRules";
 
 type RankingSourceTables = {
     currentSeasonName: string;
@@ -18,6 +19,7 @@ export type Player = {
     rank: number;
     name: string;
     note: string;
+    status?: PlayerStatus;
     wins: number;
     losses: number;
     matches: number;
@@ -95,6 +97,7 @@ export function buildPlayer(
             rank: rankingData.rank,
             name: rankingData.name,
             note: rankingData.note,
+            ...(rankingData.status ? {status: rankingData.status} : {}),
             wins: 0,
             losses: 0,
             matches: 0,

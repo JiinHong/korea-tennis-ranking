@@ -13,6 +13,7 @@ type Player = {
   rank: number;
   name: string;
   note: string;
+  status?: "active" | "injured" | "inactive" | "left";
   wins: number;
   losses: number;
   matches: number;
@@ -69,8 +70,8 @@ const filters = [
 
 type RankingFilter = (typeof filters)[number]["id"];
 
-function isInjured(note: string) {
-  return note.includes("부상") || note.toLowerCase().includes("injury");
+function isInjured(player: Player) {
+  return player.status === "injured";
 }
 
 function formatLiveTime(date: Date | null) {
@@ -124,7 +125,7 @@ function RankingRow({
   player: Player;
   detailHref: string;
 }) {
-  const injured = isInjured(player.note);
+  const injured = isInjured(player);
   const densityClass = player.rank <= 10 ? "is-featured" : "is-compact";
 
   return (
@@ -225,7 +226,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
       const matchesFilter =
         filter === "all" ||
         (filter === "active" && player.matches > 0) ||
-        (filter === "injured" && isInjured(player.note));
+        (filter === "injured" && isInjured(player));
 
       return matchesQuery && matchesFilter;
     });

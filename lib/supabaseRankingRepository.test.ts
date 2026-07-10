@@ -31,7 +31,7 @@ function createAdapter(): SupabaseRankingAdapter {
       },
       {
         rank: 2,
-        note: "손목 부상",
+        note: "왼손잡이",
         status: "injured",
         player: { id: "p2", name: "김도훈", displayName: "김도훈" },
       },
@@ -87,8 +87,8 @@ describe("getSupabaseRankingTables", () => {
     expect(result).toEqual({
       currentSeasonName: "시즌3",
       ranking: [
-        { rank: 1, name: "오준석", note: "" },
-        { rank: 2, name: "김도훈", note: "손목 부상" },
+        { rank: 1, name: "오준석", note: "", status: "active" },
+        { rank: 2, name: "김도훈", note: "왼손잡이", status: "injured" },
       ],
       matches: [
         {

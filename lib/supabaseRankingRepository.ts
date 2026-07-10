@@ -127,6 +127,7 @@ export async function getSupabaseRankingTables(
       rank: seasonPlayer.rank,
       name: displayName(seasonPlayer.player),
       note: seasonPlayer.note,
+      status: seasonPlayer.status,
     }));
 
   const matches: MatchRecord[] = [];

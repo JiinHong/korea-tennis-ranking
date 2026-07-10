@@ -65,4 +65,21 @@ describe("buildPlayer", () => {
       },
     ]);
   });
+
+  it("선수 상태를 공개 랭킹 데이터에 그대로 전달한다", () => {
+    const ranking: RankingData[] = [
+      {
+        rank: 1,
+        name: "박정용",
+        note: "왼손잡이",
+        status: "injured",
+      },
+    ];
+
+    expect(buildPlayer(ranking, [])[0]).toMatchObject({
+      name: "박정용",
+      note: "왼손잡이",
+      status: "injured",
+    });
+  });
 });

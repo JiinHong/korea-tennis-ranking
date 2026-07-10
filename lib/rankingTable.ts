@@ -1,10 +1,12 @@
 import {getSheetsClient, getSpreadsheetId} from "@/lib/googleSheets";
 import {parseRank} from "@/lib/rank";
+import type {PlayerStatus} from "@/lib/rankingRules";
 
 export type RankingData = {
     rank : number;
     name : string;
     note : string;
+    status?: PlayerStatus;
 }
 
 //구글 시트에서 랭킹 표를 읽어보는 함수
@@ -54,6 +56,7 @@ export async function getRankingTable(spreadsheetId = getSpreadsheetId()): Promi
             rank,
             name,
             note,
+            status: note.includes("부상") ? "injured" : "active",
         });
     }
 
