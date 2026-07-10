@@ -110,6 +110,27 @@ describe("createSupabaseAdminPlayerCommandAdapter", () => {
     ).rejects.toMatchObject({ kind: "validation" });
   });
 
+  it("does not expose unexpected database errors as validation messages", async () => {
+    const adapter = createSupabaseAdminPlayerCommandAdapter({
+      rpc: vi.fn().mockResolvedValue({
+        data: null,
+        error: {
+          code: "XX000",
+          message: "internal database details that must stay private",
+        },
+      }),
+    });
+
+    await expect(
+      adapter.mutate({
+        action: "add",
+        clubSlug: "seoultech",
+        name: "새 선수",
+        adminSecret: "secret",
+      })
+    ).rejects.toEqual(new Error("선수 관리 작업을 저장하지 못했습니다."));
+  });
+
   it("rejects an invalid RPC response", async () => {
     const adapter = createSupabaseAdminPlayerCommandAdapter({
       rpc: vi.fn().mockResolvedValue({ data: null, error: null }),

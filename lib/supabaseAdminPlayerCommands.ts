@@ -103,6 +103,10 @@ export function createSupabaseAdminPlayerCommandAdapter(
       );
 
       if (error) {
+        if (error.code !== "42501" && !["22023", "23505"].includes(error.code ?? "")) {
+          throw new Error("선수 관리 작업을 저장하지 못했습니다.");
+        }
+
         throw new AdminPlayerCommandError(
           error.code === "42501" ? "forbidden" : "validation",
           error.message
