@@ -2583,6 +2583,393 @@ button:disabled {
   color: #b23a32;
 }
 
+.admin-title-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-nav-action,
+.admin-primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 0 13px;
+  color: white;
+  background: #285e6a;
+  border: 1px solid #285e6a;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.admin-nav-action span {
+  font-size: 19px;
+  line-height: 1;
+}
+
+.admin-access-state.is-sensitive span {
+  background: #c94b42;
+}
+
+.admin-player-section {
+  margin-top: 30px;
+}
+
+.admin-player-heading {
+  margin-bottom: 18px;
+}
+
+.admin-player-controls {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 14px;
+}
+
+.admin-club-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: #e8ecef;
+  border: 1px solid #d9dee3;
+  border-radius: 8px;
+}
+
+.admin-club-tabs button {
+  min-height: 34px;
+  padding: 0 12px;
+  color: #68737d;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.admin-club-tabs button[aria-pressed="true"] {
+  color: #1f2933;
+  background: white;
+  box-shadow: 0 1px 4px rgba(31, 41, 51, 0.1);
+}
+
+.admin-player-control-actions {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.admin-player-search {
+  display: grid;
+  gap: 5px;
+}
+
+.admin-player-search span,
+.admin-dialog-field > span {
+  color: #68737d;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.admin-player-search input {
+  width: 220px;
+  height: 38px;
+  padding: 0 11px;
+  color: #1f2933;
+  background: white;
+  border: 1px solid #d9dee3;
+  border-radius: 7px;
+  outline: none;
+}
+
+.admin-player-search input:focus,
+.admin-dialog-field input:focus,
+.admin-dialog-field select:focus {
+  border-color: #3f7884;
+  box-shadow: 0 0 0 3px rgba(63, 120, 132, 0.14);
+}
+
+.admin-primary-button:disabled {
+  color: #8a949e;
+  background: #e7ebee;
+  border-color: #e7ebee;
+}
+
+.admin-player-notice {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.admin-player-notice.is-success {
+  color: #216c49;
+  background: #e7f4ed;
+  border: 1px solid #c8e5d5;
+}
+
+.admin-player-notice.is-error {
+  color: #a83831;
+  background: #fcebea;
+  border: 1px solid #f2cbc8;
+}
+
+.admin-player-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 46px;
+  padding: 0 16px;
+  background: #f8fafb;
+  border: 1px solid #dfe3e8;
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+}
+
+.admin-player-summary strong {
+  font-size: 13px;
+}
+
+.admin-player-summary span {
+  color: #68737d;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.admin-player-table {
+  overflow: hidden;
+  background: white;
+  border: 1px solid #dfe3e8;
+  border-radius: 0 0 8px 8px;
+}
+
+.admin-player-table-head,
+.admin-player-row {
+  display: grid;
+  grid-template-columns: 72px minmax(180px, 1fr) 110px 170px;
+  align-items: center;
+}
+
+.admin-player-table-head {
+  min-height: 38px;
+  color: #68737d;
+  background: #f8fafb;
+  border-bottom: 1px solid #e6e9ed;
+  font-size: 10px;
+  font-weight: 850;
+}
+
+.admin-player-table-head span,
+.admin-player-row > * {
+  min-width: 0;
+  padding: 0 14px;
+}
+
+.admin-player-row {
+  min-height: 58px;
+  border-bottom: 1px solid #edf0f2;
+}
+
+.admin-player-row:last-child {
+  border-bottom: 0;
+}
+
+.admin-player-row.is-left {
+  color: #7d8790;
+  background: #fafbfc;
+}
+
+.admin-player-rank {
+  font-size: 14px;
+}
+
+.admin-player-identity {
+  display: grid;
+  gap: 4px;
+}
+
+.admin-player-identity strong {
+  overflow: hidden;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-player-identity span {
+  overflow: hidden;
+  color: #7d8790;
+  font-size: 10px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-player-status button,
+.admin-player-actions button {
+  min-height: 28px;
+  padding: 0 8px;
+  background: transparent;
+  border: 1px solid #d9dee3;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 850;
+}
+
+.admin-player-status button.is-active {
+  color: #24724d;
+  border-color: #bcdcc9;
+}
+
+.admin-player-status button.is-injured {
+  color: #b23a32;
+  border-color: #edc3bf;
+}
+
+.admin-player-status button.is-inactive,
+.admin-player-status button.is-left {
+  color: #68737d;
+}
+
+.admin-player-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.admin-player-actions button {
+  color: #3e6470;
+  border-color: transparent;
+}
+
+.admin-player-empty {
+  margin: 0;
+  padding: 32px 16px;
+  color: #7d8790;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.admin-player-dialog-backdrop {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(23, 31, 38, 0.46);
+}
+
+.admin-player-dialog {
+  width: min(100%, 420px);
+  overflow: hidden;
+  background: white;
+  border: 1px solid #d9dee3;
+  border-radius: 8px;
+  box-shadow: 0 20px 50px rgba(23, 31, 38, 0.22);
+}
+
+.admin-player-dialog > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px;
+  border-bottom: 1px solid #e6e9ed;
+}
+
+.admin-player-dialog > header span {
+  display: block;
+  margin-bottom: 5px;
+  color: #b23a32;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.admin-player-dialog h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.admin-player-dialog > header button {
+  width: 30px;
+  height: 30px;
+  color: #68737d;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  font-size: 22px;
+}
+
+.admin-player-dialog form {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+}
+
+.admin-dialog-field {
+  display: grid;
+  gap: 6px;
+}
+
+.admin-dialog-field input,
+.admin-dialog-field select {
+  width: 100%;
+  height: 42px;
+  padding: 0 11px;
+  color: #1f2933;
+  background: white;
+  border: 1px solid #d9dee3;
+  border-radius: 7px;
+  outline: none;
+}
+
+.admin-dialog-help {
+  margin: -2px 0 0;
+  color: #7d8790;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.admin-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 2px;
+}
+
+.admin-dialog-actions button {
+  min-width: 72px;
+  min-height: 36px;
+  color: #52606d;
+  background: white;
+  border: 1px solid #d9dee3;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.admin-dialog-actions button.is-primary {
+  color: white;
+  background: #285e6a;
+  border-color: #285e6a;
+}
+
+.admin-dialog-actions button:disabled {
+  color: #9aa3aa;
+  background: #e8ecef;
+  border-color: #e8ecef;
+}
+
 @media (max-width: 760px) {
   .admin-shell {
     width: min(100% - 24px, 560px);
@@ -2592,6 +2979,11 @@ button:disabled {
   .admin-title-row {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .admin-title-actions {
+    width: 100%;
+    justify-content: space-between;
   }
 
   .admin-title-row h1 {
@@ -2604,6 +2996,75 @@ button:disabled {
 
   .admin-policy-grid {
     grid-template-columns: 1fr;
+  }
+
+  .admin-player-controls,
+  .admin-player-control-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-club-tabs {
+    overflow-x: auto;
+  }
+
+  .admin-club-tabs button {
+    flex: 0 0 auto;
+  }
+
+  .admin-player-search input,
+  .admin-primary-button {
+    width: 100%;
+  }
+
+  .admin-player-summary {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+    min-height: 58px;
+    padding: 11px 13px;
+  }
+
+  .admin-player-table-head {
+    display: none;
+  }
+
+  .admin-player-row {
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    gap: 7px 0;
+    min-height: 76px;
+    padding: 10px 0;
+  }
+
+  .admin-player-row > * {
+    padding: 0 10px;
+  }
+
+  .admin-player-status {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .admin-player-actions {
+    grid-column: 2 / 4;
+    justify-content: flex-start;
+  }
+
+  .admin-player-actions button {
+    padding-left: 0;
+  }
+
+  .admin-player-dialog-backdrop {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .admin-player-dialog {
+    width: 100%;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-radius: 8px 8px 0 0;
   }
 
   .admin-metric-grid {

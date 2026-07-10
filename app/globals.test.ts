@@ -113,6 +113,21 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
+  it("선수 관리 목록은 데스크톱 고정 열과 모바일 압축 행을 사용한다", () => {
+    expect(css).toContain(
+      ".admin-player-table-head,\n.admin-player-row {\n  display: grid;\n  grid-template-columns: 72px minmax(180px, 1fr) 110px 170px;"
+    );
+    expect(css).toContain(
+      "  .admin-player-table-head {\n    display: none;\n  }"
+    );
+    expect(css).toContain(
+      "  .admin-player-row {\n    grid-template-columns: 44px minmax(0, 1fr) auto;"
+    );
+    expect(css).toContain(
+      "  .admin-player-actions {\n    grid-column: 2 / 4;"
+    );
+  });
+
   it("PC에서는 클럽 제목 줄을 한 줄로 이어 붙이고 모바일에서만 줄바꿈한다", () => {
     expect(css).toContain(".club-title-line {\n  display: inline;\n}");
     expect(css).toContain(

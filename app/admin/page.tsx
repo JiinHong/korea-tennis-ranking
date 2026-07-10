@@ -44,10 +44,15 @@ export default async function AdminPage() {
               <span className="admin-kicker">ADMIN</span>
               <h1>랭킹 운영 관리</h1>
             </div>
-            <p className="admin-access-state">
-              <span aria-hidden="true" />
-              조회 전용
-            </p>
+            <div className="admin-title-actions">
+              <p className="admin-access-state">
+                <span aria-hidden="true" />
+                조회 전용
+              </p>
+              <Link className="admin-nav-action" href="/admin/players">
+                선수 관리 <span aria-hidden="true">›</span>
+              </Link>
+            </div>
           </div>
         </header>
 

@@ -62,6 +62,9 @@ describe("AdminPage", () => {
     expect(screen.getAllByText("비밀키 필요").length).toBeGreaterThan(0);
     expect(screen.getByText("선수 추가")).toBeDefined();
     expect(screen.getByText("월간 미참여 강등 적용")).toBeDefined();
+    expect(
+      screen.getByRole("link", { name: "선수 관리" }).getAttribute("href")
+    ).toBe("/admin/players");
   });
 
   it("keeps the admin route out of search results", () => {

@@ -64,7 +64,17 @@ export async function getAdminPlayerClubs(
         ? seasonPlayers
             .filter((player) => player.seasonId === season.id)
             .sort((a, b) => a.currentRank - b.currentRank)
-            .map(({ seasonId: _seasonId, ...player }) => player)
+            .map((player) => ({
+              seasonPlayerId: player.seasonPlayerId,
+              playerId: player.playerId,
+              name: player.name,
+              initialRank: player.initialRank,
+              currentRank: player.currentRank,
+              note: player.note,
+              status: player.status,
+              joinedAt: player.joinedAt,
+              leftAt: player.leftAt,
+            }))
         : [];
 
       return {
