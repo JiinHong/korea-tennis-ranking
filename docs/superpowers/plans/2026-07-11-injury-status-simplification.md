@@ -24,7 +24,7 @@
 
 ## File Map
 
-- Create `supabase/migrations/20260711012046_simplify_injury_status.sql`: remove obsolete database structures.
+- Create `supabase/migrations/20260710164117_simplify_injury_status.sql`: remove obsolete database structures.
 - Create `supabase/migrations/injuryStatusMigrations.test.ts`: migration contract coverage.
 - Modify `lib/supabaseSeedPlan.ts`: stop producing removed injury-exemption values.
 - Modify `lib/supabaseSeedPlan.test.ts`: lock the smaller rule configuration contract.
@@ -55,7 +55,7 @@
 
 **Files:**
 - Create: `supabase/migrations/injuryStatusMigrations.test.ts`
-- Create: `supabase/migrations/20260711012046_simplify_injury_status.sql`
+- Create: `supabase/migrations/20260710164117_simplify_injury_status.sql`
 - Modify: `lib/supabaseSeedPlan.test.ts`
 - Modify: `lib/supabaseSeedPlan.ts`
 - Modify: `lib/supabaseSeedSql.test.ts`
@@ -194,7 +194,7 @@ Expected: all focused tests PASS.
 - [ ] **Step 9: Commit**
 
 ```bash
-git add supabase/migrations/20260711012046_simplify_injury_status.sql supabase/migrations/injuryStatusMigrations.test.ts lib/supabaseSeedPlan.ts lib/supabaseSeedPlan.test.ts lib/supabaseSeedSql.ts lib/supabaseSeedSql.test.ts
+git add supabase/migrations/20260710164117_simplify_injury_status.sql supabase/migrations/injuryStatusMigrations.test.ts lib/supabaseSeedPlan.ts lib/supabaseSeedPlan.test.ts lib/supabaseSeedSql.ts lib/supabaseSeedSql.test.ts
 git commit -m "refactor: remove injury exemption data model"
 ```
 
@@ -652,7 +652,7 @@ git commit -m "feat: guide injured players through recovery reporting"
 ### Task 5: Apply And Verify The Supabase Migration
 
 **Files:**
-- Verify: `supabase/migrations/20260711012046_simplify_injury_status.sql`
+- Verify: `supabase/migrations/20260710164117_simplify_injury_status.sql`
 
 **Interfaces:**
 - Consumes: connected Supabase project `ltxoewsvzhumsudwrzdq`.
@@ -672,7 +672,7 @@ Expected: `0`.
 - [ ] **Step 2: Apply the migration through Supabase**
 
 Apply the exact contents of
-`supabase/migrations/20260711012046_simplify_injury_status.sql` with migration name
+`supabase/migrations/20260710164117_simplify_injury_status.sql` with migration name
 `simplify_injury_status`.
 
 Expected: migration succeeds once.
