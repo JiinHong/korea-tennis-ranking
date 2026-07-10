@@ -8,6 +8,31 @@ afterEach(() => {
 });
 
 describe("MatchEntryDialog", () => {
+  it("부상 종료는 관리자에게 보고해야 한다고 안내한다", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({ ok: true, players: [] }),
+      })
+    );
+
+    render(
+      <MatchEntryDialog
+        clubSlug="seoultech"
+        open
+        onClose={vi.fn()}
+        onRecorded={vi.fn()}
+      />
+    );
+
+    expect(
+      screen.getByText(
+        "부상 중인 선수는 경기 결과를 입력할 수 없습니다. 부상이 끝났다면 관리자에게 부상 종료를 보고해주세요."
+      )
+    ).toBeDefined();
+  });
+
   it("does not reload or reset the form when callback identities change", async () => {
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,

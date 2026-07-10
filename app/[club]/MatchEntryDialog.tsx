@@ -294,6 +294,11 @@ export default function MatchEntryDialog({
             </label>
           </div>
 
+          <p className="match-entry-guidance">
+            부상 중인 선수는 경기 결과를 입력할 수 없습니다. 부상이 끝났다면
+            관리자에게 부상 종료를 보고해주세요.
+          </p>
+
           {errorMessage ? (
             <p className="match-entry-error" role="alert">
               {errorMessage}

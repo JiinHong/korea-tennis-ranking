@@ -234,6 +234,67 @@ describe("POST /api/clubs/[club]/matches", () => {
     });
   });
 
+  it("tells an injured player to report recovery after the database rejects the match", async () => {
+    vi.mocked(recordSupabaseMatch).mockRejectedValue(
+      new Error("활동 중인 선수끼리만 경기할 수 있습니다.")
+    );
+    vi.mocked(getSupabaseMatchValidationContext).mockResolvedValue({
+      ...validContext,
+      players: [
+        { id: "p1", name: "오준석", rank: 1, status: "injured" as const },
+        ...validContext.players.slice(1),
+      ],
+    });
+
+    const response = await POST(
+      postRequest({
+        player1Id: "p1",
+        player2Id: "p2",
+        player1Score: 6,
+        player2Score: 4,
+        sourceKey: "injured-submission",
+      }),
+      { params: Promise.resolve({ club: "seoultech" }) }
+    );
+
+    expect(response.status).toBe(400);
+    expect(await response.json()).toEqual({
+      ok: false,
+      message:
+        "부상 중인 선수는 경기 결과를 입력할 수 없습니다. 부상이 끝났다면 관리자에게 부상 종료를 보고해주세요.",
+    });
+  });
+
+  it("keeps the generic database message for other non-active statuses", async () => {
+    vi.mocked(recordSupabaseMatch).mockRejectedValue(
+      new Error("활동 중인 선수끼리만 경기할 수 있습니다.")
+    );
+    vi.mocked(getSupabaseMatchValidationContext).mockResolvedValue({
+      ...validContext,
+      players: [
+        { id: "p1", name: "오준석", rank: 1, status: "inactive" as const },
+        ...validContext.players.slice(1),
+      ],
+    });
+
+    const response = await POST(
+      postRequest({
+        player1Id: "p1",
+        player2Id: "p2",
+        player1Score: 6,
+        player2Score: 4,
+        sourceKey: "inactive-submission",
+      }),
+      { params: Promise.resolve({ club: "seoultech" }) }
+    );
+
+    expect(response.status).toBe(400);
+    expect(await response.json()).toEqual({
+      ok: false,
+      message: "활동 중인 선수끼리만 경기할 수 있습니다.",
+    });
+  });
+
   it("returns 404 for unknown club slugs", async () => {
     const response = await POST(
       postRequest({

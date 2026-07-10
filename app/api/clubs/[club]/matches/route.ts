@@ -32,6 +32,10 @@ type ParsedMatchSubmission = {
   sourceKey: string;
 };
 
+const nonActiveMatchMessage = "활동 중인 선수끼리만 경기할 수 있습니다.";
+const injuredMatchMessage =
+  "부상 중인 선수는 경기 결과를 입력할 수 없습니다. 부상이 끝났다면 관리자에게 부상 종료를 보고해주세요.";
+
 function badRequest(message: string) {
   return Response.json(
     {
@@ -97,6 +101,31 @@ function rejectIfInvalid(result: RuleResult): Response | null {
 
 function publicPlayer(player: RankedPlayer) {
   return { id: player.id, name: player.name, rank: player.rank };
+}
+
+async function getMatchFailureMessage(
+  clubSlug: string,
+  input: MatchInput,
+  error: unknown
+): Promise<string> {
+  const message = error instanceof Error ? error.message : String(error);
+
+  if (message !== nonActiveMatchMessage) {
+    return message;
+  }
+
+  try {
+    const validationContext = await getSupabaseMatchValidationContext(clubSlug);
+    const selectedPlayerIds = new Set([input.player1Id, input.player2Id]);
+    const hasInjuredPlayer = validationContext.players.some(
+      (player) =>
+        selectedPlayerIds.has(player.id) && player.status === "injured"
+    );
+
+    return hasInjuredPlayer ? injuredMatchMessage : message;
+  } catch {
+    return message;
+  }
 }
 
 export async function GET(_request: Request, context: MatchRouteContext) {
@@ -186,8 +215,6 @@ export async function POST(request: Request, context: MatchRouteContext) {
       }
     );
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-
-    return badRequest(message);
+    return badRequest(await getMatchFailureMessage(club.slug, input, error));
   }
 }
