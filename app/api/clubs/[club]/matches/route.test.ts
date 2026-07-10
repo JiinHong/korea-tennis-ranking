@@ -48,7 +48,6 @@ describe("POST /api/clubs/[club]/matches", () => {
   });
 
   it("persists a valid public match and returns the recorded result", async () => {
-    vi.mocked(getSupabaseMatchValidationContext).mockResolvedValue(validContext);
     vi.mocked(recordSupabaseMatch).mockResolvedValue({
       matchId: "match-1",
       duplicate: false,
@@ -69,7 +68,7 @@ describe("POST /api/clubs/[club]/matches", () => {
     const body = await response.json();
 
     expect(response.status).toBe(201);
-    expect(getSupabaseMatchValidationContext).toHaveBeenCalledWith("seoultech");
+    expect(getSupabaseMatchValidationContext).not.toHaveBeenCalled();
     expect(recordSupabaseMatch).toHaveBeenCalledWith(
       "seoultech",
       {
@@ -90,6 +89,40 @@ describe("POST /api/clubs/[club]/matches", () => {
         defenseResult: "방어 실패",
         rankChanged: true,
       },
+    });
+  });
+
+  it("returns the existing match when a completed submission is retried", async () => {
+    vi.mocked(getSupabaseMatchValidationContext).mockResolvedValue({
+      ...validContext,
+      previousMatches: [
+        { playerAId: "p1", playerBId: "p4", playedOn: "2026-07-10" },
+      ],
+    });
+    vi.mocked(recordSupabaseMatch).mockResolvedValue({
+      matchId: "match-1",
+      duplicate: true,
+      defenseResult: "방어 실패",
+      rankChanged: true,
+    });
+
+    const response = await POST(
+      postRequest({
+        player1Id: "p1",
+        player2Id: "p4",
+        player1Score: 4,
+        player2Score: 6,
+        sourceKey: "submission-1",
+      }),
+      { params: Promise.resolve({ club: "seoultech" }) }
+    );
+
+    expect(response.status).toBe(200);
+    expect(recordSupabaseMatch).toHaveBeenCalledTimes(1);
+    expect(await response.json()).toMatchObject({
+      ok: true,
+      message: "이미 반영된 경기 결과입니다.",
+      match: { matchId: "match-1", duplicate: true },
     });
   });
 
@@ -154,14 +187,9 @@ describe("POST /api/clubs/[club]/matches", () => {
   });
 
   it("rejects a challenge outside the allowed range", async () => {
-    vi.mocked(getSupabaseMatchValidationContext).mockResolvedValue({
-      ...validContext,
-      players: [
-        ...validContext.players,
-        { id: "p5", name: "이도현", rank: 5, status: "active" as const },
-        { id: "p6", name: "김혜은", rank: 6, status: "active" as const },
-      ],
-    });
+    vi.mocked(recordSupabaseMatch).mockRejectedValue(
+      new Error("도전 가능한 순위 범위를 벗어났습니다.")
+    );
 
     const response = await POST(
       postRequest({
@@ -183,12 +211,9 @@ describe("POST /api/clubs/[club]/matches", () => {
   });
 
   it("rejects a rematch within the cooldown window", async () => {
-    vi.mocked(getSupabaseMatchValidationContext).mockResolvedValue({
-      ...validContext,
-      previousMatches: [
-        { playerAId: "p1", playerBId: "p4", playedOn: "2026-07-01" },
-      ],
-    });
+    vi.mocked(recordSupabaseMatch).mockRejectedValue(
+      new Error("동일 선수와는 2주 동안 재경기할 수 없습니다.")
+    );
 
     const response = await POST(
       postRequest({

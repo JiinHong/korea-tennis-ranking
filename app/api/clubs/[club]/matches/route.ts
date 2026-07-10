@@ -4,9 +4,6 @@ import {
   getSupabaseMatchValidationContext,
 } from "@/lib/supabaseRankingRepository";
 import {
-  resolveMatchRoles,
-  validateChallengeRange,
-  validateRematchCooldown,
   validateScore,
   type MatchInput,
   type RankedPlayer,
@@ -171,33 +168,9 @@ export async function POST(request: Request, context: MatchRouteContext) {
   }
 
   try {
-    const validationContext = await getSupabaseMatchValidationContext(club.slug);
-    const roles = resolveMatchRoles(validationContext.players, input);
-    const challengeRangeError = rejectIfInvalid(
-      validateChallengeRange(
-        validationContext.players,
-        roles.challenger.id,
-        roles.defender.id,
-        validationContext.config
-      )
-    );
-
-    if (challengeRangeError) {
-      return challengeRangeError;
-    }
-
-    const rematchError = rejectIfInvalid(
-      validateRematchCooldown(
-        input,
-        validationContext.previousMatches,
-        validationContext.config
-      )
-    );
-
-    if (rematchError) {
-      return rematchError;
-    }
-
+    // The transaction is the authoritative rule check. Calling it directly is
+    // also important for idempotency: a retry must reach its source-key lookup
+    // before the newly recorded match can trigger the rematch cooldown.
     const match = await recordSupabaseMatch(club.slug, input, sourceKey);
 
     return Response.json(
