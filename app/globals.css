@@ -52,7 +52,8 @@ body {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -853,6 +854,28 @@ button:disabled {
   gap: 8px;
 }
 
+.live-status-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.match-entry-button {
+  min-height: 38px;
+  padding: 0 13px;
+  color: white;
+  background: var(--campus-ink);
+  border: 1px solid var(--campus-ink);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.match-entry-button:hover {
+  background: #30353b;
+}
+
 .campus-ranking-page .live-stamp {
   min-height: 38px;
   padding: 0 14px;
@@ -951,6 +974,14 @@ button:disabled {
   gap: 8px;
 }
 
+.campus-ranking-page .club-match-section + .activity-strip {
+  margin-top: 24px;
+}
+
+.campus-ranking-page .club-match-section + .toolbar-section {
+  margin-top: 24px;
+}
+
 .campus-ranking-page .activity-heading {
   grid-column: 1 / -1;
   margin-bottom: 2px;
@@ -964,6 +995,162 @@ button:disabled {
 
 .campus-ranking-page .activity-card strong {
   color: var(--campus-ink);
+}
+
+.match-entry-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(17, 24, 39, 0.48);
+}
+
+.match-entry-dialog {
+  width: min(100%, 560px);
+  max-height: min(760px, calc(100vh - 40px));
+  overflow-y: auto;
+  color: var(--campus-ink);
+  background: white;
+  border: 1px solid var(--campus-line);
+  border-radius: 8px;
+  box-shadow: 0 24px 70px rgba(17, 24, 39, 0.22);
+}
+
+.match-entry-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 22px 18px;
+  border-bottom: 1px solid var(--campus-line);
+}
+
+.match-entry-header h2 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.match-entry-header p {
+  margin: 7px 0 0;
+  color: var(--campus-muted);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.match-entry-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  color: var(--campus-muted);
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  font-size: 25px;
+  line-height: 1;
+}
+
+.match-entry-close:hover {
+  color: var(--campus-ink);
+  background: #f0f2f4;
+}
+
+.match-entry-form {
+  display: grid;
+  gap: 22px;
+  padding: 22px;
+}
+
+.match-player-grid,
+.match-score-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: end;
+  gap: 12px;
+}
+
+.match-entry-field {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+}
+
+.match-entry-field > span {
+  color: var(--campus-muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.match-entry-field select,
+.match-entry-field input {
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+  padding: 0 12px;
+  color: var(--campus-ink);
+  background: white;
+  border: 1px solid #d7dce2;
+  border-radius: 8px;
+  outline: none;
+}
+
+.match-entry-field select:focus,
+.match-entry-field input:focus {
+  border-color: var(--campus-ink);
+  box-shadow: 0 0 0 3px rgba(31, 35, 40, 0.1);
+}
+
+.match-entry-field input {
+  padding: 0 8px;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 850;
+}
+
+.match-entry-versus,
+.match-score-divider {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  color: var(--campus-muted);
+  font-weight: 850;
+}
+
+.match-entry-error {
+  margin: -4px 0 0;
+  padding: 11px 12px;
+  color: var(--campus-red);
+  background: var(--campus-red-soft);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+.match-entry-submit {
+  min-height: 48px;
+  color: white;
+  background: var(--campus-ink);
+  border: 0;
+  border-radius: 8px;
+  font-weight: 850;
+}
+
+.match-entry-submit:hover:not(:disabled) {
+  background: #30353b;
+}
+
+.match-entry-submit:disabled {
+  color: #9aa0a8;
+  background: #eceff2;
 }
 
 .campus-ranking-page .club-match-section {
@@ -1842,6 +2029,20 @@ button:disabled {
 }
 
 @media (max-width: 560px) {
+  .match-entry-backdrop {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .match-entry-dialog {
+    width: 100%;
+    max-height: 84vh;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-radius: 8px 8px 0 0;
+  }
+
   .summary-inner,
   .content-shell,
   .national-hero-inner,

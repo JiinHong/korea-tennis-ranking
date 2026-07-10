@@ -74,6 +74,21 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
+  it("최근 경기와 CAMPUS FEED 사이에 명확한 섹션 간격을 둔다", () => {
+    expect(css).toContain(
+      ".campus-ranking-page .club-match-section + .activity-strip {\n  margin-top: 24px;\n}"
+    );
+  });
+
+  it("모바일 경기 입력창은 화면 아래에 붙는 시트로 보여준다", () => {
+    expect(css).toContain(
+      "  .match-entry-backdrop {\n    align-items: flex-end;\n    padding: 0;\n  }"
+    );
+    expect(css).toContain(
+      "  .match-entry-dialog {\n    width: 100%;\n    max-height: 84vh;\n    border-right: 0;\n    border-bottom: 0;\n    border-left: 0;\n    border-radius: 8px 8px 0 0;\n  }"
+    );
+  });
+
   it("좌상단 루트 이동 버튼은 두꺼운 chevron 아이콘으로 보여준다", () => {
     expect(css).toContain(
       ".national-back-link {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 38px;\n  height: 38px;\n  margin-bottom: 10px;\n  color: var(--campus-ink);\n  text-decoration: none;\n  background: transparent;\n  border-radius: 999px;\n}"

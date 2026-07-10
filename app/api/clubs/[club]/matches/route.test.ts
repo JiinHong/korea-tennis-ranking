@@ -1,11 +1,16 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { recordSupabaseMatch } from "@/lib/supabaseMatchCommands";
 import { getSupabaseMatchValidationContext } from "@/lib/supabaseRankingRepository";
 
-import { POST } from "./route";
+import { GET, POST } from "./route";
 
 vi.mock("@/lib/supabaseRankingRepository", () => ({
   getSupabaseMatchValidationContext: vi.fn(),
+}));
+
+vi.mock("@/lib/supabaseMatchCommands", () => ({
+  recordSupabaseMatch: vi.fn(),
 }));
 
 const validContext = {
@@ -23,6 +28,10 @@ const validContext = {
   },
 };
 
+afterEach(() => {
+  vi.useRealTimers();
+});
+
 function postRequest(body: unknown) {
   return new Request("https://example.com/api/clubs/seoultech/matches", {
     method: "POST",
@@ -32,11 +41,20 @@ function postRequest(body: unknown) {
 
 describe("POST /api/clubs/[club]/matches", () => {
   beforeEach(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-07-10T03:00:00.000Z"));
     vi.mocked(getSupabaseMatchValidationContext).mockReset();
+    vi.mocked(recordSupabaseMatch).mockReset();
   });
 
-  it("validates a public match submission and returns the resolved roles", async () => {
+  it("persists a valid public match and returns the recorded result", async () => {
     vi.mocked(getSupabaseMatchValidationContext).mockResolvedValue(validContext);
+    vi.mocked(recordSupabaseMatch).mockResolvedValue({
+      matchId: "match-1",
+      duplicate: false,
+      defenseResult: "방어 실패",
+      rankChanged: true,
+    });
 
     const response = await POST(
       postRequest({
@@ -44,23 +62,73 @@ describe("POST /api/clubs/[club]/matches", () => {
         player2Id: "p4",
         player1Score: 4,
         player2Score: 6,
-        playedOn: "2026-07-10",
+        sourceKey: "submission-1",
       }),
       { params: Promise.resolve({ club: "seoultech" }) }
     );
     const body = await response.json();
 
-    expect(response.status).toBe(202);
+    expect(response.status).toBe(201);
     expect(getSupabaseMatchValidationContext).toHaveBeenCalledWith("seoultech");
+    expect(recordSupabaseMatch).toHaveBeenCalledWith(
+      "seoultech",
+      {
+        player1Id: "p1",
+        player2Id: "p4",
+        player1Score: 4,
+        player2Score: 6,
+        playedOn: "2026-07-10",
+      },
+      "submission-1"
+    );
     expect(body).toEqual({
       ok: true,
-      message: "경기 결과를 검증했습니다. 저장 기능은 다음 단계에서 연결됩니다.",
-      validation: {
-        challenger: { id: "p4", name: "이민우", rank: 4 },
-        defender: { id: "p1", name: "오준석", rank: 1 },
-        winnerId: "p4",
-        loserId: "p1",
+      message: "경기 결과가 반영되었습니다.",
+      match: {
+        matchId: "match-1",
+        duplicate: false,
+        defenseResult: "방어 실패",
+        rankChanged: true,
       },
+    });
+  });
+
+  it("rejects a missing submission key before reading Supabase context", async () => {
+    const response = await POST(
+      postRequest({
+        player1Id: "p1",
+        player2Id: "p4",
+        player1Score: 4,
+        player2Score: 6,
+      }),
+      { params: Promise.resolve({ club: "seoultech" }) }
+    );
+
+    expect(response.status).toBe(400);
+    expect(getSupabaseMatchValidationContext).not.toHaveBeenCalled();
+    expect(await response.json()).toEqual({
+      ok: false,
+      message: "경기 결과 입력값이 올바르지 않습니다.",
+    });
+  });
+
+  it("rejects selecting the same player twice", async () => {
+    const response = await POST(
+      postRequest({
+        player1Id: "p1",
+        player2Id: "p1",
+        player1Score: 6,
+        player2Score: 4,
+        sourceKey: "submission-1",
+      }),
+      { params: Promise.resolve({ club: "seoultech" }) }
+    );
+
+    expect(response.status).toBe(400);
+    expect(getSupabaseMatchValidationContext).not.toHaveBeenCalled();
+    expect(await response.json()).toEqual({
+      ok: false,
+      message: "서로 다른 두 선수를 선택해주세요.",
     });
   });
 
@@ -71,7 +139,7 @@ describe("POST /api/clubs/[club]/matches", () => {
         player2Id: "p4",
         player1Score: 5,
         player2Score: 4,
-        playedOn: "2026-07-10",
+        sourceKey: "submission-1",
       }),
       { params: Promise.resolve({ club: "seoultech" }) }
     );
@@ -101,7 +169,7 @@ describe("POST /api/clubs/[club]/matches", () => {
         player2Id: "p6",
         player1Score: 4,
         player2Score: 6,
-        playedOn: "2026-07-10",
+        sourceKey: "submission-1",
       }),
       { params: Promise.resolve({ club: "seoultech" }) }
     );
@@ -128,7 +196,7 @@ describe("POST /api/clubs/[club]/matches", () => {
         player2Id: "p4",
         player1Score: 4,
         player2Score: 6,
-        playedOn: "2026-07-10",
+        sourceKey: "submission-1",
       }),
       { params: Promise.resolve({ club: "seoultech" }) }
     );
@@ -148,7 +216,7 @@ describe("POST /api/clubs/[club]/matches", () => {
         player2Id: "p4",
         player1Score: 4,
         player2Score: 6,
-        playedOn: "2026-07-10",
+        sourceKey: "submission-1",
       }),
       { params: Promise.resolve({ club: "unknown" }) }
     );
@@ -158,6 +226,37 @@ describe("POST /api/clubs/[club]/matches", () => {
     expect(body).toEqual({
       ok: false,
       message: "등록되지 않은 동아리입니다.",
+    });
+  });
+});
+
+describe("GET /api/clubs/[club]/matches", () => {
+  beforeEach(() => {
+    vi.mocked(getSupabaseMatchValidationContext).mockReset();
+  });
+
+  it("returns only active players as ranked match options", async () => {
+    vi.mocked(getSupabaseMatchValidationContext).mockResolvedValue({
+      ...validContext,
+      players: [
+        ...validContext.players,
+        { id: "p5", name: "부상 선수", rank: 5, status: "injured" as const },
+      ],
+    });
+
+    const response = await GET(new Request("https://example.com"), {
+      params: Promise.resolve({ club: "seoultech" }),
+    });
+
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({
+      ok: true,
+      players: [
+        { id: "p1", name: "오준석", rank: 1 },
+        { id: "p2", name: "김도훈", rank: 2 },
+        { id: "p3", name: "박정용", rank: 3 },
+        { id: "p4", name: "이민우", rank: 4 },
+      ],
     });
   });
 });

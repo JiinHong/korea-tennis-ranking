@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { getPlayerDetailPath } from "./playerPaths";
+import MatchEntryDialog from "./MatchEntryDialog";
 import MatchListSection from "./MatchListSection";
 import NationalRankingBackLink from "./NationalRankingBackLink";
 
@@ -165,6 +166,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<RankingFilter>("all");
   const [loadedAt, setLoadedAt] = useState<Date | null>(null);
+  const [matchEntryOpen, setMatchEntryOpen] = useState(false);
 
   const loadRanking = useCallback(async () => {
     setStatus("loading");
@@ -285,20 +287,29 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                 </div>
 
                 <div className="hero-live-actions">
-                  <p className="live-stamp" aria-label="실시간 업데이트 시간">
-                    <span className="live-indicator" aria-hidden="true" />
-                    {formatLiveTime(loadedAt)}
-                  </p>
                   <button
-                    className="refresh-button refresh-icon-button"
+                    className="match-entry-button"
                     type="button"
-                    onClick={loadRanking}
-                    disabled={status === "loading"}
-                    aria-label="랭킹 새로고침"
-                    title={status === "loading" ? "불러오는 중" : "새로고침"}
+                    onClick={() => setMatchEntryOpen(true)}
                   >
-                    <span aria-hidden="true">↻</span>
+                    경기 결과 입력
                   </button>
+                  <div className="live-status-group">
+                    <p className="live-stamp" aria-label="실시간 업데이트 시간">
+                      <span className="live-indicator" aria-hidden="true" />
+                      {formatLiveTime(loadedAt)}
+                    </p>
+                    <button
+                      className="refresh-button refresh-icon-button"
+                      type="button"
+                      onClick={loadRanking}
+                      disabled={status === "loading"}
+                      aria-label="랭킹 새로고침"
+                      title={status === "loading" ? "불러오는 중" : "새로고침"}
+                    >
+                      <span aria-hidden="true">↻</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -411,6 +422,12 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
           </>
         ) : null}
       </div>
+      <MatchEntryDialog
+        clubSlug={club.slug}
+        open={matchEntryOpen}
+        onClose={() => setMatchEntryOpen(false)}
+        onRecorded={loadRanking}
+      />
     </main>
   );
 }
