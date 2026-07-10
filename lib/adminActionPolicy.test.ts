@@ -12,7 +12,6 @@ describe("admin action policy", () => {
       "view_dashboard",
       "view_players",
       "view_matches",
-      "view_injuries",
       "view_rules",
       "preview_monthly_penalty",
       "preview_rank_change",
@@ -32,7 +31,6 @@ describe("admin action policy", () => {
       "change_player_status",
       "change_rank",
       "mutate_match",
-      "mutate_injury",
       "apply_monthly_penalty",
       "change_season",
       "bulk_import",
@@ -47,6 +45,6 @@ describe("admin action policy", () => {
     const actionIds = ADMIN_ACTIONS.map((action) => action.id);
 
     expect(new Set(actionIds).size).toBe(actionIds.length);
-    expect(actionIds).toHaveLength(22);
+    expect(actionIds).toHaveLength(20);
   });
 });

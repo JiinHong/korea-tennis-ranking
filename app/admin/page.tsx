@@ -94,8 +94,8 @@ export default async function AdminPage() {
                     <dd>{club.matches.confirmed}</dd>
                   </div>
                   <div>
-                    <dt>보호 기록</dt>
-                    <dd>{club.injuries.active}</dd>
+                    <dt>부상 선수</dt>
+                    <dd>{club.roster.injured}</dd>
                   </div>
                   <div>
                     <dt>최근 경기</dt>

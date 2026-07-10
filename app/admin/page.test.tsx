@@ -25,13 +25,10 @@ describe("AdminPage", () => {
         },
         roster: { total: 50, active: 49, injured: 1, inactive: 0, left: 0 },
         matches: { confirmed: 12, latestPlayedOn: "2026-07-08" },
-        injuries: { active: 1 },
         rules: {
           challengeRange: 4,
           rematchCooldownDays: 14,
           inactivityPenaltyDrop: 2,
-          injuryExemptionLimit: 2,
-          injuryNoticeDeadlineDaysBeforeMonthEnd: 7,
         },
       },
     ]);
@@ -53,6 +50,8 @@ describe("AdminPage", () => {
     expect(within(club).getByText("2026. 7. 8.")).toBeDefined();
     expect(within(club).getByText("4계단")).toBeDefined();
     expect(within(club).getByText("14일")).toBeDefined();
+    expect(within(club).getByText("부상 선수")).toBeDefined();
+    expect(within(club).queryByText("보호 기록")).toBeNull();
 
     const publicPageLink = within(club).getByRole("link", {
       name: "공개 랭킹 보기",

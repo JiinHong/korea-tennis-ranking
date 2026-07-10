@@ -19,15 +19,10 @@ export type AdminClubOverview = {
     confirmed: number;
     latestPlayedOn: string | null;
   };
-  injuries: {
-    active: number;
-  };
   rules: {
     challengeRange: number;
     rematchCooldownDays: number;
     inactivityPenaltyDrop: number;
-    injuryExemptionLimit: number;
-    injuryNoticeDeadlineDaysBeforeMonthEnd: number;
   } | null;
 };
 
@@ -56,12 +51,6 @@ type AdminMatchRow = {
   playedOn: string;
 };
 
-type AdminInjuryRow = {
-  seasonId: string;
-  startsOn: string;
-  endsOn: string | null;
-};
-
 type AdminRuleRow = NonNullable<AdminClubOverview["rules"]> & {
   seasonId: string;
 };
@@ -71,18 +60,8 @@ export type SupabaseAdminOverviewAdapter = {
   listCurrentSeasons(): Promise<AdminSeasonRow[]>;
   listSeasonPlayers(seasonIds: string[]): Promise<AdminSeasonPlayerRow[]>;
   listConfirmedMatches(seasonIds: string[]): Promise<AdminMatchRow[]>;
-  listApprovedInjuries(seasonIds: string[]): Promise<AdminInjuryRow[]>;
   listRuleConfigs(seasonIds: string[]): Promise<AdminRuleRow[]>;
 };
-
-function getSeoulDate(now = new Date()): string {
-  return new Intl.DateTimeFormat("en-CA", {
-    timeZone: "Asia/Seoul",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).format(now);
-}
 
 function emptyRoster(): AdminClubOverview["roster"] {
   return {
@@ -94,13 +73,8 @@ function emptyRoster(): AdminClubOverview["roster"] {
   };
 }
 
-function isActiveInjury(injury: AdminInjuryRow, today: string): boolean {
-  return injury.startsOn <= today && (!injury.endsOn || injury.endsOn >= today);
-}
-
 export async function getAdminClubOverviews(
-  adapter: SupabaseAdminOverviewAdapter = createSupabaseAdminOverviewAdapter(),
-  today = getSeoulDate()
+  adapter: SupabaseAdminOverviewAdapter = createSupabaseAdminOverviewAdapter()
 ): Promise<AdminClubOverview[]> {
   const [clubs, seasons] = await Promise.all([
     adapter.listActiveClubs(),
@@ -110,14 +84,12 @@ export async function getAdminClubOverviews(
 
   let seasonPlayers: AdminSeasonPlayerRow[] = [];
   let matches: AdminMatchRow[] = [];
-  let injuries: AdminInjuryRow[] = [];
   let rules: AdminRuleRow[] = [];
 
   if (seasonIds.length > 0) {
-    [seasonPlayers, matches, injuries, rules] = await Promise.all([
+    [seasonPlayers, matches, rules] = await Promise.all([
       adapter.listSeasonPlayers(seasonIds),
       adapter.listConfirmedMatches(seasonIds),
-      adapter.listApprovedInjuries(seasonIds),
       adapter.listRuleConfigs(seasonIds),
     ]);
   }
@@ -135,7 +107,6 @@ export async function getAdminClubOverviews(
           season: null,
           roster,
           matches: { confirmed: 0, latestPlayedOn: null },
-          injuries: { active: 0 },
           rules: null,
         };
       }
@@ -154,9 +125,6 @@ export async function getAdminClubOverviews(
         (latest, match) => (!latest || match.playedOn > latest ? match.playedOn : latest),
         null
       );
-      const activeInjuries = injuries.filter(
-        (injury) => injury.seasonId === season.id && isActiveInjury(injury, today)
-      ).length;
       const ruleConfig = rules.find((rule) => rule.seasonId === season.id);
 
       return {
@@ -172,15 +140,11 @@ export async function getAdminClubOverviews(
           confirmed: clubMatches.length,
           latestPlayedOn,
         },
-        injuries: { active: activeInjuries },
         rules: ruleConfig
           ? {
               challengeRange: ruleConfig.challengeRange,
               rematchCooldownDays: ruleConfig.rematchCooldownDays,
               inactivityPenaltyDrop: ruleConfig.inactivityPenaltyDrop,
-              injuryExemptionLimit: ruleConfig.injuryExemptionLimit,
-              injuryNoticeDeadlineDaysBeforeMonthEnd:
-                ruleConfig.injuryNoticeDeadlineDaysBeforeMonthEnd,
             }
           : null,
       };
@@ -242,25 +206,11 @@ export function createSupabaseAdminOverviewAdapter(): SupabaseAdminOverviewAdapt
         playedOn: row.played_on,
       }));
     },
-    async listApprovedInjuries(seasonIds) {
-      const { data, error } = await supabase
-        .from("injury_periods")
-        .select("season_id, starts_on, ends_on")
-        .in("season_id", seasonIds)
-        .eq("approved", true);
-
-      if (error) throw error;
-      return (data ?? []).map((row) => ({
-        seasonId: row.season_id,
-        startsOn: row.starts_on,
-        endsOn: row.ends_on,
-      }));
-    },
     async listRuleConfigs(seasonIds) {
       const { data, error } = await supabase
         .from("rule_configs")
         .select(
-          "season_id, challenge_range, rematch_cooldown_days, inactivity_penalty_drop, injury_exemption_limit, injury_notice_deadline_days_before_month_end"
+          "season_id, challenge_range, rematch_cooldown_days, inactivity_penalty_drop"
         )
         .in("season_id", seasonIds);
 
@@ -270,9 +220,6 @@ export function createSupabaseAdminOverviewAdapter(): SupabaseAdminOverviewAdapt
         challengeRange: row.challenge_range,
         rematchCooldownDays: row.rematch_cooldown_days,
         inactivityPenaltyDrop: row.inactivity_penalty_drop,
-        injuryExemptionLimit: row.injury_exemption_limit,
-        injuryNoticeDeadlineDaysBeforeMonthEnd:
-          row.injury_notice_deadline_days_before_month_end,
       }));
     },
   };
