@@ -243,8 +243,11 @@ describe("ClubRankingClient", () => {
       screen.getByRole("button", { name: "랭킹 새로고침" }).closest(".topbar")
     ).toBeNull();
     expect(
-      screen.getByRole("heading", { name: "오늘의 랭킹" })
-    ).toBeDefined();
+      screen.queryByRole("region", { name: "상위 랭킹" })
+    ).toBeNull();
+    expect(
+      screen.queryByRole("heading", { name: "오늘의 랭킹" })
+    ).toBeNull();
     expect((await screen.findAllByText("박종건")).length).toBeGreaterThan(0);
     expect(screen.getByRole("heading", { name: "활동 피드" })).toBeDefined();
     expect(

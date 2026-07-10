@@ -491,7 +491,6 @@ button:disabled {
 }
 
 .ranking-row:focus-visible,
-.campus-top-card:focus-visible,
 .activity-card:focus-visible {
   outline: 3px solid rgba(198, 41, 23, 0.2);
   outline-offset: -3px;
@@ -786,7 +785,6 @@ button:disabled {
 }
 
 .campus-ranking-page .hero-copy,
-.campus-top-feed,
 .campus-ranking-page .state-panel,
 .campus-ranking-page .toolbar-section,
 .campus-ranking-page .ranking-board {
@@ -899,19 +897,6 @@ button:disabled {
   min-width: 0;
 }
 
-.campus-top-feed {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-content: start;
-  gap: 8px;
-  padding: 16px;
-}
-
-.campus-feed-heading {
-  grid-column: 1 / -1;
-}
-
-.campus-feed-heading span,
 .activity-heading span {
   display: block;
   margin-bottom: 5px;
@@ -921,56 +906,11 @@ button:disabled {
   text-transform: uppercase;
 }
 
-.campus-feed-heading h2,
 .activity-heading h2 {
   margin: 0;
   color: var(--campus-ink);
   font-size: 18px;
   line-height: 1.2;
-}
-
-.campus-top-card {
-  display: grid;
-  grid-template-columns: 54px minmax(0, 1fr);
-  gap: 10px;
-  align-items: center;
-  width: 100%;
-  min-height: 64px;
-  padding: 10px;
-  color: inherit;
-  text-align: left;
-  text-decoration: none;
-  background: #fafbfc;
-  border: 1px solid var(--campus-line);
-  border-radius: 8px;
-}
-
-.campus-top-card .podium-rank {
-  width: 42px;
-  height: 42px;
-  margin: 0;
-  color: var(--campus-red);
-  background: var(--campus-red-soft);
-  border-radius: 8px;
-  font-size: 13px;
-}
-
-.campus-top-card strong {
-  display: block;
-  overflow: hidden;
-  color: var(--campus-ink);
-  font-size: 16px;
-  line-height: 1.2;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.campus-top-card span:last-child {
-  display: block;
-  margin-top: 4px;
-  color: var(--campus-muted);
-  font-size: 12px;
-  font-weight: 750;
 }
 
 .campus-ranking-page .content-shell {
@@ -2004,10 +1944,6 @@ button:disabled {
 
   .campus-ranking-page .activity-card {
     min-width: 0;
-  }
-
-  .campus-top-feed {
-    grid-template-columns: 1fr;
   }
 
   .club-match-section-head {

@@ -204,8 +204,6 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
     return [...players].sort((a, b) => a.rank - b.rank);
   }, [players]);
 
-  const topPlayers = rankedPlayers.slice(0, 3);
-
   const totalMatches = Math.floor(
     players.reduce((sum, player) => sum + player.matches, 0) / 2
   );
@@ -305,26 +303,6 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
               </div>
             </div>
 
-            <section className="campus-top-feed" aria-label="상위 랭킹">
-              <div className="campus-feed-heading">
-                <span>Top board</span>
-                <h2>오늘의 랭킹</h2>
-              </div>
-              {topPlayers.map((player) => (
-                <Link
-                  key={player.name}
-                  className="campus-top-card"
-                  href={getPlayerDetailPath(club.slug, player.name)}
-                  aria-label={`상위 랭킹 ${player.name} 상세 전적 보기`}
-                >
-                  <span className="podium-rank">{player.rank}위</span>
-                  <div>
-                    <strong>{player.name}</strong>
-                    <span>{formatRecord(player)}</span>
-                  </div>
-                </Link>
-              ))}
-            </section>
           </div>
         </div>
       </section>
