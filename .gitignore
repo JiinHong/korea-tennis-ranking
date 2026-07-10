@@ -23,6 +23,9 @@
 # misc
 .DS_Store
 *.pem
+.idea/
+.superpowers/
+supabase/.temp/
 
 # debug
 npm-debug.log*
