@@ -25,6 +25,7 @@
 *.pem
 .idea/
 .superpowers/
+.worktrees/
 supabase/.temp/
 
 # debug
