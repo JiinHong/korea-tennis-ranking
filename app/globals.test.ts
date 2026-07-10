@@ -98,6 +98,21 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
+  it("관리자 현황은 데스크톱 2열, 모바일 1열로 정렬한다", () => {
+    expect(css).toContain(
+      ".admin-club-grid {\n  display: grid;\n  grid-template-columns: repeat(2, minmax(0, 1fr));"
+    );
+    expect(css).toContain(
+      "  .admin-club-grid {\n    grid-template-columns: 1fr;\n  }"
+    );
+    expect(css).toContain(
+      ".admin-policy-grid {\n  display: grid;\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n  align-items: start;"
+    );
+    expect(css).toContain(
+      ".admin-policy-group {\n  align-self: start;\n}"
+    );
+  });
+
   it("PC에서는 클럽 제목 줄을 한 줄로 이어 붙이고 모바일에서만 줄바꿈한다", () => {
     expect(css).toContain(".club-title-line {\n  display: inline;\n}");
     expect(css).toContain(
