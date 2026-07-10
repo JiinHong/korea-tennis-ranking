@@ -119,8 +119,6 @@ describe("buildSupabaseSeedPlan", () => {
       challengeRange: 4,
       rematchCooldownDays: 14,
       inactivityPenaltyDrop: 2,
-      injuryExemptionLimit: 2,
-      injuryNoticeDeadlineDaysBeforeMonthEnd: 7,
     });
   });
 

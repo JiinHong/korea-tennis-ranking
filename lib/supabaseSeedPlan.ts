@@ -56,8 +56,6 @@ export type SupabaseSeedPlan = {
     challengeRange: number;
     rematchCooldownDays: number;
     inactivityPenaltyDrop: number;
-    injuryExemptionLimit: number;
-    injuryNoticeDeadlineDaysBeforeMonthEnd: number;
   };
 };
 
@@ -225,8 +223,6 @@ export function buildSupabaseSeedPlan(source: SeedSource): SupabaseSeedPlan {
       challengeRange: 4,
       rematchCooldownDays: 14,
       inactivityPenaltyDrop: 2,
-      injuryExemptionLimit: 2,
-      injuryNoticeDeadlineDaysBeforeMonthEnd: 7,
     },
   };
 }

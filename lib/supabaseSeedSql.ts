@@ -216,9 +216,7 @@ rule_input as (
     "seasonName" text,
     "challengeRange" integer,
     "rematchCooldownDays" integer,
-    "inactivityPenaltyDrop" integer,
-    "injuryExemptionLimit" integer,
-    "injuryNoticeDeadlineDaysBeforeMonthEnd" integer
+    "inactivityPenaltyDrop" integer
   )
 ),
 resolved as (
@@ -227,9 +225,7 @@ resolved as (
     seasons.id as season_id,
     rule_input."challengeRange" as challenge_range,
     rule_input."rematchCooldownDays" as rematch_cooldown_days,
-    rule_input."inactivityPenaltyDrop" as inactivity_penalty_drop,
-    rule_input."injuryExemptionLimit" as injury_exemption_limit,
-    rule_input."injuryNoticeDeadlineDaysBeforeMonthEnd" as injury_notice_deadline_days_before_month_end
+    rule_input."inactivityPenaltyDrop" as inactivity_penalty_drop
   from rule_input
   join club_row on true
   join public.seasons seasons
@@ -241,26 +237,20 @@ insert into public.rule_configs (
   season_id,
   challenge_range,
   rematch_cooldown_days,
-  inactivity_penalty_drop,
-  injury_exemption_limit,
-  injury_notice_deadline_days_before_month_end
+  inactivity_penalty_drop
 )
 select
   club_id,
   season_id,
   challenge_range,
   rematch_cooldown_days,
-  inactivity_penalty_drop,
-  injury_exemption_limit,
-  injury_notice_deadline_days_before_month_end
+  inactivity_penalty_drop
 from resolved
 on conflict (club_id, season_id) do update
 set
   challenge_range = excluded.challenge_range,
   rematch_cooldown_days = excluded.rematch_cooldown_days,
   inactivity_penalty_drop = excluded.inactivity_penalty_drop,
-  injury_exemption_limit = excluded.injury_exemption_limit,
-  injury_notice_deadline_days_before_month_end = excluded.injury_notice_deadline_days_before_month_end,
   updated_at = now();
 `.trim();
 }

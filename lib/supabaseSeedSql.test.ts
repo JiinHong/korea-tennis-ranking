@@ -55,8 +55,6 @@ const plan: SupabaseSeedPlan = {
     challengeRange: 4,
     rematchCooldownDays: 14,
     inactivityPenaltyDrop: 2,
-    injuryExemptionLimit: 2,
-    injuryNoticeDeadlineDaysBeforeMonthEnd: 7,
   },
 };
 
@@ -71,6 +69,10 @@ describe("buildSupabaseSeedSql", () => {
     expect(sql).toContain("delete from public.season_players");
     expect(sql).toContain("where not exists");
     expect(sql).toContain("insert into public.rule_configs");
+    expect(sql).not.toContain("injury_exemption_limit");
+    expect(sql).not.toContain(
+      "injury_notice_deadline_days_before_month_end"
+    );
     expect(sql).toContain("서울과학기술대학교 테니스 단식 랭킹");
   });
 
