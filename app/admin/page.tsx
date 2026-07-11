@@ -49,6 +49,9 @@ export default async function AdminPage() {
                 <span aria-hidden="true" />
                 조회 전용
               </p>
+              <Link className="admin-nav-action is-secondary" href="/admin/matches">
+                경기 관리 <span aria-hidden="true">›</span>
+              </Link>
               <Link className="admin-nav-action" href="/admin/players">
                 선수 관리 <span aria-hidden="true">›</span>
               </Link>

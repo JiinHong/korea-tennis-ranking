@@ -64,6 +64,9 @@ describe("AdminPage", () => {
     expect(
       screen.getByRole("link", { name: "선수 관리" }).getAttribute("href")
     ).toBe("/admin/players");
+    expect(
+      screen.getByRole("link", { name: "경기 관리" }).getAttribute("href")
+    ).toBe("/admin/matches");
   });
 
   it("keeps the admin route out of search results", () => {
