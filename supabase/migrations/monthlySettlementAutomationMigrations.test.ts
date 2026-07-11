@@ -68,6 +68,28 @@ describe("monthly settlement automation migration", () => {
     expect(sql).toContain("message_text");
   });
 
+  it("treats a unique violation as skipped only when a settlement exists", () => {
+    const sql = readAutomationMigration() ?? "";
+    const uniqueViolationStart = sql.indexOf("when unique_violation then");
+    const otherFailureStart = sql.indexOf("when others then", uniqueViolationStart);
+    const uniqueViolationBlock = sql.slice(
+      uniqueViolationStart,
+      otherFailureStart
+    );
+
+    expect(uniqueViolationStart).toBeGreaterThan(-1);
+    expect(otherFailureStart).toBeGreaterThan(uniqueViolationStart);
+    expect(uniqueViolationBlock).toContain(
+      "if v_existing_settlement_id is null then"
+    );
+    expect(uniqueViolationBlock).toContain(
+      "'automatic_monthly_inactivity_penalty_failed'"
+    );
+    expect(uniqueViolationBlock).toContain(
+      "'automatic_monthly_inactivity_penalty_skipped'"
+    );
+  });
+
   it("keeps automatic functions private and the existing manual RPC guarded", () => {
     const sql = readAutomationMigration();
 

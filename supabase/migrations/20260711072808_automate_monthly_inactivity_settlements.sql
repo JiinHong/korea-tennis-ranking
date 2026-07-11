@@ -442,7 +442,10 @@ begin
       v_succeeded := v_succeeded + 1;
     exception
       when unique_violation then
-        v_skipped := v_skipped + 1;
+        get stacked diagnostics
+          v_error_code = returned_sqlstate,
+          v_error_message = message_text;
+        v_existing_settlement_id := null;
 
         select settlement.id
           into v_existing_settlement_id
@@ -450,23 +453,46 @@ begin
         where settlement.season_id = season_record.season_id
           and settlement.target_month = v_target_month;
 
-        insert into public.admin_action_logs (
-          club_id,
-          action,
-          target_table,
-          target_id,
-          payload
-        ) values (
-          season_record.club_id,
-          'automatic_monthly_inactivity_penalty_skipped',
-          'monthly_settlements',
-          v_existing_settlement_id,
-          jsonb_build_object(
-            'seasonId', season_record.season_id,
-            'targetMonth', to_char(v_target_month, 'YYYY-MM'),
-            'reason', 'concurrent_settlement'
-          )
-        );
+        if v_existing_settlement_id is null then
+          v_failed := v_failed + 1;
+
+          insert into public.admin_action_logs (
+            club_id,
+            action,
+            target_table,
+            payload
+          ) values (
+            season_record.club_id,
+            'automatic_monthly_inactivity_penalty_failed',
+            'monthly_settlements',
+            jsonb_build_object(
+              'seasonId', season_record.season_id,
+              'targetMonth', to_char(v_target_month, 'YYYY-MM'),
+              'errorCode', v_error_code,
+              'errorMessage', v_error_message
+            )
+          );
+        else
+          v_skipped := v_skipped + 1;
+
+          insert into public.admin_action_logs (
+            club_id,
+            action,
+            target_table,
+            target_id,
+            payload
+          ) values (
+            season_record.club_id,
+            'automatic_monthly_inactivity_penalty_skipped',
+            'monthly_settlements',
+            v_existing_settlement_id,
+            jsonb_build_object(
+              'seasonId', season_record.season_id,
+              'targetMonth', to_char(v_target_month, 'YYYY-MM'),
+              'reason', 'concurrent_settlement'
+            )
+          );
+        end if;
       when others then
         get stacked diagnostics
           v_error_code = returned_sqlstate,
@@ -504,21 +530,6 @@ $$;
 
 revoke all on function private.run_monthly_inactivity_settlements(timestamptz)
 from public, authenticated, anon;
-
-do $$
-declare
-  v_existing_job_id bigint;
-begin
-  select job.jobid
-    into v_existing_job_id
-  from cron.job as job
-  where job.jobname = 'monthly-inactivity-settlement';
-
-  if v_existing_job_id is not null then
-    perform cron.unschedule(v_existing_job_id);
-  end if;
-end;
-$$;
 
 select cron.schedule(
   'monthly-inactivity-settlement',
