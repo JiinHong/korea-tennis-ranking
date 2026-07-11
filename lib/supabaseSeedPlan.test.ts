@@ -15,6 +15,8 @@ describe("buildSupabaseSeedPlan", () => {
         logoAlt: "서울과학기술대학교 로고",
         sheetIdEnv: "GOOGLE_SHEET_ID",
         apiPath: "/api/clubs/seoultech/ranking",
+        currentSeasonName: "시즌3",
+        currentSeasonStartsOn: "2026-07-01",
         historicalMatchLogRange: "'시즌1~2 기록'!A1:J1000",
       },
       currentSeasonName: "시즌3",
@@ -58,8 +60,8 @@ describe("buildSupabaseSeedPlan", () => {
       logoPath: "/seoultech-symbol.png",
     });
     expect(plan.seasons).toEqual([
-      { name: "시즌3", isCurrent: true },
-      { name: "시즌2", isCurrent: false },
+      { name: "시즌3", isCurrent: true, startsOn: "2026-07-01" },
+      { name: "시즌2", isCurrent: false, startsOn: "2026-05-01" },
     ]);
     expect(plan.players).toEqual([
       { name: "오준석", displayName: "오준석", normalizedName: "오준석" },
@@ -74,6 +76,7 @@ describe("buildSupabaseSeedPlan", () => {
         currentRank: 1,
         note: "",
         status: "active",
+        joinedAt: "2026-07-01T00:00:00+09:00",
       },
       {
         seasonName: "시즌3",
@@ -82,6 +85,7 @@ describe("buildSupabaseSeedPlan", () => {
         currentRank: 2,
         note: "손목 부상",
         status: "injured",
+        joinedAt: "2026-07-01T00:00:00+09:00",
       },
     ]);
     expect(plan.matches).toEqual([
@@ -134,6 +138,8 @@ describe("buildSupabaseSeedPlan", () => {
         logoAlt: "서울과학기술대학교 로고",
         sheetIdEnv: "GOOGLE_SHEET_ID",
         apiPath: "/api/clubs/seoultech/ranking",
+        currentSeasonName: "시즌3",
+        currentSeasonStartsOn: "2026-07-01",
       },
       currentSeasonName: "시즌3",
       ranking: [{ rank: 1, name: " 오준석 ", note: "" }],
@@ -169,6 +175,8 @@ describe("buildSupabaseSeedPlan", () => {
         logoAlt: "서울과학기술대학교 로고",
         sheetIdEnv: "GOOGLE_SHEET_ID",
         apiPath: "/api/clubs/seoultech/ranking",
+        currentSeasonName: "시즌3",
+        currentSeasonStartsOn: "2026-07-01",
       },
       currentSeasonName: "시즌3",
       ranking: [
@@ -208,6 +216,8 @@ describe("buildSupabaseSeedPlan", () => {
         logoAlt: "서울과학기술대학교 로고",
         sheetIdEnv: "GOOGLE_SHEET_ID",
         apiPath: "/api/clubs/seoultech/ranking",
+        currentSeasonName: "시즌3",
+        currentSeasonStartsOn: "2026-07-01",
       },
       currentSeasonName: "시즌3",
       ranking: [
@@ -249,6 +259,8 @@ describe("buildSupabaseSeedPlan", () => {
         logoAlt: "서울과학기술대학교 로고",
         sheetIdEnv: "GOOGLE_SHEET_ID",
         apiPath: "/api/clubs/seoultech/ranking",
+        currentSeasonName: "시즌3",
+        currentSeasonStartsOn: "2026-07-01",
       },
       currentSeasonName: "시즌3",
       ranking: [

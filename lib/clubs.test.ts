@@ -15,6 +15,7 @@ describe("club configuration", () => {
       sheetIdEnv: "GOOGLE_SHEET_ID",
       apiPath: "/api/clubs/seoultech/ranking",
       currentSeasonName: "시즌3",
+      currentSeasonStartsOn: "2026-07-01",
       historicalMatchLogRange: "'시즌1~2 기록'!A1:J1000",
     });
   });
@@ -31,6 +32,7 @@ describe("club configuration", () => {
       sheetIdEnv: "PETC_GOOGLE_SHEET_ID",
       apiPath: "/api/clubs/petc/ranking",
       currentSeasonName: "현재",
+      currentSeasonStartsOn: "2026-07-01",
     });
   });
 

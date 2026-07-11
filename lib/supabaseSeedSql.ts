@@ -65,7 +65,8 @@ season_input as (
   select *
   from jsonb_to_recordset(${sqlJson(plan.seasons)}) as season(
     name text,
-    "isCurrent" boolean
+    "isCurrent" boolean,
+    "startsOn" date
   )
 )
 update public.seasons
@@ -86,22 +87,26 @@ season_input as (
   select *
   from jsonb_to_recordset(${sqlJson(plan.seasons)}) as season(
     name text,
-    "isCurrent" boolean
+    "isCurrent" boolean,
+    "startsOn" date
   )
 )
 insert into public.seasons (
   club_id,
   name,
-  is_current
+  is_current,
+  starts_on
 )
 select
   club_row.id,
   season_input.name,
-  season_input."isCurrent"
+  season_input."isCurrent",
+  season_input."startsOn"
 from club_row
 cross join season_input
 on conflict (club_id, name) do update
-set is_current = excluded.is_current;
+set is_current = excluded.is_current,
+    starts_on = excluded.starts_on;
 
 with club_row as (
   select id
@@ -165,7 +170,8 @@ season_player_input as (
     "initialRank" integer,
     "currentRank" integer,
     note text,
-    status text
+    status text,
+    "joinedAt" timestamptz
   )
 ),
 resolved as (
@@ -176,7 +182,8 @@ resolved as (
     season_player."initialRank" as initial_rank,
     season_player."currentRank" as current_rank,
     season_player.note,
-    season_player.status
+    season_player.status,
+    season_player."joinedAt" as joined_at
   from season_player_input season_player
   join club_row on true
   join public.seasons seasons
@@ -193,7 +200,8 @@ insert into public.season_players (
   initial_rank,
   current_rank,
   note,
-  status
+  status,
+  joined_at
 )
 select
   club_id,
@@ -202,7 +210,8 @@ select
   initial_rank,
   current_rank,
   note,
-  status
+  status,
+  joined_at
 from resolved;
 
 with club_row as (

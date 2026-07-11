@@ -17,8 +17,8 @@ const plan: SupabaseSeedPlan = {
     logoPath: "/seoultech-symbol.png",
   },
   seasons: [
-    { name: "시즌3", isCurrent: true },
-    { name: "시즌2", isCurrent: false },
+    { name: "시즌3", isCurrent: true, startsOn: "2026-07-01" },
+    { name: "시즌2", isCurrent: false, startsOn: "2026-01-01" },
   ],
   players: [
     { name: "오준석", displayName: "오준석", normalizedName: "오준석" },
@@ -32,6 +32,7 @@ const plan: SupabaseSeedPlan = {
       currentRank: 1,
       note: "",
       status: "active",
+      joinedAt: "2026-07-01T00:00:00+09:00",
     },
   ],
   matches: [
@@ -69,6 +70,9 @@ describe("buildSupabaseSeedSql", () => {
     expect(sql).toContain("delete from public.season_players");
     expect(sql).toContain("where not exists");
     expect(sql).toContain("insert into public.rule_configs");
+    expect(sql).toContain("starts_on");
+    expect(sql).toContain("joined_at");
+    expect(sql).toContain('"joinedAt":"2026-07-01T00:00:00+09:00"');
     expect(sql).not.toContain("injury_exemption_limit");
     expect(sql).not.toContain(
       "injury_notice_deadline_days_before_month_end"

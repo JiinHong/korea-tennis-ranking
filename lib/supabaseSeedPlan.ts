@@ -23,6 +23,7 @@ export type SupabaseSeedPlan = {
   seasons: Array<{
     name: string;
     isCurrent: boolean;
+    startsOn: string;
   }>;
   players: Array<{
     name: string;
@@ -36,6 +37,7 @@ export type SupabaseSeedPlan = {
     currentRank: number;
     note: string;
     status: PlayerStatus;
+    joinedAt: string;
   }>;
   matches: Array<{
     seasonName: string;
@@ -132,6 +134,22 @@ function seasonSortValue(season: string): number {
   return Number(season.match(/\d+/)?.[0] ?? 0);
 }
 
+function seasonStartFromMatches(
+  matches: HistoricalMatchRecord[],
+  seasonName: string
+): string {
+  const firstMatchDate = matches
+    .filter((match) => match.season === seasonName)
+    .map((match) => toIsoDate(match.date))
+    .sort()[0];
+
+  if (!firstMatchDate) {
+    throw new Error(`Cannot infer season start: ${seasonName}`);
+  }
+
+  return `${firstMatchDate.slice(0, 7)}-01`;
+}
+
 function toSeedMatch(
   match: MatchRecord,
   seasonName: string,
@@ -185,12 +203,17 @@ export function buildSupabaseSeedPlan(source: SeedSource): SupabaseSeedPlan {
       {
         name: source.currentSeasonName,
         isCurrent: true,
+        startsOn: source.club.currentSeasonStartsOn,
       },
       ...Array.from(historicalSeasonNames)
         .sort((a, b) => seasonSortValue(b) - seasonSortValue(a))
         .map((seasonName) => ({
           name: seasonName,
           isCurrent: false,
+          startsOn: seasonStartFromMatches(
+            source.historicalMatches,
+            seasonName
+          ),
         })),
     ],
     players: Array.from(names.values()).map((name) => ({
@@ -208,6 +231,7 @@ export function buildSupabaseSeedPlan(source: SeedSource): SupabaseSeedPlan {
         currentRank: player.rank,
         note: player.note,
         status: inferStatus(player.note),
+        joinedAt: `${source.club.currentSeasonStartsOn}T00:00:00+09:00`,
       };
     }),
     matches: [
