@@ -3,6 +3,20 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import MatchEntryDialog from "./MatchEntryDialog";
 
+function rankedPlayers(count: number) {
+  return Array.from({ length: count }, (_, index) => ({
+    id: `p${index + 1}`,
+    name: `선수${index + 1}`,
+    rank: index + 1,
+  }));
+}
+
+function optionValues(label: string): string[] {
+  const select = screen.getByLabelText(label) as HTMLSelectElement;
+
+  return Array.from(select.options).map((option) => option.value);
+}
+
 afterEach(() => {
   vi.unstubAllGlobals();
 });
@@ -13,7 +27,7 @@ describe("MatchEntryDialog", () => {
       "fetch",
       vi.fn().mockResolvedValue({
         ok: true,
-        json: async () => ({ ok: true, players: [] }),
+        json: async () => ({ ok: true, players: [], challengeRange: 4 }),
       })
     );
 
@@ -38,6 +52,7 @@ describe("MatchEntryDialog", () => {
       ok: true,
       json: async () => ({
         ok: true,
+        challengeRange: 4,
         players: [
           { id: "p1", name: "오준석", rank: 1 },
           { id: "p4", name: "이민우", rank: 4 },
@@ -82,6 +97,7 @@ describe("MatchEntryDialog", () => {
         ok: true,
         json: async () => ({
           ok: true,
+          challengeRange: 4,
           players: [
             { id: "p1", name: "오준석", rank: 1 },
             { id: "p4", name: "이민우", rank: 4 },
@@ -157,6 +173,7 @@ describe("MatchEntryDialog", () => {
           ok: true,
           json: async () => ({
             ok: true,
+            challengeRange: 4,
             players: [
               { id: "p1", name: "오준석", rank: 1 },
               { id: "p4", name: "이민우", rank: 4 },
@@ -200,5 +217,118 @@ describe("MatchEntryDialog", () => {
     ).toBeDefined();
     expect(onRecorded).not.toHaveBeenCalled();
     expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it("filters player 2 to four active ranks above and below player 1", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          players: rankedPlayers(10),
+          challengeRange: 4,
+        }),
+      })
+    );
+
+    render(
+      <MatchEntryDialog
+        clubSlug="seoultech"
+        open
+        onClose={vi.fn()}
+        onRecorded={vi.fn()}
+      />
+    );
+
+    fireEvent.change(await screen.findByLabelText("선수 1"), {
+      target: { value: "p5" },
+    });
+
+    expect(optionValues("선수 2")).toEqual([
+      "",
+      "p1",
+      "p2",
+      "p3",
+      "p4",
+      "p6",
+      "p7",
+      "p8",
+      "p9",
+    ]);
+  });
+
+  it("filters player 1 when player 2 is selected first", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          players: rankedPlayers(10),
+          challengeRange: 4,
+        }),
+      })
+    );
+
+    render(
+      <MatchEntryDialog
+        clubSlug="seoultech"
+        open
+        onClose={vi.fn()}
+        onRecorded={vi.fn()}
+      />
+    );
+
+    fireEvent.change(await screen.findByLabelText("선수 2"), {
+      target: { value: "p6" },
+    });
+
+    expect(optionValues("선수 1")).toEqual([
+      "",
+      "p2",
+      "p3",
+      "p4",
+      "p5",
+      "p7",
+      "p8",
+      "p9",
+      "p10",
+    ]);
+  });
+
+  it("uses the challenge range returned by the match options API", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          players: rankedPlayers(10),
+          challengeRange: 2,
+        }),
+      })
+    );
+
+    render(
+      <MatchEntryDialog
+        clubSlug="seoultech"
+        open
+        onClose={vi.fn()}
+        onRecorded={vi.fn()}
+      />
+    );
+
+    fireEvent.change(await screen.findByLabelText("선수 1"), {
+      target: { value: "p5" },
+    });
+
+    expect(optionValues("선수 2")).toEqual([
+      "",
+      "p3",
+      "p4",
+      "p6",
+      "p7",
+    ]);
   });
 });

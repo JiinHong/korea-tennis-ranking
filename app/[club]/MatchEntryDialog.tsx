@@ -9,7 +9,7 @@ type MatchOption = {
 };
 
 type MatchOptionsResponse =
-  | { ok: true; players: MatchOption[] }
+  | { ok: true; players: MatchOption[]; challengeRange: number }
   | { ok: false; message: string };
 
 type MatchSubmitResponse =
@@ -31,6 +31,30 @@ function createSourceKey() {
   return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 }
 
+function opponentOptions(
+  players: MatchOption[],
+  selectedPlayerId: string,
+  challengeRange: number
+): MatchOption[] {
+  if (!selectedPlayerId) {
+    return players;
+  }
+
+  const selectedIndex = players.findIndex(
+    (player) => player.id === selectedPlayerId
+  );
+
+  if (selectedIndex === -1) {
+    return players;
+  }
+
+  return players.filter((_, index) => {
+    const distance = Math.abs(index - selectedIndex);
+
+    return distance >= 1 && distance <= challengeRange;
+  });
+}
+
 export default function MatchEntryDialog({
   clubSlug,
   open,
@@ -38,6 +62,7 @@ export default function MatchEntryDialog({
   onRecorded,
 }: MatchEntryDialogProps) {
   const [players, setPlayers] = useState<MatchOption[]>([]);
+  const [challengeRange, setChallengeRange] = useState(0);
   const [player1Id, setPlayer1Id] = useState("");
   const [player2Id, setPlayer2Id] = useState("");
   const [player1Score, setPlayer1Score] = useState("");
@@ -68,6 +93,7 @@ export default function MatchEntryDialog({
     setPlayer2Score("");
     setErrorMessage("");
     setSourceKey(createSourceKey());
+    setChallengeRange(0);
     setLoadingPlayers(true);
 
     void fetch(`/api/clubs/${clubSlug}/matches`, {
@@ -83,6 +109,7 @@ export default function MatchEntryDialog({
 
         if (active) {
           setPlayers(data.players);
+          setChallengeRange(data.challengeRange);
         }
       })
       .catch((error) => {
@@ -130,6 +157,8 @@ export default function MatchEntryDialog({
       !submitting
     );
   }, [player1Id, player1Score, player2Id, player2Score, submitting]);
+  const player1Options = opponentOptions(players, player2Id, challengeRange);
+  const player2Options = opponentOptions(players, player1Id, challengeRange);
 
   if (!open) {
     return null;
@@ -217,7 +246,7 @@ export default function MatchEntryDialog({
                 <option value="">
                   {loadingPlayers ? "불러오는 중" : "선택"}
                 </option>
-                {players.map((player) => (
+                {player1Options.map((player) => (
                   <option
                     key={player.id}
                     value={player.id}
@@ -245,7 +274,7 @@ export default function MatchEntryDialog({
                 <option value="">
                   {loadingPlayers ? "불러오는 중" : "선택"}
                 </option>
-                {players.map((player) => (
+                {player2Options.map((player) => (
                   <option
                     key={player.id}
                     value={player.id}
