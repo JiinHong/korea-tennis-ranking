@@ -319,7 +319,7 @@ describe("POST /api/clubs/[club]/matches", () => {
 describe("GET /api/clubs/[club]/matches", () => {
   beforeEach(() => {
     vi.useFakeTimers();
-    vi.setSystemTime(new Date("2026-07-10T03:00:00.000Z"));
+    vi.setSystemTime(new Date("2026-07-09T16:00:00.000Z"));
     vi.mocked(getSupabaseMatchValidationContext).mockReset();
   });
 
@@ -357,14 +357,18 @@ describe("GET /api/clubs/[club]/matches", () => {
   it("returns only active rematch cooldowns using the latest completed match per pair", async () => {
     vi.mocked(getSupabaseMatchValidationContext).mockResolvedValue({
       ...validContext,
+      config: {
+        ...validContext.config,
+        rematchCooldownDays: 10,
+      },
       players: [
         ...validContext.players,
         { id: "p5", name: "비활동 선수", rank: 5, status: "inactive" as const },
       ],
       previousMatches: [
         { playerAId: "p2", playerBId: "p1", playedOn: "2026-06-30" },
-        { playerAId: "p1", playerBId: "p2", playedOn: "2026-06-20" },
-        { playerAId: "p3", playerBId: "p4", playedOn: "2026-06-26" },
+        { playerAId: "p1", playerBId: "p2", playedOn: "2026-07-01" },
+        { playerAId: "p3", playerBId: "p4", playedOn: "2026-06-30" },
         { playerAId: "p1", playerBId: "p3", playedOn: "2026-07-11" },
         { playerAId: "p1", playerBId: "p5", playedOn: "2026-07-01" },
       ],
@@ -377,11 +381,11 @@ describe("GET /api/clubs/[club]/matches", () => {
 
     expect(body).toMatchObject({
       rematchCooldowns: [
-        { playerAId: "p1", playerBId: "p2", availableOn: "2026-07-14" },
+        { playerAId: "p1", playerBId: "p2", availableOn: "2026-07-11" },
       ],
     });
     expect(body.rematchCooldowns).toEqual([
-      { playerAId: "p1", playerBId: "p2", availableOn: "2026-07-14" },
+      { playerAId: "p1", playerBId: "p2", availableOn: "2026-07-11" },
     ]);
   });
 });

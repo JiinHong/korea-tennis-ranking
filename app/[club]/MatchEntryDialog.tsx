@@ -1,6 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
+import {
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+  type FormEvent,
+} from "react";
 
 type MatchOption = {
   id: string;
@@ -84,6 +91,28 @@ function formatAvailableOn(value: string): string {
   return `${month}월 ${day}일부터 가능`;
 }
 
+function rematchCooldownSummary(
+  options: MatchOption[],
+  selectedOpponentId: string,
+  rematchCooldowns: RematchCooldown[]
+): string {
+  const unavailableOpponents = options.flatMap((player) => {
+    const cooldown = findRematchCooldown(
+      rematchCooldowns,
+      player.id,
+      selectedOpponentId
+    );
+
+    return cooldown
+      ? [`${player.rank}위 · ${player.name} · ${formatAvailableOn(cooldown.availableOn)}`]
+      : [];
+  });
+
+  return unavailableOpponents.length > 0
+    ? `재경기 제한 상대: ${unavailableOpponents.join(", ")}`
+    : "현재 재경기 제한 상대가 없습니다.";
+}
+
 export default function MatchEntryDialog({
   clubSlug,
   open,
@@ -104,6 +133,8 @@ export default function MatchEntryDialog({
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const onCloseRef = useRef(onClose);
+  const player1CooldownDescriptionId = useId();
+  const player2CooldownDescriptionId = useId();
 
   useEffect(() => {
     onCloseRef.current = onClose;
@@ -193,6 +224,16 @@ export default function MatchEntryDialog({
   }, [player1Id, player1Score, player2Id, player2Score, submitting]);
   const player1Options = opponentOptions(players, player2Id, challengeRange);
   const player2Options = opponentOptions(players, player1Id, challengeRange);
+  const player1CooldownSummary = rematchCooldownSummary(
+    player1Options,
+    player2Id,
+    rematchCooldowns
+  );
+  const player2CooldownSummary = rematchCooldownSummary(
+    player2Options,
+    player1Id,
+    rematchCooldowns
+  );
 
   if (!open) {
     return null;
@@ -272,6 +313,7 @@ export default function MatchEntryDialog({
               <span>선수 1</span>
               <select
                 aria-label="선수 1"
+                aria-describedby={player1CooldownDescriptionId}
                 value={player1Id}
                 onChange={(event) => setPlayer1Id(event.target.value)}
                 disabled={loadingPlayers}
@@ -301,6 +343,13 @@ export default function MatchEntryDialog({
                   );
                 })}
               </select>
+              <p
+                id={player1CooldownDescriptionId}
+                className="visually-hidden"
+                aria-live="polite"
+              >
+                {player1CooldownSummary}
+              </p>
             </label>
 
             <span className="match-entry-versus" aria-hidden="true">
@@ -311,6 +360,7 @@ export default function MatchEntryDialog({
               <span>선수 2</span>
               <select
                 aria-label="선수 2"
+                aria-describedby={player2CooldownDescriptionId}
                 value={player2Id}
                 onChange={(event) => setPlayer2Id(event.target.value)}
                 disabled={loadingPlayers}
@@ -340,6 +390,13 @@ export default function MatchEntryDialog({
                   );
                 })}
               </select>
+              <p
+                id={player2CooldownDescriptionId}
+                className="visually-hidden"
+                aria-live="polite"
+              >
+                {player2CooldownSummary}
+              </p>
             </label>
           </div>
 

@@ -474,4 +474,67 @@ describe("MatchEntryDialog", () => {
     expect(blocked.disabled).toBe(true);
     expect(blocked.textContent).toContain("7월 24일부터 가능");
   });
+
+  it("describes in-range cooldown opponents and dates for each player select", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          players: rankedPlayers(4),
+          challengeRange: 4,
+          rematchCooldowns: [
+            {
+              playerAId: "p1",
+              playerBId: "p4",
+              availableOn: "2026-07-24",
+            },
+            {
+              playerAId: "p2",
+              playerBId: "p3",
+              availableOn: "2026-07-25",
+            },
+          ],
+        }),
+      })
+    );
+
+    render(
+      <MatchEntryDialog
+        clubSlug="seoultech"
+        open
+        onClose={vi.fn()}
+        onRecorded={vi.fn()}
+      />
+    );
+
+    fireEvent.change(await screen.findByLabelText("선수 1"), {
+      target: { value: "p1" },
+    });
+    fireEvent.change(screen.getByLabelText("선수 2"), {
+      target: { value: "p3" },
+    });
+
+    const player1 = screen.getByLabelText("선수 1");
+    const player2 = screen.getByLabelText("선수 2");
+    const player1DescriptionId = player1.getAttribute("aria-describedby");
+    const player2DescriptionId = player2.getAttribute("aria-describedby");
+
+    expect(player1DescriptionId).toBeTruthy();
+    expect(player2DescriptionId).toBeTruthy();
+    expect(player1DescriptionId).not.toBe(player2DescriptionId);
+
+    const player1Description = document.getElementById(player1DescriptionId!);
+    const player2Description = document.getElementById(player2DescriptionId!);
+
+    expect(player1Description?.getAttribute("aria-live")).toBe("polite");
+    expect(player2Description?.getAttribute("aria-live")).toBe("polite");
+    expect(player1Description?.textContent).toContain(
+      "2위 · 선수2 · 7월 25일부터 가능"
+    );
+    expect(player2Description?.textContent).toContain(
+      "4위 · 선수4 · 7월 24일부터 가능"
+    );
+  });
 });
