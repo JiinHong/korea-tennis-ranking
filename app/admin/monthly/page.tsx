@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import {
+  createUnavailableMonthlyAutomationStatus,
+  getAdminMonthlyAutomationStatus,
+} from "@/lib/supabaseMonthlyAutomationStatus";
 import { getAdminMonthlyClubs } from "@/lib/supabaseMonthlySettlements";
 
 import AdminMonthlyManager from "./AdminMonthlyManager";
@@ -13,7 +17,12 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminMonthlyPage() {
-  const clubs = await getAdminMonthlyClubs();
+  const [clubs, automationStatus] = await Promise.all([
+    getAdminMonthlyClubs(),
+    getAdminMonthlyAutomationStatus().catch(() =>
+      createUnavailableMonthlyAutomationStatus()
+    ),
+  ]);
 
   return (
     <main className="admin-page">
@@ -35,7 +44,10 @@ export default async function AdminMonthlyPage() {
           </div>
         </header>
 
-        <AdminMonthlyManager clubs={clubs} />
+        <AdminMonthlyManager
+          clubs={clubs}
+          automationStatus={automationStatus}
+        />
       </div>
     </main>
   );

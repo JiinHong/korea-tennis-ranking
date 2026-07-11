@@ -4,10 +4,15 @@ import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
 import type { PlayerStatus } from "@/lib/rankingRules";
+import type {
+  AdminMonthlyAutomationRun,
+  AdminMonthlyAutomationStatus,
+} from "@/lib/supabaseMonthlyAutomationStatus";
 import type { AdminMonthlyClub } from "@/lib/supabaseMonthlySettlements";
 
 type AdminMonthlyManagerProps = {
   clubs: AdminMonthlyClub[];
+  automationStatus: AdminMonthlyAutomationStatus;
 };
 
 type MutationResponse =
@@ -26,7 +31,38 @@ function statusLabel(status: PlayerStatus): string {
   return "활동";
 }
 
-export default function AdminMonthlyManager({ clubs }: AdminMonthlyManagerProps) {
+function formatSeoulDateTime(value: string): string {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(new Date(value));
+  const part = Object.fromEntries(
+    parts.map((datePart) => [datePart.type, datePart.value])
+  );
+
+  return `${part.year}. ${Number(part.month)}. ${Number(part.day)}. ${part.hour}:${part.minute}`;
+}
+
+function automationStatusLabel(
+  run: AdminMonthlyAutomationRun | null,
+  available: boolean
+): string {
+  if (!available) return "확인 불가";
+  if (!run) return "실행 대기";
+  if (run.status === "succeeded") return "정상 완료";
+  if (run.status === "skipped") return "건너뜀";
+  return "확인 필요";
+}
+
+export default function AdminMonthlyManager({
+  clubs,
+  automationStatus,
+}: AdminMonthlyManagerProps) {
   const router = useRouter();
   const initialClub = clubs.find((club) => club.season) ?? clubs[0] ?? null;
   const [selectedSlug, setSelectedSlug] = useState(initialClub?.slug ?? "");
@@ -41,6 +77,12 @@ export default function AdminMonthlyManager({ clubs }: AdminMonthlyManagerProps)
 
   const selectedClub =
     clubs.find((club) => club.slug === selectedSlug) ?? clubs[0] ?? null;
+  const latestAutomationRun = selectedClub
+    ? automationStatus.latestByClubId[selectedClub.id] ?? null
+    : null;
+  const automationState = automationStatus.available
+    ? latestAutomationRun?.status ?? "pending"
+    : "unavailable";
   const selectedPreview =
     selectedClub?.previews.find(
       (preview) => preview.targetMonth === selectedMonth
@@ -158,6 +200,68 @@ export default function AdminMonthlyManager({ clubs }: AdminMonthlyManagerProps)
           </label>
         ) : null}
       </div>
+
+      <section
+        className={`admin-monthly-automation is-${automationState}`}
+        aria-labelledby="monthly-automation-title"
+      >
+        <header className="admin-monthly-automation-header">
+          <div>
+            <span>AUTOMATION</span>
+            <h3 id="monthly-automation-title">자동 정산</h3>
+          </div>
+          <p className="admin-monthly-automation-state" role="status">
+            <span aria-hidden="true" />
+            {automationStatusLabel(
+              latestAutomationRun,
+              automationStatus.available
+            )}
+          </p>
+        </header>
+
+        <dl className="admin-monthly-automation-details">
+          <div>
+            <dt>다음 실행</dt>
+            <dd>
+              <time dateTime={automationStatus.nextRunAt}>
+                {formatSeoulDateTime(automationStatus.nextRunAt)}
+              </time>
+            </dd>
+          </div>
+          <div>
+            <dt>최근 실행</dt>
+            <dd>
+              {!automationStatus.available ? (
+                "상태 확인 불가"
+              ) : latestAutomationRun ? (
+                <time dateTime={latestAutomationRun.executedAt}>
+                  {formatSeoulDateTime(latestAutomationRun.executedAt)}
+                </time>
+              ) : (
+                "아직 실행 기록 없음"
+              )}
+            </dd>
+          </div>
+          {latestAutomationRun ? (
+            <div>
+              <dt>정산 월</dt>
+              <dd>{monthLabel(latestAutomationRun.targetMonth)}</dd>
+            </div>
+          ) : null}
+        </dl>
+
+        <div className="admin-monthly-automation-message">
+          <p>
+            {!automationStatus.available
+              ? "자동 정산 상태를 불러오지 못했습니다. 미리보기와 수동 정산은 계속 사용할 수 있습니다."
+              : latestAutomationRun?.publicMessage ??
+                "매월 1일 00:10에 전월 미참여 기록을 자동으로 정산합니다."}
+          </p>
+          {latestAutomationRun?.errorCode ? (
+            <span>오류 코드 {latestAutomationRun.errorCode}</span>
+          ) : null}
+        </div>
+      </section>
 
       {successMessage ? (
         <p className="admin-player-notice is-success" role="status">

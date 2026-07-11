@@ -3220,6 +3220,145 @@ button:disabled {
   font: inherit;
 }
 
+.admin-monthly-automation {
+  margin-bottom: 18px;
+  padding: 18px 0 16px;
+  border-top: 1px solid #dfe3e8;
+  border-bottom: 1px solid #dfe3e8;
+}
+
+.admin-monthly-automation-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.admin-monthly-automation-header > div {
+  display: grid;
+  gap: 3px;
+}
+
+.admin-monthly-automation-header > div > span {
+  color: #b6342b;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.admin-monthly-automation-header h3 {
+  margin: 0;
+  color: #1f2933;
+  font-size: 17px;
+  letter-spacing: 0;
+}
+
+.admin-monthly-automation-state {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  color: #68737d;
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.admin-monthly-automation-state > span {
+  width: 7px;
+  height: 7px;
+  background: #89939c;
+  border-radius: 50%;
+}
+
+.admin-monthly-automation.is-succeeded .admin-monthly-automation-state {
+  color: #24724d;
+}
+
+.admin-monthly-automation.is-succeeded .admin-monthly-automation-state > span {
+  background: #2d8b5d;
+}
+
+.admin-monthly-automation.is-skipped .admin-monthly-automation-state {
+  color: #8a5d21;
+}
+
+.admin-monthly-automation.is-skipped .admin-monthly-automation-state > span {
+  background: #b47b2f;
+}
+
+.admin-monthly-automation.is-failed .admin-monthly-automation-state {
+  color: #a83831;
+}
+
+.admin-monthly-automation.is-failed .admin-monthly-automation-state > span {
+  background: #c94b42;
+}
+
+.admin-monthly-automation-details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 16px 0 0;
+}
+
+.admin-monthly-automation-details > div {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  padding: 0 16px;
+  border-right: 1px solid #e6e9ed;
+}
+
+.admin-monthly-automation-details > div:first-child {
+  padding-left: 0;
+}
+
+.admin-monthly-automation-details > div:last-child {
+  border-right: 0;
+}
+
+.admin-monthly-automation-details dt {
+  color: #7d8790;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.admin-monthly-automation-details dd {
+  overflow: hidden;
+  margin: 0;
+  color: #1f2933;
+  font-size: 12px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-monthly-automation-message {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px solid #edf0f2;
+}
+
+.admin-monthly-automation-message p {
+  margin: 0;
+  color: #68737d;
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.admin-monthly-automation-message span {
+  flex: 0 0 auto;
+  color: #a83831;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.admin-monthly-automation.is-failed .admin-monthly-automation-message p {
+  color: #8f302a;
+}
+
 .admin-monthly-empty {
   padding: 36px 24px;
   color: #52606d;
@@ -3564,6 +3703,39 @@ button:disabled {
 
   .admin-monthly-month-select select {
     width: 100%;
+  }
+
+  .admin-monthly-automation {
+    padding-top: 16px;
+  }
+
+  .admin-monthly-automation-header {
+    align-items: center;
+  }
+
+  .admin-monthly-automation-details {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 0;
+  }
+
+  .admin-monthly-automation-details > div {
+    padding: 0 12px;
+  }
+
+  .admin-monthly-automation-details > div:nth-child(2) {
+    border-right: 0;
+  }
+
+  .admin-monthly-automation-details > div:nth-child(3) {
+    grid-column: 1 / 3;
+    padding: 0;
+    border-right: 0;
+  }
+
+  .admin-monthly-automation-message {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
   }
 
   .admin-monthly-summary {

@@ -2,6 +2,10 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import type { AdminMonthlyClub } from "@/lib/supabaseMonthlySettlements";
+import type {
+  AdminMonthlyAutomationStatus,
+  MonthlyAutomationRunStatus,
+} from "@/lib/supabaseMonthlyAutomationStatus";
 
 import AdminMonthlyManager from "./AdminMonthlyManager";
 
@@ -86,6 +90,45 @@ const clubs: AdminMonthlyClub[] = [
   },
 ];
 
+const emptyAutomationStatus: AdminMonthlyAutomationStatus = {
+  available: true,
+  nextRunAt: "2026-07-31T15:10:00.000Z",
+  latestByClubId: {},
+};
+
+const unavailableAutomationStatus: AdminMonthlyAutomationStatus = {
+  available: false,
+  nextRunAt: "2026-07-31T15:10:00.000Z",
+  latestByClubId: {},
+};
+
+function automationStatusWith(
+  status: MonthlyAutomationRunStatus
+): AdminMonthlyAutomationStatus {
+  return {
+    available: true,
+    nextRunAt: "2026-08-31T15:10:00.000Z",
+    latestByClubId: {
+      "club-seoultech": {
+        id: `run-${status}`,
+        clubId: "club-seoultech",
+        seasonId: "season-3",
+        targetMonth: "2026-07",
+        status,
+        settlementId: status === "failed" ? null : "settlement-1",
+        errorCode: status === "failed" ? "22023" : null,
+        publicMessage:
+          status === "succeeded"
+            ? "자동 정산을 완료했습니다."
+            : status === "skipped"
+              ? "이미 정산되어 건너뛰었습니다."
+              : "자동 정산에 실패했습니다. 미리보기에서 수동 정산을 확인해주세요.",
+        executedAt: "2026-07-31T15:10:00.000Z",
+      },
+    },
+  };
+}
+
 afterEach(() => {
   refresh.mockReset();
   vi.unstubAllGlobals();
@@ -93,7 +136,12 @@ afterEach(() => {
 
 describe("AdminMonthlyManager", () => {
   it("shows a keyless preview with participation, targets, and expected ranks", () => {
-    render(<AdminMonthlyManager clubs={clubs} />);
+    render(
+      <AdminMonthlyManager
+        clubs={clubs}
+        automationStatus={emptyAutomationStatus}
+      />
+    );
 
     expect(screen.queryByLabelText("관리자 비밀키")).toBeNull();
     expect(screen.getAllByText("2026년 7월").length).toBeGreaterThan(0);
@@ -110,7 +158,12 @@ describe("AdminMonthlyManager", () => {
       json: async () => ({ ok: true, settlement: { targetMonth: "2026-07" } }),
     });
     vi.stubGlobal("fetch", fetchMock);
-    render(<AdminMonthlyManager clubs={clubs} />);
+    render(
+      <AdminMonthlyManager
+        clubs={clubs}
+        automationStatus={emptyAutomationStatus}
+      />
+    );
 
     fireEvent.click(screen.getByRole("button", { name: "2026년 7월 정산 적용" }));
     expect(
@@ -137,6 +190,7 @@ describe("AdminMonthlyManager", () => {
     render(
       <AdminMonthlyManager
         clubs={[{ ...clubs[0], previews: [] }]}
+        automationStatus={emptyAutomationStatus}
       />
     );
 
@@ -144,5 +198,71 @@ describe("AdminMonthlyManager", () => {
       screen.getByText("아직 정산할 수 있는 완료 월이 없습니다.")
     ).toBeDefined();
     expect(screen.queryByRole("button", { name: /정산 적용/ })).toBeNull();
+  });
+
+  it("shows the next run and an explicit waiting state before the first run", () => {
+    render(
+      <AdminMonthlyManager
+        clubs={clubs}
+        automationStatus={emptyAutomationStatus}
+      />
+    );
+
+    expect(screen.getByRole("heading", { name: "자동 정산" })).toBeDefined();
+    expect(screen.getByText("실행 대기")).toBeDefined();
+    expect(screen.getByText("아직 실행 기록 없음")).toBeDefined();
+    expect(screen.getByText("2026. 8. 1. 00:10")).toBeDefined();
+  });
+
+  it("keeps the manual flow visible when automation status is unavailable", () => {
+    render(
+      <AdminMonthlyManager
+        clubs={clubs}
+        automationStatus={unavailableAutomationStatus}
+      />
+    );
+
+    expect(screen.getByText("확인 불가")).toBeDefined();
+    expect(
+      screen.getByText(
+        "자동 정산 상태를 불러오지 못했습니다. 미리보기와 수동 정산은 계속 사용할 수 있습니다."
+      )
+    ).toBeDefined();
+    expect(
+      screen.getByRole("button", { name: "2026년 7월 정산 적용" })
+    ).toBeDefined();
+  });
+
+  it.each([
+    ["succeeded", "정상 완료"],
+    ["skipped", "건너뜀"],
+    ["failed", "확인 필요"],
+  ] as const)("renders the %s automation outcome", (status, label) => {
+    render(
+      <AdminMonthlyManager
+        clubs={clubs}
+        automationStatus={automationStatusWith(status)}
+      />
+    );
+
+    expect(screen.getByText(label)).toBeDefined();
+    expect(screen.getAllByText("2026년 7월").length).toBeGreaterThan(0);
+  });
+
+  it("shows safe failure guidance and the non-secret error code", () => {
+    render(
+      <AdminMonthlyManager
+        clubs={clubs}
+        automationStatus={automationStatusWith("failed")}
+      />
+    );
+
+    expect(
+      screen.getByText(
+        "자동 정산에 실패했습니다. 미리보기에서 수동 정산을 확인해주세요."
+      )
+    ).toBeDefined();
+    expect(screen.getByText("오류 코드 22023")).toBeDefined();
+    expect(screen.queryByText(/SQL/)).toBeNull();
   });
 });
