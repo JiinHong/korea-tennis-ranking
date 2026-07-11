@@ -4,8 +4,10 @@ import {
   getSupabaseMatchValidationContext,
 } from "@/lib/supabaseRankingRepository";
 import {
+  getRematchAvailableOn,
   validateScore,
   type MatchInput,
+  type PreviousMatch,
   type RankedPlayer,
   type RuleResult,
 } from "@/lib/rankingRules";
@@ -30,6 +32,12 @@ type PublicMatchBody = {
 type ParsedMatchSubmission = {
   input: MatchInput;
   sourceKey: string;
+};
+
+type PublicRematchCooldown = {
+  playerAId: string;
+  playerBId: string;
+  availableOn: string;
 };
 
 const nonActiveMatchMessage = "활동 중인 선수끼리만 경기할 수 있습니다.";
@@ -103,6 +111,51 @@ function publicPlayer(player: RankedPlayer) {
   return { id: player.id, name: player.name, rank: player.rank };
 }
 
+function getActiveRematchCooldowns(
+  players: RankedPlayer[],
+  previousMatches: PreviousMatch[],
+  rematchCooldownDays: number,
+  today: string
+): PublicRematchCooldown[] {
+  const activePlayerIds = new Set(
+    players
+      .filter((player) => player.status === "active")
+      .map((player) => player.id)
+  );
+  const cooldownsByPair = new Map<string, PublicRematchCooldown>();
+
+  for (const match of previousMatches) {
+    if (
+      !activePlayerIds.has(match.playerAId) ||
+      !activePlayerIds.has(match.playerBId) ||
+      match.playedOn > today
+    ) {
+      continue;
+    }
+
+    const availableOn = getRematchAvailableOn(
+      match.playedOn,
+      rematchCooldownDays
+    );
+
+    if (availableOn <= today) {
+      continue;
+    }
+
+    const [playerAId, playerBId] = [match.playerAId, match.playerBId].sort();
+    const key = `${playerAId}:${playerBId}`;
+    const existing = cooldownsByPair.get(key);
+
+    if (!existing || existing.availableOn < availableOn) {
+      cooldownsByPair.set(key, { playerAId, playerBId, availableOn });
+    }
+  }
+
+  return [...cooldownsByPair.values()].sort((a, b) =>
+    `${a.playerAId}:${a.playerBId}`.localeCompare(`${b.playerAId}:${b.playerBId}`)
+  );
+}
+
 async function getMatchFailureMessage(
   clubSlug: string,
   input: MatchInput,
@@ -150,6 +203,12 @@ export async function GET(_request: Request, context: MatchRouteContext) {
       ok: true,
       players,
       challengeRange: validationContext.config.challengeRange,
+      rematchCooldowns: getActiveRematchCooldowns(
+        validationContext.players,
+        validationContext.previousMatches,
+        validationContext.config.rematchCooldownDays,
+        getSeoulDate()
+      ),
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);

@@ -318,6 +318,8 @@ describe("POST /api/clubs/[club]/matches", () => {
 
 describe("GET /api/clubs/[club]/matches", () => {
   beforeEach(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-07-10T03:00:00.000Z"));
     vi.mocked(getSupabaseMatchValidationContext).mockReset();
   });
 
@@ -342,6 +344,7 @@ describe("GET /api/clubs/[club]/matches", () => {
     expect(await response.json()).toEqual({
       ok: true,
       challengeRange: 2,
+      rematchCooldowns: [],
       players: [
         { id: "p1", name: "오준석", rank: 1 },
         { id: "p2", name: "김도훈", rank: 2 },
@@ -349,5 +352,36 @@ describe("GET /api/clubs/[club]/matches", () => {
         { id: "p4", name: "이민우", rank: 4 },
       ],
     });
+  });
+
+  it("returns only active rematch cooldowns using the latest completed match per pair", async () => {
+    vi.mocked(getSupabaseMatchValidationContext).mockResolvedValue({
+      ...validContext,
+      players: [
+        ...validContext.players,
+        { id: "p5", name: "비활동 선수", rank: 5, status: "inactive" as const },
+      ],
+      previousMatches: [
+        { playerAId: "p2", playerBId: "p1", playedOn: "2026-06-30" },
+        { playerAId: "p1", playerBId: "p2", playedOn: "2026-06-20" },
+        { playerAId: "p3", playerBId: "p4", playedOn: "2026-06-26" },
+        { playerAId: "p1", playerBId: "p3", playedOn: "2026-07-11" },
+        { playerAId: "p1", playerBId: "p5", playedOn: "2026-07-01" },
+      ],
+    });
+
+    const response = await GET(new Request("https://example.com"), {
+      params: Promise.resolve({ club: "seoultech" }),
+    });
+    const body = await response.json();
+
+    expect(body).toMatchObject({
+      rematchCooldowns: [
+        { playerAId: "p1", playerBId: "p2", availableOn: "2026-07-14" },
+      ],
+    });
+    expect(body.rematchCooldowns).toEqual([
+      { playerAId: "p1", playerBId: "p2", availableOn: "2026-07-14" },
+    ]);
   });
 });
