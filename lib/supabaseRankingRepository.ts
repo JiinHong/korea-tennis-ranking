@@ -186,11 +186,13 @@ export async function getSupabaseMatchValidationContext(
         rank: seasonPlayer.rank,
         status: seasonPlayer.status,
       })),
-    previousMatches: confirmedMatches.map((match) => ({
-      playerAId: match.challenger.id,
-      playerBId: match.defender.id,
-      playedOn: match.playedOn,
-    })),
+    previousMatches: confirmedMatches
+      .filter((match) => match.seasonId === currentSeason.id)
+      .map((match) => ({
+        playerAId: match.challenger.id,
+        playerBId: match.defender.id,
+        playedOn: match.playedOn,
+      })),
     config: ruleConfig ?? defaultRuleConfig,
   };
 }

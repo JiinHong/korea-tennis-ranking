@@ -146,8 +146,18 @@ export function validateChallengeRange(
   return { ok: true };
 }
 
-function toDateValue(date: string): number {
-  return new Date(`${date}T00:00:00+09:00`).getTime();
+export function getRematchAvailableOn(
+  playedOn: string,
+  cooldownDays: number
+): string {
+  const [year, month, day] = playedOn.split("-").map(Number);
+  const available = new Date(Date.UTC(year, month - 1, day + cooldownDays));
+
+  return [
+    available.getUTCFullYear(),
+    String(available.getUTCMonth() + 1).padStart(2, "0"),
+    String(available.getUTCDate()).padStart(2, "0"),
+  ].join("-");
 }
 
 function samePair(input: MatchInput, previousMatch: PreviousMatch): boolean {
@@ -164,10 +174,13 @@ export function validateRematchCooldown(
   previousMatches: PreviousMatch[],
   config: RankingRuleConfig
 ): RuleResult {
-  const playedOn = toDateValue(input.playedOn);
-  const cooldownMs = config.rematchCooldownDays * 24 * 60 * 60 * 1000;
   const hasRecentMatch = previousMatches.some((match) => {
-    return samePair(input, match) && playedOn - toDateValue(match.playedOn) < cooldownMs;
+    return (
+      samePair(input, match) &&
+      match.playedOn <= input.playedOn &&
+      input.playedOn <
+        getRematchAvailableOn(match.playedOn, config.rematchCooldownDays)
+    );
   });
 
   if (hasRecentMatch) {

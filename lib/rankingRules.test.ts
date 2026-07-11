@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import {
   applyMatchRanking,
+  getRematchAvailableOn,
   resolveMatchRoles,
   validateChallengeRange,
   validateRematchCooldown,
@@ -134,6 +135,28 @@ describe("validateChallengeRange", () => {
 });
 
 describe("validateRematchCooldown", () => {
+  test("allows a rematch on the cooldown availability date", () => {
+    expect(getRematchAvailableOn("2026-07-01", 14)).toBe("2026-07-15");
+
+    expect(
+      validateRematchCooldown(
+        {
+          player1Id: "p1",
+          player2Id: "p2",
+          player1Score: 6,
+          player2Score: 4,
+          playedOn: "2026-07-15",
+        },
+        [{ playerAId: "p1", playerBId: "p2", playedOn: "2026-07-01" }],
+        {
+          challengeRange: 4,
+          rematchCooldownDays: 14,
+          inactivityPenaltyDrop: 2,
+        }
+      )
+    ).toEqual({ ok: true });
+  });
+
   test("rejects rematches within fourteen days", () => {
     expect(
       validateRematchCooldown(

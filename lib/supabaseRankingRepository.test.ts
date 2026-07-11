@@ -156,7 +156,6 @@ describe("getSupabaseMatchValidationContext", () => {
       ],
       previousMatches: [
         { playerAId: "p2", playerBId: "p1", playedOn: "2026-07-08" },
-        { playerAId: "p2", playerBId: "p1", playedOn: "2026-05-26" },
       ],
       config: {
         challengeRange: 4,
