@@ -8,8 +8,19 @@ type MatchOption = {
   rank: number;
 };
 
+type RematchCooldown = {
+  playerAId: string;
+  playerBId: string;
+  availableOn: string;
+};
+
 type MatchOptionsResponse =
-  | { ok: true; players: MatchOption[]; challengeRange: number }
+  | {
+      ok: true;
+      players: MatchOption[];
+      challengeRange: number;
+      rematchCooldowns: RematchCooldown[];
+    }
   | { ok: false; message: string };
 
 type MatchSubmitResponse =
@@ -55,6 +66,24 @@ function opponentOptions(
   });
 }
 
+function findRematchCooldown(
+  rematchCooldowns: RematchCooldown[],
+  playerId: string,
+  opponentId: string
+): RematchCooldown | undefined {
+  return rematchCooldowns.find(
+    (cooldown) =>
+      (cooldown.playerAId === playerId && cooldown.playerBId === opponentId) ||
+      (cooldown.playerAId === opponentId && cooldown.playerBId === playerId)
+  );
+}
+
+function formatAvailableOn(value: string): string {
+  const [, month, day] = value.split("-").map(Number);
+
+  return `${month}월 ${day}일부터 가능`;
+}
+
 export default function MatchEntryDialog({
   clubSlug,
   open,
@@ -63,6 +92,9 @@ export default function MatchEntryDialog({
 }: MatchEntryDialogProps) {
   const [players, setPlayers] = useState<MatchOption[]>([]);
   const [challengeRange, setChallengeRange] = useState(0);
+  const [rematchCooldowns, setRematchCooldowns] = useState<RematchCooldown[]>(
+    []
+  );
   const [player1Id, setPlayer1Id] = useState("");
   const [player2Id, setPlayer2Id] = useState("");
   const [player1Score, setPlayer1Score] = useState("");
@@ -94,6 +126,7 @@ export default function MatchEntryDialog({
     setErrorMessage("");
     setSourceKey(createSourceKey());
     setChallengeRange(0);
+    setRematchCooldowns([]);
     setLoadingPlayers(true);
 
     void fetch(`/api/clubs/${clubSlug}/matches`, {
@@ -110,6 +143,7 @@ export default function MatchEntryDialog({
         if (active) {
           setPlayers(data.players);
           setChallengeRange(data.challengeRange);
+          setRematchCooldowns(data.rematchCooldowns);
         }
       })
       .catch((error) => {
@@ -246,15 +280,26 @@ export default function MatchEntryDialog({
                 <option value="">
                   {loadingPlayers ? "불러오는 중" : "선택"}
                 </option>
-                {player1Options.map((player) => (
-                  <option
-                    key={player.id}
-                    value={player.id}
-                    disabled={player.id === player2Id}
-                  >
-                    {player.rank}위 · {player.name}
-                  </option>
-                ))}
+                {player1Options.map((player) => {
+                  const cooldown = findRematchCooldown(
+                    rematchCooldowns,
+                    player.id,
+                    player2Id
+                  );
+
+                  return (
+                    <option
+                      key={player.id}
+                      value={player.id}
+                      disabled={player.id === player2Id || Boolean(cooldown)}
+                    >
+                      {player.rank}위 · {player.name}
+                      {cooldown
+                        ? ` · ${formatAvailableOn(cooldown.availableOn)}`
+                        : ""}
+                    </option>
+                  );
+                })}
               </select>
             </label>
 
@@ -274,15 +319,26 @@ export default function MatchEntryDialog({
                 <option value="">
                   {loadingPlayers ? "불러오는 중" : "선택"}
                 </option>
-                {player2Options.map((player) => (
-                  <option
-                    key={player.id}
-                    value={player.id}
-                    disabled={player.id === player1Id}
-                  >
-                    {player.rank}위 · {player.name}
-                  </option>
-                ))}
+                {player2Options.map((player) => {
+                  const cooldown = findRematchCooldown(
+                    rematchCooldowns,
+                    player.id,
+                    player1Id
+                  );
+
+                  return (
+                    <option
+                      key={player.id}
+                      value={player.id}
+                      disabled={player.id === player1Id || Boolean(cooldown)}
+                    >
+                      {player.rank}위 · {player.name}
+                      {cooldown
+                        ? ` · ${formatAvailableOn(cooldown.availableOn)}`
+                        : ""}
+                    </option>
+                  );
+                })}
               </select>
             </label>
           </div>

@@ -17,6 +17,19 @@ function optionValues(label: string): string[] {
   return Array.from(select.options).map((option) => option.value);
 }
 
+function optionByValue(label: string, value: string): HTMLOptionElement {
+  const select = screen.getByLabelText(label) as HTMLSelectElement;
+  const option = Array.from(select.options).find(
+    (candidate) => candidate.value === value
+  );
+
+  if (!option) {
+    throw new Error(`${label}에 ${value} 옵션이 없습니다.`);
+  }
+
+  return option;
+}
+
 afterEach(() => {
   vi.unstubAllGlobals();
 });
@@ -27,7 +40,12 @@ describe("MatchEntryDialog", () => {
       "fetch",
       vi.fn().mockResolvedValue({
         ok: true,
-        json: async () => ({ ok: true, players: [], challengeRange: 4 }),
+        json: async () => ({
+          ok: true,
+          players: [],
+          challengeRange: 4,
+          rematchCooldowns: [],
+        }),
       })
     );
 
@@ -53,6 +71,7 @@ describe("MatchEntryDialog", () => {
       json: async () => ({
         ok: true,
         challengeRange: 4,
+        rematchCooldowns: [],
         players: [
           { id: "p1", name: "오준석", rank: 1 },
           { id: "p4", name: "이민우", rank: 4 },
@@ -98,6 +117,7 @@ describe("MatchEntryDialog", () => {
         json: async () => ({
           ok: true,
           challengeRange: 4,
+          rematchCooldowns: [],
           players: [
             { id: "p1", name: "오준석", rank: 1 },
             { id: "p4", name: "이민우", rank: 4 },
@@ -174,6 +194,7 @@ describe("MatchEntryDialog", () => {
           json: async () => ({
             ok: true,
             challengeRange: 4,
+            rematchCooldowns: [],
             players: [
               { id: "p1", name: "오준석", rank: 1 },
               { id: "p4", name: "이민우", rank: 4 },
@@ -228,6 +249,7 @@ describe("MatchEntryDialog", () => {
           ok: true,
           players: rankedPlayers(10),
           challengeRange: 4,
+          rematchCooldowns: [],
         }),
       })
     );
@@ -267,6 +289,7 @@ describe("MatchEntryDialog", () => {
           ok: true,
           players: rankedPlayers(10),
           challengeRange: 4,
+          rematchCooldowns: [],
         }),
       })
     );
@@ -306,6 +329,7 @@ describe("MatchEntryDialog", () => {
           ok: true,
           players: rankedPlayers(10),
           challengeRange: 2,
+          rematchCooldowns: [],
         }),
       })
     );
@@ -348,6 +372,7 @@ describe("MatchEntryDialog", () => {
             { id: "p21", name: "선수21", rank: 21 },
           ],
           challengeRange: 2,
+          rematchCooldowns: [],
         }),
       })
     );
@@ -372,5 +397,81 @@ describe("MatchEntryDialog", () => {
       "p11",
       "p20",
     ]);
+  });
+
+  it("disables a cooldown opponent in player 2 after player 1 is selected", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          players: rankedPlayers(10),
+          challengeRange: 4,
+          rematchCooldowns: [
+            {
+              playerAId: "p1",
+              playerBId: "p4",
+              availableOn: "2026-07-24",
+            },
+          ],
+        }),
+      })
+    );
+
+    render(
+      <MatchEntryDialog
+        clubSlug="seoultech"
+        open
+        onClose={vi.fn()}
+        onRecorded={vi.fn()}
+      />
+    );
+
+    fireEvent.change(await screen.findByLabelText("선수 1"), {
+      target: { value: "p1" },
+    });
+
+    const blocked = optionByValue("선수 2", "p4");
+    expect(blocked.disabled).toBe(true);
+    expect(blocked.textContent).toContain("7월 24일부터 가능");
+  });
+
+  it("disables a cooldown opponent in player 1 after player 2 is selected", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          players: rankedPlayers(10),
+          challengeRange: 4,
+          rematchCooldowns: [
+            {
+              playerAId: "p1",
+              playerBId: "p4",
+              availableOn: "2026-07-24",
+            },
+          ],
+        }),
+      })
+    );
+
+    render(
+      <MatchEntryDialog
+        clubSlug="seoultech"
+        open
+        onClose={vi.fn()}
+        onRecorded={vi.fn()}
+      />
+    );
+
+    fireEvent.change(await screen.findByLabelText("선수 2"), {
+      target: { value: "p4" },
+    });
+
+    const blocked = optionByValue("선수 1", "p1");
+    expect(blocked.disabled).toBe(true);
+    expect(blocked.textContent).toContain("7월 24일부터 가능");
   });
 });
