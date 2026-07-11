@@ -324,6 +324,10 @@ describe("GET /api/clubs/[club]/matches", () => {
   it("returns only active players as ranked match options", async () => {
     vi.mocked(getSupabaseMatchValidationContext).mockResolvedValue({
       ...validContext,
+      config: {
+        ...validContext.config,
+        challengeRange: 2,
+      },
       players: [
         ...validContext.players,
         { id: "p5", name: "부상 선수", rank: 5, status: "injured" as const },
@@ -337,7 +341,7 @@ describe("GET /api/clubs/[club]/matches", () => {
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({
       ok: true,
-      challengeRange: 4,
+      challengeRange: 2,
       players: [
         { id: "p1", name: "오준석", rank: 1 },
         { id: "p2", name: "김도훈", rank: 2 },

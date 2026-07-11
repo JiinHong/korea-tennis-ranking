@@ -331,4 +331,46 @@ describe("MatchEntryDialog", () => {
       "p7",
     ]);
   });
+
+  it("uses active-player order when ranking numbers have gaps", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          players: [
+            { id: "p1", name: "선수1", rank: 1 },
+            { id: "p3", name: "선수3", rank: 3 },
+            { id: "p7", name: "선수7", rank: 7 },
+            { id: "p11", name: "선수11", rank: 11 },
+            { id: "p20", name: "선수20", rank: 20 },
+            { id: "p21", name: "선수21", rank: 21 },
+          ],
+          challengeRange: 2,
+        }),
+      })
+    );
+
+    render(
+      <MatchEntryDialog
+        clubSlug="seoultech"
+        open
+        onClose={vi.fn()}
+        onRecorded={vi.fn()}
+      />
+    );
+
+    fireEvent.change(await screen.findByLabelText("선수 1"), {
+      target: { value: "p7" },
+    });
+
+    expect(optionValues("선수 2")).toEqual([
+      "",
+      "p1",
+      "p3",
+      "p11",
+      "p20",
+    ]);
+  });
 });
