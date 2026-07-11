@@ -146,7 +146,11 @@ export async function GET(_request: Request, context: MatchRouteContext) {
       .sort((a, b) => a.rank - b.rank)
       .map(publicPlayer);
 
-    return Response.json({ ok: true, players });
+    return Response.json({
+      ok: true,
+      players,
+      challengeRange: validationContext.config.challengeRange,
+    });
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
 
