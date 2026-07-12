@@ -2896,8 +2896,11 @@ button:disabled {
 }
 
 .admin-player-dialog {
+  display: flex;
   width: min(100%, 420px);
+  max-height: calc(100dvh - 40px);
   overflow: hidden;
+  flex-direction: column;
   background: white;
   border: 1px solid #d9dee3;
   border-radius: 8px;
@@ -2938,8 +2941,10 @@ button:disabled {
 
 .admin-player-dialog form {
   display: grid;
-  gap: 14px;
+  min-height: 0;
   padding: 18px;
+  overflow-y: auto;
+  gap: 14px;
 }
 
 .admin-dialog-field {
@@ -3713,6 +3718,7 @@ button:disabled {
 
   .admin-player-dialog {
     width: 100%;
+    max-height: calc(100dvh - 16px);
     border-right: 0;
     border-bottom: 0;
     border-left: 0;

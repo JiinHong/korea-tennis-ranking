@@ -143,6 +143,18 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
+  it("관리자 다이얼로그는 낮은 화면에서도 하단 작업 버튼까지 스크롤할 수 있다", () => {
+    expect(css).toContain(
+      ".admin-player-dialog {\n  display: flex;\n  width: min(100%, 420px);\n  max-height: calc(100dvh - 40px);\n  overflow: hidden;\n  flex-direction: column;"
+    );
+    expect(css).toContain(
+      ".admin-player-dialog form {\n  display: grid;\n  min-height: 0;\n  padding: 18px;\n  overflow-y: auto;"
+    );
+    expect(css).toContain(
+      "  .admin-player-dialog {\n    width: 100%;\n    max-height: calc(100dvh - 16px);"
+    );
+  });
+
   it("PC에서는 클럽 제목 줄을 한 줄로 이어 붙이고 모바일에서만 줄바꿈한다", () => {
     expect(css).toContain(".club-title-line {\n  display: inline;\n}");
     expect(css).toContain(
