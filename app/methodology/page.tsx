@@ -274,6 +274,14 @@ export default function MethodologyPage() {
             한 부문의 결과가 다른 부문의 점수에 영향을 주지 않으며, 종합
             순위만 두 부문의 합계를 사용합니다.
           </p>
+          <h3 className="methodology-subheading">동점 처리</h3>
+          <ol aria-label="동점 처리 기준" className="methodology-tiebreakers">
+            <li>최신 연도 대회에서 얻은 점수가 더 높은 동아리</li>
+            <li>한 대회에서 얻은 최고 점수가 더 높은 동아리</li>
+            <li>우승 횟수가 더 많은 동아리</li>
+            <li>준우승 횟수가 더 많은 동아리</li>
+            <li>동아리 표시 이름의 가나다순</li>
+          </ol>
         </section>
 
         <section className="methodology-section" aria-labelledby="example-title">

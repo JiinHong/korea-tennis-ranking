@@ -107,6 +107,25 @@ describe("MethodologyPage", () => {
     expect(screen.getByText(/= 66\.3점$/)).toBeDefined();
   });
 
+  it("총점이 같을 때 적용하는 동점 처리 순서를 공개한다", () => {
+    render(<MethodologyPage />);
+
+    expect(
+      screen.getByRole("heading", { name: "동점 처리", level: 3 })
+    ).toBeDefined();
+    expect(
+      within(screen.getByRole("list", { name: "동점 처리 기준" }))
+        .getAllByRole("listitem")
+        .map((item) => item.textContent)
+    ).toEqual([
+      "최신 연도 대회에서 얻은 점수가 더 높은 동아리",
+      "한 대회에서 얻은 최고 점수가 더 높은 동아리",
+      "우승 횟수가 더 많은 동아리",
+      "준우승 횟수가 더 많은 동아리",
+      "동아리 표시 이름의 가나다순",
+    ]);
+  });
+
   it("검증 상태를 설명하되 미해결 원본 행은 공개하지 않는다", () => {
     render(<MethodologyPage />);
 
