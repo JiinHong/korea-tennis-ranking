@@ -111,6 +111,10 @@ export default function RankingMethodologyInfo() {
               적용합니다.
             </p>
             <p>같은 동아리의 여러 팀 중 가장 좋은 성적만 반영합니다.</p>
+            <p>
+              WEMIX OPEN 2025는 전체 대진 검증 전이라 현재 점수에서
+              제외합니다.
+            </p>
             <Link href="/methodology" ref={detailLinkRef}>
               계산식 자세히 보기
             </Link>

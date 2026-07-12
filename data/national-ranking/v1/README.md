@@ -3,7 +3,7 @@
 `dataset.json` is the canonical, visually verified source manifest for the
 national university club ranking. Version `sources-2026-07-12-v1` contains the
 complete Yanggu, Gyeongin, Inje, Chuncheon, and WEMIX source program: 26
-editions and 1,115 terminal result records. Yeongwol is not part of this
+editions and 1,116 terminal result records. Yeongwol is not part of this
 dataset.
 
 ## Expected source units
@@ -43,10 +43,9 @@ NATIONAL_RANKING_SOURCE_ROOT="/absolute/path/to/테니스 랭킹" \
 ```
 
 One visually verified terminal record is stored for every named entrant.
-`actualEntrants` therefore equals the number of result rows for each edition
-except `gyeongin-2024-men`. That edition has 48 named entrants but 47 stored
-terminal records because `DUTC A팀` has a literally unresolved terminal stage
-that cannot be represented by the approved stage union. BYE slots and other
+`actualEntrants` therefore equals the number of result rows for each edition.
+`gyeongin-2024-men` retains `DUTC A팀` with a null stage because the supplied
+screenshots conflict about its terminal result. BYE slots and other
 non-team placeholders are excluded. An entrant that loses its first played
 match is `first_match_loss`, including when its first played match follows one
 or more BYEs. A source-marked `w.o.`, `Dis.`, `Disqualified`, or `Ret.` records
@@ -89,9 +88,9 @@ ambiguous identities stay unresolved.
 
 `gyeongin-2024-men` remains source-unresolved because image 003 shows `DUTC
 A팀` beating `단국대 A`, while image 007 advances `단국대 A` into the Round of
-16. The 48 named entrants are retained as the edition count, the farthest
-explicit `단국대 A` terminal result is stored, and the stage-unresolved DUTC
-row is omitted. No result from this edition contributes points.
+16. The 48 named entrants are retained, `DUTC A팀` is stored with a null stage,
+and the farthest explicit `단국대 A` terminal result is stored separately. No
+result from this edition contributes points.
 
 Both WEMIX editions remain source-unresolved. The local final-stage images
 support 8 men's and 12 women's names, not the official plan's `30+3` and
@@ -103,7 +102,7 @@ the plan claims are neither inferred nor scored.
 
 ## Unresolved mapping log
 
-The conservative policy above leaves 681 of 1,115 rows unresolved. This is an
+The conservative policy above leaves 682 of 1,116 rows unresolved. This is an
 identity status only; every stored row's entrant name and terminal bracket
 outcome was visually or structurally verified.
 
@@ -123,7 +122,7 @@ outcome was visually or structurally verified.
 | `inje-2025-women` | 12 | 5 | 7 | Six university/team labels plus generic `서울대 테니스부`. |
 | `gyeongin-2023-men` | 42 | 11 | 31 | University/team labels, source-truncated identities, and acronyms without university context. |
 | `gyeongin-2023-women` | 32 | 5 | 27 | University/team labels and source-only acronyms; runner-up is displayed only as `A`. |
-| `gyeongin-2024-men` | 48 entrants / 47 results | 21 | 26 | Edition conflict above; one stage-unresolved DUTC row omitted. |
+| `gyeongin-2024-men` | 48 | 21 | 27 | Edition conflict above; DUTC is retained with an unresolved stage. |
 | `gyeongin-2024-women` | 38 | 14 | 24 | University/team labels and club acronyms without same-row university context. |
 | `gyeongin-2025-men` | 22 | 14 | 8 | University/team labels and generic `테니스부` identities. |
 | `gyeongin-2025-women` | 26 | 11 | 15 | University/team labels, campus-only labels, and generic `테니스부` identities. |

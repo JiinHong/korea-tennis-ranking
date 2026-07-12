@@ -343,6 +343,11 @@ export default function MethodologyPage() {
             unresolved와 missing 결과는 점수에서 제외하며, 미해결 원본 행은
             공개 페이지에 노출하지 않습니다.
           </p>
+          <p className="methodology-note">
+            WEMIX OPEN 2025는 공식 우승팀은 확인됐지만 전체 참가 팀 수와 전체
+            대진의 교차 검증이 끝나지 않아 현재 공개 점수에서 제외했습니다.
+            검증이 끝나면 같은 공식으로 반영합니다.
+          </p>
         </section>
 
         <section className="methodology-section" aria-labelledby="version-title">

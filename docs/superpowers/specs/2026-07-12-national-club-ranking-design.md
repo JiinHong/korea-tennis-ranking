@@ -27,6 +27,13 @@ The first ranking version uses these five competitions:
 2025 edition in the source set; nonexistent 2023 and 2024 editions are not
 recorded as zero-point results.
 
+All five source programs are retained, but only verified editions contribute
+to a public snapshot. At initial publication the supplied WEMIX final-stage
+images conflict with the official plan and do not establish the complete final
+field, so both WEMIX divisions remain `unresolved` and contribute no points.
+The public methodology must disclose this pending status until a complete
+official draw resolves it.
+
 ## Ranking outputs
 
 - Men's ranking: primary output, calculated only from men's results.

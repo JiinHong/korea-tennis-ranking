@@ -1,4 +1,8 @@
-import { NATIONAL_FORMULA_V1, scoreVerifiedResult } from "./formula";
+import {
+  getRecencyFactor,
+  NATIONAL_FORMULA_V1,
+  scoreVerifiedResult,
+} from "./formula";
 import type {
   CalculatedNationalRanking,
   CalculatedRankingRow,
@@ -92,6 +96,8 @@ export function calculateNationalRankings(
   const latestYear = new Map<string, number>();
 
   for (const edition of dataset.editions) {
+    if (edition.sourceStatus !== "verified") continue;
+
     latestYear.set(
       edition.tournamentSlug,
       Math.max(latestYear.get(edition.tournamentSlug) ?? 0, edition.year)
@@ -102,6 +108,11 @@ export function calculateNationalRankings(
 
   for (const result of dataset.results) {
     if (result.qualityStatus !== "verified") continue;
+    if (result.stage === null) {
+      throw new Error(
+        `${result.sourceRef}: verified result is missing a terminal stage`
+      );
+    }
 
     const edition = editionsByKey.get(result.editionKey);
     if (!edition) {
@@ -125,6 +136,9 @@ export function calculateNationalRankings(
     }
     if (edition.sourceStatus !== "verified") continue;
 
+    const latestEditionYear = latestYear.get(tournament.slug) ?? edition.year;
+    if (getRecencyFactor(latestEditionYear, edition.year) === 0) continue;
+
     const contribution: ScoreContribution = {
       clubSlug: club.slug,
       gender: edition.gender,
@@ -134,13 +148,13 @@ export function calculateNationalRankings(
       stage: result.stage,
       scopeFactor: tournament.scopeFactor,
       actualEntrants: edition.actualEntrants,
-      latestEditionYear: latestYear.get(tournament.slug) ?? edition.year,
+      latestEditionYear,
       editionYear: edition.year,
       points: scoreVerifiedResult({
         stage: result.stage,
         scopeFactor: tournament.scopeFactor,
         actualEntrants: edition.actualEntrants,
-        latestEditionYear: latestYear.get(tournament.slug) ?? edition.year,
+        latestEditionYear,
         editionYear: edition.year,
       }),
     };
@@ -184,9 +198,11 @@ export function calculateNationalRankings(
       latestYear
     );
 
-    genderRows.men.push(menRow);
-    genderRows.women.push(womenRow);
-    combinedRows.push(combineRankingRows(menRow, womenRow));
+    if (menContributions.length > 0) genderRows.men.push(menRow);
+    if (womenContributions.length > 0) genderRows.women.push(womenRow);
+    if (menContributions.length > 0 || womenContributions.length > 0) {
+      combinedRows.push(combineRankingRows(menRow, womenRow));
+    }
   }
 
   const rows = [

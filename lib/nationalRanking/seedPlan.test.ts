@@ -137,8 +137,6 @@ describe("buildNationalRankingSeedPlan", () => {
       "combined",
       "combined",
       "men",
-      "men",
-      "women",
       "women",
     ]);
     expect(plan.results).toContainEqual(

@@ -194,6 +194,38 @@ row_input as (
 )`;
 }
 
+function formulaInputCte(plan: NationalRankingSeedPlan): string {
+  return `
+formula_input as (
+  select *
+  from jsonb_to_record(${sqlJson(plan.formula)}) as formula(
+    version text,
+    "displayName" text,
+    config jsonb,
+    "effectiveOn" date,
+    "sourceReferences" jsonb
+  )
+)`;
+}
+
+function snapshotInputCte(plan: NationalRankingSeedPlan): string {
+  const snapshotRecord = {
+    formulaVersion: plan.formula.version,
+    sourceRevision: plan.sourceRevision,
+    sourceSummary: buildSourceSummary(plan),
+  };
+
+  return `
+snapshot_input as (
+  select *
+  from jsonb_to_record(${sqlJson(snapshotRecord)}) as snapshot(
+    "formulaVersion" text,
+    "sourceRevision" text,
+    "sourceSummary" jsonb
+  )
+)`;
+}
+
 function buildAssertionSql(plan: NationalRankingSeedPlan): string {
   return [
     sqlDoBlock(`
@@ -504,21 +536,7 @@ from resolved;`;
 
 function buildFormulaSql(plan: NationalRankingSeedPlan): string {
   return `
-update public.national_formula_versions
-set is_active = false
-where is_active = true
-  and version <> ${sqlText(plan.formula.version)};
-
-with formula_input as (
-  select *
-  from jsonb_to_record(${sqlJson(plan.formula)}) as formula(
-    version text,
-    "displayName" text,
-    config jsonb,
-    "effectiveOn" date,
-    "sourceReferences" jsonb
-  )
-)
+with ${formulaInputCte(plan)}
 insert into public.national_formula_versions (
   version,
   display_name,
@@ -533,33 +551,42 @@ select
   config,
   "effectiveOn",
   "sourceReferences",
-  true
+  false
 from formula_input
-on conflict (version) do update
-set
-  display_name = excluded.display_name,
-  config = excluded.config,
-  effective_on = excluded.effective_on,
-  source_references = excluded.source_references,
-  is_active = true;`;
+on conflict (version) do nothing;
+
+${sqlDoBlock(`
+begin
+  if exists (
+    with ${formulaInputCte(plan)}
+    select 1
+    from formula_input
+    join public.national_formula_versions versions
+      on versions.version = formula_input.version
+    where versions.display_name is distinct from formula_input."displayName"
+       or versions.config is distinct from formula_input.config
+       or versions.effective_on is distinct from formula_input."effectiveOn"
+       or versions.source_references is distinct from formula_input."sourceReferences"
+  ) then
+    raise exception 'national ranking seed formula version conflicts with immutable configuration';
+  end if;
+end
+`)}
+
+update public.national_formula_versions
+set is_active = false
+where is_active = true
+  and version <> ${sqlText(plan.formula.version)};
+
+update public.national_formula_versions
+set is_active = true
+where version = ${sqlText(plan.formula.version)};`;
 }
 
 function buildSnapshotSql(plan: NationalRankingSeedPlan): string {
-  const snapshotRecord = {
-    formulaVersion: plan.formula.version,
-    sourceRevision: plan.sourceRevision,
-    sourceSummary: buildSourceSummary(plan),
-  };
-
   return `
-with snapshot_input as (
-  select *
-  from jsonb_to_record(${sqlJson(snapshotRecord)}) as snapshot(
-    "formulaVersion" text,
-    "sourceRevision" text,
-    "sourceSummary" jsonb
-  )
-)
+with ${snapshotInputCte(plan)},
+inserted_snapshot as (
 insert into public.national_ranking_snapshots (
   formula_version,
   source_revision,
@@ -574,29 +601,13 @@ select
   false,
   null
 from snapshot_input
-on conflict (formula_version, source_revision) do update
-set
-  source_summary = excluded.source_summary;
-
-with target_snapshot as (
-  select id
-  from public.national_ranking_snapshots
-  where formula_version = ${sqlText(plan.formula.version)}
-    and source_revision = ${sqlText(plan.sourceRevision)}
-)
-delete from public.national_ranking_rows
-where snapshot_id = (select id from target_snapshot);
-
-with target_snapshot as (
-  select id
-  from public.national_ranking_snapshots
-  where formula_version = ${sqlText(plan.formula.version)}
-    and source_revision = ${sqlText(plan.sourceRevision)}
+on conflict (formula_version, source_revision) do nothing
+returning id
 ),
 ${rowInputCte(plan)},
 resolved as (
   select
-    target_snapshot.id as snapshot_id,
+    inserted_snapshot.id as snapshot_id,
     row_input.gender,
     clubs.id as club_id,
     row_input.rank,
@@ -607,7 +618,7 @@ resolved as (
     row_input."runnerUps" as runner_ups,
     row_input.contributions
   from row_input
-  cross join target_snapshot
+  cross join inserted_snapshot
   left join public.national_clubs clubs
     on clubs.slug = row_input."clubSlug"
 )
@@ -635,6 +646,74 @@ select
   runner_ups,
   contributions
 from resolved;
+
+${sqlDoBlock(`
+begin
+  if exists (
+    with ${snapshotInputCte(plan)}
+    select 1
+    from snapshot_input
+    join public.national_ranking_snapshots snapshots
+      on snapshots.formula_version = snapshot_input."formulaVersion"
+     and snapshots.source_revision = snapshot_input."sourceRevision"
+    where snapshots.source_summary is distinct from snapshot_input."sourceSummary"
+  ) then
+    raise exception 'national ranking seed snapshot conflicts with immutable source summary';
+  end if;
+end
+`)}
+
+${sqlDoBlock(`
+begin
+  if exists (
+    with target_snapshot as (
+      select id
+      from public.national_ranking_snapshots
+      where formula_version = ${sqlText(plan.formula.version)}
+        and source_revision = ${sqlText(plan.sourceRevision)}
+    ),
+    ${rowInputCte(plan)},
+    expected_rows as (
+      select
+        row_input.gender,
+        row_input."clubSlug" as club_slug,
+        row_input.rank,
+        row_input."totalPoints" as total_points,
+        row_input."latestEditionPoints" as latest_edition_points,
+        row_input."maxContribution" as max_contribution,
+        row_input.championships,
+        row_input."runnerUps" as runner_ups,
+        row_input.contributions
+      from row_input
+    ),
+    actual_rows as (
+      select
+        ranking_rows.gender,
+        clubs.slug as club_slug,
+        ranking_rows.rank,
+        ranking_rows.total_points,
+        ranking_rows.latest_edition_points,
+        ranking_rows.max_contribution,
+        ranking_rows.championships,
+        ranking_rows.runner_ups,
+        ranking_rows.contributions
+      from target_snapshot
+      join public.national_ranking_rows ranking_rows
+        on ranking_rows.snapshot_id = target_snapshot.id
+      join public.national_clubs clubs
+        on clubs.id = ranking_rows.club_id
+    )
+    select 1
+    from (
+      (select * from expected_rows except select * from actual_rows)
+      union all
+      (select * from actual_rows except select * from expected_rows)
+    ) differences
+  ) then
+    raise exception 'national ranking seed snapshot conflicts with immutable ranking rows';
+  end if;
+end
+`)}
 
 update public.national_ranking_snapshots
 set

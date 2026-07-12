@@ -9372,6 +9372,16 @@
     {
       "editionKey": "gyeongin-2024-men",
       "clubSlug": null,
+      "sourceTeamName": "DUTC A팀",
+      "teamLabel": "A",
+      "stage": null,
+      "qualityStatus": "unresolved",
+      "sourceRef": "경인지구/2024/남자/KakaoTalk_Photo_2026-07-08-04-55-48 003.jpeg; 경인지구/2024/남자/KakaoTalk_Photo_2026-07-08-04-55-49 007.jpeg",
+      "note": "Image 003 shows a 3-1 win over 단국대 A, but image 007 advances 단국대 A into the Round of 16; the terminal stage is unresolved."
+    },
+    {
+      "editionKey": "gyeongin-2024-men",
+      "clubSlug": null,
       "sourceTeamName": "단국대 A",
       "teamLabel": "A",
       "stage": "round_of_16",

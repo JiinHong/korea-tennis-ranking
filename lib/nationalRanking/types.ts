@@ -61,7 +61,7 @@ export type TeamResultInput = {
   sourceTeamName: string;
   teamLabel: string;
   sourceEntryId?: string;
-  stage: TournamentStage;
+  stage: TournamentStage | null;
   qualityStatus: ResultQualityStatus;
   sourceRef: string;
   note: string;

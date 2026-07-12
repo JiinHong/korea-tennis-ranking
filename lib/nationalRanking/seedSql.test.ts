@@ -180,8 +180,10 @@ describe("buildNationalRankingSeedSql", () => {
     ].map((match) => match[1]!);
 
     expect(sql).not.toContain("do $$");
-    expect(assertionTags).toHaveLength(4);
-    expect(new Set(assertionTags)).toEqual(new Set(["$national_seed_assertion_1$"]));
+    expect(assertionTags).toHaveLength(7);
+    expect(new Set(assertionTags)).toEqual(
+      new Set(["$national_seed_assertion$", "$national_seed_assertion_1$"])
+    );
     for (const tag of assertionTags) {
       expect(sql).toContain(`do ${tag}\nbegin`);
       expect(sql).toContain(`end\n${tag};`);
@@ -271,7 +273,7 @@ describe("buildNationalRankingSeedSql", () => {
     expect(editionInsertIndex).toBeLessThan(resultAssertionIndex);
   });
 
-  it("upserts the formula snapshot and replaces its ranking rows idempotently", () => {
+  it("keeps formula versions and snapshots immutable while exact reseeds stay idempotent", () => {
     const sql = normalizedSql(buildSql());
     const unpublishIndex = sql.indexOf("set is_published = false");
     const publishIndex = sql.indexOf("set is_published = true");
@@ -283,9 +285,24 @@ describe("buildNationalRankingSeedSql", () => {
     expect(sql).toContain("effective_on");
     expect(sql).toContain("source_references");
     expect(sql).toContain("insert into public.national_ranking_snapshots");
-    expect(sql).toContain("on conflict (formula_version, source_revision) do update");
-    expect(sql).toContain("delete from public.national_ranking_rows");
+    expect(sql).toContain("on conflict (version) do nothing");
+    expect(sql).toContain(
+      "on conflict (formula_version, source_revision) do nothing"
+    );
+    expect(sql).not.toContain("delete from public.national_ranking_rows");
     expect(sql).toContain("insert into public.national_ranking_rows");
+    expect(sql).toContain(
+      "national ranking seed formula version conflicts with immutable configuration"
+    );
+    expect(sql).toContain(
+      "national ranking seed snapshot conflicts with immutable source summary"
+    );
+    expect(sql).toContain(
+      "national ranking seed snapshot conflicts with immutable ranking rows"
+    );
+    expect(sql).toContain("inserted_snapshot as (");
+    expect(sql).toContain("returning id");
+    expect(sql).toContain("cross join inserted_snapshot");
     expect(sql).toContain("source_summary");
     expect(sql).toContain("seed-sql-test-v1");
     expect(sql).not.toContain(process.cwd());

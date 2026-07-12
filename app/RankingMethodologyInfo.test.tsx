@@ -25,6 +25,11 @@ describe("RankingMethodologyInfo", () => {
         "같은 동아리의 여러 팀 중 가장 좋은 성적만 반영합니다."
       )
     ).toBeDefined();
+    expect(
+      screen.getByText(
+        "WEMIX OPEN 2025는 전체 대진 검증 전이라 현재 점수에서 제외합니다."
+      )
+    ).toBeDefined();
     const detailLink = screen.getByRole("link", { name: "계산식 자세히 보기" });
     expect(detailLink.getAttribute("href")).toBe("/methodology");
   });

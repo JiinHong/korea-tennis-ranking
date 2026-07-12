@@ -54,7 +54,7 @@ function createValidDataset() {
         tournamentSlug: "national-open",
         year: 2025,
         gender: "men",
-        actualEntrants: 32,
+        actualEntrants: 2,
         sourceStatus: "verified",
         sourceRefs: ["national/2025/men.pdf#page=1"],
       },
@@ -74,6 +74,7 @@ function createValidDataset() {
         clubSlug: "alpha-tennis",
         sourceTeamName: "Alpha Tennis A",
         teamLabel: "A",
+        sourceEntryId: undefined as string | undefined,
         stage: "champion",
         qualityStatus: "verified",
         sourceRef: "national/2025/men.pdf#page=1",
@@ -84,10 +85,22 @@ function createValidDataset() {
         clubSlug: null,
         sourceTeamName: "Unresolved Team",
         teamLabel: "",
+        sourceEntryId: undefined as string | undefined,
         stage: "runner_up",
         qualityStatus: "unresolved",
         sourceRef: "regional/2025/women.pdf#page=2",
         note: "Club identity is ambiguous.",
+      },
+      {
+        editionKey: "national-open-2025-men",
+        clubSlug: "beta-tennis",
+        sourceTeamName: "Beta Tennis A",
+        teamLabel: "A",
+        sourceEntryId: undefined as string | undefined,
+        stage: "runner_up",
+        qualityStatus: "verified",
+        sourceRef: "national/2025/men.pdf#page=1",
+        note: "",
       },
     ],
   };
@@ -244,6 +257,24 @@ describe("parseNationalRankingDataset", () => {
     );
   });
 
+  it("requires verified edition entrant counts to match imported participants", () => {
+    const dataset = createValidDataset();
+    dataset.editions[0].actualEntrants = 3;
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(
+      "verified edition actualEntrants must match imported participant rows"
+    );
+  });
+
+  it("requires exactly one champion and runner-up in every verified edition", () => {
+    const dataset = createValidDataset();
+    dataset.results[2].stage = "champion";
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(
+      "verified edition must contain exactly one champion and one runner-up"
+    );
+  });
+
   it.each([
     ["gender", "other", "dataset.editions[0].gender must be one of: men, women"],
     [
@@ -317,6 +348,22 @@ describe("parseNationalRankingDataset", () => {
     expect(() => parseNationalRankingDataset(dataset)).toThrow(message);
   });
 
+  it("retains an unresolved source row whose terminal stage is unknown", () => {
+    const dataset = createValidDataset();
+    Object.assign(dataset.results[1], { stage: null });
+
+    expect(parseNationalRankingDataset(dataset).results[1]?.stage).toBeNull();
+  });
+
+  it("requires a terminal stage before a result can be verified", () => {
+    const dataset = createValidDataset();
+    Object.assign(dataset.results[0], { stage: null });
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(
+      "dataset.results[0].stage: verified result must include a terminal stage"
+    );
+  });
+
   it("validates result strings while permitting empty team labels and notes", () => {
     const dataset = createValidDataset();
     dataset.results[0].sourceTeamName = "";
@@ -355,10 +402,15 @@ describe("parseNationalRankingDataset", () => {
 
   it("accepts identical result labels with distinct source entry IDs", () => {
     const dataset = createValidDataset();
-    Object.assign(dataset.results[0], { sourceEntryId: "slot-35" });
+    dataset.editions[0].actualEntrants = 3;
+    Object.assign(dataset.results[0], {
+      sourceEntryId: "slot-35",
+      stage: "semifinal",
+    });
     dataset.results.push({
       ...dataset.results[0],
       sourceEntryId: "slot-46",
+      stage: "champion",
     });
 
     expect(() => parseNationalRankingDataset(dataset)).not.toThrow();
@@ -434,7 +486,7 @@ describe("loadNationalRankingDataset", () => {
     },
     "gyeongin-2024-men": {
       actualEntrants: 48,
-      resultCount: 47,
+      resultCount: 48,
       sourceStatus: "unresolved",
     },
     "gyeongin-2024-women": {
@@ -538,13 +590,25 @@ describe("loadNationalRankingDataset", () => {
 
     expect(dataset.clubs).toHaveLength(90);
     expect(dataset.aliases).toHaveLength(274);
-    expect(dataset.results).toHaveLength(1_115);
+    expect(dataset.results).toHaveLength(1_116);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
     ).toHaveLength(434);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
-    ).toHaveLength(681);
+    ).toHaveLength(682);
+
+    expect(
+      dataset.results.find(
+        (result) =>
+          result.editionKey === "gyeongin-2024-men" &&
+          result.sourceTeamName === "DUTC A팀"
+      )
+    ).toMatchObject({
+      clubSlug: null,
+      stage: null,
+      qualityStatus: "unresolved",
+    });
 
     expect(
       dataset.editions.flatMap((edition) => edition.sourceRefs).every(
@@ -633,12 +697,15 @@ describe("loadNationalRankingDataset", () => {
         )
     ).toBe(false);
     expect(
-      dataset.results.some(
+      dataset.results.find(
         (result) =>
           result.editionKey === "gyeongin-2024-men" &&
           result.sourceTeamName === "DUTC A팀"
       )
-    ).toBe(false);
+    ).toMatchObject({
+      stage: null,
+      qualityStatus: "unresolved",
+    });
     expect(
       dataset.results.find(
         (result) =>

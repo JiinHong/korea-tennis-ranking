@@ -343,6 +343,142 @@ describe("calculateNationalRankings", () => {
     expect(gammaCombined?.contributions).toHaveLength(1);
   });
 
+  it("omits clubs without scoreable results but ranks a verified current zero-point loss", () => {
+    const result = calculateNationalRankings({
+      ...dataset,
+      clubs: [
+        ...dataset.clubs,
+        {
+          slug: "gamma",
+          universityName: "Gamma University",
+          clubName: "Gamma Tennis",
+          displayName: "라마바사",
+        },
+        {
+          slug: "delta",
+          universityName: "Delta University",
+          clubName: "Delta Tennis",
+          displayName: "다라마바사",
+        },
+      ],
+      results: [
+        ...dataset.results,
+        {
+          ...dataset.results[0],
+          clubSlug: "delta",
+          sourceTeamName: "Delta Men",
+          sourceRef: "national-men-2025.pdf#delta",
+          stage: "first_match_loss",
+        },
+      ],
+    });
+
+    expect(result.rows.some((row) => row.clubSlug === "gamma")).toBe(false);
+    expect(
+      result.rows.some(
+        (row) => row.clubSlug === "delta" && row.gender === "women"
+      )
+    ).toBe(false);
+    expect(
+      result.rows.find(
+        (row) => row.clubSlug === "delta" && row.gender === "men"
+      )
+    ).toMatchObject({ totalPoints: 0, championships: 0, runnerUps: 0 });
+    expect(
+      result.rows.find(
+        (row) => row.clubSlug === "delta" && row.gender === "combined"
+      )
+    ).toMatchObject({ totalPoints: 0, championships: 0, runnerUps: 0 });
+  });
+
+  it("excludes expired editions from contributions and stage-count tie-breakers", () => {
+    const result = calculateNationalRankings({
+      version: "expired-tie-test-v1",
+      clubs: [dataset.clubs[0], dataset.clubs[1]],
+      aliases: [],
+      tournaments: [dataset.tournaments[0]],
+      editions: [
+        {
+          ...dataset.editions[0],
+          key: "national-men-2023",
+          year: 2023,
+        },
+        {
+          ...dataset.editions[0],
+          key: "national-men-2026",
+          year: 2026,
+        },
+      ],
+      results: [
+        {
+          ...dataset.results[0],
+          editionKey: "national-men-2023",
+          clubSlug: "beta",
+          sourceTeamName: "Beta 2023",
+          sourceRef: "national-men-2025.pdf#beta-2023",
+          stage: "champion",
+        },
+        {
+          ...dataset.results[0],
+          editionKey: "national-men-2026",
+          clubSlug: "alpha",
+          sourceTeamName: "Alpha 2026",
+          sourceRef: "national-men-2025.pdf#alpha-2026",
+          stage: "first_match_loss",
+        },
+        {
+          ...dataset.results[0],
+          editionKey: "national-men-2026",
+          clubSlug: "beta",
+          sourceTeamName: "Beta 2026",
+          sourceRef: "national-men-2025.pdf#beta-2026",
+          stage: "first_match_loss",
+        },
+      ],
+    });
+    const men = result.rows.filter((row) => row.gender === "men");
+    const beta = men.find((row) => row.clubSlug === "beta");
+
+    expect(men.map((row) => row.clubSlug)).toEqual(["alpha", "beta"]);
+    expect(beta?.championships).toBe(0);
+    expect(beta?.contributions.map((item) => item.editionYear)).toEqual([2026]);
+  });
+
+  it("does not let unresolved or missing future editions decay verified scores", () => {
+    const result = calculateNationalRankings({
+      version: "unverified-future-edition-test-v1",
+      clubs: [dataset.clubs[0]],
+      aliases: [],
+      tournaments: [dataset.tournaments[0]],
+      editions: [
+        dataset.editions[0],
+        {
+          ...dataset.editions[0],
+          key: "national-men-2026-unresolved",
+          year: 2026,
+          sourceStatus: "unresolved",
+        },
+        {
+          ...dataset.editions[0],
+          key: "national-men-2027-missing",
+          year: 2027,
+          sourceStatus: "missing",
+        },
+      ],
+      results: [dataset.results[0]],
+    });
+    const alphaMen = result.rows.find(
+      (row) => row.clubSlug === "alpha" && row.gender === "men"
+    );
+
+    expect(alphaMen?.totalPoints).toBeCloseTo(100);
+    expect(alphaMen?.latestEditionPoints).toBeCloseTo(100);
+    expect(alphaMen?.contributions[0]).toMatchObject({
+      editionYear: 2025,
+      latestEditionYear: 2025,
+    });
+  });
+
   it("excludes results that are unresolved or belong to unverified editions", () => {
     const result = calculateNationalRankings(dataset);
     const betaWomen = result.rows.find(
@@ -351,6 +487,21 @@ describe("calculateNationalRankings", () => {
 
     expect(betaWomen?.totalPoints).toBeCloseTo(100);
     expect(betaWomen?.contributions).toHaveLength(1);
+  });
+
+  it("fails closed when a verified result has no terminal stage", () => {
+    expect(() =>
+      calculateNationalRankings({
+        ...dataset,
+        results: [
+          {
+            ...dataset.results[0],
+            stage: null as unknown as "champion",
+            sourceRef: "results.csv:16",
+          },
+        ],
+      })
+    ).toThrow(/results\.csv:16.*terminal stage/i);
   });
 
   it("reports source-qualified errors for verified results with unknown joins", () => {

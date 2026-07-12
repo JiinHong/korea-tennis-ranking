@@ -241,10 +241,25 @@ function parseResults(value: unknown): TeamResultInput[] {
   return requireArray(value, "dataset.results").map((item, index) => {
     const path = `dataset.results[${index}]`;
     const record = requireRecord(item, path);
+    const qualityStatus = requireOneOf(
+      record.qualityStatus,
+      RESULT_QUALITY_STATUSES,
+      `${path}.qualityStatus`
+    );
+    const stage =
+      record.stage === null
+        ? null
+        : requireOneOf(record.stage, TOURNAMENT_STAGES, `${path}.stage`);
     const sourceEntryId =
       record.sourceEntryId === undefined
         ? undefined
         : requireString(record.sourceEntryId, `${path}.sourceEntryId`);
+
+    if (qualityStatus === "verified" && stage === null) {
+      throw new Error(
+        `${path}.stage: verified result must include a terminal stage`
+      );
+    }
 
     return {
       editionKey: requireString(record.editionKey, `${path}.editionKey`),
@@ -252,12 +267,8 @@ function parseResults(value: unknown): TeamResultInput[] {
       sourceTeamName: requireString(record.sourceTeamName, `${path}.sourceTeamName`),
       teamLabel: requireStringValue(record.teamLabel, `${path}.teamLabel`),
       ...(sourceEntryId === undefined ? {} : { sourceEntryId }),
-      stage: requireOneOf(record.stage, TOURNAMENT_STAGES, `${path}.stage`),
-      qualityStatus: requireOneOf(
-        record.qualityStatus,
-        RESULT_QUALITY_STATUSES,
-        `${path}.qualityStatus`
-      ),
+      stage,
+      qualityStatus,
       sourceRef: requireString(record.sourceRef, `${path}.sourceRef`),
       note: requireStringValue(record.note, `${path}.note`),
     };
@@ -269,6 +280,7 @@ function validateRelationships(dataset: NationalRankingDataset): void {
   const tournamentSlugs = new Set(dataset.tournaments.map((tournament) => tournament.slug));
   const editionsByKey = new Map(dataset.editions.map((edition) => [edition.key, edition]));
   const resultsByVisibleIdentity = new Map<string, TeamResultInput[]>();
+  const resultsByEdition = new Map<string, TeamResultInput[]>();
 
   for (const [index, alias] of dataset.aliases.entries()) {
     if (!clubSlugs.has(alias.clubSlug)) {
@@ -323,6 +335,10 @@ function validateRelationships(dataset: NationalRankingDataset): void {
 
     matchingResults.push(result);
     resultsByVisibleIdentity.set(visibleIdentity, matchingResults);
+
+    const editionResults = resultsByEdition.get(result.editionKey) ?? [];
+    editionResults.push(result);
+    resultsByEdition.set(result.editionKey, editionResults);
   }
 
   for (const [visibleIdentity, matchingResults] of resultsByVisibleIdentity) {
@@ -340,6 +356,35 @@ function validateRelationships(dataset: NationalRankingDataset): void {
         result.sourceEntryId,
         result.sourceRef,
         "result identity"
+      );
+    }
+  }
+
+  for (const edition of dataset.editions) {
+    if (edition.sourceStatus !== "verified") continue;
+
+    const participantResults = (resultsByEdition.get(edition.key) ?? []).filter(
+      (result) => result.qualityStatus !== "did_not_enter"
+    );
+
+    if (participantResults.length !== edition.actualEntrants) {
+      throw new Error(
+        `${edition.key}: verified edition actualEntrants must match imported participant rows ` +
+          `(${edition.actualEntrants} declared, ${participantResults.length} imported)`
+      );
+    }
+
+    const championCount = participantResults.filter(
+      (result) => result.stage === "champion"
+    ).length;
+    const runnerUpCount = participantResults.filter(
+      (result) => result.stage === "runner_up"
+    ).length;
+
+    if (championCount !== 1 || runnerUpCount !== 1) {
+      throw new Error(
+        `${edition.key}: verified edition must contain exactly one champion and one runner-up ` +
+          `(${championCount} champions, ${runnerUpCount} runner-ups)`
       );
     }
   }

@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 import { describe, expect, it } from "vitest";
@@ -7,9 +7,20 @@ const migrationPath = join(
   process.cwd(),
   "supabase/migrations/20260712120000_create_national_rankings.sql"
 );
+const migrationDirectory = join(process.cwd(), "supabase/migrations");
 
 function readMigration(): string | null {
   return existsSync(migrationPath) ? readFileSync(migrationPath, "utf8") : null;
+}
+
+function readMigrationEndingWith(suffix: string): string | null {
+  const migration = readdirSync(migrationDirectory).find((file) =>
+    file.endsWith(suffix)
+  );
+
+  return migration
+    ? readFileSync(join(migrationDirectory, migration), "utf8")
+    : null;
 }
 
 const nationalTables = [
@@ -154,6 +165,26 @@ describe("national ranking migration", () => {
     expect(sql).not.toContain("unique (edition_id, source_team_name)");
     expect(sql).toContain(
       "quality_status <> 'verified' or club_id is not null"
+    );
+  });
+
+  it("retains an unknown stage only for a non-verified source result", () => {
+    const initialMigration = normalizeSql(readMigration());
+    const migration = readMigrationEndingWith(
+      "_allow_unresolved_national_result_stage.sql"
+    );
+    const sql = normalizeSql(migration);
+
+    expect(migration).not.toBeNull();
+    expect(initialMigration).toContain("stage text not null check");
+    expect(initialMigration).not.toContain(
+      "quality_status <> 'verified' or stage is not null"
+    );
+    expect(sql).toContain(
+      "alter table public.national_team_results alter column stage drop not null"
+    );
+    expect(sql).toContain(
+      "check (quality_status <> 'verified' or stage is not null)"
     );
   });
 
