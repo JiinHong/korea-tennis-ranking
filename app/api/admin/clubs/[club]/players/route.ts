@@ -48,6 +48,10 @@ function isPlayerStatus(value: unknown): value is PlayerStatus {
   return playerStatuses.includes(value as PlayerStatus);
 }
 
+function isPositiveInteger(value: unknown): value is number {
+  return typeof value === "number" && Number.isInteger(value) && value > 0;
+}
+
 async function readBody(request: Request): Promise<UnknownBody | null> {
   try {
     const value = await request.json();
@@ -145,6 +149,18 @@ export async function PATCH(
         clubSlug: slug,
         seasonPlayerId: body.seasonPlayerId,
         status: body.status,
+        adminSecret: body.adminSecret,
+      });
+
+      return Response.json({ ok: true, player });
+    }
+
+    if (body.operation === "rank" && isPositiveInteger(body.targetRank)) {
+      const player = await manageAdminPlayer({
+        action: "rank",
+        clubSlug: slug,
+        seasonPlayerId: body.seasonPlayerId,
+        targetRank: body.targetRank,
         adminSecret: body.adminSecret,
       });
 

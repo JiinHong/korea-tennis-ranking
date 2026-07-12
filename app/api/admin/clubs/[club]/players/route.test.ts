@@ -140,6 +140,92 @@ describe("PATCH /api/admin/clubs/[club]/players", () => {
     });
   });
 
+  it("changes a current-season player's rank", async () => {
+    const rankResult = {
+      ...result,
+      action: "rank" as const,
+      oldRank: 5,
+      rank: 2,
+      changes: [
+        {
+          seasonPlayerId: "season-player-1",
+          name: "새 선수",
+          oldRank: 5,
+          newRank: 2,
+        },
+      ],
+    };
+    vi.mocked(manageAdminPlayer).mockResolvedValue(rankResult);
+
+    const response = await PATCH(
+      request("PATCH", {
+        operation: "rank",
+        seasonPlayerId: "season-player-1",
+        targetRank: 2,
+        adminSecret: "secret",
+      }),
+      context
+    );
+
+    expect(response.status).toBe(200);
+    expect(manageAdminPlayer).toHaveBeenCalledWith({
+      action: "rank",
+      clubSlug: "seoultech",
+      seasonPlayerId: "season-player-1",
+      targetRank: 2,
+      adminSecret: "secret",
+    });
+    expect(await response.json()).toEqual({ ok: true, player: rankResult });
+  });
+
+  it.each([0, -1, 1.5, "2", null])(
+    "rejects an invalid target rank: %s",
+    async (targetRank) => {
+      const response = await PATCH(
+        request("PATCH", {
+          operation: "rank",
+          seasonPlayerId: "season-player-1",
+          targetRank,
+          adminSecret: "secret",
+        }),
+        context
+      );
+
+      expect(response.status).toBe(400);
+      expect(manageAdminPlayer).not.toHaveBeenCalled();
+    }
+  );
+
+  it("rejects a rank change without the admin secret", async () => {
+    const response = await PATCH(
+      request("PATCH", {
+        operation: "rank",
+        seasonPlayerId: "season-player-1",
+        targetRank: 2,
+        adminSecret: "",
+      }),
+      context
+    );
+
+    expect(response.status).toBe(400);
+    expect(manageAdminPlayer).not.toHaveBeenCalled();
+  });
+
+  it("returns 404 for a rank change on an unknown club", async () => {
+    const response = await PATCH(
+      request("PATCH", {
+        operation: "rank",
+        seasonPlayerId: "season-player-1",
+        targetRank: 2,
+        adminSecret: "secret",
+      }),
+      { params: Promise.resolve({ club: "unknown" }) }
+    );
+
+    expect(response.status).toBe(404);
+    expect(manageAdminPlayer).not.toHaveBeenCalled();
+  });
+
   it("rejects unsupported player statuses", async () => {
     const response = await PATCH(
       request("PATCH", {
@@ -199,5 +285,27 @@ describe("PATCH /api/admin/clubs/[club]/players", () => {
     );
 
     expect(response.status).toBe(400);
+  });
+
+  it("hides unexpected command failures", async () => {
+    vi.mocked(manageAdminPlayer).mockRejectedValue(
+      new Error("private database details")
+    );
+
+    const response = await PATCH(
+      request("PATCH", {
+        operation: "rank",
+        seasonPlayerId: "season-player-1",
+        targetRank: 2,
+        adminSecret: "secret",
+      }),
+      context
+    );
+
+    expect(response.status).toBe(500);
+    expect(await response.json()).toEqual({
+      ok: false,
+      message: "선수 관리 작업을 완료하지 못했습니다.",
+    });
   });
 });
