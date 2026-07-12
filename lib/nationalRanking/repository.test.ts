@@ -136,6 +136,21 @@ describe("getNationalRankingPageData", () => {
     }
   });
 
+  test("preserves the message from PostgREST-shaped adapter errors", async () => {
+    const adapter: NationalRankingReadAdapter = {
+      listLatestRows: vi.fn().mockRejectedValue({
+        code: "42501",
+        details: null,
+        hint: null,
+        message: "permission denied for view latest_national_rankings",
+      }),
+    };
+
+    await expect(getNationalRankingPageData(adapter)).rejects.toThrow(
+      "National ranking read failed: permission denied for view latest_national_rankings"
+    );
+  });
+
   test.each([
     {
       metadata: "formula version",
