@@ -234,6 +234,9 @@ describe("AdminPlayerManager", () => {
     expect(screen.getByRole("dialog", { name: "순위 변경" })).toBeDefined();
     expect(screen.getByText("다섯번째선수 · 현재 5위")).toBeDefined();
     expect(
+      screen.getByLabelText("관리자 비밀키").getAttribute("autocomplete")
+    ).toBe("off");
+    expect(
       (screen.getByRole("button", { name: "순위 적용" }) as HTMLButtonElement)
         .disabled
     ).toBe(true);

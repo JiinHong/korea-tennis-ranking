@@ -101,7 +101,6 @@ describe("createSupabaseAdminPlayerCommandAdapter", () => {
       p_name: null,
       p_status: "inactive",
       p_admin_secret: "secret",
-      p_target_rank: null,
     });
   });
 

@@ -127,21 +127,23 @@ export function createSupabaseAdminPlayerCommandAdapter(
 ): SupabaseAdminPlayerCommandAdapter {
   return {
     async mutate(input) {
+      const rpcParameters = {
+        p_action: input.action,
+        p_club_slug: input.clubSlug,
+        p_season_player_id:
+          input.action === "add" ? null : input.seasonPlayerId,
+        p_name:
+          input.action === "add" || input.action === "rename"
+            ? input.name
+            : null,
+        p_status: input.action === "status" ? input.status : null,
+        p_admin_secret: input.adminSecret,
+      };
       const { data, error } = await supabase.rpc(
         "manage_admin_player_with_secret",
-        {
-          p_action: input.action,
-          p_club_slug: input.clubSlug,
-          p_season_player_id:
-            input.action === "add" ? null : input.seasonPlayerId,
-          p_name:
-            input.action === "add" || input.action === "rename"
-              ? input.name
-              : null,
-          p_status: input.action === "status" ? input.status : null,
-          p_admin_secret: input.adminSecret,
-          p_target_rank: input.action === "rank" ? input.targetRank : null,
-        }
+        input.action === "rank"
+          ? { ...rpcParameters, p_target_rank: input.targetRank }
+          : rpcParameters
       );
 
       if (error) {

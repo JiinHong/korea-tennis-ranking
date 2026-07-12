@@ -441,7 +441,7 @@ export default function AdminPlayerManager({ clubs }: AdminPlayerManagerProps) {
                   type="password"
                   value={adminSecret}
                   maxLength={200}
-                  autoComplete="current-password"
+                  autoComplete="off"
                   onChange={(event) => setAdminSecret(event.target.value)}
                   required
                 />

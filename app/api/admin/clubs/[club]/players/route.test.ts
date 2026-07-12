@@ -18,9 +18,10 @@ vi.mock("@/lib/supabaseAdminPlayerCommands", async (importOriginal) => {
 });
 
 const context = { params: Promise.resolve({ club: "seoultech" }) };
+const seasonPlayerId = "11111111-1111-4111-8111-111111111111";
 const result = {
   action: "add" as const,
-  seasonPlayerId: "season-player-1",
+  seasonPlayerId,
   playerId: "player-1",
   name: "새 선수",
   rank: 51,
@@ -96,7 +97,7 @@ describe("PATCH /api/admin/clubs/[club]/players", () => {
     const response = await PATCH(
       request("PATCH", {
         operation: "rename",
-        seasonPlayerId: "season-player-1",
+        seasonPlayerId,
         name: "수정 선수",
         adminSecret: "secret",
       }),
@@ -107,7 +108,7 @@ describe("PATCH /api/admin/clubs/[club]/players", () => {
     expect(manageAdminPlayer).toHaveBeenCalledWith({
       action: "rename",
       clubSlug: "seoultech",
-      seasonPlayerId: "season-player-1",
+      seasonPlayerId,
       name: "수정 선수",
       adminSecret: "secret",
     });
@@ -123,7 +124,7 @@ describe("PATCH /api/admin/clubs/[club]/players", () => {
     const response = await PATCH(
       request("PATCH", {
         operation: "status",
-        seasonPlayerId: "season-player-1",
+        seasonPlayerId,
         status: "inactive",
         adminSecret: "secret",
       }),
@@ -134,7 +135,7 @@ describe("PATCH /api/admin/clubs/[club]/players", () => {
     expect(manageAdminPlayer).toHaveBeenCalledWith({
       action: "status",
       clubSlug: "seoultech",
-      seasonPlayerId: "season-player-1",
+      seasonPlayerId,
       status: "inactive",
       adminSecret: "secret",
     });
@@ -148,7 +149,7 @@ describe("PATCH /api/admin/clubs/[club]/players", () => {
       rank: 2,
       changes: [
         {
-          seasonPlayerId: "season-player-1",
+          seasonPlayerId,
           name: "새 선수",
           oldRank: 5,
           newRank: 2,
@@ -160,7 +161,7 @@ describe("PATCH /api/admin/clubs/[club]/players", () => {
     const response = await PATCH(
       request("PATCH", {
         operation: "rank",
-        seasonPlayerId: "season-player-1",
+        seasonPlayerId,
         targetRank: 2,
         adminSecret: "secret",
       }),
@@ -171,7 +172,7 @@ describe("PATCH /api/admin/clubs/[club]/players", () => {
     expect(manageAdminPlayer).toHaveBeenCalledWith({
       action: "rank",
       clubSlug: "seoultech",
-      seasonPlayerId: "season-player-1",
+      seasonPlayerId,
       targetRank: 2,
       adminSecret: "secret",
     });
@@ -184,7 +185,7 @@ describe("PATCH /api/admin/clubs/[club]/players", () => {
       const response = await PATCH(
         request("PATCH", {
           operation: "rank",
-          seasonPlayerId: "season-player-1",
+          seasonPlayerId,
           targetRank,
           adminSecret: "secret",
         }),
@@ -196,11 +197,26 @@ describe("PATCH /api/admin/clubs/[club]/players", () => {
     }
   );
 
-  it("rejects a rank change without the admin secret", async () => {
+  it("rejects a malformed season player id before calling the database", async () => {
     const response = await PATCH(
       request("PATCH", {
         operation: "rank",
         seasonPlayerId: "season-player-1",
+        targetRank: 2,
+        adminSecret: "secret",
+      }),
+      context
+    );
+
+    expect(response.status).toBe(400);
+    expect(manageAdminPlayer).not.toHaveBeenCalled();
+  });
+
+  it("rejects a rank change without the admin secret", async () => {
+    const response = await PATCH(
+      request("PATCH", {
+        operation: "rank",
+        seasonPlayerId,
         targetRank: 2,
         adminSecret: "",
       }),
@@ -215,7 +231,7 @@ describe("PATCH /api/admin/clubs/[club]/players", () => {
     const response = await PATCH(
       request("PATCH", {
         operation: "rank",
-        seasonPlayerId: "season-player-1",
+        seasonPlayerId,
         targetRank: 2,
         adminSecret: "secret",
       }),
@@ -230,7 +246,7 @@ describe("PATCH /api/admin/clubs/[club]/players", () => {
     const response = await PATCH(
       request("PATCH", {
         operation: "status",
-        seasonPlayerId: "season-player-1",
+        seasonPlayerId,
         status: "deleted",
         adminSecret: "secret",
       }),
@@ -252,7 +268,7 @@ describe("PATCH /api/admin/clubs/[club]/players", () => {
     const response = await PATCH(
       request("PATCH", {
         operation: "rename",
-        seasonPlayerId: "season-player-1",
+        seasonPlayerId,
         name: "수정 선수",
         adminSecret: "wrong",
       }),
@@ -277,7 +293,7 @@ describe("PATCH /api/admin/clubs/[club]/players", () => {
     const response = await PATCH(
       request("PATCH", {
         operation: "rename",
-        seasonPlayerId: "season-player-1",
+        seasonPlayerId,
         name: "중복 선수",
         adminSecret: "secret",
       }),
@@ -295,7 +311,7 @@ describe("PATCH /api/admin/clubs/[club]/players", () => {
     const response = await PATCH(
       request("PATCH", {
         operation: "rank",
-        seasonPlayerId: "season-player-1",
+        seasonPlayerId,
         targetRank: 2,
         adminSecret: "secret",
       }),

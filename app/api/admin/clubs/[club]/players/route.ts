@@ -20,6 +20,8 @@ const playerStatuses: PlayerStatus[] = [
   "inactive",
   "left",
 ];
+const uuidPattern =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 function errorResponse(message: string, status: number) {
   return Response.json({ ok: false, message }, { status });
@@ -40,8 +42,8 @@ function normalizedName(value: unknown): string | null {
   return name.length >= 1 && name.length <= 50 ? name : null;
 }
 
-function isIdentifier(value: unknown): value is string {
-  return typeof value === "string" && value.length > 0 && value.length <= 100;
+function isUuid(value: unknown): value is string {
+  return typeof value === "string" && uuidPattern.test(value);
 }
 
 function isPlayerStatus(value: unknown): value is PlayerStatus {
@@ -118,7 +120,7 @@ export async function PATCH(
 
   if (
     !body ||
-    !isIdentifier(body.seasonPlayerId) ||
+    !isUuid(body.seasonPlayerId) ||
     !isAdminSecret(body.adminSecret)
   ) {
     return errorResponse("선수 수정 입력값이 올바르지 않습니다.", 400);
