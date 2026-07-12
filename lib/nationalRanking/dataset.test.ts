@@ -1,0 +1,338 @@
+import { describe, expect, it } from "vitest";
+
+import { parseNationalRankingDataset } from "@/lib/nationalRanking/dataset";
+
+function createValidDataset() {
+  return {
+    version: "sources-test-v1",
+    clubs: [
+      {
+        slug: "alpha-tennis",
+        universityName: "Alpha University",
+        clubName: "Alpha Tennis",
+        displayName: "Alpha Tennis",
+      },
+      {
+        slug: "beta-tennis",
+        universityName: "Beta University",
+        clubName: "Beta Tennis",
+        displayName: "Beta Tennis",
+      },
+    ],
+    aliases: [
+      {
+        clubSlug: "alpha-tennis",
+        normalizedAlias: "alpha tennis",
+        sourceLabel: "Alpha Tennis Club",
+      },
+    ],
+    tournaments: [
+      {
+        slug: "national-open",
+        name: "National Open",
+        scope: "national",
+        scopeFactor: 1,
+      },
+      {
+        slug: "regional-open",
+        name: "Regional Open",
+        scope: "regional",
+        scopeFactor: 0.85,
+      },
+    ],
+    editions: [
+      {
+        key: "national-open-2025-men",
+        tournamentSlug: "national-open",
+        year: 2025,
+        gender: "men",
+        actualEntrants: 32,
+        sourceStatus: "verified",
+        sourceRefs: ["national/2025/men.pdf"],
+      },
+      {
+        key: "regional-open-2025-women",
+        tournamentSlug: "regional-open",
+        year: 2025,
+        gender: "women",
+        actualEntrants: 16,
+        sourceStatus: "unresolved",
+        sourceRefs: ["regional/2025/women.pdf"],
+      },
+    ],
+    results: [
+      {
+        editionKey: "national-open-2025-men",
+        clubSlug: "alpha-tennis",
+        sourceTeamName: "Alpha Tennis A",
+        teamLabel: "A",
+        stage: "champion",
+        qualityStatus: "verified",
+        sourceRef: "national/2025/men.pdf#page=1",
+        note: "",
+      },
+      {
+        editionKey: "regional-open-2025-women",
+        clubSlug: null,
+        sourceTeamName: "Unresolved Team",
+        teamLabel: "",
+        stage: "runner_up",
+        qualityStatus: "unresolved",
+        sourceRef: "regional/2025/women.pdf#page=2",
+        note: "Club identity is ambiguous.",
+      },
+    ],
+  };
+}
+
+describe("parseNationalRankingDataset", () => {
+  it("accepts a valid dataset and returns newly constructed records", () => {
+    const input = createValidDataset();
+    const dataset = parseNationalRankingDataset(input);
+
+    expect(dataset).toEqual(input);
+    expect(dataset).not.toBe(input);
+    expect(dataset.clubs).not.toBe(input.clubs);
+    expect(dataset.editions[0]).not.toBe(input.editions[0]);
+  });
+
+  it("requires a non-empty version", () => {
+    const dataset = createValidDataset();
+    dataset.version = "";
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(
+      "dataset.version must be a non-empty string"
+    );
+  });
+
+  it("requires every top-level collection to be an array", () => {
+    const dataset = createValidDataset();
+    dataset.clubs = {} as never;
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(
+      "dataset.clubs must be an array"
+    );
+  });
+
+  it("rejects duplicate club and tournament slugs", () => {
+    const duplicateClub = createValidDataset();
+    duplicateClub.clubs.push({ ...duplicateClub.clubs[0] });
+
+    expect(() => parseNationalRankingDataset(duplicateClub)).toThrow(
+      "duplicate club slug"
+    );
+
+    const duplicateTournament = createValidDataset();
+    duplicateTournament.tournaments.push({ ...duplicateTournament.tournaments[0] });
+
+    expect(() => parseNationalRankingDataset(duplicateTournament)).toThrow(
+      "duplicate tournament slug"
+    );
+  });
+
+  it("validates every club string field", () => {
+    const dataset = createValidDataset();
+    dataset.clubs[0].displayName = " ";
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(
+      "dataset.clubs[0].displayName must be a non-empty string"
+    );
+  });
+
+  it("requires aliases to be unique and reference known clubs", () => {
+    const duplicateAlias = createValidDataset();
+    duplicateAlias.aliases.push({
+      ...duplicateAlias.aliases[0],
+      clubSlug: "beta-tennis",
+    });
+
+    expect(() => parseNationalRankingDataset(duplicateAlias)).toThrow(
+      "duplicate normalized alias"
+    );
+
+    const unknownClub = createValidDataset();
+    unknownClub.aliases[0].clubSlug = "unknown-club";
+
+    expect(() => parseNationalRankingDataset(unknownClub)).toThrow(
+      "alias references an unknown club"
+    );
+  });
+
+  it("validates every alias string field", () => {
+    const dataset = createValidDataset();
+    dataset.aliases[0].sourceLabel = "";
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(
+      "dataset.aliases[0].sourceLabel must be a non-empty string"
+    );
+  });
+
+  it("allows only known tournament scopes", () => {
+    const dataset = createValidDataset();
+    dataset.tournaments[0].scope = "international";
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(
+      "dataset.tournaments[0].scope must be one of: national, regional"
+    );
+  });
+
+  it("requires a scope factor that is both allowed and coherent with its scope", () => {
+    const invalidFactor = createValidDataset();
+    invalidFactor.tournaments[0].scopeFactor = 0.9;
+
+    expect(() => parseNationalRankingDataset(invalidFactor)).toThrow(
+      "scopeFactor must be exactly 1 or 0.85"
+    );
+
+    const incoherentFactor = createValidDataset();
+    incoherentFactor.tournaments[0].scopeFactor = 0.85;
+
+    expect(() => parseNationalRankingDataset(incoherentFactor)).toThrow(
+      "national scope requires scopeFactor 1"
+    );
+  });
+
+  it("rejects duplicate edition keys and tournament-year-gender identities", () => {
+    const duplicateKey = createValidDataset();
+    duplicateKey.editions.push({ ...duplicateKey.editions[0] });
+
+    expect(() => parseNationalRankingDataset(duplicateKey)).toThrow(
+      "duplicate edition key"
+    );
+
+    const duplicateNaturalKey = createValidDataset();
+    duplicateNaturalKey.editions.push({
+      ...duplicateNaturalKey.editions[0],
+      key: "another-national-open-2025-men",
+    });
+
+    expect(() => parseNationalRankingDataset(duplicateNaturalKey)).toThrow(
+      "duplicate tournament/year/gender edition"
+    );
+  });
+
+  it("requires editions to reference known tournaments", () => {
+    const dataset = createValidDataset();
+    dataset.editions[0].tournamentSlug = "unknown-tournament";
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(
+      "edition references an unknown tournament"
+    );
+  });
+
+  it("requires edition years and entrant counts to be positive integers", () => {
+    const invalidYear = createValidDataset();
+    invalidYear.editions[0].year = 2025.5;
+
+    expect(() => parseNationalRankingDataset(invalidYear)).toThrow(
+      "dataset.editions[0].year must be a positive integer"
+    );
+
+    const invalidEntrants = createValidDataset();
+    invalidEntrants.editions[0].actualEntrants = 0;
+
+    expect(() => parseNationalRankingDataset(invalidEntrants)).toThrow(
+      "actualEntrants must be a positive integer"
+    );
+  });
+
+  it.each([
+    ["gender", "other", "dataset.editions[0].gender must be one of: men, women"],
+    [
+      "sourceStatus",
+      "pending",
+      "dataset.editions[0].sourceStatus must be one of: verified, unresolved, missing",
+    ],
+  ])("validates the edition %s union", (field, value, message) => {
+    const dataset = createValidDataset();
+    Object.assign(dataset.editions[0], { [field]: value });
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(message);
+  });
+
+  it("requires unique non-empty edition source references", () => {
+    const emptyReference = createValidDataset();
+    emptyReference.editions[0].sourceRefs = [""];
+
+    expect(() => parseNationalRankingDataset(emptyReference)).toThrow(
+      "dataset.editions[0].sourceRefs[0] must be a non-empty string"
+    );
+
+    const duplicateReference = createValidDataset();
+    duplicateReference.editions[0].sourceRefs.push(
+      duplicateReference.editions[0].sourceRefs[0]
+    );
+
+    expect(() => parseNationalRankingDataset(duplicateReference)).toThrow(
+      "duplicate source reference"
+    );
+  });
+
+  it("requires each result to reference a known edition", () => {
+    const dataset = createValidDataset();
+    dataset.results[0].editionKey = "unknown-edition";
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(
+      "result references an unknown edition"
+    );
+  });
+
+  it("requires every non-null result club to be known", () => {
+    const dataset = createValidDataset();
+    dataset.results[1].clubSlug = "unknown-club";
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(
+      "result references an unknown club"
+    );
+  });
+
+  it("requires verified results to reference a known non-null club", () => {
+    const dataset = createValidDataset();
+    dataset.results[0].clubSlug = null;
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(
+      "verified result must reference a known club"
+    );
+  });
+
+  it.each([
+    ["stage", "finalist", "dataset.results[0].stage must be one of:"],
+    [
+      "qualityStatus",
+      "pending",
+      "dataset.results[0].qualityStatus must be one of: verified, unresolved, missing, did_not_enter",
+    ],
+  ])("validates the result %s union", (field, value, message) => {
+    const dataset = createValidDataset();
+    Object.assign(dataset.results[0], { [field]: value });
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(message);
+  });
+
+  it("validates result strings while permitting empty team labels and notes", () => {
+    const dataset = createValidDataset();
+    dataset.results[0].sourceTeamName = "";
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(
+      "dataset.results[0].sourceTeamName must be a non-empty string"
+    );
+  });
+
+  it("requires every result source reference to belong to its edition", () => {
+    const dataset = createValidDataset();
+    dataset.results[0].sourceRef = "unrelated/2025/men.pdf#page=1";
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(
+      "result sourceRef is not listed by its edition"
+    );
+  });
+
+  it("rejects duplicate result natural identities", () => {
+    const dataset = createValidDataset();
+    dataset.results.push({ ...dataset.results[0] });
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(
+      "duplicate result identity"
+    );
+  });
+});
