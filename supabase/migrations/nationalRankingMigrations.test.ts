@@ -12,9 +12,102 @@ function readMigration(): string | null {
   return existsSync(migrationPath) ? readFileSync(migrationPath, "utf8") : null;
 }
 
+const nationalTables = [
+  "national_clubs",
+  "national_club_aliases",
+  "national_tournaments",
+  "national_tournament_editions",
+  "national_team_results",
+  "national_formula_versions",
+  "national_ranking_snapshots",
+  "national_ranking_rows",
+] as const;
+
+const anonSelectTargets = [
+  "public.national_clubs",
+  "public.national_tournaments",
+  "public.national_formula_versions",
+  "public.national_ranking_snapshots",
+  "public.national_ranking_rows",
+  "public.latest_national_rankings",
+] as const;
+
+const privateAnonTargets = [
+  "public.national_club_aliases",
+  "public.national_tournament_editions",
+  "public.national_team_results",
+] as const;
+
+const latestViewPattern =
+  /\bcreate\s+or\s+replace\s+view\s+public\.latest_national_rankings\s+with\s*\(\s*security_invoker\s*=\s*true\s*\)\s+as\b/i;
+
+function normalizeSql(sql: string | null): string {
+  return (sql ?? "")
+    .replace(/\/\*[\s\S]*?\*\//g, " ")
+    .replace(/--.*$/gm, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function policyPattern(
+  table: string,
+  operation: "all" | "select",
+  role: "anon" | "service_role",
+  bodyPattern: string
+): RegExp {
+  return new RegExp(
+    `\\bcreate\\s+policy\\s+(?:"[^"]+"|[a-z_][a-z0-9_]*)` +
+      `\\s+on\\s+public\\.${escapeRegExp(table)}` +
+      `\\s+for\\s+${operation}\\s+to\\s+${role}` +
+      `\\s+${bodyPattern}\\s*;`,
+    "i"
+  );
+}
+
+function createPolicyBlocks(sql: string): string[] {
+  return [...normalizeSql(sql).matchAll(/\bcreate\s+policy\b[^;]*;/g)].map(
+    (match) => match[0]
+  );
+}
+
+function policyForRolePattern(table: string, role: "anon" | "service_role"): RegExp {
+  return new RegExp(
+    `\\bcreate\\s+policy\\s+(?:"[^"]+"|[a-z_][a-z0-9_]*)` +
+      `\\s+on\\s+public\\.${escapeRegExp(table)}[^;]*` +
+      `\\bto\\s+[^;]*\\b${role}\\b[^;]*;`,
+    "i"
+  );
+}
+
+type SqlGrant = {
+  privileges: string[];
+  targets: string[];
+  roles: string[];
+};
+
+function parseGrants(sql: string): SqlGrant[] {
+  const grantPattern =
+    /\bgrant\s+([^;]+?)\s+on\s+(?:table\s+)?([^;]+?)\s+to\s+([^;]+?)\s*;/gi;
+
+  return [...normalizeSql(sql).matchAll(grantPattern)].map((match) => ({
+    privileges: match[1]!.split(",").map((value) => value.trim().toLowerCase()),
+    targets: match[2]!.split(",").map((value) => value.trim().toLowerCase()),
+    roles: match[3]!
+      .replace(/\s+with\s+grant\s+option$/i, "")
+      .split(",")
+      .map((value) => value.trim().toLowerCase()),
+  }));
+}
+
 describe("national ranking migration", () => {
   it("creates the national ranking tables and latest view", () => {
     const sql = readMigration();
+    const normalizedSql = normalizeSql(sql);
 
     expect(sql).not.toBeNull();
     expect(sql).toContain('create extension if not exists "pgcrypto"');
@@ -40,8 +133,7 @@ describe("national ranking migration", () => {
     expect(sql).toContain(
       "create table if not exists public.national_ranking_rows"
     );
-    expect(sql).toContain("with (security_invoker = true)");
-    expect(sql).toContain("create view public.latest_national_rankings");
+    expect(normalizedSql).toMatch(latestViewPattern);
   });
 
   it("preserves source dataset identities and quality constraints", () => {
@@ -113,57 +205,95 @@ describe("national ranking migration", () => {
 
   it("enables RLS and grants only the intended public surface", () => {
     const sql = readMigration() ?? "";
+    const normalizedSql = normalizeSql(sql);
+    const policyBlocks = createPolicyBlocks(sql);
+    const serviceRolePolicyBlocks = policyBlocks.filter((block) =>
+      /\bto\s+service_role\b/.test(block)
+    );
+
+    expect(serviceRolePolicyBlocks).toHaveLength(nationalTables.length);
+
+    for (const table of nationalTables) {
+      expect(normalizedSql).toMatch(
+        new RegExp(
+          `\\balter\\s+table\\s+public\\.${escapeRegExp(table)}` +
+            `\\s+enable\\s+row\\s+level\\s+security\\s*;`,
+          "i"
+        )
+      );
+      expect(normalizedSql).toMatch(
+        policyPattern(
+          table,
+          "all",
+          "service_role",
+          "using\\s*\\(\\s*true\\s*\\)\\s+with\\s+check\\s*\\(\\s*true\\s*\\)"
+        )
+      );
+      expect(
+        serviceRolePolicyBlocks.some((block) =>
+          policyPattern(
+            table,
+            "all",
+            "service_role",
+            "using\\s*\\(\\s*true\\s*\\)\\s+with\\s+check\\s*\\(\\s*true\\s*\\)"
+          ).test(block)
+        )
+      ).toBe(true);
+    }
 
     for (const table of [
       "national_clubs",
-      "national_club_aliases",
       "national_tournaments",
-      "national_tournament_editions",
-      "national_team_results",
       "national_formula_versions",
-      "national_ranking_snapshots",
-      "national_ranking_rows",
     ]) {
-      expect(sql).toContain(
-        `alter table public.${table} enable row level security`
+      expect(normalizedSql).toMatch(
+        policyPattern(
+          table,
+          "select",
+          "anon",
+          "using\\s*\\(\\s*is_active\\s*=\\s*true\\s*\\)"
+        )
       );
-      expect(sql).toContain(`on public.${table} to service_role`);
     }
 
-    expect(sql).toContain("create policy \"Public can read active national clubs\"");
-    expect(sql).toContain("using (is_active = true)");
-    expect(sql).toContain(
-      "create policy \"Public can read active national tournaments\""
+    expect(normalizedSql).toMatch(
+      policyPattern(
+        "national_ranking_snapshots",
+        "select",
+        "anon",
+        "using\\s*\\(\\s*is_published\\s*=\\s*true\\s*\\)"
+      )
     );
-    expect(sql).toContain(
-      "create policy \"Public can read active national formula versions\""
+    expect(normalizedSql).toMatch(
+      policyPattern(
+        "national_ranking_rows",
+        "select",
+        "anon",
+        "using\\s*\\(\\s*exists\\s*\\([^;]*snapshot\\.is_published\\s*=\\s*true[^;]*\\)\\s*\\)"
+      )
     );
-    expect(sql).toContain(
-      "create policy \"Public can read published national ranking snapshots\""
+
+    const anonGrants = parseGrants(sql).filter((grant) => grant.roles.includes("anon"));
+    const actualAnonSelectTargets = anonGrants.flatMap((grant) => grant.targets);
+
+    expect(
+      anonGrants.every(
+        (grant) => grant.privileges.length === 1 && grant.privileges[0] === "select"
+      )
+    ).toBe(true);
+    expect([...actualAnonSelectTargets].sort()).toEqual([...anonSelectTargets].sort());
+
+    for (const target of privateAnonTargets) {
+      expect(actualAnonSelectTargets).not.toContain(target);
+      expect(normalizedSql).not.toMatch(
+        policyForRolePattern(target.replace(/^public\./, ""), "anon")
+      );
+    }
+
+    expect(normalizedSql).toMatch(
+      /\bgrant\s+usage\s*,\s*select\s+on\s+all\s+sequences\s+in\s+schema\s+public\s+to\s+service_role\s*;/i
     );
-    expect(sql).toContain(
-      "create policy \"Public can read published national ranking rows\""
-    );
-    expect(sql).toContain("to anon");
-    expect(sql).toContain("to service_role");
-    expect(sql).toContain("grant select on public.national_clubs to anon");
-    expect(sql).toContain("grant select on public.national_tournaments to anon");
-    expect(sql).toContain(
-      "grant select on public.national_formula_versions to anon"
-    );
-    expect(sql).toContain(
-      "grant select on public.national_ranking_snapshots to anon"
-    );
-    expect(sql).toContain(
-      "grant select on public.national_ranking_rows to anon"
-    );
-    expect(sql).not.toContain("grant select on public.national_club_aliases to anon");
-    expect(sql).not.toContain(
-      "grant select on public.national_tournament_editions to anon"
-    );
-    expect(sql).not.toContain("grant select on public.national_team_results to anon");
-    expect(sql).toContain("grant usage, select on all sequences in schema public to service_role");
-    expect(sql).not.toContain("auth.role()");
-    expect(sql).not.toContain("security definer");
+    expect(normalizedSql).not.toMatch(/\bauth\s*\.\s*role\s*\(\s*\)/i);
+    expect(normalizedSql).not.toMatch(/\bsecurity\s+definer\b/i);
   });
 });

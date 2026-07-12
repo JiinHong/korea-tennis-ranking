@@ -319,7 +319,7 @@ grant all privileges on public.national_ranking_snapshots to service_role;
 grant all privileges on public.national_ranking_rows to service_role;
 grant usage, select on all sequences in schema public to service_role;
 
-create view public.latest_national_rankings
+create or replace view public.latest_national_rankings
 with (security_invoker = true)
 as
 select
