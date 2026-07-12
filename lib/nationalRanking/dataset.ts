@@ -268,7 +268,7 @@ function validateRelationships(dataset: NationalRankingDataset): void {
   const clubSlugs = new Set(dataset.clubs.map((club) => club.slug));
   const tournamentSlugs = new Set(dataset.tournaments.map((tournament) => tournament.slug));
   const editionsByKey = new Map(dataset.editions.map((edition) => [edition.key, edition]));
-  const resultIdentities = new Set<string>();
+  const resultsByVisibleIdentity = new Map<string, TeamResultInput[]>();
 
   for (const [index, alias] of dataset.aliases.entries()) {
     if (!clubSlugs.has(alias.clubSlug)) {
@@ -314,17 +314,34 @@ function validateRelationships(dataset: NationalRankingDataset): void {
       );
     }
 
-    requireUnique(
-      resultIdentities,
-      [
-        result.editionKey,
-        result.sourceTeamName,
-        result.teamLabel,
-        result.sourceEntryId ?? "",
-      ].join(":"),
-      resultPath,
-      "result identity"
-    );
+    const visibleIdentity = JSON.stringify([
+      result.editionKey,
+      result.sourceTeamName,
+      result.teamLabel,
+    ]);
+    const matchingResults = resultsByVisibleIdentity.get(visibleIdentity) ?? [];
+
+    matchingResults.push(result);
+    resultsByVisibleIdentity.set(visibleIdentity, matchingResults);
+  }
+
+  for (const [visibleIdentity, matchingResults] of resultsByVisibleIdentity) {
+    if (matchingResults.length === 1) continue;
+
+    const sourceEntryIds = new Set<string>();
+    for (const result of matchingResults) {
+      if (!result.sourceEntryId) {
+        throw new Error(
+          `${result.sourceRef}: duplicate result identity ${visibleIdentity}: repeated visible result identity requires unique sourceEntryId values`
+        );
+      }
+      requireUnique(
+        sourceEntryIds,
+        result.sourceEntryId,
+        result.sourceRef,
+        "result identity"
+      );
+    }
   }
 }
 

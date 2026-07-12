@@ -1,5 +1,5 @@
+import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
-import { homedir } from "node:os";
 import { resolve } from "node:path";
 
 import { describe, expect, it } from "vitest";
@@ -364,6 +364,18 @@ describe("parseNationalRankingDataset", () => {
     expect(() => parseNationalRankingDataset(dataset)).not.toThrow();
   });
 
+  it("rejects identical result labels when one source entry ID is missing", () => {
+    const dataset = createValidDataset();
+    dataset.results.push({
+      ...dataset.results[0],
+      sourceEntryId: "slot-46",
+    });
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(
+      "repeated visible result identity requires unique sourceEntryId values"
+    );
+  });
+
   it("rejects duplicate source entry IDs for identical result labels", () => {
     const dataset = createValidDataset();
     Object.assign(dataset.results[0], { sourceEntryId: "slot-35" });
@@ -565,16 +577,31 @@ describe("loadNationalRankingDataset", () => {
     expect(() => calculateNationalRankings(dataset)).not.toThrow();
   });
 
-  it("preserves the approved Task 4 edition and result counts", () => {
+  it("preserves the exact approved Task 4 ordered content", () => {
     const dataset = loadNationalRankingDataset();
     const priorEditionKeys = new Set(Object.keys(priorExpectedCounts));
+    const approvedTask4 = {
+      clubs: dataset.clubs.slice(0, 53),
+      aliases: dataset.aliases.slice(0, 151),
+      editions: dataset.editions.filter((edition) =>
+        priorEditionKeys.has(edition.key)
+      ),
+      results: dataset.results.filter((result) =>
+        priorEditionKeys.has(result.editionKey)
+      ),
+    };
+    // Generated from 27cb77b; this detects content or ordering drift without a fixture copy.
+    const fingerprint = createHash("sha256")
+      .update(JSON.stringify(approvedTask4))
+      .digest("hex");
 
-    expect(
-      dataset.editions.filter((edition) => priorEditionKeys.has(edition.key))
-    ).toHaveLength(12);
-    expect(
-      dataset.results.filter((result) => priorEditionKeys.has(result.editionKey))
-    ).toHaveLength(608);
+    expect(approvedTask4.clubs).toHaveLength(53);
+    expect(approvedTask4.aliases).toHaveLength(151);
+    expect(approvedTask4.editions).toHaveLength(12);
+    expect(approvedTask4.results).toHaveLength(608);
+    expect(fingerprint).toBe(
+      "32877ab82dc7a3a625077d9b80985c435de7c52ef96e3fc872a0d78fe6d47131"
+    );
 
     for (const [editionKey, expectedCount] of Object.entries(priorExpectedCounts)) {
       expect(
@@ -685,9 +712,8 @@ describe("loadNationalRankingDataset", () => {
     }
   });
 
-  it("uses exact edition source refs backed by relative existing source files", () => {
+  it("uses exact relative source refs listed by each edition", () => {
     const dataset = loadNationalRankingDataset();
-    const sourceRoot = resolve(homedir(), "Documents/테니스 랭킹");
     const editionsByKey = new Map(
       dataset.editions.map((edition) => [edition.key, edition])
     );
@@ -707,10 +733,30 @@ describe("loadNationalRankingDataset", () => {
 
         expect(relativePath.startsWith("/"), sourceRef).toBe(false);
         expect(relativePath.includes(":\\"), sourceRef).toBe(false);
-        expect(existsSync(resolve(sourceRoot, relativePath)), sourceRef).toBe(true);
       }
     }
   });
+
+  it.skipIf(!process.env.NATIONAL_RANKING_SOURCE_ROOT)(
+    "resolves every source file when NATIONAL_RANKING_SOURCE_ROOT is set",
+    () => {
+      const sourceRoot = process.env.NATIONAL_RANKING_SOURCE_ROOT;
+      if (!sourceRoot) throw new Error("NATIONAL_RANKING_SOURCE_ROOT is required");
+      const dataset = loadNationalRankingDataset();
+
+      for (const sourceRef of dataset.editions.flatMap(
+        (edition) => edition.sourceRefs
+      )) {
+        for (const referencePart of sourceRef.split("; ")) {
+          const relativePath = referencePart.split("#", 1)[0];
+
+          expect(existsSync(resolve(sourceRoot, relativePath)), sourceRef).toBe(
+            true
+          );
+        }
+      }
+    }
+  );
 
   it("keeps 고려대학교 KUTC, PETC, and KMTC distinct", () => {
     const dataset = loadNationalRankingDataset();

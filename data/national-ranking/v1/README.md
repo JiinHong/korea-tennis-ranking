@@ -23,14 +23,24 @@ WEMIX is the only 2025-only exception. All 26 units above are present.
 
 ## Source references
 
-The common source root is `~/Documents/테니스 랭킹`. All committed `sourceRefs`
-are relative to that root; absolute machine paths are forbidden. A PNG result
-or edition references the image path. Every PDF reference at both the edition
-and result level appends a one-based page anchor, for example
+The extraction archive used for this manifest was `~/Documents/테니스 랭킹`,
+but tests do not assume that personal path. All committed `sourceRefs` are
+relative to the archive root; absolute machine paths are forbidden. A PNG
+result or edition references the image path. Every PDF reference at both the
+edition and result level appends a one-based page anchor, for example
 `양구/2025/남자/2025 양구 남자.pdf#page=3`.
 XLSX references append the structurally parsed sheet name, for example
 `춘천/2025/남자/2025년_남자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진`.
 Every result reference is an exact member of its edition's `sourceRefs`.
+
+Normal tests verify those relative-reference and membership contracts
+hermetically. To additionally verify that every referenced source file exists
+in a local archive, opt in with an explicit absolute root:
+
+```bash
+NATIONAL_RANKING_SOURCE_ROOT="/absolute/path/to/테니스 랭킹" \
+  npm test -- lib/nationalRanking/dataset.test.ts
+```
 
 One visually verified terminal record is stored for every named entrant.
 `actualEntrants` therefore equals the number of result rows for each edition
