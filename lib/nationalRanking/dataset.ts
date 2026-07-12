@@ -1,3 +1,5 @@
+import sourceDataset from "@/data/national-ranking/v1/dataset.json";
+
 import type {
   NationalClubAliasInput,
   NationalClubInput,
@@ -329,4 +331,8 @@ export function parseNationalRankingDataset(value: unknown): NationalRankingData
 
   validateRelationships(dataset);
   return dataset;
+}
+
+export function loadNationalRankingDataset(): NationalRankingDataset {
+  return parseNationalRankingDataset(sourceDataset);
 }

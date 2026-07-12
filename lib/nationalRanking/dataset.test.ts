@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 
-import { parseNationalRankingDataset } from "@/lib/nationalRanking/dataset";
+import { calculateNationalRankings } from "@/lib/nationalRanking/calculate";
+import {
+  loadNationalRankingDataset,
+  parseNationalRankingDataset,
+} from "@/lib/nationalRanking/dataset";
 
 function createValidDataset() {
   return {
@@ -334,5 +338,76 @@ describe("parseNationalRankingDataset", () => {
     expect(() => parseNationalRankingDataset(dataset)).toThrow(
       "duplicate result identity"
     );
+  });
+});
+
+describe("loadNationalRankingDataset", () => {
+  const expectedCounts = {
+    "yanggu-2023-men": 98,
+    "yanggu-2023-women": 91,
+    "yanggu-2024-men": 89,
+    "yanggu-2024-women": 73,
+    "yanggu-2025-men": 94,
+    "yanggu-2025-women": 73,
+    "inje-2023-men": 18,
+    "inje-2023-women": 10,
+    "inje-2024-men": 20,
+    "inje-2024-women": 10,
+    "inje-2025-men": 20,
+    "inje-2025-women": 12,
+  } as const;
+
+  it("loads the verified Yanggu and Inje source manifest", () => {
+    const dataset = loadNationalRankingDataset();
+    const selected = dataset.editions.filter((edition) =>
+      ["yanggu", "inje"].includes(edition.tournamentSlug)
+    );
+    const clubs = new Set(dataset.clubs.map((club) => club.slug));
+
+    expect(dataset.version).toBe("sources-2026-07-12-v1");
+    expect(dataset.tournaments).toEqual([
+      { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
+      { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
+      { slug: "inje", name: "하늘내린인제", scope: "national", scopeFactor: 1 },
+      { slug: "chuncheon", name: "춘천소양강배", scope: "national", scopeFactor: 1 },
+      { slug: "wemix", name: "WEMIX OPEN", scope: "national", scopeFactor: 1 },
+    ]);
+    expect(selected).toHaveLength(12);
+    expect(new Set(selected.map((edition) => edition.gender))).toEqual(
+      new Set(["men", "women"])
+    );
+    expect(selected.every((edition) => edition.sourceRefs.length > 0)).toBe(true);
+
+    for (const [editionKey, expectedCount] of Object.entries(expectedCounts)) {
+      const edition = selected.find(({ key }) => key === editionKey);
+      const results = dataset.results.filter(
+        (result) => result.editionKey === editionKey
+      );
+
+      expect(edition?.actualEntrants, editionKey).toBe(expectedCount);
+      expect(results, editionKey).toHaveLength(expectedCount);
+    }
+
+    expect(dataset.results).toHaveLength(608);
+    expect(
+      dataset.editions.flatMap((edition) => edition.sourceRefs).every(
+        (sourceRef) => !sourceRef.startsWith("/") && !sourceRef.includes(":\\")
+      )
+    ).toBe(true);
+    expect(JSON.stringify(dataset)).not.toMatch(/\/Users\/|[A-Za-z]:\\\\/);
+    expect(
+      dataset.results
+        .filter((result) => result.sourceRef.includes(".pdf"))
+        .every((result) => /#page=\d+$/.test(result.sourceRef))
+    ).toBe(true);
+    expect(
+      dataset.results.every((result) =>
+        result.qualityStatus === "verified"
+          ? result.clubSlug !== null && clubs.has(result.clubSlug)
+          : result.clubSlug === null
+      )
+    ).toBe(true);
+    expect(() => parseNationalRankingDataset(dataset)).not.toThrow();
+    expect(() => calculateNationalRankings(dataset)).not.toThrow();
   });
 });
