@@ -93,6 +93,7 @@ create table if not exists public.national_formula_versions (
   version text primary key,
   display_name text not null,
   config jsonb not null,
+  effective_on date not null,
   source_references jsonb not null default '[]'::jsonb,
   is_active boolean not null default false,
   created_at timestamptz not null default now(),
@@ -325,7 +326,9 @@ as
 select
   ranking_row.snapshot_id,
   formula.version as formula_version,
+  formula.effective_on,
   snapshot.source_revision,
+  snapshot.created_at as calculated_at,
   snapshot.published_at,
   ranking_row.gender,
   ranking_row.rank,

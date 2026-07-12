@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
+    "seed:national:sql": "node --import tsx scripts/build-national-ranking-seed-sql.ts",
     "seed:sql": "tsx scripts/build-supabase-seed-sql.ts",
     "test:watch": "vitest"
   },

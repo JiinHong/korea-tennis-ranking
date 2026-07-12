@@ -1,0 +1,333 @@
+import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
+import {
+  existsSync,
+  mkdtempSync,
+  readFileSync,
+  readdirSync,
+  rmSync,
+} from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+
+import { describe, expect, it } from "vitest";
+
+import { loadNationalRankingDataset } from "@/lib/nationalRanking/dataset";
+import { buildNationalRankingSeedPlan } from "@/lib/nationalRanking/seedPlan";
+import { buildNationalRankingSeedSql } from "@/lib/nationalRanking/seedSql";
+import type { NationalRankingDataset } from "@/lib/nationalRanking/types";
+
+const dataset = {
+  version: "seed-sql-test-v1",
+  clubs: [
+    {
+      slug: "alpha",
+      universityName: "Alpha University",
+      clubName: "Alpha's Tennis",
+      displayName: "Alpha",
+    },
+    {
+      slug: "beta",
+      universityName: "Beta University",
+      clubName: "Beta Tennis",
+      displayName: "Beta",
+    },
+  ],
+  aliases: [
+    {
+      clubSlug: "alpha",
+      normalizedAlias: "alpha tennis",
+      sourceLabel: "Alpha's Tennis Club",
+    },
+  ],
+  tournaments: [
+    { slug: "national", name: "National", scope: "national", scopeFactor: 1 },
+    { slug: "regional", name: "Regional", scope: "regional", scopeFactor: 0.85 },
+  ],
+  editions: [
+    {
+      key: "national-2025-men",
+      tournamentSlug: "national",
+      year: 2025,
+      gender: "men",
+      actualEntrants: 32,
+      sourceStatus: "verified",
+      sourceRefs: ["national-2025-men.pdf"],
+    },
+    {
+      key: "regional-2025-women",
+      tournamentSlug: "regional",
+      year: 2025,
+      gender: "women",
+      actualEntrants: 16,
+      sourceStatus: "verified",
+      sourceRefs: ["regional-2025-women.pdf"],
+    },
+  ],
+  results: [
+    {
+      editionKey: "national-2025-men",
+      clubSlug: "alpha",
+      sourceTeamName: "Alpha's A",
+      teamLabel: "A",
+      stage: "champion",
+      qualityStatus: "verified",
+      sourceRef: "national-2025-men.pdf#alpha-a",
+      note: "",
+    },
+    {
+      editionKey: "regional-2025-women",
+      clubSlug: "beta",
+      sourceTeamName: "Beta Women",
+      teamLabel: "",
+      sourceEntryId: "draw-row-9",
+      stage: "runner_up",
+      qualityStatus: "verified",
+      sourceRef: "regional-2025-women.pdf#beta",
+      note: "",
+    },
+    {
+      editionKey: "national-2025-men",
+      clubSlug: null,
+      sourceTeamName: "Can't Resolve",
+      teamLabel: "",
+      stage: "semifinal",
+      qualityStatus: "unresolved",
+      sourceRef: "national-2025-men.pdf#unknown",
+      note: "Club can't be mapped safely.",
+    },
+  ],
+} satisfies NationalRankingDataset;
+
+const cliPath = "scripts/build-national-ranking-seed-sql.ts";
+const packageScriptCommand =
+  "node --import tsx scripts/build-national-ranking-seed-sql.ts";
+
+function buildSql(): string {
+  return buildNationalRankingSeedSql(
+    buildNationalRankingSeedPlan(dataset, "revision-abc")
+  );
+}
+
+function normalizedSql(sql: string): string {
+  return sql.replace(/\s+/g, " ").trim().toLowerCase();
+}
+
+describe("buildNationalRankingSeedSql", () => {
+  it("wraps one escaped transaction without credentials or grants", () => {
+    const sql = buildSql();
+
+    expect(sql.startsWith("begin;\n")).toBe(true);
+    expect(sql.endsWith("\ncommit;")).toBe(true);
+    expect(sql).toContain("Alpha''s Tennis");
+    expect(sql).toContain("Alpha''s A");
+    expect(sql).toContain("can''t be mapped");
+    expect(sql).not.toMatch(/\bgrant\b/i);
+    expect(sql).not.toMatch(
+      /process\.env|service[_-]?role|supabase[_-]?(?:key|url|secret)|password|api[_-]?key/i
+    );
+  });
+
+  it("upserts source rows by natural keys and preserves source entry identity", () => {
+    const sql = normalizedSql(buildSql());
+
+    expect(sql).toContain("insert into public.national_clubs");
+    expect(sql).toContain("on conflict (slug) do update");
+    expect(sql).toContain("insert into public.national_club_aliases");
+    expect(sql).toContain("on conflict (normalized_alias) do update");
+    expect(sql).toContain("insert into public.national_tournaments");
+    expect(sql).toContain("insert into public.national_tournament_editions");
+    expect(sql).toContain("on conflict (tournament_id, edition_year, gender) do update");
+    expect(sql).toContain("coalesce(result_input.\"sourceentryid\", '')");
+    expect(sql).toContain("source_entry_id");
+    expect(sql).toContain("draw-row-9");
+  });
+
+  it("replaces imported results per edition without silently dropping missing parents", () => {
+    const sql = normalizedSql(buildSql());
+    const editionInsertIndex = sql.indexOf(
+      "insert into public.national_tournament_editions"
+    );
+    const resultAssertionIndex = sql.indexOf(
+      "'national ranking seed result references a missing edition or club'"
+    );
+
+    expect(sql).toContain("delete from public.national_team_results");
+    expect(sql).toContain("using imported_edition");
+    expect(sql).toContain("insert into public.national_team_results");
+    expect(sql).toContain("left join public.national_clubs clubs");
+    expect(sql).toContain("result_input.\"clubslug\" is null");
+    expect(sql).toContain("result_input.\"qualitystatus\" = 'verified'");
+    expect(sql).toContain("raise exception");
+    expect(editionInsertIndex).toBeGreaterThan(-1);
+    expect(resultAssertionIndex).toBeGreaterThan(-1);
+    expect(editionInsertIndex).toBeLessThan(resultAssertionIndex);
+  });
+
+  it("upserts the formula snapshot and replaces its ranking rows idempotently", () => {
+    const sql = normalizedSql(buildSql());
+    const unpublishIndex = sql.indexOf("set is_published = false");
+    const publishIndex = sql.indexOf("set is_published = true");
+
+    expect(sql).toContain("update public.national_formula_versions");
+    expect(sql).toContain("set is_active = false");
+    expect(sql).toContain("insert into public.national_formula_versions");
+    expect(sql).toContain("display_name");
+    expect(sql).toContain("effective_on");
+    expect(sql).toContain("source_references");
+    expect(sql).toContain("insert into public.national_ranking_snapshots");
+    expect(sql).toContain("on conflict (formula_version, source_revision) do update");
+    expect(sql).toContain("delete from public.national_ranking_rows");
+    expect(sql).toContain("insert into public.national_ranking_rows");
+    expect(sql).toContain("source_summary");
+    expect(sql).toContain("seed-sql-test-v1");
+    expect(sql).not.toContain(process.cwd());
+    expect(unpublishIndex).toBeGreaterThan(-1);
+    expect(publishIndex).toBeGreaterThan(-1);
+    expect(unpublishIndex).toBeLessThan(publishIndex);
+  });
+
+  it("publishes only contributions from verified editions, verified results, and known clubs", () => {
+    const plan = buildNationalRankingSeedPlan(dataset, "revision-abc");
+    const verifiedEditions = new Set(
+      plan.editions
+        .filter((edition) => edition.sourceStatus === "verified")
+        .map((edition) => edition.key)
+    );
+    const knownClubs = new Set(plan.clubs.map((club) => club.slug));
+    const verifiedResults = new Set(
+      plan.results
+        .filter(
+          (result) =>
+            result.qualityStatus === "verified" &&
+            result.clubSlug !== null &&
+            knownClubs.has(result.clubSlug) &&
+            verifiedEditions.has(result.editionKey)
+        )
+        .map((result) =>
+          JSON.stringify([
+            result.editionKey,
+            result.clubSlug,
+            result.sourceTeamName,
+          ])
+        )
+    );
+
+    for (const contribution of plan.rows.flatMap((row) => row.contributions)) {
+      expect(verifiedEditions.has(contribution.editionKey)).toBe(true);
+      expect(knownClubs.has(contribution.clubSlug)).toBe(true);
+      expect(
+        verifiedResults.has(
+          JSON.stringify([
+            contribution.editionKey,
+            contribution.clubSlug,
+            contribution.sourceTeamName,
+          ])
+        )
+      ).toBe(true);
+      expect(contribution).not.toHaveProperty("note");
+      expect(contribution).not.toHaveProperty("sourceRef");
+      expect(contribution).not.toHaveProperty("qualityStatus");
+    }
+
+    const sql = buildSql();
+
+    expect(sql).toContain("contributions");
+    expect(sql).toContain("Club can''t be mapped safely.");
+  });
+
+  it("keeps the real dataset's published contributions inside the verified source boundary", () => {
+    const plan = buildNationalRankingSeedPlan(
+      loadNationalRankingDataset(),
+      "real-revision"
+    );
+    const verifiedEditions = new Set(
+      plan.editions
+        .filter((edition) => edition.sourceStatus === "verified")
+        .map((edition) => edition.key)
+    );
+    const knownClubs = new Set(plan.clubs.map((club) => club.slug));
+    const verifiedResults = new Set(
+      plan.results
+        .filter(
+          (result) =>
+            result.qualityStatus === "verified" &&
+            result.clubSlug !== null &&
+            knownClubs.has(result.clubSlug) &&
+            verifiedEditions.has(result.editionKey)
+        )
+        .map((result) =>
+          JSON.stringify([
+            result.editionKey,
+            result.clubSlug,
+            result.sourceTeamName,
+          ])
+        )
+    );
+
+    for (const contribution of plan.rows.flatMap((row) => row.contributions)) {
+      expect(verifiedEditions.has(contribution.editionKey)).toBe(true);
+      expect(knownClubs.has(contribution.clubSlug)).toBe(true);
+      expect(
+        verifiedResults.has(
+          JSON.stringify([
+            contribution.editionKey,
+            contribution.clubSlug,
+            contribution.sourceTeamName,
+          ])
+        )
+      ).toBe(true);
+      expect(contribution).not.toHaveProperty("note");
+      expect(contribution).not.toHaveProperty("sourceRef");
+      expect(contribution).not.toHaveProperty("qualityStatus");
+    }
+  });
+
+  it("exposes a package script and rejects --out without a following path", () => {
+    const packageJson = JSON.parse(readFileSync("package.json", "utf8")) as {
+      scripts: Record<string, string>;
+    };
+    let stderr = "";
+
+    try {
+      execFileSync(process.execPath, ["--import", "tsx", cliPath, "--out"], {
+        cwd: process.cwd(),
+        encoding: "utf8",
+        stdio: ["ignore", "pipe", "pipe"],
+      });
+    } catch (error) {
+      stderr = String((error as { stderr?: string }).stderr ?? "");
+    }
+
+    expect(packageJson.scripts["seed:national:sql"]).toBe(packageScriptCommand);
+    expect(stderr).toContain("--out requires a following path");
+  });
+
+  it("writes exactly the requested output file with the validated dataset hash", () => {
+    const dataset = loadNationalRankingDataset();
+    const expectedRevision = createHash("sha256")
+      .update(JSON.stringify(dataset))
+      .digest("hex");
+    const tempDir = mkdtempSync(join(tmpdir(), "national-seed-"));
+    const outPath = join(tempDir, "seed.sql");
+
+    try {
+      execFileSync(process.execPath, ["--import", "tsx", cliPath, "--out", outPath], {
+        cwd: process.cwd(),
+        encoding: "utf8",
+        stdio: ["ignore", "pipe", "pipe"],
+      });
+
+      const sql = readFileSync(outPath, "utf8");
+
+      expect(readdirSync(tempDir)).toEqual(["seed.sql"]);
+      expect(existsSync(outPath)).toBe(true);
+      expect(sql.startsWith("begin;\n")).toBe(true);
+      expect(sql.endsWith("\ncommit;")).toBe(true);
+      expect(sql).toContain(expectedRevision);
+      expect(sql).not.toMatch(/process\.env|service[_-]?role|password|api[_-]?key/i);
+    } finally {
+      rmSync(tempDir, { recursive: true, force: true });
+    }
+  });
+});

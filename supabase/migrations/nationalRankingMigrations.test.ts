@@ -162,6 +162,7 @@ describe("national ranking migration", () => {
 
     expect(sql).toContain("version text primary key");
     expect(sql).toContain("config jsonb not null");
+    expect(sql).toContain("effective_on date not null");
     expect(sql).toContain("source_references jsonb not null");
     expect(sql).toContain("is_active boolean not null default false");
     expect(sql).toContain("national_formula_versions_one_active_idx");
@@ -180,6 +181,16 @@ describe("national ranking migration", () => {
     expect(sql).toContain("contributions jsonb not null default '[]'::jsonb");
     expect(sql).toContain("unique (snapshot_id, gender, club_id)");
     expect(sql).toContain("unique (snapshot_id, gender, rank)");
+  });
+
+  it("exposes formula and snapshot audit fields required by readers", () => {
+    const sql = readMigration() ?? "";
+    const normalizedSql = normalizeSql(sql);
+
+    expect(normalizedSql).toContain("effective_on date not null");
+    expect(normalizedSql).toContain("formula.effective_on");
+    expect(normalizedSql).toContain("snapshot.created_at as calculated_at");
+    expect(normalizedSql).toContain("snapshot.published_at");
   });
 
   it("indexes every foreign key and the public ranking order", () => {
