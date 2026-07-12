@@ -214,6 +214,12 @@ describe("national ranking responsive contracts", () => {
     );
   });
 
+  it("전국 랭킹 조작 요소의 키보드 포커스를 불투명 액센트 윤곽선으로 표시한다", () => {
+    expect(css).toMatch(
+      /\.national-ranking-tabs button:focus-visible,[\s\S]*?\.ranking-methodology-dialog a:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--national-accent\);[^}]*\}/
+    );
+  });
+
   it("640px 이하에서 표 열을 압축하고 산정 방식을 안전 영역이 있는 바텀 시트로 바꾼다", () => {
     expect(css).toMatch(/@media\s*\(max-width:\s*640px\)/);
     expect(css).toMatch(

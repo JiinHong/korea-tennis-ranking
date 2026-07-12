@@ -20,6 +20,8 @@ export default function RankingMethodologyInfo() {
       return;
     }
 
+    const previousBodyOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     closeButtonRef.current?.focus();
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -56,7 +58,10 @@ export default function RankingMethodologyInfo() {
     };
 
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousBodyOverflow;
+    };
   }, [closeDialog, isOpen]);
 
   return (

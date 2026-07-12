@@ -2329,7 +2329,7 @@ button:disabled {
 .national-campus-link:focus-visible,
 .national-status a:focus-visible,
 .ranking-methodology-dialog a:focus-visible {
-  outline: 3px solid rgba(35, 104, 76, 0.2);
+  outline: 3px solid var(--national-accent);
   outline-offset: 2px;
 }
 

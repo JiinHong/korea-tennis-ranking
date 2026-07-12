@@ -77,4 +77,30 @@ describe("RankingMethodologyInfo", () => {
 
     expect(screen.queryByRole("dialog")).toBeNull();
   });
+
+  it("다이얼로그가 열린 동안 본문 스크롤을 잠그고 닫히거나 언마운트되면 이전 상태를 복원한다", () => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "clip";
+
+    try {
+      const { unmount } = render(<RankingMethodologyInfo />);
+      const trigger = screen.getByRole("button", {
+        name: "랭킹 산정 방식 보기",
+      });
+
+      fireEvent.click(trigger);
+      expect(document.body.style.overflow).toBe("hidden");
+
+      fireEvent.click(screen.getByRole("button", { name: "닫기" }));
+      expect(document.body.style.overflow).toBe("clip");
+
+      fireEvent.click(trigger);
+      expect(document.body.style.overflow).toBe("hidden");
+
+      unmount();
+      expect(document.body.style.overflow).toBe("clip");
+    } finally {
+      document.body.style.overflow = previousOverflow;
+    }
+  });
 });
