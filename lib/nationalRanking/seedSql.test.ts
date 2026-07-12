@@ -10,12 +10,13 @@ import {
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { loadNationalRankingDataset } from "@/lib/nationalRanking/dataset";
 import { buildNationalRankingSeedPlan } from "@/lib/nationalRanking/seedPlan";
 import { buildNationalRankingSeedSql } from "@/lib/nationalRanking/seedSql";
 import type { NationalRankingDataset } from "@/lib/nationalRanking/types";
+import { runNationalRankingSeedSqlCli } from "../../scripts/build-national-ranking-seed-sql";
 
 const dataset = {
   version: "seed-sql-test-v1",
@@ -113,6 +114,48 @@ function normalizedSql(sql: string): string {
   return sql.replace(/\s+/g, " ").trim().toLowerCase();
 }
 
+function dangerousDollarQuoteDataset(): NationalRankingDataset {
+  const dangerousText =
+    "Alpha $$ $national_seed_assertion$ women's source";
+
+  return {
+    ...dataset,
+    clubs: [
+      {
+        ...dataset.clubs[0]!,
+        clubName: dangerousText,
+      },
+      dataset.clubs[1]!,
+    ],
+    aliases: [
+      {
+        ...dataset.aliases[0]!,
+        sourceLabel: dangerousText,
+      },
+    ],
+    editions: [
+      {
+        ...dataset.editions[0]!,
+        sourceRefs: [dangerousText],
+      },
+      dataset.editions[1]!,
+    ],
+    results: [
+      {
+        ...dataset.results[0]!,
+        sourceTeamName: dangerousText,
+        sourceRef: dangerousText,
+        note: dangerousText,
+      },
+      dataset.results[1]!,
+      {
+        ...dataset.results[2]!,
+        sourceRef: dangerousText,
+      },
+    ],
+  };
+}
+
 describe("buildNationalRankingSeedSql", () => {
   it("wraps one escaped transaction without credentials or grants", () => {
     const sql = buildSql();
@@ -126,6 +169,70 @@ describe("buildNationalRankingSeedSql", () => {
     expect(sql).not.toMatch(
       /process\.env|service[_-]?role|supabase[_-]?(?:key|url|secret)|password|api[_-]?key/i
     );
+  });
+
+  it("chooses assertion dollar tags that cannot be closed by source data", () => {
+    const sql = buildNationalRankingSeedSql(
+      buildNationalRankingSeedPlan(dangerousDollarQuoteDataset(), "revision-abc")
+    );
+    const assertionTags = [
+      ...sql.matchAll(/\bdo\s+(\$national_seed_assertion(?:_\d+)?\$)\s*\nbegin/g),
+    ].map((match) => match[1]!);
+
+    expect(sql).not.toContain("do $$");
+    expect(assertionTags).toHaveLength(4);
+    expect(new Set(assertionTags)).toEqual(new Set(["$national_seed_assertion_1$"]));
+    for (const tag of assertionTags) {
+      expect(sql).toContain(`do ${tag}\nbegin`);
+      expect(sql).toContain(`end\n${tag};`);
+    }
+    expect(sql).toContain("women''s source");
+    expect(sql).toContain("$$ $national_seed_assertion$");
+  });
+
+  it("reconciles canonical source rows as a fully managed dataset", () => {
+    const sql = buildSql().toLowerCase();
+    const normalized = normalizedSql(sql);
+    const clubUpsertIndex = normalized.indexOf("insert into public.national_clubs");
+    const staleClubIndex = normalized.indexOf(
+      "update public.national_clubs clubs set is_active = false"
+    );
+    const tournamentUpsertIndex = normalized.indexOf(
+      "insert into public.national_tournaments"
+    );
+    const staleTournamentIndex = normalized.indexOf(
+      "update public.national_tournaments tournaments set is_active = false"
+    );
+    const staleAliasIndex = normalized.indexOf(
+      "delete from public.national_club_aliases aliases"
+    );
+    const aliasInsertIndex = normalized.indexOf(
+      "insert into public.national_club_aliases"
+    );
+    const staleEditionIndex = normalized.indexOf(
+      "delete from public.national_tournament_editions editions"
+    );
+    const currentResultDeleteIndex = normalized.indexOf(
+      "delete from public.national_team_results results using imported_edition"
+    );
+
+    expect(sql).toContain("-- current clubs are upserted active before stale clubs are deactivated.");
+    expect(sql).toContain("-- aliases are fully replaced from the managed source manifest.");
+    expect(sql).toContain("-- stale editions are deleted before current edition results are refreshed.");
+    expect(normalized).toContain("where not exists ( select 1 from club_input");
+    expect(normalized).toContain("where not exists ( select 1 from tournament_input");
+    expect(normalized).toContain("where not exists ( select 1 from alias_input");
+    expect(normalized).toContain("where not exists ( select 1 from edition_input");
+    expect(normalized).toContain("set is_active = true");
+    expect(normalized).toContain("set is_active = false");
+    expect(clubUpsertIndex).toBeGreaterThan(-1);
+    expect(staleClubIndex).toBeGreaterThan(clubUpsertIndex);
+    expect(tournamentUpsertIndex).toBeGreaterThan(-1);
+    expect(staleTournamentIndex).toBeGreaterThan(tournamentUpsertIndex);
+    expect(staleAliasIndex).toBeGreaterThan(-1);
+    expect(aliasInsertIndex).toBeGreaterThan(staleAliasIndex);
+    expect(staleEditionIndex).toBeGreaterThan(-1);
+    expect(currentResultDeleteIndex).toBeGreaterThan(staleEditionIndex);
   });
 
   it("upserts source rows by natural keys and preserves source entry identity", () => {
@@ -301,6 +408,27 @@ describe("buildNationalRankingSeedSql", () => {
 
     expect(packageJson.scripts["seed:national:sql"]).toBe(packageScriptCommand);
     expect(stderr).toContain("--out requires a following path");
+  });
+
+  it("validates malformed --out arguments before dataset loading or SQL generation", () => {
+    const loadDataset = vi.fn(() => {
+      throw new Error("dataset should not load for malformed --out");
+    });
+
+    expect(() =>
+      runNationalRankingSeedSqlCli(["node", cliPath, "--out", "--flag"], {
+        loadDataset,
+      })
+    ).toThrow("--out requires a following path");
+    expect(() =>
+      runNationalRankingSeedSqlCli(["node", cliPath, "--out", ""], {
+        loadDataset,
+      })
+    ).toThrow("--out requires a non-empty path");
+    expect(loadDataset).not.toHaveBeenCalled();
+    expect(readFileSync(cliPath, "utf8")).toContain(
+      "Source revision is SHA-256(JSON.stringify(validated dataset)): order-preserving validated-manifest serialization."
+    );
   });
 
   it("writes exactly the requested output file with the validated dataset hash", () => {

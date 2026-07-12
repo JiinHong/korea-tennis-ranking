@@ -1,28 +1,68 @@
 import { createHash } from "node:crypto";
 import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 
 import { loadNationalRankingDataset } from "../lib/nationalRanking/dataset";
 import { buildNationalRankingSeedPlan } from "../lib/nationalRanking/seedPlan";
 import { buildNationalRankingSeedSql } from "../lib/nationalRanking/seedSql";
+import type { NationalRankingDataset } from "../lib/nationalRanking/types";
 
-const dataset = loadNationalRankingDataset();
-const revision = createHash("sha256")
-  .update(JSON.stringify(dataset))
-  .digest("hex");
-const sql = buildNationalRankingSeedSql(
-  buildNationalRankingSeedPlan(dataset, revision)
-);
-const outIndex = process.argv.indexOf("--out");
+type CliArgs = {
+  outPath?: string;
+};
 
-if (outIndex >= 0) {
-  const outPath = process.argv[outIndex + 1];
+type CliDeps = {
+  loadDataset?: () => NationalRankingDataset;
+  writeFile?: (path: string, data: string) => void;
+  stdout?: {
+    write(data: string): unknown;
+  };
+};
 
-  if (!outPath || outPath.startsWith("--")) {
+export function parseNationalRankingSeedSqlCliArgs(argv: string[]): CliArgs {
+  const outIndex = argv.indexOf("--out");
+
+  if (outIndex < 0) {
+    return {};
+  }
+
+  const outPath = argv[outIndex + 1];
+
+  if (outPath === undefined || outPath.startsWith("--")) {
     throw new Error("--out requires a following path");
   }
 
-  writeFileSync(resolve(outPath), sql);
-} else {
-  process.stdout.write(sql);
+  if (outPath.trim() === "") {
+    throw new Error("--out requires a non-empty path");
+  }
+
+  return { outPath: resolve(outPath) };
+}
+
+export function runNationalRankingSeedSqlCli(
+  argv = process.argv,
+  deps: CliDeps = {}
+): void {
+  const args = parseNationalRankingSeedSqlCliArgs(argv);
+  const dataset = (deps.loadDataset ?? loadNationalRankingDataset)();
+  // Source revision is SHA-256(JSON.stringify(validated dataset)): order-preserving validated-manifest serialization.
+  const revision = createHash("sha256")
+    .update(JSON.stringify(dataset))
+    .digest("hex");
+  const sql = buildNationalRankingSeedSql(
+    buildNationalRankingSeedPlan(dataset, revision)
+  );
+
+  if (args.outPath) {
+    (deps.writeFile ?? writeFileSync)(args.outPath, sql);
+  } else {
+    (deps.stdout ?? process.stdout).write(sql);
+  }
+}
+
+const invokedPath = process.argv[1] ? pathToFileURL(resolve(process.argv[1])).href : "";
+
+if (import.meta.url === invokedPath) {
+  runNationalRankingSeedSqlCli();
 }

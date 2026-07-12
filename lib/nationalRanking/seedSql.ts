@@ -21,6 +21,24 @@ function sqlText(value: string): string {
   return `'${value.replace(/'/g, "''")}'`;
 }
 
+function chooseDollarTag(body: string, baseTag: string): string {
+  for (let suffix = 0; ; suffix += 1) {
+    const tagName = suffix === 0 ? baseTag : `${baseTag}_${suffix}`;
+    const dollarTag = `$${tagName}$`;
+
+    if (!body.includes(dollarTag)) {
+      return dollarTag;
+    }
+  }
+}
+
+function sqlDoBlock(body: string, baseTag = "national_seed_assertion"): string {
+  const trimmedBody = body.trim();
+  const dollarTag = chooseDollarTag(trimmedBody, baseTag);
+
+  return `do ${dollarTag}\n${trimmedBody}\n${dollarTag};`;
+}
+
 function wrapTransaction(sql: string): string {
   return `begin;\n\n${sql.trim()}\n\ncommit;`;
 }
@@ -177,8 +195,8 @@ row_input as (
 }
 
 function buildAssertionSql(plan: NationalRankingSeedPlan): string {
-  return `
-do $$
+  return [
+    sqlDoBlock(`
 begin
   if exists (
     with ${aliasInputCte(plan)}
@@ -190,9 +208,10 @@ begin
   ) then
     raise exception 'national ranking seed alias references a missing club';
   end if;
-end $$;
+end
+`),
 
-do $$
+    sqlDoBlock(`
 begin
   if exists (
     with ${editionInputCte(plan)}
@@ -204,9 +223,10 @@ begin
   ) then
     raise exception 'national ranking seed edition references a missing tournament';
   end if;
-end $$;
+end
+`),
 
-do $$
+    sqlDoBlock(`
 begin
   if exists (
     with ${resultInputCte(plan)},
@@ -236,9 +256,10 @@ begin
   ) then
     raise exception 'national ranking seed result references a missing edition or club';
   end if;
-end $$;
+end
+`),
 
-do $$
+    sqlDoBlock(`
 begin
   if exists (
     with ${rowInputCte(plan)}
@@ -250,11 +271,14 @@ begin
   ) then
     raise exception 'national ranking seed ranking row references a missing club';
   end if;
-end $$;`;
+end
+`),
+  ].join("\n\n");
 }
 
 function buildSourceSql(plan: NationalRankingSeedPlan): string {
   return `
+-- Current clubs are upserted active before stale clubs are deactivated.
 with ${clubInputCte(plan)}
 insert into public.national_clubs (
   slug,
@@ -272,11 +296,32 @@ select
 from club_input
 on conflict (slug) do update
 set
+  is_active = true,
   university_name = excluded.university_name,
   club_name = excluded.club_name,
   display_name = excluded.display_name,
-  is_active = true,
   updated_at = now();
+
+with ${clubInputCte(plan)}
+update public.national_clubs clubs
+set
+  is_active = false,
+  updated_at = now()
+where not exists (
+  select 1
+  from club_input
+  where club_input.slug = clubs.slug
+)
+  and clubs.is_active = true;
+
+-- Aliases are fully replaced from the managed source manifest.
+with ${aliasInputCte(plan)}
+delete from public.national_club_aliases aliases
+where not exists (
+  select 1
+  from alias_input
+  where alias_input."normalizedAlias" = aliases.normalized_alias
+);
 
 with ${aliasInputCte(plan)},
 resolved as (
@@ -303,6 +348,7 @@ set
   club_id = excluded.club_id,
   source_label = excluded.source_label;
 
+-- Current tournaments are upserted active before stale tournaments are deactivated.
 with ${tournamentInputCte(plan)}
 insert into public.national_tournaments (
   slug,
@@ -320,10 +366,20 @@ select
 from tournament_input
 on conflict (slug) do update
 set
+  is_active = true,
   name = excluded.name,
   scope = excluded.scope,
-  scope_factor = excluded.scope_factor,
-  is_active = true;
+  scope_factor = excluded.scope_factor;
+
+with ${tournamentInputCte(plan)}
+update public.national_tournaments tournaments
+set is_active = false
+where not exists (
+  select 1
+  from tournament_input
+  where tournament_input.slug = tournaments.slug
+)
+  and tournaments.is_active = true;
 
 with ${editionInputCte(plan)},
 resolved as (
@@ -359,6 +415,21 @@ set
   actual_entrants = excluded.actual_entrants,
   source_status = excluded.source_status,
   source_refs = excluded.source_refs;
+
+-- Stale editions are deleted before current edition results are refreshed.
+with ${editionInputCte(plan)}
+delete from public.national_tournament_editions editions
+using public.national_tournaments tournaments
+where not exists (
+    select 1
+    from edition_input
+    join public.national_tournaments input_tournaments
+      on input_tournaments.slug = edition_input."tournamentSlug"
+    where input_tournaments.id = editions.tournament_id
+      and edition_input.year = editions.edition_year
+      and edition_input.gender = editions.gender
+  )
+  and editions.tournament_id = tournaments.id;
 
 ${buildAssertionSql(plan)}
 
