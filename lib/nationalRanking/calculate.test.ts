@@ -403,6 +403,125 @@ describe("calculateNationalRankings", () => {
     ).toThrow(/results\.csv:13.*unknown club/i);
   });
 
+  it("validates tournament and club joins before excluding an unverified edition", () => {
+    expect(() =>
+      calculateNationalRankings({
+        ...dataset,
+        editions: [
+          ...dataset.editions,
+          {
+            ...dataset.editions[0],
+            key: "unverified-unknown-tournament",
+            tournamentSlug: "unknown-tournament",
+            sourceStatus: "unresolved",
+          },
+        ],
+        results: [
+          {
+            ...dataset.results[0],
+            editionKey: "unverified-unknown-tournament",
+            sourceRef: "results.csv:14",
+          },
+        ],
+      })
+    ).toThrow(/results\.csv:14.*unknown tournament/i);
+
+    expect(() =>
+      calculateNationalRankings({
+        ...dataset,
+        editions: [
+          ...dataset.editions,
+          {
+            ...dataset.editions[0],
+            key: "unverified-known-tournament",
+            sourceStatus: "unresolved",
+          },
+        ],
+        results: [
+          {
+            ...dataset.results[0],
+            editionKey: "unverified-known-tournament",
+            clubSlug: "unknown-club",
+            sourceRef: "results.csv:15",
+          },
+        ],
+      })
+    ).toThrow(/results\.csv:15.*unknown club/i);
+  });
+
+  it("adds gender totals directly for combined rows", () => {
+    const result = calculateNationalRankings({
+      ...dataset,
+      tournaments: [
+        {
+          slug: "men-large",
+          name: "Men Large",
+          scope: "national",
+          scopeFactor: 1e14,
+        },
+        {
+          slug: "women-small-one",
+          name: "Women Small One",
+          scope: "national",
+          scopeFactor: 0.01,
+        },
+        {
+          slug: "women-small-two",
+          name: "Women Small Two",
+          scope: "national",
+          scopeFactor: 0.01,
+        },
+      ],
+      editions: [
+        {
+          ...dataset.editions[0],
+          key: "men-large-2025",
+          tournamentSlug: "men-large",
+        },
+        {
+          ...dataset.editions[2],
+          key: "women-small-one-2025",
+          tournamentSlug: "women-small-one",
+        },
+        {
+          ...dataset.editions[2],
+          key: "women-small-two-2025",
+          tournamentSlug: "women-small-two",
+        },
+      ],
+      results: [
+        {
+          ...dataset.results[0],
+          editionKey: "men-large-2025",
+          stage: "champion",
+        },
+        {
+          ...dataset.results[3],
+          editionKey: "women-small-one-2025",
+          stage: "champion",
+        },
+        {
+          ...dataset.results[3],
+          editionKey: "women-small-two-2025",
+          stage: "champion",
+        },
+      ],
+    });
+    const menRow = result.rows.find(
+      (row) => row.clubSlug === "alpha" && row.gender === "men"
+    );
+    const womenRow = result.rows.find(
+      (row) => row.clubSlug === "alpha" && row.gender === "women"
+    );
+    const combinedRow = result.rows.find(
+      (row) => row.clubSlug === "alpha" && row.gender === "combined"
+    );
+
+    expect(combinedRow?.totalPoints).toBe(
+      menRow!.totalPoints + womenRow!.totalPoints
+    );
+  });
+
   it("applies the full approved tie-break order", () => {
     const men = calculateNationalRankings(createTieDataset()).rows.filter(
       (row) => row.gender === "men"

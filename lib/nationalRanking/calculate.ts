@@ -36,6 +36,24 @@ function createRankingRow(
   };
 }
 
+function combineRankingRows(
+  menRow: CalculatedRankingRow,
+  womenRow: CalculatedRankingRow
+): CalculatedRankingRow {
+  return {
+    clubSlug: menRow.clubSlug,
+    gender: "combined",
+    rank: 0,
+    totalPoints: menRow.totalPoints + womenRow.totalPoints,
+    latestEditionPoints:
+      menRow.latestEditionPoints + womenRow.latestEditionPoints,
+    maxContribution: Math.max(menRow.maxContribution, womenRow.maxContribution),
+    championships: menRow.championships + womenRow.championships,
+    runnerUps: menRow.runnerUps + womenRow.runnerUps,
+    contributions: [...menRow.contributions, ...womenRow.contributions],
+  };
+}
+
 function sortAndRank(
   rows: CalculatedRankingRow[],
   clubsBySlug: Map<string, NationalClubInput>
@@ -91,7 +109,6 @@ export function calculateNationalRankings(
         `${result.sourceRef}: verified result references unknown edition "${result.editionKey}"`
       );
     }
-    if (edition.sourceStatus !== "verified") continue;
 
     const tournament = tournamentsBySlug.get(edition.tournamentSlug);
     if (!tournament) {
@@ -106,6 +123,7 @@ export function calculateNationalRankings(
         `${result.sourceRef}: verified result references unknown club "${result.clubSlug ?? "null"}"`
       );
     }
+    if (edition.sourceStatus !== "verified") continue;
 
     const contribution: ScoreContribution = {
       clubSlug: club.slug,
@@ -168,14 +186,7 @@ export function calculateNationalRankings(
 
     genderRows.men.push(menRow);
     genderRows.women.push(womenRow);
-    combinedRows.push(
-      createRankingRow(
-        club.slug,
-        "combined",
-        [...menContributions, ...womenContributions],
-        latestYear
-      )
-    );
+    combinedRows.push(combineRankingRows(menRow, womenRow));
   }
 
   const rows = [
