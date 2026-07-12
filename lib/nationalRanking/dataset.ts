@@ -241,12 +241,17 @@ function parseResults(value: unknown): TeamResultInput[] {
   return requireArray(value, "dataset.results").map((item, index) => {
     const path = `dataset.results[${index}]`;
     const record = requireRecord(item, path);
+    const sourceEntryId =
+      record.sourceEntryId === undefined
+        ? undefined
+        : requireString(record.sourceEntryId, `${path}.sourceEntryId`);
 
     return {
       editionKey: requireString(record.editionKey, `${path}.editionKey`),
       clubSlug: requireNullableString(record.clubSlug, `${path}.clubSlug`),
       sourceTeamName: requireString(record.sourceTeamName, `${path}.sourceTeamName`),
       teamLabel: requireStringValue(record.teamLabel, `${path}.teamLabel`),
+      ...(sourceEntryId === undefined ? {} : { sourceEntryId }),
       stage: requireOneOf(record.stage, TOURNAMENT_STAGES, `${path}.stage`),
       qualityStatus: requireOneOf(
         record.qualityStatus,
@@ -311,7 +316,12 @@ function validateRelationships(dataset: NationalRankingDataset): void {
 
     requireUnique(
       resultIdentities,
-      `${result.editionKey}:${result.sourceTeamName}:${result.teamLabel}`,
+      [
+        result.editionKey,
+        result.sourceTeamName,
+        result.teamLabel,
+        result.sourceEntryId ?? "",
+      ].join(":"),
       resultPath,
       "result identity"
     );

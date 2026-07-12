@@ -60,6 +60,7 @@ export type TeamResultInput = {
   clubSlug: string | null;
   sourceTeamName: string;
   teamLabel: string;
+  sourceEntryId?: string;
   stage: TournamentStage;
   qualityStatus: ResultQualityStatus;
   sourceRef: string;
