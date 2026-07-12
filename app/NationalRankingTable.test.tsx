@@ -84,4 +84,48 @@ describe("NationalRankingTable", () => {
     expect(screen.queryByText("연세대학교")).toBeNull();
     expect(within(screen.getByRole("table")).getAllByRole("row")).toHaveLength(2);
   });
+
+  it("선택된 탭만 탭 순서에 두고 탭 패널도 포커스할 수 있게 한다", () => {
+    render(<NationalRankingTable rankings={rankings} />);
+
+    expect(screen.getByRole("tab", { name: "남자부" }).tabIndex).toBe(0);
+    expect(screen.getByRole("tab", { name: "여자부" }).tabIndex).toBe(-1);
+    expect(screen.getByRole("tab", { name: "종합" }).tabIndex).toBe(-1);
+    expect(screen.getByRole("tabpanel").tabIndex).toBe(0);
+
+    fireEvent.click(screen.getByRole("tab", { name: "여자부" }));
+
+    expect(screen.getByRole("tab", { name: "남자부" }).tabIndex).toBe(-1);
+    expect(screen.getByRole("tab", { name: "여자부" }).tabIndex).toBe(0);
+  });
+
+  it("방향키와 Home, End로 탭을 순환하며 대상 탭을 활성화하고 포커스한다", () => {
+    render(<NationalRankingTable rankings={rankings} />);
+
+    const menTab = screen.getByRole("tab", { name: "남자부" });
+    const womenTab = screen.getByRole("tab", { name: "여자부" });
+    const combinedTab = screen.getByRole("tab", { name: "종합" });
+
+    menTab.focus();
+    fireEvent.keyDown(menTab, { key: "ArrowRight" });
+    expect(document.activeElement).toBe(womenTab);
+    expect(womenTab.getAttribute("aria-selected")).toBe("true");
+    expect(screen.getByText("연세대학교")).toBeDefined();
+
+    fireEvent.keyDown(womenTab, { key: "ArrowLeft" });
+    expect(document.activeElement).toBe(menTab);
+    expect(menTab.getAttribute("aria-selected")).toBe("true");
+
+    fireEvent.keyDown(menTab, { key: "ArrowLeft" });
+    expect(document.activeElement).toBe(combinedTab);
+    expect(combinedTab.getAttribute("aria-selected")).toBe("true");
+
+    fireEvent.keyDown(combinedTab, { key: "Home" });
+    expect(document.activeElement).toBe(menTab);
+    expect(menTab.getAttribute("aria-selected")).toBe("true");
+
+    fireEvent.keyDown(menTab, { key: "End" });
+    expect(document.activeElement).toBe(combinedTab);
+    expect(combinedTab.getAttribute("aria-selected")).toBe("true");
+  });
 });

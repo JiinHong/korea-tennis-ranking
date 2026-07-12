@@ -37,7 +37,8 @@ export default async function Home() {
 
         {readFailed ? (
           <section className="national-status" role="alert">
-            전국 랭킹을 불러오지 못했습니다.
+            <p>전국 랭킹을 불러오지 못했습니다.</p>
+            <Link href="/">다시 시도</Link>
           </section>
         ) : pageData === null ? (
           <section className="national-status" role="status">

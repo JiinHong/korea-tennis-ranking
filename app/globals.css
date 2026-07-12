@@ -1884,6 +1884,18 @@ button:disabled {
   font-weight: 750;
 }
 
+.national-status p {
+  margin: 0;
+}
+
+.national-status a {
+  display: inline-flex;
+  margin-top: 12px;
+  color: var(--national-accent);
+  font-weight: 800;
+  text-underline-offset: 4px;
+}
+
 .national-ranking-surface {
   width: 100%;
   overflow: hidden;
@@ -1938,6 +1950,7 @@ button:disabled {
 .ranking-methodology-trigger:focus-visible,
 .ranking-methodology-close:focus-visible,
 .national-campus-link:focus-visible,
+.national-status a:focus-visible,
 .ranking-methodology-dialog a:focus-visible {
   outline: 3px solid rgba(35, 104, 76, 0.2);
   outline-offset: 2px;
@@ -2082,7 +2095,8 @@ button:disabled {
 .ranking-methodology-dialog {
   position: absolute;
   top: calc(100% + 8px);
-  right: 0;
+  left: 0;
+  right: auto;
   z-index: 51;
   width: min(360px, calc(100vw - 32px));
   padding: 18px;
@@ -2218,6 +2232,7 @@ button:disabled {
 
   .ranking-methodology-dialog {
     position: fixed;
+    top: auto;
     right: 0;
     bottom: 0;
     left: 0;

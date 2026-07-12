@@ -36,12 +36,37 @@ describe("RankingMethodologyInfo", () => {
     fireEvent.click(trigger);
     fireEvent.keyDown(document, { key: "Escape" });
     expect(screen.queryByRole("dialog")).toBeNull();
+    expect(document.activeElement).toBe(trigger);
 
     fireEvent.click(trigger);
     const closeButton = screen.getByRole("button", { name: "닫기" });
     expect(closeButton.getAttribute("title")).toBe("닫기");
     fireEvent.click(closeButton);
     expect(screen.queryByRole("dialog")).toBeNull();
+    expect(document.activeElement).toBe(trigger);
+  });
+
+  it("Tab과 Shift+Tab 포커스를 닫기 버튼과 상세 링크 안에서 순환한다", () => {
+    render(<RankingMethodologyInfo />);
+
+    fireEvent.click(screen.getByRole("button", { name: "랭킹 산정 방식 보기" }));
+
+    const closeButton = screen.getByRole("button", { name: "닫기" });
+    const detailLink = screen.getByRole("link", { name: "계산식 자세히 보기" });
+
+    expect(document.activeElement).toBe(closeButton);
+
+    fireEvent.keyDown(closeButton, { key: "Tab" });
+    expect(document.activeElement).toBe(detailLink);
+
+    fireEvent.keyDown(detailLink, { key: "Tab" });
+    expect(document.activeElement).toBe(closeButton);
+
+    fireEvent.keyDown(closeButton, { key: "Tab", shiftKey: true });
+    expect(document.activeElement).toBe(detailLink);
+
+    fireEvent.keyDown(detailLink, { key: "Tab", shiftKey: true });
+    expect(document.activeElement).toBe(closeButton);
   });
 
   it("바깥 배경을 누르면 다이얼로그를 닫는다", () => {

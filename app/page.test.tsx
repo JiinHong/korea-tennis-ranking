@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { getCachedNationalRankingPageData } from "@/lib/nationalRanking/repository";
@@ -21,21 +21,23 @@ const rankingRow = {
   runnerUps: 0,
 };
 
+const rankingPageData = {
+  formulaVersion: "national-club-v1",
+  calculatedAt: "2026-07-12T12:00:00.000Z",
+  rankings: {
+    men: [rankingRow],
+    women: [{ ...rankingRow, clubSlug: "yonsei", clubName: "YTC" }],
+    combined: [{ ...rankingRow, points: 2469.12 }],
+  },
+};
+
 describe("Home", () => {
   beforeEach(() => {
     vi.mocked(getCachedNationalRankingPageData).mockReset();
   });
 
   it("게시된 전국 랭킹과 산정 메타데이터를 조용한 운영 화면에 보여준다", async () => {
-    vi.mocked(getCachedNationalRankingPageData).mockResolvedValue({
-      formulaVersion: "national-club-v1",
-      calculatedAt: "2026-07-12T12:00:00.000Z",
-      rankings: {
-        men: [rankingRow],
-        women: [{ ...rankingRow, clubSlug: "yonsei", clubName: "YTC" }],
-        combined: [{ ...rankingRow, points: 2469.12 }],
-      },
-    });
+    vi.mocked(getCachedNationalRankingPageData).mockResolvedValue(rankingPageData);
 
     render(await Home());
 
@@ -72,16 +74,27 @@ describe("Home", () => {
     expect(screen.queryByRole("table")).toBeNull();
   });
 
-  it("랭킹 조회가 실패해도 비어 있는 페이지 대신 오류 상태를 보여준다", async () => {
-    vi.mocked(getCachedNationalRankingPageData).mockRejectedValue(
-      new Error("database unavailable")
-    );
+  it("랭킹 조회 실패 시 다시 시도 링크를 보여주고 다음 요청에서 복구한다", async () => {
+    vi.mocked(getCachedNationalRankingPageData)
+      .mockRejectedValueOnce(new Error("database unavailable"))
+      .mockResolvedValueOnce(rankingPageData);
 
-    render(await Home());
+    const firstRender = render(await Home());
+    const alert = screen.getByRole("alert");
 
     expect(
-      screen.getByText("전국 랭킹을 불러오지 못했습니다.")
+      within(alert).getByText("전국 랭킹을 불러오지 못했습니다.")
     ).toBeDefined();
+    expect(
+      within(alert).getByRole("link", { name: "다시 시도" }).getAttribute("href")
+    ).toBe("/");
     expect(screen.queryByRole("table")).toBeNull();
+
+    firstRender.unmount();
+    render(await Home());
+
+    expect(screen.getByRole("table")).toBeDefined();
+    expect(screen.getByText("national-club-v1")).toBeDefined();
+    expect(getCachedNationalRankingPageData).toHaveBeenCalledTimes(2);
   });
 });

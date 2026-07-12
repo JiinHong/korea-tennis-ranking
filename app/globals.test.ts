@@ -171,34 +171,46 @@ describe("national ranking responsive contracts", () => {
 
   it("조용한 전체 너비 랭킹 표에 고정 순위와 점수 열을 둔다", () => {
     expect(css).toMatch(
-      /\.national-ranking-section\s*\{[^}]*width:\s*100%;[^}]*\}/s
+      /\.national-ranking-section\s*\{[\s\S]*?width:\s*100%;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.national-ranking-table\s*\{[^}]*width:\s*100%;[^}]*table-layout:\s*fixed;[^}]*\}/s
+      /\.national-ranking-table\s*\{[\s\S]*?width:\s*100%;[^}]*table-layout:\s*fixed;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.national-ranking-rank-column\s*\{[^}]*width:\s*72px;[^}]*\}/s
+      /\.national-ranking-rank-column\s*\{[\s\S]*?width:\s*72px;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.national-ranking-score-column\s*\{[^}]*width:\s*140px;[^}]*\}/s
+      /\.national-ranking-score-column\s*\{[\s\S]*?width:\s*140px;[^}]*\}/
     );
   });
 
   it("동아리 이름은 줄바꿈하고 순위와 점수는 각 기준선에 고정한다", () => {
     expect(css).toMatch(
-      /\.national-ranking-club\s*\{[^}]*min-width:\s*0;[^}]*overflow-wrap:\s*anywhere;[^}]*\}/s
+      /\.national-ranking-club\s*\{[\s\S]*?min-width:\s*0;[^}]*overflow-wrap:\s*anywhere;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.national-ranking-rank\s*\{[^}]*text-align:\s*center;[^}]*\}/s
+      /\.national-ranking-rank\s*\{[\s\S]*?text-align:\s*center;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.national-ranking-score\s*\{[^}]*text-align:\s*right;[^}]*white-space:\s*nowrap;[^}]*\}/s
+      /\.national-ranking-score\s*\{[\s\S]*?text-align:\s*right;[^}]*white-space:\s*nowrap;[^}]*\}/
     );
   });
 
   it("데스크톱 산정 방식은 작은 팝오버로 배치한다", () => {
     expect(css).toMatch(
-      /\.ranking-methodology-dialog\s*\{[^}]*position:\s*absolute;[^}]*width:\s*min\(360px,\s*calc\(100vw - 32px\)\);[^}]*border-radius:\s*8px;[^}]*\}/s
+      /\.ranking-methodology-dialog\s*\{[\s\S]*?position:\s*absolute;[^}]*width:\s*min\(360px,\s*calc\(100vw - 32px\)\);[^}]*border-radius:\s*8px;[^}]*\}/
+    );
+  });
+
+  it("데스크톱 산정 방식 팝오버를 왼쪽으로 고정해 화면 안에 유지한다", () => {
+    expect(css).toMatch(
+      /\.ranking-methodology-dialog\s*\{[^}]*left:\s*0;[^}]*right:\s*auto;[^}]*\}/
+    );
+  });
+
+  it("오류 상태의 다시 시도 링크를 기존 전국 랭킹 링크처럼 표시한다", () => {
+    expect(css).toMatch(
+      /\.national-status a\s*\{[^}]*display:\s*inline-flex;[^}]*color:\s*var\(--national-accent\);[^}]*font-weight:\s*800;[^}]*text-underline-offset:\s*4px;[^}]*\}/
     );
   });
 
@@ -208,7 +220,7 @@ describe("national ranking responsive contracts", () => {
       /@media\s*\(max-width:\s*640px\)[\s\S]*?\.national-ranking-rank-column\s*\{[^}]*width:\s*48px;[^}]*\}[\s\S]*?\.national-ranking-score-column\s*\{[^}]*width:\s*96px;[^}]*\}/
     );
     expect(css).toMatch(
-      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.ranking-methodology-dialog\s*\{[^}]*position:\s*fixed;[^}]*bottom:\s*0;[^}]*width:\s*100%;[^}]*padding-bottom:\s*calc\(20px \+ env\(safe-area-inset-bottom\)\);[^}]*border-radius:\s*8px 8px 0 0;[^}]*\}/
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.ranking-methodology-dialog\s*\{[^}]*position:\s*fixed;[^}]*top:\s*auto;[^}]*bottom:\s*0;[^}]*width:\s*100%;[^}]*padding-bottom:\s*calc\(20px \+ env\(safe-area-inset-bottom\)\);[^}]*border-radius:\s*8px 8px 0 0;[^}]*\}/
     );
   });
 

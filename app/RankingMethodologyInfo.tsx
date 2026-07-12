@@ -7,7 +7,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export default function RankingMethodologyInfo() {
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const detailLinkRef = useRef<HTMLAnchorElement>(null);
 
   const closeDialog = useCallback(() => {
     setIsOpen(false);
@@ -19,12 +20,39 @@ export default function RankingMethodologyInfo() {
       return;
     }
 
-    dialogRef.current?.focus();
+    closeButtonRef.current?.focus();
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        event.preventDefault();
         closeDialog();
+        return;
       }
+
+      if (event.key !== "Tab") {
+        return;
+      }
+
+      const focusableElements = [
+        closeButtonRef.current,
+        detailLinkRef.current,
+      ].filter(
+        (element): element is HTMLButtonElement | HTMLAnchorElement =>
+          element !== null
+      );
+      const currentIndex = focusableElements.findIndex(
+        (element) => element === document.activeElement
+      );
+      const nextIndex = event.shiftKey
+        ? currentIndex <= 0
+          ? focusableElements.length - 1
+          : currentIndex - 1
+        : currentIndex === focusableElements.length - 1
+          ? 0
+          : currentIndex + 1;
+
+      event.preventDefault();
+      focusableElements[nextIndex]?.focus();
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -57,7 +85,6 @@ export default function RankingMethodologyInfo() {
             aria-labelledby="ranking-methodology-title"
             aria-modal="true"
             className="ranking-methodology-dialog"
-            ref={dialogRef}
             role="dialog"
             tabIndex={-1}
           >
@@ -67,6 +94,7 @@ export default function RankingMethodologyInfo() {
                 aria-label="닫기"
                 className="ranking-methodology-close"
                 onClick={closeDialog}
+                ref={closeButtonRef}
                 title="닫기"
                 type="button"
               >
@@ -78,7 +106,9 @@ export default function RankingMethodologyInfo() {
               적용합니다.
             </p>
             <p>같은 동아리의 여러 팀 중 가장 좋은 성적만 반영합니다.</p>
-            <Link href="/methodology">계산식 자세히 보기</Link>
+            <Link href="/methodology" ref={detailLinkRef}>
+              계산식 자세히 보기
+            </Link>
           </div>
         </>
       ) : null}

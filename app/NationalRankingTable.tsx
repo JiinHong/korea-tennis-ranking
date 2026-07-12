@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { type KeyboardEvent, useRef, useState } from "react";
 
 import type { NationalRankingPageData } from "@/lib/nationalRanking/repository";
 import type { RankingGender } from "@/lib/nationalRanking/types";
@@ -23,14 +23,40 @@ export default function NationalRankingTable({
   rankings,
 }: NationalRankingTableProps) {
   const [activeGender, setActiveGender] = useState<RankingGender>("men");
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const activeTab = tabs.find((tab) => tab.gender === activeGender)!;
   const rows = rankings[activeGender];
+
+  const handleTabKeyDown = (
+    event: KeyboardEvent<HTMLButtonElement>,
+    currentIndex: number
+  ) => {
+    let targetIndex: number | null = null;
+
+    if (event.key === "ArrowRight") {
+      targetIndex = (currentIndex + 1) % tabs.length;
+    } else if (event.key === "ArrowLeft") {
+      targetIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    } else if (event.key === "Home") {
+      targetIndex = 0;
+    } else if (event.key === "End") {
+      targetIndex = tabs.length - 1;
+    }
+
+    if (targetIndex === null) {
+      return;
+    }
+
+    event.preventDefault();
+    setActiveGender(tabs[targetIndex].gender);
+    tabRefs.current[targetIndex]?.focus();
+  };
 
   return (
     <section className="national-ranking-surface" aria-label="전국 동아리 랭킹">
       <div className="national-ranking-toolbar">
         <div className="national-ranking-tabs" role="tablist" aria-label="랭킹 부문">
-          {tabs.map((tab) => (
+          {tabs.map((tab, index) => (
             <button
               aria-controls="national-ranking-panel"
               aria-selected={activeGender === tab.gender}
@@ -38,7 +64,12 @@ export default function NationalRankingTable({
               id={`national-ranking-tab-${tab.gender}`}
               key={tab.gender}
               onClick={() => setActiveGender(tab.gender)}
+              onKeyDown={(event) => handleTabKeyDown(event, index)}
+              ref={(element) => {
+                tabRefs.current[index] = element;
+              }}
               role="tab"
+              tabIndex={activeGender === tab.gender ? 0 : -1}
               type="button"
             >
               {tab.label}
@@ -54,6 +85,7 @@ export default function NationalRankingTable({
         aria-labelledby={`national-ranking-tab-${activeGender}`}
         id="national-ranking-panel"
         role="tabpanel"
+        tabIndex={0}
       >
         <table className="national-ranking-table">
           <caption className="visually-hidden">{activeTab.label} 전국 동아리 랭킹</caption>
