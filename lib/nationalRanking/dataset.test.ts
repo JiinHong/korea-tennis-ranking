@@ -52,7 +52,7 @@ function createValidDataset() {
         gender: "men",
         actualEntrants: 32,
         sourceStatus: "verified",
-        sourceRefs: ["national/2025/men.pdf"],
+        sourceRefs: ["national/2025/men.pdf#page=1"],
       },
       {
         key: "regional-open-2025-women",
@@ -61,7 +61,7 @@ function createValidDataset() {
         gender: "women",
         actualEntrants: 16,
         sourceStatus: "unresolved",
-        sourceRefs: ["regional/2025/women.pdf"],
+        sourceRefs: ["regional/2025/women.pdf#page=2"],
       },
     ],
     results: [
@@ -322,12 +322,21 @@ describe("parseNationalRankingDataset", () => {
     );
   });
 
-  it("requires every result source reference to belong to its edition", () => {
+  it("requires every result source reference to exactly match its edition", () => {
     const dataset = createValidDataset();
     dataset.results[0].sourceRef = "unrelated/2025/men.pdf#page=1";
 
     expect(() => parseNationalRankingDataset(dataset)).toThrow(
       "result sourceRef is not listed by its edition"
+    );
+  });
+
+  it("rejects a result page that only shares an edition source-ref prefix", () => {
+    const dataset = createValidDataset();
+    dataset.results[0].sourceRef = "national/2025/men.pdf#page=10";
+
+    expect(() => parseNationalRankingDataset(dataset)).toThrow(
+      'national/2025/men.pdf#page=10: result sourceRef is not listed by its edition "national-open-2025-men"'
     );
   });
 
@@ -392,6 +401,14 @@ describe("loadNationalRankingDataset", () => {
     }
 
     expect(dataset.results).toHaveLength(608);
+    expect(dataset.clubs).toHaveLength(53);
+    expect(dataset.aliases).toHaveLength(151);
+    expect(
+      dataset.results.filter((result) => result.qualityStatus === "verified")
+    ).toHaveLength(228);
+    expect(
+      dataset.results.filter((result) => result.qualityStatus === "unresolved")
+    ).toHaveLength(380);
     expect(
       dataset.editions.flatMap((edition) => edition.sourceRefs).every(
         (sourceRef) => !sourceRef.startsWith("/") && !sourceRef.includes(":\\")
@@ -423,12 +440,19 @@ describe("loadNationalRankingDataset", () => {
     expect(() => calculateNationalRankings(dataset)).not.toThrow();
   });
 
-  it("keeps 경기대학교 Kft distinct from KTF", () => {
+  it("keeps 경기대학교 Kft distinct from incumbent KTF", () => {
     const dataset = loadNationalRankingDataset();
     const clubSlugs = new Set(dataset.clubs.map((club) => club.slug));
+    const ktfAliases = dataset.aliases
+      .filter((alias) => alias.clubSlug === "gyeonggi-ktf")
+      .map(({ normalizedAlias, clubSlug }) => ({ normalizedAlias, clubSlug }));
     const kftAliases = dataset.aliases
       .filter((alias) => alias.normalizedAlias.startsWith("경기대학교 kft "))
       .map(({ normalizedAlias, clubSlug }) => ({ normalizedAlias, clubSlug }));
+    const ktfResults = dataset.results
+      .filter((result) => result.clubSlug === "gyeonggi-ktf")
+      .map(({ sourceTeamName, clubSlug }) => ({ sourceTeamName, clubSlug }))
+      .sort((left, right) => left.sourceTeamName.localeCompare(right.sourceTeamName));
     const kftResults = dataset.results
       .filter(
         (result) =>
@@ -441,6 +465,18 @@ describe("loadNationalRankingDataset", () => {
     expect(
       ["gyeonggi-ktf", "gyeonggi-kft"].filter((slug) => !clubSlugs.has(slug))
     ).toEqual([]);
+    expect(ktfAliases).toEqual([
+      { normalizedAlias: "경기대학교 경기대 ktf", clubSlug: "gyeonggi-ktf" },
+      { normalizedAlias: "경기대학교 ktf 여", clubSlug: "gyeonggi-ktf" },
+      { normalizedAlias: "경기대학교 ktf 정", clubSlug: "gyeonggi-ktf" },
+      { normalizedAlias: "경기대학교 ktf 진", clubSlug: "gyeonggi-ktf" },
+    ]);
+    expect(ktfResults).toEqual([
+      { sourceTeamName: "Ktf 여", clubSlug: "gyeonggi-ktf" },
+      { sourceTeamName: "Ktf 정", clubSlug: "gyeonggi-ktf" },
+      { sourceTeamName: "Ktf 진", clubSlug: "gyeonggi-ktf" },
+      { sourceTeamName: "경기대 Ktf", clubSlug: "gyeonggi-ktf" },
+    ]);
     expect(kftAliases).toEqual([
       { normalizedAlias: "경기대학교 kft a", clubSlug: "gyeonggi-kft" },
       { normalizedAlias: "경기대학교 kft b", clubSlug: "gyeonggi-kft" },
@@ -451,12 +487,19 @@ describe("loadNationalRankingDataset", () => {
     ]);
   });
 
-  it("keeps 연세대학교 쿠크리스 distinct from 쿠크다스", () => {
+  it("keeps 연세대학교 쿠크리스 distinct from incumbent 쿠크다스", () => {
     const dataset = loadNationalRankingDataset();
     const clubSlugs = new Set(dataset.clubs.map((club) => club.slug));
+    const kookdasAliases = dataset.aliases
+      .filter((alias) => alias.clubSlug === "yonsei-kookdas")
+      .map(({ normalizedAlias, clubSlug }) => ({ normalizedAlias, clubSlug }));
     const kookrisAliases = dataset.aliases
       .filter((alias) => alias.normalizedAlias.startsWith("연세대학교 쿠크리스 "))
       .map(({ normalizedAlias, clubSlug }) => ({ normalizedAlias, clubSlug }));
+    const kookdasResults = dataset.results
+      .filter((result) => result.clubSlug === "yonsei-kookdas")
+      .map(({ sourceTeamName, clubSlug }) => ({ sourceTeamName, clubSlug }))
+      .sort((left, right) => left.sourceTeamName.localeCompare(right.sourceTeamName));
     const kookrisResults = dataset.results
       .filter(
         (result) =>
@@ -469,6 +512,19 @@ describe("loadNationalRankingDataset", () => {
     expect(
       ["yonsei-kookdas", "yonsei-kookris"].filter((slug) => !clubSlugs.has(slug))
     ).toEqual([]);
+    expect(kookdasAliases).toEqual([
+      { normalizedAlias: "연세대학교 연세대 쿠크다스 a", clubSlug: "yonsei-kookdas" },
+      { normalizedAlias: "연세대학교 연세대 쿠크다스 b", clubSlug: "yonsei-kookdas" },
+      { normalizedAlias: "연세대학교 쿠크다스 a", clubSlug: "yonsei-kookdas" },
+      { normalizedAlias: "연세대학교 쿠크다스 b", clubSlug: "yonsei-kookdas" },
+    ]);
+    expect(kookdasResults).toEqual([
+      { sourceTeamName: "연세대 쿠크다스 A", clubSlug: "yonsei-kookdas" },
+      { sourceTeamName: "연세대 쿠크다스 A", clubSlug: "yonsei-kookdas" },
+      { sourceTeamName: "연세대 쿠크다스 B", clubSlug: "yonsei-kookdas" },
+      { sourceTeamName: "쿠크다스 A", clubSlug: "yonsei-kookdas" },
+      { sourceTeamName: "쿠크다스 B", clubSlug: "yonsei-kookdas" },
+    ]);
     expect(kookrisAliases).toEqual([
       { normalizedAlias: "연세대학교 쿠크리스 a", clubSlug: "yonsei-kookris" },
       { normalizedAlias: "연세대학교 쿠크리스 b", clubSlug: "yonsei-kookris" },

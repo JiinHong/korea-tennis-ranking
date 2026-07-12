@@ -291,7 +291,7 @@ function validateRelationships(dataset: NationalRankingDataset): void {
       );
     }
 
-    if (!edition.sourceRefs.some((sourceRef) => result.sourceRef.startsWith(sourceRef))) {
+    if (!edition.sourceRefs.includes(result.sourceRef)) {
       throw new Error(
         `${resultPath}: result sourceRef is not listed by its edition "${edition.key}"`
       );
