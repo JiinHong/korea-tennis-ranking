@@ -1759,113 +1759,483 @@ button:disabled {
 }
 
 .national-page {
+  --national-bg: #f5f7f6;
+  --national-ink: #20272f;
+  --national-muted: #65717c;
+  --national-line: #dce2e7;
+  --national-accent: #23684c;
+  --national-accent-soft: #e8f3ee;
+  --national-secondary: #835f28;
   min-height: 100vh;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(244, 247, 245, 0)),
-    var(--background);
+  color: var(--national-ink);
+  background: var(--national-bg);
 }
 
-.national-hero {
-  padding: 56px 0 36px;
-  color: white;
-  background:
-    linear-gradient(135deg, rgba(16, 54, 41, 0.98), rgba(47, 125, 91, 0.94)),
-    var(--green-950);
-}
-
-.national-hero-inner,
-.national-section {
-  width: min(1120px, calc(100% - 32px));
+.national-shell {
+  width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
-}
-
-.national-hero-inner h1 {
-  max-width: 760px;
-  margin: 0;
-  font-size: 52px;
-  line-height: 1.02;
-  font-weight: 900;
-}
-
-.national-hero-inner p:not(.org-label) {
-  max-width: 660px;
-  margin: 20px 0 0;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 18px;
-  line-height: 1.65;
-  font-weight: 650;
-}
-
-.national-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 30px;
-}
-
-.national-actions a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0 16px;
-  color: var(--green-950);
-  background: var(--lime);
-  border-radius: 8px;
-  font-weight: 850;
-  text-decoration: none;
-}
-
-.national-section {
-  display: grid;
-  grid-template-columns: 260px minmax(0, 1fr);
-  gap: 24px;
   padding: 34px 0 56px;
 }
 
-.section-kicker {
+.national-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--national-line);
+}
+
+.national-kicker {
   display: block;
   margin-bottom: 8px;
-  color: var(--green-600);
-  font-size: 12px;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.national-section h2 {
-  margin: 0;
-  font-size: 24px;
-  line-height: 1.15;
-}
-
-.tournament-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.tournament-card {
-  min-height: 76px;
-  padding: 16px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-}
-
-.tournament-card span {
-  display: block;
-  color: var(--foreground);
-  font-size: 15px;
-  line-height: 1.35;
+  color: var(--national-accent);
+  font-size: 11px;
   font-weight: 850;
+  letter-spacing: 0;
+}
+
+.national-header h1 {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.2;
+  font-weight: 850;
+  word-break: keep-all;
+}
+
+.national-campus-link {
+  flex: 0 0 auto;
+  color: var(--national-accent);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  white-space: nowrap;
+}
+
+.national-ranking-section {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.national-ranking-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 12px;
+}
+
+.national-ranking-title-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.national-ranking-title-row h2 {
+  margin: 0 5px 0 0;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.national-ranking-title-row > span {
+  color: var(--national-muted);
+  font-size: 12px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.national-ranking-meta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0;
+}
+
+.national-ranking-meta div {
+  display: grid;
+  gap: 3px;
+}
+
+.national-ranking-meta dt {
+  color: var(--national-muted);
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.national-ranking-meta dd {
+  margin: 0;
+  color: var(--national-ink);
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.national-status {
+  margin-top: 24px;
+  padding: 30px 20px;
+  color: var(--national-muted);
+  text-align: center;
+  background: white;
+  border: 1px solid var(--national-line);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.national-ranking-surface {
+  width: 100%;
+  overflow: hidden;
+  background: white;
+  border: 1px solid var(--national-line);
+  border-radius: 8px;
+}
+
+.national-ranking-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 52px;
+  padding: 8px 12px;
+  background: #fafbfb;
+  border-bottom: 1px solid var(--national-line);
+}
+
+.national-ranking-tabs {
+  display: inline-flex;
+  min-width: 0;
+  padding: 3px;
+  background: #edf1ef;
+  border: 1px solid #dde4e0;
+  border-radius: 8px;
+}
+
+.national-ranking-tabs button {
+  min-width: 72px;
+  min-height: 32px;
+  padding: 0 12px;
+  overflow-wrap: anywhere;
+  color: var(--national-muted);
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.national-ranking-tabs button[aria-selected="true"] {
+  color: white;
+  background: var(--national-accent);
+}
+
+.national-ranking-tabs button.is-secondary:not([aria-selected="true"]) {
+  color: var(--national-secondary);
+}
+
+.national-ranking-tabs button:focus-visible,
+.ranking-methodology-trigger:focus-visible,
+.ranking-methodology-close:focus-visible,
+.national-campus-link:focus-visible,
+.ranking-methodology-dialog a:focus-visible {
+  outline: 3px solid rgba(35, 104, 76, 0.2);
+  outline-offset: 2px;
+}
+
+.national-ranking-secondary-label {
+  color: var(--national-secondary);
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.national-ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.national-ranking-rank-column {
+  width: 72px;
+}
+
+.national-ranking-score-column {
+  width: 140px;
+}
+
+.national-ranking-table th,
+.national-ranking-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #e8ecef;
+}
+
+.national-ranking-table th {
+  height: 42px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: var(--national-muted);
+  text-align: left;
+  background: #f7f9f8;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.national-ranking-table th:first-child {
+  text-align: center;
+}
+
+.national-ranking-table th:last-child {
+  text-align: right;
+}
+
+.national-ranking-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.national-ranking-rank {
+  color: var(--national-muted);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.national-ranking-club {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.national-ranking-club strong {
+  min-width: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  word-break: keep-all;
+}
+
+.national-ranking-club span {
+  min-width: 0;
+  color: var(--national-muted);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.national-ranking-score {
+  color: var(--national-ink);
+  text-align: right;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.national-ranking-empty {
+  color: var(--national-muted);
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ranking-methodology-info {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.ranking-methodology-trigger,
+.ranking-methodology-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: var(--national-muted);
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+}
+
+.ranking-methodology-trigger {
+  width: 30px;
+  height: 30px;
+}
+
+.ranking-methodology-trigger:hover,
+.ranking-methodology-close:hover {
+  color: var(--national-ink);
+  background: #edf1ef;
+}
+
+.ranking-methodology-trigger svg {
+  width: 17px;
+  height: 17px;
+}
+
+.ranking-methodology-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: transparent;
+}
+
+.ranking-methodology-dialog {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 51;
+  width: min(360px, calc(100vw - 32px));
+  padding: 18px;
+  color: var(--national-ink);
+  background: white;
+  border: 1px solid var(--national-line);
+  border-radius: 8px;
+  box-shadow: 0 14px 34px rgba(32, 39, 47, 0.14);
+}
+
+.ranking-methodology-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.ranking-methodology-dialog h2 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.ranking-methodology-close {
+  width: 30px;
+  height: 30px;
+}
+
+.ranking-methodology-close svg {
+  width: 18px;
+  height: 18px;
+}
+
+.ranking-methodology-dialog p {
+  margin: 0;
+  color: var(--national-muted);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+.ranking-methodology-dialog p + p {
+  margin-top: 7px;
+}
+
+.ranking-methodology-dialog a {
+  display: inline-flex;
+  margin-top: 15px;
+  color: var(--national-accent);
+  font-size: 13px;
+  font-weight: 850;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 640px) {
+  .national-shell {
+    width: calc(100% - 20px);
+    padding-top: 22px;
+  }
+
+  .national-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  .national-header h1 {
+    font-size: 25px;
+  }
+
+  .national-ranking-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .national-ranking-meta {
+    width: 100%;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .national-ranking-meta div {
+    min-width: 0;
+  }
+
+  .national-ranking-meta dd {
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .national-ranking-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .national-ranking-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .national-ranking-tabs button {
+    min-width: 0;
+    padding: 0 6px;
+  }
+
+  .national-ranking-rank-column {
+    width: 48px;
+  }
+
+  .national-ranking-score-column {
+    width: 96px;
+  }
+
+  .national-ranking-table th,
+  .national-ranking-table td {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .national-ranking-club {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .ranking-methodology-backdrop {
+    background: rgba(32, 39, 47, 0.36);
+  }
+
+  .ranking-methodology-dialog {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-height: min(76vh, 520px);
+    padding: 20px;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+    overflow-y: auto;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-radius: 8px 8px 0 0;
+  }
 }
 
 @media (max-width: 860px) {
   .summary-inner,
-  .content-shell,
-  .national-hero-inner,
-  .national-section {
+  .content-shell {
     width: min(100% - 24px, 680px);
   }
 
@@ -2030,21 +2400,6 @@ button:disabled {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .national-hero {
-    padding-top: 38px;
-  }
-
-  .national-hero-inner h1 {
-    font-size: 40px;
-  }
-
-  .national-section {
-    grid-template-columns: 1fr;
-  }
-
-  .tournament-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 560px) {
@@ -2063,9 +2418,7 @@ button:disabled {
   }
 
   .summary-inner,
-  .content-shell,
-  .national-hero-inner,
-  .national-section {
+  .content-shell {
     width: min(100% - 20px, 420px);
   }
 
@@ -2334,13 +2687,6 @@ button:disabled {
     grid-template-columns: 38px minmax(0, 1fr) auto;
   }
 
-  .national-hero-inner h1 {
-    font-size: 34px;
-  }
-
-  .tournament-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 .admin-page {

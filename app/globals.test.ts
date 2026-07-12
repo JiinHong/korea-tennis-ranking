@@ -165,3 +165,56 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 });
+
+describe("national ranking responsive contracts", () => {
+  const css = readFileSync(join(process.cwd(), "app/globals.css"), "utf8");
+
+  it("조용한 전체 너비 랭킹 표에 고정 순위와 점수 열을 둔다", () => {
+    expect(css).toMatch(
+      /\.national-ranking-section\s*\{[^}]*width:\s*100%;[^}]*\}/s
+    );
+    expect(css).toMatch(
+      /\.national-ranking-table\s*\{[^}]*width:\s*100%;[^}]*table-layout:\s*fixed;[^}]*\}/s
+    );
+    expect(css).toMatch(
+      /\.national-ranking-rank-column\s*\{[^}]*width:\s*72px;[^}]*\}/s
+    );
+    expect(css).toMatch(
+      /\.national-ranking-score-column\s*\{[^}]*width:\s*140px;[^}]*\}/s
+    );
+  });
+
+  it("동아리 이름은 줄바꿈하고 순위와 점수는 각 기준선에 고정한다", () => {
+    expect(css).toMatch(
+      /\.national-ranking-club\s*\{[^}]*min-width:\s*0;[^}]*overflow-wrap:\s*anywhere;[^}]*\}/s
+    );
+    expect(css).toMatch(
+      /\.national-ranking-rank\s*\{[^}]*text-align:\s*center;[^}]*\}/s
+    );
+    expect(css).toMatch(
+      /\.national-ranking-score\s*\{[^}]*text-align:\s*right;[^}]*white-space:\s*nowrap;[^}]*\}/s
+    );
+  });
+
+  it("데스크톱 산정 방식은 작은 팝오버로 배치한다", () => {
+    expect(css).toMatch(
+      /\.ranking-methodology-dialog\s*\{[^}]*position:\s*absolute;[^}]*width:\s*min\(360px,\s*calc\(100vw - 32px\)\);[^}]*border-radius:\s*8px;[^}]*\}/s
+    );
+  });
+
+  it("640px 이하에서 표 열을 압축하고 산정 방식을 안전 영역이 있는 바텀 시트로 바꾼다", () => {
+    expect(css).toMatch(/@media\s*\(max-width:\s*640px\)/);
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.national-ranking-rank-column\s*\{[^}]*width:\s*48px;[^}]*\}[\s\S]*?\.national-ranking-score-column\s*\{[^}]*width:\s*96px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.ranking-methodology-dialog\s*\{[^}]*position:\s*fixed;[^}]*bottom:\s*0;[^}]*width:\s*100%;[^}]*padding-bottom:\s*calc\(20px \+ env\(safe-area-inset-bottom\)\);[^}]*border-radius:\s*8px 8px 0 0;[^}]*\}/
+    );
+  });
+
+  it("이전 마케팅 히어로와 대회 카드 계약을 제거한다", () => {
+    expect(css).not.toMatch(/\.national-hero(?:\s|[-,{])/);
+    expect(css).not.toContain(".tournament-grid");
+    expect(css).not.toContain(".tournament-card");
+  });
+});
