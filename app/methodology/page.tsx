@@ -6,6 +6,8 @@ import {
   NATIONAL_FORMULA_V1,
 } from "@/lib/nationalRanking/formula";
 
+import MethodologyTableRegion from "./MethodologyTableRegion";
+
 const FORMULA_EFFECTIVE_ON = "2026-07-12";
 
 const STAGE_ROWS = [
@@ -73,25 +75,6 @@ function formatFactor(value: number): string {
   return value === 0 ? "0" : value.toFixed(2);
 }
 
-function TableRegion({
-  label,
-  children,
-}: Readonly<{
-  label: string;
-  children: React.ReactNode;
-}>) {
-  return (
-    <div
-      aria-label={`${label} 스크롤 영역`}
-      className="methodology-table-scroll"
-      role="region"
-      tabIndex={0}
-    >
-      {children}
-    </div>
-  );
-}
-
 export default function MethodologyPage() {
   return (
     <main className="methodology-page">
@@ -145,7 +128,7 @@ export default function MethodologyPage() {
             관계를 100점 기준으로 정규화했습니다. 부전승은 승리로 세지
             않습니다.
           </p>
-          <TableRegion label="진출 단계별 점수">
+          <MethodologyTableRegion label="진출 단계별 점수">
             <table className="methodology-table">
               <caption>진출 단계별 점수</caption>
               <thead>
@@ -163,7 +146,7 @@ export default function MethodologyPage() {
                 ))}
               </tbody>
             </table>
-          </TableRegion>
+          </MethodologyTableRegion>
           <p className="methodology-note">
             부전승 뒤 실제로 치른 첫 경기에서 패하면 0점입니다. 공식 대진에서
             확인된 진출 단계까지만 인정합니다.
@@ -176,7 +159,7 @@ export default function MethodologyPage() {
             전국 대회는 1.00, 지역 대회인 경인지구 연맹전은 0.85를 적용합니다.
             상금, 후원 규모, 대회 연혁에 따른 주관적 보너스는 없습니다.
           </p>
-          <TableRegion label="대회 범위별 가중치">
+          <MethodologyTableRegion label="대회 범위별 가중치">
             <table className="methodology-table">
               <caption>대회 범위별 가중치</caption>
               <thead>
@@ -196,7 +179,7 @@ export default function MethodologyPage() {
                 ))}
               </tbody>
             </table>
-          </TableRegion>
+          </MethodologyTableRegion>
         </section>
 
         <section className="methodology-section" aria-labelledby="field-title">
@@ -214,7 +197,7 @@ export default function MethodologyPage() {
               {NATIONAL_FORMULA_V1.field.baseline}))
             </code>
           </div>
-          <TableRegion label="참가 팀 수별 기준 가중치">
+          <MethodologyTableRegion label="참가 팀 수별 기준 가중치">
             <table className="methodology-table">
               <caption>참가 팀 수별 기준 가중치</caption>
               <thead>
@@ -232,7 +215,7 @@ export default function MethodologyPage() {
                 ))}
               </tbody>
             </table>
-          </TableRegion>
+          </MethodologyTableRegion>
         </section>
 
         <section className="methodology-section" aria-labelledby="recency-title">
@@ -242,7 +225,7 @@ export default function MethodologyPage() {
             개최 연도에 1.00을 적용하고, 이전 성적은 해마다{" "}
             {NATIONAL_FORMULA_V1.recencyRetention.toFixed(2)}배로 줄어듭니다.
           </p>
-          <TableRegion label="대회별 연도 가중치">
+          <MethodologyTableRegion label="대회별 연도 가중치">
             <table className="methodology-table">
               <caption>대회별 연도 가중치</caption>
               <thead>
@@ -260,7 +243,7 @@ export default function MethodologyPage() {
                 ))}
               </tbody>
             </table>
-          </TableRegion>
+          </MethodologyTableRegion>
           <p className="methodology-note">
             존재하지 않았던 대회 연도에는 결과 행을 만들지 않으며 불참으로
             간주하지 않습니다.

@@ -153,7 +153,7 @@
 .methodology-table-scroll:focus-visible,
 .methodology-back-link:focus-visible,
 .methodology-references a:focus-visible {
-  outline: 3px solid rgba(35, 104, 76, 0.2);
+  outline: 3px solid var(--methodology-accent);
   outline-offset: 3px;
 }
 

@@ -230,3 +230,13 @@ describe("national ranking responsive contracts", () => {
     expect(css).not.toContain(".tournament-card");
   });
 });
+
+describe("methodology accessibility contracts", () => {
+  const css = readFileSync(join(process.cwd(), "app/globals.css"), "utf8");
+
+  it("키보드 포커스 윤곽선은 배경과 충분히 대비되는 불투명 색을 사용한다", () => {
+    expect(css).toMatch(
+      /\.methodology-table-scroll:focus-visible,[\s\S]*?\.methodology-references a:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--methodology-accent\);[^}]*\}/
+    );
+  });
+});
