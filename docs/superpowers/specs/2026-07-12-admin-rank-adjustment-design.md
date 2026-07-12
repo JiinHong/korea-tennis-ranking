@@ -40,22 +40,25 @@ The database remains authoritative.
 
 ## Approaches Considered
 
-### Separate guarded rank RPC (selected)
+### Extend the existing guarded player RPC (selected)
 
-Add a focused `adjust_admin_player_rank_with_secret` database function. It
-locks the current season roster, validates the target, temporarily offsets
-ranks to avoid the `(season_id, current_rank)` unique constraint, applies the
-move, and writes audit rows.
+Replace `manage_admin_player_with_secret` with a backward-compatible signature
+that adds `p_target_rank integer default null`, then add the `rank` action. The
+function locks the current season roster, validates the target, temporarily
+offsets ranks to avoid the `(season_id, current_rank)` unique constraint,
+applies the move, and writes audit rows.
 
-This keeps the already-deployed add, rename, and status RPC signature stable
-and limits the blast radius of the change.
+The default parameter keeps existing six-parameter callers working during a
+rolling deployment. Reusing the existing guarded endpoint also avoids adding a
+fifth anonymous `security definer` function to the Supabase security-advisor
+baseline.
 
-### Extend the existing player-management RPC
+### Separate guarded rank RPC
 
-Adding a rank action and parameter to `manage_admin_player_with_secret` would
-centralize all player mutations, but changing its signature would create a new
-Postgres overload unless the old function were explicitly dropped. It also
-makes an already large function harder to reason about.
+A focused `adjust_admin_player_rank_with_secret` function would limit changes
+to the existing player RPC, but it would expand the externally callable
+privileged surface and add another intentional security-advisor warning. This
+approach is rejected.
 
 ### Multiple server-side updates
 
@@ -71,18 +74,20 @@ rejected.
 3. The client sends `operation`, `seasonPlayerId`, `targetRank`, and
    `adminSecret` to the existing admin player route.
 4. The route validates the payload and calls the server-only command adapter.
-5. The adapter invokes `adjust_admin_player_rank_with_secret`.
+5. The adapter invokes `manage_admin_player_with_secret` with action `rank` and
+   the target-rank parameter.
 6. Postgres verifies the secret, locks the roster, applies the complete rank
    shift, and writes `admin_rank_adjusted` and `change_rank` audit records.
 7. The UI discards the secret, closes the dialog, and refreshes server data.
 
 ## Database Safety
 
-The RPC uses `security definer` with an empty `search_path` and schema-qualified
-relations. Execution is revoked from `public` and `authenticated`; it is
-granted only to `anon` and `service_role` because the current server client uses
-the publishable key and the function performs its own constant-time password
-hash comparison.
+The existing RPC continues to use `security definer` with an empty `search_path`
+and schema-qualified relations. Execution is revoked from `public` and
+`authenticated`; it is granted only to `anon` and `service_role` because the
+current server client uses the publishable key and the function performs its
+own constant-time password hash comparison. No additional privileged function
+is exposed.
 
 All current-season rows are locked before reading or writing ranks. Every
 validation failure raises a known SQLSTATE and rolls back the entire function.

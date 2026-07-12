@@ -4,7 +4,7 @@
 
 **Goal:** Let administrators preview and atomically correct a current-season player's rank while preserving unique contiguous ranks and recording audit history.
 
-**Architecture:** A pure TypeScript helper builds the client preview from the loaded roster. A server-only command adapter calls a focused guarded Supabase RPC; the RPC locks the season roster, applies the complete shift in one transaction, and records ranking and admin audit events. The existing admin player route and page expose the operation without changing public ranking contracts.
+**Architecture:** A pure TypeScript helper builds the client preview from the loaded roster. A server-only command adapter calls the existing guarded Supabase player RPC with a new backward-compatible target-rank parameter; the RPC locks the season roster, applies the complete shift in one transaction, and records ranking and admin audit events. The existing admin player route and page expose the operation without changing public ranking contracts or adding another privileged endpoint.
 
 **Tech Stack:** Next.js 16 App Router, React 19, TypeScript, Supabase Postgres, `@supabase/supabase-js`, Vitest, Testing Library.
 
@@ -14,7 +14,9 @@
 - Do not change `initial_rank`, past matches, or any ranking rule.
 - Do not allow `left` players to move or occupy selectable target ranks.
 - Require the existing admin secret only when applying the mutation.
-- Keep the existing add, rename, and status RPC signature unchanged.
+- Keep existing add, rename, and status callers compatible through a defaulted
+  final RPC parameter.
+- Do not add another externally callable `security definer` function.
 - Use one atomic database function with roster locking and schema-qualified names.
 - Record both `admin_rank_adjusted` and `change_rank` audit entries.
 
@@ -67,13 +69,17 @@ Run `npm test -- lib/adminRankAdjustment.test.ts` and commit the helper and test
 - Modify: `lib/supabaseAdminPlayerCommands.test.ts`
 
 **Interfaces:**
-- Database function: `public.adjust_admin_player_rank_with_secret(p_club_slug text, p_season_player_id uuid, p_target_rank integer, p_admin_secret text) returns jsonb`.
+- Database function: `public.manage_admin_player_with_secret(p_action text, p_club_slug text, p_season_player_id uuid, p_name text, p_status text, p_admin_secret text, p_target_rank integer default null) returns jsonb`.
 - TypeScript mutation: `{ action: "rank"; clubSlug; seasonPlayerId; targetRank; adminSecret }`.
 - Result extends the existing player result with `action: "rank"`, `oldRank`, and `changes`.
 
 - [ ] **Step 1: Write failing migration contract tests**
 
-Assert the SQL contains secret verification, active club/current season lookup, ordered `FOR UPDATE`, left-player rejection, non-left target bounds, temporary rank offset, both movement directions, `admin_rank_adjusted`, `change_rank`, and explicit revoke/grant statements.
+Assert the SQL drops the six-argument function and recreates it with a defaulted
+target-rank parameter, while retaining secret verification, active club/current
+season lookup, ordered `FOR UPDATE`, left-player rejection, non-left target
+bounds, temporary rank offset, both movement directions,
+`admin_rank_adjusted`, `change_rank`, and explicit revoke/grant statements.
 
 - [ ] **Step 2: Verify migration tests RED**
 
@@ -89,14 +95,17 @@ Run the focused migration test.
 
 - [ ] **Step 5: Write failing command-adapter tests**
 
-Assert the rank mutation calls:
+Assert the rank mutation calls the existing guarded RPC:
 
 ```ts
-rpc("adjust_admin_player_rank_with_secret", {
+rpc("manage_admin_player_with_secret", {
+  p_action: "rank",
   p_club_slug: "seoultech",
   p_season_player_id: "sp-5",
-  p_target_rank: 2,
+  p_name: null,
+  p_status: null,
   p_admin_secret: "secret",
+  p_target_rank: 2,
 });
 ```
 
@@ -104,7 +113,8 @@ Also reject malformed response data, map `42501` to `forbidden`, map `22023` to 
 
 - [ ] **Step 6: Verify command tests RED, implement, then verify GREEN**
 
-Run `npm test -- lib/supabaseAdminPlayerCommands.test.ts`, implement a separate rank RPC branch without changing existing RPC parameters, then rerun the test.
+Run `npm test -- lib/supabaseAdminPlayerCommands.test.ts`, add the rank mutation
+and send `p_target_rank: null` for existing actions, then rerun the test.
 
 - [ ] **Step 7: Commit the database and command slice**
 
@@ -190,7 +200,7 @@ Run the component and global CSS tests, then commit the UI slice.
 - [ ] Run `npm run build` and verify the admin and API routes compile.
 - [ ] Apply `20260712024408_adjust_admin_player_rank.sql` to Supabase project `ltxoewsvzhumsudwrzdq`.
 - [ ] Query function privileges to confirm `public` and `authenticated` cannot execute the RPC.
-- [ ] Run Supabase security and performance advisors and compare new notices against the pre-change baseline.
+- [ ] Run Supabase security and performance advisors and confirm the baseline remains four intentional anonymous privileged-function warnings and three unused-index notices.
 - [ ] Use a transaction that is rolled back to exercise upward and downward movement against real current-season rows without changing production ranks.
 - [ ] Start the app and inspect `/admin/players` on desktop and 390x844 mobile; verify no overflow, exact preview copy, keyboard labels, and error state.
 - [ ] Run a final code review, merge the feature branch into `main`, push, wait for Vercel Production `Ready`, and verify the deployed admin page responds successfully.
