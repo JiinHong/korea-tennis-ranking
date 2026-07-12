@@ -18,6 +18,21 @@ const result = {
   status: "active" as const,
 };
 
+const rankResult = {
+  ...result,
+  action: "rank" as const,
+  oldRank: 5,
+  rank: 2,
+  changes: [
+    {
+      seasonPlayerId: "season-player-1",
+      name: "새 선수",
+      oldRank: 5,
+      newRank: 2,
+    },
+  ],
+};
+
 describe("manageAdminPlayer", () => {
   it("passes a typed add mutation to the adapter", async () => {
     const adapter: SupabaseAdminPlayerCommandAdapter = {
@@ -41,6 +56,25 @@ describe("manageAdminPlayer", () => {
       name: "새 선수",
       adminSecret: "secret",
     });
+  });
+
+  it("passes a typed rank mutation to the adapter", async () => {
+    const adapter: SupabaseAdminPlayerCommandAdapter = {
+      mutate: vi.fn().mockResolvedValue(rankResult),
+    };
+
+    await expect(
+      manageAdminPlayer(
+        {
+          action: "rank",
+          clubSlug: "seoultech",
+          seasonPlayerId: "season-player-1",
+          targetRank: 2,
+          adminSecret: "secret",
+        },
+        adapter
+      )
+    ).resolves.toEqual(rankResult);
   });
 });
 
@@ -67,6 +101,32 @@ describe("createSupabaseAdminPlayerCommandAdapter", () => {
       p_name: null,
       p_status: "inactive",
       p_admin_secret: "secret",
+      p_target_rank: null,
+    });
+  });
+
+  it("maps rank changes to the guarded RPC target parameter", async () => {
+    const rpc = vi.fn().mockResolvedValue({ data: rankResult, error: null });
+    const adapter = createSupabaseAdminPlayerCommandAdapter({ rpc });
+
+    await expect(
+      adapter.mutate({
+        action: "rank",
+        clubSlug: "seoultech",
+        seasonPlayerId: "season-player-1",
+        targetRank: 2,
+        adminSecret: "secret",
+      })
+    ).resolves.toEqual(rankResult);
+
+    expect(rpc).toHaveBeenCalledWith("manage_admin_player_with_secret", {
+      p_action: "rank",
+      p_club_slug: "seoultech",
+      p_season_player_id: "season-player-1",
+      p_name: null,
+      p_status: null,
+      p_admin_secret: "secret",
+      p_target_rank: 2,
     });
   });
 
@@ -141,6 +201,25 @@ describe("createSupabaseAdminPlayerCommandAdapter", () => {
         action: "add",
         clubSlug: "seoultech",
         name: "새 선수",
+        adminSecret: "secret",
+      })
+    ).rejects.toThrow("선수 관리 결과를 확인하지 못했습니다.");
+  });
+
+  it("rejects a rank response without its old rank and change list", async () => {
+    const adapter = createSupabaseAdminPlayerCommandAdapter({
+      rpc: vi.fn().mockResolvedValue({
+        data: { ...result, action: "rank", rank: 2 },
+        error: null,
+      }),
+    });
+
+    await expect(
+      adapter.mutate({
+        action: "rank",
+        clubSlug: "seoultech",
+        seasonPlayerId: "season-player-1",
+        targetRank: 2,
         adminSecret: "secret",
       })
     ).rejects.toThrow("선수 관리 결과를 확인하지 못했습니다.");

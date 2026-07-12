@@ -75,10 +75,11 @@ Run `npm test -- lib/adminRankAdjustment.test.ts` and commit the helper and test
 
 - [ ] **Step 1: Write failing migration contract tests**
 
-Assert the SQL drops the six-argument function and recreates it with a defaulted
-target-rank parameter, while retaining secret verification, active club/current
-season lookup, ordered `FOR UPDATE`, left-player rejection, non-left target
-bounds, temporary rank offset, both movement directions,
+Assert the SQL moves the six-argument implementation into the private schema
+and recreates the public name as a wrapper with a defaulted target-rank
+parameter, while retaining secret verification, active club/current season
+lookup, ordered `FOR UPDATE`, left-player rejection, non-left target bounds,
+temporary rank offset, both movement directions,
 `admin_rank_adjusted`, `change_rank`, and explicit revoke/grant statements.
 
 - [ ] **Step 2: Verify migration tests RED**

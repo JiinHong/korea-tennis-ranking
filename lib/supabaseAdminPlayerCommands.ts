@@ -1,5 +1,6 @@
 import "server-only";
 
+import type { AdminRankAdjustmentChange } from "@/lib/adminRankAdjustment";
 import type { PlayerStatus } from "@/lib/rankingRules";
 import { getSupabaseReadClient } from "@/lib/supabaseServer";
 
@@ -22,16 +23,30 @@ export type AdminPlayerMutation =
       action: "status";
       seasonPlayerId: string;
       status: PlayerStatus;
+    })
+  | (AdminPlayerMutationBase & {
+      action: "rank";
+      seasonPlayerId: string;
+      targetRank: number;
     });
 
-export type AdminPlayerMutationResult = {
-  action: AdminPlayerMutation["action"];
+type AdminPlayerMutationResultBase = {
   seasonPlayerId: string;
   playerId: string;
   name: string;
   rank: number;
   status: PlayerStatus;
 };
+
+export type AdminPlayerMutationResult =
+  | (AdminPlayerMutationResultBase & {
+      action: "add" | "rename" | "status";
+    })
+  | (AdminPlayerMutationResultBase & {
+      action: "rank";
+      oldRank: number;
+      changes: AdminRankAdjustmentChange[];
+    });
 
 export type SupabaseAdminPlayerCommandAdapter = {
   mutate(input: AdminPlayerMutation): Promise<AdminPlayerMutationResult>;
@@ -61,19 +76,42 @@ function isPlayerStatus(value: unknown): value is PlayerStatus {
   return ["active", "injured", "inactive", "left"].includes(String(value));
 }
 
-function isMutationResult(value: unknown): value is AdminPlayerMutationResult {
+function isRankChange(value: unknown): value is AdminRankAdjustmentChange {
   if (!value || typeof value !== "object") return false;
 
   const row = value as Record<string, unknown>;
 
   return (
-    ["add", "rename", "status"].includes(String(row.action)) &&
+    typeof row.seasonPlayerId === "string" &&
+    typeof row.name === "string" &&
+    typeof row.oldRank === "number" &&
+    typeof row.newRank === "number"
+  );
+}
+
+function isMutationResult(value: unknown): value is AdminPlayerMutationResult {
+  if (!value || typeof value !== "object") return false;
+
+  const row = value as Record<string, unknown>;
+
+  const hasCommonFields =
     typeof row.seasonPlayerId === "string" &&
     typeof row.playerId === "string" &&
     typeof row.name === "string" &&
     typeof row.rank === "number" &&
-    isPlayerStatus(row.status)
-  );
+    isPlayerStatus(row.status);
+
+  if (!hasCommonFields) return false;
+
+  if (row.action === "rank") {
+    return (
+      typeof row.oldRank === "number" &&
+      Array.isArray(row.changes) &&
+      row.changes.every(isRankChange)
+    );
+  }
+
+  return ["add", "rename", "status"].includes(String(row.action));
 }
 
 export async function manageAdminPlayer(
@@ -96,9 +134,13 @@ export function createSupabaseAdminPlayerCommandAdapter(
           p_club_slug: input.clubSlug,
           p_season_player_id:
             input.action === "add" ? null : input.seasonPlayerId,
-          p_name: input.action === "status" ? null : input.name,
+          p_name:
+            input.action === "add" || input.action === "rename"
+              ? input.name
+              : null,
           p_status: input.action === "status" ? input.status : null,
           p_admin_secret: input.adminSecret,
+          p_target_rank: input.action === "rank" ? input.targetRank : null,
         }
       );
 

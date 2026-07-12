@@ -42,11 +42,13 @@ The database remains authoritative.
 
 ### Extend the existing guarded player RPC (selected)
 
-Replace `manage_admin_player_with_secret` with a backward-compatible signature
-that adds `p_target_rank integer default null`, then add the `rank` action. The
-function locks the current season roster, validates the target, temporarily
-offsets ranks to avoid the `(season_id, current_rank)` unique constraint,
-applies the move, and writes audit rows.
+Move the existing six-parameter implementation into the private schema, then
+recreate `manage_admin_player_with_secret` as a backward-compatible wrapper
+that adds `p_target_rank integer default null` and the `rank` action. Existing
+actions delegate to the unchanged private implementation. The rank branch
+locks the current season roster, validates the target, temporarily offsets
+ranks to avoid the `(season_id, current_rank)` unique constraint, applies the
+move, and writes audit rows.
 
 The default parameter keeps existing six-parameter callers working during a
 rolling deployment. Reusing the existing guarded endpoint also avoids adding a
