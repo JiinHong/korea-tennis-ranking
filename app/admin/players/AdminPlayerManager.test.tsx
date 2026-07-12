@@ -1,4 +1,10 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import type { AdminPlayerClub } from "@/lib/supabaseAdminPlayers";
@@ -40,6 +46,50 @@ const clubs: AdminPlayerClub[] = [
         status: "injured",
         joinedAt: "2026-07-01T00:00:00Z",
         leftAt: null,
+      },
+      {
+        seasonPlayerId: "sp-3",
+        playerId: "player-3",
+        name: "세번째선수",
+        initialRank: 3,
+        currentRank: 3,
+        note: "",
+        status: "active",
+        joinedAt: "2026-07-01T00:00:00Z",
+        leftAt: null,
+      },
+      {
+        seasonPlayerId: "sp-4",
+        playerId: "player-4",
+        name: "네번째선수",
+        initialRank: 4,
+        currentRank: 4,
+        note: "",
+        status: "inactive",
+        joinedAt: "2026-07-01T00:00:00Z",
+        leftAt: null,
+      },
+      {
+        seasonPlayerId: "sp-5",
+        playerId: "player-5",
+        name: "다섯번째선수",
+        initialRank: 5,
+        currentRank: 5,
+        note: "",
+        status: "active",
+        joinedAt: "2026-07-01T00:00:00Z",
+        leftAt: null,
+      },
+      {
+        seasonPlayerId: "sp-6",
+        playerId: "player-6",
+        name: "탈퇴선수",
+        initialRank: 6,
+        currentRank: 6,
+        note: "",
+        status: "left",
+        joinedAt: "2026-07-01T00:00:00Z",
+        leftAt: "2026-07-10T00:00:00Z",
       },
     ],
   },
@@ -161,6 +211,116 @@ describe("AdminPlayerManager", () => {
       status: "inactive",
       adminSecret: "admin-secret",
     });
+  });
+
+  it("offers rank adjustment only for non-left players", () => {
+    render(<AdminPlayerManager clubs={clubs} />);
+
+    expect(
+      screen.getByRole("button", { name: "활동선수 순위 변경" })
+    ).toBeDefined();
+    expect(
+      screen.queryByRole("button", { name: "탈퇴선수 순위 변경" })
+    ).toBeNull();
+  });
+
+  it("previews every cascading rank change before submission", () => {
+    render(<AdminPlayerManager clubs={clubs} />);
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "다섯번째선수 순위 변경" })
+    );
+
+    expect(screen.getByRole("dialog", { name: "순위 변경" })).toBeDefined();
+    expect(screen.getByText("다섯번째선수 · 현재 5위")).toBeDefined();
+    expect(
+      (screen.getByRole("button", { name: "순위 적용" }) as HTMLButtonElement)
+        .disabled
+    ).toBe(true);
+
+    fireEvent.change(screen.getByLabelText("목표 순위"), {
+      target: { value: "2" },
+    });
+
+    const preview = screen.getByRole("region", {
+      name: "순위 변경 미리보기",
+    });
+    expect(within(preview).getByText("다섯번째선수")).toBeDefined();
+    expect(within(preview).getByText("5위 → 2위")).toBeDefined();
+    expect(within(preview).getByText("부상선수")).toBeDefined();
+    expect(within(preview).getByText("2위 → 3위")).toBeDefined();
+    expect(within(preview).getByText("세번째선수")).toBeDefined();
+    expect(within(preview).getByText("3위 → 4위")).toBeDefined();
+    expect(within(preview).getByText("네번째선수")).toBeDefined();
+    expect(within(preview).getByText("4위 → 5위")).toBeDefined();
+  });
+
+  it("submits a valid rank adjustment and does not retain the secret", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(
+      successResponse({
+        action: "rank",
+        oldRank: 5,
+        rank: 2,
+        changes: [],
+      })
+    );
+    vi.stubGlobal("fetch", fetchMock);
+    render(<AdminPlayerManager clubs={clubs} />);
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "다섯번째선수 순위 변경" })
+    );
+    fireEvent.change(screen.getByLabelText("목표 순위"), {
+      target: { value: "2" },
+    });
+    fireEvent.change(screen.getByLabelText("관리자 비밀키"), {
+      target: { value: "admin-secret" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "순위 적용" }));
+
+    await waitFor(() => expect(refresh).toHaveBeenCalledTimes(1));
+    const options = fetchMock.mock.calls[0][1] as RequestInit;
+    expect(JSON.parse(String(options.body))).toEqual({
+      operation: "rank",
+      seasonPlayerId: "sp-5",
+      targetRank: 2,
+      adminSecret: "admin-secret",
+    });
+    expect(screen.queryByLabelText("관리자 비밀키")).toBeNull();
+  });
+
+  it("keeps a failed rank adjustment open and clears its secret", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: false,
+        json: async () => ({
+          ok: false,
+          message: "현재 순위와 다른 목표 순위를 선택해주세요.",
+        }),
+      })
+    );
+    render(<AdminPlayerManager clubs={clubs} />);
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "다섯번째선수 순위 변경" })
+    );
+    fireEvent.change(screen.getByLabelText("목표 순위"), {
+      target: { value: "2" },
+    });
+    fireEvent.change(screen.getByLabelText("관리자 비밀키"), {
+      target: { value: "wrong" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "순위 적용" }));
+
+    expect(
+      await screen.findByText("현재 순위와 다른 목표 순위를 선택해주세요.")
+    ).toBeDefined();
+    expect(screen.getByRole("dialog", { name: "순위 변경" })).toBeDefined();
+    expect(
+      (screen.getByLabelText("관리자 비밀키") as HTMLInputElement).value
+    ).toBe("");
+    expect(refresh).not.toHaveBeenCalled();
   });
 
   it("keeps a failed mutation open and shows the server message", async () => {

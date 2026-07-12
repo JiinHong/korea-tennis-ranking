@@ -128,6 +128,21 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
+  it("순위 변경 미리보기는 중첩 카드 없이 안정적인 두 열로 정렬한다", () => {
+    expect(css).toContain(
+      ".admin-rank-preview {\n  display: grid;\n  gap: 8px;\n  min-width: 0;\n  padding: 12px 0;\n  border-top: 1px solid #e6e9ed;\n  border-bottom: 1px solid #e6e9ed;"
+    );
+    expect(css).toContain(
+      ".admin-rank-preview li {\n  display: grid;\n  grid-template-columns: minmax(0, 1fr) auto;\n  align-items: center;\n  gap: 12px;"
+    );
+    expect(css).toContain(
+      "  .admin-player-actions {\n    grid-column: 2 / 4;\n    flex-wrap: wrap;"
+    );
+    expect(css).not.toContain(
+      ".admin-rank-preview li {\n  background: white;"
+    );
+  });
+
   it("PC에서는 클럽 제목 줄을 한 줄로 이어 붙이고 모바일에서만 줄바꿈한다", () => {
     expect(css).toContain(".club-title-line {\n  display: inline;\n}");
     expect(css).toContain(

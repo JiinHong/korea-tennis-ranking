@@ -3,6 +3,7 @@
 import { useMemo, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
+import { buildAdminRankAdjustmentPreview } from "@/lib/adminRankAdjustment";
 import type {
   AdminPlayerClub,
   AdminSeasonPlayer,
@@ -16,7 +17,8 @@ type AdminPlayerManagerProps = {
 type MutationDialog =
   | { kind: "add" }
   | { kind: "rename"; player: AdminSeasonPlayer }
-  | { kind: "status"; player: AdminSeasonPlayer };
+  | { kind: "status"; player: AdminSeasonPlayer }
+  | { kind: "rank"; player: AdminSeasonPlayer };
 
 type MutationResponse =
   | { ok: true; player: { name: string } }
@@ -40,6 +42,7 @@ export default function AdminPlayerManager({ clubs }: AdminPlayerManagerProps) {
   const [dialog, setDialog] = useState<MutationDialog | null>(null);
   const [name, setName] = useState("");
   const [status, setStatus] = useState<PlayerStatus>("active");
+  const [targetRank, setTargetRank] = useState(1);
   const [adminSecret, setAdminSecret] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -47,6 +50,24 @@ export default function AdminPlayerManager({ clubs }: AdminPlayerManagerProps) {
 
   const selectedClub =
     clubs.find((club) => club.slug === selectedSlug) ?? clubs[0] ?? null;
+  const rankedPlayers = useMemo(
+    () =>
+      (selectedClub?.players ?? [])
+        .filter((player) => player.status !== "left")
+        .toSorted((a, b) => a.currentRank - b.currentRank),
+    [selectedClub]
+  );
+  const rankPreview = useMemo(
+    () =>
+      dialog?.kind === "rank" && selectedClub
+        ? buildAdminRankAdjustmentPreview(
+            selectedClub.players,
+            dialog.player.seasonPlayerId,
+            targetRank
+          )
+        : null,
+    [dialog, selectedClub, targetRank]
+  );
   const filteredPlayers = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase("ko");
 
@@ -61,6 +82,7 @@ export default function AdminPlayerManager({ clubs }: AdminPlayerManagerProps) {
     setDialog(null);
     setName("");
     setStatus("active");
+    setTargetRank(1);
     setAdminSecret("");
     setErrorMessage("");
     setSubmitting(false);
@@ -93,6 +115,16 @@ export default function AdminPlayerManager({ clubs }: AdminPlayerManagerProps) {
     setSuccessMessage("");
   }
 
+  function openRankDialog(player: AdminSeasonPlayer) {
+    setDialog({ kind: "rank", player });
+    setName(player.name);
+    setStatus(player.status);
+    setTargetRank(player.currentRank);
+    setAdminSecret("");
+    setErrorMessage("");
+    setSuccessMessage("");
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -108,12 +140,19 @@ export default function AdminPlayerManager({ clubs }: AdminPlayerManagerProps) {
             name: name.trim(),
             adminSecret,
           }
-        : {
+        : dialog.kind === "status"
+          ? {
             operation: "status",
             seasonPlayerId: dialog.player.seasonPlayerId,
             status,
             adminSecret,
-          };
+            }
+          : {
+              operation: "rank",
+              seasonPlayerId: dialog.player.seasonPlayerId,
+              targetRank,
+              adminSecret,
+            };
 
     setSubmitting(true);
     setErrorMessage("");
@@ -148,9 +187,17 @@ export default function AdminPlayerManager({ clubs }: AdminPlayerManagerProps) {
       ? "선수 추가"
       : dialog?.kind === "rename"
         ? "이름 수정"
-        : "상태 변경";
+        : dialog?.kind === "status"
+          ? "상태 변경"
+          : "순위 변경";
   const submitLabel =
-    dialog?.kind === "add" ? "추가" : dialog?.kind === "rename" ? "저장" : "변경";
+    dialog?.kind === "add"
+      ? "추가"
+      : dialog?.kind === "rename"
+        ? "저장"
+        : dialog?.kind === "status"
+          ? "변경"
+          : "순위 적용";
 
   return (
     <section className="admin-section admin-player-section" aria-labelledby="player-roster-title">
@@ -249,6 +296,15 @@ export default function AdminPlayerManager({ clubs }: AdminPlayerManagerProps) {
                 </button>
               </div>
               <div className="admin-player-actions" role="cell">
+                {player.status !== "left" ? (
+                  <button
+                    type="button"
+                    onClick={() => openRankDialog(player)}
+                    aria-label={`${player.name} 순위 변경`}
+                  >
+                    순위 변경
+                  </button>
+                ) : null}
                 <button
                   type="button"
                   onClick={() => openRenameDialog(player)}
@@ -292,7 +348,7 @@ export default function AdminPlayerManager({ clubs }: AdminPlayerManagerProps) {
             </header>
 
             <form onSubmit={handleSubmit}>
-              {dialog.kind !== "status" ? (
+              {dialog.kind === "add" || dialog.kind === "rename" ? (
                 <label className="admin-dialog-field">
                   <span>선수 이름</span>
                   <input
@@ -304,7 +360,7 @@ export default function AdminPlayerManager({ clubs }: AdminPlayerManagerProps) {
                     required
                   />
                 </label>
-              ) : (
+              ) : dialog.kind === "status" ? (
                 <label className="admin-dialog-field">
                   <span>선수 상태</span>
                   <select
@@ -319,6 +375,63 @@ export default function AdminPlayerManager({ clubs }: AdminPlayerManagerProps) {
                     ))}
                   </select>
                 </label>
+              ) : (
+                <>
+                  <div className="admin-rank-player">
+                    <span>선수</span>
+                    <strong>
+                      {dialog.player.name} · 현재 {dialog.player.currentRank}위
+                    </strong>
+                  </div>
+
+                  <label className="admin-dialog-field">
+                    <span>목표 순위</span>
+                    <select
+                      aria-label="목표 순위"
+                      value={targetRank}
+                      onChange={(event) =>
+                        setTargetRank(Number(event.target.value))
+                      }
+                      autoFocus
+                    >
+                      {rankedPlayers.map((player) => (
+                        <option
+                          key={player.seasonPlayerId}
+                          value={player.currentRank}
+                        >
+                          {player.currentRank}위 · {player.name}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+
+                  {rankPreview ? (
+                    <section
+                      className="admin-rank-preview"
+                      role="region"
+                      aria-label="순위 변경 미리보기"
+                    >
+                      <header>
+                        <strong>변경 미리보기</strong>
+                        <span>{rankPreview.changes.length}명 영향</span>
+                      </header>
+                      <ul>
+                        {rankPreview.changes.map((change) => (
+                          <li key={change.seasonPlayerId}>
+                            <span>{change.name}</span>
+                            <strong>
+                              {change.oldRank}위 → {change.newRank}위
+                            </strong>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+                  ) : (
+                    <p className="admin-rank-preview-empty">
+                      현재 순위와 다른 목표 순위를 선택해주세요.
+                    </p>
+                  )}
+                </>
               )}
 
               <label className="admin-dialog-field">
@@ -354,8 +467,11 @@ export default function AdminPlayerManager({ clubs }: AdminPlayerManagerProps) {
                   disabled={
                     submitting ||
                     !adminSecret.trim() ||
-                    (dialog.kind !== "status" && !name.trim()) ||
-                    (dialog.kind === "status" && status === dialog.player.status)
+                    ((dialog.kind === "add" || dialog.kind === "rename") &&
+                      !name.trim()) ||
+                    (dialog.kind === "status" &&
+                      status === dialog.player.status) ||
+                    (dialog.kind === "rank" && !rankPreview)
                   }
                 >
                   {submitting ? "반영 중" : submitLabel}

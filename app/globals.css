@@ -2867,6 +2867,7 @@ button:disabled {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap: 4px;
 }
 
 .admin-player-actions button {
@@ -2956,6 +2957,98 @@ button:disabled {
   border: 1px solid #d9dee3;
   border-radius: 7px;
   outline: none;
+}
+
+.admin-rank-player {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  background: #f8fafb;
+  border-left: 3px solid #3f7884;
+}
+
+.admin-rank-player span {
+  color: #68737d;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.admin-rank-player strong {
+  color: #1f2933;
+  font-size: 13px;
+}
+
+.admin-rank-preview {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px 0;
+  border-top: 1px solid #e6e9ed;
+  border-bottom: 1px solid #e6e9ed;
+}
+
+.admin-rank-preview > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.admin-rank-preview > header strong {
+  color: #1f2933;
+  font-size: 12px;
+}
+
+.admin-rank-preview > header span {
+  color: #68737d;
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.admin-rank-preview ul {
+  max-height: 220px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.admin-rank-preview li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 34px;
+  padding: 6px 2px;
+}
+
+.admin-rank-preview li + li {
+  border-top: 1px solid #edf0f2;
+}
+
+.admin-rank-preview li span {
+  overflow: hidden;
+  color: #52606d;
+  font-size: 11px;
+  font-weight: 750;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-rank-preview li strong {
+  color: #285e6a;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.admin-rank-preview-empty {
+  margin: 0;
+  padding: 11px 0;
+  color: #7d8790;
+  border-top: 1px solid #e6e9ed;
+  border-bottom: 1px solid #e6e9ed;
+  font-size: 10px;
+  line-height: 1.5;
 }
 
 .admin-dialog-help {
@@ -3605,6 +3698,7 @@ button:disabled {
 
   .admin-player-actions {
     grid-column: 2 / 4;
+    flex-wrap: wrap;
     justify-content: flex-start;
   }
 
