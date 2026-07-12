@@ -21,7 +21,15 @@ type CliDeps = {
 };
 
 export function parseNationalRankingSeedSqlCliArgs(argv: string[]): CliArgs {
-  const outIndex = argv.indexOf("--out");
+  const outIndexes = argv.flatMap((argument, index) =>
+    argument === "--out" ? [index] : []
+  );
+
+  if (outIndexes.length > 1) {
+    throw new Error("--out may only be provided once");
+  }
+
+  const outIndex = outIndexes[0] ?? -1;
 
   if (outIndex < 0) {
     return {};

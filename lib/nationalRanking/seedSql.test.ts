@@ -425,6 +425,12 @@ describe("buildNationalRankingSeedSql", () => {
         loadDataset,
       })
     ).toThrow("--out requires a non-empty path");
+    expect(() =>
+      runNationalRankingSeedSqlCli(
+        ["node", cliPath, "--out", "first.sql", "--out"],
+        { loadDataset }
+      )
+    ).toThrow("--out may only be provided once");
     expect(loadDataset).not.toHaveBeenCalled();
     expect(readFileSync(cliPath, "utf8")).toContain(
       "Source revision is SHA-256(JSON.stringify(validated dataset)): order-preserving validated-manifest serialization."
