@@ -19,6 +19,365 @@
   --shadow: 0 12px 36px rgba(23, 33, 28, 0.08);
 }
 
+/* National ranking methodology document */
+.methodology-page {
+  --methodology-ink: #20272f;
+  --methodology-muted: #65717c;
+  --methodology-line: #dce2e7;
+  --methodology-accent: #23684c;
+  --methodology-soft: #eef4f1;
+  min-height: 100vh;
+  color: var(--methodology-ink);
+  background: #f5f7f6;
+}
+
+.methodology-document {
+  width: min(780px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 72px;
+}
+
+.methodology-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--methodology-accent);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.methodology-header {
+  padding: 48px 0 42px;
+}
+
+.methodology-kicker {
+  margin: 0 0 10px;
+  color: var(--methodology-accent);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.methodology-header h1 {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 850;
+  line-height: 1.2;
+  letter-spacing: 0;
+  word-break: keep-all;
+}
+
+.methodology-header > p:last-child {
+  max-width: 650px;
+  margin: 18px 0 0;
+  color: var(--methodology-muted);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+.methodology-section {
+  width: 100%;
+  padding: 34px 0 38px;
+  border-top: 1px solid var(--methodology-line);
+}
+
+.methodology-section h2 {
+  margin: 0 0 16px;
+  font-size: 22px;
+  font-weight: 850;
+  line-height: 1.35;
+  letter-spacing: 0;
+  word-break: keep-all;
+}
+
+.methodology-section p {
+  margin: 0;
+  color: var(--methodology-muted);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.8;
+  word-break: keep-all;
+}
+
+.methodology-section p + p {
+  margin-top: 12px;
+}
+
+.methodology-section strong {
+  color: var(--methodology-ink);
+  font-weight: 850;
+}
+
+.methodology-formula {
+  width: 100%;
+  margin: 18px 0;
+  padding: 20px;
+  overflow: hidden;
+  background: var(--methodology-soft);
+  border: 1px solid #ccdcd4;
+  border-radius: 8px;
+}
+
+.methodology-formula code {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  color: #174f39;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.7;
+  white-space: normal;
+  word-break: keep-all;
+}
+
+.methodology-formula-secondary code {
+  font-size: 14px;
+  font-weight: 750;
+  word-break: normal;
+}
+
+.methodology-table-scroll {
+  width: 100%;
+  margin: 20px 0 0;
+  overflow-x: auto;
+  background: white;
+  border: 1px solid var(--methodology-line);
+  border-radius: 8px;
+  scrollbar-gutter: stable;
+}
+
+.methodology-table-scroll:focus-visible,
+.methodology-back-link:focus-visible,
+.methodology-references a:focus-visible {
+  outline: 3px solid rgba(35, 104, 76, 0.2);
+  outline-offset: 3px;
+}
+
+.methodology-table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+}
+
+.methodology-table caption {
+  padding: 13px 16px;
+  color: var(--methodology-ink);
+  text-align: left;
+  border-bottom: 1px solid var(--methodology-line);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.methodology-table th,
+.methodology-table td {
+  padding: 13px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e8ecef;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.methodology-table thead th {
+  color: var(--methodology-muted);
+  background: #f7f9f8;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.methodology-table tbody th {
+  color: var(--methodology-ink);
+  font-weight: 750;
+}
+
+.methodology-table tbody td {
+  color: var(--methodology-muted);
+  font-weight: 700;
+}
+
+.methodology-table th:last-child,
+.methodology-table td:last-child {
+  text-align: right;
+}
+
+.methodology-table tbody tr:last-child th,
+.methodology-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.methodology-section .methodology-note {
+  margin-top: 16px;
+  padding-left: 14px;
+  color: #66552e;
+  border-left: 3px solid #b48a35;
+  font-size: 13px;
+}
+
+.methodology-examples {
+  display: grid;
+  gap: 0;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--methodology-line);
+}
+
+.methodology-examples li {
+  display: grid;
+  gap: 7px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--methodology-line);
+}
+
+.methodology-examples span {
+  color: var(--methodology-muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.methodology-examples code {
+  overflow-wrap: anywhere;
+  color: var(--methodology-ink);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 15px;
+  font-weight: 850;
+  line-height: 1.6;
+}
+
+.methodology-status-list,
+.methodology-version {
+  margin: 4px 0 0;
+}
+
+.methodology-status-list > div,
+.methodology-version > div {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 18px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--methodology-line);
+}
+
+.methodology-status-list > div:first-child,
+.methodology-version > div:first-child {
+  border-top: 1px solid var(--methodology-line);
+}
+
+.methodology-status-list dt,
+.methodology-version dt {
+  color: var(--methodology-ink);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.methodology-status-list dd,
+.methodology-version dd {
+  margin: 0;
+  color: var(--methodology-muted);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.65;
+}
+
+.methodology-status-list code,
+.methodology-version code,
+.methodology-version time {
+  color: var(--methodology-accent);
+  font-family: var(--font-geist-mono), monospace;
+  font-weight: 800;
+}
+
+.methodology-version {
+  margin-bottom: 16px;
+}
+
+.methodology-references {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--methodology-line);
+}
+
+.methodology-references li {
+  display: grid;
+  gap: 5px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--methodology-line);
+}
+
+.methodology-references a {
+  width: fit-content;
+  color: var(--methodology-accent);
+  font-size: 14px;
+  font-weight: 850;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.methodology-references span {
+  color: var(--methodology-muted);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+@media (max-width: 640px) {
+  .methodology-document {
+    width: calc(100% - 24px);
+    padding-top: 22px;
+    padding-bottom: 48px;
+  }
+
+  .methodology-header {
+    padding: 38px 0 34px;
+  }
+
+  .methodology-header h1 {
+    font-size: 31px;
+  }
+
+  .methodology-header > p:last-child {
+    font-size: 15px;
+  }
+
+  .methodology-section {
+    padding: 28px 0 32px;
+  }
+
+  .methodology-section h2 {
+    font-size: 20px;
+  }
+
+  .methodology-formula {
+    padding: 16px;
+  }
+
+  .methodology-formula code,
+  .methodology-examples code {
+    font-size: 13px;
+  }
+
+  .methodology-table {
+    min-width: 480px;
+  }
+
+  .methodology-status-list > div,
+  .methodology-version > div {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .methodology-page,
+  .methodology-table-scroll {
+    scroll-behavior: auto;
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
