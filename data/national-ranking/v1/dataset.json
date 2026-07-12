@@ -98,6 +98,12 @@
       "displayName": "강원대학교 SHOT"
     },
     {
+      "slug": "gyeonggi-kft",
+      "universityName": "경기대학교",
+      "clubName": "Kft",
+      "displayName": "경기대학교 Kft"
+    },
+    {
       "slug": "gyeonggi-ktf",
       "universityName": "경기대학교",
       "clubName": "KTF",
@@ -302,6 +308,12 @@
       "displayName": "연세대학교 쿠크다스"
     },
     {
+      "slug": "yonsei-kookris",
+      "universityName": "연세대학교",
+      "clubName": "쿠크리스",
+      "displayName": "연세대학교 쿠크리스"
+    },
+    {
       "slug": "yonsei-yutt",
       "universityName": "연세대학교",
       "clubName": "YUTT",
@@ -405,12 +417,12 @@
       "sourceLabel": "경기대 Ktf"
     },
     {
-      "clubSlug": "gyeonggi-ktf",
+      "clubSlug": "gyeonggi-kft",
       "normalizedAlias": "경기대학교 kft a",
       "sourceLabel": "Kft A"
     },
     {
-      "clubSlug": "gyeonggi-ktf",
+      "clubSlug": "gyeonggi-kft",
       "normalizedAlias": "경기대학교 kft b",
       "sourceLabel": "Kft B"
     },
@@ -785,12 +797,12 @@
       "sourceLabel": "쿠크다스 B"
     },
     {
-      "clubSlug": "yonsei-kookdas",
+      "clubSlug": "yonsei-kookris",
       "normalizedAlias": "연세대학교 쿠크리스 a",
       "sourceLabel": "쿠크리스 A"
     },
     {
-      "clubSlug": "yonsei-kookdas",
+      "clubSlug": "yonsei-kookris",
       "normalizedAlias": "연세대학교 쿠크리스 b",
       "sourceLabel": "쿠크리스 B"
     },
@@ -1164,7 +1176,9 @@
       "actualEntrants": 94,
       "sourceStatus": "verified",
       "sourceRefs": [
-        "양구/2025/남자/2025 양구 남자.pdf"
+        "양구/2025/남자/2025 양구 남자.pdf#page=1",
+        "양구/2025/남자/2025 양구 남자.pdf#page=2",
+        "양구/2025/남자/2025 양구 남자.pdf#page=3"
       ]
     },
     {
@@ -1175,7 +1189,9 @@
       "actualEntrants": 73,
       "sourceStatus": "verified",
       "sourceRefs": [
-        "양구/2025/여자/2025 양구 여자.pdf"
+        "양구/2025/여자/2025 양구 여자.pdf#page=1",
+        "양구/2025/여자/2025 양구 여자.pdf#page=2",
+        "양구/2025/여자/2025 양구 여자.pdf#page=3"
       ]
     },
     {
@@ -1232,7 +1248,7 @@
       "actualEntrants": 20,
       "sourceStatus": "verified",
       "sourceRefs": [
-        "인제/2025/남자/2025 인제 남자.pdf"
+        "인제/2025/남자/2025 인제 남자.pdf#page=1"
       ]
     },
     {
@@ -1243,7 +1259,7 @@
       "actualEntrants": 12,
       "sourceStatus": "verified",
       "sourceRefs": [
-        "인제/2025/여자/2025 인제 여자.pdf"
+        "인제/2025/여자/2025 인제 여자.pdf#page=1"
       ]
     }
   ],
@@ -4040,7 +4056,7 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": "gyeonggi-ktf",
+      "clubSlug": "gyeonggi-kft",
       "sourceTeamName": "Kft B",
       "teamLabel": "B",
       "stage": "first_match_loss",
@@ -4670,7 +4686,7 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": "yonsei-kookdas",
+      "clubSlug": "yonsei-kookris",
       "sourceTeamName": "쿠크리스 A",
       "teamLabel": "A",
       "stage": "round_of_32",
@@ -4720,7 +4736,7 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": "gyeonggi-ktf",
+      "clubSlug": "gyeonggi-kft",
       "sourceTeamName": "Kft A",
       "teamLabel": "A",
       "stage": "round_of_32",
@@ -4730,7 +4746,7 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": "yonsei-kookdas",
+      "clubSlug": "yonsei-kookris",
       "sourceTeamName": "쿠크리스 B",
       "teamLabel": "B",
       "stage": "round_of_64",

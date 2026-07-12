@@ -372,6 +372,9 @@ describe("loadNationalRankingDataset", () => {
       { slug: "chuncheon", name: "춘천소양강배", scope: "national", scopeFactor: 1 },
       { slug: "wemix", name: "WEMIX OPEN", scope: "national", scopeFactor: 1 },
     ]);
+    expect(dataset.editions.map((edition) => edition.key).sort()).toEqual(
+      Object.keys(expectedCounts).sort()
+    );
     expect(selected).toHaveLength(12);
     expect(new Set(selected.map((edition) => edition.gender))).toEqual(
       new Set(["men", "women"])
@@ -395,11 +398,20 @@ describe("loadNationalRankingDataset", () => {
       )
     ).toBe(true);
     expect(JSON.stringify(dataset)).not.toMatch(/\/Users\/|[A-Za-z]:\\\\/);
-    expect(
-      dataset.results
-        .filter((result) => result.sourceRef.includes(".pdf"))
-        .every((result) => /#page=\d+$/.test(result.sourceRef))
-    ).toBe(true);
+    const unanchoredPdfRefs = {
+      editions: dataset.editions.flatMap((edition) =>
+        edition.sourceRefs.filter(
+          (sourceRef) => sourceRef.includes(".pdf") && !/#page=\d+$/.test(sourceRef)
+        )
+      ),
+      results: dataset.results
+        .map((result) => result.sourceRef)
+        .filter(
+          (sourceRef) => sourceRef.includes(".pdf") && !/#page=\d+$/.test(sourceRef)
+        ),
+    };
+
+    expect(unanchoredPdfRefs).toEqual({ editions: [], results: [] });
     expect(
       dataset.results.every((result) =>
         result.qualityStatus === "verified"
@@ -409,5 +421,61 @@ describe("loadNationalRankingDataset", () => {
     ).toBe(true);
     expect(() => parseNationalRankingDataset(dataset)).not.toThrow();
     expect(() => calculateNationalRankings(dataset)).not.toThrow();
+  });
+
+  it("keeps 경기대학교 Kft distinct from KTF", () => {
+    const dataset = loadNationalRankingDataset();
+    const clubSlugs = new Set(dataset.clubs.map((club) => club.slug));
+    const kftAliases = dataset.aliases
+      .filter((alias) => alias.normalizedAlias.startsWith("경기대학교 kft "))
+      .map(({ normalizedAlias, clubSlug }) => ({ normalizedAlias, clubSlug }));
+    const kftResults = dataset.results
+      .filter(
+        (result) =>
+          result.editionKey === "yanggu-2024-women" &&
+          ["Kft A", "Kft B"].includes(result.sourceTeamName)
+      )
+      .map(({ sourceTeamName, clubSlug }) => ({ sourceTeamName, clubSlug }))
+      .sort((left, right) => left.sourceTeamName.localeCompare(right.sourceTeamName));
+
+    expect(
+      ["gyeonggi-ktf", "gyeonggi-kft"].filter((slug) => !clubSlugs.has(slug))
+    ).toEqual([]);
+    expect(kftAliases).toEqual([
+      { normalizedAlias: "경기대학교 kft a", clubSlug: "gyeonggi-kft" },
+      { normalizedAlias: "경기대학교 kft b", clubSlug: "gyeonggi-kft" },
+    ]);
+    expect(kftResults).toEqual([
+      { sourceTeamName: "Kft A", clubSlug: "gyeonggi-kft" },
+      { sourceTeamName: "Kft B", clubSlug: "gyeonggi-kft" },
+    ]);
+  });
+
+  it("keeps 연세대학교 쿠크리스 distinct from 쿠크다스", () => {
+    const dataset = loadNationalRankingDataset();
+    const clubSlugs = new Set(dataset.clubs.map((club) => club.slug));
+    const kookrisAliases = dataset.aliases
+      .filter((alias) => alias.normalizedAlias.startsWith("연세대학교 쿠크리스 "))
+      .map(({ normalizedAlias, clubSlug }) => ({ normalizedAlias, clubSlug }));
+    const kookrisResults = dataset.results
+      .filter(
+        (result) =>
+          result.editionKey === "yanggu-2024-women" &&
+          ["쿠크리스 A", "쿠크리스 B"].includes(result.sourceTeamName)
+      )
+      .map(({ sourceTeamName, clubSlug }) => ({ sourceTeamName, clubSlug }))
+      .sort((left, right) => left.sourceTeamName.localeCompare(right.sourceTeamName));
+
+    expect(
+      ["yonsei-kookdas", "yonsei-kookris"].filter((slug) => !clubSlugs.has(slug))
+    ).toEqual([]);
+    expect(kookrisAliases).toEqual([
+      { normalizedAlias: "연세대학교 쿠크리스 a", clubSlug: "yonsei-kookris" },
+      { normalizedAlias: "연세대학교 쿠크리스 b", clubSlug: "yonsei-kookris" },
+    ]);
+    expect(kookrisResults).toEqual([
+      { sourceTeamName: "쿠크리스 A", clubSlug: "yonsei-kookris" },
+      { sourceTeamName: "쿠크리스 B", clubSlug: "yonsei-kookris" },
+    ]);
   });
 });

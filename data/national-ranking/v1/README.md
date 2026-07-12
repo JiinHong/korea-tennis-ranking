@@ -26,9 +26,9 @@ definitions are present so later source tranches share one stable catalog.
 
 The common source root is `~/Documents/테니스 랭킹`. All committed `sourceRefs`
 are relative to that root; absolute machine paths are forbidden. A PNG result
-references the image path. Every PDF result appends a one-based page anchor,
-for example `양구/2025/남자/2025 양구 남자.pdf#page=3`. Edition-level
-`sourceRefs` list the underlying source file without the page anchor.
+or edition references the image path. Every PDF reference at both the edition
+and result level appends a one-based page anchor, for example
+`양구/2025/남자/2025 양구 남자.pdf#page=3`.
 
 One visually verified terminal record is stored for every named entrant.
 `actualEntrants` therefore equals the number of result rows for each edition.
@@ -48,11 +48,13 @@ distinct club/team identity. A university name followed only by `A`, `B`,
 different year or source.
 
 Canonical clubs consolidate visually explicit spelling and case variants such
-as `Kutc`/`KUTC`, `Hitc`/`HITC`, `Ktf`/`Kft`, and the reported Yonsei
-`쿠크다스`/`쿠크리스` forms. Campus-qualified identities remain separate when
-the source distinguishes them. Aliases use an NFKC-normalized, lowercased
-combination of canonical university context and the exact reported team name;
-`sourceLabel` preserves the source spelling.
+as `Kutc`/`KUTC`, `Hitc`/`HITC`, and `Ktf`/`KTF`. Source-explicit identities
+remain distinct without evidence that they are variants: 경기대학교 `Kft` is
+separate from `KTF`, and 연세대학교 `쿠크리스` is separate from `쿠크다스`.
+Campus-qualified identities likewise remain separate when the source
+distinguishes them. Aliases use an NFKC-normalized, lowercased combination of
+canonical university context and the exact reported team name; `sourceLabel`
+preserves the source spelling.
 
 OCR may help locate text, but no OCR output becomes `verified` without visual
 confirmation against the source image or rendered PDF page. Illegible or
