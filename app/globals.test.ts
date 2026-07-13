@@ -169,6 +169,33 @@ describe("campus ranking responsive title styles", () => {
 describe("national ranking responsive contracts", () => {
   const css = readFileSync(join(process.cwd(), "app/globals.css"), "utf8");
 
+  it("랭킹 부문을 채움 없는 텍스트 탭과 선택 밑줄로 표시한다", () => {
+    expect(css).toMatch(
+      /\.national-ranking-toolbar\s*\{[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-ranking-tabs\s*\{[^}]*display:\s*grid;[^}]*width:\s*100%;[^}]*padding:\s*0;[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*border-radius:\s*0;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-ranking-tabs button\s*\{[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*border-bottom:\s*2px solid transparent;[^}]*border-radius:\s*0;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-ranking-tabs button\[aria-selected="true"\]\s*\{[^}]*color:\s*var\(--national-ink\);[^}]*background:\s*transparent;[^}]*border-bottom-color:\s*var\(--national-accent\);[^}]*\}/
+    );
+  });
+
+  it("랭킹 표는 외곽 프레임 없이 행 사이 가로선만 사용한다", () => {
+    expect(css).toMatch(
+      /\.national-ranking-surface\s*\{[^}]*border:\s*0;[^}]*border-radius:\s*0;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-ranking-table th,\s*\.national-ranking-table td\s*\{[^}]*border:\s*0;[^}]*border-bottom:\s*1px solid var\(--national-line\);[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-ranking-table th\s*\{[^}]*background:\s*transparent;[^}]*\}/
+    );
+  });
+
   it("조용한 전체 너비 랭킹 표에 고정 순위와 점수 열을 둔다", () => {
     expect(css).toMatch(
       /\.national-ranking-section\s*\{[\s\S]*?width:\s*100%;[^}]*\}/
@@ -231,9 +258,12 @@ describe("national ranking responsive contracts", () => {
     );
   });
 
-  it("전국 랭킹 조작 요소의 키보드 포커스를 불투명 액센트 윤곽선으로 표시한다", () => {
+  it("탭의 키보드 포커스는 하단선으로, 다른 조작 요소는 액센트 윤곽선으로 표시한다", () => {
     expect(css).toMatch(
-      /\.national-ranking-tabs button:focus-visible,[\s\S]*?\.national-ranking-club-link:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--national-accent\);[^}]*\}/
+      /\.national-ranking-tabs button:focus-visible\s*\{[^}]*outline:\s*0;[^}]*box-shadow:\s*inset 0 -4px var\(--national-accent\);[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.ranking-methodology-trigger:focus-visible,[\s\S]*?\.national-ranking-club-link:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--national-accent\);[^}]*\}/
     );
   });
 

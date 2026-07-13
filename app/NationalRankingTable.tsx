@@ -80,7 +80,6 @@ export default function NationalRankingTable({
             <button
               aria-controls="national-ranking-panel"
               aria-selected={activeGender === tab.gender}
-              className={tab.gender === "combined" ? "is-secondary" : undefined}
               id={`national-ranking-tab-${tab.gender}`}
               key={tab.gender}
               onClick={() => setActiveGender(tab.gender)}
@@ -96,9 +95,6 @@ export default function NationalRankingTable({
             </button>
           ))}
         </div>
-        {activeGender === "combined" ? (
-          <span className="national-ranking-secondary-label">보조 랭킹</span>
-        ) : null}
       </div>
 
       <div

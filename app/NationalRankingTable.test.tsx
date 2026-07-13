@@ -176,7 +176,7 @@ describe("NationalRankingTable", () => {
     expect(screen.getByText("프로토타입대학교").closest("a")).toBeNull();
   });
 
-  it("여자부와 보조 종합 랭킹을 같은 표 안에서 전환한다", () => {
+  it("여자부와 종합 랭킹을 부가 라벨 없이 같은 표 안에서 전환한다", () => {
     render(<NationalRankingTable rankings={rankings} />);
 
     fireEvent.click(screen.getByRole("tab", { name: "여자부" }));
@@ -189,7 +189,7 @@ describe("NationalRankingTable", () => {
 
     fireEvent.click(screen.getByRole("tab", { name: "종합" }));
 
-    expect(screen.getByText("보조 랭킹")).toBeDefined();
+    expect(screen.queryByText("보조 랭킹")).toBeNull();
     expect(screen.getByText("고려대학교")).toBeDefined();
     expect(screen.queryByText("연세대학교")).toBeNull();
     expect(within(screen.getByRole("table")).getAllByRole("row")).toHaveLength(2);
