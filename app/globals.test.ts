@@ -235,25 +235,13 @@ describe("national ranking responsive contracts", () => {
     );
   });
 
-  it("산정 방식 안내는 기본적으로 숨기고 탭 상태나 데스크톱 호버로 표시한다", () => {
+  it("헤더의 랭킹 계산 방식 링크를 팝오버 없이 조용한 텍스트 링크로 표시한다", () => {
     expect(css).toMatch(
-      /\.ranking-methodology-tooltip\s*\{[^}]*opacity:\s*0;[^}]*visibility:\s*hidden;[^}]*pointer-events:\s*none;[^}]*\}/
+      /\.national-methodology-link\s*\{[^}]*display:\s*inline-flex;[^}]*margin-top:\s*8px;[^}]*color:\s*var\(--national-accent\);[^}]*font-weight:\s*800;[^}]*text-underline-offset:\s*4px;[^}]*\}/
     );
-    expect(css).toMatch(
-      /\.ranking-methodology-info\[data-open="true"\]\s+\.ranking-methodology-tooltip\s*\{[^}]*opacity:\s*1;[^}]*visibility:\s*visible;[^}]*pointer-events:\s*auto;[^}]*\}/
-    );
-    expect(css).toMatch(
-      /@media\s*\(hover:\s*hover\)\s*\{[\s\S]*?\.ranking-methodology-info:hover\s+\.ranking-methodology-tooltip\s*\{[^}]*opacity:\s*1;[^}]*visibility:\s*visible;[^}]*pointer-events:\s*auto;[^}]*\}/
-    );
-    expect(css).not.toContain("and (pointer: fine)");
-    expect(css).not.toContain(".ranking-methodology-backdrop");
-    expect(css).not.toContain(".ranking-methodology-dialog");
-  });
-
-  it("정보 아이콘과 툴팁 사이에 끊기지 않는 호버 이동 영역을 둔다", () => {
-    expect(css).toMatch(
-      /\.ranking-methodology-info::after\s*\{[^}]*content:\s*"";[^}]*position:\s*absolute;[^}]*top:\s*100%;[^}]*left:\s*-88px;[^}]*width:\s*min\(340px,\s*calc\(100vw - 32px\)\);[^}]*height:\s*6px;[^}]*\}/
-    );
+    expect(css).not.toContain(".ranking-methodology-info");
+    expect(css).not.toContain(".ranking-methodology-trigger");
+    expect(css).not.toContain(".ranking-methodology-tooltip");
   });
 
   it("오류 상태의 다시 시도 링크를 기존 전국 랭킹 링크처럼 표시한다", () => {
@@ -267,7 +255,7 @@ describe("national ranking responsive contracts", () => {
       /\.national-ranking-tabs button:focus-visible\s*\{[^}]*outline:\s*0;[^}]*box-shadow:\s*inset 0 -4px var\(--national-accent\);[^}]*\}/
     );
     expect(css).toMatch(
-      /\.ranking-methodology-trigger:focus-visible,[\s\S]*?\.national-ranking-honor-trigger:focus-visible,[\s\S]*?\.national-ranking-club-link:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--national-accent\);[^}]*\}/
+      /\.national-methodology-link:focus-visible,[\s\S]*?\.national-ranking-honor-trigger:focus-visible,[\s\S]*?\.national-ranking-club-link:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--national-accent\);[^}]*\}/
     );
   });
 

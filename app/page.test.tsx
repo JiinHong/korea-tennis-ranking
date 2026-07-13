@@ -53,6 +53,14 @@ describe("Home", () => {
         "국토정중앙배(양구), 경인지구 연맹전, 춘천소양강배, 하늘내린인제, WEMIX OPEN의 성적을 바탕으로 산정합니다."
       )
     ).toBeDefined();
+    expect(
+      screen
+        .getByRole("link", { name: "랭킹 계산 방식 보기" })
+        .getAttribute("href")
+    ).toBe("/methodology");
+    expect(
+      screen.queryByRole("button", { name: "랭킹 산정 방식 안내" })
+    ).toBeNull();
     expect(screen.queryByText("national-club-v3")).toBeNull();
     expect(screen.queryByText("계산식")).toBeNull();
     expect(screen.queryByText("산정 시각")).toBeNull();

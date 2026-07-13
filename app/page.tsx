@@ -3,7 +3,6 @@ import Link from "next/link";
 import { getCachedNationalRankingPageData } from "@/lib/nationalRanking/repository";
 
 import NationalRankingTable from "./NationalRankingTable";
-import RankingMethodologyInfo from "./RankingMethodologyInfo";
 
 const rankingPeriodFormatter = new Intl.DateTimeFormat("ko-KR", {
   year: "numeric",
@@ -33,6 +32,9 @@ export default async function Home() {
               국토정중앙배(양구), 경인지구 연맹전, 춘천소양강배,
               하늘내린인제, WEMIX OPEN의 성적을 바탕으로 산정합니다.
             </p>
+            <Link className="national-methodology-link" href="/methodology">
+              랭킹 계산 방식 보기
+            </Link>
           </div>
         </header>
 
@@ -50,7 +52,6 @@ export default async function Home() {
             <div className="national-ranking-header">
               <div className="national-ranking-title-row">
                 <h2 id="ranking-title">전국 랭킹</h2>
-                <RankingMethodologyInfo />
               </div>
               <time
                 className="national-ranking-reference-date"
