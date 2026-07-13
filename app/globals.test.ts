@@ -235,13 +235,17 @@ describe("national ranking responsive contracts", () => {
     );
   });
 
-  it("산정 방식 안내는 기본적으로 숨기고 마우스 호버 환경에서만 표시한다", () => {
+  it("산정 방식 안내는 기본적으로 숨기고 탭 상태나 데스크톱 호버로 표시한다", () => {
     expect(css).toMatch(
       /\.ranking-methodology-tooltip\s*\{[^}]*opacity:\s*0;[^}]*visibility:\s*hidden;[^}]*pointer-events:\s*none;[^}]*\}/
     );
     expect(css).toMatch(
-      /@media\s*\(hover:\s*hover\)\s*and\s*\(pointer:\s*fine\)\s*\{[\s\S]*?\.ranking-methodology-info:hover\s+\.ranking-methodology-tooltip\s*\{[^}]*opacity:\s*1;[^}]*visibility:\s*visible;[^}]*pointer-events:\s*auto;[^}]*\}/
+      /\.ranking-methodology-info\[data-open="true"\]\s+\.ranking-methodology-tooltip\s*\{[^}]*opacity:\s*1;[^}]*visibility:\s*visible;[^}]*pointer-events:\s*auto;[^}]*\}/
     );
+    expect(css).toMatch(
+      /@media\s*\(hover:\s*hover\)\s*\{[\s\S]*?\.ranking-methodology-info:hover\s+\.ranking-methodology-tooltip\s*\{[^}]*opacity:\s*1;[^}]*visibility:\s*visible;[^}]*pointer-events:\s*auto;[^}]*\}/
+    );
+    expect(css).not.toContain("and (pointer: fine)");
     expect(css).not.toContain(".ranking-methodology-backdrop");
     expect(css).not.toContain(".ranking-methodology-dialog");
   });

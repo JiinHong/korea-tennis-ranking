@@ -4,41 +4,69 @@ import { describe, expect, it } from "vitest";
 import RankingMethodologyInfo from "./RankingMethodologyInfo";
 
 describe("RankingMethodologyInfo", () => {
-  it("클릭 버튼이나 다이얼로그 없이 정보 아이콘과 산정 요약을 함께 렌더링한다", () => {
+  it("정보 아이콘을 접근 가능한 토글 버튼으로 렌더링한다", () => {
     render(<RankingMethodologyInfo />);
 
-    const trigger = screen.getByLabelText("랭킹 산정 방식 안내");
+    const trigger = screen.getByRole("button", {
+      name: "랭킹 산정 방식 안내",
+    });
 
-    expect(trigger.tagName).toBe("SPAN");
-    expect(trigger.getAttribute("tabindex")).toBe("0");
-    expect(screen.queryByRole("button")).toBeNull();
+    expect(trigger.getAttribute("aria-expanded")).toBe("false");
+    expect(trigger.getAttribute("aria-controls")).toBe(
+      "ranking-methodology-tooltip"
+    );
     expect(screen.queryByRole("dialog")).toBeNull();
-    expect(
-      screen.getByText(
-        "대회 성적에 진출 단계, 대회 위상, 참가 규모, 최근 연도 가중치를 적용합니다."
-      )
-    ).toBeDefined();
-    expect(
-      screen.getByText("같은 동아리의 여러 팀 중 가장 좋은 성적만 반영합니다.")
-    ).toBeDefined();
-    expect(
-      screen.getByText(
-        "WEMIX OPEN 2025는 전체 대진 검증 전이라 현재 점수에서 제외합니다."
-      )
-    ).toBeDefined();
     expect(
       screen.getByRole("link", { name: "자세히 보기" }).getAttribute("href")
     ).toBe("/methodology");
   });
 
-  it("아이콘을 클릭해도 다이얼로그를 만들거나 본문 스크롤을 잠그지 않는다", () => {
+  it("모바일처럼 아이콘을 탭하면 안내를 열고 다시 탭하면 닫는다", () => {
+    render(<RankingMethodologyInfo />);
+
+    const trigger = screen.getByRole("button", {
+      name: "랭킹 산정 방식 안내",
+    });
+    const tooltip = screen.getByTestId("ranking-methodology-tooltip");
+
+    fireEvent.click(trigger);
+
+    expect(trigger.getAttribute("aria-expanded")).toBe("true");
+    expect(tooltip.getAttribute("data-open")).toBe("true");
+
+    fireEvent.click(trigger);
+
+    expect(trigger.getAttribute("aria-expanded")).toBe("false");
+    expect(tooltip.getAttribute("data-open")).toBe("false");
+  });
+
+  it("열린 안내는 바깥 영역을 누르거나 Escape를 누르면 닫는다", () => {
+    render(<RankingMethodologyInfo />);
+
+    const trigger = screen.getByRole("button", {
+      name: "랭킹 산정 방식 안내",
+    });
+
+    fireEvent.click(trigger);
+    fireEvent.pointerDown(document.body);
+    expect(trigger.getAttribute("aria-expanded")).toBe("false");
+
+    fireEvent.click(trigger);
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(trigger.getAttribute("aria-expanded")).toBe("false");
+    expect(document.activeElement).toBe(trigger);
+  });
+
+  it("안내를 열어도 모달을 만들거나 본문 스크롤을 잠그지 않는다", () => {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "clip";
 
     try {
       render(<RankingMethodologyInfo />);
 
-      fireEvent.click(screen.getByLabelText("랭킹 산정 방식 안내"));
+      fireEvent.click(
+        screen.getByRole("button", { name: "랭킹 산정 방식 안내" })
+      );
 
       expect(screen.queryByRole("dialog")).toBeNull();
       expect(screen.queryByTestId("ranking-methodology-backdrop")).toBeNull();

@@ -2430,11 +2430,16 @@ button:disabled {
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
+  padding: 0;
   color: var(--national-muted);
+  background: transparent;
+  border: 0;
   width: 28px;
   height: 28px;
   border-radius: 50%;
   cursor: help;
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .ranking-methodology-trigger svg {
@@ -2486,15 +2491,19 @@ button:disabled {
   text-underline-offset: 4px;
 }
 
-.ranking-methodology-trigger:focus-visible + .ranking-methodology-tooltip,
-.ranking-methodology-tooltip:focus-within {
+.ranking-methodology-info[data-open="true"] .ranking-methodology-tooltip {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
   transform: translateY(0);
 }
 
-@media (hover: hover) and (pointer: fine) {
+.ranking-methodology-info[data-open="true"] .ranking-methodology-trigger {
+  color: var(--national-ink);
+  background: #edf1ef;
+}
+
+@media (hover: hover) {
   .ranking-methodology-info:hover .ranking-methodology-tooltip {
     opacity: 1;
     visibility: visible;
