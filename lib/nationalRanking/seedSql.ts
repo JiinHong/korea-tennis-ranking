@@ -716,9 +716,7 @@ end
 `)}
 
 update public.national_ranking_snapshots
-set
-  is_published = false,
-  published_at = null
+set is_published = false
 where is_published = true
   and not (
     formula_version = ${sqlText(plan.formula.version)}

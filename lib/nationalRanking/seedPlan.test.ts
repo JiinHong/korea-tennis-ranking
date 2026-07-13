@@ -30,13 +30,13 @@ const dataset = {
     },
   ],
   tournaments: [
-    { slug: "national", name: "National", scope: "national", scopeFactor: 1 },
-    { slug: "regional", name: "Regional", scope: "regional", scopeFactor: 0.85 },
+    { slug: "yanggu", name: "National", scope: "national", scopeFactor: 1 },
+    { slug: "gyeongin", name: "Regional", scope: "regional", scopeFactor: 0.85 },
   ],
   editions: [
     {
       key: "national-2025-men",
-      tournamentSlug: "national",
+      tournamentSlug: "yanggu",
       year: 2025,
       gender: "men",
       actualEntrants: 32,
@@ -45,7 +45,7 @@ const dataset = {
     },
     {
       key: "regional-2025-women",
-      tournamentSlug: "regional",
+      tournamentSlug: "gyeongin",
       year: 2025,
       gender: "women",
       actualEntrants: 16,
@@ -54,7 +54,7 @@ const dataset = {
     },
     {
       key: "national-2024-men-unresolved",
-      tournamentSlug: "national",
+      tournamentSlug: "yanggu",
       year: 2024,
       gender: "men",
       actualEntrants: 24,
@@ -113,11 +113,20 @@ describe("buildNationalRankingSeedPlan", () => {
 
     expect(plan.sourceRevision).toBe("revision-123");
     expect(plan.formula).toMatchObject({
-      version: "national-club-v1",
-      displayName: "National Club Ranking v1",
-      effectiveOn: "2026-07-12",
+      version: "national-club-v2",
+      displayName: "National Club Ranking v2",
+      effectiveOn: "2026-07-13",
     });
-    expect(plan.formula.config.version).toBe("national-club-v1");
+    expect(plan.formula.config).toMatchObject({
+      version: "national-club-v2",
+      tournamentPrestigeFactors: {
+        yanggu: 1,
+        gyeongin: 0.9,
+        chuncheon: 0.9,
+        wemix: 0.8,
+        inje: 0.8,
+      },
+    });
     expect(plan.formula.sourceReferences).toEqual(PRIMARY_METHODOLOGY_REFERENCES);
     expect(
       plan.formula.sourceReferences.every(

@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
 
-import { calculateNationalRankings } from "@/lib/nationalRanking/calculate";
+import { calculateNationalRankings as calculateRankings } from "@/lib/nationalRanking/calculate";
+import { NATIONAL_FORMULA_V1 } from "@/lib/nationalRanking/formula";
 import type { NationalRankingDataset } from "@/lib/nationalRanking/types";
+
+function calculateNationalRankings(dataset: NationalRankingDataset) {
+  return calculateRankings(dataset, NATIONAL_FORMULA_V1);
+}
 
 const dataset = {
   version: "test-v1",
@@ -688,5 +693,82 @@ describe("calculateNationalRankings", () => {
       "korean-b",
     ]);
     expect(men.map((row) => row.rank)).toEqual([1, 2, 3, 4, 5, 6, 7]);
+  });
+
+  it("applies the approved prestige order independently of national or regional scope", () => {
+    const tournaments = [
+      { slug: "yanggu", name: "양구", scope: "national", scopeFactor: 1 },
+      { slug: "gyeongin", name: "경인지구", scope: "regional", scopeFactor: 0.85 },
+      { slug: "chuncheon", name: "춘천", scope: "national", scopeFactor: 1 },
+      { slug: "wemix", name: "위믹스", scope: "national", scopeFactor: 1 },
+      { slug: "inje", name: "인제", scope: "national", scopeFactor: 1 },
+    ] as const;
+    const clubs = tournaments.map((tournament) => ({
+      slug: tournament.slug,
+      universityName: `${tournament.name} 대학교`,
+      clubName: `${tournament.name} 테니스`,
+      displayName: tournament.name,
+    }));
+    const prestigeDataset = {
+      version: "prestige-test-v2",
+      clubs,
+      aliases: [],
+      tournaments: [...tournaments],
+      editions: tournaments.map((tournament) => ({
+        key: `${tournament.slug}-men-2025`,
+        tournamentSlug: tournament.slug,
+        year: 2025,
+        gender: "men" as const,
+        actualEntrants: 32,
+        sourceStatus: "verified" as const,
+        sourceRefs: [`${tournament.slug}.pdf`],
+      })),
+      results: tournaments.map((tournament) => ({
+        editionKey: `${tournament.slug}-men-2025`,
+        clubSlug: tournament.slug,
+        sourceTeamName: tournament.name,
+        teamLabel: "A",
+        stage: "champion" as const,
+        qualityStatus: "verified" as const,
+        sourceRef: `${tournament.slug}.pdf#champion`,
+        note: "",
+      })),
+    } satisfies NationalRankingDataset;
+
+    const result = calculateRankings(prestigeDataset);
+    const pointsByClub = Object.fromEntries(
+      result.rows
+        .filter((row) => row.gender === "men")
+        .map((row) => [row.clubSlug, row.totalPoints])
+    );
+
+    expect(result.formulaVersion).toBe("national-club-v2");
+    expect(pointsByClub).toEqual({
+      yanggu: 100,
+      gyeongin: 90,
+      chuncheon: 90,
+      wemix: 80,
+      inje: 80,
+    });
+  });
+
+  it("fails before scoring when a configured tournament has no v2 prestige weight", () => {
+    expect(() =>
+      calculateRankings({
+        version: "missing-prestige-test-v2",
+        clubs: [],
+        aliases: [],
+        tournaments: [
+          {
+            slug: "unknown-tournament",
+            name: "Unknown Tournament",
+            scope: "national",
+            scopeFactor: 1,
+          },
+        ],
+        editions: [],
+        results: [],
+      })
+    ).toThrow(/prestige factor is missing.*unknown-tournament/i);
   });
 });

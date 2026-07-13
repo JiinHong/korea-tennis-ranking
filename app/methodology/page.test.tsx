@@ -7,7 +7,7 @@ const SECTION_HEADINGS = [
   "지표 정의",
   "공식",
   "진출 단계 점수",
-  "대회 범위 가중치",
+  "대회 위상 가중치",
   "참가 규모 가중치",
   "연도 가중치",
   "A/B/C팀 처리",
@@ -41,14 +41,14 @@ describe("MethodologyPage", () => {
     ).toEqual(SECTION_HEADINGS);
     expect(
       screen.getByText(
-        "대회 점수 = 진출 단계 점수 × 대회 범위 × 참가 규모 × 연도 가중치"
+        "대회 점수 = 진출 단계 점수 × 대회 위상 × 참가 규모 × 연도 가중치"
       )
     ).toBeDefined();
-    expect(screen.getByText("national-club-v1")).toBeDefined();
-    expect(screen.getByText("2026-07-12")).toBeDefined();
+    expect(screen.getByText("national-club-v2")).toBeDefined();
+    expect(screen.getByText("2026-07-13")).toBeDefined();
   });
 
-  it("공식 v1의 단계 점수와 대회 범위 가중치를 표로 공개한다", () => {
+  it("공식 v2의 단계 점수와 대회별 위상 가중치를 표로 공개한다", () => {
     render(<MethodologyPage />);
 
     [
@@ -63,12 +63,12 @@ describe("MethodologyPage", () => {
     ].forEach((cells) => expectRow("진출 단계별 점수", cells));
 
     [
-      ["국토정중앙배(양구)", "전국", "1.00"],
-      ["하늘내린인제", "전국", "1.00"],
-      ["춘천소양강배", "전국", "1.00"],
-      ["WEMIX OPEN", "전국", "1.00"],
-      ["경인지구 연맹전", "지역", "0.85"],
-    ].forEach((cells) => expectRow("대회 범위별 가중치", cells));
+      ["국토정중앙배(양구)", "최상위", "1.00"],
+      ["경인지구 연맹전", "주요", "0.90"],
+      ["춘천소양강배", "주요", "0.90"],
+      ["WEMIX OPEN", "신흥", "0.80"],
+      ["하늘내린인제", "신흥", "0.80"],
+    ].forEach((cells) => expectRow("대회 위상별 가중치", cells));
   });
 
   it("참가 규모와 연도 가중치 기준값을 표로 공개한다", () => {
@@ -104,7 +104,7 @@ describe("MethodologyPage", () => {
     ).toBeDefined();
     expect(screen.getByText(/= 110점$/)).toBeDefined();
     expect(screen.getByText(/= 66점$/)).toBeDefined();
-    expect(screen.getByText(/= 66\.3점$/)).toBeDefined();
+    expect(screen.getByText(/= 70\.2점$/)).toBeDefined();
   });
 
   it("총점이 같을 때 적용하는 동점 처리 순서를 공개한다", () => {

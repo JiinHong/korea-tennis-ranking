@@ -1,8 +1,10 @@
 import {
   getRecencyFactor,
-  NATIONAL_FORMULA_V1,
+  getTournamentPrestigeFactor,
+  NATIONAL_FORMULA_V2,
   scoreVerifiedResult,
 } from "./formula";
+import type { NationalFormula } from "./formula";
 import type {
   CalculatedNationalRanking,
   CalculatedRankingRow,
@@ -84,7 +86,8 @@ function sortAndRank(
 }
 
 export function calculateNationalRankings(
-  dataset: NationalRankingDataset
+  dataset: NationalRankingDataset,
+  formula: NationalFormula = NATIONAL_FORMULA_V2
 ): CalculatedNationalRanking {
   const clubsBySlug = new Map(dataset.clubs.map((club) => [club.slug, club]));
   const tournamentsBySlug = new Map(
@@ -94,6 +97,12 @@ export function calculateNationalRankings(
     dataset.editions.map((edition) => [edition.key, edition])
   );
   const latestYear = new Map<string, number>();
+
+  if (formula.version === "national-club-v2") {
+    for (const tournament of dataset.tournaments) {
+      getTournamentPrestigeFactor(tournament.slug, formula);
+    }
+  }
 
   for (const edition of dataset.editions) {
     if (edition.sourceStatus !== "verified") continue;
@@ -137,7 +146,21 @@ export function calculateNationalRankings(
     if (edition.sourceStatus !== "verified") continue;
 
     const latestEditionYear = latestYear.get(tournament.slug) ?? edition.year;
-    if (getRecencyFactor(latestEditionYear, edition.year) === 0) continue;
+    if (getRecencyFactor(latestEditionYear, edition.year, formula) === 0) continue;
+
+    const tournamentPrestigeFactor =
+      formula.version === "national-club-v2"
+        ? getTournamentPrestigeFactor(tournament.slug, formula)
+        : undefined;
+    const scoreInput = {
+      stage: result.stage,
+      actualEntrants: edition.actualEntrants,
+      latestEditionYear,
+      editionYear: edition.year,
+      ...(formula.version === "national-club-v2"
+        ? { tournamentPrestigeFactor: tournamentPrestigeFactor! }
+        : { scopeFactor: tournament.scopeFactor }),
+    };
 
     const contribution: ScoreContribution = {
       clubSlug: club.slug,
@@ -147,16 +170,11 @@ export function calculateNationalRankings(
       sourceTeamName: result.sourceTeamName,
       stage: result.stage,
       scopeFactor: tournament.scopeFactor,
+      tournamentPrestigeFactor,
       actualEntrants: edition.actualEntrants,
       latestEditionYear,
       editionYear: edition.year,
-      points: scoreVerifiedResult({
-        stage: result.stage,
-        scopeFactor: tournament.scopeFactor,
-        actualEntrants: edition.actualEntrants,
-        latestEditionYear,
-        editionYear: edition.year,
-      }),
+      points: scoreVerifiedResult(scoreInput, formula),
     };
     const scoringUnit = [
       contribution.clubSlug,
@@ -211,5 +229,5 @@ export function calculateNationalRankings(
     ...sortAndRank(combinedRows, clubsBySlug),
   ];
 
-  return { formulaVersion: NATIONAL_FORMULA_V1.version, rows };
+  return { formulaVersion: formula.version, rows };
 }

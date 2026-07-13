@@ -3,12 +3,12 @@ import Link from "next/link";
 import {
   getFieldSizeFactor,
   getRecencyFactor,
-  NATIONAL_FORMULA_V1,
+  NATIONAL_FORMULA_V2,
 } from "@/lib/nationalRanking/formula";
 
 import MethodologyTableRegion from "./MethodologyTableRegion";
 
-const FORMULA_EFFECTIVE_ON = "2026-07-12";
+const FORMULA_EFFECTIVE_ON = "2026-07-13";
 
 const STAGE_ROWS = [
   ["우승", "champion"],
@@ -21,12 +21,12 @@ const STAGE_ROWS = [
   ["실제로 치른 첫 경기 패배", "first_match_loss"],
 ] as const;
 
-const COMPETITION_SCOPE_ROWS = [
-  ["국토정중앙배(양구)", "전국", "1.00"],
-  ["하늘내린인제", "전국", "1.00"],
-  ["춘천소양강배", "전국", "1.00"],
-  ["WEMIX OPEN", "전국", "1.00"],
-  ["경인지구 연맹전", "지역", "0.85"],
+const COMPETITION_PRESTIGE_ROWS = [
+  ["국토정중앙배(양구)", "최상위", "1.00"],
+  ["경인지구 연맹전", "주요", "0.90"],
+  ["춘천소양강배", "주요", "0.90"],
+  ["WEMIX OPEN", "신흥", "0.80"],
+  ["하늘내린인제", "신흥", "0.80"],
 ] as const;
 
 const FIELD_SIZE_REFERENCES = [16, 32, 64, 128] as const;
@@ -112,7 +112,7 @@ export default function MethodologyPage() {
           <p>검증된 각 대회 성적에는 아래 네 요소를 곱합니다.</p>
           <div className="methodology-formula" role="note">
             <code>
-              대회 점수 = 진출 단계 점수 × 대회 범위 × 참가 규모 × 연도
+              대회 점수 = 진출 단계 점수 × 대회 위상 × 참가 규모 × 연도
               가중치
             </code>
           </div>
@@ -141,7 +141,7 @@ export default function MethodologyPage() {
                 {STAGE_ROWS.map(([label, stage]) => (
                   <tr key={stage}>
                     <th scope="row">{label}</th>
-                    <td>{NATIONAL_FORMULA_V1.stagePoints[stage]}</td>
+                    <td>{NATIONAL_FORMULA_V2.stagePoints[stage]}</td>
                   </tr>
                 ))}
               </tbody>
@@ -153,27 +153,29 @@ export default function MethodologyPage() {
           </p>
         </section>
 
-        <section className="methodology-section" aria-labelledby="scope-title">
-          <h2 id="scope-title">대회 범위 가중치</h2>
+        <section className="methodology-section" aria-labelledby="prestige-title">
+          <h2 id="prestige-title">대회 위상 가중치</h2>
           <p>
-            전국 대회는 1.00, 지역 대회인 경인지구 연맹전은 0.85를 적용합니다.
-            상금, 후원 규모, 대회 연혁에 따른 주관적 보너스는 없습니다.
+            전국·지역이라는 명칭만으로 일괄 감점하지 않고, 대학 동아리 대회로서의
+            권위와 축적된 역사를 반영해 대회별 가중치를 적용합니다. 양구를 최상위로,
+            경인지구와 춘천을 주요 대회로, 역사가 짧은 위믹스와 인제를 신흥 대회로
+            구분합니다.
           </p>
-          <MethodologyTableRegion label="대회 범위별 가중치">
+          <MethodologyTableRegion label="대회 위상별 가중치">
             <table className="methodology-table">
-              <caption>대회 범위별 가중치</caption>
+              <caption>대회 위상별 가중치</caption>
               <thead>
                 <tr>
                   <th scope="col">대회</th>
-                  <th scope="col">범위</th>
+                  <th scope="col">위상</th>
                   <th scope="col">가중치</th>
                 </tr>
               </thead>
               <tbody>
-                {COMPETITION_SCOPE_ROWS.map(([competition, scope, factor]) => (
+                {COMPETITION_PRESTIGE_ROWS.map(([competition, prestige, factor]) => (
                   <tr key={competition}>
                     <th scope="row">{competition}</th>
-                    <td>{scope}</td>
+                    <td>{prestige}</td>
                     <td>{factor}</td>
                   </tr>
                 ))}
@@ -190,11 +192,11 @@ export default function MethodologyPage() {
           </p>
           <div className="methodology-formula methodology-formula-secondary">
             <code>
-              참가 규모 = clamp({NATIONAL_FORMULA_V1.field.minimum.toFixed(2)},
+              참가 규모 = clamp({NATIONAL_FORMULA_V2.field.minimum.toFixed(2)},
               {" "}
-              {NATIONAL_FORMULA_V1.field.maximum.toFixed(2)}, 1 +{" "}
-              {NATIONAL_FORMULA_V1.field.step.toFixed(2)} × log₂(N /{" "}
-              {NATIONAL_FORMULA_V1.field.baseline}))
+              {NATIONAL_FORMULA_V2.field.maximum.toFixed(2)}, 1 +{" "}
+              {NATIONAL_FORMULA_V2.field.step.toFixed(2)} × log₂(N /{" "}
+              {NATIONAL_FORMULA_V2.field.baseline}))
             </code>
           </div>
           <MethodologyTableRegion label="참가 팀 수별 기준 가중치">
@@ -223,7 +225,7 @@ export default function MethodologyPage() {
           <p>
             최신 연도는 대회마다 독립적으로 판단합니다. 해당 대회의 가장 최근
             개최 연도에 1.00을 적용하고, 이전 성적은 해마다{" "}
-            {NATIONAL_FORMULA_V1.recencyRetention.toFixed(2)}배로 줄어듭니다.
+            {NATIONAL_FORMULA_V2.recencyRetention.toFixed(2)}배로 줄어듭니다.
           </p>
           <MethodologyTableRegion label="대회별 연도 가중치">
             <table className="methodology-table">
@@ -288,7 +290,7 @@ export default function MethodologyPage() {
           <h2 id="example-title">계산 예시</h2>
           <ol className="methodology-examples">
             <li>
-              <span>최신 64팀 전국 대회 우승</span>
+              <span>최신 64팀 국토정중앙배(양구) 우승</span>
               <code>100 × 1.00 × 1.10 × 1.00 = 110점</code>
             </li>
             <li>
@@ -297,7 +299,7 @@ export default function MethodologyPage() {
             </li>
             <li>
               <span>최신 128팀 경인지구 연맹전 준우승</span>
-              <code>65 × 0.85 × 1.20 × 1.00 = 66.3점</code>
+              <code>65 × 0.90 × 1.20 × 1.00 = 70.2점</code>
             </li>
           </ol>
         </section>
@@ -356,7 +358,7 @@ export default function MethodologyPage() {
             <div>
               <dt>공식 버전</dt>
               <dd>
-                <code>{NATIONAL_FORMULA_V1.version}</code>
+                <code>{NATIONAL_FORMULA_V2.version}</code>
               </dd>
             </div>
             <div>

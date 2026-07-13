@@ -107,7 +107,7 @@ export default function RankingMethodologyInfo() {
               </button>
             </div>
             <p>
-              대회 성적에 진출 단계, 참가 규모, 대회 범위, 최근 연도 가중치를
+              대회 성적에 진출 단계, 대회 위상, 참가 규모, 최근 연도 가중치를
               적용합니다.
             </p>
             <p>같은 동아리의 여러 팀 중 가장 좋은 성적만 반영합니다.</p>

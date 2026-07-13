@@ -1,13 +1,31 @@
 import { describe, expect, it } from "vitest";
 
+import * as nationalFormula from "@/lib/nationalRanking/formula";
 import {
+  NATIONAL_FORMULA_V1,
+  NATIONAL_FORMULA_V2,
   getFieldSizeFactor,
   getRecencyFactor,
   getStagePoints,
   scoreVerifiedResult,
 } from "@/lib/nationalRanking/formula";
 
-describe("national ranking formula v1", () => {
+describe("national ranking formula v2", () => {
+  it("defines the approved three-tier tournament prestige weights", () => {
+    const formula = Reflect.get(nationalFormula, "NATIONAL_FORMULA_V2");
+
+    expect(formula).toMatchObject({
+      version: "national-club-v2",
+      tournamentPrestigeFactors: {
+        yanggu: 1,
+        gyeongin: 0.9,
+        chuncheon: 0.9,
+        wemix: 0.8,
+        inje: 0.8,
+      },
+    });
+  });
+
   it("uses the approved ATP-shaped stage curve", () => {
     expect(getStagePoints("champion")).toBe(100);
     expect(getStagePoints("runner_up")).toBe(65);
@@ -35,15 +53,51 @@ describe("national ranking formula v1", () => {
     expect(getRecencyFactor(2025, 2022)).toBe(0);
   });
 
-  it("multiplies every approved factor", () => {
+  it("multiplies the tournament prestige factor instead of a generic scope factor", () => {
     expect(
       scoreVerifiedResult({
         stage: "champion",
-        scopeFactor: 1,
+        tournamentPrestigeFactor: 0.9,
         actualEntrants: 64,
         latestEditionYear: 2025,
         editionYear: 2024,
-      })
-    ).toBeCloseTo(66);
+      } as Parameters<typeof scoreVerifiedResult>[0])
+    ).toBeCloseTo(59.4);
+  });
+
+  it("keeps the v1 scope-weighted formula reproducible", () => {
+    expect(
+      scoreVerifiedResult(
+        {
+          stage: "champion",
+          scopeFactor: 0.85,
+          actualEntrants: 32,
+          latestEditionYear: 2025,
+          editionYear: 2025,
+        },
+        NATIONAL_FORMULA_V1
+      )
+    ).toBe(85);
+  });
+
+  it("keeps v1 and v2 runtime configuration immutable and independent", () => {
+    expect(Object.isFrozen(NATIONAL_FORMULA_V1)).toBe(true);
+    expect(Object.isFrozen(NATIONAL_FORMULA_V1.stagePoints)).toBe(true);
+    expect(Object.isFrozen(NATIONAL_FORMULA_V1.field)).toBe(true);
+    expect(Object.isFrozen(NATIONAL_FORMULA_V2)).toBe(true);
+    expect(Object.isFrozen(NATIONAL_FORMULA_V2.stagePoints)).toBe(true);
+    expect(Object.isFrozen(NATIONAL_FORMULA_V2.field)).toBe(true);
+    expect(Object.isFrozen(NATIONAL_FORMULA_V2.tournamentPrestigeFactors)).toBe(
+      true
+    );
+    expect(NATIONAL_FORMULA_V1.stagePoints).not.toBe(
+      NATIONAL_FORMULA_V2.stagePoints
+    );
+    expect(NATIONAL_FORMULA_V1.field).not.toBe(NATIONAL_FORMULA_V2.field);
+    expect(
+      Reflect.set(NATIONAL_FORMULA_V2.stagePoints, "champion", 999)
+    ).toBe(false);
+    expect(NATIONAL_FORMULA_V1.stagePoints.champion).toBe(100);
+    expect(NATIONAL_FORMULA_V2.stagePoints.champion).toBe(100);
   });
 });

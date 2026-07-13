@@ -42,13 +42,13 @@ const dataset = {
     },
   ],
   tournaments: [
-    { slug: "national", name: "National", scope: "national", scopeFactor: 1 },
-    { slug: "regional", name: "Regional", scope: "regional", scopeFactor: 0.85 },
+    { slug: "yanggu", name: "National", scope: "national", scopeFactor: 1 },
+    { slug: "gyeongin", name: "Regional", scope: "regional", scopeFactor: 0.85 },
   ],
   editions: [
     {
       key: "national-2025-men",
-      tournamentSlug: "national",
+      tournamentSlug: "yanggu",
       year: 2025,
       gender: "men",
       actualEntrants: 32,
@@ -57,7 +57,7 @@ const dataset = {
     },
     {
       key: "regional-2025-women",
-      tournamentSlug: "regional",
+      tournamentSlug: "gyeongin",
       year: 2025,
       gender: "women",
       actualEntrants: 16,
@@ -290,6 +290,7 @@ describe("buildNationalRankingSeedSql", () => {
       "on conflict (formula_version, source_revision) do nothing"
     );
     expect(sql).not.toContain("delete from public.national_ranking_rows");
+    expect(sql).not.toContain("published_at = null");
     expect(sql).toContain("insert into public.national_ranking_rows");
     expect(sql).toContain(
       "national ranking seed formula version conflicts with immutable configuration"

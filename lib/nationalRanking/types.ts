@@ -17,13 +17,22 @@ export type ResultQualityStatus =
   | "missing"
   | "did_not_enter";
 
-export type FormulaInput = {
+export type FormulaBaseInput = {
   stage: TournamentStage;
-  scopeFactor: number;
   actualEntrants: number;
   latestEditionYear: number;
   editionYear: number;
 };
+
+export type FormulaV1Input = FormulaBaseInput & {
+  scopeFactor: number;
+};
+
+export type FormulaV2Input = FormulaBaseInput & {
+  tournamentPrestigeFactor: number;
+};
+
+export type FormulaInput = FormulaV1Input | FormulaV2Input;
 
 export type NationalClubInput = {
   slug: string;
@@ -76,12 +85,14 @@ export type NationalRankingDataset = {
   results: TeamResultInput[];
 };
 
-export type ScoreContribution = FormulaInput & {
+export type ScoreContribution = FormulaBaseInput & {
   clubSlug: string;
   gender: NationalGender;
   tournamentSlug: string;
   editionKey: string;
   sourceTeamName: string;
+  scopeFactor: number;
+  tournamentPrestigeFactor?: number;
   points: number;
 };
 
@@ -98,6 +109,6 @@ export type CalculatedRankingRow = {
 };
 
 export type CalculatedNationalRanking = {
-  formulaVersion: "national-club-v1";
+  formulaVersion: "national-club-v1" | "national-club-v2";
   rows: CalculatedRankingRow[];
 };

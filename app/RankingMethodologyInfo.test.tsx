@@ -17,7 +17,7 @@ describe("RankingMethodologyInfo", () => {
     expect(screen.getByRole("dialog")).toBeDefined();
     expect(
       screen.getByText(
-        "대회 성적에 진출 단계, 참가 규모, 대회 범위, 최근 연도 가중치를 적용합니다."
+        "대회 성적에 진출 단계, 대회 위상, 참가 규모, 최근 연도 가중치를 적용합니다."
       )
     ).toBeDefined();
     expect(
