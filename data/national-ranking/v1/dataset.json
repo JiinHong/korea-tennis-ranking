@@ -1,5 +1,5 @@
 {
-  "version": "sources-2026-07-13-v2",
+  "version": "sources-2026-07-13-v3",
   "clubs": [
     {
       "slug": "catholic-courtrang",
@@ -366,6 +366,12 @@
       "universityName": "서울대학교",
       "clubName": "TNT",
       "displayName": "서울대학교 TNT"
+    },
+    {
+      "slug": "ajou-tennis",
+      "universityName": "아주대학교",
+      "clubName": "테니스 동아리",
+      "displayName": "아주대학교 테니스 동아리"
     }
   ],
   "aliases": [
@@ -2221,13 +2227,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 진리 [Q]",
       "teamLabel": "",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehpg.png",
-      "note": "Slot 13 was visually traced through every round and won the final 3-1."
+      "note": "School-qualified final frozen to 연세대학교 YUTT, the university's pre-assignment men leader (rank 7)."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2841,13 +2847,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대 A [3]",
       "teamLabel": "A",
       "stage": "runner_up",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehpg.png",
-      "note": "Slot 96 was visually traced through the draw and lost the final 1-3."
+      "note": "School-qualified final frozen to 전북대학교 ACE, the university's pre-assignment men leader (rank 35)."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3101,13 +3107,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-luvis",
       "sourceTeamName": "경희 A [1]",
       "teamLabel": "A",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eiiq.png",
-      "note": "Traced from slot 1 through the final; visually shown defeating Sgtc A 2-1."
+      "note": "School-qualified final frozen to 경희대학교 러비스, the university's pre-assignment women leader (rank 27)."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4001,13 +4007,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "sogang-sgtc",
       "sourceTeamName": "Sgtc A [2]",
       "teamLabel": "A",
       "stage": "runner_up",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eiiq.png",
-      "note": "Traced from slot 128 through the final; visually shown losing 1-2 to 경희 A."
+      "note": "School-qualified final frozen to 서강대학교 SGTC, the university's pre-assignment women leader (rank 2)."
     },
     {
       "editionKey": "yanggu-2024-men",
@@ -4901,13 +4907,13 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-global-impact",
       "sourceTeamName": "경희대 국제 A [1]",
       "teamLabel": "A",
       "stage": "runner_up",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/여자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_6.png",
-      "note": "Slot 1; traced through the upper half to the final, where Sgtc A [2] is shown as winner."
+      "note": "School-qualified final frozen to 경희대학교 국제캠퍼스 임팩트, the university's pre-assignment women leader (rank 33)."
     },
     {
       "editionKey": "yanggu-2024-women",
@@ -6061,13 +6067,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대 A",
       "teamLabel": "A",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=3",
-      "note": "Visually checked slot 59 and traced the bracket to terminal stage champion."
+      "note": "School-qualified final frozen to 전북대학교 ACE, the university's pre-assignment men leader (rank 35)."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -6711,13 +6717,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "dankook-cheonan-dkutc",
       "sourceTeamName": "단국대 A",
       "teamLabel": "A",
       "stage": "runner_up",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=3",
-      "note": "Visually checked slot 25 and traced the bracket to terminal stage runner_up."
+      "note": "School-qualified final frozen to 단국대학교 천안캠퍼스 DKUTC, the university's pre-assignment women leader (rank 38)."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -7331,13 +7337,13 @@
     },
     {
       "editionKey": "inje-2023-men",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대",
       "teamLabel": "-",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "인제/2023/남자/SCR-20260708-eevg.png",
-      "note": "Later original PNG shows advancement from the semifinal after 고려대 was disqualified and a 2-0 final win over 서울시립대."
+      "note": "School-qualified final frozen to 전북대학교 ACE, the university's pre-assignment men leader (rank 35)."
     },
     {
       "editionKey": "inje-2023-men",
@@ -7431,13 +7437,13 @@
     },
     {
       "editionKey": "inje-2023-men",
-      "clubSlug": null,
+      "clubSlug": "uos-approach",
       "sourceTeamName": "서울시립대",
       "teamLabel": "-",
       "stage": "runner_up",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "인제/2023/남자/SCR-20260708-eevg.png",
-      "note": "Later original PNG shows a semifinal win over 서울과기대 A and a 0-2 final loss to 전북대."
+      "note": "School-qualified final frozen to 서울시립대학교 어프로치, the university's pre-assignment men leader (rank 53)."
     },
     {
       "editionKey": "inje-2023-men",
@@ -7491,13 +7497,13 @@
     },
     {
       "editionKey": "inje-2023-women",
-      "clubSlug": null,
+      "clubSlug": "seoultech-neutinamu",
       "sourceTeamName": "서울과기대 A [Q]",
       "teamLabel": "A",
       "stage": "runner_up",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "인제/2023/여자/SCR-20260708-efjo.png",
-      "note": "Later original PNG shows a 2-0 semifinal win and a 1-2 final loss to 서울대 [Q]."
+      "note": "School-qualified final frozen to 서울과학기술대학교 느티나무, the university's pre-assignment women leader (rank 1)."
     },
     {
       "editionKey": "inje-2023-women",
@@ -7571,13 +7577,13 @@
     },
     {
       "editionKey": "inje-2023-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-tnt",
       "sourceTeamName": "서울대 [Q]",
       "teamLabel": "-",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "인제/2023/여자/SCR-20260708-efjo.png",
-      "note": "Later original PNG shows a 2-1 semifinal win over 숭실대 [Q] and a 2-1 final win over 서울과기대 A [Q]."
+      "note": "School-qualified final frozen to 서울대학교 TNT, the university's pre-assignment women leader (rank 25)."
     },
     {
       "editionKey": "inje-2024-men",
@@ -7861,13 +7867,13 @@
     },
     {
       "editionKey": "inje-2024-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-tnt",
       "sourceTeamName": "서울대 테니스부",
       "teamLabel": "-",
       "stage": "runner_up",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "인제/2024/여자/Draw_2024_하늘내린인제_전국대학동아리_테니스대회_최종_결과_2.png",
-      "note": "Original PNG explicitly pairs 서울대 with 서울대 테니스부; it reaches the final, while the far-right winner line names Smash A."
+      "note": "School-qualified final frozen to 서울대학교 TNT, the university's pre-assignment women leader (rank 25)."
     },
     {
       "editionKey": "inje-2024-women",
@@ -8031,13 +8037,13 @@
     },
     {
       "editionKey": "inje-2025-men",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대a",
       "teamLabel": "a",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "인제/2025/남자/2025 인제 남자.pdf#page=1",
-      "note": "400-DPI page preserves the literal 전북대a; the far-right continuation after the two final slots names it as the winner."
+      "note": "School-qualified final frozen to 전북대학교 ACE, the university's pre-assignment men leader (rank 35)."
     },
     {
       "editionKey": "inje-2025-men",
@@ -8121,13 +8127,13 @@
     },
     {
       "editionKey": "inje-2025-women",
-      "clubSlug": null,
+      "clubSlug": "seoultech-neutinamu",
       "sourceTeamName": "서울과학기술대 A",
       "teamLabel": "A",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "인제/2025/여자/2025 인제 여자.pdf#page=1",
-      "note": "400-DPI page shows advancement over Kuta, then the disqualification result, a semifinal win, and the far-right Winner line naming 서울과학기술대 A."
+      "note": "School-qualified final frozen to 서울과학기술대학교 느티나무, the university's pre-assignment women leader (rank 1)."
     },
     {
       "editionKey": "inje-2025-women",
@@ -8181,13 +8187,13 @@
     },
     {
       "editionKey": "inje-2025-women",
-      "clubSlug": null,
+      "clubSlug": "kaist-stroke",
       "sourceTeamName": "카이스트 A",
       "teamLabel": "A",
       "stage": "runner_up",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "인제/2025/여자/2025 인제 여자.pdf#page=1",
-      "note": "400-DPI page shows advancement to the final; the far-right Winner line instead names 서울과학기술대 A."
+      "note": "School-qualified final frozen to KAIST Stroke, the university's pre-assignment women leader (rank 17)."
     },
     {
       "editionKey": "inje-2025-women",
@@ -8201,13 +8207,13 @@
     },
     {
       "editionKey": "gyeongin-2023-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-tnt",
       "sourceTeamName": "서울대 A",
       "teamLabel": "A",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/남자/KakaoTalk_Photo_2026-07-08-04-58-22 011.jpeg",
-      "note": "Traced from an opening BYE through every round; won the final 2-1 over 러비스 A."
+      "note": "School-qualified final frozen to 서울대학교 TNT, the university's pre-assignment men leader (rank 20)."
     },
     {
       "editionKey": "gyeongin-2023-men",
@@ -8621,13 +8627,13 @@
     },
     {
       "editionKey": "gyeongin-2023-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-luvis",
       "sourceTeamName": "경희대s",
       "teamLabel": "s",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/여자/KakaoTalk_Photo_2026-07-08-04-59-38.jpeg",
-      "note": "Traced through every round; won the final 2-1 over A."
+      "note": "School-qualified final frozen to 경희대학교 러비스, the university's pre-assignment women leader (rank 27)."
     },
     {
       "editionKey": "gyeongin-2023-women",
@@ -8941,13 +8947,13 @@
     },
     {
       "editionKey": "gyeongin-2024-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-tnt",
       "sourceTeamName": "서울대학교 A",
       "teamLabel": "A",
       "stage": "champion",
       "qualityStatus": "unresolved",
       "sourceRef": "경인지구/2024/남자/KakaoTalk_Photo_2026-07-08-04-55-49 011.jpeg",
-      "note": "Final shows a 3-1 win over 아주대 A."
+      "note": "School-qualified final frozen to 서울대학교 TNT, the university's pre-assignment men leader (rank 20)."
     },
     {
       "editionKey": "gyeongin-2024-men",
@@ -9383,13 +9389,13 @@
     },
     {
       "editionKey": "gyeongin-2024-men",
-      "clubSlug": null,
+      "clubSlug": "ajou-tennis",
       "sourceTeamName": "아주대 A",
       "teamLabel": "A",
       "stage": "runner_up",
       "qualityStatus": "unresolved",
       "sourceRef": "경인지구/2024/남자/KakaoTalk_Photo_2026-07-08-04-55-49 011.jpeg",
-      "note": "Final shows a 1-3 loss to 서울대학교 A."
+      "note": "School-qualified final frozen to 아주대학교 테니스 동아리; no existing club candidate was available before the pre-assignment batch."
     },
     {
       "editionKey": "gyeongin-2024-men",
@@ -9793,23 +9799,23 @@
     },
     {
       "editionKey": "gyeongin-2024-women",
-      "clubSlug": null,
+      "clubSlug": "uos-approach",
       "sourceTeamName": "서울시립대A",
       "teamLabel": "A",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/여자/KakaoTalk_Photo_2026-07-08-04-55-34 011.jpeg",
-      "note": "Final shows a 2-0 win over 성균관대학교 공자."
+      "note": "School-qualified final frozen to 서울시립대학교 어프로치, the university's pre-assignment women leader (rank 41)."
     },
     {
       "editionKey": "gyeongin-2025-women",
-      "clubSlug": null,
+      "clubSlug": "uos-approach",
       "sourceTeamName": "서울시립대A",
       "teamLabel": "A",
       "stage": "runner_up",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2025/여자/KakaoTalk_Photo_2026-07-08-05-17-28 002.jpeg",
-      "note": "PNG shows wins through the quarterfinal; JPEG shows a 2-0 semifinal win over 단국대 and a 0-2 final loss to 서울과기대A."
+      "note": "School-qualified final frozen to 서울시립대학교 어프로치, the university's pre-assignment women leader (rank 41)."
     },
     {
       "editionKey": "gyeongin-2025-women",
@@ -9953,13 +9959,13 @@
     },
     {
       "editionKey": "gyeongin-2025-women",
-      "clubSlug": null,
+      "clubSlug": "seoultech-neutinamu",
       "sourceTeamName": "서울과기대A",
       "teamLabel": "A",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2025/여자/KakaoTalk_Photo_2026-07-08-05-17-28 002.jpeg",
-      "note": "After an opening BYE, the PNG shows wins through the quarterfinal; the JPEG shows a 2-1 semifinal win over 성균관대 A and a 2-0 final win over 서울시립대A."
+      "note": "School-qualified final frozen to 서울과학기술대학교 느티나무, the university's pre-assignment women leader (rank 1)."
     },
     {
       "editionKey": "gyeongin-2025-women",
@@ -10063,13 +10069,13 @@
     },
     {
       "editionKey": "gyeongin-2025-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-tnt",
       "sourceTeamName": "서울대학교 테니스부 A",
       "teamLabel": "A",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2025/남자/KakaoTalk_Photo_2026-07-08-05-17-13 002.jpeg",
-      "note": "PNG shows wins through the quarterfinal; JPEG shows a 3-0 semifinal win over 서울대학교 테니스부 B and a 3-0 final win over 서강대."
+      "note": "School-qualified final frozen to 서울대학교 TNT, the university's pre-assignment men leader (rank 20)."
     },
     {
       "editionKey": "gyeongin-2025-men",
@@ -10173,13 +10179,13 @@
     },
     {
       "editionKey": "gyeongin-2025-men",
-      "clubSlug": null,
+      "clubSlug": "sogang-sgtc",
       "sourceTeamName": "서강대",
       "teamLabel": "",
       "stage": "runner_up",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2025/남자/KakaoTalk_Photo_2026-07-08-05-17-13 002.jpeg",
-      "note": "PNG shows wins through the quarterfinal; JPEG shows a 3-1 semifinal win over 서울과기대A and a 0-3 final loss to 서울대학교 테니스부 A."
+      "note": "School-qualified final frozen to 서강대학교 SGTC, the university's pre-assignment men leader (rank 32)."
     },
     {
       "editionKey": "gyeongin-2025-men",
@@ -10733,13 +10739,13 @@
     },
     {
       "editionKey": "chuncheon-2023-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-tnt",
       "sourceTeamName": "서울대 A",
       "teamLabel": "A",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2023/남자/SCR-20260708-dxej.png",
-      "note": "Visually traced through all connected pages to final win, 2-1; no status marker."
+      "note": "School-qualified final frozen to 서울대학교 TNT, the university's pre-assignment men leader (rank 20)."
     },
     {
       "editionKey": "chuncheon-2023-men",
@@ -10933,13 +10939,13 @@
     },
     {
       "editionKey": "chuncheon-2023-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-global-impact",
       "sourceTeamName": "경희대 국제 A",
       "teamLabel": "A",
       "stage": "runner_up",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2023/여자/SCR-20260708-dxye.png",
-      "note": "Visually traced through all connected pages to final loss, 1-2; no status marker."
+      "note": "School-qualified final frozen to 경희대학교 국제캠퍼스 임팩트, the university's pre-assignment women leader (rank 33)."
     },
     {
       "editionKey": "chuncheon-2023-women",
@@ -11053,13 +11059,13 @@
     },
     {
       "editionKey": "chuncheon-2023-women",
-      "clubSlug": null,
+      "clubSlug": "soongsil-sstc",
       "sourceTeamName": "숭실대 A",
       "teamLabel": "A",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2023/여자/SCR-20260708-dxye.png",
-      "note": "Visually traced through all connected pages to final win, 2-1; no status marker."
+      "note": "School-qualified final frozen to 숭실대학교 SSTC, the university's pre-assignment women leader (rank 8)."
     },
     {
       "editionKey": "chuncheon-2023-women",
@@ -11313,13 +11319,13 @@
     },
     {
       "editionKey": "chuncheon-2024-men",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대A",
       "teamLabel": "A",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2024/남자/테니스대회_128강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "won final 2-0 vs 경북대 KUTC C"
+      "note": "School-qualified final frozen to 전북대학교 ACE, the university's pre-assignment men leader (rank 35)."
     },
     {
       "editionKey": "chuncheon-2024-men",
@@ -11883,13 +11889,13 @@
     },
     {
       "editionKey": "chuncheon-2024-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-global-impact",
       "sourceTeamName": "경희대 국제 A",
       "teamLabel": "A",
       "stage": "runner_up",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2024/여자/여자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "lost 1-2 to 서울과기대 느티나무 A (결승)"
+      "note": "School-qualified final frozen to 경희대학교 국제캠퍼스 임팩트, the university's pre-assignment women leader (rank 33)."
     },
     {
       "editionKey": "chuncheon-2024-women",
@@ -12653,13 +12659,13 @@
     },
     {
       "editionKey": "chuncheon-2025-men",
-      "clubSlug": null,
+      "clubSlug": "uos-approach",
       "sourceTeamName": "서울시립대 장",
       "teamLabel": "",
       "stage": "runner_up",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2025/남자/2025년_남자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 결승 row 64 shows a 1-2 loss to 경북대kutc(숫소)."
+      "note": "School-qualified final frozen to 서울시립대학교 어프로치, the university's pre-assignment men leader (rank 53)."
     },
     {
       "editionKey": "chuncheon-2025-men",
@@ -12953,13 +12959,13 @@
     },
     {
       "editionKey": "chuncheon-2025-women",
-      "clubSlug": null,
+      "clubSlug": "sogang-sgtc",
       "sourceTeamName": "서강대A",
       "teamLabel": "A",
       "stage": "runner_up",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2025/여자/2025년_여자부_32강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 결승 row 32 shows a 1-2 loss to 서울과기대 느티나무 A."
+      "note": "School-qualified final frozen to 서강대학교 SGTC, the university's pre-assignment women leader (rank 2)."
     },
     {
       "editionKey": "chuncheon-2025-women",

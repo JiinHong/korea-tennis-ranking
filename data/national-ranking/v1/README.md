@@ -1,7 +1,7 @@
 # National ranking source dataset v1
 
 `dataset.json` is the canonical, visually verified source manifest for the
-national university club ranking. Version `sources-2026-07-13-v2` contains the
+national university club ranking. Version `sources-2026-07-13-v3` contains the
 complete Yanggu, Gyeongin, Inje, Chuncheon, and WEMIX source program: 26
 editions and 1,116 terminal result records. Yeongwol is not part of this
 dataset.
@@ -58,12 +58,13 @@ source names and empty team labels remain exact.
 
 ## Club identity and aliases
 
-The club, not the university, is the ranking entity. A result is `verified`
-only when that same source row explicitly pairs a university or campus with a
-distinct club/team identity. A university name followed only by `A`, `B`,
-`C`, another generic team label, or a generic name such as `테니스부` remains
-`unresolved` with `clubSlug: null`. A club mapping is never borrowed from a
-different year or source.
+The club, not the university, is the ranking entity. Ordinary result rows are
+`verified` only when the source explicitly pairs a university or campus with a
+distinct club/team identity. The administrator-approved exception applies only
+to visible champion and runner-up rows: a school-only label is frozen to that
+school's highest-ranked same-gender canonical club before the inferred final
+batch is added. The assignment is stored in `clubSlug` and never recomputed at
+request time. Labels that do not identify even a school remain unresolved.
 
 Canonical clubs consolidate visually explicit spellings plus the
 administrator-confirmed team-name families documented in the 2026-07-13
@@ -81,10 +82,13 @@ lowercased combination of canonical university context and the exact reported
 team name; `sourceLabel` preserves the source spelling.
 
 A verified edition requires exactly one champion-stage record and one
-runner-up-stage record. Those records may still have
-`qualityStatus: "unresolved"` and `clubSlug: null` when the source proves the
-result but not a distinct club identity. No club mapping is fabricated to make
-a champion or runner-up scoreable.
+runner-up-stage record. Thirty-one school-qualified finals are frozen under the
+rule above; only source labels `러비스 A` and `A`, which identify no school,
+remain unassigned. 아주대학교 had no existing canonical candidate, so its
+school-qualified final is represented conservatively as `아주대학교 테니스
+동아리` until an administrator supplies the exact club name. An edition whose
+field remains unresolved can still retain a concrete honor owner without
+contributing points.
 
 OCR may help locate text, but no OCR output becomes `verified` without visual
 confirmation against the source image or rendered PDF page. Illegible or
@@ -108,35 +112,35 @@ The two editions and all 20 terminal rows are therefore verified and scoreable.
 
 ## Unresolved mapping log
 
-The conservative policy above leaves 668 of 1,116 rows unresolved. This is an
+The conservative policy above leaves 639 of 1,116 rows unresolved. This is an
 identity status only; every stored row's entrant name and terminal bracket
 outcome was visually or structurally verified.
 
-| Edition | Entrants/results | Verified club | Unresolved club | Reason summary |
+| Edition | Entrants/results | Verified rows | Unresolved rows | Reason summary |
 | --- | ---: | ---: | ---: | --- |
-| `yanggu-2023-men` | 98 | 0 | 98 | Draw has entrant labels but no university/club identity key. |
-| `yanggu-2023-women` | 91 | 0 | 91 | Draw has entrant labels but no university/club identity key. |
+| `yanggu-2023-men` | 98 | 2 | 96 | School-qualified final is frozen; other entrant labels lack a university/club identity key. |
+| `yanggu-2023-women` | 91 | 2 | 89 | School-qualified final is frozen; other entrant labels lack a university/club identity key. |
 | `yanggu-2024-men` | 89 | 69 | 20 | University-only and generic `테니스부` rows. |
-| `yanggu-2024-women` | 73 | 55 | 18 | University-only, generic `테니스부`, and source-unresolved `라중`. |
-| `yanggu-2025-men` | 94 | 36 | 58 | University plus team label only; no distinct club in those rows. |
-| `yanggu-2025-women` | 73 | 24 | 49 | University plus team label only; no distinct club in those rows. |
-| `inje-2023-men` | 18 | 0 | 18 | University/team labels only; no club column identity. |
-| `inje-2023-women` | 10 | 0 | 10 | University/team labels only; no club column identity. |
+| `yanggu-2024-women` | 73 | 56 | 17 | School-qualified final is frozen; generic identities and source-unresolved `라중` remain. |
+| `yanggu-2025-men` | 94 | 37 | 57 | School-qualified final is frozen; remaining generic team labels lack a distinct club. |
+| `yanggu-2025-women` | 73 | 25 | 48 | School-qualified final is frozen; remaining generic team labels lack a distinct club. |
+| `inje-2023-men` | 18 | 2 | 16 | School-qualified final is frozen; other university/team labels remain unresolved. |
+| `inje-2023-women` | 10 | 2 | 8 | School-qualified final is frozen; other university/team labels remain unresolved. |
 | `inje-2024-men` | 20 | 18 | 2 | Generic university `테니스부` identities. |
-| `inje-2024-women` | 10 | 9 | 1 | Generic university `테니스부` identity. |
-| `inje-2025-men` | 20 | 12 | 8 | Seven university/team labels plus generic `서울대 테니스부`. |
-| `inje-2025-women` | 12 | 5 | 7 | Six university/team labels plus generic `서울대 테니스부`. |
-| `gyeongin-2023-men` | 42 | 11 | 31 | University/team labels, source-truncated identities, and acronyms without university context. |
-| `gyeongin-2023-women` | 32 | 5 | 27 | University/team labels and source-only acronyms; runner-up is displayed only as `A`. |
+| `inje-2024-women` | 10 | 10 | 0 | School-qualified runner-up is frozen. |
+| `inje-2025-men` | 20 | 13 | 7 | School-qualified champion is frozen; other generic identities remain. |
+| `inje-2025-women` | 12 | 7 | 5 | School-qualified finalists are frozen; other generic identities remain. |
+| `gyeongin-2023-men` | 42 | 12 | 30 | Champion is frozen; runner-up `러비스 A` has no university context. |
+| `gyeongin-2023-women` | 32 | 6 | 26 | Champion is frozen; runner-up is displayed only as `A`. |
 | `gyeongin-2024-men` | 48 | 21 | 27 | Edition conflict above; DUTC is retained with an unresolved stage. |
-| `gyeongin-2024-women` | 38 | 14 | 24 | University/team labels and club acronyms without same-row university context. |
-| `gyeongin-2025-men` | 22 | 14 | 8 | University/team labels and generic `테니스부` identities. |
-| `gyeongin-2025-women` | 26 | 11 | 15 | University/team labels, campus-only labels, and generic `테니스부` identities. |
-| `chuncheon-2023-men` | 50 | 20 | 30 | University/campus plus team labels without a distinct club. |
-| `chuncheon-2023-women` | 42 | 13 | 29 | University/campus plus team labels without a distinct club. |
-| `chuncheon-2024-men` | 68 | 40 | 28 | University/team labels and source-designated non-club nicknames. |
-| `chuncheon-2024-women` | 34 | 10 | 24 | University/team labels and source-designated non-club nicknames. |
-| `chuncheon-2025-men` | 58 | 31 | 27 | University/team labels, campus-only labels, and generic `테니스부` identities. |
-| `chuncheon-2025-women` | 28 | 10 | 18 | University/team labels, campus-only labels, and source-designated non-club nicknames. |
+| `gyeongin-2024-women` | 38 | 15 | 23 | School-qualified champion is frozen; other generic identities remain. |
+| `gyeongin-2025-men` | 22 | 16 | 6 | School-qualified finalists are frozen; other generic identities remain. |
+| `gyeongin-2025-women` | 26 | 13 | 13 | School-qualified finalists are frozen; other generic identities remain. |
+| `chuncheon-2023-men` | 50 | 21 | 29 | School-qualified champion is frozen; other generic identities remain. |
+| `chuncheon-2023-women` | 42 | 15 | 27 | School-qualified finalists are frozen; other generic identities remain. |
+| `chuncheon-2024-men` | 68 | 41 | 27 | School-qualified champion is frozen; other generic identities remain. |
+| `chuncheon-2024-women` | 34 | 11 | 23 | School-qualified runner-up is frozen; other generic identities remain. |
+| `chuncheon-2025-men` | 58 | 32 | 26 | School-qualified runner-up is frozen; other generic identities remain. |
+| `chuncheon-2025-women` | 28 | 11 | 17 | School-qualified runner-up is frozen; other generic identities remain. |
 | `wemix-2025-men` | 8 | 8 | 0 | School-only entries are frozen under the approved pre-WEMIX ranking rule. |
 | `wemix-2025-women` | 12 | 12 | 0 | Explicit aliases, clipped labels, and school-only entries are frozen under the approved rule. |
