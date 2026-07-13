@@ -22,10 +22,7 @@ const scoreFormatter = new Intl.NumberFormat("ko-KR", {
   maximumFractionDigits: 0,
 });
 
-const campusRankingPaths: ReadonlyMap<string, string> = new Map([
-  ["seoultech-neutinamu", "/seoultech"],
-  ["korea-petc", "/petc"],
-]);
+const DISPLAY_HONOR_YEAR = 2025;
 
 type RankTier = "gold" | "silver" | "bronze";
 
@@ -128,7 +125,9 @@ export default function NationalRankingTable({
               </tr>
             ) : (
               rows.map((row) => {
-                const campusPath = campusRankingPaths.get(row.clubSlug);
+                const displayedHonors = row.honors.filter(
+                  (honor) => honor.year === DISPLAY_HONOR_YEAR
+                );
                 const clubName = (
                   <span className="national-ranking-club">
                     <strong>{row.universityName}</strong>
@@ -146,23 +145,19 @@ export default function NationalRankingTable({
                     </td>
                     <td>
                       <span className="national-ranking-club-cell">
-                        {campusPath ? (
-                          <Link
-                            aria-label={`${row.displayName} 단식 랭킹 보기`}
-                            className="national-ranking-club-link"
-                            href={campusPath}
-                          >
-                            {clubName}
-                          </Link>
-                        ) : (
-                          clubName
-                        )}
-                        {row.honors.length > 0 ? (
+                        <Link
+                          aria-label={`${row.displayName} 대회 성적 보기`}
+                          className="national-ranking-club-link"
+                          href={`/clubs/${row.clubSlug}`}
+                        >
+                          {clubName}
+                        </Link>
+                        {displayedHonors.length > 0 ? (
                           <span
-                            aria-label="통산 수상 기록"
+                            aria-label="2025년 수상 기록"
                             className="national-ranking-honors"
                           >
-                            {row.honors.map((honor) => (
+                            {displayedHonors.map((honor) => (
                               <NationalRankingHonor
                                 honor={honor}
                                 key={`${honor.editionKey}-${honor.stage}`}

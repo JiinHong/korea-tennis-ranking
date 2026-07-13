@@ -26,7 +26,7 @@ describe("RankingMethodologyInfo", () => {
     ).toBeDefined();
     expect(
       screen.getByText(
-        "우승과 준우승 왕관은 점수 산정 기간이 지나도 통산 기록으로 남습니다."
+        "랭킹표의 왕관은 2025년 대회 우승과 준우승 기록만 표시합니다."
       )
     ).toBeDefined();
     expect(screen.queryByText(/현재 점수에서 제외/)).toBeNull();

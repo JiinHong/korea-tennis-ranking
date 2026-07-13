@@ -161,11 +161,11 @@
 .methodology-table-scroll {
   width: 100%;
   margin: 20px 0 0;
-  overflow-x: auto;
+  overflow-x: visible;
   background: white;
   border: 1px solid var(--methodology-line);
   border-radius: 8px;
-  scrollbar-gutter: stable;
+  scrollbar-gutter: auto;
 }
 
 .methodology-table-scroll:focus-visible,
@@ -177,8 +177,9 @@
 
 .methodology-table {
   width: 100%;
-  min-width: 520px;
+  min-width: 0;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .methodology-table caption {
@@ -197,6 +198,7 @@
   border-bottom: 1px solid #e8ecef;
   font-size: 14px;
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .methodology-table thead th {
@@ -378,8 +380,14 @@
     font-size: 13px;
   }
 
-  .methodology-table {
-    min-width: 480px;
+  .methodology-table caption {
+    padding: 11px 10px;
+  }
+
+  .methodology-table th,
+  .methodology-table td {
+    padding: 11px 8px;
+    font-size: 12px;
   }
 
   .methodology-status-list > div,
@@ -2176,6 +2184,130 @@ button:disabled {
   word-break: keep-all;
 }
 
+.national-header-description {
+  max-width: 700px;
+  margin: 12px 0 0;
+  color: var(--national-muted);
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.65;
+  word-break: keep-all;
+}
+
+.national-club-results-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 30px;
+  color: var(--national-muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.national-club-results-back:hover {
+  color: var(--national-accent);
+}
+
+.national-club-results-header {
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--national-line);
+}
+
+.national-club-results-header h1 {
+  margin: 0;
+  font-size: clamp(28px, 5vw, 42px);
+  line-height: 1.2;
+  font-weight: 850;
+  word-break: keep-all;
+}
+
+.national-club-results-header p {
+  margin: 10px 0 0;
+  color: var(--national-muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.national-club-results-section {
+  margin-top: 28px;
+}
+
+.national-club-results-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--national-line);
+}
+
+.national-club-results-title-row h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.national-club-results-title-row span {
+  color: var(--national-muted);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.national-club-results-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.national-club-results-list li {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) 80px;
+  align-items: center;
+  gap: 24px;
+  min-height: 92px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--national-line);
+}
+
+.national-club-result-edition,
+.national-club-result-competition {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.national-club-result-edition strong,
+.national-club-result-competition strong {
+  font-size: 16px;
+  font-weight: 850;
+}
+
+.national-club-result-edition span,
+.national-club-result-competition span {
+  min-width: 0;
+  color: var(--national-muted);
+  font-size: 12px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.national-club-result-stage {
+  color: var(--national-accent);
+  text-align: right;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.national-club-results-empty {
+  margin: 0;
+  padding: 48px 0;
+  color: var(--national-muted);
+  text-align: center;
+  border-bottom: 1px solid var(--national-line);
+  font-size: 14px;
+  font-weight: 700;
+}
+
 .national-ranking-section {
   width: 100%;
   margin-top: 24px;
@@ -2650,6 +2782,34 @@ button:disabled {
 
   .national-ranking-honors {
     padding-top: 1px;
+  }
+
+  .national-club-results-back {
+    margin-bottom: 20px;
+  }
+
+  .national-club-results-header h1 {
+    font-size: 27px;
+  }
+
+  .national-club-results-list li {
+    grid-template-columns: 64px minmax(0, 1fr) 54px;
+    gap: 10px;
+    min-height: 78px;
+    padding: 14px 0;
+  }
+
+  .national-club-result-edition strong,
+  .national-club-result-competition strong {
+    font-size: 14px;
+  }
+
+  .national-club-result-competition strong {
+    overflow-wrap: anywhere;
+  }
+
+  .national-club-result-stage {
+    font-size: 15px;
   }
 
 }

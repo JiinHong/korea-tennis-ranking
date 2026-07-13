@@ -11,7 +11,7 @@ const SECTION_HEADINGS = [
   "참가 규모 가중치",
   "연도 가중치",
   "A/B/C팀 처리",
-  "통산 수상 기록",
+  "수상 기록",
   "남자부·여자부·종합",
   "계산 예시",
   "데이터 검증 원칙",
@@ -105,9 +105,10 @@ describe("MethodologyPage", () => {
     ).toBeDefined();
     expect(
       screen.getByText(
-        "우승과 준우승 왕관은 현재 점수 산정 기간이 지나도 동아리의 통산 수상 기록으로 남습니다."
+        "랭킹표의 왕관은 2025년 대회 우승과 준우승 기록만 표시합니다. 원자료의 이전 수상 기록은 삭제하지 않고 보존합니다."
       )
     ).toBeDefined();
+    expect(screen.queryByText(/오래된 왕관/)).toBeNull();
     expect(screen.getByText(/= 756점$/)).toBeDefined();
     expect(screen.getByText(/= 504점$/)).toBeDefined();
     expect(screen.getByText(/= 156점$/)).toBeDefined();

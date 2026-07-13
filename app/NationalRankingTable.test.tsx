@@ -180,29 +180,32 @@ describe("NationalRankingTable", () => {
     ]);
   });
 
-  it("과기대와 PETC 동아리 이름만 각 단식 랭킹으로 연결한다", () => {
+  it("모든 동아리 이름을 해당 동아리의 전국 대회 성적 페이지로 연결한다", () => {
     render(<NationalRankingTable rankings={rankings} />);
 
     expect(
       screen
         .getByRole("link", {
-          name: "서울과학기술대학교 STC 단식 랭킹 보기",
+          name: "서울과학기술대학교 STC 대회 성적 보기",
         })
         .getAttribute("href")
-    ).toBe("/seoultech");
+    ).toBe("/clubs/seoultech-neutinamu");
+    expect(
+      screen.getByRole("link", {
+        name: "고려대학교 PETC 대회 성적 보기",
+      })
+        .getAttribute("href")
+    ).toBe("/clubs/korea-petc");
     expect(
       screen
-        .getByRole("link", { name: "고려대학교 PETC 단식 랭킹 보기" })
+        .getByRole("link", {
+          name: "한국과학기술원 KAIST Tennis 대회 성적 보기",
+        })
         .getAttribute("href")
-    ).toBe("/petc");
-    expect(
-      screen.queryByRole("link", {
-        name: "한국과학기술원 KAIST Tennis 단식 랭킹 보기",
-      })
-    ).toBeNull();
+    ).toBe("/clubs/kaist");
   });
 
-  it("객체 프로토타입과 같은 슬러그는 단식 랭킹 링크로 오인하지 않는다", () => {
+  it("객체 프로토타입과 같은 안전한 슬러그도 일반 성적 링크로 다룬다", () => {
     const rankingsWithPrototypeSlug: NationalRankingPageData["rankings"] = {
       ...rankings,
       men: [
@@ -224,26 +227,27 @@ describe("NationalRankingTable", () => {
 
     render(<NationalRankingTable rankings={rankingsWithPrototypeSlug} />);
 
-    expect(screen.getByText("프로토타입대학교").closest("a")).toBeNull();
+    expect(
+      screen.getByText("프로토타입대학교").closest("a")?.getAttribute("href")
+    ).toBe("/clubs/constructor");
   });
 
-  it("동아리 이름 뒤에 통산 우승과 준우승 왕관을 각각 표시한다", () => {
+  it("동아리 이름 뒤에는 2025년 우승과 준우승 왕관만 표시한다", () => {
     render(<NationalRankingTable rankings={rankings} />);
 
     const champion = screen.getByRole("button", {
       name: "2025 양구 남자부 우승",
     });
-    const runnerUp = screen.getByRole("button", {
-      name: "2024 경인지구 남자부 준우승",
-    });
 
     expect(champion).toBeDefined();
-    expect(runnerUp).toBeDefined();
     expect(champion.closest("a")).toBeNull();
-    expect(runnerUp.closest("a")).toBeNull();
+    expect(screen.getByLabelText("2025년 수상 기록")).toBeDefined();
     expect(screen.getByText("서울과학기술대학교").closest("a")?.getAttribute("href")).toBe(
-      "/seoultech"
+      "/clubs/seoultech-neutinamu"
     );
+    expect(
+      screen.queryByRole("button", { name: "2024 경인지구 남자부 준우승" })
+    ).toBeNull();
     expect(
       screen.queryByRole("button", { name: "2025 위믹스 여자부 준우승" })
     ).toBeNull();
@@ -274,8 +278,8 @@ describe("NationalRankingTable", () => {
       screen.getByRole("button", { name: "2025 춘천 남자부 우승" })
     ).toBeDefined();
     expect(
-      screen.getByRole("button", { name: "2024 인제 여자부 준우승" })
-    ).toBeDefined();
+      screen.queryByRole("button", { name: "2024 인제 여자부 준우승" })
+    ).toBeNull();
     expect(screen.queryByText("연세대학교")).toBeNull();
     expect(within(screen.getByRole("table")).getAllByRole("row")).toHaveLength(2);
   });

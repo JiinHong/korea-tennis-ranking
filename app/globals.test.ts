@@ -278,6 +278,15 @@ describe("national ranking responsive contracts", () => {
     );
   });
 
+  it("모바일 동아리 성적 목록은 화면 안의 세 열로 압축하고 긴 팀명을 줄바꿈한다", () => {
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.national-club-results-list li\s*\{[^}]*grid-template-columns:\s*64px minmax\(0,\s*1fr\) 54px;[^}]*gap:\s*10px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.national-club-result-competition strong\s*\{[^}]*overflow-wrap:\s*anywhere;[^}]*\}/
+    );
+  });
+
   it("이전 마케팅 히어로와 대회 카드 계약을 제거한다", () => {
     expect(css).not.toMatch(/\.national-hero(?:\s|[-,{])/);
     expect(css).not.toContain(".tournament-grid");
@@ -292,5 +301,18 @@ describe("methodology accessibility contracts", () => {
     expect(css).toMatch(
       /\.methodology-table-scroll:focus-visible,[\s\S]*?\.methodology-references a:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--methodology-accent\);[^}]*\}/
     );
+  });
+
+  it("모바일 방법론 표는 가로 스크롤 없이 셀 안에서 줄바꿈한다", () => {
+    expect(css).toMatch(
+      /\.methodology-table-scroll\s*\{[^}]*overflow-x:\s*visible;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.methodology-table\s*\{[^}]*width:\s*100%;[^}]*min-width:\s*0;[^}]*table-layout:\s*fixed;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.methodology-table th,\s*\.methodology-table td\s*\{[^}]*overflow-wrap:\s*anywhere;[^}]*\}/
+    );
+    expect(css).not.toMatch(/\.methodology-table\s*\{[^}]*min-width:\s*(?:480|520)px;/);
   });
 });
