@@ -14,6 +14,7 @@ import type {
   NationalClubInput,
   NationalGender,
   NationalRankingDataset,
+  NationalRankingHonor,
   RankingGender,
   ScoreContribution,
 } from "./types";
@@ -22,6 +23,7 @@ function createRankingRow(
   clubSlug: string,
   gender: RankingGender,
   contributions: ScoreContribution[],
+  honors: NationalRankingHonor[],
   latestYear: Map<string, number>
 ): CalculatedRankingRow {
   return {
@@ -42,12 +44,14 @@ function createRankingRow(
       .length,
     runnerUps: contributions.filter((item) => item.stage === "runner_up").length,
     contributions,
+    honors,
   };
 }
 
 function combineRankingRows(
   menRow: CalculatedRankingRow,
-  womenRow: CalculatedRankingRow
+  womenRow: CalculatedRankingRow,
+  tournamentOrder: Map<string, number>
 ): CalculatedRankingRow {
   return {
     clubSlug: menRow.clubSlug,
@@ -60,7 +64,36 @@ function combineRankingRows(
     championships: menRow.championships + womenRow.championships,
     runnerUps: menRow.runnerUps + womenRow.runnerUps,
     contributions: [...menRow.contributions, ...womenRow.contributions],
+    honors: sortHonors(
+      [...menRow.honors, ...womenRow.honors],
+      tournamentOrder
+    ),
   };
+}
+
+function sortHonors(
+  honors: NationalRankingHonor[],
+  tournamentOrder: Map<string, number>
+): NationalRankingHonor[] {
+  return honors.sort((left, right) => {
+    const yearDifference = right.year - left.year;
+    if (yearDifference !== 0) return yearDifference;
+
+    const tournamentDifference =
+      (tournamentOrder.get(left.tournamentSlug) ?? Number.MAX_SAFE_INTEGER) -
+      (tournamentOrder.get(right.tournamentSlug) ?? Number.MAX_SAFE_INTEGER);
+    if (tournamentDifference !== 0) return tournamentDifference;
+
+    if (left.gender !== right.gender) {
+      return left.gender === "women" ? -1 : 1;
+    }
+
+    return left.stage === right.stage
+      ? 0
+      : left.stage === "champion"
+        ? -1
+        : 1;
+  });
 }
 
 function sortAndRank(
@@ -96,6 +129,9 @@ export function calculateNationalRankings(
   const tournamentsBySlug = new Map(
     dataset.tournaments.map((tournament) => [tournament.slug, tournament])
   );
+  const tournamentOrder = new Map(
+    dataset.tournaments.map((tournament, index) => [tournament.slug, index])
+  );
   const editionsByKey = new Map(
     dataset.editions.map((edition) => [edition.key, edition])
   );
@@ -118,6 +154,55 @@ export function calculateNationalRankings(
       edition.tournamentSlug,
       Math.max(latestYear.get(edition.tournamentSlug) ?? 0, edition.year)
     );
+  }
+
+  const honorByIdentity = new Map<string, NationalRankingHonor>();
+
+  for (const result of dataset.results) {
+    if (
+      result.clubSlug === null ||
+      (result.stage !== "champion" && result.stage !== "runner_up")
+    ) {
+      continue;
+    }
+
+    const club = clubsBySlug.get(result.clubSlug);
+    const edition = editionsByKey.get(result.editionKey);
+    const tournament = edition
+      ? tournamentsBySlug.get(edition.tournamentSlug)
+      : undefined;
+
+    if (!club || !edition || !tournament) continue;
+
+    const honor: NationalRankingHonor = {
+      editionKey: edition.key,
+      tournamentSlug: tournament.slug,
+      tournamentName: tournament.name,
+      year: edition.year,
+      gender: edition.gender,
+      stage: result.stage,
+    };
+    const identity = [
+      club.slug,
+      honor.editionKey,
+      honor.gender,
+      honor.stage,
+    ].join(":");
+
+    honorByIdentity.set(identity, honor);
+  }
+
+  const honorsByClubAndGender = new Map<string, NationalRankingHonor[]>();
+  for (const [identity, honor] of honorByIdentity) {
+    const [clubSlug] = identity.split(":");
+    const key = `${clubSlug}:${honor.gender}`;
+    const honors = honorsByClubAndGender.get(key) ?? [];
+
+    honors.push(honor);
+    honorsByClubAndGender.set(key, honors);
+  }
+  for (const [key, honors] of honorsByClubAndGender) {
+    honorsByClubAndGender.set(key, sortHonors(honors, tournamentOrder));
   }
 
   const bestContributions = new Map<string, ScoreContribution>();
@@ -261,18 +346,38 @@ export function calculateNationalRankings(
     const menContributions = contributionsByClubAndGender.get(`${club.slug}:men`) ?? [];
     const womenContributions =
       contributionsByClubAndGender.get(`${club.slug}:women`) ?? [];
-    const menRow = createRankingRow(club.slug, "men", menContributions, latestYear);
+    const menHonors = honorsByClubAndGender.get(`${club.slug}:men`) ?? [];
+    const womenHonors = honorsByClubAndGender.get(`${club.slug}:women`) ?? [];
+    const menRow = createRankingRow(
+      club.slug,
+      "men",
+      menContributions,
+      menHonors,
+      latestYear
+    );
     const womenRow = createRankingRow(
       club.slug,
       "women",
       womenContributions,
+      womenHonors,
       latestYear
     );
 
-    if (menContributions.length > 0) genderRows.men.push(menRow);
-    if (womenContributions.length > 0) genderRows.women.push(womenRow);
-    if (menContributions.length > 0 || womenContributions.length > 0) {
-      combinedRows.push(combineRankingRows(menRow, womenRow));
+    if (menContributions.length > 0 || menHonors.length > 0) {
+      genderRows.men.push(menRow);
+    }
+    if (womenContributions.length > 0 || womenHonors.length > 0) {
+      genderRows.women.push(womenRow);
+    }
+    if (
+      menContributions.length > 0 ||
+      womenContributions.length > 0 ||
+      menHonors.length > 0 ||
+      womenHonors.length > 0
+    ) {
+      combinedRows.push(
+        combineRankingRows(menRow, womenRow, tournamentOrder)
+      );
     }
   }
 

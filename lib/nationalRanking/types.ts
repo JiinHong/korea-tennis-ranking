@@ -103,6 +103,15 @@ export type ScoreContribution = FormulaBaseInput & {
   points: number;
 };
 
+export type NationalRankingHonor = {
+  editionKey: string;
+  tournamentSlug: string;
+  tournamentName: string;
+  year: number;
+  gender: NationalGender;
+  stage: "champion" | "runner_up";
+};
+
 export type CalculatedRankingRow = {
   clubSlug: string;
   gender: RankingGender;
@@ -113,6 +122,7 @@ export type CalculatedRankingRow = {
   championships: number;
   runnerUps: number;
   contributions: ScoreContribution[];
+  honors: NationalRankingHonor[];
 };
 
 export type CalculatedNationalRanking = {

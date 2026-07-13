@@ -335,6 +335,112 @@ describe("calculateNationalRankings", () => {
     );
   });
 
+  it("preserves an expired or non-scoreable title as one all-time honor", () => {
+    const honorDataset = {
+      version: "all-time-honor-test",
+      clubs: [dataset.clubs[0]],
+      aliases: [],
+      tournaments: [dataset.tournaments[0]],
+      editions: [
+        {
+          ...dataset.editions[0],
+          key: "national-men-2021",
+          year: 2021,
+          sourceStatus: "unresolved" as const,
+        },
+        {
+          ...dataset.editions[0],
+          key: "national-men-2025",
+          year: 2025,
+        },
+      ],
+      results: [
+        {
+          ...dataset.results[0],
+          editionKey: "national-men-2021",
+          qualityStatus: "unresolved" as const,
+          sourceRef: "national-men-2021.pdf#alpha",
+        },
+        {
+          ...dataset.results[0],
+          editionKey: "national-men-2021",
+          qualityStatus: "unresolved" as const,
+          sourceRef: "national-men-2021.pdf#alpha-duplicate",
+        },
+      ],
+    } satisfies NationalRankingDataset;
+
+    const alphaMen = calculateNationalRankings(honorDataset).rows.find(
+      (row) => row.clubSlug === "alpha" && row.gender === "men"
+    );
+
+    expect(alphaMen?.totalPoints).toBe(0);
+    expect(alphaMen?.honors).toEqual([
+      {
+        editionKey: "national-men-2021",
+        tournamentSlug: "national",
+        tournamentName: "National",
+        year: 2021,
+        gender: "men",
+        stage: "champion",
+      },
+    ]);
+    expect(alphaMen?.championships).toBe(0);
+  });
+
+  it("combines and sorts men's and women's all-time honors by newest edition", () => {
+    const genderHonorDataset = {
+      version: "combined-honor-test",
+      clubs: [dataset.clubs[0]],
+      aliases: [],
+      tournaments: [dataset.tournaments[0]],
+      editions: [
+        {
+          ...dataset.editions[0],
+          key: "national-men-2024",
+          year: 2024,
+        },
+        {
+          ...dataset.editions[2],
+          key: "national-women-2025",
+          year: 2025,
+        },
+      ],
+      results: [
+        {
+          ...dataset.results[0],
+          editionKey: "national-men-2024",
+          sourceRef: "national-men-2024.pdf#alpha",
+          stage: "runner_up" as const,
+        },
+        {
+          ...dataset.results[3],
+          editionKey: "national-women-2025",
+          sourceRef: "national-women-2025.pdf#alpha",
+          stage: "champion" as const,
+        },
+      ],
+    } satisfies NationalRankingDataset;
+
+    const result = calculateNationalRankings(genderHonorDataset);
+    const alphaMen = result.rows.find(
+      (row) => row.clubSlug === "alpha" && row.gender === "men"
+    );
+    const alphaWomen = result.rows.find(
+      (row) => row.clubSlug === "alpha" && row.gender === "women"
+    );
+    const alphaCombined = result.rows.find(
+      (row) => row.clubSlug === "alpha" && row.gender === "combined"
+    );
+
+    expect(alphaMen?.honors.map((honor) => honor.gender)).toEqual(["men"]);
+    expect(alphaWomen?.honors.map((honor) => honor.gender)).toEqual(["women"]);
+    expect(alphaCombined?.honors.map((honor) => honor.gender)).toEqual([
+      "women",
+      "men",
+    ]);
+  });
+
   it("uses only the best verified team per club, gender, tournament, and edition", () => {
     const result = calculateNationalRankings(dataset);
     const alphaMen = result.rows.find(
