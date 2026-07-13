@@ -537,12 +537,12 @@ describe("loadNationalRankingDataset", () => {
     "wemix-2025-men": {
       actualEntrants: 8,
       resultCount: 8,
-      sourceStatus: "unresolved",
+      sourceStatus: "verified",
     },
     "wemix-2025-women": {
       actualEntrants: 12,
       resultCount: 12,
-      sourceStatus: "unresolved",
+      sourceStatus: "verified",
     },
   } as const;
 
@@ -550,7 +550,7 @@ describe("loadNationalRankingDataset", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-07-12-v1");
+    expect(dataset.version).toBe("sources-2026-07-13-v2");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -588,15 +588,15 @@ describe("loadNationalRankingDataset", () => {
       expect(results, editionKey).toHaveLength(expected.resultCount);
     }
 
-    expect(dataset.clubs).toHaveLength(90);
-    expect(dataset.aliases).toHaveLength(274);
+    expect(dataset.clubs).toHaveLength(61);
+    expect(dataset.aliases).toHaveLength(273);
     expect(dataset.results).toHaveLength(1_116);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
-    ).toHaveLength(434);
+    ).toHaveLength(448);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
-    ).toHaveLength(682);
+    ).toHaveLength(668);
 
     expect(
       dataset.results.find(
@@ -654,7 +654,7 @@ describe("loadNationalRankingDataset", () => {
         priorEditionKeys.has(result.editionKey)
       ),
     };
-    // Generated from 27cb77b; this detects content or ordering drift without a fixture copy.
+    // Re-baselined after the approved v2 canonical club merge.
     const fingerprint = createHash("sha256")
       .update(JSON.stringify(approvedTask4))
       .digest("hex");
@@ -664,7 +664,7 @@ describe("loadNationalRankingDataset", () => {
     expect(approvedTask4.editions).toHaveLength(12);
     expect(approvedTask4.results).toHaveLength(608);
     expect(fingerprint).toBe(
-      "32877ab82dc7a3a625077d9b80985c435de7c52ef96e3fc872a0d78fe6d47131"
+      "7b3e09750210b995b6a6b6c312a1f6197e4de93ed7c602e2e37c154d1d38068d"
     );
 
     for (const [editionKey, expectedCount] of Object.entries(priorExpectedCounts)) {
@@ -675,13 +675,9 @@ describe("loadNationalRankingDataset", () => {
     }
   });
 
-  it("keeps unresolved source conflicts out of scoring", () => {
+  it("keeps the remaining unresolved source conflict out of scoring", () => {
     const dataset = loadNationalRankingDataset();
-    const unresolvedEditionKeys = new Set([
-      "gyeongin-2024-men",
-      "wemix-2025-men",
-      "wemix-2025-women",
-    ]);
+    const unresolvedEditionKeys = new Set(["gyeongin-2024-men"]);
     const rankings = calculateNationalRankings(dataset);
 
     expect(
@@ -706,27 +702,40 @@ describe("loadNationalRankingDataset", () => {
       stage: null,
       qualityStatus: "unresolved",
     });
+  });
+
+  it("verifies every WEMIX result against the supplied 8-team and 12-team draws", () => {
+    const dataset = loadNationalRankingDataset();
+    const wemixResults = dataset.results.filter((result) =>
+      result.editionKey.startsWith("wemix-2025-")
+    );
+
+    expect(wemixResults).toHaveLength(20);
     expect(
-      dataset.results.find(
+      wemixResults.every(
+        (result) =>
+          result.clubSlug !== null && result.qualityStatus === "verified"
+      )
+    ).toBe(true);
+    expect(
+      wemixResults.find(
         (result) =>
           result.editionKey === "wemix-2025-men" &&
           result.stage === "champion"
       )
     ).toMatchObject({
       sourceTeamName: "서울대학교",
-      clubSlug: null,
-      qualityStatus: "unresolved",
+      clubSlug: "seoul-tnt",
     });
     expect(
-      dataset.results.find(
+      wemixResults.find(
         (result) =>
           result.editionKey === "wemix-2025-women" &&
           result.stage === "champion"
       )
     ).toMatchObject({
       sourceTeamName: "과기대 느티나무 (1차우...",
-      clubSlug: null,
-      qualityStatus: "unresolved",
+      clubSlug: "seoultech-neutinamu",
     });
   });
 
@@ -845,112 +854,120 @@ describe("loadNationalRankingDataset", () => {
     ).toBe("korea-kmtc");
   });
 
-  it("keeps 경기대학교 Kft distinct from incumbent KTF", () => {
+  it("merges every administrator-confirmed club alias into its canonical club", () => {
     const dataset = loadNationalRankingDataset();
     const clubSlugs = new Set(dataset.clubs.map((club) => club.slug));
-    const ktfAliases = dataset.aliases
-      .filter((alias) => alias.clubSlug === "gyeonggi-ktf")
-      .map(({ normalizedAlias, clubSlug }) => ({ normalizedAlias, clubSlug }));
-    const kftAliases = dataset.aliases
-      .filter((alias) => alias.normalizedAlias.startsWith("경기대학교 kft "))
-      .map(({ normalizedAlias, clubSlug }) => ({ normalizedAlias, clubSlug }));
-    const ktfResults = dataset.results
-      .filter((result) => result.clubSlug === "gyeonggi-ktf")
-      .map(({ sourceTeamName, clubSlug }) => ({ sourceTeamName, clubSlug }))
-      .sort((left, right) => left.sourceTeamName.localeCompare(right.sourceTeamName));
-    const kftResults = dataset.results
-      .filter(
-        (result) =>
-          result.editionKey === "yanggu-2024-women" &&
-          ["Kft A", "Kft B"].includes(result.sourceTeamName)
-      )
-      .map(({ sourceTeamName, clubSlug }) => ({ sourceTeamName, clubSlug }))
-      .sort((left, right) => left.sourceTeamName.localeCompare(right.sourceTeamName));
+    const canonicalMerges = new Map([
+      ["gyeonggi-kft", "gyeonggi-ktf"],
+      ["gyeonggi-tetonam", "gyeonggi-ktf"],
+      ["dankook-cheonan-hodu", "dankook-cheonan-dkutc"],
+      ["dankook-jukjeon-danwoong", "dankook-jukjeon-dkutc"],
+      ["dankook-jukjeon-woongbi", "dankook-jukjeon-dkutc"],
+      ["sungkyunkwan-gongja", "sungkyunkwan-stc"],
+      ["sungkyunkwan-mengja", "sungkyunkwan-stc"],
+      ["sungkyunkwan-sit", "sungkyunkwan-stc"],
+      ["sungkyunkwan-soonja", "sungkyunkwan-stc"],
+      ["yonsei-kookris", "yonsei-kookdas"],
+      ["yonsei-freedom", "yonsei-yutt"],
+      ["yonsei-justice", "yonsei-yutt"],
+      ["yonsei-the-true-truth", "yonsei-yutt"],
+      ["yonsei-truth", "yonsei-yutt"],
+      ["inha-rakoon", "inha-rapum"],
+      ["inha-biryong", "inha-rapum"],
+      ["chungang-puangi", "chungang-love4t"],
+      ["chungang-pureongi", "chungang-love4t"],
+      ["kau-songgolmae", "kau-ace"],
+      ["hanyang-blue", "hanyang-hytc"],
+      ["hanyang-lion", "hanyang-hytc"],
+      ["hongik-hongilboy", "hongik-hitc"],
+      ["chungnam-kotshot", "chungnam-goodshot"],
+      ["catholic-badboys", "catholic-courtrang"],
+      ["sogang-brg", "sogang-sgtc"],
+      ["sogang-fa", "sogang-sgtc"],
+      ["soongsil-dickhorse", "soongsil-sstc"],
+      ["jeonbuk-ace-korean", "jeonbuk-ace"],
+    ]);
 
     expect(
-      ["gyeonggi-ktf", "gyeonggi-kft"].filter((slug) => !clubSlugs.has(slug))
+      [...canonicalMerges.keys()].filter((slug) => clubSlugs.has(slug))
     ).toEqual([]);
-    expect(ktfAliases).toEqual(
-      expect.arrayContaining([
-        { normalizedAlias: "경기대학교 경기대 ktf", clubSlug: "gyeonggi-ktf" },
-        { normalizedAlias: "경기대학교 ktf 여", clubSlug: "gyeonggi-ktf" },
-        { normalizedAlias: "경기대학교 ktf 정", clubSlug: "gyeonggi-ktf" },
-        { normalizedAlias: "경기대학교 ktf 진", clubSlug: "gyeonggi-ktf" },
-      ])
-    );
-    expect(ktfResults).toEqual(
-      expect.arrayContaining([
-        { sourceTeamName: "Ktf 여", clubSlug: "gyeonggi-ktf" },
-        { sourceTeamName: "Ktf 정", clubSlug: "gyeonggi-ktf" },
-        { sourceTeamName: "Ktf 진", clubSlug: "gyeonggi-ktf" },
-        { sourceTeamName: "경기대 Ktf", clubSlug: "gyeonggi-ktf" },
-      ])
-    );
-    expect(kftAliases).toEqual([
-      { normalizedAlias: "경기대학교 kft a", clubSlug: "gyeonggi-kft" },
-      { normalizedAlias: "경기대학교 kft b", clubSlug: "gyeonggi-kft" },
-    ]);
-    expect(kftResults).toEqual([
-      { sourceTeamName: "Kft A", clubSlug: "gyeonggi-kft" },
-      { sourceTeamName: "Kft B", clubSlug: "gyeonggi-kft" },
-    ]);
+    expect(
+      dataset.aliases.some((alias) => canonicalMerges.has(alias.clubSlug))
+    ).toBe(false);
+    expect(
+      dataset.results.some(
+        (result) =>
+          result.clubSlug !== null && canonicalMerges.has(result.clubSlug)
+      )
+    ).toBe(false);
+
+    const representativeResults = [
+      ["Kft A", "gyeonggi-ktf"],
+      ["경기대 테토남", "gyeonggi-ktf"],
+      ["단국대 호두", "dankook-cheonan-dkutc"],
+      ["단국대 단웅팀", "dankook-jukjeon-dkutc"],
+      ["성균관대학교 공자", "sungkyunkwan-stc"],
+      ["쿠크리스 A", "yonsei-kookdas"],
+      ["연세대자유", "yonsei-yutt"],
+      ["라쿤", "inha-rapum"],
+      ["중앙대 푸앙이", "chungang-love4t"],
+      ["한국항공대 송골매", "kau-ace"],
+      ["한양대 블루", "hanyang-hytc"],
+      ["홍익대 홍일보이", "hongik-hitc"],
+      ["충남대콧샷 A", "chungnam-goodshot"],
+      ["가톨릭대 Badboys", "catholic-courtrang"],
+      ["서강대 Brg", "sogang-sgtc"],
+      ["숭실대 디크호스", "soongsil-sstc"],
+      ["전북대 에이스", "jeonbuk-ace"],
+    ] as const;
+
+    for (const [sourceTeamName, canonicalSlug] of representativeResults) {
+      expect(
+        dataset.results.some(
+          (result) =>
+            result.sourceTeamName === sourceTeamName &&
+            result.clubSlug === canonicalSlug
+        ),
+        sourceTeamName
+      ).toBe(true);
+    }
   });
 
-  it("keeps 연세대학교 쿠크리스 distinct from incumbent 쿠크다스", () => {
+  it("keeps Dankook DKUTC split by campus and freezes legacy rows by gender", () => {
     const dataset = loadNationalRankingDataset();
-    const clubSlugs = new Set(dataset.clubs.map((club) => club.slug));
-    const kookdasAliases = dataset.aliases
-      .filter((alias) => alias.clubSlug === "yonsei-kookdas")
-      .map(({ normalizedAlias, clubSlug }) => ({ normalizedAlias, clubSlug }));
-    const kookrisAliases = dataset.aliases
-      .filter((alias) => alias.normalizedAlias.startsWith("연세대학교 쿠크리스 "))
-      .map(({ normalizedAlias, clubSlug }) => ({ normalizedAlias, clubSlug }));
-    const kookdasResults = dataset.results
-      .filter((result) => result.clubSlug === "yonsei-kookdas")
-      .map(({ sourceTeamName, clubSlug }) => ({ sourceTeamName, clubSlug }))
-      .sort((left, right) => left.sourceTeamName.localeCompare(right.sourceTeamName));
-    const kookrisResults = dataset.results
-      .filter(
-        (result) =>
-          result.editionKey === "yanggu-2024-women" &&
-          ["쿠크리스 A", "쿠크리스 B"].includes(result.sourceTeamName)
-      )
-      .map(({ sourceTeamName, clubSlug }) => ({ sourceTeamName, clubSlug }))
-      .sort((left, right) => left.sourceTeamName.localeCompare(right.sourceTeamName));
+    const editionsByKey = new Map(
+      dataset.editions.map((edition) => [edition.key, edition])
+    );
 
-    expect(
-      ["yonsei-kookdas", "yonsei-kookris"].filter((slug) => !clubSlugs.has(slug))
-    ).toEqual([]);
-    expect(kookdasAliases).toEqual(
+    expect(dataset.clubs).toEqual(
       expect.arrayContaining([
-        {
-          normalizedAlias: "연세대학교 연세대 쿠크다스 a",
-          clubSlug: "yonsei-kookdas",
-        },
-        {
-          normalizedAlias: "연세대학교 연세대 쿠크다스 b",
-          clubSlug: "yonsei-kookdas",
-        },
-        { normalizedAlias: "연세대학교 쿠크다스 a", clubSlug: "yonsei-kookdas" },
-        { normalizedAlias: "연세대학교 쿠크다스 b", clubSlug: "yonsei-kookdas" },
+        expect.objectContaining({
+          slug: "dankook-cheonan-dkutc",
+          universityName: "단국대학교 천안캠퍼스",
+        }),
+        expect.objectContaining({
+          slug: "dankook-jukjeon-dkutc",
+          universityName: "단국대학교 죽전캠퍼스",
+        }),
       ])
     );
-    expect(kookdasResults).toEqual(
-      expect.arrayContaining([
-        { sourceTeamName: "연세대 쿠크다스 A", clubSlug: "yonsei-kookdas" },
-        { sourceTeamName: "연세대 쿠크다스 A", clubSlug: "yonsei-kookdas" },
-        { sourceTeamName: "연세대 쿠크다스 B", clubSlug: "yonsei-kookdas" },
-        { sourceTeamName: "쿠크다스 A", clubSlug: "yonsei-kookdas" },
-        { sourceTeamName: "쿠크다스 B", clubSlug: "yonsei-kookdas" },
-      ])
+    expect(dataset.clubs.some((club) => club.slug === "dankook-dkutc")).toBe(
+      false
     );
-    expect(kookrisAliases).toEqual([
-      { normalizedAlias: "연세대학교 쿠크리스 a", clubSlug: "yonsei-kookris" },
-      { normalizedAlias: "연세대학교 쿠크리스 b", clubSlug: "yonsei-kookris" },
-    ]);
-    expect(kookrisResults).toEqual([
-      { sourceTeamName: "쿠크리스 A", clubSlug: "yonsei-kookris" },
-      { sourceTeamName: "쿠크리스 B", clubSlug: "yonsei-kookris" },
-    ]);
+
+    const legacyRows = dataset.results.filter((result) =>
+      ["Dkutc A", "Dkutc B", "단국대학교 DKUTC", "단국대 DKUTC", "단국대 DKUTC C"].includes(
+        result.sourceTeamName
+      )
+    );
+
+    for (const result of legacyRows) {
+      const gender = editionsByKey.get(result.editionKey)?.gender;
+      expect(result.clubSlug).toBe(
+        gender === "women"
+          ? "dankook-cheonan-dkutc"
+          : "dankook-jukjeon-dkutc"
+      );
+    }
   });
 });

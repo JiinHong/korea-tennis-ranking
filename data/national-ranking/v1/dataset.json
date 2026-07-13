@@ -1,12 +1,6 @@
 {
-  "version": "sources-2026-07-12-v1",
+  "version": "sources-2026-07-13-v2",
   "clubs": [
-    {
-      "slug": "catholic-badboys",
-      "universityName": "가톨릭대학교",
-      "clubName": "Badboys",
-      "displayName": "가톨릭대학교 Badboys"
-    },
     {
       "slug": "catholic-courtrang",
       "universityName": "가톨릭대학교",
@@ -32,34 +26,10 @@
       "displayName": "단국대학교 천안캠퍼스 DKUTC"
     },
     {
-      "slug": "dankook-cheonan-hodu",
-      "universityName": "단국대학교 천안캠퍼스",
-      "clubName": "호두",
-      "displayName": "단국대학교 천안캠퍼스 호두"
-    },
-    {
-      "slug": "dankook-dkutc",
-      "universityName": "단국대학교",
-      "clubName": "DKUTC",
-      "displayName": "단국대학교 DKUTC"
-    },
-    {
-      "slug": "dankook-jukjeon-danwoong",
-      "universityName": "단국대학교 죽전캠퍼스",
-      "clubName": "단웅",
-      "displayName": "단국대학교 죽전캠퍼스 단웅"
-    },
-    {
       "slug": "dankook-jukjeon-dkutc",
       "universityName": "단국대학교 죽전캠퍼스",
       "clubName": "DKUTC",
       "displayName": "단국대학교 죽전캠퍼스 DKUTC"
-    },
-    {
-      "slug": "dankook-jukjeon-woongbi",
-      "universityName": "단국대학교 죽전캠퍼스",
-      "clubName": "웅비",
-      "displayName": "단국대학교 죽전캠퍼스 웅비"
     },
     {
       "slug": "dongguk-dutc",
@@ -98,16 +68,10 @@
       "displayName": "강원대학교 SHOT"
     },
     {
-      "slug": "gyeonggi-kft",
-      "universityName": "경기대학교",
-      "clubName": "Kft",
-      "displayName": "경기대학교 Kft"
-    },
-    {
       "slug": "gyeonggi-ktf",
       "universityName": "경기대학교",
-      "clubName": "KTF",
-      "displayName": "경기대학교 KTF"
+      "clubName": "Ktf",
+      "displayName": "경기대학교 Ktf"
     },
     {
       "slug": "hanbat-masters",
@@ -140,12 +104,6 @@
       "displayName": "홍익대학교 HITC"
     },
     {
-      "slug": "inha-rakoon",
-      "universityName": "인하대학교",
-      "clubName": "라쿤",
-      "displayName": "인하대학교 라쿤"
-    },
-    {
       "slug": "inha-rapum",
       "universityName": "인하대학교",
       "clubName": "라품",
@@ -168,12 +126,6 @@
       "universityName": "KAIST",
       "clubName": "Stroke",
       "displayName": "KAIST Stroke"
-    },
-    {
-      "slug": "kau-songgolmae",
-      "universityName": "한국항공대학교",
-      "clubName": "송골매",
-      "displayName": "한국항공대학교 송골매"
     },
     {
       "slug": "knsu-alley",
@@ -308,40 +260,16 @@
       "displayName": "연세대학교 쿠크다스"
     },
     {
-      "slug": "yonsei-kookris",
-      "universityName": "연세대학교",
-      "clubName": "쿠크리스",
-      "displayName": "연세대학교 쿠크리스"
-    },
-    {
       "slug": "yonsei-yutt",
       "universityName": "연세대학교",
       "clubName": "YUTT",
       "displayName": "연세대학교 YUTT"
     },
     {
-      "slug": "chungang-puangi",
-      "universityName": "중앙대학교",
-      "clubName": "푸앙이",
-      "displayName": "중앙대학교 푸앙이"
-    },
-    {
-      "slug": "chungang-pureongi",
-      "universityName": "중앙대학교",
-      "clubName": "푸렁이",
-      "displayName": "중앙대학교 푸렁이"
-    },
-    {
       "slug": "chungbuk-ace",
       "universityName": "충북대학교",
       "clubName": "에이스",
       "displayName": "충북대학교 에이스"
-    },
-    {
-      "slug": "chungnam-kotshot",
-      "universityName": "충남대학교",
-      "clubName": "콧샷",
-      "displayName": "충남대학교 콧샷"
     },
     {
       "slug": "dankook-ace",
@@ -362,46 +290,10 @@
       "displayName": "경인교육대학교 러브에이스"
     },
     {
-      "slug": "gyeonggi-tetonam",
-      "universityName": "경기대학교",
-      "clubName": "테토남",
-      "displayName": "경기대학교 테토남"
-    },
-    {
       "slug": "hannam-winners",
       "universityName": "한남대학교",
       "clubName": "위너스",
       "displayName": "한남대학교 위너스"
-    },
-    {
-      "slug": "hanyang-blue",
-      "universityName": "한양대학교",
-      "clubName": "블루",
-      "displayName": "한양대학교 블루"
-    },
-    {
-      "slug": "hanyang-lion",
-      "universityName": "한양대학교",
-      "clubName": "사자",
-      "displayName": "한양대학교 사자"
-    },
-    {
-      "slug": "hongik-hongilboy",
-      "universityName": "홍익대학교",
-      "clubName": "홍일보이",
-      "displayName": "홍익대학교 홍일보이"
-    },
-    {
-      "slug": "inha-biryong",
-      "universityName": "인하대학교",
-      "clubName": "비룡",
-      "displayName": "인하대학교 비룡"
-    },
-    {
-      "slug": "jeonbuk-ace-korean",
-      "universityName": "전북대학교",
-      "clubName": "에이스",
-      "displayName": "전북대학교 에이스"
     },
     {
       "slug": "kau-ace",
@@ -474,72 +366,6 @@
       "universityName": "서울대학교",
       "clubName": "TNT",
       "displayName": "서울대학교 TNT"
-    },
-    {
-      "slug": "sogang-brg",
-      "universityName": "서강대학교",
-      "clubName": "Brg",
-      "displayName": "서강대학교 Brg"
-    },
-    {
-      "slug": "sogang-fa",
-      "universityName": "서강대학교",
-      "clubName": "FA",
-      "displayName": "서강대학교 FA"
-    },
-    {
-      "slug": "soongsil-dickhorse",
-      "universityName": "숭실대학교",
-      "clubName": "디크호스",
-      "displayName": "숭실대학교 디크호스"
-    },
-    {
-      "slug": "sungkyunkwan-gongja",
-      "universityName": "성균관대학교",
-      "clubName": "공자",
-      "displayName": "성균관대학교 공자"
-    },
-    {
-      "slug": "sungkyunkwan-mengja",
-      "universityName": "성균관대학교",
-      "clubName": "맹자",
-      "displayName": "성균관대학교 맹자"
-    },
-    {
-      "slug": "sungkyunkwan-sit",
-      "universityName": "성균관대학교",
-      "clubName": "SIT",
-      "displayName": "성균관대학교 SIT"
-    },
-    {
-      "slug": "sungkyunkwan-soonja",
-      "universityName": "성균관대학교",
-      "clubName": "순자",
-      "displayName": "성균관대학교 순자"
-    },
-    {
-      "slug": "yonsei-freedom",
-      "universityName": "연세대학교",
-      "clubName": "자유",
-      "displayName": "연세대학교 자유"
-    },
-    {
-      "slug": "yonsei-justice",
-      "universityName": "연세대학교",
-      "clubName": "정의",
-      "displayName": "연세대학교 정의"
-    },
-    {
-      "slug": "yonsei-the-true-truth",
-      "universityName": "연세대학교",
-      "clubName": "더트루트루쓰",
-      "displayName": "연세대학교 더트루트루쓰"
-    },
-    {
-      "slug": "yonsei-truth",
-      "universityName": "연세대학교",
-      "clubName": "진리",
-      "displayName": "연세대학교 진리"
     }
   ],
   "aliases": [
@@ -579,7 +405,7 @@
       "sourceLabel": "타이브레이크 C"
     },
     {
-      "clubSlug": "catholic-badboys",
+      "clubSlug": "catholic-courtrang",
       "normalizedAlias": "가톨릭대학교 가톨릭대 badboys",
       "sourceLabel": "가톨릭대 Badboys"
     },
@@ -639,12 +465,12 @@
       "sourceLabel": "경기대 Ktf"
     },
     {
-      "clubSlug": "gyeonggi-kft",
+      "clubSlug": "gyeonggi-ktf",
       "normalizedAlias": "경기대학교 kft a",
       "sourceLabel": "Kft A"
     },
     {
-      "clubSlug": "gyeonggi-kft",
+      "clubSlug": "gyeonggi-ktf",
       "normalizedAlias": "경기대학교 kft b",
       "sourceLabel": "Kft B"
     },
@@ -799,12 +625,12 @@
       "sourceLabel": "Kmtc"
     },
     {
-      "clubSlug": "dankook-jukjeon-danwoong",
+      "clubSlug": "dankook-jukjeon-dkutc",
       "normalizedAlias": "단국대학교 죽전캠퍼스 단국대 단웅팀",
       "sourceLabel": "단국대 단웅팀"
     },
     {
-      "clubSlug": "dankook-jukjeon-woongbi",
+      "clubSlug": "dankook-jukjeon-dkutc",
       "normalizedAlias": "단국대학교 죽전캠퍼스 단국대 웅비팀",
       "sourceLabel": "단국대 웅비팀"
     },
@@ -819,7 +645,7 @@
       "sourceLabel": "Dkutc 죽전 B"
     },
     {
-      "clubSlug": "dankook-cheonan-hodu",
+      "clubSlug": "dankook-cheonan-dkutc",
       "normalizedAlias": "단국대학교 천안캠퍼스 단국대 호두",
       "sourceLabel": "단국대 호두"
     },
@@ -839,13 +665,13 @@
       "sourceLabel": "Dkutc 천안"
     },
     {
-      "clubSlug": "dankook-dkutc",
-      "normalizedAlias": "단국대학교 dkutc a",
+      "clubSlug": "dankook-cheonan-dkutc",
+      "normalizedAlias": "단국대학교 천안캠퍼스 dkutc a",
       "sourceLabel": "Dkutc A"
     },
     {
-      "clubSlug": "dankook-dkutc",
-      "normalizedAlias": "단국대학교 dkutc b",
+      "clubSlug": "dankook-cheonan-dkutc",
+      "normalizedAlias": "단국대학교 천안캠퍼스 dkutc b",
       "sourceLabel": "Dkutc B"
     },
     {
@@ -1019,12 +845,12 @@
       "sourceLabel": "쿠크다스 B"
     },
     {
-      "clubSlug": "yonsei-kookris",
+      "clubSlug": "yonsei-kookdas",
       "normalizedAlias": "연세대학교 쿠크리스 a",
       "sourceLabel": "쿠크리스 A"
     },
     {
-      "clubSlug": "yonsei-kookris",
+      "clubSlug": "yonsei-kookdas",
       "normalizedAlias": "연세대학교 쿠크리스 b",
       "sourceLabel": "쿠크리스 B"
     },
@@ -1139,7 +965,7 @@
       "sourceLabel": "Uitc 탕후루"
     },
     {
-      "clubSlug": "inha-rakoon",
+      "clubSlug": "inha-rapum",
       "normalizedAlias": "인하대학교 라쿤",
       "sourceLabel": "라쿤"
     },
@@ -1209,7 +1035,7 @@
       "sourceLabel": "Alley"
     },
     {
-      "clubSlug": "kau-songgolmae",
+      "clubSlug": "kau-ace",
       "normalizedAlias": "한국항공대학교 한국항공대 송골매",
       "sourceLabel": "한국항공대 송골매"
     },
@@ -1299,7 +1125,7 @@
       "sourceLabel": "Stroke E"
     },
     {
-      "clubSlug": "hongik-hongilboy",
+      "clubSlug": "hongik-hitc",
       "normalizedAlias": "홍익대학교 홍익대 홍일보이",
       "sourceLabel": "홍익대 홍일보이"
     },
@@ -1349,7 +1175,7 @@
       "sourceLabel": "상명대 테슬라A"
     },
     {
-      "clubSlug": "sungkyunkwan-gongja",
+      "clubSlug": "sungkyunkwan-stc",
       "normalizedAlias": "성균관대학교 성균관대학교 공자",
       "sourceLabel": "성균관대학교 공자"
     },
@@ -1409,8 +1235,8 @@
       "sourceLabel": "연세대 YUTT 자유"
     },
     {
-      "clubSlug": "dankook-dkutc",
-      "normalizedAlias": "단국대학교 단국대학교 dkutc",
+      "clubSlug": "dankook-jukjeon-dkutc",
+      "normalizedAlias": "단국대학교 죽전캠퍼스 단국대학교 dkutc",
       "sourceLabel": "단국대학교 DKUTC"
     },
     {
@@ -1479,12 +1305,12 @@
       "sourceLabel": "가천대 타이브레이..."
     },
     {
-      "clubSlug": "inha-biryong",
+      "clubSlug": "inha-rapum",
       "normalizedAlias": "인하대학교 인하대학교 비룡",
       "sourceLabel": "인하대학교 비룡"
     },
     {
-      "clubSlug": "yonsei-the-true-truth",
+      "clubSlug": "yonsei-yutt",
       "normalizedAlias": "연세대학교 연세대학교 더트루트루쓰",
       "sourceLabel": "연세대학교 더트루트루쓰"
     },
@@ -1499,7 +1325,7 @@
       "sourceLabel": "경인교대 러브에이스A"
     },
     {
-      "clubSlug": "hanyang-lion",
+      "clubSlug": "hanyang-hytc",
       "normalizedAlias": "한양대학교 한양대 사자",
       "sourceLabel": "한양대 사자"
     },
@@ -1524,12 +1350,12 @@
       "sourceLabel": "중앙대 LOVE4T A"
     },
     {
-      "clubSlug": "gyeonggi-tetonam",
+      "clubSlug": "gyeonggi-ktf",
       "normalizedAlias": "경기대학교 경기대 테토남",
       "sourceLabel": "경기대 테토남"
     },
     {
-      "clubSlug": "hanyang-blue",
+      "clubSlug": "hanyang-hytc",
       "normalizedAlias": "한양대학교 한양대 블루",
       "sourceLabel": "한양대 블루"
     },
@@ -1544,17 +1370,17 @@
       "sourceLabel": "고려대 KMTC"
     },
     {
-      "clubSlug": "soongsil-dickhorse",
+      "clubSlug": "soongsil-sstc",
       "normalizedAlias": "숭실대학교 숭실대 디크호스",
       "sourceLabel": "숭실대 디크호스"
     },
     {
-      "clubSlug": "yonsei-freedom",
+      "clubSlug": "yonsei-yutt",
       "normalizedAlias": "연세대학교 연세대자유",
       "sourceLabel": "연세대자유"
     },
     {
-      "clubSlug": "yonsei-justice",
+      "clubSlug": "yonsei-yutt",
       "normalizedAlias": "연세대학교 연세대학교 정의",
       "sourceLabel": "연세대학교 정의"
     },
@@ -1569,7 +1395,7 @@
       "sourceLabel": "한밭대 마스터즈A"
     },
     {
-      "clubSlug": "sungkyunkwan-soonja",
+      "clubSlug": "sungkyunkwan-stc",
       "normalizedAlias": "성균관대학교 성균관대 순자",
       "sourceLabel": "성균관대 순자"
     },
@@ -1579,7 +1405,7 @@
       "sourceLabel": "남서울대 위닝샷A"
     },
     {
-      "clubSlug": "chungang-pureongi",
+      "clubSlug": "chungang-love4t",
       "normalizedAlias": "중앙대학교 중앙대 푸렁이",
       "sourceLabel": "중앙대 푸렁이"
     },
@@ -1589,7 +1415,7 @@
       "sourceLabel": "전북대 ACE"
     },
     {
-      "clubSlug": "chungang-puangi",
+      "clubSlug": "chungang-love4t",
       "normalizedAlias": "중앙대학교 중앙대 푸앙이",
       "sourceLabel": "중앙대 푸앙이"
     },
@@ -1599,12 +1425,12 @@
       "sourceLabel": "경희대 셔틀"
     },
     {
-      "clubSlug": "yonsei-truth",
+      "clubSlug": "yonsei-yutt",
       "normalizedAlias": "연세대학교 연세대진리",
       "sourceLabel": "연세대진리"
     },
     {
-      "clubSlug": "sungkyunkwan-gongja",
+      "clubSlug": "sungkyunkwan-stc",
       "normalizedAlias": "성균관대학교 성균관대 공자",
       "sourceLabel": "성균관대 공자"
     },
@@ -1614,17 +1440,12 @@
       "sourceLabel": "인천대 UITC"
     },
     {
-      "clubSlug": "dankook-dkutc",
-      "normalizedAlias": "단국대학교 단국대 dkutc",
-      "sourceLabel": "단국대 DKUTC"
-    },
-    {
       "clubSlug": "hanyang-hytc",
       "normalizedAlias": "한양대학교 한양대 hytc. b",
       "sourceLabel": "한양대 HYTC. B"
     },
     {
-      "clubSlug": "sungkyunkwan-mengja",
+      "clubSlug": "sungkyunkwan-stc",
       "normalizedAlias": "성균관대학교 성균관대 맹자",
       "sourceLabel": "성균관대 맹자"
     },
@@ -1634,7 +1455,7 @@
       "sourceLabel": "한밭대 마스터즈"
     },
     {
-      "clubSlug": "yonsei-truth",
+      "clubSlug": "yonsei-yutt",
       "normalizedAlias": "연세대학교 연세대 진리",
       "sourceLabel": "연세대 진리"
     },
@@ -1659,8 +1480,8 @@
       "sourceLabel": "경희대 러비스 A"
     },
     {
-      "clubSlug": "dankook-dkutc",
-      "normalizedAlias": "단국대학교 단국대 dkutc c",
+      "clubSlug": "dankook-jukjeon-dkutc",
+      "normalizedAlias": "단국대학교 죽전캠퍼스 단국대 dkutc c",
       "sourceLabel": "단국대 DKUTC C"
     },
     {
@@ -1714,7 +1535,7 @@
       "sourceLabel": "한양대 HYTC B"
     },
     {
-      "clubSlug": "sungkyunkwan-sit",
+      "clubSlug": "sungkyunkwan-stc",
       "normalizedAlias": "성균관대학교 성균관대 sit",
       "sourceLabel": "성균관대 sit"
     },
@@ -1739,7 +1560,7 @@
       "sourceLabel": "강릉원주대학교 LOVE"
     },
     {
-      "clubSlug": "sogang-fa",
+      "clubSlug": "sogang-sgtc",
       "normalizedAlias": "서강대학교 서강대 fa",
       "sourceLabel": "서강대 FA"
     },
@@ -1754,7 +1575,7 @@
       "sourceLabel": "단국대 ACE a"
     },
     {
-      "clubSlug": "sogang-brg",
+      "clubSlug": "sogang-sgtc",
       "normalizedAlias": "서강대학교 서강대 brg",
       "sourceLabel": "서강대 Brg"
     },
@@ -1894,7 +1715,7 @@
       "sourceLabel": "건국대 KTC 건덕"
     },
     {
-      "clubSlug": "chungnam-kotshot",
+      "clubSlug": "chungnam-goodshot",
       "normalizedAlias": "충남대학교 충남대콧샷 a",
       "sourceLabel": "충남대콧샷 A"
     },
@@ -1904,7 +1725,7 @@
       "sourceLabel": "연세대학교 YUTT"
     },
     {
-      "clubSlug": "jeonbuk-ace-korean",
+      "clubSlug": "jeonbuk-ace",
       "normalizedAlias": "전북대학교 전북대 에이스",
       "sourceLabel": "전북대 에이스"
     },
@@ -2280,7 +2101,7 @@
       "year": 2025,
       "gender": "men",
       "actualEntrants": 8,
-      "sourceStatus": "unresolved",
+      "sourceStatus": "verified",
       "sourceRefs": [
         "위믹스/2025/남자/KakaoTalk_Photo_2026-07-08-05-18-41.png"
       ]
@@ -2291,7 +2112,7 @@
       "year": 2025,
       "gender": "women",
       "actualEntrants": 12,
-      "sourceStatus": "unresolved",
+      "sourceStatus": "verified",
       "sourceRefs": [
         "위믹스/2025/여자/KakaoTalk_Photo_2026-07-08-05-18-15.png"
       ]
@@ -5010,7 +4831,7 @@
     },
     {
       "editionKey": "yanggu-2024-men",
-      "clubSlug": "inha-rakoon",
+      "clubSlug": "inha-rapum",
       "sourceTeamName": "라쿤",
       "teamLabel": "-",
       "stage": "first_match_loss",
@@ -5090,7 +4911,7 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": "gyeonggi-kft",
+      "clubSlug": "gyeonggi-ktf",
       "sourceTeamName": "Kft B",
       "teamLabel": "B",
       "stage": "first_match_loss",
@@ -5440,7 +5261,7 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": "dankook-dkutc",
+      "clubSlug": "dankook-cheonan-dkutc",
       "sourceTeamName": "Dkutc B",
       "teamLabel": "B",
       "stage": "first_match_loss",
@@ -5720,7 +5541,7 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": "yonsei-kookris",
+      "clubSlug": "yonsei-kookdas",
       "sourceTeamName": "쿠크리스 A",
       "teamLabel": "A",
       "stage": "round_of_32",
@@ -5750,7 +5571,7 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": "dankook-dkutc",
+      "clubSlug": "dankook-cheonan-dkutc",
       "sourceTeamName": "Dkutc A",
       "teamLabel": "A",
       "stage": "first_match_loss",
@@ -5770,7 +5591,7 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": "gyeonggi-kft",
+      "clubSlug": "gyeonggi-ktf",
       "sourceTeamName": "Kft A",
       "teamLabel": "A",
       "stage": "round_of_32",
@@ -5780,7 +5601,7 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": "yonsei-kookris",
+      "clubSlug": "yonsei-kookdas",
       "sourceTeamName": "쿠크리스 B",
       "teamLabel": "B",
       "stage": "round_of_64",
@@ -5860,7 +5681,7 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": "dankook-jukjeon-danwoong",
+      "clubSlug": "dankook-jukjeon-dkutc",
       "sourceTeamName": "단국대 단웅팀",
       "teamLabel": "",
       "stage": "round_of_64",
@@ -5960,7 +5781,7 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": "dankook-jukjeon-woongbi",
+      "clubSlug": "dankook-jukjeon-dkutc",
       "sourceTeamName": "단국대 웅비팀",
       "teamLabel": "",
       "stage": "first_match_loss",
@@ -6290,7 +6111,7 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": "kau-songgolmae",
+      "clubSlug": "kau-ace",
       "sourceTeamName": "한국항공대 송골매",
       "teamLabel": "",
       "stage": "round_of_64",
@@ -8100,7 +7921,7 @@
     },
     {
       "editionKey": "inje-2025-men",
-      "clubSlug": "dankook-cheonan-hodu",
+      "clubSlug": "dankook-cheonan-dkutc",
       "sourceTeamName": "단국대 호두",
       "teamLabel": "-",
       "stage": "first_match_loss",
@@ -8130,7 +7951,7 @@
     },
     {
       "editionKey": "inje-2025-men",
-      "clubSlug": "catholic-badboys",
+      "clubSlug": "catholic-courtrang",
       "sourceTeamName": "가톨릭대 Badboys",
       "teamLabel": "-",
       "stage": "round_of_16",
@@ -8400,7 +8221,7 @@
     },
     {
       "editionKey": "gyeongin-2023-men",
-      "clubSlug": "hongik-hongilboy",
+      "clubSlug": "hongik-hitc",
       "sourceTeamName": "홍익대 홍일보이",
       "teamLabel": "",
       "stage": "first_match_loss",
@@ -9140,7 +8961,7 @@
     },
     {
       "editionKey": "gyeongin-2024-men",
-      "clubSlug": "sungkyunkwan-gongja",
+      "clubSlug": "sungkyunkwan-stc",
       "sourceTeamName": "성균관대학교 공자",
       "teamLabel": "",
       "stage": "round_of_32",
@@ -9522,7 +9343,7 @@
     },
     {
       "editionKey": "gyeongin-2024-men",
-      "clubSlug": "dankook-dkutc",
+      "clubSlug": "dankook-jukjeon-dkutc",
       "sourceTeamName": "단국대학교 DKUTC",
       "teamLabel": "",
       "stage": "first_match_loss",
@@ -9632,7 +9453,7 @@
     },
     {
       "editionKey": "gyeongin-2024-women",
-      "clubSlug": "sungkyunkwan-gongja",
+      "clubSlug": "sungkyunkwan-stc",
       "sourceTeamName": "성균관대학교 공자",
       "teamLabel": "",
       "stage": "runner_up",
@@ -10012,7 +9833,7 @@
     },
     {
       "editionKey": "gyeongin-2025-women",
-      "clubSlug": "inha-biryong",
+      "clubSlug": "inha-rapum",
       "sourceTeamName": "인하대학교 비룡",
       "teamLabel": "",
       "stage": "first_match_loss",
@@ -10072,7 +9893,7 @@
     },
     {
       "editionKey": "gyeongin-2025-women",
-      "clubSlug": "yonsei-the-true-truth",
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대학교 더트루트루쓰",
       "teamLabel": "",
       "stage": "quarterfinal",
@@ -10272,7 +10093,7 @@
     },
     {
       "editionKey": "gyeongin-2025-men",
-      "clubSlug": "inha-biryong",
+      "clubSlug": "inha-rapum",
       "sourceTeamName": "인하대학교 비룡",
       "teamLabel": "",
       "stage": "quarterfinal",
@@ -10292,7 +10113,7 @@
     },
     {
       "editionKey": "gyeongin-2025-men",
-      "clubSlug": "hanyang-lion",
+      "clubSlug": "hanyang-hytc",
       "sourceTeamName": "한양대 사자",
       "teamLabel": "",
       "stage": "first_match_loss",
@@ -10412,7 +10233,7 @@
     },
     {
       "editionKey": "gyeongin-2025-men",
-      "clubSlug": "gyeonggi-tetonam",
+      "clubSlug": "gyeonggi-ktf",
       "sourceTeamName": "경기대 테토남",
       "teamLabel": "",
       "stage": "round_of_16",
@@ -10432,7 +10253,7 @@
     },
     {
       "editionKey": "gyeongin-2025-men",
-      "clubSlug": "hanyang-blue",
+      "clubSlug": "hanyang-hytc",
       "sourceTeamName": "한양대 블루",
       "teamLabel": "",
       "stage": "quarterfinal",
@@ -10472,7 +10293,7 @@
     },
     {
       "editionKey": "chuncheon-2023-men",
-      "clubSlug": "soongsil-dickhorse",
+      "clubSlug": "soongsil-sstc",
       "sourceTeamName": "숭실대 디크호스",
       "teamLabel": "",
       "stage": "first_match_loss",
@@ -10552,7 +10373,7 @@
     },
     {
       "editionKey": "chuncheon-2023-men",
-      "clubSlug": "yonsei-freedom",
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대자유",
       "teamLabel": "",
       "stage": "round_of_32",
@@ -10572,7 +10393,7 @@
     },
     {
       "editionKey": "chuncheon-2023-men",
-      "clubSlug": "yonsei-justice",
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대학교 정의",
       "teamLabel": "",
       "stage": "round_of_16",
@@ -10732,7 +10553,7 @@
     },
     {
       "editionKey": "chuncheon-2023-men",
-      "clubSlug": "sungkyunkwan-soonja",
+      "clubSlug": "sungkyunkwan-stc",
       "sourceTeamName": "성균관대 순자",
       "teamLabel": "",
       "stage": "first_match_loss",
@@ -10762,7 +10583,7 @@
     },
     {
       "editionKey": "chuncheon-2023-men",
-      "clubSlug": "chungang-pureongi",
+      "clubSlug": "chungang-love4t",
       "sourceTeamName": "중앙대 푸렁이",
       "teamLabel": "",
       "stage": "first_match_loss",
@@ -10842,7 +10663,7 @@
     },
     {
       "editionKey": "chuncheon-2023-men",
-      "clubSlug": "chungang-puangi",
+      "clubSlug": "chungang-love4t",
       "sourceTeamName": "중앙대 푸앙이",
       "teamLabel": "",
       "stage": "round_of_32",
@@ -10862,7 +10683,7 @@
     },
     {
       "editionKey": "chuncheon-2023-men",
-      "clubSlug": "yonsei-truth",
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대진리",
       "teamLabel": "",
       "stage": "quarterfinal",
@@ -10892,7 +10713,7 @@
     },
     {
       "editionKey": "chuncheon-2023-men",
-      "clubSlug": "sungkyunkwan-gongja",
+      "clubSlug": "sungkyunkwan-stc",
       "sourceTeamName": "성균관대 공자",
       "teamLabel": "",
       "stage": "round_of_32",
@@ -11062,7 +10883,7 @@
     },
     {
       "editionKey": "chuncheon-2023-women",
-      "clubSlug": "dankook-dkutc",
+      "clubSlug": "dankook-cheonan-dkutc",
       "sourceTeamName": "단국대 DKUTC",
       "teamLabel": "",
       "stage": "first_match_loss",
@@ -11092,7 +10913,7 @@
     },
     {
       "editionKey": "chuncheon-2023-women",
-      "clubSlug": "sungkyunkwan-gongja",
+      "clubSlug": "sungkyunkwan-stc",
       "sourceTeamName": "성균관대 공자",
       "teamLabel": "",
       "stage": "first_match_loss",
@@ -11192,7 +11013,7 @@
     },
     {
       "editionKey": "chuncheon-2023-women",
-      "clubSlug": "sungkyunkwan-mengja",
+      "clubSlug": "sungkyunkwan-stc",
       "sourceTeamName": "성균관대 맹자",
       "teamLabel": "",
       "stage": "round_of_32",
@@ -11302,7 +11123,7 @@
     },
     {
       "editionKey": "chuncheon-2023-women",
-      "clubSlug": "yonsei-truth",
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 진리",
       "teamLabel": "",
       "stage": "quarterfinal",
@@ -11322,7 +11143,7 @@
     },
     {
       "editionKey": "chuncheon-2023-women",
-      "clubSlug": "sungkyunkwan-soonja",
+      "clubSlug": "sungkyunkwan-stc",
       "sourceTeamName": "성균관대 순자",
       "teamLabel": "",
       "stage": "first_match_loss",
@@ -11472,7 +11293,7 @@
     },
     {
       "editionKey": "chuncheon-2024-men",
-      "clubSlug": "dankook-dkutc",
+      "clubSlug": "dankook-jukjeon-dkutc",
       "sourceTeamName": "단국대 DKUTC C",
       "teamLabel": "C",
       "stage": "first_match_loss",
@@ -11822,7 +11643,7 @@
     },
     {
       "editionKey": "chuncheon-2024-men",
-      "clubSlug": "sungkyunkwan-sit",
+      "clubSlug": "sungkyunkwan-stc",
       "sourceTeamName": "성균관대 sit",
       "teamLabel": "",
       "stage": "first_match_loss",
@@ -11962,7 +11783,7 @@
     },
     {
       "editionKey": "chuncheon-2024-men",
-      "clubSlug": "sogang-fa",
+      "clubSlug": "sogang-sgtc",
       "sourceTeamName": "서강대 FA",
       "teamLabel": "",
       "stage": "first_match_loss",
@@ -12032,7 +11853,7 @@
     },
     {
       "editionKey": "chuncheon-2024-men",
-      "clubSlug": "sogang-brg",
+      "clubSlug": "sogang-sgtc",
       "sourceTeamName": "서강대 Brg",
       "teamLabel": "",
       "stage": "first_match_loss",
@@ -13262,103 +13083,103 @@
     },
     {
       "editionKey": "wemix-2025-men",
-      "clubSlug": null,
+      "clubSlug": "korea-kutc",
       "sourceTeamName": "고려대학교",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/남자/KakaoTalk_Photo_2026-07-08-05-18-41.png",
-      "note": "Loses the visible quarterfinal 1-2 to 영남대학교."
+      "note": "Loses the visible quarterfinal 1-2 to 영남대학교. Club identity frozen to korea-kutc under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-men",
-      "clubSlug": null,
+      "clubSlug": "yeungnam-yuta",
       "sourceTeamName": "영남대학교",
       "teamLabel": "",
       "stage": "semifinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/남자/KakaoTalk_Photo_2026-07-08-05-18-41.png",
-      "note": "Beats 고려대학교 2-1, then loses 1-2 to 가천대학교."
+      "note": "Beats 고려대학교 2-1, then loses 1-2 to 가천대학교. Club identity frozen to yeungnam-yuta under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-men",
-      "clubSlug": null,
+      "clubSlug": "uos-approach",
       "sourceTeamName": "서울시립대학교",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/남자/KakaoTalk_Photo_2026-07-08-05-18-41.png",
-      "note": "Loses the visible quarterfinal 0-2 to 가천대학교."
+      "note": "Loses the visible quarterfinal 0-2 to 가천대학교. Club identity frozen to uos-approach under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-men",
-      "clubSlug": null,
+      "clubSlug": "gachon-tiebreak",
       "sourceTeamName": "가천대학교",
       "teamLabel": "",
       "stage": "runner_up",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/남자/KakaoTalk_Photo_2026-07-08-05-18-41.png",
-      "note": "Beats 서울시립대학교 2-0 and 영남대학교 2-1, then loses the final 1-2 to 서울대학교."
+      "note": "Beats 서울시립대학교 2-0 and 영남대학교 2-1, then loses the final 1-2 to 서울대학교. Club identity frozen to gachon-tiebreak under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-tnt",
       "sourceTeamName": "서울대학교",
       "teamLabel": "",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/남자/KakaoTalk_Photo_2026-07-08-05-18-41.png",
-      "note": "Beats 전북대학교 2-0, 연세대학교 2-1, and 가천대학교 2-1 in the final."
+      "note": "Beats 전북대학교 2-0, 연세대학교 2-1, and 가천대학교 2-1 in the final. Club identity frozen to seoul-tnt under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-men",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대학교",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/남자/KakaoTalk_Photo_2026-07-08-05-18-41.png",
-      "note": "Loses the visible quarterfinal 0-2 to 서울대학교."
+      "note": "Loses the visible quarterfinal 0-2 to 서울대학교. Club identity frozen to jeonbuk-ace under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-men",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대학교",
       "teamLabel": "",
       "stage": "semifinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/남자/KakaoTalk_Photo_2026-07-08-05-18-41.png",
-      "note": "Beats 경기대학교 2-0, then loses 1-2 to 서울대학교."
+      "note": "Beats 경기대학교 2-0, then loses 1-2 to 서울대학교. Club identity frozen to yonsei-yutt under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-men",
-      "clubSlug": null,
+      "clubSlug": "gyeonggi-ktf",
       "sourceTeamName": "경기대학교",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/남자/KakaoTalk_Photo_2026-07-08-05-18-41.png",
-      "note": "Loses the visible quarterfinal 0-2 to 연세대학교."
+      "note": "Loses the visible quarterfinal 0-2 to 연세대학교. Club identity frozen to gyeonggi-ktf under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-women",
-      "clubSlug": null,
+      "clubSlug": "seoultech-neutinamu",
       "sourceTeamName": "과기대 느티나무 (1차우...",
       "teamLabel": "",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/여자/KakaoTalk_Photo_2026-07-08-05-18-15.png",
-      "note": "After a BYE, beats 충남대콧샷 A 2-1, 이화여대 스매시 A 2-0, and 고려대 KUTC (3차우승) 2-0 in the final. The parenthetical is visibly truncated in every later appearance."
+      "note": "After a BYE, beats 충남대콧샷 A 2-1, 이화여대 스매시 A 2-0, and 고려대 KUTC (3차우승) 2-0 in the final. The parenthetical is visibly truncated in every later appearance. Club identity frozen to seoultech-neutinamu under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-women",
-      "clubSlug": "chungnam-kotshot",
+      "clubSlug": "chungnam-goodshot",
       "sourceTeamName": "충남대콧샷 A",
       "teamLabel": "A",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/여자/KakaoTalk_Photo_2026-07-08-05-18-15.png",
-      "note": "After a BYE, loses its first played match 1-2 to 과기대 느티나무 ...."
+      "note": "After a BYE, loses its first played match 1-2 to 과기대 느티나무 .... Club identity frozen to chungnam-goodshot under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-women",
@@ -13368,7 +13189,7 @@
       "stage": "semifinal",
       "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/여자/KakaoTalk_Photo_2026-07-08-05-18-15.png",
-      "note": "Beats 연세대학교 YUTT 2-0 and 전북대 에이스 2-0, then loses 0-2 to 과기대 느티나무 ...."
+      "note": "Beats 연세대학교 YUTT 2-0 and 전북대 에이스 2-0, then loses 0-2 to 과기대 느티나무 .... Club identity frozen to ewha-smash under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-women",
@@ -13378,37 +13199,37 @@
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/여자/KakaoTalk_Photo_2026-07-08-05-18-15.png",
-      "note": "Loses the visible Round-of-16 match 0-2 to 이화여대 스매시 A."
+      "note": "Loses the visible Round-of-16 match 0-2 to 이화여대 스매시 A. Club identity frozen to yonsei-yutt under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-women",
-      "clubSlug": null,
+      "clubSlug": "inu-uitc",
       "sourceTeamName": "인천대학교",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/여자/KakaoTalk_Photo_2026-07-08-05-18-15.png",
-      "note": "Loses the visible Round-of-16 match 0-2 to 전북대 에이스."
+      "note": "Loses the visible Round-of-16 match 0-2 to 전북대 에이스. Club identity frozen to inu-uitc under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-women",
-      "clubSlug": "jeonbuk-ace-korean",
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대 에이스",
       "teamLabel": "",
       "stage": "quarterfinal",
       "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/여자/KakaoTalk_Photo_2026-07-08-05-18-15.png",
-      "note": "Beats 인천대학교 2-0, then loses 0-2 to 이화여대 스매시 A."
+      "note": "Beats 인천대학교 2-0, then loses 0-2 to 이화여대 스매시 A. Club identity frozen to jeonbuk-ace under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-women",
-      "clubSlug": null,
+      "clubSlug": "gachon-tiebreak",
       "sourceTeamName": "가천대학교 타이브...",
       "teamLabel": "",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/여자/KakaoTalk_Photo_2026-07-08-05-18-15.png",
-      "note": "Beats 이화여대 스매시 B 2-0, then loses 1-2 to 서울대학교. The hidden completion and any hidden team suffix are not guessed."
+      "note": "Beats 이화여대 스매시 B 2-0, then loses 1-2 to 서울대학교. The hidden completion and any hidden team suffix are not guessed. Club identity frozen to gachon-tiebreak under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-women",
@@ -13418,37 +13239,37 @@
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/여자/KakaoTalk_Photo_2026-07-08-05-18-15.png",
-      "note": "Loses the visible Round-of-16 match 0-2 to 가천대학교 타이브...."
+      "note": "Loses the visible Round-of-16 match 0-2 to 가천대학교 타이브.... Club identity frozen to ewha-smash under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-women",
-      "clubSlug": null,
+      "clubSlug": "ginue-loveace",
       "sourceTeamName": "경인교대",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/여자/KakaoTalk_Photo_2026-07-08-05-18-15.png",
-      "note": "Loses the visible Round-of-16 match 0-2 to 서울대학교."
+      "note": "Loses the visible Round-of-16 match 0-2 to 서울대학교. Club identity frozen to ginue-loveace under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-tnt",
       "sourceTeamName": "서울대학교",
       "teamLabel": "",
       "stage": "semifinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/여자/KakaoTalk_Photo_2026-07-08-05-18-15.png",
-      "note": "Beats 경인교대 2-0 and 가천대학교 타이브... 2-1, then loses 0-2 to 고려대 KUTC (3차우승)."
+      "note": "Beats 경인교대 2-0 and 가천대학교 타이브... 2-1, then loses 0-2 to 고려대 KUTC (3차우승). Club identity frozen to seoul-tnt under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-kuta",
       "sourceTeamName": "경희대 KUTA",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/여자/KakaoTalk_Photo_2026-07-08-05-18-15.png",
-      "note": "After a BYE, loses its first played match 0-2 to 고려대 KUTC (3차우승)."
+      "note": "After a BYE, loses its first played match 0-2 to 고려대 KUTC (3차우승). Club identity frozen to kyunghee-kuta under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-women",
@@ -13458,7 +13279,7 @@
       "stage": "runner_up",
       "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/여자/KakaoTalk_Photo_2026-07-08-05-18-15.png",
-      "note": "After a BYE, beats 경희대 KUTA 2-0 and 서울대학교 2-0, then loses the final 0-2 to 과기대 느티나무 ...."
+      "note": "After a BYE, beats 경희대 KUTA 2-0 and 서울대학교 2-0, then loses the final 0-2 to 과기대 느티나무 .... Club identity frozen to korea-kutc under the administrator-approved school-only assignment rule."
     }
   ]
 }

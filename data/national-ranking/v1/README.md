@@ -1,7 +1,7 @@
 # National ranking source dataset v1
 
 `dataset.json` is the canonical, visually verified source manifest for the
-national university club ranking. Version `sources-2026-07-12-v1` contains the
+national university club ranking. Version `sources-2026-07-13-v2` contains the
 complete Yanggu, Gyeongin, Inje, Chuncheon, and WEMIX source program: 26
 editions and 1,116 terminal result records. Yeongwol is not part of this
 dataset.
@@ -65,14 +65,20 @@ distinct club/team identity. A university name followed only by `A`, `B`,
 `unresolved` with `clubSlug: null`. A club mapping is never borrowed from a
 different year or source.
 
-Canonical clubs consolidate visually explicit spelling and case variants such
-as `Kutc`/`KUTC`, `Hitc`/`HITC`, and `Ktf`/`KTF`. Source-explicit identities
-remain distinct without evidence that they are variants: 경기대학교 `Kft` is
-separate from `KTF`, and 연세대학교 `쿠크리스` is separate from `쿠크다스`.
-Campus-qualified identities likewise remain separate when the source
-distinguishes them. Aliases use an NFKC-normalized, lowercased combination of
-canonical university context and the exact reported team name; `sourceLabel`
-preserves the source spelling.
+Canonical clubs consolidate visually explicit spellings plus the
+administrator-confirmed team-name families documented in the 2026-07-13
+design. These include 경기대학교 `KTF`/`Kft`/`테토남`, 연세대학교
+`YUTT`/`자유`/`정의`/`진리`/`더트루트루쓰`, 연세대학교
+`쿠크다스`/`쿠크리스`, and the other confirmed aliases covered by dataset
+tests. Unconfirmed clubs at the same university remain distinct. Korea
+University KUTC, PETC, and KMTC are therefore still independent ranking
+entities.
+
+Campus is part of identity. 단국대학교 천안캠퍼스 DKUTC and 단국대학교
+죽전캠퍼스 DKUTC are separate clubs; campus-unspecified historical rows are
+frozen to 천안 for women and 죽전 for men. Aliases use an NFKC-normalized,
+lowercased combination of canonical university context and the exact reported
+team name; `sourceLabel` preserves the source spelling.
 
 A verified edition requires exactly one champion-stage record and one
 runner-up-stage record. Those records may still have
@@ -92,17 +98,17 @@ A팀` beating `단국대 A`, while image 007 advances `단국대 A` into the Rou
 and the farthest explicit `단국대 A` terminal result is stored separately. No
 result from this edition contributes points.
 
-Both WEMIX editions remain source-unresolved. The local final-stage images
-support 8 men's and 12 women's names, not the official plan's `30+3` and
-`18+3` fields. The men's image visibly makes `서울대학교` champion, contrary
-to the plan's KUTC claim. The women's image makes the abbreviated `과기대
-느티나무` champion over `고려대 KUTC`, but does not independently spell out
-the champion's full university. Only the image-supported records are stored;
-the plan claims are neither inferred nor scored.
+Both WEMIX editions use the visually confirmed local final-stage draws: 8 men's
+teams and 12 women's teams, rather than the planning document's proposed
+fields. The men's image makes 서울대학교 champion and the women's image makes
+the clipped 과기대 느티나무 label champion over 고려대 KUTC. Under the
+administrator-approved school-only rule, each visible entry is frozen to the
+highest-ranked same-gender club from that university before WEMIX is added.
+The two editions and all 20 terminal rows are therefore verified and scoreable.
 
 ## Unresolved mapping log
 
-The conservative policy above leaves 682 of 1,116 rows unresolved. This is an
+The conservative policy above leaves 668 of 1,116 rows unresolved. This is an
 identity status only; every stored row's entrant name and terminal bracket
 outcome was visually or structurally verified.
 
@@ -132,5 +138,5 @@ outcome was visually or structurally verified.
 | `chuncheon-2024-women` | 34 | 10 | 24 | University/team labels and source-designated non-club nicknames. |
 | `chuncheon-2025-men` | 58 | 31 | 27 | University/team labels, campus-only labels, and generic `테니스부` identities. |
 | `chuncheon-2025-women` | 28 | 10 | 18 | University/team labels, campus-only labels, and source-designated non-club nicknames. |
-| `wemix-2025-men` | 8 | 0 | 8 | Final-stage image uses university-only labels. |
-| `wemix-2025-women` | 12 | 6 | 6 | Abbreviated/truncated champion identity, university-only labels, and campus-ambiguous KUTA. |
+| `wemix-2025-men` | 8 | 8 | 0 | School-only entries are frozen under the approved pre-WEMIX ranking rule. |
+| `wemix-2025-women` | 12 | 12 | 0 | Explicit aliases, clipped labels, and school-only entries are frozen under the approved rule. |
