@@ -143,7 +143,7 @@ export default function NationalRankingTable({
                     >
                       {row.rank}
                     </td>
-                    <td>
+                    <td className="national-ranking-club-column">
                       <span className="national-ranking-club-cell">
                         <Link
                           aria-label={`${row.displayName} 대회 성적 보기`}

@@ -205,6 +205,24 @@ describe("NationalRankingTable", () => {
     ).toBe("/clubs/kaist");
   });
 
+  it("동아리 칸 전체를 성적 페이지 링크의 터치 영역으로 사용한다", () => {
+    render(<NationalRankingTable rankings={rankings} />);
+
+    const link = screen.getByRole("link", {
+      name: "서울과학기술대학교 STC 대회 성적 보기",
+    });
+    const clubCell = link.closest("td");
+
+    expect(clubCell?.classList.contains("national-ranking-club-column")).toBe(
+      true
+    );
+    expect(
+      within(clubCell as HTMLTableCellElement).getByRole("button", {
+        name: "2025 양구 남자부 우승",
+      }).closest("a")
+    ).toBeNull();
+  });
+
   it("객체 프로토타입과 같은 안전한 슬러그도 일반 성적 링크로 다룬다", () => {
     const rankingsWithPrototypeSlug: NationalRankingPageData["rankings"] = {
       ...rankings,

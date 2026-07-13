@@ -271,6 +271,18 @@ describe("national ranking responsive contracts", () => {
     );
   });
 
+  it("동아리 이름 칸 전체를 링크로 누를 수 있고 왕관 조작은 링크보다 위에 둔다", () => {
+    expect(css).toMatch(
+      /\.national-ranking-club-column\s*\{[^}]*position:\s*relative;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-ranking-club-link::after\s*\{[^}]*content:\s*"";[^}]*position:\s*absolute;[^}]*inset:\s*0;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-ranking-honors\s*\{[^}]*position:\s*relative;[^}]*z-index:\s*1;[^}]*\}/
+    );
+  });
+
   it("640px 이하에서 표 열을 압축한다", () => {
     expect(css).toMatch(/@media\s*\(max-width:\s*640px\)/);
     expect(css).toMatch(
