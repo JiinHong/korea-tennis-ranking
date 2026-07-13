@@ -1,6 +1,7 @@
 "use client";
 
 import { type KeyboardEvent, useRef, useState } from "react";
+import Link from "next/link";
 
 import type { NationalRankingPageData } from "@/lib/nationalRanking/repository";
 import type { RankingGender } from "@/lib/nationalRanking/types";
@@ -18,6 +19,11 @@ const tabs: Array<{ gender: RankingGender; label: string }> = [
 const scoreFormatter = new Intl.NumberFormat("ko-KR", {
   maximumFractionDigits: 1,
 });
+
+const campusRankingPaths: ReadonlyMap<string, string> = new Map([
+  ["seoultech-neutinamu", "/seoultech"],
+  ["korea-petc", "/petc"],
+]);
 
 type RankTier = "gold" | "silver" | "bronze";
 
@@ -123,25 +129,42 @@ export default function NationalRankingTable({
                 </td>
               </tr>
             ) : (
-              rows.map((row) => (
-                <tr key={row.clubSlug}>
-                  <td
-                    className="national-ranking-rank"
-                    data-rank-tier={getRankTier(row.rank)}
-                  >
-                    {row.rank}
-                  </td>
-                  <td>
-                    <span className="national-ranking-club">
-                      <strong>{row.universityName}</strong>
-                      <span>{row.clubName}</span>
-                    </span>
-                  </td>
-                  <td className="national-ranking-score">
-                    {scoreFormatter.format(row.points)}
-                  </td>
-                </tr>
-              ))
+              rows.map((row) => {
+                const campusPath = campusRankingPaths.get(row.clubSlug);
+                const clubName = (
+                  <span className="national-ranking-club">
+                    <strong>{row.universityName}</strong>
+                    <span>{row.clubName}</span>
+                  </span>
+                );
+
+                return (
+                  <tr key={row.clubSlug}>
+                    <td
+                      className="national-ranking-rank"
+                      data-rank-tier={getRankTier(row.rank)}
+                    >
+                      {row.rank}
+                    </td>
+                    <td>
+                      {campusPath ? (
+                        <Link
+                          aria-label={`${row.displayName} 단식 랭킹 보기`}
+                          className="national-ranking-club-link"
+                          href={campusPath}
+                        >
+                          {clubName}
+                        </Link>
+                      ) : (
+                        clubName
+                      )}
+                    </td>
+                    <td className="national-ranking-score">
+                      {scoreFormatter.format(row.points)}
+                    </td>
+                  </tr>
+                );
+              })
             )}
           </tbody>
         </table>

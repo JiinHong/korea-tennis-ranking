@@ -208,15 +208,20 @@ describe("national ranking responsive contracts", () => {
     );
   });
 
-  it("데스크톱 산정 방식은 작은 팝오버로 배치한다", () => {
+  it("산정 방식 안내는 기본적으로 숨기고 마우스 호버 환경에서만 표시한다", () => {
     expect(css).toMatch(
-      /\.ranking-methodology-dialog\s*\{[\s\S]*?position:\s*absolute;[^}]*width:\s*min\(360px,\s*calc\(100vw - 32px\)\);[^}]*border-radius:\s*8px;[^}]*\}/
+      /\.ranking-methodology-tooltip\s*\{[^}]*opacity:\s*0;[^}]*visibility:\s*hidden;[^}]*pointer-events:\s*none;[^}]*\}/
     );
+    expect(css).toMatch(
+      /@media\s*\(hover:\s*hover\)\s*and\s*\(pointer:\s*fine\)\s*\{[\s\S]*?\.ranking-methodology-info:hover\s+\.ranking-methodology-tooltip\s*\{[^}]*opacity:\s*1;[^}]*visibility:\s*visible;[^}]*pointer-events:\s*auto;[^}]*\}/
+    );
+    expect(css).not.toContain(".ranking-methodology-backdrop");
+    expect(css).not.toContain(".ranking-methodology-dialog");
   });
 
-  it("데스크톱 산정 방식 팝오버를 왼쪽으로 고정해 화면 안에 유지한다", () => {
+  it("정보 아이콘과 툴팁 사이에 끊기지 않는 호버 이동 영역을 둔다", () => {
     expect(css).toMatch(
-      /\.ranking-methodology-dialog\s*\{[^}]*left:\s*0;[^}]*right:\s*auto;[^}]*\}/
+      /\.ranking-methodology-info::after\s*\{[^}]*content:\s*"";[^}]*position:\s*absolute;[^}]*top:\s*100%;[^}]*left:\s*-88px;[^}]*width:\s*min\(340px,\s*calc\(100vw - 32px\)\);[^}]*height:\s*6px;[^}]*\}/
     );
   });
 
@@ -228,17 +233,14 @@ describe("national ranking responsive contracts", () => {
 
   it("전국 랭킹 조작 요소의 키보드 포커스를 불투명 액센트 윤곽선으로 표시한다", () => {
     expect(css).toMatch(
-      /\.national-ranking-tabs button:focus-visible,[\s\S]*?\.ranking-methodology-dialog a:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--national-accent\);[^}]*\}/
+      /\.national-ranking-tabs button:focus-visible,[\s\S]*?\.national-ranking-club-link:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--national-accent\);[^}]*\}/
     );
   });
 
-  it("640px 이하에서 표 열을 압축하고 산정 방식을 안전 영역이 있는 바텀 시트로 바꾼다", () => {
+  it("640px 이하에서 표 열을 압축한다", () => {
     expect(css).toMatch(/@media\s*\(max-width:\s*640px\)/);
     expect(css).toMatch(
       /@media\s*\(max-width:\s*640px\)[\s\S]*?\.national-ranking-rank-column\s*\{[^}]*width:\s*48px;[^}]*\}[\s\S]*?\.national-ranking-score-column\s*\{[^}]*width:\s*96px;[^}]*\}/
-    );
-    expect(css).toMatch(
-      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.ranking-methodology-dialog\s*\{[^}]*position:\s*fixed;[^}]*top:\s*auto;[^}]*bottom:\s*0;[^}]*width:\s*100%;[^}]*padding-bottom:\s*calc\(20px \+ env\(safe-area-inset-bottom\)\);[^}]*border-radius:\s*8px 8px 0 0;[^}]*\}/
     );
   });
 

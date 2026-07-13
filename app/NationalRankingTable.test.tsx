@@ -9,7 +9,7 @@ const rankings: NationalRankingPageData["rankings"] = {
   men: [
     {
       rank: 1,
-      clubSlug: "seoultech",
+      clubSlug: "seoultech-neutinamu",
       universityName: "서울과학기술대학교",
       clubName: "STC",
       displayName: "서울과학기술대학교 STC",
@@ -28,6 +28,17 @@ const rankings: NationalRankingPageData["rankings"] = {
       latestEditionPoints: 70,
       championships: 0,
       runnerUps: 1,
+    },
+    {
+      rank: 9,
+      clubSlug: "korea-petc",
+      universityName: "고려대학교",
+      clubName: "PETC",
+      displayName: "고려대학교 PETC",
+      points: 530,
+      latestEditionPoints: 40,
+      championships: 0,
+      runnerUps: 0,
     },
     {
       rank: 10,
@@ -113,9 +124,56 @@ describe("NationalRankingTable", () => {
     ).toEqual([
       ["1", "gold"],
       ["2", "silver"],
+      ["9", "silver"],
       ["10", "silver"],
       ["11", "bronze"],
     ]);
+  });
+
+  it("과기대와 PETC 동아리 이름만 각 단식 랭킹으로 연결한다", () => {
+    render(<NationalRankingTable rankings={rankings} />);
+
+    expect(
+      screen
+        .getByRole("link", {
+          name: "서울과학기술대학교 STC 단식 랭킹 보기",
+        })
+        .getAttribute("href")
+    ).toBe("/seoultech");
+    expect(
+      screen
+        .getByRole("link", { name: "고려대학교 PETC 단식 랭킹 보기" })
+        .getAttribute("href")
+    ).toBe("/petc");
+    expect(
+      screen.queryByRole("link", {
+        name: "한국과학기술원 KAIST Tennis 단식 랭킹 보기",
+      })
+    ).toBeNull();
+  });
+
+  it("객체 프로토타입과 같은 슬러그는 단식 랭킹 링크로 오인하지 않는다", () => {
+    const rankingsWithPrototypeSlug: NationalRankingPageData["rankings"] = {
+      ...rankings,
+      men: [
+        ...rankings.men,
+        {
+          rank: 12,
+          clubSlug: "constructor",
+          universityName: "프로토타입대학교",
+          clubName: "테니스부",
+          displayName: "프로토타입대학교 테니스부",
+          points: 10,
+          latestEditionPoints: 0,
+          championships: 0,
+          runnerUps: 0,
+        },
+      ],
+    };
+
+    render(<NationalRankingTable rankings={rankingsWithPrototypeSlug} />);
+
+    expect(screen.getByText("프로토타입대학교").closest("a")).toBeNull();
   });
 
   it("여자부와 보조 종합 랭킹을 같은 표 안에서 전환한다", () => {

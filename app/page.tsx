@@ -5,9 +5,9 @@ import { getCachedNationalRankingPageData } from "@/lib/nationalRanking/reposito
 import NationalRankingTable from "./NationalRankingTable";
 import RankingMethodologyInfo from "./RankingMethodologyInfo";
 
-const calculatedAtFormatter = new Intl.DateTimeFormat("ko-KR", {
-  dateStyle: "medium",
-  timeStyle: "short",
+const rankingPeriodFormatter = new Intl.DateTimeFormat("ko-KR", {
+  year: "numeric",
+  month: "long",
   timeZone: "Asia/Seoul",
 });
 
@@ -30,9 +30,6 @@ export default async function Home() {
             <span className="national-kicker">NATIONAL CLUB RANKING</span>
             <h1>전국 대학 테니스 동아리 랭킹</h1>
           </div>
-          <Link className="national-campus-link" href="/seoultech">
-            서울과기대 단식 랭킹
-          </Link>
         </header>
 
         {readFailed ? (
@@ -49,23 +46,14 @@ export default async function Home() {
             <div className="national-ranking-header">
               <div className="national-ranking-title-row">
                 <h2 id="ranking-title">전국 랭킹</h2>
-                <span>랭킹 산정 방식</span>
                 <RankingMethodologyInfo />
               </div>
-              <dl className="national-ranking-meta">
-                <div>
-                  <dt>계산식</dt>
-                  <dd>{pageData.formulaVersion}</dd>
-                </div>
-                <div>
-                  <dt>산정 시각</dt>
-                  <dd>
-                    <time dateTime={pageData.calculatedAt}>
-                      {calculatedAtFormatter.format(new Date(pageData.calculatedAt))}
-                    </time>
-                  </dd>
-                </div>
-              </dl>
+              <time
+                className="national-ranking-reference-date"
+                dateTime={pageData.calculatedAt}
+              >
+                ※ {rankingPeriodFormatter.format(new Date(pageData.calculatedAt))} 기준
+              </time>
             </div>
             <NationalRankingTable rankings={pageData.rankings} />
           </section>

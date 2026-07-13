@@ -11,7 +11,7 @@ vi.mock("@/lib/nationalRanking/repository", () => ({
 
 const rankingRow = {
   rank: 1,
-  clubSlug: "seoultech",
+  clubSlug: "seoultech-neutinamu",
   universityName: "서울과학기술대학교",
   clubName: "STC",
   displayName: "서울과학기술대학교 STC",
@@ -36,7 +36,7 @@ describe("Home", () => {
     vi.mocked(getCachedNationalRankingPageData).mockReset();
   });
 
-  it("게시된 전국 랭킹과 산정 메타데이터를 조용한 운영 화면에 보여준다", async () => {
+  it("게시된 전국 랭킹과 기준 월만 조용한 운영 화면에 보여준다", async () => {
     vi.mocked(getCachedNationalRankingPageData).mockResolvedValue(rankingPageData);
 
     render(await Home());
@@ -47,8 +47,12 @@ describe("Home", () => {
         name: "전국 대학 테니스 동아리 랭킹",
       })
     ).toBeDefined();
-    expect(screen.getByText("national-club-v1")).toBeDefined();
-    const calculatedAt = screen.getByText(/2026.*7.*12/) as HTMLTimeElement;
+    expect(screen.queryByText("national-club-v1")).toBeNull();
+    expect(screen.queryByText("계산식")).toBeNull();
+    expect(screen.queryByText("산정 시각")).toBeNull();
+    const calculatedAt = screen.getByText(
+      "※ 2026년 7월 기준"
+    ) as HTMLTimeElement;
     expect(calculatedAt.getAttribute("datetime")).toBe(
       "2026-07-12T12:00:00.000Z"
     );
@@ -57,10 +61,9 @@ describe("Home", () => {
     expect(screen.queryByText(/구축할 예정입니다/)).toBeNull();
     expect(screen.queryByText("영월")).toBeNull();
 
-    const seoultechLink = screen.getByRole("link", {
-      name: "서울과기대 단식 랭킹",
-    });
-    expect(seoultechLink.getAttribute("href")).toBe("/seoultech");
+    expect(
+      screen.queryByRole("link", { name: "서울과기대 단식 랭킹" })
+    ).toBeNull();
   });
 
   it("게시된 스냅샷이 없으면 준비 상태를 보여준다", async () => {
@@ -94,7 +97,7 @@ describe("Home", () => {
     render(await Home());
 
     expect(screen.getByRole("table")).toBeDefined();
-    expect(screen.getByText("national-club-v1")).toBeDefined();
+    expect(screen.getByText("※ 2026년 7월 기준")).toBeDefined();
     expect(getCachedNationalRankingPageData).toHaveBeenCalledTimes(2);
   });
 });
