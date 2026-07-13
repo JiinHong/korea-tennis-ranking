@@ -312,6 +312,17 @@ describe("buildNationalRankingSeedSql", () => {
     expect(unpublishIndex).toBeLessThan(publishIndex);
   });
 
+  it("persists all-time honors and includes them in immutable row comparison", () => {
+    const sql = buildSql();
+    const normalized = normalizedSql(sql);
+
+    expect(sql).toContain('"honors":[{');
+    expect(normalized).toContain("honors jsonb");
+    expect(normalized).toContain("runner_ups, contributions, honors");
+    expect(normalized).toContain("row_input.honors");
+    expect(normalized).toContain("ranking_rows.honors");
+  });
+
   it("publishes only contributions from verified editions, verified results, and known clubs", () => {
     const plan = buildNationalRankingSeedPlan(dataset, "revision-abc");
     const verifiedEditions = new Set(

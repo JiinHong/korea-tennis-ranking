@@ -113,18 +113,22 @@ describe("buildNationalRankingSeedPlan", () => {
 
     expect(plan.sourceRevision).toBe("revision-123");
     expect(plan.formula).toMatchObject({
-      version: "national-club-v2",
-      displayName: "National Club Ranking v2",
+      version: "national-club-v3",
+      displayName: "National Club Ranking v3",
       effectiveOn: "2026-07-13",
     });
     expect(plan.formula.config).toMatchObject({
-      version: "national-club-v2",
-      tournamentPrestigeFactors: {
-        yanggu: 1,
-        gyeongin: 0.9,
-        chuncheon: 0.9,
-        wemix: 0.8,
-        inje: 0.8,
+      version: "national-club-v3",
+      stageUnits: {
+        champion: 21,
+        runner_up: 13,
+      },
+      tournamentUnits: {
+        yanggu: 3,
+        gyeongin: 2,
+        chuncheon: 2,
+        wemix: 1,
+        inje: 1,
       },
     });
     expect(plan.formula.sourceReferences).toEqual(PRIMARY_METHODOLOGY_REFERENCES);
@@ -156,6 +160,9 @@ describe("buildNationalRankingSeedPlan", () => {
     );
 
     const contributions = plan.rows.flatMap((row) => row.contributions);
+    const alphaMen = plan.rows.find(
+      (row) => row.clubSlug === "alpha" && row.gender === "men"
+    );
 
     expect(contributions).toEqual(
       expect.arrayContaining([
@@ -177,5 +184,18 @@ describe("buildNationalRankingSeedPlan", () => {
         expect.objectContaining({ editionKey: "national-2024-men-unresolved" }),
       ])
     );
+    expect(plan.rows.every((row) => Number.isInteger(row.totalPoints))).toBe(
+      true
+    );
+    expect(alphaMen?.honors).toEqual([
+      expect.objectContaining({
+        editionKey: "national-2025-men",
+        stage: "champion",
+      }),
+      expect.objectContaining({
+        editionKey: "national-2024-men-unresolved",
+        stage: "runner_up",
+      }),
+    ]);
   });
 });

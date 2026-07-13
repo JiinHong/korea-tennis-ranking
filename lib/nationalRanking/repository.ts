@@ -3,7 +3,10 @@ import "server-only";
 import { unstable_cache } from "next/cache";
 
 import { getSupabaseReadClient } from "@/lib/supabaseServer";
-import type { RankingGender } from "@/lib/nationalRanking/types";
+import type {
+  NationalRankingHonor,
+  RankingGender,
+} from "@/lib/nationalRanking/types";
 
 export type PublicNationalRankingRow = {
   rank: number;
@@ -15,6 +18,7 @@ export type PublicNationalRankingRow = {
   latestEditionPoints: number;
   championships: number;
   runnerUps: number;
+  honors: NationalRankingHonor[];
 };
 
 export type NationalRankingViewRow = {
@@ -26,6 +30,7 @@ export type NationalRankingViewRow = {
   latest_edition_points: number;
   championships: number;
   runner_ups: number;
+  honors: unknown;
   club_slug: string;
   university_name: string;
   club_name: string;
@@ -50,7 +55,7 @@ function createNationalRankingReadAdapter(): NationalRankingReadAdapter {
       const { data, error } = await supabase
         .from("latest_national_rankings")
         .select(
-          "formula_version, calculated_at, gender, rank, total_points, latest_edition_points, championships, runner_ups, club_slug, university_name, club_name, display_name"
+          "formula_version, calculated_at, gender, rank, total_points, latest_edition_points, championships, runner_ups, honors, club_slug, university_name, club_name, display_name"
         )
         .order("gender", { ascending: true })
         .order("rank", { ascending: true });
@@ -79,6 +84,75 @@ function describeError(error: unknown): string {
   }
 
   return String(error);
+}
+
+function requireHonorString(
+  value: unknown,
+  field: string,
+  clubSlug: string
+): string {
+  if (typeof value !== "string" || value.trim() === "") {
+    throw new Error(
+      `National ranking honors field ${field} is invalid for ${clubSlug}`
+    );
+  }
+
+  return value;
+}
+
+function parseNationalRankingHonors(
+  value: unknown,
+  clubSlug: string
+): NationalRankingHonor[] {
+  if (!Array.isArray(value)) {
+    throw new Error(`National ranking honors must be an array for ${clubSlug}`);
+  }
+
+  return value.map((item, index) => {
+    if (!item || typeof item !== "object" || Array.isArray(item)) {
+      throw new Error(
+        `National ranking honors item ${index} is invalid for ${clubSlug}`
+      );
+    }
+
+    const record = item as Record<string, unknown>;
+    const year = record.year;
+    const gender = record.gender;
+    const stage = record.stage;
+
+    if (!Number.isInteger(year) || (year as number) <= 0) {
+      throw new Error(
+        `National ranking honors field year is invalid for ${clubSlug}`
+      );
+    }
+    if (gender !== "men" && gender !== "women") {
+      throw new Error(
+        `National ranking honors field gender is invalid for ${clubSlug}`
+      );
+    }
+    if (stage !== "champion" && stage !== "runner_up") {
+      throw new Error(
+        `National ranking honors field stage is invalid for ${clubSlug}`
+      );
+    }
+
+    return {
+      editionKey: requireHonorString(record.editionKey, "editionKey", clubSlug),
+      tournamentSlug: requireHonorString(
+        record.tournamentSlug,
+        "tournamentSlug",
+        clubSlug
+      ),
+      tournamentName: requireHonorString(
+        record.tournamentName,
+        "tournamentName",
+        clubSlug
+      ),
+      year: year as number,
+      gender,
+      stage,
+    };
+  });
 }
 
 export async function getNationalRankingPageData(
@@ -127,6 +201,7 @@ export async function getNationalRankingPageData(
       latestEditionPoints: row.latest_edition_points,
       championships: row.championships,
       runnerUps: row.runner_ups,
+      honors: parseNationalRankingHonors(row.honors, row.club_slug),
     });
   }
 
@@ -143,6 +218,6 @@ export async function getNationalRankingPageData(
 
 export const getCachedNationalRankingPageData = unstable_cache(
   () => getNationalRankingPageData(),
-  ["national-ranking-v2"],
+  ["national-ranking-v3"],
   { tags: ["national-ranking"], revalidate: 300 }
 );

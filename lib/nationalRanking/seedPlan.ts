@@ -1,5 +1,5 @@
 import { calculateNationalRankings } from "./calculate";
-import { NATIONAL_FORMULA_V2 } from "./formula";
+import { NATIONAL_FORMULA_V3 } from "./formula";
 import type {
   CalculatedRankingRow,
   NationalRankingDataset,
@@ -31,9 +31,9 @@ export const PRIMARY_METHODOLOGY_REFERENCES = [
 export type NationalRankingSeedPlan = {
   datasetVersion: NationalRankingDataset["version"];
   formula: {
-    version: typeof NATIONAL_FORMULA_V2.version;
+    version: typeof NATIONAL_FORMULA_V3.version;
     displayName: string;
-    config: typeof NATIONAL_FORMULA_V2;
+    config: typeof NATIONAL_FORMULA_V3;
     effectiveOn: string;
     sourceReferences: typeof PRIMARY_METHODOLOGY_REFERENCES;
   };
@@ -55,9 +55,9 @@ export function buildNationalRankingSeedPlan(
   return {
     datasetVersion: dataset.version,
     formula: {
-      version: NATIONAL_FORMULA_V2.version,
-      displayName: "National Club Ranking v2",
-      config: NATIONAL_FORMULA_V2,
+      version: NATIONAL_FORMULA_V3.version,
+      displayName: "National Club Ranking v3",
+      config: NATIONAL_FORMULA_V3,
       effectiveOn: "2026-07-13",
       sourceReferences: PRIMARY_METHODOLOGY_REFERENCES,
     },

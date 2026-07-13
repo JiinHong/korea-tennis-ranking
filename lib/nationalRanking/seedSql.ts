@@ -11,6 +11,7 @@ type RankingRowRecord = {
   championships: number;
   runnerUps: number;
   contributions: NationalRankingSeedPlan["rows"][number]["contributions"];
+  honors: NationalRankingSeedPlan["rows"][number]["honors"];
 };
 
 function sqlJson(value: unknown): string {
@@ -74,6 +75,7 @@ function buildSourceSummary(plan: NationalRankingSeedPlan) {
         (total, row) => total + row.contributions.length,
         0
       ),
+      honors: plan.rows.reduce((total, row) => total + row.honors.length, 0),
     },
     editionsBySourceStatus: countBy(
       plan.editions.map((edition) => edition.sourceStatus),
@@ -101,6 +103,7 @@ function buildRankingRowRecords(plan: NationalRankingSeedPlan): RankingRowRecord
     championships: row.championships,
     runnerUps: row.runnerUps,
     contributions: row.contributions,
+    honors: row.honors,
   }));
 }
 
@@ -189,7 +192,8 @@ row_input as (
     "maxContribution" numeric,
     championships integer,
     "runnerUps" integer,
-    contributions jsonb
+    contributions jsonb,
+    honors jsonb
   )
 )`;
 }
@@ -616,7 +620,8 @@ resolved as (
     row_input."maxContribution" as max_contribution,
     row_input.championships,
     row_input."runnerUps" as runner_ups,
-    row_input.contributions
+    row_input.contributions,
+    row_input.honors
   from row_input
   cross join inserted_snapshot
   left join public.national_clubs clubs
@@ -632,7 +637,8 @@ insert into public.national_ranking_rows (
   max_contribution,
   championships,
   runner_ups,
-  contributions
+  contributions,
+  honors
 )
 select
   snapshot_id,
@@ -644,7 +650,8 @@ select
   max_contribution,
   championships,
   runner_ups,
-  contributions
+  contributions,
+  honors
 from resolved;
 
 ${sqlDoBlock(`
@@ -683,7 +690,8 @@ begin
         row_input."maxContribution" as max_contribution,
         row_input.championships,
         row_input."runnerUps" as runner_ups,
-        row_input.contributions
+        row_input.contributions,
+        row_input.honors
       from row_input
     ),
     actual_rows as (
@@ -696,7 +704,8 @@ begin
         ranking_rows.max_contribution,
         ranking_rows.championships,
         ranking_rows.runner_ups,
-        ranking_rows.contributions
+        ranking_rows.contributions,
+        ranking_rows.honors
       from target_snapshot
       join public.national_ranking_rows ranking_rows
         on ranking_rows.snapshot_id = target_snapshot.id

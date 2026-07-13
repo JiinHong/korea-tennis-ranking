@@ -35,6 +35,16 @@ function rankingRow(
     latest_edition_points: 40,
     championships: 2,
     runner_ups: 1,
+    honors: [
+      {
+        editionKey: "yanggu-2025-men",
+        tournamentSlug: "yanggu",
+        tournamentName: "국토정중앙배(양구)",
+        year: 2025,
+        gender: "men",
+        stage: "champion",
+      },
+    ],
     club_slug: "seoultech",
     university_name: "Seoul National University of Science and Technology",
     club_name: "STC",
@@ -106,6 +116,16 @@ describe("getNationalRankingPageData", () => {
             latestEditionPoints: 20,
             championships: 1,
             runnerUps: 2,
+            honors: [
+              {
+                editionKey: "yanggu-2025-men",
+                tournamentSlug: "yanggu",
+                tournamentName: "국토정중앙배(양구)",
+                year: 2025,
+                gender: "men",
+                stage: "champion",
+              },
+            ],
           },
         ],
         combined: [
@@ -118,6 +138,17 @@ describe("getNationalRankingPageData", () => {
 
   test("returns null when no ranking snapshot has been published", async () => {
     await expect(getNationalRankingPageData(createAdapter([]))).resolves.toBeNull();
+  });
+
+  test("rejects a public view row whose honors value is not an array", async () => {
+    const invalidRow = {
+      ...rankingRow(),
+      honors: { stage: "champion" },
+    } as unknown as NationalRankingViewRow;
+
+    await expect(
+      getNationalRankingPageData(createAdapter([invalidRow]))
+    ).rejects.toThrow(/honors.*array/i);
   });
 
   test("wraps adapter errors with the public read context", async () => {
@@ -208,7 +239,7 @@ describe("default national ranking read adapter", () => {
     expect(mocks.supabaseFrom).toHaveBeenCalledWith("latest_national_rankings");
     expect(select).toHaveBeenCalledTimes(1);
     expect(select).toHaveBeenCalledWith(
-      "formula_version, calculated_at, gender, rank, total_points, latest_edition_points, championships, runner_ups, club_slug, university_name, club_name, display_name"
+      "formula_version, calculated_at, gender, rank, total_points, latest_edition_points, championships, runner_ups, honors, club_slug, university_name, club_name, display_name"
     );
     expect(genderOrder).toHaveBeenCalledWith("gender", { ascending: true });
     expect(rankOrder).toHaveBeenCalledWith("rank", { ascending: true });
@@ -220,7 +251,7 @@ describe("getCachedNationalRankingPageData", () => {
     expect(getCachedNationalRankingPageData).toBeTypeOf("function");
     expect(mocks.unstableCache).toHaveBeenCalledWith(
       expect.any(Function),
-      ["national-ranking-v2"],
+      ["national-ranking-v3"],
       { tags: ["national-ranking"], revalidate: 300 }
     );
   });
