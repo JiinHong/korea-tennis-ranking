@@ -32,7 +32,11 @@ export type FormulaV2Input = FormulaBaseInput & {
   tournamentPrestigeFactor: number;
 };
 
-export type FormulaInput = FormulaV1Input | FormulaV2Input;
+export type FormulaV3Input = FormulaBaseInput & {
+  tournamentSlug: string;
+};
+
+export type FormulaInput = FormulaV1Input | FormulaV2Input | FormulaV3Input;
 
 export type NationalClubInput = {
   slug: string;
@@ -93,6 +97,9 @@ export type ScoreContribution = FormulaBaseInput & {
   sourceTeamName: string;
   scopeFactor: number;
   tournamentPrestigeFactor?: number;
+  tournamentUnits?: number;
+  fieldSizeUnits?: number;
+  recencyUnits?: number;
   points: number;
 };
 
@@ -109,6 +116,9 @@ export type CalculatedRankingRow = {
 };
 
 export type CalculatedNationalRanking = {
-  formulaVersion: "national-club-v1" | "national-club-v2";
+  formulaVersion:
+    | "national-club-v1"
+    | "national-club-v2"
+    | "national-club-v3";
   rows: CalculatedRankingRow[];
 };

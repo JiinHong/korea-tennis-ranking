@@ -1,7 +1,10 @@
 import {
+  getFieldSizeUnits,
   getRecencyFactor,
+  getRecencyUnits,
   getTournamentPrestigeFactor,
-  NATIONAL_FORMULA_V2,
+  getTournamentUnits,
+  NATIONAL_FORMULA_V3,
   scoreVerifiedResult,
 } from "./formula";
 import type { NationalFormula } from "./formula";
@@ -87,7 +90,7 @@ function sortAndRank(
 
 export function calculateNationalRankings(
   dataset: NationalRankingDataset,
-  formula: NationalFormula = NATIONAL_FORMULA_V2
+  formula: NationalFormula = NATIONAL_FORMULA_V3
 ): CalculatedNationalRanking {
   const clubsBySlug = new Map(dataset.clubs.map((club) => [club.slug, club]));
   const tournamentsBySlug = new Map(
@@ -101,6 +104,10 @@ export function calculateNationalRankings(
   if (formula.version === "national-club-v2") {
     for (const tournament of dataset.tournaments) {
       getTournamentPrestigeFactor(tournament.slug, formula);
+    }
+  } else if (formula.version === "national-club-v3") {
+    for (const tournament of dataset.tournaments) {
+      getTournamentUnits(tournament.slug, formula);
     }
   }
 
@@ -146,21 +153,64 @@ export function calculateNationalRankings(
     if (edition.sourceStatus !== "verified") continue;
 
     const latestEditionYear = latestYear.get(tournament.slug) ?? edition.year;
-    if (getRecencyFactor(latestEditionYear, edition.year, formula) === 0) continue;
-
     const tournamentPrestigeFactor =
       formula.version === "national-club-v2"
         ? getTournamentPrestigeFactor(tournament.slug, formula)
         : undefined;
-    const scoreInput = {
-      stage: result.stage,
-      actualEntrants: edition.actualEntrants,
-      latestEditionYear,
-      editionYear: edition.year,
-      ...(formula.version === "national-club-v2"
-        ? { tournamentPrestigeFactor: tournamentPrestigeFactor! }
-        : { scopeFactor: tournament.scopeFactor }),
-    };
+    const tournamentUnits =
+      formula.version === "national-club-v3"
+        ? getTournamentUnits(tournament.slug, formula)
+        : undefined;
+    const fieldSizeUnits =
+      formula.version === "national-club-v3"
+        ? getFieldSizeUnits(edition.actualEntrants, formula)
+        : undefined;
+    const recencyUnits =
+      formula.version === "national-club-v3"
+        ? getRecencyUnits(latestEditionYear, edition.year, formula)
+        : undefined;
+
+    if (
+      formula.version === "national-club-v3"
+        ? recencyUnits === 0
+        : getRecencyFactor(latestEditionYear, edition.year, formula) === 0
+    ) {
+      continue;
+    }
+
+    const points =
+      formula.version === "national-club-v3"
+        ? scoreVerifiedResult(
+            {
+              stage: result.stage,
+              tournamentSlug: tournament.slug,
+              actualEntrants: edition.actualEntrants,
+              latestEditionYear,
+              editionYear: edition.year,
+            },
+            formula
+          )
+        : formula.version === "national-club-v2"
+          ? scoreVerifiedResult(
+              {
+                stage: result.stage,
+                tournamentPrestigeFactor: tournamentPrestigeFactor!,
+                actualEntrants: edition.actualEntrants,
+                latestEditionYear,
+                editionYear: edition.year,
+              },
+              formula
+            )
+          : scoreVerifiedResult(
+              {
+                stage: result.stage,
+                scopeFactor: tournament.scopeFactor,
+                actualEntrants: edition.actualEntrants,
+                latestEditionYear,
+                editionYear: edition.year,
+              },
+              formula
+            );
 
     const contribution: ScoreContribution = {
       clubSlug: club.slug,
@@ -171,10 +221,13 @@ export function calculateNationalRankings(
       stage: result.stage,
       scopeFactor: tournament.scopeFactor,
       tournamentPrestigeFactor,
+      tournamentUnits,
+      fieldSizeUnits,
+      recencyUnits,
       actualEntrants: edition.actualEntrants,
       latestEditionYear,
       editionYear: edition.year,
-      points: scoreVerifiedResult(scoreInput, formula),
+      points,
     };
     const scoringUnit = [
       contribution.clubSlug,

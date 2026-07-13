@@ -1,7 +1,10 @@
 import { describe, expect, it } from "vitest";
 
 import { calculateNationalRankings as calculateRankings } from "@/lib/nationalRanking/calculate";
-import { NATIONAL_FORMULA_V1 } from "@/lib/nationalRanking/formula";
+import {
+  NATIONAL_FORMULA_V1,
+  NATIONAL_FORMULA_V2,
+} from "@/lib/nationalRanking/formula";
 import type { NationalRankingDataset } from "@/lib/nationalRanking/types";
 
 function calculateNationalRankings(dataset: NationalRankingDataset) {
@@ -285,6 +288,53 @@ function createTieDataset() {
 }
 
 describe("calculateNationalRankings", () => {
+  it("uses the approved integer-only v3 formula by default", () => {
+    const v3Dataset = {
+      version: "integer-v3-test",
+      clubs: [dataset.clubs[0]],
+      aliases: [],
+      tournaments: [
+        {
+          slug: "yanggu",
+          name: "양구",
+          scope: "national" as const,
+          scopeFactor: 1,
+        },
+      ],
+      editions: [
+        {
+          ...dataset.editions[0],
+          key: "yanggu-men-2025",
+          tournamentSlug: "yanggu",
+          actualEntrants: 64,
+        },
+      ],
+      results: [
+        {
+          ...dataset.results[0],
+          editionKey: "yanggu-men-2025",
+        },
+      ],
+    } satisfies NationalRankingDataset;
+
+    const result = calculateRankings(v3Dataset);
+    const alphaMen = result.rows.find(
+      (row) => row.clubSlug === "alpha" && row.gender === "men"
+    );
+
+    expect(result.formulaVersion).toBe("national-club-v3");
+    expect(alphaMen?.totalPoints).toBe(756);
+    expect(alphaMen?.contributions[0]).toMatchObject({
+      tournamentUnits: 3,
+      fieldSizeUnits: 4,
+      recencyUnits: 3,
+      points: 756,
+    });
+    expect(result.rows.every((row) => Number.isInteger(row.totalPoints))).toBe(
+      true
+    );
+  });
+
   it("uses only the best verified team per club, gender, tournament, and edition", () => {
     const result = calculateNationalRankings(dataset);
     const alphaMen = result.rows.find(
@@ -735,7 +785,7 @@ describe("calculateNationalRankings", () => {
       })),
     } satisfies NationalRankingDataset;
 
-    const result = calculateRankings(prestigeDataset);
+    const result = calculateRankings(prestigeDataset, NATIONAL_FORMULA_V2);
     const pointsByClub = Object.fromEntries(
       result.rows
         .filter((row) => row.gender === "men")
@@ -754,21 +804,24 @@ describe("calculateNationalRankings", () => {
 
   it("fails before scoring when a configured tournament has no v2 prestige weight", () => {
     expect(() =>
-      calculateRankings({
-        version: "missing-prestige-test-v2",
-        clubs: [],
-        aliases: [],
-        tournaments: [
-          {
-            slug: "unknown-tournament",
-            name: "Unknown Tournament",
-            scope: "national",
-            scopeFactor: 1,
-          },
-        ],
-        editions: [],
-        results: [],
-      })
+      calculateRankings(
+        {
+          version: "missing-prestige-test-v2",
+          clubs: [],
+          aliases: [],
+          tournaments: [
+            {
+              slug: "unknown-tournament",
+              name: "Unknown Tournament",
+              scope: "national",
+              scopeFactor: 1,
+            },
+          ],
+          editions: [],
+          results: [],
+        },
+        NATIONAL_FORMULA_V2
+      )
     ).toThrow(/prestige factor is missing.*unknown-tournament/i);
   });
 });

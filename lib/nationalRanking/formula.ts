@@ -2,6 +2,7 @@ import type {
   FormulaInput,
   FormulaV1Input,
   FormulaV2Input,
+  FormulaV3Input,
   TournamentStage,
 } from "./types";
 
@@ -48,7 +49,21 @@ export type NationalFormulaV2 = NationalFormulaBase & {
   readonly tournamentPrestigeFactors: Readonly<Record<string, number>>;
 };
 
-export type NationalFormula = NationalFormulaV1 | NationalFormulaV2;
+export type NationalFormulaV3 = {
+  readonly version: "national-club-v3";
+  readonly stageUnits: Readonly<Record<TournamentStage, number>>;
+  readonly tournamentUnits: Readonly<Record<string, number>>;
+  readonly fieldSizeTiers: ReadonlyArray<{
+    readonly maximumEntrants: number | null;
+    readonly units: number;
+  }>;
+  readonly recencyUnits: readonly [number, number, number];
+};
+
+export type NationalFormula =
+  | NationalFormulaV1
+  | NationalFormulaV2
+  | NationalFormulaV3;
 
 export const NATIONAL_FORMULA_V1: NationalFormulaV1 = Object.freeze({
   version: "national-club-v1",
@@ -73,11 +88,41 @@ export const NATIONAL_FORMULA_V2: NationalFormulaV2 = Object.freeze({
   }),
 });
 
+export const NATIONAL_FORMULA_V3: NationalFormulaV3 = Object.freeze({
+  version: "national-club-v3",
+  stageUnits: Object.freeze({
+    champion: 21,
+    runner_up: 13,
+    semifinal: 8,
+    quarterfinal: 5,
+    round_of_16: 3,
+    round_of_32: 2,
+    round_of_64: 1,
+    first_match_loss: 0,
+  }),
+  tournamentUnits: Object.freeze({
+    yanggu: 3,
+    gyeongin: 2,
+    chuncheon: 2,
+    inje: 1,
+    wemix: 1,
+  }),
+  fieldSizeTiers: Object.freeze([
+    Object.freeze({ maximumEntrants: 12, units: 1 }),
+    Object.freeze({ maximumEntrants: 31, units: 2 }),
+    Object.freeze({ maximumEntrants: 63, units: 3 }),
+    Object.freeze({ maximumEntrants: null, units: 4 }),
+  ]),
+  recencyUnits: Object.freeze([3, 2, 1]),
+});
+
 export function getStagePoints(
   stage: TournamentStage,
-  formula: NationalFormula = NATIONAL_FORMULA_V2
+  formula: NationalFormula = NATIONAL_FORMULA_V3
 ): number {
-  return formula.stagePoints[stage];
+  return formula.version === "national-club-v3"
+    ? formula.stageUnits[stage]
+    : formula.stagePoints[stage];
 }
 
 export function getFieldSizeFactor(
@@ -131,6 +176,61 @@ export function getTournamentPrestigeFactor(
   return factor;
 }
 
+export function getFieldSizeUnits(
+  actualEntrants: number,
+  formula: NationalFormulaV3 = NATIONAL_FORMULA_V3
+): number {
+  if (!Number.isInteger(actualEntrants) || actualEntrants <= 0) {
+    throw new Error("actualEntrants must be a positive integer");
+  }
+
+  const tier = formula.fieldSizeTiers.find(
+    ({ maximumEntrants }) =>
+      maximumEntrants === null || actualEntrants <= maximumEntrants
+  );
+
+  if (!tier || !Number.isInteger(tier.units) || tier.units <= 0) {
+    throw new Error("Field-size units must be a positive integer");
+  }
+
+  return tier.units;
+}
+
+export function getRecencyUnits(
+  latestEditionYear: number,
+  editionYear: number,
+  formula: NationalFormulaV3 = NATIONAL_FORMULA_V3
+): number {
+  const age = latestEditionYear - editionYear;
+
+  if (!Number.isInteger(age)) {
+    throw new Error("Edition years must be integers");
+  }
+  if (age < 0) {
+    throw new Error("editionYear cannot follow latestEditionYear");
+  }
+
+  return formula.recencyUnits[age] ?? 0;
+}
+
+export function getTournamentUnits(
+  tournamentSlug: string,
+  formula: NationalFormulaV3 = NATIONAL_FORMULA_V3
+): number {
+  const units = formula.tournamentUnits[tournamentSlug];
+
+  if (!Number.isInteger(units) || units <= 0) {
+    throw new Error(`Tournament units are missing for "${tournamentSlug}"`);
+  }
+
+  return units;
+}
+
+export function scoreVerifiedResult(
+  input: FormulaV3Input,
+  formula?: NationalFormulaV3
+): number;
+
 export function scoreVerifiedResult(
   input: FormulaV2Input,
   formula?: NationalFormulaV2
@@ -145,8 +245,25 @@ export function scoreVerifiedResult(
 ): number;
 export function scoreVerifiedResult(
   input: FormulaInput,
-  formula: NationalFormula = NATIONAL_FORMULA_V2
+  formula: NationalFormula = NATIONAL_FORMULA_V3
 ): number {
+  if (formula.version === "national-club-v3") {
+    if (!("tournamentSlug" in input)) {
+      throw new Error("tournamentSlug is required for national-club-v3");
+    }
+
+    return (
+      getStagePoints(input.stage, formula) *
+      getTournamentUnits(input.tournamentSlug, formula) *
+      getFieldSizeUnits(input.actualEntrants, formula) *
+      getRecencyUnits(
+        input.latestEditionYear,
+        input.editionYear,
+        formula
+      )
+    );
+  }
+
   const weightingFactor =
     formula.version === "national-club-v1"
       ? "scopeFactor" in input
