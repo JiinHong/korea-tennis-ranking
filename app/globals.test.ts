@@ -196,6 +196,18 @@ describe("national ranking responsive contracts", () => {
     );
   });
 
+  it("레퍼런스 색상으로 금·은·브론즈 순위 번호를 구분한다", () => {
+    expect(css).toMatch(
+      /\.national-ranking-rank\[data-rank-tier="gold"\]\s*\{[^}]*color:\s*#ec9a01;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-ranking-rank\[data-rank-tier="silver"\]\s*\{[^}]*color:\s*#435f7a;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-ranking-rank\[data-rank-tier="bronze"\]\s*\{[^}]*color:\s*#ad5600;[^}]*\}/
+    );
+  });
+
   it("데스크톱 산정 방식은 작은 팝오버로 배치한다", () => {
     expect(css).toMatch(
       /\.ranking-methodology-dialog\s*\{[\s\S]*?position:\s*absolute;[^}]*width:\s*min\(360px,\s*calc\(100vw - 32px\)\);[^}]*border-radius:\s*8px;[^}]*\}/

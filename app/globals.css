@@ -2390,6 +2390,18 @@ button:disabled {
   font-weight: 850;
 }
 
+.national-ranking-rank[data-rank-tier="gold"] {
+  color: #ec9a01;
+}
+
+.national-ranking-rank[data-rank-tier="silver"] {
+  color: #435f7a;
+}
+
+.national-ranking-rank[data-rank-tier="bronze"] {
+  color: #ad5600;
+}
+
 .national-ranking-club {
   display: flex;
   align-items: baseline;

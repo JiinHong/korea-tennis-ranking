@@ -18,6 +18,39 @@ const rankings: NationalRankingPageData["rankings"] = {
       championships: 1,
       runnerUps: 0,
     },
+    {
+      rank: 2,
+      clubSlug: "kaist",
+      universityName: "한국과학기술원",
+      clubName: "KAIST Tennis",
+      displayName: "한국과학기술원 KAIST Tennis",
+      points: 1100,
+      latestEditionPoints: 70,
+      championships: 0,
+      runnerUps: 1,
+    },
+    {
+      rank: 10,
+      clubSlug: "hanyang",
+      universityName: "한양대학교",
+      clubName: "HYTC",
+      displayName: "한양대학교 HYTC",
+      points: 500,
+      latestEditionPoints: 30,
+      championships: 0,
+      runnerUps: 0,
+    },
+    {
+      rank: 11,
+      clubSlug: "soongsil",
+      universityName: "숭실대학교",
+      clubName: "SSUTC",
+      displayName: "숭실대학교 SSUTC",
+      points: 450,
+      latestEditionPoints: 20,
+      championships: 0,
+      runnerUps: 0,
+    },
   ],
   women: [
     {
@@ -64,6 +97,25 @@ describe("NationalRankingTable", () => {
     expect(screen.getByText("STC")).toBeDefined();
     expect(screen.getByText("1,234.6")).toBeDefined();
     expect(screen.queryByText("연세대학교")).toBeNull();
+  });
+
+  it("순위 번호를 1위 금색, 2~10위 은색, 11위부터 브론즈색 등급으로 구분한다", () => {
+    render(<NationalRankingTable rankings={rankings} />);
+
+    const rankCells = Array.from(
+      screen
+        .getByRole("table")
+        .querySelectorAll<HTMLTableCellElement>(".national-ranking-rank")
+    );
+
+    expect(
+      rankCells.map((cell) => [cell.textContent, cell.dataset.rankTier])
+    ).toEqual([
+      ["1", "gold"],
+      ["2", "silver"],
+      ["10", "silver"],
+      ["11", "bronze"],
+    ]);
   });
 
   it("여자부와 보조 종합 랭킹을 같은 표 안에서 전환한다", () => {

@@ -19,6 +19,20 @@ const scoreFormatter = new Intl.NumberFormat("ko-KR", {
   maximumFractionDigits: 1,
 });
 
+type RankTier = "gold" | "silver" | "bronze";
+
+function getRankTier(rank: number): RankTier {
+  if (rank === 1) {
+    return "gold";
+  }
+
+  if (rank >= 2 && rank <= 10) {
+    return "silver";
+  }
+
+  return "bronze";
+}
+
 export default function NationalRankingTable({
   rankings,
 }: NationalRankingTableProps) {
@@ -111,7 +125,12 @@ export default function NationalRankingTable({
             ) : (
               rows.map((row) => (
                 <tr key={row.clubSlug}>
-                  <td className="national-ranking-rank">{row.rank}</td>
+                  <td
+                    className="national-ranking-rank"
+                    data-rank-tier={getRankTier(row.rank)}
+                  >
+                    {row.rank}
+                  </td>
                   <td>
                     <span className="national-ranking-club">
                       <strong>{row.universityName}</strong>
