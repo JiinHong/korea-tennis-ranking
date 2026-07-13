@@ -65,6 +65,8 @@ export type NationalFormula =
   | NationalFormulaV2
   | NationalFormulaV3;
 
+type LegacyNationalFormula = NationalFormulaV1 | NationalFormulaV2;
+
 export const NATIONAL_FORMULA_V1: NationalFormulaV1 = Object.freeze({
   version: "national-club-v1",
   stagePoints: createStagePoints(),
@@ -113,7 +115,7 @@ export const NATIONAL_FORMULA_V3: NationalFormulaV3 = Object.freeze({
     Object.freeze({ maximumEntrants: 63, units: 3 }),
     Object.freeze({ maximumEntrants: null, units: 4 }),
   ]),
-  recencyUnits: Object.freeze([3, 2, 1]),
+  recencyUnits: Object.freeze([3, 2, 1] as const),
 });
 
 export function getStagePoints(
@@ -127,7 +129,7 @@ export function getStagePoints(
 
 export function getFieldSizeFactor(
   actualEntrants: number,
-  formula: NationalFormula = NATIONAL_FORMULA_V2
+  formula: LegacyNationalFormula = NATIONAL_FORMULA_V2
 ): number {
   if (!Number.isInteger(actualEntrants) || actualEntrants <= 0) {
     throw new Error("actualEntrants must be a positive integer");
@@ -146,7 +148,7 @@ export function getFieldSizeFactor(
 export function getRecencyFactor(
   latestEditionYear: number,
   editionYear: number,
-  formula: NationalFormula = NATIONAL_FORMULA_V2
+  formula: LegacyNationalFormula = NATIONAL_FORMULA_V2
 ): number {
   const age = latestEditionYear - editionYear;
 

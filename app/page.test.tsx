@@ -15,19 +15,20 @@ const rankingRow = {
   universityName: "서울과학기술대학교",
   clubName: "STC",
   displayName: "서울과학기술대학교 STC",
-  points: 1234.56,
+  points: 1234,
   latestEditionPoints: 80,
   championships: 1,
   runnerUps: 0,
+  honors: [],
 };
 
 const rankingPageData = {
-  formulaVersion: "national-club-v1",
+  formulaVersion: "national-club-v3",
   calculatedAt: "2026-07-12T12:00:00.000Z",
   rankings: {
     men: [rankingRow],
     women: [{ ...rankingRow, clubSlug: "yonsei", clubName: "YTC" }],
-    combined: [{ ...rankingRow, points: 2469.12 }],
+    combined: [{ ...rankingRow, points: 2468 }],
   },
 };
 
@@ -47,7 +48,7 @@ describe("Home", () => {
         name: "전국 대학 테니스 동아리 랭킹",
       })
     ).toBeDefined();
-    expect(screen.queryByText("national-club-v1")).toBeNull();
+    expect(screen.queryByText("national-club-v3")).toBeNull();
     expect(screen.queryByText("계산식")).toBeNull();
     expect(screen.queryByText("산정 시각")).toBeNull();
     const calculatedAt = screen.getByText(

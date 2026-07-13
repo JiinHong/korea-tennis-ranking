@@ -1,9 +1,9 @@
 import Link from "next/link";
 
 import {
-  getFieldSizeFactor,
-  getRecencyFactor,
-  NATIONAL_FORMULA_V2,
+  getFieldSizeUnits,
+  getRecencyUnits,
+  NATIONAL_FORMULA_V3,
 } from "@/lib/nationalRanking/formula";
 
 import MethodologyTableRegion from "./MethodologyTableRegion";
@@ -22,20 +22,25 @@ const STAGE_ROWS = [
 ] as const;
 
 const COMPETITION_PRESTIGE_ROWS = [
-  ["국토정중앙배(양구)", "최상위", "1.00"],
-  ["경인지구 연맹전", "주요", "0.90"],
-  ["춘천소양강배", "주요", "0.90"],
-  ["WEMIX OPEN", "신흥", "0.80"],
-  ["하늘내린인제", "신흥", "0.80"],
+  ["국토정중앙배(양구)", "최상위", 3],
+  ["경인지구 연맹전", "주요", 2],
+  ["춘천소양강배", "주요", 2],
+  ["WEMIX OPEN", "신흥", 1],
+  ["하늘내린인제", "신흥", 1],
 ] as const;
 
-const FIELD_SIZE_REFERENCES = [16, 32, 64, 128] as const;
+const FIELD_SIZE_ROWS = [
+  ["1~12팀", 12],
+  ["13~31팀", 31],
+  ["32~63팀", 63],
+  ["64팀 이상", 64],
+] as const;
 
 const RECENCY_ROWS = [
-  ["최신 연도", 0],
-  ["1년 전", 1],
-  ["2년 전", 2],
-  ["3년 이상", 3],
+  ["최신 대회", 0],
+  ["직전 대회", 1],
+  ["두 번째 이전 대회", 2],
+  ["그보다 오래된 대회", 3],
 ] as const;
 
 const REFERENCE_LINKS = [
@@ -71,10 +76,6 @@ const REFERENCE_LINKS = [
   },
 ] as const;
 
-function formatFactor(value: number): string {
-  return value === 0 ? "0" : value.toFixed(2);
-}
-
 export default function MethodologyPage() {
   return (
     <main className="methodology-page">
@@ -102,8 +103,8 @@ export default function MethodologyPage() {
           </p>
           <p>
             각 단위의 대회 점수를 합산해 동아리의 남자부 또는 여자부 점수를
-            구합니다. 계산 중에는 전체 정밀도를 유지하고 화면에 표시할 때만
-            반올림합니다.
+            구합니다. 모든 입력과 중간 계산, 최종 점수는 정수이며 소수점 반올림을
+            사용하지 않습니다.
           </p>
         </section>
 
@@ -112,8 +113,8 @@ export default function MethodologyPage() {
           <p>검증된 각 대회 성적에는 아래 네 요소를 곱합니다.</p>
           <div className="methodology-formula" role="note">
             <code>
-              대회 점수 = 진출 단계 점수 × 대회 위상 × 참가 규모 × 연도
-              가중치
+              대회 점수 = 진출 단계 단위 × 대회 위상 단위 × 참가 규모 단위 ×
+              최신 대회 단위
             </code>
           </div>
           <p>
@@ -124,8 +125,8 @@ export default function MethodologyPage() {
         <section className="methodology-section" aria-labelledby="stage-title">
           <h2 id="stage-title">진출 단계 점수</h2>
           <p>
-            우승과 깊은 진출을 더 크게 보상하도록 2026 ATP 메인 드로의 단계별
-            관계를 100점 기준으로 정규화했습니다. 부전승은 승리로 세지
+            우승과 깊은 진출을 더 크게 보상하되 점수가 지나치게 커지지 않도록
+            단계 간 관계를 작은 정수 단위로 압축했습니다. 부전승은 승리로 세지
             않습니다.
           </p>
           <MethodologyTableRegion label="진출 단계별 점수">
@@ -141,7 +142,7 @@ export default function MethodologyPage() {
                 {STAGE_ROWS.map(([label, stage]) => (
                   <tr key={stage}>
                     <th scope="row">{label}</th>
-                    <td>{NATIONAL_FORMULA_V2.stagePoints[stage]}</td>
+                    <td>{NATIONAL_FORMULA_V3.stageUnits[stage]}</td>
                   </tr>
                 ))}
               </tbody>
@@ -168,7 +169,7 @@ export default function MethodologyPage() {
                 <tr>
                   <th scope="col">대회</th>
                   <th scope="col">위상</th>
-                  <th scope="col">가중치</th>
+                  <th scope="col">단위</th>
                 </tr>
               </thead>
               <tbody>
@@ -188,31 +189,22 @@ export default function MethodologyPage() {
           <h2 id="field-title">참가 규모 가중치</h2>
           <p>
             N은 해당 연도와 부문에서 실제 참가한 팀 수입니다. 부전승과 경기 전
-            기권 팀은 제외합니다.
+            기권 팀은 제외하며, 참가 규모를 네 구간의 정수 단위로 나눕니다.
           </p>
-          <div className="methodology-formula methodology-formula-secondary">
-            <code>
-              참가 규모 = clamp({NATIONAL_FORMULA_V2.field.minimum.toFixed(2)},
-              {" "}
-              {NATIONAL_FORMULA_V2.field.maximum.toFixed(2)}, 1 +{" "}
-              {NATIONAL_FORMULA_V2.field.step.toFixed(2)} × log₂(N /{" "}
-              {NATIONAL_FORMULA_V2.field.baseline}))
-            </code>
-          </div>
           <MethodologyTableRegion label="참가 팀 수별 기준 가중치">
             <table className="methodology-table">
               <caption>참가 팀 수별 기준 가중치</caption>
               <thead>
                 <tr>
                   <th scope="col">실제 참가 팀 수</th>
-                  <th scope="col">가중치</th>
+                  <th scope="col">단위</th>
                 </tr>
               </thead>
               <tbody>
-                {FIELD_SIZE_REFERENCES.map((entrants) => (
-                  <tr key={entrants}>
-                    <th scope="row">{entrants}</th>
-                    <td>{formatFactor(getFieldSizeFactor(entrants))}</td>
+                {FIELD_SIZE_ROWS.map(([label, entrants]) => (
+                  <tr key={label}>
+                    <th scope="row">{label}</th>
+                    <td>{getFieldSizeUnits(entrants)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -223,24 +215,24 @@ export default function MethodologyPage() {
         <section className="methodology-section" aria-labelledby="recency-title">
           <h2 id="recency-title">연도 가중치</h2>
           <p>
-            최신 연도는 대회마다 독립적으로 판단합니다. 해당 대회의 가장 최근
-            개최 연도에 1.00을 적용하고, 이전 성적은 해마다{" "}
-            {NATIONAL_FORMULA_V2.recencyRetention.toFixed(2)}배로 줄어듭니다.
+            최신 대회는 대회마다 독립적으로 판단합니다. 가장 최근 개최 연도부터
+            세 개 연도만 3, 2, 1 단위로 반영하며 그보다 오래된 성적은 현재
+            점수에서 제외합니다.
           </p>
           <MethodologyTableRegion label="대회별 연도 가중치">
             <table className="methodology-table">
               <caption>대회별 연도 가중치</caption>
               <thead>
                 <tr>
-                  <th scope="col">대회 내 연도 차이</th>
-                  <th scope="col">가중치</th>
+                  <th scope="col">대회 내 순서</th>
+                  <th scope="col">단위</th>
                 </tr>
               </thead>
               <tbody>
                 {RECENCY_ROWS.map(([label, age]) => (
                   <tr key={label}>
                     <th scope="row">{label}</th>
-                    <td>{formatFactor(getRecencyFactor(2026, 2026 - age))}</td>
+                    <td>{getRecencyUnits(2026, 2026 - age)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -260,9 +252,26 @@ export default function MethodologyPage() {
           </p>
           <p>
             나머지 팀은 점수를 더하지도, 가장 좋은 팀의 점수를 낮추지도
-            않습니다. 팀 접미사는 동아리 정체성과 별도로 보관하며, 대학명만
-            확인되는 결과는 공식 참가 명단 등으로 동아리가 검증되기 전까지
-            추정해 배정하지 않습니다.
+            않습니다. A/B/C 외에 자유·정의·진리처럼 고유 팀명을 사용해도 같은
+            동아리임이 확인되면 하나의 동아리 식별자로 통합합니다.
+          </p>
+          <p>
+            결과에 학교명만 남아 동아리명이 없는 경우에는 같은 학교의 기존
+            동아리 중 사전 산정 점수가 가장 높은 동아리에 한 번 배정하고, 그
+            배정 결과를 데이터에 고정해 순환 계산을 막습니다.
+          </p>
+        </section>
+
+        <section className="methodology-section" aria-labelledby="honors-title">
+          <h2 id="honors-title">통산 수상 기록</h2>
+          <p>
+            우승과 준우승 왕관은 현재 점수 산정 기간이 지나도 동아리의 통산
+            수상 기록으로 남습니다.
+          </p>
+          <p>
+            금색 왕관은 우승, 은색 왕관은 준우승을 뜻합니다. 오래된 왕관은 현재
+            점수나 동점 처리 횟수에는 더해지지 않으며, 해당 대회와 연도, 부문을
+            확인할 수 있는 기록으로만 유지합니다.
           </p>
         </section>
 
@@ -290,16 +299,16 @@ export default function MethodologyPage() {
           <h2 id="example-title">계산 예시</h2>
           <ol className="methodology-examples">
             <li>
-              <span>최신 64팀 국토정중앙배(양구) 우승</span>
-              <code>100 × 1.00 × 1.10 × 1.00 = 110점</code>
+              <span>최신 94팀 국토정중앙배(양구) 우승</span>
+              <code>21 × 3 × 4 × 3 = 756점</code>
             </li>
             <li>
-              <span>같은 대회의 1년 전 우승</span>
-              <code>100 × 1.00 × 1.10 × 0.60 = 66점</code>
+              <span>같은 규모와 성적의 직전 대회</span>
+              <code>21 × 3 × 4 × 2 = 504점</code>
             </li>
             <li>
-              <span>최신 128팀 경인지구 연맹전 준우승</span>
-              <code>65 × 0.90 × 1.20 × 1.00 = 70.2점</code>
+              <span>최신 22팀 경인지구 연맹전 준우승</span>
+              <code>13 × 2 × 2 × 3 = 156점</code>
             </li>
           </ol>
         </section>
@@ -346,9 +355,8 @@ export default function MethodologyPage() {
             공개 페이지에 노출하지 않습니다.
           </p>
           <p className="methodology-note">
-            WEMIX OPEN 2025는 공식 우승팀은 확인됐지만 전체 참가 팀 수와 전체
-            대진의 교차 검증이 끝나지 않아 현재 공개 점수에서 제외했습니다.
-            검증이 끝나면 같은 공식으로 반영합니다.
+            WEMIX OPEN 2025는 확인된 남자부·여자부 대진과 참가 규모를 현재 공개
+            점수에 반영합니다.
           </p>
         </section>
 
@@ -358,7 +366,7 @@ export default function MethodologyPage() {
             <div>
               <dt>공식 버전</dt>
               <dd>
-                <code>{NATIONAL_FORMULA_V2.version}</code>
+                <code>{NATIONAL_FORMULA_V3.version}</code>
               </dd>
             </div>
             <div>

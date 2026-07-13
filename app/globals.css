@@ -2288,8 +2288,8 @@ button:disabled {
 .ranking-methodology-trigger:focus-visible,
 .national-status a:focus-visible,
 .ranking-methodology-tooltip a:focus-visible,
-.national-ranking-club-link:focus-visible,
-.national-ranking-honor-trigger:focus-visible {
+.national-ranking-honor-trigger:focus-visible,
+.national-ranking-club-link:focus-visible {
   outline: 3px solid var(--national-accent);
   outline-offset: 2px;
 }

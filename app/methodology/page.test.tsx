@@ -11,6 +11,7 @@ const SECTION_HEADINGS = [
   "참가 규모 가중치",
   "연도 가중치",
   "A/B/C팀 처리",
+  "통산 수상 기록",
   "남자부·여자부·종합",
   "계산 예시",
   "데이터 검증 원칙",
@@ -41,33 +42,33 @@ describe("MethodologyPage", () => {
     ).toEqual(SECTION_HEADINGS);
     expect(
       screen.getByText(
-        "대회 점수 = 진출 단계 점수 × 대회 위상 × 참가 규모 × 연도 가중치"
+        "대회 점수 = 진출 단계 단위 × 대회 위상 단위 × 참가 규모 단위 × 최신 대회 단위"
       )
     ).toBeDefined();
-    expect(screen.getByText("national-club-v2")).toBeDefined();
+    expect(screen.getByText("national-club-v3")).toBeDefined();
     expect(screen.getByText("2026-07-13")).toBeDefined();
   });
 
-  it("공식 v2의 단계 점수와 대회별 위상 가중치를 표로 공개한다", () => {
+  it("공식 v3의 단계 단위와 대회별 위상 단위를 정수로 공개한다", () => {
     render(<MethodologyPage />);
 
     [
-      ["우승", "100"],
-      ["준우승", "65"],
-      ["4강", "40"],
-      ["8강", "20"],
-      ["16강", "10"],
-      ["32강", "5"],
-      ["64강", "2.5"],
+      ["우승", "21"],
+      ["준우승", "13"],
+      ["4강", "8"],
+      ["8강", "5"],
+      ["16강", "3"],
+      ["32강", "2"],
+      ["64강", "1"],
       ["실제로 치른 첫 경기 패배", "0"],
     ].forEach((cells) => expectRow("진출 단계별 점수", cells));
 
     [
-      ["국토정중앙배(양구)", "최상위", "1.00"],
-      ["경인지구 연맹전", "주요", "0.90"],
-      ["춘천소양강배", "주요", "0.90"],
-      ["WEMIX OPEN", "신흥", "0.80"],
-      ["하늘내린인제", "신흥", "0.80"],
+      ["국토정중앙배(양구)", "최상위", "3"],
+      ["경인지구 연맹전", "주요", "2"],
+      ["춘천소양강배", "주요", "2"],
+      ["WEMIX OPEN", "신흥", "1"],
+      ["하늘내린인제", "신흥", "1"],
     ].forEach((cells) => expectRow("대회 위상별 가중치", cells));
   });
 
@@ -75,17 +76,17 @@ describe("MethodologyPage", () => {
     render(<MethodologyPage />);
 
     [
-      ["16", "0.90"],
-      ["32", "1.00"],
-      ["64", "1.10"],
-      ["128", "1.20"],
+      ["1~12팀", "1"],
+      ["13~31팀", "2"],
+      ["32~63팀", "3"],
+      ["64팀 이상", "4"],
     ].forEach((cells) => expectRow("참가 팀 수별 기준 가중치", cells));
 
     [
-      ["최신 연도", "1.00"],
-      ["1년 전", "0.60"],
-      ["2년 전", "0.36"],
-      ["3년 이상", "0"],
+      ["최신 대회", "3"],
+      ["직전 대회", "2"],
+      ["두 번째 이전 대회", "1"],
+      ["그보다 오래된 대회", "0"],
     ].forEach((cells) => expectRow("대회별 연도 가중치", cells));
   });
 
@@ -102,9 +103,14 @@ describe("MethodologyPage", () => {
         "남자부와 여자부 랭킹은 각각 독립된 주요 랭킹이며, 종합 랭킹은 남자부 점수와 여자부 점수를 더한 보조 랭킹입니다."
       )
     ).toBeDefined();
-    expect(screen.getByText(/= 110점$/)).toBeDefined();
-    expect(screen.getByText(/= 66점$/)).toBeDefined();
-    expect(screen.getByText(/= 70\.2점$/)).toBeDefined();
+    expect(
+      screen.getByText(
+        "우승과 준우승 왕관은 현재 점수 산정 기간이 지나도 동아리의 통산 수상 기록으로 남습니다."
+      )
+    ).toBeDefined();
+    expect(screen.getByText(/= 756점$/)).toBeDefined();
+    expect(screen.getByText(/= 504점$/)).toBeDefined();
+    expect(screen.getByText(/= 156점$/)).toBeDefined();
   });
 
   it("총점이 같을 때 적용하는 동점 처리 순서를 공개한다", () => {
@@ -140,7 +146,7 @@ describe("MethodologyPage", () => {
     ).toBeDefined();
     expect(
       screen.getByText(
-        /WEMIX OPEN 2025는 공식 우승팀은 확인됐지만 전체 참가 팀 수와 전체 대진의 교차 검증이 끝나지 않아 현재 공개 점수에서 제외/
+        "WEMIX OPEN 2025는 확인된 남자부·여자부 대진과 참가 규모를 현재 공개 점수에 반영합니다."
       )
     ).toBeDefined();
   });

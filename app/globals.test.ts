@@ -267,7 +267,7 @@ describe("national ranking responsive contracts", () => {
       /\.national-ranking-tabs button:focus-visible\s*\{[^}]*outline:\s*0;[^}]*box-shadow:\s*inset 0 -4px var\(--national-accent\);[^}]*\}/
     );
     expect(css).toMatch(
-      /\.ranking-methodology-trigger:focus-visible,[\s\S]*?\.national-ranking-club-link:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--national-accent\);[^}]*\}/
+      /\.ranking-methodology-trigger:focus-visible,[\s\S]*?\.national-ranking-honor-trigger:focus-visible,[\s\S]*?\.national-ranking-club-link:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--national-accent\);[^}]*\}/
     );
   });
 
