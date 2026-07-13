@@ -128,12 +128,6 @@ export default function NationalRankingTable({
                 const displayedHonors = row.honors.filter(
                   (honor) => honor.year === DISPLAY_HONOR_YEAR
                 );
-                const clubName = (
-                  <span className="national-ranking-club">
-                    <strong>{row.universityName}</strong>
-                    <span>{row.clubName}</span>
-                  </span>
-                );
 
                 return (
                   <tr key={row.clubSlug}>
@@ -150,8 +144,16 @@ export default function NationalRankingTable({
                           className="national-ranking-club-link"
                           href={`/clubs/${row.clubSlug}`}
                         >
-                          {clubName}
+                          <span className="national-ranking-club">
+                            <strong>{row.universityName}</strong>
+                          </span>
                         </Link>
+                        <span
+                          aria-hidden="true"
+                          className="national-ranking-club-name"
+                        >
+                          {row.clubName}
+                        </span>
                         {displayedHonors.length > 0 ? (
                           <span
                             aria-label="2025년 수상 기록"

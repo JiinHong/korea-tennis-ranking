@@ -271,6 +271,18 @@ describe("NationalRankingTable", () => {
     ).toBeNull();
   });
 
+  it("동아리명과 왕관 묶음을 같은 하단 행에 배치한다", () => {
+    render(<NationalRankingTable rankings={rankings} />);
+
+    const clubName = screen.getByText("STC");
+    const honors = screen.getByLabelText("2025년 수상 기록");
+
+    expect(clubName.classList.contains("national-ranking-club-name")).toBe(
+      true
+    );
+    expect(clubName.parentElement).toBe(honors.parentElement);
+  });
+
   it("여자부와 종합 랭킹을 부가 라벨 없이 같은 표 안에서 전환한다", () => {
     render(<NationalRankingTable rankings={rankings} />);
 

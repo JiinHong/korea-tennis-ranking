@@ -283,6 +283,24 @@ describe("national ranking responsive contracts", () => {
     );
   });
 
+  it("왕관을 작게 유지하고 모바일에서 동아리명 옆 한 줄에 배치한다", () => {
+    expect(css).toMatch(
+      /\.national-ranking-honors\s*\{[^}]*flex-wrap:\s*nowrap;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-ranking-honor-trigger\s*\{[^}]*width:\s*24px;[^}]*height:\s*24px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-ranking-honor-trigger img\s*\{[^}]*width:\s*21px;[^}]*height:\s*16px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.national-ranking-club-cell\s*\{[^}]*display:\s*grid;[^}]*grid-template-columns:\s*auto minmax\(0,\s*1fr\);[^}]*grid-template-rows:\s*auto auto;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.national-ranking-club-name\s*\{[^}]*grid-column:\s*1;[^}]*grid-row:\s*2;[^}]*\}[\s\S]*?\.national-ranking-honors\s*\{[^}]*grid-column:\s*2;[^}]*grid-row:\s*2;[^}]*\}/
+    );
+  });
+
   it("640px 이하에서 표 열을 압축한다", () => {
     expect(css).toMatch(/@media\s*\(max-width:\s*640px\)/);
     expect(css).toMatch(
