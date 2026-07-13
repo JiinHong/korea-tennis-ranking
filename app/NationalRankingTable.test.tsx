@@ -13,10 +13,28 @@ const rankings: NationalRankingPageData["rankings"] = {
       universityName: "서울과학기술대학교",
       clubName: "STC",
       displayName: "서울과학기술대학교 STC",
-      points: 1234.56,
+      points: 1234,
       latestEditionPoints: 80,
       championships: 1,
-      runnerUps: 0,
+      runnerUps: 1,
+      honors: [
+        {
+          editionKey: "yanggu-2025-men",
+          tournamentSlug: "yanggu",
+          tournamentName: "국토정중앙배(양구)",
+          year: 2025,
+          gender: "men",
+          stage: "champion",
+        },
+        {
+          editionKey: "gyeongin-2024-men",
+          tournamentSlug: "gyeongin",
+          tournamentName: "경인지구 연맹전",
+          year: 2024,
+          gender: "men",
+          stage: "runner_up",
+        },
+      ],
     },
     {
       rank: 2,
@@ -28,6 +46,7 @@ const rankings: NationalRankingPageData["rankings"] = {
       latestEditionPoints: 70,
       championships: 0,
       runnerUps: 1,
+      honors: [],
     },
     {
       rank: 9,
@@ -39,6 +58,7 @@ const rankings: NationalRankingPageData["rankings"] = {
       latestEditionPoints: 40,
       championships: 0,
       runnerUps: 0,
+      honors: [],
     },
     {
       rank: 10,
@@ -50,6 +70,7 @@ const rankings: NationalRankingPageData["rankings"] = {
       latestEditionPoints: 30,
       championships: 0,
       runnerUps: 0,
+      honors: [],
     },
     {
       rank: 11,
@@ -61,6 +82,7 @@ const rankings: NationalRankingPageData["rankings"] = {
       latestEditionPoints: 20,
       championships: 0,
       runnerUps: 0,
+      honors: [],
     },
   ],
   women: [
@@ -74,6 +96,16 @@ const rankings: NationalRankingPageData["rankings"] = {
       latestEditionPoints: 60,
       championships: 0,
       runnerUps: 1,
+      honors: [
+        {
+          editionKey: "wemix-2025-women",
+          tournamentSlug: "wemix",
+          tournamentName: "WEMIX OPEN",
+          year: 2025,
+          gender: "women",
+          stage: "runner_up",
+        },
+      ],
     },
   ],
   combined: [
@@ -83,10 +115,28 @@ const rankings: NationalRankingPageData["rankings"] = {
       universityName: "고려대학교",
       clubName: "KUTC",
       displayName: "고려대학교 KUTC",
-      points: 2111.11,
+      points: 2111,
       latestEditionPoints: 120,
       championships: 2,
       runnerUps: 1,
+      honors: [
+        {
+          editionKey: "chuncheon-2025-men",
+          tournamentSlug: "chuncheon",
+          tournamentName: "춘천소양강배",
+          year: 2025,
+          gender: "men",
+          stage: "champion",
+        },
+        {
+          editionKey: "inje-2024-women",
+          tournamentSlug: "inje",
+          tournamentName: "하늘내린인제",
+          year: 2024,
+          gender: "women",
+          stage: "runner_up",
+        },
+      ],
     },
   ],
 };
@@ -106,7 +156,7 @@ describe("NationalRankingTable", () => {
     expect(screen.getByRole("columnheader", { name: "점수" })).toBeDefined();
     expect(screen.getByText("서울과학기술대학교")).toBeDefined();
     expect(screen.getByText("STC")).toBeDefined();
-    expect(screen.getByText("1,234.6")).toBeDefined();
+    expect(screen.getByText("1,234")).toBeDefined();
     expect(screen.queryByText("연세대학교")).toBeNull();
   });
 
@@ -167,6 +217,7 @@ describe("NationalRankingTable", () => {
           latestEditionPoints: 0,
           championships: 0,
           runnerUps: 0,
+          honors: [],
         },
       ],
     };
@@ -174,6 +225,28 @@ describe("NationalRankingTable", () => {
     render(<NationalRankingTable rankings={rankingsWithPrototypeSlug} />);
 
     expect(screen.getByText("프로토타입대학교").closest("a")).toBeNull();
+  });
+
+  it("동아리 이름 뒤에 통산 우승과 준우승 왕관을 각각 표시한다", () => {
+    render(<NationalRankingTable rankings={rankings} />);
+
+    const champion = screen.getByRole("button", {
+      name: "2025 양구 남자부 우승",
+    });
+    const runnerUp = screen.getByRole("button", {
+      name: "2024 경인지구 남자부 준우승",
+    });
+
+    expect(champion).toBeDefined();
+    expect(runnerUp).toBeDefined();
+    expect(champion.closest("a")).toBeNull();
+    expect(runnerUp.closest("a")).toBeNull();
+    expect(screen.getByText("서울과학기술대학교").closest("a")?.getAttribute("href")).toBe(
+      "/seoultech"
+    );
+    expect(
+      screen.queryByRole("button", { name: "2025 위믹스 여자부 준우승" })
+    ).toBeNull();
   });
 
   it("여자부와 종합 랭킹을 부가 라벨 없이 같은 표 안에서 전환한다", () => {
@@ -185,12 +258,24 @@ describe("NationalRankingTable", () => {
       screen.getByRole("tab", { name: "여자부" }).getAttribute("aria-selected")
     ).toBe("true");
     expect(screen.getByText("연세대학교")).toBeDefined();
+    expect(
+      screen.getByRole("button", { name: "2025 위믹스 여자부 준우승" })
+    ).toBeDefined();
+    expect(
+      screen.queryByRole("button", { name: "2025 양구 남자부 우승" })
+    ).toBeNull();
     expect(screen.queryByText("서울과학기술대학교")).toBeNull();
 
     fireEvent.click(screen.getByRole("tab", { name: "종합" }));
 
     expect(screen.queryByText("보조 랭킹")).toBeNull();
     expect(screen.getByText("고려대학교")).toBeDefined();
+    expect(
+      screen.getByRole("button", { name: "2025 춘천 남자부 우승" })
+    ).toBeDefined();
+    expect(
+      screen.getByRole("button", { name: "2024 인제 여자부 준우승" })
+    ).toBeDefined();
     expect(screen.queryByText("연세대학교")).toBeNull();
     expect(within(screen.getByRole("table")).getAllByRole("row")).toHaveLength(2);
   });

@@ -2236,7 +2236,7 @@ button:disabled {
 
 .national-ranking-surface {
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
   background: white;
   border: 0;
   border-radius: 0;
@@ -2288,7 +2288,8 @@ button:disabled {
 .ranking-methodology-trigger:focus-visible,
 .national-status a:focus-visible,
 .ranking-methodology-tooltip a:focus-visible,
-.national-ranking-club-link:focus-visible {
+.national-ranking-club-link:focus-visible,
+.national-ranking-honor-trigger:focus-visible {
   outline: 3px solid var(--national-accent);
   outline-offset: 2px;
 }
@@ -2364,6 +2365,13 @@ button:disabled {
   overflow-wrap: anywhere;
 }
 
+.national-ranking-club-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
 .national-ranking-club-link {
   display: block;
   width: fit-content;
@@ -2401,6 +2409,89 @@ button:disabled {
   white-space: nowrap;
   font-size: 14px;
   font-weight: 850;
+}
+
+.national-ranking-honors {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  gap: 1px;
+  min-width: 0;
+}
+
+.national-ranking-honor {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.national-ranking-honor-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 26px;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: 3px;
+  cursor: help;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.national-ranking-honor-trigger img {
+  display: block;
+  width: 23px;
+  height: 18px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 1px rgba(32, 39, 47, 0.16));
+}
+
+.national-ranking-honor-tooltip {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  z-index: 60;
+  width: max-content;
+  max-width: min(260px, calc(100vw - 24px));
+  padding: 7px 9px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  color: white;
+  background: #20272f;
+  border-radius: 4px;
+  box-shadow: 0 8px 20px rgba(32, 39, 47, 0.18);
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.4;
+  text-align: center;
+  white-space: normal;
+  transform: translate(-50%, -4px);
+  transition:
+    opacity 120ms ease,
+    visibility 120ms ease,
+    transform 120ms ease;
+}
+
+.national-ranking-honor[data-open="true"]
+  .national-ranking-honor-tooltip {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+@media (hover: hover) {
+  .national-ranking-honor:hover .national-ranking-honor-tooltip,
+  .national-ranking-honor:focus-within .national-ranking-honor-tooltip {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+  }
 }
 
 .national-ranking-empty {
@@ -2549,6 +2640,16 @@ button:disabled {
     align-items: flex-start;
     flex-direction: column;
     gap: 2px;
+  }
+
+  .national-ranking-club-cell {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 4px 7px;
+  }
+
+  .national-ranking-honors {
+    padding-top: 1px;
   }
 
 }

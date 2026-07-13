@@ -6,6 +6,8 @@ import Link from "next/link";
 import type { NationalRankingPageData } from "@/lib/nationalRanking/repository";
 import type { RankingGender } from "@/lib/nationalRanking/types";
 
+import NationalRankingHonor from "./NationalRankingHonor";
+
 type NationalRankingTableProps = {
   rankings: NationalRankingPageData["rankings"];
 };
@@ -17,7 +19,7 @@ const tabs: Array<{ gender: RankingGender; label: string }> = [
 ];
 
 const scoreFormatter = new Intl.NumberFormat("ko-KR", {
-  maximumFractionDigits: 1,
+  maximumFractionDigits: 0,
 });
 
 const campusRankingPaths: ReadonlyMap<string, string> = new Map([
@@ -143,17 +145,32 @@ export default function NationalRankingTable({
                       {row.rank}
                     </td>
                     <td>
-                      {campusPath ? (
-                        <Link
-                          aria-label={`${row.displayName} 단식 랭킹 보기`}
-                          className="national-ranking-club-link"
-                          href={campusPath}
-                        >
-                          {clubName}
-                        </Link>
-                      ) : (
-                        clubName
-                      )}
+                      <span className="national-ranking-club-cell">
+                        {campusPath ? (
+                          <Link
+                            aria-label={`${row.displayName} 단식 랭킹 보기`}
+                            className="national-ranking-club-link"
+                            href={campusPath}
+                          >
+                            {clubName}
+                          </Link>
+                        ) : (
+                          clubName
+                        )}
+                        {row.honors.length > 0 ? (
+                          <span
+                            aria-label="통산 수상 기록"
+                            className="national-ranking-honors"
+                          >
+                            {row.honors.map((honor) => (
+                              <NationalRankingHonor
+                                honor={honor}
+                                key={`${honor.editionKey}-${honor.stage}`}
+                              />
+                            ))}
+                          </span>
+                        ) : null}
+                      </span>
                     </td>
                     <td className="national-ranking-score">
                       {scoreFormatter.format(row.points)}

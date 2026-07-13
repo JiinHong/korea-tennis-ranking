@@ -65,12 +65,13 @@ export default function RankingMethodologyInfo() {
         id="ranking-methodology-tooltip"
       >
         <p>
-          대회 성적에 진출 단계, 대회 위상, 참가 규모, 최근 연도 가중치를
+          진출 단계, 대회 위상, 참가 규모, 최신 대회 순서에 정수 단위를
           적용합니다.
         </p>
         <p>같은 동아리의 여러 팀 중 가장 좋은 성적만 반영합니다.</p>
         <p>
-          WEMIX OPEN 2025는 전체 대진 검증 전이라 현재 점수에서 제외합니다.
+          우승과 준우승 왕관은 점수 산정 기간이 지나도 통산 기록으로
+          남습니다.
         </p>
         <Link href="/methodology">자세히 보기</Link>
       </div>
