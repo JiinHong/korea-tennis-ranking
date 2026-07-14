@@ -362,6 +362,12 @@
       "displayName": "상명대학교 테슬라"
     },
     {
+      "slug": "seoul-university",
+      "universityName": "서울대학교",
+      "clubName": "",
+      "displayName": "서울대학교"
+    },
+    {
       "slug": "seoul-tnt",
       "universityName": "서울대학교",
       "clubName": "TNT",
@@ -1691,6 +1697,11 @@
       "sourceLabel": "홍익대 HITC B"
     },
     {
+      "clubSlug": "seoul-university",
+      "normalizedAlias": "서울대학교 서울대 테니스부",
+      "sourceLabel": "서울대 테니스부"
+    },
+    {
       "clubSlug": "seoul-tnt",
       "normalizedAlias": "서울대학교 서울대 tnt a",
       "sourceLabel": "서울대 TNT A"
@@ -2487,13 +2498,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 A [Q]",
       "teamLabel": "A",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehdy.png",
-      "note": "Slot 48 received a BYE, won in the Round of 64, then lost in the Round of 32."
+      "note": "Slot 48 received a BYE, won in the Round of 64, then lost in the Round of 32. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2947,13 +2958,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 B [Q]",
       "teamLabel": "B",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehlp.png",
-      "note": "Slot 109 won in the Round of 128, then lost in the Round of 64."
+      "note": "Slot 109 won in the Round of 128, then lost in the Round of 64. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3047,13 +3058,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 C [Q]",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehlp.png",
-      "note": "Slot 122 lost its first played match in the Round of 128."
+      "note": "Slot 122 lost its first played match in the Round of 128. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3347,13 +3358,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 A [3]",
       "teamLabel": "A",
       "stage": "semifinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eiiq.png",
-      "note": "Traced into the semifinal, where it visually lost 1-2 to 경희 A."
+      "note": "Traced into the semifinal, where it visually lost 1-2 to 경희 A. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3447,13 +3458,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 B [Q]",
       "teamLabel": "B",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eihz.png",
-      "note": "Traced into the Round of 16, where it visually lost 0-2 to 서울대 A."
+      "note": "Traced into the Round of 16, where it visually lost 0-2 to 서울대 A. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3537,13 +3548,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 C [Q]",
       "teamLabel": "C",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eicp.png",
-      "note": "Won its opening match, then visually lost in the Round of 64 to 타이브레이크 A."
+      "note": "Won its opening match, then visually lost in the Round of 64 to 타이브레이크 A. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4347,13 +4358,13 @@
     },
     {
       "editionKey": "yanggu-2024-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 B",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/남자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_1.png",
-      "note": "After a BYE it loses its first played match to Kuta A."
+      "note": "After a BYE it loses its first played match to Kuta A. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2024-men",
@@ -4457,13 +4468,13 @@
     },
     {
       "editionKey": "yanggu-2024-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 A",
       "teamLabel": "A",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/남자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_3.png",
-      "note": "It wins twice, advances from Round 4 by w.o. over 서울시립대 U, then loses the quarterfinal to Stc 세종 A [3]."
+      "note": "It wins twice, advances from Round 4 by w.o. over 서울시립대 U, then loses the quarterfinal to Stc 세종 A [3]. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2024-men",
@@ -4657,13 +4668,13 @@
     },
     {
       "editionKey": "yanggu-2024-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 C",
       "teamLabel": "C",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/남자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_2.png",
-      "note": "It beats 아주대 B and 서울시립대 창 [3], then loses in Round 3 to Dkutc 죽전 A."
+      "note": "It beats 아주대 B and 서울시립대 창 [3], then loses in Round 3 to Dkutc 죽전 A. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2024-men",
@@ -5097,13 +5108,13 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대학교 A [3]",
       "teamLabel": "A",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/여자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_4.png",
-      "note": "Slot 33; beat Sstc B, then lost in Round 3 to Yutt 진리."
+      "note": "Slot 33; beat Sstc B, then lost in Round 3 to Yutt 진리. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2024-women",
@@ -5257,13 +5268,13 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대학교 B",
       "teamLabel": "B",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/여자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_6.png",
-      "note": "Slot 62; advanced from Round 4, then lost the quarterfinal to Sstc A."
+      "note": "Slot 62; advanced from Round 4, then lost the quarterfinal to Sstc A. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2024-women",
@@ -5477,13 +5488,13 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대학교 C",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/여자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_5.png",
-      "note": "Slot 100; lost its first played preliminary match to Hitc."
+      "note": "Slot 100; lost its first played preliminary match to Hitc. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2024-women",
@@ -5747,13 +5758,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 C",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=1",
-      "note": "Visually checked slot 16 and terminal first played match after a Round-of-128 BYE."
+      "note": "Visually checked slot 16 and terminal first played match after a Round-of-128 BYE. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -6037,13 +6048,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 A",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=1",
-      "note": "Visually checked slot 54 and traced the bracket to terminal stage round_of_16."
+      "note": "Visually checked slot 54 and traced the bracket to terminal stage round_of_16. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -6277,13 +6288,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 B",
       "teamLabel": "B",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=2",
-      "note": "Visually checked slot 89 and traced the bracket to terminal stage round_of_32."
+      "note": "Visually checked slot 89 and traced the bracket to terminal stage round_of_32. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -6657,13 +6668,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 B",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=1",
-      "note": "Visually checked slot 16 and terminal first played match after a Round-of-128 BYE."
+      "note": "Visually checked slot 16 and terminal first played match after a Round-of-128 BYE. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -7017,13 +7028,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 C",
       "teamLabel": "C",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=2",
-      "note": "Visually checked slot 80 and traced the bracket to terminal stage round_of_32."
+      "note": "Visually checked slot 80 and traced the bracket to terminal stage round_of_32. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -7237,13 +7248,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 A",
       "teamLabel": "A",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=2",
-      "note": "Visually checked slot 118 and traced the bracket to terminal stage round_of_32."
+      "note": "Visually checked slot 118 and traced the bracket to terminal stage round_of_32. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -7577,13 +7588,13 @@
     },
     {
       "editionKey": "inje-2023-women",
-      "clubSlug": "seoul-tnt",
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 [Q]",
       "teamLabel": "-",
       "stage": "champion",
       "qualityStatus": "verified",
       "sourceRef": "인제/2023/여자/SCR-20260708-efjo.png",
-      "note": "School-qualified final frozen to 서울대학교 TNT, the university's pre-assignment women leader (rank 25)."
+      "note": "School-qualified final frozen to 서울대학교, the university's pre-assignment women leader (rank 25)."
     },
     {
       "editionKey": "inje-2024-men",
@@ -7777,13 +7788,13 @@
     },
     {
       "editionKey": "inje-2024-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대테니스부",
       "teamLabel": "-",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "인제/2024/남자/Draw_2024_하늘내린인제_전국대학동아리_테니스대회_최종_결과_1.png",
-      "note": "Original PNG explicitly pairs 서울대 with 서울대테니스부; it wins Round 2 and then loses the quarterfinal to 느티나무 A."
+      "note": "Original PNG explicitly pairs 서울대 with 서울대테니스부; it wins Round 2 and then loses the quarterfinal to 느티나무 A. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "inje-2024-women",
@@ -7867,13 +7878,13 @@
     },
     {
       "editionKey": "inje-2024-women",
-      "clubSlug": "seoul-tnt",
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 테니스부",
       "teamLabel": "-",
       "stage": "runner_up",
       "qualityStatus": "verified",
       "sourceRef": "인제/2024/여자/Draw_2024_하늘내린인제_전국대학동아리_테니스대회_최종_결과_2.png",
-      "note": "School-qualified final frozen to 서울대학교 TNT, the university's pre-assignment women leader (rank 25)."
+      "note": "School-qualified final frozen to 서울대학교, the university's pre-assignment women leader (rank 25)."
     },
     {
       "editionKey": "inje-2024-women",
@@ -7987,13 +7998,13 @@
     },
     {
       "editionKey": "inje-2025-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 테니스부",
       "teamLabel": "-",
       "stage": "semifinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "인제/2025/남자/2025 인제 남자.pdf#page=1",
-      "note": "400-DPI page explicitly names 서울대 테니스부; it advances through the quarterfinal before a semifinal loss to 전북대a."
+      "note": "400-DPI page explicitly names 서울대 테니스부; it advances through the quarterfinal before a semifinal loss to 전북대a. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "inje-2025-men",
@@ -8087,13 +8098,13 @@
     },
     {
       "editionKey": "inje-2025-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 테니스부",
       "teamLabel": "-",
       "stage": "semifinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "인제/2025/여자/2025 인제 여자.pdf#page=1",
-      "note": "400-DPI page explicitly names 서울대 테니스부; it advances through its quarterfinal and then loses the semifinal to 서울과학기술대 A."
+      "note": "400-DPI page explicitly names 서울대 테니스부; it advances through its quarterfinal and then loses the semifinal to 서울과학기술대 A. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "inje-2025-women",
@@ -8207,13 +8218,13 @@
     },
     {
       "editionKey": "gyeongin-2023-men",
-      "clubSlug": "seoul-tnt",
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 A",
       "teamLabel": "A",
       "stage": "champion",
       "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/남자/KakaoTalk_Photo_2026-07-08-04-58-22 011.jpeg",
-      "note": "School-qualified final frozen to 서울대학교 TNT, the university's pre-assignment men leader (rank 20)."
+      "note": "School-qualified final frozen to 서울대학교, the university's pre-assignment men leader (rank 20)."
     },
     {
       "editionKey": "gyeongin-2023-men",
@@ -8697,13 +8708,13 @@
     },
     {
       "editionKey": "gyeongin-2023-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 A",
       "teamLabel": "A",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/여자/KakaoTalk_Photo_2026-07-08-04-59-38.jpeg",
-      "note": "Won two matches, then lost 1-2 to 경희대s in the quarterfinal."
+      "note": "Won two matches, then lost 1-2 to 경희대s in the quarterfinal. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "gyeongin-2023-women",
@@ -8877,13 +8888,13 @@
     },
     {
       "editionKey": "gyeongin-2023-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 B",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/여자/KakaoTalk_Photo_2026-07-08-04-59-38.jpeg",
-      "note": "Lost its first played match 0-2 to 연세대 진리."
+      "note": "Lost its first played match 0-2 to 연세대 진리. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "gyeongin-2023-women",
@@ -8947,13 +8958,13 @@
     },
     {
       "editionKey": "gyeongin-2024-men",
-      "clubSlug": "seoul-tnt",
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대학교 A",
       "teamLabel": "A",
       "stage": "champion",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/남자/KakaoTalk_Photo_2026-07-08-04-55-49 011.jpeg",
-      "note": "School-qualified final frozen to 서울대학교 TNT, the university's pre-assignment men leader (rank 20)."
+      "note": "School-qualified final frozen to 서울대학교, the university's pre-assignment men leader (rank 20). Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "gyeongin-2024-men",
@@ -8997,13 +9008,13 @@
     },
     {
       "editionKey": "gyeongin-2024-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 C",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/남자/KakaoTalk_Photo_2026-07-08-04-55-48 001.jpeg",
-      "note": "BYE, then first played-match loss 0-3 to 연세대 YUTT 진리."
+      "note": "BYE, then first played-match loss 0-3 to 연세대 YUTT 진리. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "gyeongin-2024-men",
@@ -9299,13 +9310,13 @@
     },
     {
       "editionKey": "gyeongin-2024-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대학교B",
       "teamLabel": "B",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/남자/KakaoTalk_Photo_2026-07-08-04-55-49 007.jpeg",
-      "note": "Lost 2-3 to 서강대."
+      "note": "Lost 2-3 to 서강대. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "gyeongin-2024-men",
@@ -9409,13 +9420,13 @@
     },
     {
       "editionKey": "gyeongin-2024-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대학교 D",
       "teamLabel": "D",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/남자/KakaoTalk_Photo_2026-07-08-04-55-48 004.jpeg",
-      "note": "Won its opener, then lost 0-3 to 경희대학교 A."
+      "note": "Won its opener, then lost 0-3 to 경희대학교 A. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "gyeongin-2024-men",
@@ -9579,13 +9590,13 @@
     },
     {
       "editionKey": "gyeongin-2024-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대B",
       "teamLabel": "B",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/여자/KakaoTalk_Photo_2026-07-08-04-55-34 006.jpeg",
-      "note": "Lost 0-2 to 한양대 HYTC A."
+      "note": "Lost 0-2 to 한양대 HYTC A. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "gyeongin-2024-women",
@@ -9709,13 +9720,13 @@
     },
     {
       "editionKey": "gyeongin-2024-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대A",
       "teamLabel": "A",
       "stage": "semifinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/여자/KakaoTalk_Photo_2026-07-08-04-55-34 010.jpeg",
-      "note": "Semifinal shows a 1-2 loss to 서울시립대A."
+      "note": "Semifinal shows a 1-2 loss to 서울시립대A. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "gyeongin-2024-women",
@@ -9789,13 +9800,13 @@
     },
     {
       "editionKey": "gyeongin-2024-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대C",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/여자/KakaoTalk_Photo_2026-07-08-04-55-34 004.jpeg",
-      "note": "BYE, then first played-match loss to 서울시립대A; source displays the unusual score 2-6."
+      "note": "BYE, then first played-match loss to 서울시립대A; source displays the unusual score 2-6. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "gyeongin-2024-women",
@@ -9939,13 +9950,13 @@
     },
     {
       "editionKey": "gyeongin-2025-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대학교 테니스부 A",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2025/여자/KakaoTalk_Photo_2026-07-08-05-17-28 001.png",
-      "note": "Original PNG shows a 2-1 opening win over 이화여대 B, then a 0-2 Round-of-16 loss to 서울과기대A."
+      "note": "Original PNG shows a 2-1 opening win over 이화여대 B, then a 0-2 Round-of-16 loss to 서울과기대A. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "gyeongin-2025-women",
@@ -10039,13 +10050,13 @@
     },
     {
       "editionKey": "gyeongin-2025-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대학교 테니스부 B",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2025/여자/KakaoTalk_Photo_2026-07-08-05-17-28 001.png",
-      "note": "Original PNG shows a 0-2 opening loss to 이화여대A."
+      "note": "Original PNG shows a 0-2 opening loss to 이화여대A. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "gyeongin-2025-women",
@@ -10069,13 +10080,13 @@
     },
     {
       "editionKey": "gyeongin-2025-men",
-      "clubSlug": "seoul-tnt",
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대학교 테니스부 A",
       "teamLabel": "A",
       "stage": "champion",
       "qualityStatus": "verified",
       "sourceRef": "경인지구/2025/남자/KakaoTalk_Photo_2026-07-08-05-17-13 002.jpeg",
-      "note": "School-qualified final frozen to 서울대학교 TNT, the university's pre-assignment men leader (rank 20)."
+      "note": "School-qualified final frozen to 서울대학교, the university's pre-assignment men leader (rank 20)."
     },
     {
       "editionKey": "gyeongin-2025-men",
@@ -10109,13 +10120,13 @@
     },
     {
       "editionKey": "gyeongin-2025-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대학교 테니스부 C",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2025/남자/KakaoTalk_Photo_2026-07-08-05-17-13 001.png",
-      "note": "Original PNG shows a 0-3 opening loss to 인하대학교 비룡."
+      "note": "Original PNG shows a 0-3 opening loss to 인하대학교 비룡. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "gyeongin-2025-men",
@@ -10149,13 +10160,13 @@
     },
     {
       "editionKey": "gyeongin-2025-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대학교 테니스부 B",
       "teamLabel": "B",
       "stage": "semifinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2025/남자/KakaoTalk_Photo_2026-07-08-05-17-13 002.jpeg",
-      "note": "After an opening BYE, the PNG shows wins through the quarterfinal; the JPEG shows a 0-3 semifinal loss to 서울대학교 테니스부 A."
+      "note": "After an opening BYE, the PNG shows wins through the quarterfinal; the JPEG shows a 0-3 semifinal loss to 서울대학교 테니스부 A. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "gyeongin-2025-men",
@@ -10369,13 +10380,13 @@
     },
     {
       "editionKey": "chuncheon-2023-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 B",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2023/남자/SCR-20260708-dwxw.png",
-      "note": "Visually verified opening played-match loss; no status marker."
+      "note": "Visually verified opening played-match loss; no status marker. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "chuncheon-2023-men",
@@ -10739,13 +10750,13 @@
     },
     {
       "editionKey": "chuncheon-2023-men",
-      "clubSlug": "seoul-tnt",
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 A",
       "teamLabel": "A",
       "stage": "champion",
       "qualityStatus": "verified",
       "sourceRef": "춘천/2023/남자/SCR-20260708-dxej.png",
-      "note": "School-qualified final frozen to 서울대학교 TNT, the university's pre-assignment men leader (rank 20)."
+      "note": "School-qualified final frozen to 서울대학교, the university's pre-assignment men leader (rank 20)."
     },
     {
       "editionKey": "chuncheon-2023-men",
@@ -10949,13 +10960,13 @@
     },
     {
       "editionKey": "chuncheon-2023-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대학교 A",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2023/여자/SCR-20260708-dxvm.png",
-      "note": "Visually traced through connected pages to 16-round loss; no status marker."
+      "note": "Visually traced through connected pages to 16-round loss; no status marker. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "chuncheon-2023-women",
@@ -11099,13 +11110,13 @@
     },
     {
       "editionKey": "chuncheon-2023-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대학교 B",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2023/여자/SCR-20260708-dxuf.png",
-      "note": "Opening BYE, then visually verified first played-match loss; no status marker."
+      "note": "Opening BYE, then visually verified first played-match loss; no status marker. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "chuncheon-2023-women",
@@ -11529,13 +11540,13 @@
     },
     {
       "editionKey": "chuncheon-2024-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 b",
       "teamLabel": "b",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2024/남자/테니스대회_128강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "lost 1-2 to 건국대 KTC A (32강)"
+      "note": "lost 1-2 to 건국대 KTC A (32강) Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "chuncheon-2024-men",
@@ -11879,13 +11890,13 @@
     },
     {
       "editionKey": "chuncheon-2024-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대 a",
       "teamLabel": "a",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2024/남자/테니스대회_128강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "lost 0-2 to 경북대 KUTC C (16강)"
+      "note": "lost 0-2 to 경북대 KUTC C (16강) Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "chuncheon-2024-women",
@@ -11949,13 +11960,13 @@
     },
     {
       "editionKey": "chuncheon-2024-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대A",
       "teamLabel": "A",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2024/여자/여자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "lost 1-2 to 경희대 국제 A (8강)"
+      "note": "lost 1-2 to 경희대 국제 A (8강) Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "chuncheon-2024-women",
@@ -12039,13 +12050,13 @@
     },
     {
       "editionKey": "chuncheon-2024-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대C",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2024/여자/여자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "lost 1-2 to 한양대 에리카 A (32강)"
+      "note": "lost 1-2 to 한양대 에리카 A (32강) Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "chuncheon-2024-women",
@@ -12199,13 +12210,13 @@
     },
     {
       "editionKey": "chuncheon-2024-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대B",
       "teamLabel": "B",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2024/여자/여자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "lost 0-2 to 성균관대 공자 (32강)"
+      "note": "lost 0-2 to 성균관대 공자 (32강) Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "chuncheon-2024-women",
@@ -12229,13 +12240,13 @@
     },
     {
       "editionKey": "chuncheon-2025-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대학교 테니스부B",
       "teamLabel": "B",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2025/남자/2025년_남자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 8강 row 58 shows a 1-2 loss to 경북대kutc(숫소)."
+      "note": "Rendered 8강 row 58 shows a 1-2 loss to 경북대kutc(숫소). Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "chuncheon-2025-men",
@@ -12279,13 +12290,13 @@
     },
     {
       "editionKey": "chuncheon-2025-men",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대학교 테니스부A",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2025/남자/2025년_남자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 16강 row 50 shows a 1-2 loss to 서울대학교 테니스부B."
+      "note": "Rendered 16강 row 50 shows a 1-2 loss to 서울대학교 테니스부B. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "chuncheon-2025-men",
@@ -12869,13 +12880,13 @@
     },
     {
       "editionKey": "chuncheon-2025-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대A",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2025/여자/2025년_여자부_32강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 16강 row 19 shows a 0-2 loss to 서울과기대 느티나무 A."
+      "note": "Rendered 16강 row 19 shows a 0-2 loss to 서울과기대 느티나무 A. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "chuncheon-2025-women",
@@ -13079,13 +13090,13 @@
     },
     {
       "editionKey": "chuncheon-2025-women",
-      "clubSlug": null,
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대B",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2025/여자/2025년_여자부_32강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Initial row 17 records a BYE; rendered row 25 shows its first played-match 1-2 loss to 홍익대 HITC A."
+      "note": "Initial row 17 records a BYE; rendered row 25 shows its first played-match 1-2 loss to 홍익대 HITC A. Club identity confirmed by the administrator as 서울대학교."
     },
     {
       "editionKey": "wemix-2025-men",
@@ -13129,13 +13140,13 @@
     },
     {
       "editionKey": "wemix-2025-men",
-      "clubSlug": "seoul-tnt",
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대학교",
       "teamLabel": "",
       "stage": "champion",
       "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/남자/KakaoTalk_Photo_2026-07-08-05-18-41.png",
-      "note": "Beats 전북대학교 2-0, 연세대학교 2-1, and 가천대학교 2-1 in the final. Club identity frozen to seoul-tnt under the administrator-approved school-only assignment rule."
+      "note": "Beats 전북대학교 2-0, 연세대학교 2-1, and 가천대학교 2-1 in the final. Club identity frozen to seoul-university under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-men",
@@ -13259,13 +13270,13 @@
     },
     {
       "editionKey": "wemix-2025-women",
-      "clubSlug": "seoul-tnt",
+      "clubSlug": "seoul-university",
       "sourceTeamName": "서울대학교",
       "teamLabel": "",
       "stage": "semifinal",
       "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/여자/KakaoTalk_Photo_2026-07-08-05-18-15.png",
-      "note": "Beats 경인교대 2-0 and 가천대학교 타이브... 2-1, then loses 0-2 to 고려대 KUTC (3차우승). Club identity frozen to seoul-tnt under the administrator-approved school-only assignment rule."
+      "note": "Beats 경인교대 2-0 and 가천대학교 타이브... 2-1, then loses 0-2 to 고려대 KUTC (3차우승). Club identity frozen to seoul-university under the administrator-approved school-only assignment rule."
     },
     {
       "editionKey": "wemix-2025-women",

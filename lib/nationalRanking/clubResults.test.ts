@@ -113,6 +113,47 @@ describe("getNationalClubResultsPageData", () => {
     });
   });
 
+  test("동아리명이 없는 대학 테니스부는 빈 문자열을 유효한 이름으로 유지한다", async () => {
+    await expect(
+      getNationalClubResultsPageData(
+        "seoul-university",
+        createAdapter([
+          resultRow({
+            club_slug: "seoul-university",
+            university_name: "서울대학교",
+            club_name: "",
+            display_name: "서울대학교",
+            source_team_name: "서울대 A",
+          }),
+        ])
+      )
+    ).resolves.toEqual({
+      club: {
+        slug: "seoul-university",
+        universityName: "서울대학교",
+        clubName: "",
+        displayName: "서울대학교",
+      },
+      results: [expect.objectContaining({ sourceTeamName: "서울대 A" })],
+    });
+  });
+
+  test("동아리명이 공백으로만 채워진 데이터는 거부한다", async () => {
+    await expect(
+      getNationalClubResultsPageData(
+        "seoul-university",
+        createAdapter([
+          resultRow({
+            club_slug: "seoul-university",
+            university_name: "서울대학교",
+            club_name: "   ",
+            display_name: "서울대학교",
+          }),
+        ])
+      )
+    ).rejects.toThrow("National club result field club_name is invalid");
+  });
+
   test("존재하지 않는 동아리는 null을 반환한다", async () => {
     await expect(
       getNationalClubResultsPageData("unknown", createAdapter([]))

@@ -121,7 +121,7 @@ function parseClubs(value: unknown): NationalClubInput[] {
     return {
       slug,
       universityName: requireString(record.universityName, `${path}.universityName`),
-      clubName: requireString(record.clubName, `${path}.clubName`),
+      clubName: requireStringValue(record.clubName, `${path}.clubName`),
       displayName: requireString(record.displayName, `${path}.displayName`),
     };
   });

@@ -101,6 +101,17 @@ function requireString(value: unknown, field: string): string {
   return value;
 }
 
+function requireClubName(value: unknown): string {
+  if (
+    typeof value !== "string" ||
+    (value !== "" && value.trim() === "")
+  ) {
+    throw new Error("National club result field club_name is invalid");
+  }
+
+  return value;
+}
+
 function parseResult(row: NationalClubResultViewRow): PublicNationalClubResult | null {
   if (row.tournament_slug === null) {
     const nullableFields = [
@@ -171,7 +182,7 @@ export async function getNationalClubResultsPageData(
       firstRow.university_name,
       "university_name"
     ),
-    clubName: requireString(firstRow.club_name, "club_name"),
+    clubName: requireClubName(firstRow.club_name),
     displayName: requireString(firstRow.display_name, "display_name"),
   };
 

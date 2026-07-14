@@ -117,6 +117,23 @@ describe("parseNationalRankingDataset", () => {
     expect(dataset.editions[0]).not.toBe(input.editions[0]);
   });
 
+  it("allows an empty club name when the university team has no separate club name", () => {
+    const input = createValidDataset();
+    input.clubs[0] = {
+      ...input.clubs[0],
+      clubName: "",
+      displayName: "Alpha University",
+    };
+
+    const dataset = parseNationalRankingDataset(input);
+
+    expect(dataset.clubs[0]).toMatchObject({
+      universityName: "Alpha University",
+      clubName: "",
+      displayName: "Alpha University",
+    });
+  });
+
   it("requires a non-empty version", () => {
     const dataset = createValidDataset();
     dataset.version = "";
@@ -588,15 +605,15 @@ describe("loadNationalRankingDataset", () => {
       expect(results, editionKey).toHaveLength(expected.resultCount);
     }
 
-    expect(dataset.clubs).toHaveLength(62);
-    expect(dataset.aliases).toHaveLength(273);
+    expect(dataset.clubs).toHaveLength(63);
+    expect(dataset.aliases).toHaveLength(274);
     expect(dataset.results).toHaveLength(1_116);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
-    ).toHaveLength(477);
+    ).toHaveLength(523);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
-    ).toHaveLength(639);
+    ).toHaveLength(593);
 
     expect(
       dataset.results.find(
@@ -657,7 +674,7 @@ describe("loadNationalRankingDataset", () => {
         priorEditionKeys.has(result.editionKey)
       ),
     };
-    // Re-baselined after the approved v2 canonical club merge.
+    // Re-baselined after separating Seoul National University from TNT.
     const fingerprint = createHash("sha256")
       .update(JSON.stringify(approvedTask4))
       .digest("hex");
@@ -667,7 +684,7 @@ describe("loadNationalRankingDataset", () => {
     expect(approvedTask4.editions).toHaveLength(12);
     expect(approvedTask4.results).toHaveLength(608);
     expect(fingerprint).toBe(
-      "31718c94c680deabb1e458a1b1353393e9b7f604626e2301709b57f6afc28de9"
+      "88c78d7c14706fae3dac05732799d29b14132f2e72883110bb15b93685e2b748"
     );
 
     for (const [editionKey, expectedCount] of Object.entries(priorExpectedCounts)) {
@@ -728,7 +745,7 @@ describe("loadNationalRankingDataset", () => {
       )
     ).toMatchObject({
       sourceTeamName: "서울대학교",
-      clubSlug: "seoul-tnt",
+      clubSlug: "seoul-university",
     });
     expect(
       wemixResults.find(
@@ -974,6 +991,63 @@ describe("loadNationalRankingDataset", () => {
     }
   });
 
+  it("keeps Seoul National University and TNT as separate clubs", () => {
+    const dataset = loadNationalRankingDataset();
+
+    expect(dataset.clubs).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          slug: "seoul-university",
+          universityName: "서울대학교",
+          clubName: "",
+          displayName: "서울대학교",
+        }),
+        expect.objectContaining({
+          slug: "seoul-tnt",
+          universityName: "서울대학교",
+          clubName: "TNT",
+          displayName: "서울대학교 TNT",
+        }),
+      ])
+    );
+
+    const seoulResults = dataset.results.filter((result) =>
+      /^(서울대|서울대학교)/.test(result.sourceTeamName)
+    );
+
+    expect(seoulResults.length).toBeGreaterThan(0);
+
+    for (const result of seoulResults) {
+      expect(result.clubSlug, result.sourceRef).toBe(
+        /TNT/i.test(result.sourceTeamName)
+          ? "seoul-tnt"
+          : "seoul-university"
+      );
+      expect(result.qualityStatus, result.sourceRef).toBe("verified");
+    }
+
+    const menRows = calculateNationalRankings(dataset).rows.filter(
+      (row) => row.gender === "men"
+    );
+    const universityRow = menRows.find(
+      (row) => row.clubSlug === "seoul-university"
+    );
+    const tntRow = menRows.find((row) => row.clubSlug === "seoul-tnt");
+
+    expect(universityRow?.contributions).not.toHaveLength(0);
+    expect(
+      universityRow?.contributions.every(
+        (contribution) => !/TNT/i.test(contribution.sourceTeamName)
+      )
+    ).toBe(true);
+    expect(tntRow?.contributions).not.toHaveLength(0);
+    expect(
+      tntRow?.contributions.every((contribution) =>
+        /TNT/i.test(contribution.sourceTeamName)
+      )
+    ).toBe(true);
+  });
+
   it("freezes every school-qualified final to the pre-assignment gender leader", () => {
     const dataset = loadNationalRankingDataset();
     const expectedAssignments = new Map([
@@ -987,21 +1061,21 @@ describe("loadNationalRankingDataset", () => {
       ["inje-2023-men|전북대", "jeonbuk-ace"],
       ["inje-2023-men|서울시립대", "uos-approach"],
       ["inje-2023-women|서울과기대 A [Q]", "seoultech-neutinamu"],
-      ["inje-2023-women|서울대 [Q]", "seoul-tnt"],
-      ["inje-2024-women|서울대 테니스부", "seoul-tnt"],
+      ["inje-2023-women|서울대 [Q]", "seoul-university"],
+      ["inje-2024-women|서울대 테니스부", "seoul-university"],
       ["inje-2025-men|전북대a", "jeonbuk-ace"],
       ["inje-2025-women|서울과학기술대 A", "seoultech-neutinamu"],
       ["inje-2025-women|카이스트 A", "kaist-stroke"],
-      ["gyeongin-2023-men|서울대 A", "seoul-tnt"],
+      ["gyeongin-2023-men|서울대 A", "seoul-university"],
       ["gyeongin-2023-women|경희대s", "kyunghee-luvis"],
-      ["gyeongin-2024-men|서울대학교 A", "seoul-tnt"],
+      ["gyeongin-2024-men|서울대학교 A", "seoul-university"],
       ["gyeongin-2024-men|아주대 A", "ajou-tennis"],
       ["gyeongin-2024-women|서울시립대A", "uos-approach"],
       ["gyeongin-2025-women|서울시립대A", "uos-approach"],
       ["gyeongin-2025-women|서울과기대A", "seoultech-neutinamu"],
-      ["gyeongin-2025-men|서울대학교 테니스부 A", "seoul-tnt"],
+      ["gyeongin-2025-men|서울대학교 테니스부 A", "seoul-university"],
       ["gyeongin-2025-men|서강대", "sogang-sgtc"],
-      ["chuncheon-2023-men|서울대 A", "seoul-tnt"],
+      ["chuncheon-2023-men|서울대 A", "seoul-university"],
       ["chuncheon-2023-women|경희대 국제 A", "kyunghee-global-impact"],
       ["chuncheon-2023-women|숭실대 A", "soongsil-sstc"],
       ["chuncheon-2024-men|전북대A", "jeonbuk-ace"],

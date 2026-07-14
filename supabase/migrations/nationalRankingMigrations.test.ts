@@ -116,6 +116,21 @@ function parseGrants(sql: string): SqlGrant[] {
 }
 
 describe("national ranking migration", () => {
+  it("allows a canonical national club to use an intentionally empty club name", () => {
+    const migration = readMigrationEndingWith(
+      "_allow_empty_national_club_name.sql"
+    );
+    const sql = normalizeSql(migration);
+
+    expect(migration).not.toBeNull();
+    expect(sql).toContain(
+      "drop constraint if exists national_clubs_club_name_check"
+    );
+    expect(sql).toContain(
+      "add constraint national_clubs_club_name_check check (club_name = '' or btrim(club_name) <> '')"
+    );
+  });
+
   it("adds best historical results to the secure public ranking view", () => {
     const migration = readMigrationEndingWith(
       "_add_national_ranking_best_results.sql"
