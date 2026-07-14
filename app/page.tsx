@@ -1,15 +1,10 @@
 import { Suspense } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { getCachedNationalRankingPageData } from "@/lib/nationalRanking/repository";
 
 import NationalRankingTable from "./NationalRankingTable";
-
-const rankingPeriodFormatter = new Intl.DateTimeFormat("ko-KR", {
-  year: "numeric",
-  month: "long",
-  timeZone: "Asia/Seoul",
-});
 
 export default async function Home() {
   let pageData: Awaited<ReturnType<typeof getCachedNationalRankingPageData>> =
@@ -55,12 +50,16 @@ export default async function Home() {
               <div className="national-ranking-title-row">
                 <h2 id="ranking-title">전국 랭킹</h2>
               </div>
-              <time
-                className="national-ranking-reference-date"
-                dateTime={pageData.calculatedAt}
-              >
-                ※ {rankingPeriodFormatter.format(new Date(pageData.calculatedAt))} 기준
-              </time>
+              <p className="national-ranking-crown-guide">
+                <Image
+                  alt=""
+                  aria-hidden="true"
+                  height={14}
+                  src="/national-ranking/black-crown.png"
+                  width={18}
+                />
+                <span>왕관은 최근 1년간의 입상을 의미합니다.</span>
+              </p>
             </div>
             <Suspense
               fallback={

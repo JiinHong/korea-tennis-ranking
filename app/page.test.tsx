@@ -43,7 +43,7 @@ describe("Home", () => {
     vi.mocked(getCachedNationalRankingPageData).mockReset();
   });
 
-  it("게시된 전국 랭킹과 기준 월만 조용한 운영 화면에 보여준다", async () => {
+  it("게시된 전국 랭킹과 최근 1년 왕관 안내를 보여준다", async () => {
     vi.mocked(getCachedNationalRankingPageData).mockResolvedValue(rankingPageData);
 
     render(await Home());
@@ -70,12 +70,15 @@ describe("Home", () => {
     expect(screen.queryByText("national-club-v3")).toBeNull();
     expect(screen.queryByText("계산식")).toBeNull();
     expect(screen.queryByText("산정 시각")).toBeNull();
-    const calculatedAt = screen.getByText(
-      "※ 2026년 7월 기준"
-    ) as HTMLTimeElement;
-    expect(calculatedAt.getAttribute("datetime")).toBe(
-      "2026-07-12T12:00:00.000Z"
+    const crownGuide = screen.getByText(
+      "왕관은 최근 1년간의 입상을 의미합니다."
     );
+    const crownImage = crownGuide.parentElement?.querySelector("img");
+    expect(crownImage?.getAttribute("src")).toContain(
+      encodeURIComponent("/national-ranking/black-crown.png")
+    );
+    expect(screen.queryByText("※ 2026년 7월 기준")).toBeNull();
+    expect(screen.queryByRole("time")).toBeNull();
     expect(screen.getByRole("table")).toBeDefined();
     expect(screen.getByText("서울과학기술대학교")).toBeDefined();
     expect(screen.queryByText(/구축할 예정입니다/)).toBeNull();
@@ -117,7 +120,9 @@ describe("Home", () => {
     render(await Home());
 
     expect(screen.getByRole("table")).toBeDefined();
-    expect(screen.getByText("※ 2026년 7월 기준")).toBeDefined();
+    expect(
+      screen.getByText("왕관은 최근 1년간의 입상을 의미합니다.")
+    ).toBeDefined();
     expect(getCachedNationalRankingPageData).toHaveBeenCalledTimes(2);
   });
 });
