@@ -97,11 +97,19 @@ describe("MethodologyPage", () => {
     ].forEach((cells) => expectRow("참가 팀 수별 기준 가중치", cells));
 
     [
-      ["최신 대회", "3"],
-      ["직전 대회", "2"],
-      ["두 번째 이전 대회", "1"],
-      ["그보다 오래된 대회", "0"],
+      ["1년 이내", "3"],
+      ["2년 이내", "2"],
+      ["3년 이내", "1"],
+      ["3년 초과", "0"],
     ].forEach((cells) => expectRow("대회별 연도 가중치", cells));
+
+    const recencyTable = screen.getByRole("table", {
+      name: "대회별 연도 가중치",
+    });
+    expect(within(recencyTable).getByRole("columnheader", { name: "기간" }))
+      .toBeDefined();
+    expect(within(recencyTable).queryByText("최신 대회")).toBeNull();
+    expect(within(recencyTable).queryByText("직전 대회")).toBeNull();
   });
 
   it("복수 팀과 부문별 집계 원칙 및 계산 예시를 설명한다", () => {

@@ -37,10 +37,10 @@ const FIELD_SIZE_ROWS = [
 ] as const;
 
 const RECENCY_ROWS = [
-  ["최신 대회", 0],
-  ["직전 대회", 1],
-  ["두 번째 이전 대회", 2],
-  ["그보다 오래된 대회", 3],
+  ["1년 이내", 0],
+  ["2년 이내", 1],
+  ["3년 이내", 2],
+  ["3년 초과", 3],
 ] as const;
 
 const REFERENCE_LINKS = [
@@ -213,16 +213,16 @@ export default function MethodologyPage() {
         <section className="methodology-section" aria-labelledby="recency-title">
           <h2 id="recency-title">연도 가중치</h2>
           <p>
-            최신 대회는 대회마다 독립적으로 판단합니다. 가장 최근 개최 연도부터
-            세 개 연도만 3, 2, 1 단위로 반영하며 그보다 오래된 성적은 현재
-            점수에서 제외합니다.
+            각 대회의 가장 최근 개최 연도를 기준으로 1년 이내 성적은 3단위,
+            2년 이내는 2단위, 3년 이내는 1단위로 반영합니다. 3년을 초과한
+            성적은 현재 점수에서 제외합니다.
           </p>
           <MethodologyTableRegion label="대회별 연도 가중치">
             <table className="methodology-table">
               <caption>대회별 연도 가중치</caption>
               <thead>
                 <tr>
-                  <th scope="col">대회 내 순서</th>
+                  <th scope="col">기간</th>
                   <th scope="col">단위</th>
                 </tr>
               </thead>
