@@ -36,6 +36,12 @@ describe("MethodologyPage", () => {
       screen.getByRole("heading", { name: "랭킹 계산 방식", level: 1 })
     ).toBeDefined();
     expect(
+      screen.getByText(
+        "공개된 단체전 성적을 어떤 기준으로 점수화하는지 설명합니다."
+      )
+    ).toBeDefined();
+    expect(screen.queryByText(/누구나 결과를 다시 계산/)).toBeNull();
+    expect(
       screen
         .getAllByRole("heading", { level: 2 })
         .map((heading) => heading.textContent)

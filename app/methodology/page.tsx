@@ -89,8 +89,7 @@ export default function MethodologyPage() {
           <p className="methodology-kicker">전국 대학 테니스 동아리 랭킹</p>
           <h1>랭킹 계산 방식</h1>
           <p>
-            공개된 단체전 성적을 어떤 기준으로 점수화하는지, 같은 원자료로
-            누구나 결과를 다시 계산할 수 있도록 설명합니다.
+            공개된 단체전 성적을 어떤 기준으로 점수화하는지 설명합니다.
           </p>
         </header>
 
