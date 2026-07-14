@@ -999,8 +999,8 @@ describe("loadNationalRankingDataset", () => {
         expect.objectContaining({
           slug: "seoul-university",
           universityName: "서울대학교",
-          clubName: "",
-          displayName: "서울대학교",
+          clubName: "테니스부",
+          displayName: "서울대학교 테니스부",
         }),
         expect.objectContaining({
           slug: "seoul-tnt",

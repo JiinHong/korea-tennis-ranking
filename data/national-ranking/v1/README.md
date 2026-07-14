@@ -66,7 +66,7 @@ school's highest-ranked same-gender canonical club before the inferred final
 batch is added. The assignment is stored in `clubSlug` and never recomputed at
 request time. The separately confirmed Seoul National University rule maps
 `서울대`, `서울대학교`, and `서울대(학교) 테니스부` labels to the canonical
-blank-name `서울대학교` club; only labels that explicitly contain `TNT` map to
+`서울대학교 테니스부` club; only labels that explicitly contain `TNT` map to
 `서울대학교 TNT`. Labels that do not identify even a school remain unresolved.
 
 Canonical clubs consolidate visually explicit spellings plus the
@@ -111,7 +111,7 @@ fields. The men's image makes 서울대학교 champion and the women's image mak
 the clipped 과기대 느티나무 label champion over 고려대 KUTC. Under the
 administrator-approved school-only rule, each visible entry is frozen to the
 highest-ranked same-gender club from that university before WEMIX is added,
-except that 서울대학교 follows the separately confirmed blank-name club rule.
+except that 서울대학교 follows the separately confirmed 테니스부 club rule.
 The two editions and all 20 terminal rows are therefore verified and scoreable.
 
 ## Unresolved mapping log
