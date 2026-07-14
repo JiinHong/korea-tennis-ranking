@@ -9,6 +9,12 @@ vi.mock("@/lib/nationalRanking/clubResults", () => ({
   getCachedNationalClubResultsPageData: vi.fn(),
 }));
 
+vi.mock("next/navigation", () => ({
+  notFound: vi.fn(),
+  useRouter: () => ({ replace: vi.fn() }),
+  useSearchParams: () => new URLSearchParams(),
+}));
+
 describe("NationalClubResultsPage", () => {
   it("동아리의 16강 이상 대회 성적을 별도 페이지에 리스트로 보여준다", async () => {
     vi.mocked(getCachedNationalClubResultsPageData).mockResolvedValue({
@@ -65,7 +71,7 @@ describe("NationalClubResultsPage", () => {
       screen.getByRole("link", { name: "전국 랭킹으로 돌아가기" }).getAttribute(
         "href"
       )
-    ).toBe("/");
+    ).toBe("/?gender=combined");
   });
 
   it("확인된 16강 이상 성적이 없으면 조용한 빈 상태를 보여준다", async () => {

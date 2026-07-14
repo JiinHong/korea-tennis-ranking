@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  Fragment,
-  type KeyboardEvent,
-  useRef,
-  useState,
-} from "react";
+import { Fragment, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { parseRankingGender } from "@/lib/nationalRanking/genderQuery";
@@ -13,17 +8,14 @@ import type { NationalRankingPageData } from "@/lib/nationalRanking/repository";
 import type { RankingGender } from "@/lib/nationalRanking/types";
 
 import NationalRankingExpandedResults from "./NationalRankingExpandedResults";
+import NationalRankingDivisionTabs, {
+  rankingDivisionTabs,
+} from "./NationalRankingDivisionTabs";
 import NationalRankingHonor from "./NationalRankingHonor";
 
 type NationalRankingTableProps = {
   rankings: NationalRankingPageData["rankings"];
 };
-
-const tabs: Array<{ gender: RankingGender; label: string }> = [
-  { gender: "men", label: "남자부" },
-  { gender: "women", label: "여자부" },
-  { gender: "combined", label: "종합" },
-];
 
 const scoreFormatter = new Intl.NumberFormat("ko-KR", {
   maximumFractionDigits: 0,
@@ -53,8 +45,9 @@ export default function NationalRankingTable({
   const urlGender = parseRankingGender(searchParams.get("gender"), "men");
   const [activeGender, setActiveGender] = useState<RankingGender>(urlGender);
   const [expandedClubSlug, setExpandedClubSlug] = useState<string | null>(null);
-  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const activeTab = tabs.find((tab) => tab.gender === activeGender)!;
+  const activeTab = rankingDivisionTabs.find(
+    (tab) => tab.gender === activeGender
+  )!;
   const rows = rankings[activeGender];
 
   const selectGender = (gender: RankingGender) => {
@@ -66,54 +59,16 @@ export default function NationalRankingTable({
     router.replace(`/?${nextParams.toString()}`, { scroll: false });
   };
 
-  const handleTabKeyDown = (
-    event: KeyboardEvent<HTMLButtonElement>,
-    currentIndex: number
-  ) => {
-    let targetIndex: number | null = null;
-
-    if (event.key === "ArrowRight") {
-      targetIndex = (currentIndex + 1) % tabs.length;
-    } else if (event.key === "ArrowLeft") {
-      targetIndex = (currentIndex - 1 + tabs.length) % tabs.length;
-    } else if (event.key === "Home") {
-      targetIndex = 0;
-    } else if (event.key === "End") {
-      targetIndex = tabs.length - 1;
-    }
-
-    if (targetIndex === null) {
-      return;
-    }
-
-    event.preventDefault();
-    selectGender(tabs[targetIndex].gender);
-    tabRefs.current[targetIndex]?.focus();
-  };
-
   return (
     <section className="national-ranking-surface" aria-label="전국 동아리 랭킹">
       <div className="national-ranking-toolbar">
-        <div className="national-ranking-tabs" role="tablist" aria-label="랭킹 부문">
-          {tabs.map((tab, index) => (
-            <button
-              aria-controls="national-ranking-panel"
-              aria-selected={activeGender === tab.gender}
-              id={`national-ranking-tab-${tab.gender}`}
-              key={tab.gender}
-              onClick={() => selectGender(tab.gender)}
-              onKeyDown={(event) => handleTabKeyDown(event, index)}
-              ref={(element) => {
-                tabRefs.current[index] = element;
-              }}
-              role="tab"
-              tabIndex={activeGender === tab.gender ? 0 : -1}
-              type="button"
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
+        <NationalRankingDivisionTabs
+          activeGender={activeGender}
+          ariaLabel="랭킹 부문"
+          idPrefix="national-ranking-tab"
+          onSelect={selectGender}
+          panelId="national-ranking-panel"
+        />
       </div>
 
       <div

@@ -2247,6 +2247,10 @@ button:disabled {
   margin-top: 28px;
 }
 
+.national-club-results-section > .national-ranking-tabs {
+  margin-bottom: 18px;
+}
+
 .national-club-results-title-row {
   display: flex;
   align-items: baseline;
@@ -2275,12 +2279,19 @@ button:disabled {
 
 .national-club-results-list li {
   display: grid;
-  grid-template-columns: 110px minmax(0, 1fr) 80px;
+  grid-template-columns: 24px 110px minmax(0, 1fr) 80px;
   align-items: center;
-  gap: 24px;
+  gap: 18px;
   min-height: 92px;
   padding: 18px 0;
   border-bottom: 1px solid var(--national-line);
+}
+
+.national-club-result-crown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
 }
 
 .national-club-result-edition,
@@ -2839,10 +2850,14 @@ button:disabled {
   }
 
   .national-club-results-list li {
-    grid-template-columns: 64px minmax(0, 1fr) 54px;
-    gap: 10px;
+    grid-template-columns: 20px 64px minmax(0, 1fr) 54px;
+    gap: 8px;
     min-height: 78px;
     padding: 14px 0;
+  }
+
+  .national-club-result-crown {
+    width: 20px;
   }
 
   .national-club-result-edition strong,

@@ -307,6 +307,15 @@ describe("national ranking responsive contracts", () => {
     );
   });
 
+  it("동아리 전체 성적은 고정된 작은 왕관 열로 기록 기준선을 맞춘다", () => {
+    expect(css).toMatch(
+      /\.national-club-results-list li\s*\{[^}]*grid-template-columns:\s*24px 110px minmax\(0,\s*1fr\) 80px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.national-club-results-list li\s*\{[^}]*grid-template-columns:\s*20px 64px minmax\(0,\s*1fr\) 54px;[^}]*\}/
+    );
+  });
+
   it("640px 이하에서 표 열을 압축한다", () => {
     expect(css).toMatch(/@media\s*\(max-width:\s*640px\)/);
     expect(css).toMatch(
@@ -314,9 +323,9 @@ describe("national ranking responsive contracts", () => {
     );
   });
 
-  it("모바일 동아리 성적 목록은 화면 안의 세 열로 압축하고 긴 팀명을 줄바꿈한다", () => {
+  it("모바일 동아리 성적 목록은 왕관을 포함한 네 열로 압축하고 긴 팀명을 줄바꿈한다", () => {
     expect(css).toMatch(
-      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.national-club-results-list li\s*\{[^}]*grid-template-columns:\s*64px minmax\(0,\s*1fr\) 54px;[^}]*gap:\s*10px;[^}]*\}/
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.national-club-results-list li\s*\{[^}]*grid-template-columns:\s*20px 64px minmax\(0,\s*1fr\) 54px;[^}]*gap:\s*8px;[^}]*\}/
     );
     expect(css).toMatch(
       /@media\s*\(max-width:\s*640px\)[\s\S]*?\.national-club-result-competition strong\s*\{[^}]*overflow-wrap:\s*anywhere;[^}]*\}/
