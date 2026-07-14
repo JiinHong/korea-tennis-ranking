@@ -253,22 +253,42 @@ describe("NationalRankingTable", () => {
     ).toBe("/clubs/seoultech-neutinamu?gender=men");
   });
 
-  it("동아리 칸 전체를 펼치기 버튼의 터치 영역으로 두고 왕관은 별도 조작한다", () => {
+  it("랭킹 행 전체를 펼치기 버튼의 터치 영역으로 두고 닫힌 상태를 복원한다", () => {
     render(<NationalRankingTable rankings={rankings} />);
 
     const disclosure = screen.getByRole("button", {
       name: "서울과학기술대학교 STC 최고 성적 펼치기",
     });
-    const clubCell = disclosure.closest("td");
+    const rankingRow = disclosure.closest("tr");
+    const rankCell = rankingRow?.querySelector(".national-ranking-rank");
+    const scoreCell = rankingRow?.querySelector(".national-ranking-score");
 
-    expect(clubCell?.classList.contains("national-ranking-club-column")).toBe(
-      true
-    );
+    expect(rankingRow?.classList.contains("national-ranking-main-row")).toBe(true);
+    expect(rankingRow?.getAttribute("data-expanded")).toBe("false");
+
+    fireEvent.click(rankCell as HTMLTableCellElement);
+    expect(rankingRow?.getAttribute("data-expanded")).toBe("true");
+
+    fireEvent.click(scoreCell as HTMLTableCellElement);
+    expect(rankingRow?.getAttribute("data-expanded")).toBe("false");
+  });
+
+  it("왕관은 행 펼치기 버튼과 별도로 조작한다", () => {
+    render(<NationalRankingTable rankings={rankings} />);
+
+    const disclosure = screen.getByRole("button", {
+      name: "서울과학기술대학교 STC 최고 성적 펼치기",
+    });
+    const rankingRow = disclosure.closest("tr");
+    const honor = within(rankingRow as HTMLTableRowElement).getByRole("button", {
+      name: "2025 양구 남자부 우승",
+    });
+
     expect(
-      within(clubCell as HTMLTableCellElement).getByRole("button", {
-        name: "2025 양구 남자부 우승",
-      }).closest(".national-ranking-club-disclosure")
+      honor.closest(".national-ranking-club-disclosure")
     ).toBeNull();
+    fireEvent.click(honor);
+    expect(rankingRow?.getAttribute("data-expanded")).toBe("false");
   });
 
   it("객체 프로토타입과 같은 안전한 슬러그도 일반 성적 링크로 다룬다", () => {

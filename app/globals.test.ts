@@ -259,15 +259,24 @@ describe("national ranking responsive contracts", () => {
     );
   });
 
-  it("동아리 이름 칸 전체를 펼치기 버튼으로 누를 수 있고 왕관 조작은 버튼보다 위에 둔다", () => {
+  it("랭킹 행 전체를 펼치기 버튼으로 누를 수 있고 왕관 조작은 버튼보다 위에 둔다", () => {
+    expect(css).toMatch(
+      /\.national-ranking-main-row\s*\{[^}]*cursor:\s*pointer;[^}]*\}/
+    );
     expect(css).toMatch(
       /\.national-ranking-club-column\s*\{[^}]*position:\s*relative;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.national-ranking-club-disclosure\s*\{[^}]*position:\s*absolute;[^}]*inset:\s*0;[^}]*\}/
-    );
-    expect(css).toMatch(
       /\.national-ranking-honors\s*\{[^}]*position:\s*relative;[^}]*z-index:\s*1;[^}]*\}/
+    );
+  });
+
+  it("동아리명 강조색은 hover가 아니라 열린 행에만 적용한다", () => {
+    expect(css).toMatch(
+      /\.national-ranking-main-row\[data-expanded="true"\][\s\S]*?\.national-ranking-club strong\s*\{[^}]*color:\s*var\(--national-accent\);[^}]*\}/
+    );
+    expect(css).not.toMatch(
+      /\.national-ranking-club-column:hover[\s\S]*?\.national-ranking-club strong/
     );
   });
 

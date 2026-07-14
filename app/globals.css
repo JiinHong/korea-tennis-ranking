@@ -2522,6 +2522,10 @@ button:disabled {
   overflow-wrap: anywhere;
 }
 
+.national-ranking-main-row {
+  cursor: pointer;
+}
+
 .national-ranking-club-column {
   position: relative;
 }
@@ -2547,7 +2551,8 @@ button:disabled {
   pointer-events: none;
 }
 
-.national-ranking-club-column:hover .national-ranking-club strong {
+.national-ranking-main-row[data-expanded="true"]
+  .national-ranking-club strong {
   color: var(--national-accent);
 }
 

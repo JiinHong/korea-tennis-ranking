@@ -107,10 +107,27 @@ export default function NationalRankingTable({
                 );
                 const isExpanded = expandedClubSlug === row.clubSlug;
                 const regionId = `national-ranking-${activeGender}-${row.clubSlug}-results`;
+                const toggleClubResults = () =>
+                  setExpandedClubSlug((current) =>
+                    current === row.clubSlug ? null : row.clubSlug
+                  );
 
                 return (
                   <Fragment key={row.clubSlug}>
-                    <tr className="national-ranking-main-row">
+                    <tr
+                      className="national-ranking-main-row"
+                      data-expanded={isExpanded ? "true" : "false"}
+                      onClick={(event) => {
+                        if (
+                          event.target instanceof Element &&
+                          event.target.closest(".national-ranking-honor")
+                        ) {
+                          return;
+                        }
+
+                        toggleClubResults();
+                      }}
+                    >
                       <td
                         className="national-ranking-rank"
                         data-rank-tier={getRankTier(row.rank)}
@@ -125,11 +142,10 @@ export default function NationalRankingTable({
                             isExpanded ? "접기" : "펼치기"
                           }`}
                           className="national-ranking-club-disclosure"
-                          onClick={() =>
-                            setExpandedClubSlug((current) =>
-                              current === row.clubSlug ? null : row.clubSlug
-                            )
-                          }
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            toggleClubResults();
+                          }}
                           type="button"
                         />
                         <span className="national-ranking-club-cell">
