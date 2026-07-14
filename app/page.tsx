@@ -31,7 +31,8 @@ export default async function Home() {
             <h1>전국 대학 테니스 동아리 랭킹</h1>
             <p className="national-header-description">
               국토정중앙배(양구), 경인지구 연맹전, 춘천소양강배,
-              하늘내린인제, WEMIX OPEN의 성적을 바탕으로 산정합니다.
+              하늘내린인제, WEMIX OPEN의 최근 3년간 성적을 바탕으로
+              산정합니다.
             </p>
             <Link className="national-methodology-link" href="/methodology">
               랭킹 계산 방식 보기

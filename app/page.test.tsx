@@ -56,7 +56,7 @@ describe("Home", () => {
     ).toBeDefined();
     expect(
       screen.getByText(
-        "국토정중앙배(양구), 경인지구 연맹전, 춘천소양강배, 하늘내린인제, WEMIX OPEN의 성적을 바탕으로 산정합니다."
+        "국토정중앙배(양구), 경인지구 연맹전, 춘천소양강배, 하늘내린인제, WEMIX OPEN의 최근 3년간 성적을 바탕으로 산정합니다."
       )
     ).toBeDefined();
     expect(
