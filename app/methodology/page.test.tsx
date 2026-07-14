@@ -105,7 +105,12 @@ describe("MethodologyPage", () => {
     ).toBeDefined();
     expect(
       screen.getByText(
-        "랭킹표의 왕관은 2025년 대회 우승과 준우승 기록만 표시합니다. 원자료의 이전 수상 기록은 삭제하지 않고 보존합니다."
+        "랭킹표의 왕관은 2025년 대회 우승·준우승·4강 기록만 표시합니다. 원자료의 이전 수상 기록은 삭제하지 않고 보존합니다."
+      )
+    ).toBeDefined();
+    expect(
+      screen.getByText(
+        "금색 왕관은 우승, 은색 왕관은 준우승, 동색 왕관은 4강 진출을 뜻합니다. 이전 연도의 수상 기록은 삭제하지 않고 원자료에 유지합니다."
       )
     ).toBeDefined();
     expect(screen.queryByText(/오래된 왕관/)).toBeNull();
