@@ -300,6 +300,12 @@ describe("national ranking responsive contracts", () => {
       /\.national-ranking-honor-trigger\s*\{[^}]*width:\s*24px;[^}]*height:\s*24px;[^}]*\}/
     );
     expect(css).toMatch(
+      /\.national-ranking-honor-trigger\s*\{[^}]*cursor:\s*pointer;[^}]*\}/
+    );
+    expect(css).not.toMatch(
+      /\.national-ranking-honor-trigger\s*\{[^}]*cursor:\s*help;[^}]*\}/
+    );
+    expect(css).toMatch(
       /\.national-ranking-honor-trigger img\s*\{[^}]*width:\s*21px;[^}]*height:\s*16px;[^}]*\}/
     );
     expect(css).toMatch(

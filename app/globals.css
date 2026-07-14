@@ -2621,7 +2621,7 @@ button:disabled {
   background: transparent;
   border: 0;
   border-radius: 3px;
-  cursor: help;
+  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
 
