@@ -52,13 +52,12 @@ export default async function Home() {
               </div>
               <p className="national-ranking-crown-guide">
                 <Image
-                  alt=""
-                  aria-hidden="true"
+                  alt="왕관"
                   height={14}
                   src="/national-ranking/black-crown.png"
                   width={18}
                 />
-                <span>왕관은 최근 1년간의 입상을 의미합니다.</span>
+                <span>: 최근 1년간의 입상</span>
               </p>
             </div>
             <Suspense

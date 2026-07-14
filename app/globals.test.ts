@@ -244,6 +244,12 @@ describe("national ranking responsive contracts", () => {
     expect(css).not.toContain(".ranking-methodology-tooltip");
   });
 
+  it("최근 입상 안내의 검정 왕관을 글자 기준선에 맞게 살짝 올린다", () => {
+    expect(css).toMatch(
+      /\.national-ranking-crown-guide img\s*\{[^}]*transform:\s*translateY\(-1px\);[^}]*\}/
+    );
+  });
+
   it("오류 상태의 다시 시도 링크를 기존 전국 랭킹 링크처럼 표시한다", () => {
     expect(css).toMatch(
       /\.national-status a\s*\{[^}]*display:\s*inline-flex;[^}]*color:\s*var\(--national-accent\);[^}]*font-weight:\s*800;[^}]*text-underline-offset:\s*4px;[^}]*\}/

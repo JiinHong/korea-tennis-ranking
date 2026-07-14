@@ -70,13 +70,15 @@ describe("Home", () => {
     expect(screen.queryByText("national-club-v3")).toBeNull();
     expect(screen.queryByText("계산식")).toBeNull();
     expect(screen.queryByText("산정 시각")).toBeNull();
-    const crownGuide = screen.getByText(
-      "왕관은 최근 1년간의 입상을 의미합니다."
-    );
+    const crownGuide = screen.getByText(": 최근 1년간의 입상");
     const crownImage = crownGuide.parentElement?.querySelector("img");
+    expect(crownImage?.getAttribute("alt")).toBe("왕관");
     expect(crownImage?.getAttribute("src")).toContain(
       encodeURIComponent("/national-ranking/black-crown.png")
     );
+    expect(
+      screen.queryByText("왕관은 최근 1년간의 입상을 의미합니다.")
+    ).toBeNull();
     expect(screen.queryByText("※ 2026년 7월 기준")).toBeNull();
     expect(screen.queryByRole("time")).toBeNull();
     expect(screen.getByRole("table")).toBeDefined();
@@ -120,9 +122,7 @@ describe("Home", () => {
     render(await Home());
 
     expect(screen.getByRole("table")).toBeDefined();
-    expect(
-      screen.getByText("왕관은 최근 1년간의 입상을 의미합니다.")
-    ).toBeDefined();
+    expect(screen.getByText(": 최근 1년간의 입상")).toBeDefined();
     expect(getCachedNationalRankingPageData).toHaveBeenCalledTimes(2);
   });
 });

@@ -2377,6 +2377,7 @@ button:disabled {
   height: 14px;
   flex: 0 0 auto;
   object-fit: contain;
+  transform: translateY(-1px);
 }
 
 .national-status {
