@@ -70,12 +70,20 @@ describe("MethodologyPage", () => {
     ].forEach((cells) => expectRow("진출 단계별 점수", cells));
 
     [
-      ["국토정중앙배(양구)", "최상위", "3"],
-      ["경인지구 연맹전", "주요", "2"],
-      ["춘천소양강배", "주요", "2"],
-      ["WEMIX OPEN", "신흥", "1"],
-      ["하늘내린인제", "신흥", "1"],
+      ["국토정중앙배(양구)", "1등급", "3"],
+      ["경인지구 연맹전", "2등급", "2"],
+      ["춘천소양강배", "2등급", "2"],
+      ["WEMIX OPEN", "3등급", "1"],
+      ["하늘내린인제", "3등급", "1"],
     ].forEach((cells) => expectRow("대회 위상별 가중치", cells));
+
+    const prestigeTable = screen.getByRole("table", {
+      name: "대회 위상별 가중치",
+    });
+    expect(within(prestigeTable).getByRole("columnheader", { name: "등급" }))
+      .toBeDefined();
+    expect(within(prestigeTable).queryByText("주요")).toBeNull();
+    expect(within(prestigeTable).queryByText("신흥")).toBeNull();
   });
 
   it("참가 규모와 연도 가중치 기준값을 표로 공개한다", () => {

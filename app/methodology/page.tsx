@@ -22,11 +22,11 @@ const STAGE_ROWS = [
 ] as const;
 
 const COMPETITION_PRESTIGE_ROWS = [
-  ["국토정중앙배(양구)", "최상위", 3],
-  ["경인지구 연맹전", "주요", 2],
-  ["춘천소양강배", "주요", 2],
-  ["WEMIX OPEN", "신흥", 1],
-  ["하늘내린인제", "신흥", 1],
+  ["국토정중앙배(양구)", "1등급", 3],
+  ["경인지구 연맹전", "2등급", 2],
+  ["춘천소양강배", "2등급", 2],
+  ["WEMIX OPEN", "3등급", 1],
+  ["하늘내린인제", "3등급", 1],
 ] as const;
 
 const FIELD_SIZE_ROWS = [
@@ -157,9 +157,8 @@ export default function MethodologyPage() {
           <h2 id="prestige-title">대회 위상 가중치</h2>
           <p>
             전국·지역이라는 명칭만으로 일괄 감점하지 않고, 대학 동아리 대회로서의
-            권위와 축적된 역사를 반영해 대회별 가중치를 적용합니다. 양구를 최상위로,
-            경인지구와 춘천을 주요 대회로, 역사가 짧은 위믹스와 인제를 신흥 대회로
-            구분합니다.
+            권위와 축적된 역사를 반영해 대회별 가중치를 적용합니다. 양구는 1등급,
+            경인지구와 춘천은 2등급, WEMIX OPEN과 인제는 3등급으로 구분합니다.
           </p>
           <MethodologyTableRegion label="대회 위상별 가중치">
             <table className="methodology-table">
@@ -167,7 +166,7 @@ export default function MethodologyPage() {
               <thead>
                 <tr>
                   <th scope="col">대회</th>
-                  <th scope="col">위상</th>
+                  <th scope="col">등급</th>
                   <th scope="col">단위</th>
                 </tr>
               </thead>
