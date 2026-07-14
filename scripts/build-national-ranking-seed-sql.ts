@@ -8,6 +8,9 @@ import { buildNationalRankingSeedPlan } from "../lib/nationalRanking/seedPlan";
 import { buildNationalRankingSeedSql } from "../lib/nationalRanking/seedSql";
 import type { NationalRankingDataset } from "../lib/nationalRanking/types";
 
+export const NATIONAL_RANKING_SNAPSHOT_SCHEMA_VERSION =
+  "national-ranking-snapshot-v2";
+
 type CliArgs = {
   outPath?: string;
 };
@@ -54,8 +57,10 @@ export function runNationalRankingSeedSqlCli(
 ): void {
   const args = parseNationalRankingSeedSqlCliArgs(argv);
   const dataset = (deps.loadDataset ?? loadNationalRankingDataset)();
-  // Source revision is SHA-256(JSON.stringify(validated dataset)): order-preserving validated-manifest serialization.
+  // Source revision combines the validated dataset with the snapshot schema version.
   const revision = createHash("sha256")
+    .update(NATIONAL_RANKING_SNAPSHOT_SCHEMA_VERSION)
+    .update("\0")
     .update(JSON.stringify(dataset))
     .digest("hex");
   const sql = buildNationalRankingSeedSql(

@@ -477,13 +477,15 @@ describe("buildNationalRankingSeedSql", () => {
     ).toThrow("--out may only be provided once");
     expect(loadDataset).not.toHaveBeenCalled();
     expect(readFileSync(cliPath, "utf8")).toContain(
-      "Source revision is SHA-256(JSON.stringify(validated dataset)): order-preserving validated-manifest serialization."
+      "Source revision combines the validated dataset with the snapshot schema version."
     );
   });
 
-  it("writes exactly the requested output file with the validated dataset hash", () => {
+  it("writes exactly the requested output file with a schema-aware source revision", () => {
     const dataset = loadNationalRankingDataset();
     const expectedRevision = createHash("sha256")
+      .update("national-ranking-snapshot-v2")
+      .update("\0")
       .update(JSON.stringify(dataset))
       .digest("hex");
     const tempDir = mkdtempSync(join(tmpdir(), "national-seed-"));

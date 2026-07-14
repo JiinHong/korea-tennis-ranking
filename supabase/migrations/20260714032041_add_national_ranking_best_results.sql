@@ -28,8 +28,8 @@ select
   ranking_row.championships,
   ranking_row.runner_ups,
   ranking_row.contributions,
-  ranking_row.best_results,
-  ranking_row.honors
+  ranking_row.honors,
+  ranking_row.best_results
 from public.national_ranking_snapshots as snapshot
 join public.national_formula_versions as formula
   on formula.version = snapshot.formula_version

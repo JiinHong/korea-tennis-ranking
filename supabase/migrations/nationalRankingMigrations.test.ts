@@ -131,6 +131,9 @@ describe("national ranking migration", () => {
     expect(sql).toContain("ranking_row.best_results");
     expect(sql).toContain("ranking_row.honors");
     expect(sql).toContain(
+      "ranking_row.honors, ranking_row.best_results"
+    );
+    expect(sql).toContain(
       "grant select on public.latest_national_rankings to anon"
     );
     expect(sql).not.toContain("security definer");
