@@ -441,6 +441,172 @@ describe("calculateNationalRankings", () => {
     ]);
   });
 
+  it("keeps each division's three best verified all-time results", () => {
+    const bestResultDataset = {
+      version: "best-result-test",
+      clubs: dataset.clubs,
+      aliases: [],
+      tournaments: [
+        { slug: "yanggu", name: "양구", scope: "national" as const, scopeFactor: 1 },
+        {
+          slug: "chuncheon",
+          name: "춘천",
+          scope: "national" as const,
+          scopeFactor: 1,
+        },
+        {
+          slug: "gyeongin",
+          name: "경인지구",
+          scope: "regional" as const,
+          scopeFactor: 0.85,
+        },
+        { slug: "inje", name: "인제", scope: "national" as const, scopeFactor: 1 },
+      ],
+      editions: [
+        {
+          key: "yanggu-men-2022",
+          tournamentSlug: "yanggu",
+          year: 2022,
+          gender: "men" as const,
+          actualEntrants: 64,
+          sourceStatus: "verified" as const,
+          sourceRefs: ["yanggu-men-2022.pdf"],
+        },
+        {
+          key: "yanggu-men-2025",
+          tournamentSlug: "yanggu",
+          year: 2025,
+          gender: "men" as const,
+          actualEntrants: 64,
+          sourceStatus: "verified" as const,
+          sourceRefs: ["yanggu-men-2025.pdf"],
+        },
+        {
+          key: "chuncheon-men-2025",
+          tournamentSlug: "chuncheon",
+          year: 2025,
+          gender: "men" as const,
+          actualEntrants: 48,
+          sourceStatus: "verified" as const,
+          sourceRefs: ["chuncheon-men-2025.pdf"],
+        },
+        {
+          key: "gyeongin-men-2025",
+          tournamentSlug: "gyeongin",
+          year: 2025,
+          gender: "men" as const,
+          actualEntrants: 32,
+          sourceStatus: "verified" as const,
+          sourceRefs: ["gyeongin-men-2025.pdf"],
+        },
+        {
+          key: "inje-women-2025",
+          tournamentSlug: "inje",
+          year: 2025,
+          gender: "women" as const,
+          actualEntrants: 24,
+          sourceStatus: "verified" as const,
+          sourceRefs: ["inje-women-2025.pdf"],
+        },
+      ],
+      results: [
+        {
+          editionKey: "yanggu-men-2022",
+          clubSlug: "alpha",
+          sourceTeamName: "Alpha 2022",
+          teamLabel: "",
+          stage: "champion" as const,
+          qualityStatus: "verified" as const,
+          sourceRef: "yanggu-men-2022.pdf#alpha",
+          note: "",
+        },
+        {
+          editionKey: "yanggu-men-2025",
+          clubSlug: "beta",
+          sourceTeamName: "Beta 2025",
+          teamLabel: "",
+          stage: "round_of_16" as const,
+          qualityStatus: "verified" as const,
+          sourceRef: "yanggu-men-2025.pdf#beta",
+          note: "",
+        },
+        {
+          editionKey: "chuncheon-men-2025",
+          clubSlug: "alpha",
+          sourceTeamName: "Alpha A",
+          teamLabel: "A",
+          stage: "runner_up" as const,
+          qualityStatus: "verified" as const,
+          sourceRef: "chuncheon-men-2025.pdf#alpha-a",
+          note: "",
+        },
+        {
+          editionKey: "gyeongin-men-2025",
+          clubSlug: "alpha",
+          sourceTeamName: "Alpha A",
+          teamLabel: "A",
+          stage: "semifinal" as const,
+          qualityStatus: "verified" as const,
+          sourceRef: "gyeongin-men-2025.pdf#alpha-a",
+          note: "",
+        },
+        {
+          editionKey: "gyeongin-men-2025",
+          clubSlug: "alpha",
+          sourceTeamName: "Alpha B",
+          teamLabel: "B",
+          stage: "quarterfinal" as const,
+          qualityStatus: "verified" as const,
+          sourceRef: "gyeongin-men-2025.pdf#alpha-b",
+          note: "",
+        },
+        {
+          editionKey: "inje-women-2025",
+          clubSlug: "alpha",
+          sourceTeamName: "Alpha Women",
+          teamLabel: "",
+          stage: "champion" as const,
+          qualityStatus: "verified" as const,
+          sourceRef: "inje-women-2025.pdf#alpha",
+          note: "",
+        },
+      ],
+    } satisfies NationalRankingDataset;
+
+    const result = calculateNationalRankings(bestResultDataset);
+    const alphaMen = result.rows.find(
+      (row) => row.clubSlug === "alpha" && row.gender === "men"
+    );
+    const alphaCombined = result.rows.find(
+      (row) => row.clubSlug === "alpha" && row.gender === "combined"
+    );
+
+    expect(
+      alphaMen?.bestResults.map((bestResult) => [
+        bestResult.stage,
+        bestResult.tournamentSlug,
+        bestResult.year,
+        bestResult.sourceTeamName,
+      ])
+    ).toEqual([
+      ["champion", "yanggu", 2022, "Alpha 2022"],
+      ["runner_up", "chuncheon", 2025, "Alpha A"],
+      ["semifinal", "gyeongin", 2025, "Alpha A"],
+    ]);
+    expect(alphaMen?.honors).toContainEqual(
+      expect.objectContaining({
+        editionKey: "gyeongin-men-2025",
+        stage: "semifinal",
+      })
+    );
+    expect(alphaCombined?.bestResults).toHaveLength(3);
+    expect(alphaCombined?.bestResults[1]).toMatchObject({
+      gender: "women",
+      stage: "champion",
+      tournamentSlug: "inje",
+    });
+  });
+
   it("uses only the best verified team per club, gender, tournament, and edition", () => {
     const result = calculateNationalRankings(dataset);
     const alphaMen = result.rows.find(

@@ -11,6 +11,15 @@ export type TournamentStage =
   | "round_of_64"
   | "first_match_loss";
 
+export type PublicTournamentResultStage = Extract<
+  TournamentStage,
+  | "champion"
+  | "runner_up"
+  | "semifinal"
+  | "quarterfinal"
+  | "round_of_16"
+>;
+
 export type ResultQualityStatus =
   | "verified"
   | "unresolved"
@@ -109,7 +118,21 @@ export type NationalRankingHonor = {
   tournamentName: string;
   year: number;
   gender: NationalGender;
-  stage: "champion" | "runner_up";
+  stage: Extract<
+    TournamentStage,
+    "champion" | "runner_up" | "semifinal"
+  >;
+};
+
+export type NationalRankingBestResult = {
+  editionKey: string;
+  tournamentSlug: string;
+  tournamentName: string;
+  year: number;
+  gender: NationalGender;
+  actualEntrants: number;
+  stage: PublicTournamentResultStage;
+  sourceTeamName: string;
 };
 
 export type CalculatedRankingRow = {
@@ -123,6 +146,7 @@ export type CalculatedRankingRow = {
   runnerUps: number;
   contributions: ScoreContribution[];
   honors: NationalRankingHonor[];
+  bestResults: NationalRankingBestResult[];
 };
 
 export type CalculatedNationalRanking = {

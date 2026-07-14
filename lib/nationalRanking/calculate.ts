@@ -13,17 +13,70 @@ import type {
   CalculatedRankingRow,
   NationalClubInput,
   NationalGender,
+  NationalRankingBestResult,
   NationalRankingDataset,
   NationalRankingHonor,
+  PublicTournamentResultStage,
   RankingGender,
   ScoreContribution,
 } from "./types";
+
+const PUBLIC_RESULT_STAGES = new Set<PublicTournamentResultStage>([
+  "champion",
+  "runner_up",
+  "semifinal",
+  "quarterfinal",
+  "round_of_16",
+]);
+
+const BEST_RESULT_STAGE_ORDER: Record<PublicTournamentResultStage, number> = {
+  champion: 0,
+  runner_up: 1,
+  semifinal: 2,
+  quarterfinal: 3,
+  round_of_16: 4,
+};
+
+const PODIUM_STAGE_ORDER: Record<NationalRankingHonor["stage"], number> = {
+  champion: 0,
+  runner_up: 1,
+  semifinal: 2,
+};
+
+function compareBestResults(
+  left: NationalRankingBestResult,
+  right: NationalRankingBestResult,
+  tournamentOrder: Map<string, number>
+): number {
+  const stageDifference =
+    BEST_RESULT_STAGE_ORDER[left.stage] - BEST_RESULT_STAGE_ORDER[right.stage];
+  if (stageDifference !== 0) return stageDifference;
+
+  const tournamentUnitDifference =
+    (NATIONAL_FORMULA_V3.tournamentUnits[right.tournamentSlug] ?? 0) -
+    (NATIONAL_FORMULA_V3.tournamentUnits[left.tournamentSlug] ?? 0);
+  if (tournamentUnitDifference !== 0) return tournamentUnitDifference;
+
+  const yearDifference = right.year - left.year;
+  if (yearDifference !== 0) return yearDifference;
+
+  const entrantDifference = right.actualEntrants - left.actualEntrants;
+  if (entrantDifference !== 0) return entrantDifference;
+
+  const tournamentDifference =
+    (tournamentOrder.get(left.tournamentSlug) ?? Number.MAX_SAFE_INTEGER) -
+    (tournamentOrder.get(right.tournamentSlug) ?? Number.MAX_SAFE_INTEGER);
+  if (tournamentDifference !== 0) return tournamentDifference;
+
+  return left.sourceTeamName.localeCompare(right.sourceTeamName, "ko-KR");
+}
 
 function createRankingRow(
   clubSlug: string,
   gender: RankingGender,
   contributions: ScoreContribution[],
   honors: NationalRankingHonor[],
+  bestResults: NationalRankingBestResult[],
   latestYear: Map<string, number>
 ): CalculatedRankingRow {
   return {
@@ -45,6 +98,7 @@ function createRankingRow(
     runnerUps: contributions.filter((item) => item.stage === "runner_up").length,
     contributions,
     honors,
+    bestResults,
   };
 }
 
@@ -68,6 +122,11 @@ function combineRankingRows(
       [...menRow.honors, ...womenRow.honors],
       tournamentOrder
     ),
+    bestResults: [...menRow.bestResults, ...womenRow.bestResults]
+      .sort((left, right) =>
+        compareBestResults(left, right, tournamentOrder)
+      )
+      .slice(0, 3),
   };
 }
 
@@ -88,11 +147,7 @@ function sortHonors(
       return left.gender === "women" ? -1 : 1;
     }
 
-    return left.stage === right.stage
-      ? 0
-      : left.stage === "champion"
-        ? -1
-        : 1;
+    return PODIUM_STAGE_ORDER[left.stage] - PODIUM_STAGE_ORDER[right.stage];
   });
 }
 
@@ -161,7 +216,9 @@ export function calculateNationalRankings(
   for (const result of dataset.results) {
     if (
       result.clubSlug === null ||
-      (result.stage !== "champion" && result.stage !== "runner_up")
+      (result.stage !== "champion" &&
+        result.stage !== "runner_up" &&
+        result.stage !== "semifinal")
     ) {
       continue;
     }
@@ -203,6 +260,77 @@ export function calculateNationalRankings(
   }
   for (const [key, honors] of honorsByClubAndGender) {
     honorsByClubAndGender.set(key, sortHonors(honors, tournamentOrder));
+  }
+
+  const bestResultByIdentity = new Map<string, NationalRankingBestResult>();
+
+  for (const result of dataset.results) {
+    if (
+      result.clubSlug === null ||
+      result.qualityStatus !== "verified" ||
+      result.stage === null ||
+      !PUBLIC_RESULT_STAGES.has(result.stage as PublicTournamentResultStage)
+    ) {
+      continue;
+    }
+
+    const club = clubsBySlug.get(result.clubSlug);
+    const edition = editionsByKey.get(result.editionKey);
+    const tournament = edition
+      ? tournamentsBySlug.get(edition.tournamentSlug)
+      : undefined;
+
+    if (!club || !edition || !tournament || edition.sourceStatus !== "verified") {
+      continue;
+    }
+
+    const bestResult: NationalRankingBestResult = {
+      editionKey: edition.key,
+      tournamentSlug: tournament.slug,
+      tournamentName: tournament.name,
+      year: edition.year,
+      gender: edition.gender,
+      actualEntrants: edition.actualEntrants,
+      stage: result.stage as PublicTournamentResultStage,
+      sourceTeamName: result.sourceTeamName,
+    };
+    const identity = [
+      club.slug,
+      edition.gender,
+      tournament.slug,
+      edition.year,
+    ].join(":");
+    const currentBest = bestResultByIdentity.get(identity);
+
+    if (
+      !currentBest ||
+      compareBestResults(bestResult, currentBest, tournamentOrder) < 0
+    ) {
+      bestResultByIdentity.set(identity, bestResult);
+    }
+  }
+
+  const bestResultsByClubAndGender = new Map<
+    string,
+    NationalRankingBestResult[]
+  >();
+  for (const [identity, bestResult] of bestResultByIdentity) {
+    const [clubSlug] = identity.split(":");
+    const key = `${clubSlug}:${bestResult.gender}`;
+    const bestResults = bestResultsByClubAndGender.get(key) ?? [];
+
+    bestResults.push(bestResult);
+    bestResultsByClubAndGender.set(key, bestResults);
+  }
+  for (const [key, bestResults] of bestResultsByClubAndGender) {
+    bestResultsByClubAndGender.set(
+      key,
+      bestResults
+        .sort((left, right) =>
+          compareBestResults(left, right, tournamentOrder)
+        )
+        .slice(0, 3)
+    );
   }
 
   const bestContributions = new Map<string, ScoreContribution>();
@@ -348,11 +476,16 @@ export function calculateNationalRankings(
       contributionsByClubAndGender.get(`${club.slug}:women`) ?? [];
     const menHonors = honorsByClubAndGender.get(`${club.slug}:men`) ?? [];
     const womenHonors = honorsByClubAndGender.get(`${club.slug}:women`) ?? [];
+    const menBestResults =
+      bestResultsByClubAndGender.get(`${club.slug}:men`) ?? [];
+    const womenBestResults =
+      bestResultsByClubAndGender.get(`${club.slug}:women`) ?? [];
     const menRow = createRankingRow(
       club.slug,
       "men",
       menContributions,
       menHonors,
+      menBestResults,
       latestYear
     );
     const womenRow = createRankingRow(
@@ -360,20 +493,31 @@ export function calculateNationalRankings(
       "women",
       womenContributions,
       womenHonors,
+      womenBestResults,
       latestYear
     );
 
-    if (menContributions.length > 0 || menHonors.length > 0) {
+    if (
+      menContributions.length > 0 ||
+      menHonors.length > 0 ||
+      menBestResults.length > 0
+    ) {
       genderRows.men.push(menRow);
     }
-    if (womenContributions.length > 0 || womenHonors.length > 0) {
+    if (
+      womenContributions.length > 0 ||
+      womenHonors.length > 0 ||
+      womenBestResults.length > 0
+    ) {
       genderRows.women.push(womenRow);
     }
     if (
       menContributions.length > 0 ||
       womenContributions.length > 0 ||
       menHonors.length > 0 ||
-      womenHonors.length > 0
+      womenHonors.length > 0 ||
+      menBestResults.length > 0 ||
+      womenBestResults.length > 0
     ) {
       combinedRows.push(
         combineRankingRows(menRow, womenRow, tournamentOrder)

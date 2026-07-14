@@ -197,5 +197,12 @@ describe("buildNationalRankingSeedPlan", () => {
         stage: "runner_up",
       }),
     ]);
+    expect(alphaMen?.bestResults).toEqual([
+      expect.objectContaining({
+        editionKey: "national-2025-men",
+        sourceTeamName: "Alpha A",
+        stage: "champion",
+      }),
+    ]);
   });
 });
