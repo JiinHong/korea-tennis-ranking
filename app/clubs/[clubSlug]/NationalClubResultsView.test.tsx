@@ -114,13 +114,13 @@ describe("NationalClubResultsView", () => {
     ).toBe("/?gender=women");
   });
 
-  it("2025년 우승·준우승·4강에만 금·은·동 왕관을 표시한다", () => {
+  it("전체 연도의 우승·준우승·4강에 금·은·동 왕관을 표시한다", () => {
     const { container } = render(<NationalClubResultsView pageData={pageData} />);
 
     const crowns = Array.from(
       container.querySelectorAll<HTMLImageElement>(".national-result-crown")
     );
-    expect(crowns).toHaveLength(3);
+    expect(crowns).toHaveLength(4);
     expect(crowns.map((crown) => crown.getAttribute("src"))).toEqual(
       expect.arrayContaining([
         expect.stringContaining(encodeURIComponent("/national-ranking/gold-crown.png")),
@@ -130,7 +130,9 @@ describe("NationalClubResultsView", () => {
     );
 
     const oldChampion = screen.getByText("춘천소양강배").closest("li");
-    expect(oldChampion?.querySelector("img")).toBeNull();
+    expect(oldChampion?.querySelector("img")?.getAttribute("src")).toContain(
+      encodeURIComponent("/national-ranking/gold-crown.png")
+    );
   });
 
   it("남자부를 선택하면 기록 수와 URL을 함께 바꾼다", () => {

@@ -108,10 +108,9 @@ export default function NationalClubResultsView({
           ) : (
             <ul aria-label="대회 성적" className="national-club-results-list">
               {visibleResults.map((result) => {
-                const crownStage =
-                  result.year === 2025 && isPodiumStage(result.stage)
-                    ? result.stage
-                    : null;
+                const crownStage = isPodiumStage(result.stage)
+                  ? result.stage
+                  : null;
 
                 return (
                   <li
