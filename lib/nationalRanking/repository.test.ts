@@ -35,6 +35,18 @@ function rankingRow(
     latest_edition_points: 40,
     championships: 2,
     runner_ups: 1,
+    best_results: [
+      {
+        editionKey: "gyeongin-2025-men",
+        tournamentSlug: "gyeongin",
+        tournamentName: "경인지구 연맹전",
+        year: 2025,
+        gender: "men",
+        actualEntrants: 32,
+        stage: "semifinal",
+        sourceTeamName: "STC A",
+      },
+    ],
     honors: [
       {
         editionKey: "yanggu-2025-men",
@@ -116,6 +128,18 @@ describe("getNationalRankingPageData", () => {
             latestEditionPoints: 20,
             championships: 1,
             runnerUps: 2,
+            bestResults: [
+              {
+                editionKey: "gyeongin-2025-men",
+                tournamentSlug: "gyeongin",
+                tournamentName: "경인지구 연맹전",
+                year: 2025,
+                gender: "men",
+                actualEntrants: 32,
+                stage: "semifinal",
+                sourceTeamName: "STC A",
+              },
+            ],
             honors: [
               {
                 editionKey: "yanggu-2025-men",
@@ -149,6 +173,36 @@ describe("getNationalRankingPageData", () => {
     await expect(
       getNationalRankingPageData(createAdapter([invalidRow]))
     ).rejects.toThrow(/honors.*array/i);
+  });
+
+  test("rejects a public view row whose best results value is not an array", async () => {
+    const invalidRow = {
+      ...rankingRow(),
+      best_results: { stage: "champion" },
+    } as unknown as NationalRankingViewRow;
+
+    await expect(
+      getNationalRankingPageData(createAdapter([invalidRow]))
+    ).rejects.toThrow(/best results.*array.*seoultech/i);
+  });
+
+  test.each([
+    ["stage", { stage: "round_of_32" }],
+    ["year", { year: 0 }],
+    ["gender", { gender: "mixed" }],
+    ["actualEntrants", { actualEntrants: 0 }],
+  ])("rejects an invalid best results %s field", async (_field, overrides) => {
+    const validBestResult = rankingRow().best_results[0] as Record<
+      string,
+      unknown
+    >;
+    const invalidRow = rankingRow({
+      best_results: [{ ...validBestResult, ...overrides }],
+    });
+
+    await expect(
+      getNationalRankingPageData(createAdapter([invalidRow]))
+    ).rejects.toThrow(/national ranking best results.*seoultech/i);
   });
 
   test("wraps adapter errors with the public read context", async () => {
@@ -239,7 +293,7 @@ describe("default national ranking read adapter", () => {
     expect(mocks.supabaseFrom).toHaveBeenCalledWith("latest_national_rankings");
     expect(select).toHaveBeenCalledTimes(1);
     expect(select).toHaveBeenCalledWith(
-      "formula_version, calculated_at, gender, rank, total_points, latest_edition_points, championships, runner_ups, honors, club_slug, university_name, club_name, display_name"
+      "formula_version, calculated_at, gender, rank, total_points, latest_edition_points, championships, runner_ups, best_results, honors, club_slug, university_name, club_name, display_name"
     );
     expect(genderOrder).toHaveBeenCalledWith("gender", { ascending: true });
     expect(rankOrder).toHaveBeenCalledWith("rank", { ascending: true });

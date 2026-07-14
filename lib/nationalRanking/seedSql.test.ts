@@ -318,9 +318,24 @@ describe("buildNationalRankingSeedSql", () => {
 
     expect(sql).toContain('"honors":[{');
     expect(normalized).toContain("honors jsonb");
-    expect(normalized).toContain("runner_ups, contributions, honors");
+    expect(normalized).toContain(
+      "runner_ups, contributions, best_results, honors"
+    );
     expect(normalized).toContain("row_input.honors");
     expect(normalized).toContain("ranking_rows.honors");
+  });
+
+  it("persists best results and includes them in immutable row comparison", () => {
+    const sql = buildSql();
+    const normalized = normalizedSql(sql);
+
+    expect(sql).toContain('"bestResults":[{');
+    expect(normalized).toContain('"bestresults" jsonb');
+    expect(normalized).toContain(
+      "runner_ups, contributions, best_results, honors"
+    );
+    expect(normalized).toContain('row_input."bestresults" as best_results');
+    expect(normalized).toContain("ranking_rows.best_results");
   });
 
   it("publishes only contributions from verified editions, verified results, and known clubs", () => {

@@ -116,6 +116,26 @@ function parseGrants(sql: string): SqlGrant[] {
 }
 
 describe("national ranking migration", () => {
+  it("adds best historical results to the secure public ranking view", () => {
+    const migration = readMigrationEndingWith(
+      "_add_national_ranking_best_results.sql"
+    );
+    const sql = normalizeSql(migration);
+
+    expect(migration).not.toBeNull();
+    expect(sql).toContain(
+      "add column if not exists best_results jsonb not null default '[]'::jsonb"
+    );
+    expect(sql).toContain("check (jsonb_typeof(best_results) = 'array')");
+    expect(sql).toMatch(latestViewPattern);
+    expect(sql).toContain("ranking_row.best_results");
+    expect(sql).toContain("ranking_row.honors");
+    expect(sql).toContain(
+      "grant select on public.latest_national_rankings to anon"
+    );
+    expect(sql).not.toContain("security definer");
+  });
+
   it("adds all-time honors to the secure public ranking view", () => {
     const migration = readMigrationEndingWith(
       "_add_national_ranking_honors.sql"

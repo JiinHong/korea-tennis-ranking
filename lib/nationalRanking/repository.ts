@@ -4,7 +4,9 @@ import { unstable_cache } from "next/cache";
 
 import { getSupabaseReadClient } from "@/lib/supabaseServer";
 import type {
+  NationalRankingBestResult,
   NationalRankingHonor,
+  PublicTournamentResultStage,
   RankingGender,
 } from "@/lib/nationalRanking/types";
 
@@ -18,6 +20,7 @@ export type PublicNationalRankingRow = {
   latestEditionPoints: number;
   championships: number;
   runnerUps: number;
+  bestResults: NationalRankingBestResult[];
   honors: NationalRankingHonor[];
 };
 
@@ -30,6 +33,7 @@ export type NationalRankingViewRow = {
   latest_edition_points: number;
   championships: number;
   runner_ups: number;
+  best_results: unknown;
   honors: unknown;
   club_slug: string;
   university_name: string;
@@ -55,7 +59,7 @@ function createNationalRankingReadAdapter(): NationalRankingReadAdapter {
       const { data, error } = await supabase
         .from("latest_national_rankings")
         .select(
-          "formula_version, calculated_at, gender, rank, total_points, latest_edition_points, championships, runner_ups, honors, club_slug, university_name, club_name, display_name"
+          "formula_version, calculated_at, gender, rank, total_points, latest_edition_points, championships, runner_ups, best_results, honors, club_slug, university_name, club_name, display_name"
         )
         .order("gender", { ascending: true })
         .order("rank", { ascending: true });
@@ -100,6 +104,107 @@ function requireHonorString(
   return value;
 }
 
+function requireBestResultString(
+  value: unknown,
+  field: string,
+  clubSlug: string
+): string {
+  if (typeof value !== "string" || value.trim() === "") {
+    throw new Error(
+      `National ranking best results field ${field} is invalid for ${clubSlug}`
+    );
+  }
+
+  return value;
+}
+
+function parseNationalRankingBestResults(
+  value: unknown,
+  clubSlug: string
+): NationalRankingBestResult[] {
+  if (!Array.isArray(value)) {
+    throw new Error(
+      `National ranking best results must be an array for ${clubSlug}`
+    );
+  }
+
+  const publicStages = new Set<PublicTournamentResultStage>([
+    "champion",
+    "runner_up",
+    "semifinal",
+    "quarterfinal",
+    "round_of_16",
+  ]);
+
+  return value.map((item, index) => {
+    if (!item || typeof item !== "object" || Array.isArray(item)) {
+      throw new Error(
+        `National ranking best results item ${index} is invalid for ${clubSlug}`
+      );
+    }
+
+    const record = item as Record<string, unknown>;
+    const year = record.year;
+    const gender = record.gender;
+    const actualEntrants = record.actualEntrants;
+    const stage = record.stage;
+
+    if (!Number.isInteger(year) || (year as number) <= 0) {
+      throw new Error(
+        `National ranking best results field year is invalid for ${clubSlug}`
+      );
+    }
+    if (gender !== "men" && gender !== "women") {
+      throw new Error(
+        `National ranking best results field gender is invalid for ${clubSlug}`
+      );
+    }
+    if (
+      !Number.isInteger(actualEntrants) ||
+      (actualEntrants as number) <= 0
+    ) {
+      throw new Error(
+        `National ranking best results field actualEntrants is invalid for ${clubSlug}`
+      );
+    }
+    if (
+      typeof stage !== "string" ||
+      !publicStages.has(stage as PublicTournamentResultStage)
+    ) {
+      throw new Error(
+        `National ranking best results field stage is invalid for ${clubSlug}`
+      );
+    }
+
+    return {
+      editionKey: requireBestResultString(
+        record.editionKey,
+        "editionKey",
+        clubSlug
+      ),
+      tournamentSlug: requireBestResultString(
+        record.tournamentSlug,
+        "tournamentSlug",
+        clubSlug
+      ),
+      tournamentName: requireBestResultString(
+        record.tournamentName,
+        "tournamentName",
+        clubSlug
+      ),
+      year: year as number,
+      gender,
+      actualEntrants: actualEntrants as number,
+      stage: stage as PublicTournamentResultStage,
+      sourceTeamName: requireBestResultString(
+        record.sourceTeamName,
+        "sourceTeamName",
+        clubSlug
+      ),
+    };
+  });
+}
+
 function parseNationalRankingHonors(
   value: unknown,
   clubSlug: string
@@ -130,7 +235,11 @@ function parseNationalRankingHonors(
         `National ranking honors field gender is invalid for ${clubSlug}`
       );
     }
-    if (stage !== "champion" && stage !== "runner_up") {
+    if (
+      stage !== "champion" &&
+      stage !== "runner_up" &&
+      stage !== "semifinal"
+    ) {
       throw new Error(
         `National ranking honors field stage is invalid for ${clubSlug}`
       );
@@ -201,6 +310,10 @@ export async function getNationalRankingPageData(
       latestEditionPoints: row.latest_edition_points,
       championships: row.championships,
       runnerUps: row.runner_ups,
+      bestResults: parseNationalRankingBestResults(
+        row.best_results,
+        row.club_slug
+      ),
       honors: parseNationalRankingHonors(row.honors, row.club_slug),
     });
   }

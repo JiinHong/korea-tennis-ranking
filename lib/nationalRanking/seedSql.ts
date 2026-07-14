@@ -11,6 +11,7 @@ type RankingRowRecord = {
   championships: number;
   runnerUps: number;
   contributions: NationalRankingSeedPlan["rows"][number]["contributions"];
+  bestResults: NationalRankingSeedPlan["rows"][number]["bestResults"];
   honors: NationalRankingSeedPlan["rows"][number]["honors"];
 };
 
@@ -76,6 +77,10 @@ function buildSourceSummary(plan: NationalRankingSeedPlan) {
         0
       ),
       honors: plan.rows.reduce((total, row) => total + row.honors.length, 0),
+      bestResults: plan.rows.reduce(
+        (total, row) => total + row.bestResults.length,
+        0
+      ),
     },
     editionsBySourceStatus: countBy(
       plan.editions.map((edition) => edition.sourceStatus),
@@ -103,6 +108,7 @@ function buildRankingRowRecords(plan: NationalRankingSeedPlan): RankingRowRecord
     championships: row.championships,
     runnerUps: row.runnerUps,
     contributions: row.contributions,
+    bestResults: row.bestResults,
     honors: row.honors,
   }));
 }
@@ -193,6 +199,7 @@ row_input as (
     championships integer,
     "runnerUps" integer,
     contributions jsonb,
+    "bestResults" jsonb,
     honors jsonb
   )
 )`;
@@ -621,6 +628,7 @@ resolved as (
     row_input.championships,
     row_input."runnerUps" as runner_ups,
     row_input.contributions,
+    row_input."bestResults" as best_results,
     row_input.honors
   from row_input
   cross join inserted_snapshot
@@ -638,6 +646,7 @@ insert into public.national_ranking_rows (
   championships,
   runner_ups,
   contributions,
+  best_results,
   honors
 )
 select
@@ -651,6 +660,7 @@ select
   championships,
   runner_ups,
   contributions,
+  best_results,
   honors
 from resolved;
 
@@ -691,6 +701,7 @@ begin
         row_input.championships,
         row_input."runnerUps" as runner_ups,
         row_input.contributions,
+        row_input."bestResults" as best_results,
         row_input.honors
       from row_input
     ),
@@ -705,6 +716,7 @@ begin
         ranking_rows.championships,
         ranking_rows.runner_ups,
         ranking_rows.contributions,
+        ranking_rows.best_results,
         ranking_rows.honors
       from target_snapshot
       join public.national_ranking_rows ranking_rows
