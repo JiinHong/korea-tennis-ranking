@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 
 import { getCachedNationalRankingPageData } from "@/lib/nationalRanking/repository";
@@ -60,7 +61,15 @@ export default async function Home() {
                 ※ {rankingPeriodFormatter.format(new Date(pageData.calculatedAt))} 기준
               </time>
             </div>
-            <NationalRankingTable rankings={pageData.rankings} />
+            <Suspense
+              fallback={
+                <div className="national-ranking-loading" role="status">
+                  랭킹을 정리하고 있습니다.
+                </div>
+              }
+            >
+              <NationalRankingTable rankings={pageData.rankings} />
+            </Suspense>
           </section>
         )}
       </div>

@@ -255,19 +255,31 @@ describe("national ranking responsive contracts", () => {
       /\.national-ranking-tabs button:focus-visible\s*\{[^}]*outline:\s*0;[^}]*box-shadow:\s*inset 0 -4px var\(--national-accent\);[^}]*\}/
     );
     expect(css).toMatch(
-      /\.national-methodology-link:focus-visible,[\s\S]*?\.national-ranking-honor-trigger:focus-visible,[\s\S]*?\.national-ranking-club-link:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--national-accent\);[^}]*\}/
+      /\.national-methodology-link:focus-visible,[\s\S]*?\.national-ranking-honor-trigger:focus-visible,[\s\S]*?\.national-ranking-club-disclosure:focus-visible,[\s\S]*?\.national-ranking-results-link:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--national-accent\);[^}]*\}/
     );
   });
 
-  it("동아리 이름 칸 전체를 링크로 누를 수 있고 왕관 조작은 링크보다 위에 둔다", () => {
+  it("동아리 이름 칸 전체를 펼치기 버튼으로 누를 수 있고 왕관 조작은 버튼보다 위에 둔다", () => {
     expect(css).toMatch(
       /\.national-ranking-club-column\s*\{[^}]*position:\s*relative;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.national-ranking-club-link::after\s*\{[^}]*content:\s*"";[^}]*position:\s*absolute;[^}]*inset:\s*0;[^}]*\}/
+      /\.national-ranking-club-disclosure\s*\{[^}]*position:\s*absolute;[^}]*inset:\s*0;[^}]*\}/
     );
     expect(css).toMatch(
       /\.national-ranking-honors\s*\{[^}]*position:\s*relative;[^}]*z-index:\s*1;[^}]*\}/
+    );
+  });
+
+  it("최고 성적 행은 높이와 투명도를 전환하고 모션 감소 설정을 존중한다", () => {
+    expect(css).toMatch(
+      /\.national-ranking-expansion\s*\{[^}]*display:\s*grid;[^}]*grid-template-rows:\s*0fr;[^}]*opacity:\s*0;[^}]*transition:[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-ranking-detail-row\[data-open="true"\][\s\S]*?\.national-ranking-expansion\s*\{[^}]*grid-template-rows:\s*1fr;[^}]*opacity:\s*1;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.national-ranking-expansion\s*\{[^}]*transition:\s*none;[^}]*\}/
     );
   });
 

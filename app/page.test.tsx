@@ -9,6 +9,11 @@ vi.mock("@/lib/nationalRanking/repository", () => ({
   getCachedNationalRankingPageData: vi.fn(),
 }));
 
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ replace: vi.fn() }),
+  useSearchParams: () => new URLSearchParams(),
+}));
+
 const rankingRow = {
   rank: 1,
   clubSlug: "seoultech-neutinamu",
@@ -19,6 +24,7 @@ const rankingRow = {
   latestEditionPoints: 80,
   championships: 1,
   runnerUps: 0,
+  bestResults: [],
   honors: [],
 };
 

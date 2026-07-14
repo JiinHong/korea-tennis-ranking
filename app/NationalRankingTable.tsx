@@ -1,11 +1,18 @@
 "use client";
 
-import { type KeyboardEvent, useRef, useState } from "react";
-import Link from "next/link";
+import {
+  Fragment,
+  type KeyboardEvent,
+  useRef,
+  useState,
+} from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
+import { parseRankingGender } from "@/lib/nationalRanking/genderQuery";
 import type { NationalRankingPageData } from "@/lib/nationalRanking/repository";
 import type { RankingGender } from "@/lib/nationalRanking/types";
 
+import NationalRankingExpandedResults from "./NationalRankingExpandedResults";
 import NationalRankingHonor from "./NationalRankingHonor";
 
 type NationalRankingTableProps = {
@@ -41,10 +48,23 @@ function getRankTier(rank: number): RankTier {
 export default function NationalRankingTable({
   rankings,
 }: NationalRankingTableProps) {
-  const [activeGender, setActiveGender] = useState<RankingGender>("men");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const urlGender = parseRankingGender(searchParams.get("gender"), "men");
+  const [activeGender, setActiveGender] = useState<RankingGender>(urlGender);
+  const [expandedClubSlug, setExpandedClubSlug] = useState<string | null>(null);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const activeTab = tabs.find((tab) => tab.gender === activeGender)!;
   const rows = rankings[activeGender];
+
+  const selectGender = (gender: RankingGender) => {
+    setActiveGender(gender);
+    setExpandedClubSlug(null);
+
+    const nextParams = new URLSearchParams(searchParams.toString());
+    nextParams.set("gender", gender);
+    router.replace(`/?${nextParams.toString()}`, { scroll: false });
+  };
 
   const handleTabKeyDown = (
     event: KeyboardEvent<HTMLButtonElement>,
@@ -67,7 +87,7 @@ export default function NationalRankingTable({
     }
 
     event.preventDefault();
-    setActiveGender(tabs[targetIndex].gender);
+    selectGender(tabs[targetIndex].gender);
     tabRefs.current[targetIndex]?.focus();
   };
 
@@ -81,7 +101,7 @@ export default function NationalRankingTable({
               aria-selected={activeGender === tab.gender}
               id={`national-ranking-tab-${tab.gender}`}
               key={tab.gender}
-              onClick={() => setActiveGender(tab.gender)}
+              onClick={() => selectGender(tab.gender)}
               onKeyDown={(event) => handleTabKeyDown(event, index)}
               ref={(element) => {
                 tabRefs.current[index] = element;
@@ -103,7 +123,9 @@ export default function NationalRankingTable({
         tabIndex={0}
       >
         <table className="national-ranking-table">
-          <caption className="visually-hidden">{activeTab.label} 전국 동아리 랭킹</caption>
+          <caption className="visually-hidden">
+            {activeTab.label} 전국 동아리 랭킹
+          </caption>
           <colgroup>
             <col className="national-ranking-rank-column" />
             <col />
@@ -128,51 +150,78 @@ export default function NationalRankingTable({
                 const displayedHonors = row.honors.filter(
                   (honor) => honor.year === DISPLAY_HONOR_YEAR
                 );
+                const isExpanded = expandedClubSlug === row.clubSlug;
+                const regionId = `national-ranking-${activeGender}-${row.clubSlug}-results`;
 
                 return (
-                  <tr key={row.clubSlug}>
-                    <td
-                      className="national-ranking-rank"
-                      data-rank-tier={getRankTier(row.rank)}
-                    >
-                      {row.rank}
-                    </td>
-                    <td className="national-ranking-club-column">
-                      <span className="national-ranking-club-cell">
-                        <Link
-                          aria-label={`${row.displayName} 대회 성적 보기`}
-                          className="national-ranking-club-link"
-                          href={`/clubs/${row.clubSlug}`}
-                        >
+                  <Fragment key={row.clubSlug}>
+                    <tr className="national-ranking-main-row">
+                      <td
+                        className="national-ranking-rank"
+                        data-rank-tier={getRankTier(row.rank)}
+                      >
+                        {row.rank}
+                      </td>
+                      <td className="national-ranking-club-column">
+                        <button
+                          aria-controls={regionId}
+                          aria-expanded={isExpanded}
+                          aria-label={`${row.displayName} 최고 성적 ${
+                            isExpanded ? "접기" : "펼치기"
+                          }`}
+                          className="national-ranking-club-disclosure"
+                          onClick={() =>
+                            setExpandedClubSlug((current) =>
+                              current === row.clubSlug ? null : row.clubSlug
+                            )
+                          }
+                          type="button"
+                        />
+                        <span className="national-ranking-club-cell">
                           <span className="national-ranking-club">
                             <strong>{row.universityName}</strong>
                           </span>
-                        </Link>
-                        <span
-                          aria-hidden="true"
-                          className="national-ranking-club-name"
-                        >
-                          {row.clubName}
-                        </span>
-                        {displayedHonors.length > 0 ? (
                           <span
-                            aria-label="2025년 수상 기록"
-                            className="national-ranking-honors"
+                            aria-hidden="true"
+                            className="national-ranking-club-name"
                           >
-                            {displayedHonors.map((honor) => (
-                              <NationalRankingHonor
-                                honor={honor}
-                                key={`${honor.editionKey}-${honor.stage}`}
-                              />
-                            ))}
+                            {row.clubName}
                           </span>
-                        ) : null}
-                      </span>
-                    </td>
-                    <td className="national-ranking-score">
-                      {scoreFormatter.format(row.points)}
-                    </td>
-                  </tr>
+                          {displayedHonors.length > 0 ? (
+                            <span
+                              aria-label="2025년 수상 기록"
+                              className="national-ranking-honors"
+                            >
+                              {displayedHonors.map((honor) => (
+                                <NationalRankingHonor
+                                  honor={honor}
+                                  key={`${honor.editionKey}-${honor.stage}`}
+                                />
+                              ))}
+                            </span>
+                          ) : null}
+                        </span>
+                      </td>
+                      <td className="national-ranking-score">
+                        {scoreFormatter.format(row.points)}
+                      </td>
+                    </tr>
+                    <tr
+                      className="national-ranking-detail-row"
+                      data-open={isExpanded ? "true" : "false"}
+                    >
+                      <td colSpan={3}>
+                        <NationalRankingExpandedResults
+                          activeGender={activeGender}
+                          bestResults={row.bestResults}
+                          clubSlug={row.clubSlug}
+                          displayName={row.displayName}
+                          isOpen={isExpanded}
+                          regionId={regionId}
+                        />
+                      </td>
+                    </tr>
+                  </Fragment>
                 );
               })
             )}

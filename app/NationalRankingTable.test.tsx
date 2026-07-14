@@ -1,9 +1,19 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { NationalRankingPageData } from "@/lib/nationalRanking/repository";
 
 import NationalRankingTable from "./NationalRankingTable";
+
+const navigation = vi.hoisted(() => ({
+  query: "",
+  replace: vi.fn(),
+}));
+
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ replace: navigation.replace }),
+  useSearchParams: () => new URLSearchParams(navigation.query),
+}));
 
 const rankings: NationalRankingPageData["rankings"] = {
   men: [
@@ -17,6 +27,28 @@ const rankings: NationalRankingPageData["rankings"] = {
       latestEditionPoints: 80,
       championships: 1,
       runnerUps: 1,
+      bestResults: [
+        {
+          editionKey: "yanggu-2025-men",
+          tournamentSlug: "yanggu",
+          tournamentName: "국토정중앙배(양구)",
+          year: 2025,
+          gender: "men",
+          actualEntrants: 64,
+          stage: "champion",
+          sourceTeamName: "느티나무 A",
+        },
+        {
+          editionKey: "gyeongin-2024-men",
+          tournamentSlug: "gyeongin",
+          tournamentName: "경인지구 연맹전",
+          year: 2024,
+          gender: "men",
+          actualEntrants: 48,
+          stage: "runner_up",
+          sourceTeamName: "느티나무",
+        },
+      ],
       honors: [
         {
           editionKey: "yanggu-2025-men",
@@ -46,6 +78,18 @@ const rankings: NationalRankingPageData["rankings"] = {
       latestEditionPoints: 70,
       championships: 0,
       runnerUps: 1,
+      bestResults: [
+        {
+          editionKey: "inje-2025-men",
+          tournamentSlug: "inje",
+          tournamentName: "하늘내린인제",
+          year: 2025,
+          gender: "men",
+          actualEntrants: 24,
+          stage: "quarterfinal",
+          sourceTeamName: "KAIST",
+        },
+      ],
       honors: [],
     },
     {
@@ -58,6 +102,7 @@ const rankings: NationalRankingPageData["rankings"] = {
       latestEditionPoints: 40,
       championships: 0,
       runnerUps: 0,
+      bestResults: [],
       honors: [],
     },
     {
@@ -70,6 +115,7 @@ const rankings: NationalRankingPageData["rankings"] = {
       latestEditionPoints: 30,
       championships: 0,
       runnerUps: 0,
+      bestResults: [],
       honors: [],
     },
     {
@@ -82,6 +128,7 @@ const rankings: NationalRankingPageData["rankings"] = {
       latestEditionPoints: 20,
       championships: 0,
       runnerUps: 0,
+      bestResults: [],
       honors: [],
     },
   ],
@@ -96,6 +143,7 @@ const rankings: NationalRankingPageData["rankings"] = {
       latestEditionPoints: 60,
       championships: 0,
       runnerUps: 1,
+      bestResults: [],
       honors: [
         {
           editionKey: "wemix-2025-women",
@@ -119,6 +167,7 @@ const rankings: NationalRankingPageData["rankings"] = {
       latestEditionPoints: 120,
       championships: 2,
       runnerUps: 1,
+      bestResults: [],
       honors: [
         {
           editionKey: "chuncheon-2025-men",
@@ -142,6 +191,11 @@ const rankings: NationalRankingPageData["rankings"] = {
 };
 
 describe("NationalRankingTable", () => {
+  beforeEach(() => {
+    navigation.query = "";
+    navigation.replace.mockReset();
+  });
+
   it("기본 남자부 랭킹을 실제 표와 안정적인 열로 보여준다", () => {
     render(<NationalRankingTable rankings={rankings} />);
 
@@ -180,38 +234,32 @@ describe("NationalRankingTable", () => {
     ]);
   });
 
-  it("모든 동아리 이름을 해당 동아리의 전국 대회 성적 페이지로 연결한다", () => {
+  it("동아리 칸을 누르면 최고 성적과 현재 부문이 담긴 전체 성적 링크를 펼친다", () => {
     render(<NationalRankingTable rankings={rankings} />);
 
+    const disclosure = screen.getByRole("button", {
+      name: "서울과학기술대학교 STC 최고 성적 펼치기",
+    });
+    fireEvent.click(disclosure);
+
+    expect(disclosure.getAttribute("aria-expanded")).toBe("true");
     expect(
-      screen
-        .getByRole("link", {
-          name: "서울과학기술대학교 STC 대회 성적 보기",
-        })
-        .getAttribute("href")
-    ).toBe("/clubs/seoultech-neutinamu");
-    expect(
-      screen.getByRole("link", {
-        name: "고려대학교 PETC 대회 성적 보기",
+      screen.getByRole("region", {
+        name: "서울과학기술대학교 STC 최고 성적",
       })
-        .getAttribute("href")
-    ).toBe("/clubs/korea-petc");
+    ).toBeDefined();
     expect(
-      screen
-        .getByRole("link", {
-          name: "한국과학기술원 KAIST Tennis 대회 성적 보기",
-        })
-        .getAttribute("href")
-    ).toBe("/clubs/kaist");
+      screen.getByRole("link", { name: "전체 성적 보기" }).getAttribute("href")
+    ).toBe("/clubs/seoultech-neutinamu?gender=men");
   });
 
-  it("동아리 칸 전체를 성적 페이지 링크의 터치 영역으로 사용한다", () => {
+  it("동아리 칸 전체를 펼치기 버튼의 터치 영역으로 두고 왕관은 별도 조작한다", () => {
     render(<NationalRankingTable rankings={rankings} />);
 
-    const link = screen.getByRole("link", {
-      name: "서울과학기술대학교 STC 대회 성적 보기",
+    const disclosure = screen.getByRole("button", {
+      name: "서울과학기술대학교 STC 최고 성적 펼치기",
     });
-    const clubCell = link.closest("td");
+    const clubCell = disclosure.closest("td");
 
     expect(clubCell?.classList.contains("national-ranking-club-column")).toBe(
       true
@@ -219,7 +267,7 @@ describe("NationalRankingTable", () => {
     expect(
       within(clubCell as HTMLTableCellElement).getByRole("button", {
         name: "2025 양구 남자부 우승",
-      }).closest("a")
+      }).closest(".national-ranking-club-disclosure")
     ).toBeNull();
   });
 
@@ -238,6 +286,7 @@ describe("NationalRankingTable", () => {
           latestEditionPoints: 0,
           championships: 0,
           runnerUps: 0,
+          bestResults: [],
           honors: [],
         },
       ],
@@ -245,9 +294,13 @@ describe("NationalRankingTable", () => {
 
     render(<NationalRankingTable rankings={rankingsWithPrototypeSlug} />);
 
+    const disclosure = screen.getByRole("button", {
+      name: "프로토타입대학교 테니스부 최고 성적 펼치기",
+    });
+    fireEvent.click(disclosure);
     expect(
-      screen.getByText("프로토타입대학교").closest("a")?.getAttribute("href")
-    ).toBe("/clubs/constructor");
+      screen.getByRole("link", { name: "전체 성적 보기" }).getAttribute("href")
+    ).toBe("/clubs/constructor?gender=men");
   });
 
   it("동아리 이름 뒤에는 2025년 우승과 준우승 왕관만 표시한다", () => {
@@ -260,9 +313,11 @@ describe("NationalRankingTable", () => {
     expect(champion).toBeDefined();
     expect(champion.closest("a")).toBeNull();
     expect(screen.getByLabelText("2025년 수상 기록")).toBeDefined();
-    expect(screen.getByText("서울과학기술대학교").closest("a")?.getAttribute("href")).toBe(
-      "/clubs/seoultech-neutinamu"
-    );
+    expect(
+      screen.getByRole("button", {
+        name: "서울과학기술대학교 STC 최고 성적 펼치기",
+      })
+    ).toBeDefined();
     expect(
       screen.queryByRole("button", { name: "2024 경인지구 남자부 준우승" })
     ).toBeNull();
@@ -311,7 +366,64 @@ describe("NationalRankingTable", () => {
       screen.queryByRole("button", { name: "2024 인제 여자부 준우승" })
     ).toBeNull();
     expect(screen.queryByText("연세대학교")).toBeNull();
-    expect(within(screen.getByRole("table")).getAllByRole("row")).toHaveLength(2);
+    expect(
+      within(screen.getByRole("table")).getAllByRole("row", { hidden: true })
+    ).toHaveLength(3);
+  });
+
+  it("한 동아리를 펼치면 이전에 열려 있던 동아리를 닫는다", () => {
+    render(<NationalRankingTable rankings={rankings} />);
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: "서울과학기술대학교 STC 최고 성적 펼치기",
+      })
+    );
+    expect(
+      screen.getByRole("region", {
+        name: "서울과학기술대학교 STC 최고 성적",
+      })
+    ).toBeDefined();
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: "한국과학기술원 KAIST Tennis 최고 성적 펼치기",
+      })
+    );
+
+    expect(
+      screen.queryByRole("region", {
+        name: "서울과학기술대학교 STC 최고 성적",
+      })
+    ).toBeNull();
+    expect(
+      screen.getByRole("region", {
+        name: "한국과학기술원 KAIST Tennis 최고 성적",
+      })
+    ).toBeDefined();
+  });
+
+  it("URL의 여자부를 초기 선택하고 부문 전환 시 열린 행을 닫으며 URL을 바꾼다", () => {
+    navigation.query = "gender=women";
+    render(<NationalRankingTable rankings={rankings} />);
+
+    expect(
+      screen.getByRole("tab", { name: "여자부" }).getAttribute("aria-selected")
+    ).toBe("true");
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: "연세대학교 YTC 최고 성적 펼치기",
+      })
+    );
+    fireEvent.click(screen.getByRole("tab", { name: "남자부" }));
+
+    expect(navigation.replace).toHaveBeenCalledWith("/?gender=men", {
+      scroll: false,
+    });
+    expect(
+      screen.queryByRole("region", { name: "연세대학교 YTC 최고 성적" })
+    ).toBeNull();
   });
 
   it("선택된 탭만 탭 순서에 두고 탭 패널도 포커스할 수 있게 한다", () => {
