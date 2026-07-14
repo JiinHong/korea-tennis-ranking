@@ -51,6 +51,28 @@ describe("NationalRankingHonor", () => {
     ).toContain(encodeURIComponent("/national-ranking/silver-crown.png"));
   });
 
+  it("4강 기록에는 동색 왕관과 4강 설명을 사용한다", () => {
+    render(
+      <NationalRankingHonor
+        honor={{
+          editionKey: "gyeongin-2025-men",
+          tournamentSlug: "gyeongin",
+          tournamentName: "경인지구 연맹전",
+          year: 2025,
+          gender: "men",
+          stage: "semifinal",
+        }}
+      />
+    );
+
+    expect(
+      screen.getByRole("button", { name: "2025 경인지구 남자부 4강" })
+    ).toBeDefined();
+    expect(
+      screen.getByRole("img", { name: "4강" }).getAttribute("src")
+    ).toContain(encodeURIComponent("/national-ranking/bronze-crown.png"));
+  });
+
   it("모바일 탭으로 열고 다시 탭하거나 바깥을 누르면 닫는다", () => {
     render(
       <NationalRankingHonor

@@ -289,6 +289,12 @@ describe("national ranking responsive contracts", () => {
     );
   });
 
+  it("성적 목록의 왕관은 행 높이를 밀어내지 않는 작은 크기를 사용한다", () => {
+    expect(css).toMatch(
+      /\.national-result-crown\s*\{[^}]*width:\s*18px;[^}]*height:\s*14px;[^}]*object-fit:\s*contain;[^}]*\}/
+    );
+  });
+
   it("640px 이하에서 표 열을 압축한다", () => {
     expect(css).toMatch(/@media\s*\(max-width:\s*640px\)/);
     expect(css).toMatch(

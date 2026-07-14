@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useId, useRef, useState } from "react";
 
 import type { NationalRankingHonor as NationalRankingHonorRecord } from "@/lib/nationalRanking/types";
+
+import NationalPodiumCrown from "./NationalPodiumCrown";
 
 type NationalRankingHonorProps = {
   honor: NationalRankingHonorRecord;
@@ -21,7 +22,11 @@ function getHonorLabel(honor: NationalRankingHonorRecord): string {
   const tournamentName =
     tournamentShortNames[honor.tournamentSlug] ?? honor.tournamentName;
   const gender = honor.gender === "men" ? "남자부" : "여자부";
-  const result = honor.stage === "champion" ? "우승" : "준우승";
+  const result = {
+    champion: "우승",
+    runner_up: "준우승",
+    semifinal: "4강",
+  }[honor.stage];
 
   return `${honor.year} ${tournamentName} ${gender} ${result}`;
 }
@@ -34,7 +39,6 @@ export default function NationalRankingHonor({
   const containerRef = useRef<HTMLSpanElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const label = getHonorLabel(honor);
-  const isChampion = honor.stage === "champion";
 
   useEffect(() => {
     if (!isOpen) {
@@ -81,16 +85,7 @@ export default function NationalRankingHonor({
         ref={triggerRef}
         type="button"
       >
-        <Image
-          alt={isChampion ? "우승" : "준우승"}
-          height={18}
-          src={
-            isChampion
-              ? "/national-ranking/gold-crown.png"
-              : "/national-ranking/silver-crown.png"
-          }
-          width={23}
-        />
+        <NationalPodiumCrown stage={honor.stage} />
       </button>
 
       <span
