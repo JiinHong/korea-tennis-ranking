@@ -2372,12 +2372,6 @@ button:disabled {
   text-align: right;
 }
 
-.national-ranking-crown-symbol {
-  display: inline-flex;
-  align-items: center;
-  gap: 1px;
-}
-
 .national-ranking-crown-guide img {
   width: 18px;
   height: 14px;
