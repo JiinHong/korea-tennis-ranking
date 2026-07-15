@@ -13,8 +13,31 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Korea Tennis Ranking",
-  description: "전국 대학 테니스 동아리와 교내 단식 랭킹을 보여주는 서비스",
+  metadataBase: new URL("https://koreatennisranking.com"),
+  title: "전국 대학 테니스 동아리 랭킹",
+  description: "전국 대학 테니스 동아리 대회 성적을 바탕으로 산정한 랭킹",
+  openGraph: {
+    title: "전국 대학 테니스 동아리 랭킹",
+    description: "전국 대학 테니스 동아리 대회 성적을 바탕으로 산정한 랭킹",
+    url: "/",
+    siteName: "Korea Tennis Club Ranking",
+    locale: "ko_KR",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1546,
+        height: 952,
+        alt: "Korea Tennis Club Ranking",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "전국 대학 테니스 동아리 랭킹",
+    description: "전국 대학 테니스 동아리 대회 성적을 바탕으로 산정한 랭킹",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
