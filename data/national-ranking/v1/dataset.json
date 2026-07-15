@@ -1,5 +1,5 @@
 {
-  "version": "sources-2026-07-13-v3",
+  "version": "sources-2026-07-15-v4",
   "clubs": [
     {
       "slug": "catholic-courtrang",
@@ -2138,13 +2138,13 @@
   "results": [
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-seoul-kuta",
       "sourceTeamName": "경희 A [1]",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehnv.png",
-      "note": "Slot 1 was visually traced from an opening BYE through the bracket; it lost in the Round of 16."
+      "note": "Slot 1 was visually traced from an opening BYE through the bracket; it lost in the Round of 16. Administrator confirmed 경희 A as 경희대학교 서울캠퍼스 KUTA."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2318,13 +2318,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "hanyang-erica-hitec",
       "sourceTeamName": "에리카 A [Q]",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehnv.png",
-      "note": "Slot 24 advanced from a Round-of-128 BYE and lost in the Round of 16."
+      "note": "Slot 24 advanced from a Round-of-128 BYE and lost in the Round of 16. Reviewed under the university's consolidated-club rule as 한양대학교 ERICA 하이텍."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2378,13 +2378,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "seoultech-neutinamu",
       "sourceTeamName": "서울과기대 A [Q]",
       "teamLabel": "A",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehnv.png",
-      "note": "Slot 32 advanced from a Round-of-128 BYE and lost in the quarterfinal."
+      "note": "Slot 32 advanced from a Round-of-128 BYE and lost in the quarterfinal. Reviewed under the university's consolidated-club rule as 서울과학기술대학교 느티나무."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2408,13 +2408,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "catholic-courtrang",
       "sourceTeamName": "가톨릭대 A [Q]",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehnv.png",
-      "note": "Slot 36 advanced through three played matches and lost in the Round of 16."
+      "note": "Slot 36 advanced through three played matches and lost in the Round of 16. Reviewed under the university's consolidated-club rule as 가톨릭대학교 코트랑."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2448,13 +2448,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "uos-approach",
       "sourceTeamName": "서울시립대 장 [Q]",
       "teamLabel": "",
       "stage": "semifinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehpg.png",
-      "note": "Slot 41 was traced through the draw and lost its semifinal 0-3."
+      "note": "Slot 41 was traced through the draw and lost its semifinal 0-3. Reviewed under the university's consolidated-club rule as 서울시립대학교 어프로치."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2508,13 +2508,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "hanyang-hytc",
       "sourceTeamName": "Hytc 피스 [Q]",
       "teamLabel": "",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehnv.png",
-      "note": "Slot 49 advanced from a Round-of-128 BYE and lost in the quarterfinal."
+      "note": "Slot 49 advanced from a Round-of-128 BYE and lost in the quarterfinal. Reviewed as 한양대학교 HYTC."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2618,23 +2618,23 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "yeungnam-yuta",
       "sourceTeamName": "영남대a [Q]",
       "teamLabel": "a",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehnv.png",
-      "note": "Slot 64 advanced from a Round-of-128 BYE and lost in the Round of 16."
+      "note": "Slot 64 advanced from a Round-of-128 BYE and lost in the Round of 16. Reviewed under the university's consolidated-club rule as 영남대학교 YUTA."
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "kaist-stroke",
       "sourceTeamName": "카이스트 T [Q]",
       "teamLabel": "T",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehnv.png",
-      "note": "Slot 65 advanced from a Round-of-128 BYE and lost in the quarterfinal."
+      "note": "Slot 65 advanced from a Round-of-128 BYE and lost in the quarterfinal. Reviewed under the university's consolidated-club rule as KAIST Stroke."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2728,13 +2728,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "dankook-cheonan-dkutc",
       "sourceTeamName": "Dkuct 1 [Q]",
       "teamLabel": "1",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehnv.png",
-      "note": "Slot 78 advanced through three played matches, then was marked Disqualified in the Round of 16."
+      "note": "Slot 78 advanced through three played matches, then was marked Disqualified in the Round of 16. Administrator provisionally assigned this DKUTC entry to 단국대학교 천안캠퍼스."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2788,13 +2788,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "yonsei-kookdas",
       "sourceTeamName": "쿠크다스 [Q]",
       "teamLabel": "",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehnv.png",
-      "note": "Slot 86 advanced through three played matches and lost in the Round of 16."
+      "note": "Slot 86 advanced through three played matches and lost in the Round of 16. Reviewed as 연세대학교 쿠크다스."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2868,13 +2868,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "dongguk-dutc",
       "sourceTeamName": "Dutc A [Q]",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehnv.png",
-      "note": "Slot 97 advanced from a Round-of-128 BYE and lost in the Round of 16."
+      "note": "Slot 97 advanced from a Round-of-128 BYE and lost in the Round of 16. Reviewed under the university's consolidated-club rule as 동국대학교 DUTC."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2978,13 +2978,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "sejong-stc",
       "sourceTeamName": "세종대 A [Q]",
       "teamLabel": "A",
       "stage": "semifinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehpg.png",
-      "note": "Slot 112 was traced from a Round-of-128 BYE through the draw and lost its semifinal 0-3."
+      "note": "Slot 112 was traced from a Round-of-128 BYE through the draw and lost its semifinal 0-3. Reviewed under the university's consolidated-club rule as 세종대학교 STC."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3038,13 +3038,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "soongsil-sstc",
       "sourceTeamName": "숭실대 A [Q]",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehnv.png",
-      "note": "Slot 120 advanced from a Round-of-128 BYE and lost in the Round of 16."
+      "note": "Slot 120 advanced from a Round-of-128 BYE and lost in the Round of 16. Reviewed under the university's consolidated-club rule as 숭실대학교 SSTC."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3078,13 +3078,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "kaist-stroke",
       "sourceTeamName": "카이스트 S [Q]",
       "teamLabel": "S",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehnv.png",
-      "note": "Slot 124 advanced through the bracket and lost in the quarterfinal."
+      "note": "Slot 124 advanced through the bracket and lost in the quarterfinal. Reviewed under the university's consolidated-club rule as KAIST Stroke."
     },
     {
       "editionKey": "yanggu-2023-men",

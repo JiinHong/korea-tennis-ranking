@@ -567,7 +567,7 @@ describe("loadNationalRankingDataset", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-07-13-v3");
+    expect(dataset.version).toBe("sources-2026-07-15-v4");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -610,10 +610,10 @@ describe("loadNationalRankingDataset", () => {
     expect(dataset.results).toHaveLength(1_116);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
-    ).toHaveLength(523);
+    ).toHaveLength(537);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
-    ).toHaveLength(593);
+    ).toHaveLength(579);
 
     expect(
       dataset.results.find(
@@ -674,7 +674,7 @@ describe("loadNationalRankingDataset", () => {
         priorEditionKeys.has(result.editionKey)
       ),
     };
-    // Re-baselined after separating Seoul National University from TNT.
+    // Re-baselined after reviewing the 2023 Yanggu men's Round-of-16 field.
     const fingerprint = createHash("sha256")
       .update(JSON.stringify(approvedTask4))
       .digest("hex");
@@ -684,7 +684,7 @@ describe("loadNationalRankingDataset", () => {
     expect(approvedTask4.editions).toHaveLength(12);
     expect(approvedTask4.results).toHaveLength(608);
     expect(fingerprint).toBe(
-      "88c78d7c14706fae3dac05732799d29b14132f2e72883110bb15b93685e2b748"
+      "2a63af243fe643754fa52515fb581aae22510eace448e92473a59733d3c25296"
     );
 
     for (const [editionKey, expectedCount] of Object.entries(priorExpectedCounts)) {
@@ -1046,6 +1046,43 @@ describe("loadNationalRankingDataset", () => {
         /TNT/i.test(contribution.sourceTeamName)
       )
     ).toBe(true);
+  });
+
+  it("maps the reviewed 2023 Yanggu men's Round-of-16 field to canonical clubs", () => {
+    const dataset = loadNationalRankingDataset();
+    const expectedAssignments = new Map([
+      ["경희 A [1]", "kyunghee-seoul-kuta"],
+      ["연세대 진리 [Q]", "yonsei-yutt"],
+      ["에리카 A [Q]", "hanyang-erica-hitec"],
+      ["서울과기대 A [Q]", "seoultech-neutinamu"],
+      ["가톨릭대 A [Q]", "catholic-courtrang"],
+      ["서울시립대 장 [Q]", "uos-approach"],
+      ["Hytc 피스 [Q]", "hanyang-hytc"],
+      ["영남대a [Q]", "yeungnam-yuta"],
+      ["카이스트 T [Q]", "kaist-stroke"],
+      ["Dkuct 1 [Q]", "dankook-cheonan-dkutc"],
+      ["쿠크다스 [Q]", "yonsei-kookdas"],
+      ["전북대 A [3]", "jeonbuk-ace"],
+      ["Dutc A [Q]", "dongguk-dutc"],
+      ["세종대 A [Q]", "sejong-stc"],
+      ["숭실대 A [Q]", "soongsil-sstc"],
+      ["카이스트 S [Q]", "kaist-stroke"],
+    ]);
+
+    const reviewedResults = dataset.results.filter(
+      (result) =>
+        result.editionKey === "yanggu-2023-men" &&
+        expectedAssignments.has(result.sourceTeamName)
+    );
+
+    expect(reviewedResults).toHaveLength(expectedAssignments.size);
+
+    for (const result of reviewedResults) {
+      expect(result.clubSlug, result.sourceTeamName).toBe(
+        expectedAssignments.get(result.sourceTeamName)
+      );
+      expect(result.qualityStatus, result.sourceTeamName).toBe("verified");
+    }
   });
 
   it("freezes every school-qualified final to the pre-assignment gender leader", () => {

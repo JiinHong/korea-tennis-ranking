@@ -1,7 +1,7 @@
 # National ranking source dataset v1
 
 `dataset.json` is the canonical, visually verified source manifest for the
-national university club ranking. Version `sources-2026-07-13-v3` contains the
+national university club ranking. Version `sources-2026-07-15-v4` contains the
 complete Yanggu, Gyeongin, Inje, Chuncheon, and WEMIX source program: 26
 editions and 1,116 terminal result records. Yeongwol is not part of this
 dataset.
@@ -59,12 +59,16 @@ source names and empty team labels remain exact.
 ## Club identity and aliases
 
 The club, not the university, is the ranking entity. Ordinary result rows are
-`verified` only when the source explicitly pairs a university or campus with a
-distinct club/team identity. The administrator-approved exception applies only
-to visible champion and runner-up rows: a school-only label is frozen to that
-school's highest-ranked same-gender canonical club before the inferred final
-batch is added. The assignment is stored in `clubSlug` and never recomputed at
-request time. The separately confirmed Seoul National University rule maps
+`verified` when the source explicitly pairs a university or campus with a
+distinct club/team identity. When the administrator confirms that a university
+has one consolidated tennis club, reviewed team letters and nicknames from that
+university are also assigned to the canonical club. This rule applies only to
+manually reviewed rows; it is not a global text-matching fallback. The
+administrator-approved school-only exception for visible champion and runner-up
+rows freezes each label to that school's highest-ranked same-gender canonical
+club before the inferred final batch is added. The assignment is stored in
+`clubSlug` and never recomputed at request time. The separately confirmed Seoul
+National University rule maps
 `서울대`, `서울대학교`, and `서울대(학교) 테니스부` labels to the canonical
 `서울대학교 테니스부` club; only labels that explicitly contain `TNT` map to
 `서울대학교 TNT`. Labels that do not identify even a school remain unresolved.
@@ -116,13 +120,13 @@ The two editions and all 20 terminal rows are therefore verified and scoreable.
 
 ## Unresolved mapping log
 
-The conservative policy above leaves 593 of 1,116 rows unresolved. This is an
+The conservative policy above leaves 579 of 1,116 rows unresolved. This is an
 identity status only; every stored row's entrant name and terminal bracket
 outcome was visually or structurally verified.
 
 | Edition | Entrants/results | Verified rows | Unresolved rows | Reason summary |
 | --- | ---: | ---: | ---: | --- |
-| `yanggu-2023-men` | 98 | 5 | 93 | School-qualified final and confirmed Seoul National University rows are frozen; other entrant labels lack a university/club identity key. |
+| `yanggu-2023-men` | 98 | 19 | 79 | The reviewed Round-of-16 field is assigned using confirmed club identities and the consolidated-club rule; lower-round labels still await review. |
 | `yanggu-2023-women` | 91 | 5 | 86 | School-qualified final and confirmed Seoul National University rows are frozen; other entrant labels lack a university/club identity key. |
 | `yanggu-2024-men` | 89 | 72 | 17 | University-only and generic `테니스부` rows remain except for confirmed Seoul National University entries. |
 | `yanggu-2024-women` | 73 | 59 | 14 | School-qualified final is frozen; generic identities and source-unresolved `라중` remain. |
