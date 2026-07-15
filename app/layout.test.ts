@@ -14,17 +14,16 @@ describe("root metadata", () => {
     );
     expect(metadata.openGraph).toMatchObject({
       title: "전국 대학 테니스 동아리 랭킹",
-      description:
-        "전국 대학 테니스 동아리 대회 성적을 바탕으로 산정한 랭킹",
+      description: "우리학교 테니스 동아리 실시간 랭킹 확인!",
       url: "/",
       siteName: "Korea Tennis Club Ranking",
       locale: "ko_KR",
       type: "website",
       images: [
         {
-          url: "/og-image.png",
-          width: 1546,
-          height: 952,
+          url: "/og-image-v2.png",
+          width: 1540,
+          height: 866,
           alt: "Korea Tennis Club Ranking",
         },
       ],
