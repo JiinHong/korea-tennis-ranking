@@ -9,11 +9,16 @@ const navigation = vi.hoisted(() => ({
   query: "",
   replace: vi.fn(),
 }));
+const analytics = vi.hoisted(() => ({
+  trackAmplitudeEvent: vi.fn(() => Promise.resolve()),
+}));
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ replace: navigation.replace }),
   useSearchParams: () => new URLSearchParams(navigation.query),
 }));
+
+vi.mock("@/lib/amplitudeAnalytics", () => analytics);
 
 const pageData: NationalClubResultsPageData = {
   club: {
@@ -80,6 +85,7 @@ describe("NationalClubResultsView", () => {
   beforeEach(() => {
     navigation.query = "";
     navigation.replace.mockReset();
+    analytics.trackAmplitudeEvent.mockClear();
   });
 
   it("상세 페이지의 기본 부문인 종합에서 남녀 전체 기록을 보여준다", () => {
@@ -148,5 +154,12 @@ describe("NationalClubResultsView", () => {
     const list = screen.getByRole("list", { name: "대회 성적" });
     expect(within(list).getAllByRole("listitem")).toHaveLength(2);
     expect(within(list).queryByText("경인지구 연맹전")).toBeNull();
+    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
+      "National Club Results Division Changed",
+      {
+        club_slug: "seoultech-neutinamu",
+        division: "men",
+      }
+    );
   });
 });

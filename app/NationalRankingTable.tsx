@@ -3,6 +3,7 @@
 import { Fragment, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
+import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
 import { parseRankingGender } from "@/lib/nationalRanking/genderQuery";
 import type { NationalRankingPageData } from "@/lib/nationalRanking/repository";
 import type { RankingGender } from "@/lib/nationalRanking/types";
@@ -51,6 +52,9 @@ export default function NationalRankingTable({
   const rows = rankings[activeGender];
 
   const selectGender = (gender: RankingGender) => {
+    void trackAmplitudeEvent("National Ranking Division Changed", {
+      division: gender,
+    });
     setActiveGender(gender);
     setExpandedClubSlug(null);
 
@@ -107,10 +111,19 @@ export default function NationalRankingTable({
                 );
                 const isExpanded = expandedClubSlug === row.clubSlug;
                 const regionId = `national-ranking-${activeGender}-${row.clubSlug}-results`;
-                const toggleClubResults = () =>
+                const toggleClubResults = () => {
+                  if (!isExpanded) {
+                    void trackAmplitudeEvent("National Club Preview Opened", {
+                      club_slug: row.clubSlug,
+                      division: activeGender,
+                      rank: row.rank,
+                    });
+                  }
+
                   setExpandedClubSlug((current) =>
                     current === row.clubSlug ? null : row.clubSlug
                   );
+                };
 
                 return (
                   <Fragment key={row.clubSlug}>

@@ -1,7 +1,13 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import ClubRankingClient from "./ClubRankingClient";
+
+const analytics = vi.hoisted(() => ({
+  trackAmplitudeEvent: vi.fn(() => Promise.resolve()),
+}));
+
+vi.mock("@/lib/amplitudeAnalytics", () => analytics);
 
 const club = {
   slug: "seoultech",
@@ -15,6 +21,10 @@ const club = {
 };
 
 describe("ClubRankingClient", () => {
+  beforeEach(() => {
+    analytics.trackAmplitudeEvent.mockClear();
+  });
+
   afterEach(() => {
     vi.unstubAllGlobals();
     vi.useRealTimers();
@@ -27,6 +37,72 @@ describe("ClubRankingClient", () => {
 
     expect(screen.getByText("최신 순위를 가져오고 있습니다.")).toBeDefined();
     expect(screen.queryByText(/구글 시트/)).toBeNull();
+  });
+
+  it("랭킹의 핵심 조작을 동아리 정보와 함께 기록한다", async () => {
+    const rankingResponse = {
+      ok: true,
+      json: async () => ({
+        ok: true,
+        players: [
+          {
+            rank: 1,
+            name: "오준석",
+            note: "",
+            wins: 1,
+            losses: 0,
+            matches: 1,
+            recent5: ["W"],
+          },
+        ],
+        detailsByPlayer: {},
+      }),
+    };
+    const matchOptionsResponse = {
+      ok: true,
+      json: async () => ({
+        ok: true,
+        players: [],
+        challengeRange: 4,
+        rematchCooldowns: [],
+      }),
+    };
+    const fetchMock = vi.fn((input: string | URL | Request) =>
+      Promise.resolve(
+        String(input).endsWith("/matches")
+          ? matchOptionsResponse
+          : rankingResponse
+      )
+    );
+    vi.stubGlobal("fetch", fetchMock);
+
+    render(<ClubRankingClient club={club} />);
+
+    const playerLink = await screen.findByRole("link", {
+      name: "오준석 상세 전적 보기",
+    });
+    playerLink.addEventListener("click", (event) => event.preventDefault());
+    fireEvent.click(screen.getByRole("button", { name: "경기 결과 입력" }));
+    fireEvent.click(screen.getByRole("button", { name: "랭킹 새로고침" }));
+    fireEvent.click(screen.getByRole("button", { name: "경기 있음" }));
+    fireEvent.click(playerLink);
+
+    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
+      "Campus Match Entry Opened",
+      { club_slug: "seoultech" }
+    );
+    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
+      "Campus Ranking Refreshed",
+      { club_slug: "seoultech" }
+    );
+    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
+      "Campus Ranking Filter Changed",
+      { club_slug: "seoultech", filter: "active" }
+    );
+    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
+      "Player Profile Opened",
+      { club_slug: "seoultech", rank: 1, source: "ranking" }
+    );
   });
 
   it("10위까지는 큰 랭킹 행으로, 11위부터는 compact 행으로 보여준다", async () => {

@@ -9,11 +9,16 @@ const navigation = vi.hoisted(() => ({
   query: "",
   replace: vi.fn(),
 }));
+const analytics = vi.hoisted(() => ({
+  trackAmplitudeEvent: vi.fn(() => Promise.resolve()),
+}));
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ replace: navigation.replace }),
   useSearchParams: () => new URLSearchParams(navigation.query),
 }));
+
+vi.mock("@/lib/amplitudeAnalytics", () => analytics);
 
 const rankings: NationalRankingPageData["rankings"] = {
   men: [
@@ -194,6 +199,31 @@ describe("NationalRankingTable", () => {
   beforeEach(() => {
     navigation.query = "";
     navigation.replace.mockReset();
+    analytics.trackAmplitudeEvent.mockClear();
+  });
+
+  it("부문 전환과 동아리 최고 성적 열기를 이름 있는 이벤트로 기록한다", () => {
+    render(<NationalRankingTable rankings={rankings} />);
+
+    fireEvent.click(screen.getByRole("tab", { name: "여자부" }));
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: "연세대학교 YTC 최고 성적 펼치기",
+      })
+    );
+
+    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
+      "National Ranking Division Changed",
+      { division: "women" }
+    );
+    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
+      "National Club Preview Opened",
+      {
+        club_slug: "yonsei",
+        division: "women",
+        rank: 1,
+      }
+    );
   });
 
   it("기본 남자부 랭킹을 실제 표와 안정적인 열로 보여준다", () => {

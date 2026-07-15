@@ -1,9 +1,15 @@
-import { render, screen, within } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { fireEvent, render, screen, within } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { NationalRankingBestResult } from "@/lib/nationalRanking/types";
 
 import NationalRankingExpandedResults from "./NationalRankingExpandedResults";
+
+const analytics = vi.hoisted(() => ({
+  trackAmplitudeEvent: vi.fn(() => Promise.resolve()),
+}));
+
+vi.mock("@/lib/amplitudeAnalytics", () => analytics);
 
 const bestResults: NationalRankingBestResult[] = [
   {
@@ -49,6 +55,10 @@ const bestResults: NationalRankingBestResult[] = [
 ];
 
 describe("NationalRankingExpandedResults", () => {
+  beforeEach(() => {
+    analytics.trackAmplitudeEvent.mockClear();
+  });
+
   it("전체 연도 최고 성적을 최대 세 개만 표시한다", () => {
     render(
       <NationalRankingExpandedResults
@@ -114,5 +124,30 @@ describe("NationalRankingExpandedResults", () => {
       "true"
     );
     expect(container.querySelector("a")?.getAttribute("tabindex")).toBe("-1");
+  });
+
+  it("전체 성적 페이지 이동을 현재 부문과 함께 기록한다", () => {
+    render(
+      <NationalRankingExpandedResults
+        activeGender="men"
+        bestResults={bestResults}
+        clubSlug="seoultech-neutinamu"
+        displayName="서울과학기술대학교 느티나무"
+        isOpen
+        regionId="seoultech-results"
+      />
+    );
+
+    const resultsLink = screen.getByRole("link", { name: "전체 성적 보기" });
+    resultsLink.addEventListener("click", (event) => event.preventDefault());
+    fireEvent.click(resultsLink);
+
+    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
+      "National Club Results Opened",
+      {
+        club_slug: "seoultech-neutinamu",
+        division: "men",
+      }
+    );
   });
 });

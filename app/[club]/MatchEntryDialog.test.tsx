@@ -1,7 +1,13 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import MatchEntryDialog from "./MatchEntryDialog";
+
+const analytics = vi.hoisted(() => ({
+  trackAmplitudeEvent: vi.fn(() => Promise.resolve()),
+}));
+
+vi.mock("@/lib/amplitudeAnalytics", () => analytics);
 
 function rankedPlayers(count: number) {
   return Array.from({ length: count }, (_, index) => ({
@@ -32,6 +38,10 @@ function optionByValue(label: string, value: string): HTMLOptionElement {
 
 afterEach(() => {
   vi.unstubAllGlobals();
+});
+
+beforeEach(() => {
+  analytics.trackAmplitudeEvent.mockClear();
 });
 
 describe("MatchEntryDialog", () => {
@@ -180,6 +190,10 @@ describe("MatchEntryDialog", () => {
     });
     expect(body.sourceKey).toEqual(expect.any(String));
     expect(onClose).toHaveBeenCalledTimes(1);
+    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
+      "Match Result Submitted",
+      { club_slug: "seoultech" }
+    );
   });
 
   it("keeps the dialog open and shows a server validation message", async () => {
@@ -238,6 +252,71 @@ describe("MatchEntryDialog", () => {
     ).toBeDefined();
     expect(onRecorded).not.toHaveBeenCalled();
     expect(onClose).not.toHaveBeenCalled();
+    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
+      "Match Result Submission Failed",
+      { club_slug: "seoultech" }
+    );
+  });
+
+  it("저장은 성공하고 후속 새로고침만 실패하면 제출 실패로 기록하지 않는다", async () => {
+    const onRecorded = vi.fn().mockRejectedValue(new Error("refresh failed"));
+    vi.stubGlobal(
+      "fetch",
+      vi
+        .fn()
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({
+            ok: true,
+            challengeRange: 4,
+            rematchCooldowns: [],
+            players: [
+              { id: "p1", name: "오준석", rank: 1 },
+              { id: "p4", name: "이민우", rank: 4 },
+            ],
+          }),
+        })
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({
+            ok: true,
+            message: "경기 결과가 반영되었습니다.",
+          }),
+        })
+    );
+
+    render(
+      <MatchEntryDialog
+        clubSlug="seoultech"
+        open
+        onClose={vi.fn()}
+        onRecorded={onRecorded}
+      />
+    );
+
+    fireEvent.change(await screen.findByLabelText("선수 1"), {
+      target: { value: "p1" },
+    });
+    fireEvent.change(screen.getByLabelText("선수 2"), {
+      target: { value: "p4" },
+    });
+    fireEvent.change(screen.getByLabelText("선수 1 점수"), {
+      target: { value: "6" },
+    });
+    fireEvent.change(screen.getByLabelText("선수 2 점수"), {
+      target: { value: "4" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "결과 반영" }));
+
+    await waitFor(() => expect(onRecorded).toHaveBeenCalledTimes(1));
+    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
+      "Match Result Submitted",
+      { club_slug: "seoultech" }
+    );
+    expect(analytics.trackAmplitudeEvent).not.toHaveBeenCalledWith(
+      "Match Result Submission Failed",
+      { club_slug: "seoultech" }
+    );
   });
 
   it("filters player 2 to four active ranks above and below player 1", async () => {

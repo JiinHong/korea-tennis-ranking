@@ -9,6 +9,8 @@ import {
   type FormEvent,
 } from "react";
 
+import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
+
 type MatchOption = {
   id: string;
   name: string;
@@ -248,6 +250,7 @@ export default function MatchEntryDialog({
 
     setSubmitting(true);
     setErrorMessage("");
+    let matchWasRecorded = false;
 
     try {
       const response = await fetch(`/api/clubs/${clubSlug}/matches`, {
@@ -267,9 +270,18 @@ export default function MatchEntryDialog({
         throw new Error(data.message);
       }
 
+      matchWasRecorded = true;
+      void trackAmplitudeEvent("Match Result Submitted", {
+        club_slug: clubSlug,
+      });
       await onRecorded();
       onClose();
     } catch (error) {
+      if (!matchWasRecorded) {
+        void trackAmplitudeEvent("Match Result Submission Failed", {
+          club_slug: clubSlug,
+        });
+      }
       setErrorMessage(error instanceof Error ? error.message : String(error));
     } finally {
       setSubmitting(false);

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
+import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
 import { getPlayerDetailPath } from "./playerPaths";
 import MatchEntryDialog from "./MatchEntryDialog";
 import MatchListSection from "./MatchListSection";
@@ -121,9 +122,11 @@ function RecentForm({ recent5 }: { recent5: string[] }) {
 function RankingRow({
   player,
   detailHref,
+  onOpen,
 }: {
   player: Player;
   detailHref: string;
+  onOpen: () => void;
 }) {
   const injured = isInjured(player);
   const densityClass = player.rank <= 10 ? "is-featured" : "is-compact";
@@ -133,6 +136,7 @@ function RankingRow({
       className={`ranking-row ${densityClass}`}
       href={detailHref}
       aria-label={`${player.name} 상세 전적 보기`}
+      onClick={onOpen}
     >
       <div className="rank-cell">
         <span>{player.rank}</span>
@@ -202,6 +206,28 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
   useEffect(() => {
     void loadRanking();
   }, [loadRanking]);
+
+  const refreshRanking = () => {
+    void trackAmplitudeEvent("Campus Ranking Refreshed", {
+      club_slug: club.slug,
+    });
+    void loadRanking();
+  };
+
+  const openMatchEntry = () => {
+    void trackAmplitudeEvent("Campus Match Entry Opened", {
+      club_slug: club.slug,
+    });
+    setMatchEntryOpen(true);
+  };
+
+  const selectFilter = (nextFilter: RankingFilter) => {
+    void trackAmplitudeEvent("Campus Ranking Filter Changed", {
+      club_slug: club.slug,
+      filter: nextFilter,
+    });
+    setFilter(nextFilter);
+  };
 
   const rankedPlayers = useMemo(() => {
     return [...players].sort((a, b) => a.rank - b.rank);
@@ -291,7 +317,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                   <button
                     className="match-entry-button"
                     type="button"
-                    onClick={() => setMatchEntryOpen(true)}
+                    onClick={openMatchEntry}
                   >
                     경기 결과 입력
                   </button>
@@ -303,7 +329,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                     <button
                       className="refresh-button refresh-icon-button"
                       type="button"
-                      onClick={loadRanking}
+                      onClick={refreshRanking}
                       disabled={status === "loading"}
                       aria-label="랭킹 새로고침"
                       title={status === "loading" ? "불러오는 중" : "새로고침"}
@@ -324,7 +350,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
           <section className="state-panel" role="alert">
             <strong>랭킹을 불러오지 못했습니다.</strong>
             <p>{errorMessage}</p>
-            <button type="button" onClick={loadRanking}>
+            <button type="button" onClick={refreshRanking}>
               다시 시도
             </button>
           </section>
@@ -360,6 +386,13 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                     className="activity-card"
                     href={getPlayerDetailPath(club.slug, player.name)}
                     aria-label={`활동 선수 ${player.name} 상세 전적 보기`}
+                    onClick={() => {
+                      void trackAmplitudeEvent("Player Profile Opened", {
+                        club_slug: club.slug,
+                        rank: player.rank,
+                        source: "activity_feed",
+                      });
+                    }}
                   >
                     <span>{player.rank}위</span>
                     <strong>{player.name}</strong>
@@ -391,7 +424,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                       key={item.id}
                       type="button"
                       aria-pressed={filter === item.id}
-                      onClick={() => setFilter(item.id)}
+                      onClick={() => selectFilter(item.id)}
                     >
                       {item.label}
                     </button>
@@ -414,6 +447,13 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                     key={player.name}
                     player={player}
                     detailHref={getPlayerDetailPath(club.slug, player.name)}
+                    onOpen={() => {
+                      void trackAmplitudeEvent("Player Profile Opened", {
+                        club_slug: club.slug,
+                        rank: player.rank,
+                        source: "ranking",
+                      });
+                    }}
                   />
                 ))
               ) : (

@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 
+import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
 import type {
   NationalRankingBestResult,
   PublicTournamentResultStage,
@@ -102,6 +105,12 @@ export default function NationalRankingExpandedResults({
           <Link
             className="national-ranking-results-link"
             href={`/clubs/${clubSlug}?gender=${activeGender}`}
+            onClick={() => {
+              void trackAmplitudeEvent("National Club Results Opened", {
+                club_slug: clubSlug,
+                division: activeGender,
+              });
+            }}
             tabIndex={isOpen ? 0 : -1}
           >
             전체 성적 보기

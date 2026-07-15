@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
+import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
 import type {
   NationalClubResultsPageData,
   PublicNationalClubResultStage,
@@ -56,6 +57,10 @@ export default function NationalClubResultsView({
       : pageData.results.filter((result) => result.gender === activeGender);
 
   const selectGender = (gender: RankingGender) => {
+    void trackAmplitudeEvent("National Club Results Division Changed", {
+      club_slug: pageData.club.slug,
+      division: gender,
+    });
     setActiveGender(gender);
     router.replace(`/clubs/${pageData.club.slug}?gender=${gender}`, {
       scroll: false,
