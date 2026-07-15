@@ -70,8 +70,9 @@ describe("Home", () => {
     expect(screen.queryByText("national-club-v3")).toBeNull();
     expect(screen.queryByText("계산식")).toBeNull();
     expect(screen.queryByText("산정 시각")).toBeNull();
-    const crownGuide = screen.getByText(": 최근 1년간의 입상");
-    const crownImage = crownGuide.parentElement?.querySelector("img");
+    const crownGuide = screen.getByText(": 최근 1년간의 입상").closest("p");
+    const crownImage = crownGuide?.querySelector("img");
+    expect(crownGuide?.textContent).toBe("(): 최근 1년간의 입상");
     expect(crownImage?.getAttribute("alt")).toBe("왕관");
     expect(crownImage?.getAttribute("src")).toContain(
       encodeURIComponent("/national-ranking/black-crown.png")
@@ -122,7 +123,9 @@ describe("Home", () => {
     render(await Home());
 
     expect(screen.getByRole("table")).toBeDefined();
-    expect(screen.getByText(": 최근 1년간의 입상")).toBeDefined();
+    expect(
+      screen.getByText(": 최근 1년간의 입상").closest("p")?.textContent
+    ).toBe("(): 최근 1년간의 입상");
     expect(getCachedNationalRankingPageData).toHaveBeenCalledTimes(2);
   });
 });

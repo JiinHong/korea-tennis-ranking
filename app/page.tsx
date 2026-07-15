@@ -51,12 +51,16 @@ export default async function Home() {
                 <h2 id="ranking-title">전국 랭킹</h2>
               </div>
               <p className="national-ranking-crown-guide">
-                <Image
-                  alt="왕관"
-                  height={14}
-                  src="/national-ranking/black-crown.png"
-                  width={18}
-                />
+                <span className="national-ranking-crown-symbol">
+                  <span aria-hidden="true">(</span>
+                  <Image
+                    alt="왕관"
+                    height={14}
+                    src="/national-ranking/black-crown.png"
+                    width={18}
+                  />
+                  <span aria-hidden="true">)</span>
+                </span>
                 <span>: 최근 1년간의 입상</span>
               </p>
             </div>
