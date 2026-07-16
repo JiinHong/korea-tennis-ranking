@@ -3,6 +3,16 @@ import { join } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
+describe("shared tennis color palette", () => {
+  const css = readFileSync(join(process.cwd(), "app/globals.css"), "utf8");
+
+  it("공통 그린 토큰도 딥 보틀 그린과 차분한 보조색으로 맞춘다", () => {
+    expect(css).toMatch(
+      /:root\s*\{[^}]*--green-950:\s*#0d2e27;[^}]*--green-800:\s*#1a3b2b;[^}]*--green-600:\s*#2d4a3e;[^}]*--green-100:\s*#e8efeb;[^}]*\}/
+    );
+  });
+});
+
 describe("campus ranking responsive title styles", () => {
   const css = readFileSync(join(process.cwd(), "app/globals.css"), "utf8");
 
@@ -169,6 +179,24 @@ describe("campus ranking responsive title styles", () => {
 describe("national ranking responsive contracts", () => {
   const css = readFileSync(join(process.cwd(), "app/globals.css"), "utf8");
 
+  it("전국 랭킹은 톤다운된 딥 보틀 그린 팔레트를 사용한다", () => {
+    expect(css).toMatch(
+      /\.national-page\s*\{[^}]*--national-ink:\s*#171b1f;[^}]*--national-muted:\s*#66717c;[^}]*--national-line:\s*#dfe4e1;[^}]*--national-accent:\s*#1a3b2b;[^}]*--national-accent-strong:\s*#0d2e27;[^}]*--national-accent-soft:\s*#edf2ef;[^}]*\}/
+    );
+  });
+
+  it("대학명과 점수는 잉크색을 유지하고 펼침 상태는 배경으로만 구분한다", () => {
+    expect(css).toMatch(
+      /\.national-ranking-club strong\s*\{[^}]*color:\s*var\(--national-ink\);[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-ranking-main-row\[data-expanded="true"\] td\s*\{[^}]*background:\s*var\(--national-accent-soft\);[^}]*\}/
+    );
+    expect(css).not.toMatch(
+      /\.national-ranking-main-row\[data-expanded="true"\][\s\S]*?\.national-ranking-club strong\s*\{[^}]*color:\s*var\(--national-accent\);[^}]*\}/
+    );
+  });
+
   it("랭킹 부문을 채움 없는 텍스트 탭과 선택 밑줄로 표시한다", () => {
     expect(css).toMatch(
       /\.national-ranking-toolbar\s*\{[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*\}/
@@ -277,12 +305,12 @@ describe("national ranking responsive contracts", () => {
     );
   });
 
-  it("동아리명 강조색은 hover가 아니라 열린 행에만 적용한다", () => {
-    expect(css).toMatch(
-      /\.national-ranking-main-row\[data-expanded="true"\][\s\S]*?\.national-ranking-club strong\s*\{[^}]*color:\s*var\(--national-accent\);[^}]*\}/
-    );
+  it("동아리명은 hover나 열린 상태에서도 포인트색으로 바꾸지 않는다", () => {
     expect(css).not.toMatch(
       /\.national-ranking-club-column:hover[\s\S]*?\.national-ranking-club strong/
+    );
+    expect(css).not.toMatch(
+      /\.national-ranking-main-row\[data-expanded="true"\][\s\S]*?\.national-ranking-club strong\s*\{[^}]*color:\s*var\(--national-accent\);[^}]*\}/
     );
   });
 
@@ -362,6 +390,12 @@ describe("national ranking responsive contracts", () => {
 
 describe("methodology accessibility contracts", () => {
   const css = readFileSync(join(process.cwd(), "app/globals.css"), "utf8");
+
+  it("계산 방식 문서도 전국 랭킹과 같은 딥 그린 팔레트를 공유한다", () => {
+    expect(css).toMatch(
+      /\.methodology-page\s*\{[^}]*--methodology-ink:\s*#171b1f;[^}]*--methodology-muted:\s*#66717c;[^}]*--methodology-line:\s*#dfe4e1;[^}]*--methodology-accent:\s*#1a3b2b;[^}]*--methodology-soft:\s*#edf2ef;[^}]*\}/
+    );
+  });
 
   it("키보드 포커스 윤곽선은 배경과 충분히 대비되는 불투명 색을 사용한다", () => {
     expect(css).toMatch(

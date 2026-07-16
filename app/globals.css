@@ -1,34 +1,34 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f7f5;
-  --foreground: #17211c;
+  --background: #f5f7f6;
+  --foreground: #171b1f;
   --panel: #ffffff;
-  --panel-soft: #eef5f1;
-  --line: #dce6e0;
-  --line-strong: #b8c9bf;
-  --muted: #617168;
-  --green-950: #103629;
-  --green-800: #1c5a43;
-  --green-600: #2f7d5b;
-  --green-100: #dceee6;
+  --panel-soft: #f0f3f1;
+  --line: #dfe4e1;
+  --line-strong: #bec9c2;
+  --muted: #667169;
+  --green-950: #0d2e27;
+  --green-800: #1a3b2b;
+  --green-600: #2d4a3e;
+  --green-100: #e8efeb;
   --lime: #d7f758;
   --clay: #d98254;
   --blue: #3e6d88;
   --danger: #b94a48;
-  --shadow: 0 12px 36px rgba(23, 33, 28, 0.08);
+  --shadow: 0 12px 36px rgba(26, 59, 43, 0.07);
 }
 
 /* National ranking methodology document */
 .methodology-page {
-  --methodology-ink: #20272f;
-  --methodology-muted: #65717c;
-  --methodology-line: #dce2e7;
-  --methodology-accent: #23684c;
-  --methodology-soft: #eef4f1;
+  --methodology-ink: #171b1f;
+  --methodology-muted: #66717c;
+  --methodology-line: #dfe4e1;
+  --methodology-accent: #1a3b2b;
+  --methodology-soft: #edf2ef;
   min-height: 100vh;
   color: var(--methodology-ink);
-  background: #f5f7f6;
+  background: #f6f7f7;
 }
 
 .methodology-document {
@@ -135,7 +135,7 @@
   padding: 20px;
   overflow: hidden;
   background: var(--methodology-soft);
-  border: 1px solid #ccdcd4;
+  border: 1px solid #cfd8d3;
   border-radius: 8px;
 }
 
@@ -143,7 +143,7 @@
   display: block;
   max-width: 100%;
   overflow-wrap: anywhere;
-  color: #174f39;
+  color: var(--methodology-accent);
   font-family: var(--font-geist-mono), monospace;
   font-size: 15px;
   font-weight: 800;
@@ -476,7 +476,7 @@ button:disabled {
 .summary-band {
   color: white;
   background:
-    linear-gradient(135deg, rgba(16, 54, 41, 0.98), rgba(47, 125, 91, 0.96)),
+    linear-gradient(135deg, rgba(13, 46, 39, 0.99), rgba(45, 74, 62, 0.97)),
     linear-gradient(90deg, var(--green-950), var(--green-600));
   border-bottom: 1px solid rgba(255, 255, 255, 0.16);
 }
@@ -761,7 +761,7 @@ button:disabled {
 
 .search-field input:focus {
   border-color: var(--green-600);
-  box-shadow: 0 0 0 3px rgba(47, 125, 91, 0.14);
+  box-shadow: 0 0 0 3px rgba(26, 59, 43, 0.14);
 }
 
 .segment-control {
@@ -2144,12 +2144,13 @@ button:disabled {
 }
 
 .national-page {
-  --national-bg: #f5f7f6;
-  --national-ink: #20272f;
-  --national-muted: #65717c;
-  --national-line: #dce2e7;
-  --national-accent: #23684c;
-  --national-accent-soft: #e8f3ee;
+  --national-bg: #f6f7f7;
+  --national-ink: #171b1f;
+  --national-muted: #66717c;
+  --national-line: #dfe4e1;
+  --national-accent: #1a3b2b;
+  --national-accent-strong: #0d2e27;
+  --national-accent-soft: #edf2ef;
   --national-secondary: #835f28;
   min-height: 100vh;
   color: var(--national-ink);
@@ -2205,7 +2206,7 @@ button:disabled {
 }
 
 .national-methodology-link:hover {
-  color: var(--national-ink);
+  color: var(--national-accent-strong);
 }
 
 .national-club-results-back {
@@ -2220,7 +2221,7 @@ button:disabled {
 }
 
 .national-club-results-back:hover {
-  color: var(--national-accent);
+  color: var(--national-accent-strong);
 }
 
 .national-club-results-header {
@@ -2317,7 +2318,7 @@ button:disabled {
 }
 
 .national-club-result-stage {
-  color: var(--national-accent);
+  color: var(--national-ink);
   text-align: right;
   font-size: 18px;
   font-weight: 900;
@@ -2483,6 +2484,7 @@ button:disabled {
   padding: 14px 18px;
   border: 0;
   border-bottom: 1px solid var(--national-line);
+  transition: background-color 140ms ease;
 }
 
 .national-ranking-table th {
@@ -2564,13 +2566,13 @@ button:disabled {
   pointer-events: none;
 }
 
-.national-ranking-main-row[data-expanded="true"]
-  .national-ranking-club strong {
-  color: var(--national-accent);
+.national-ranking-main-row[data-expanded="true"] td {
+  background: var(--national-accent-soft);
 }
 
 .national-ranking-club strong {
   min-width: 0;
+  color: var(--national-ink);
   font-size: 14px;
   line-height: 1.45;
   word-break: keep-all;
@@ -2719,7 +2721,7 @@ button:disabled {
 
 .national-ranking-expanded-results {
   padding: 6px 18px 18px 72px;
-  background: #f8faf9;
+  background: #f8f9f8;
 }
 
 .national-ranking-best-results {
