@@ -22,7 +22,9 @@ export default async function Home() {
       <div className="national-shell">
         <header className="national-header">
           <div>
-            <span className="national-kicker">NATIONAL CLUB RANKING</span>
+            <span className="national-kicker">
+              KOREA CAMPUS TENNIS RANKING
+            </span>
             <h1>전국 대학 테니스 동아리 랭킹</h1>
             <p className="national-header-description">
               국토정중앙배(양구), 경인지구 연맹전, 춘천소양강배,

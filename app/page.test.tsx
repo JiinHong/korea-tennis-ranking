@@ -48,6 +48,8 @@ describe("Home", () => {
 
     render(await Home());
 
+    expect(screen.getByText("KOREA CAMPUS TENNIS RANKING")).toBeDefined();
+    expect(screen.queryByText("NATIONAL CLUB RANKING")).toBeNull();
     expect(
       screen.getByRole("heading", {
         level: 1,
