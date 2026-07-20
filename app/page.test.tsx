@@ -58,9 +58,17 @@ describe("Home", () => {
     ).toBeDefined();
     expect(
       screen.getByText(
-        "국토정중앙배(양구), 경인지구 연맹전, 춘천소양강배, 하늘내린인제, WEMIX OPEN의 최근 3년간 성적을 바탕으로 산정합니다."
+        "최근 3년간 5개 대학 테니스 대회 성적을 반영한 랭킹입니다."
       )
     ).toBeDefined();
+    expect(
+      screen.getByText("양구 · 경인지구 · 춘천 · 인제 · WEMIX OPEN")
+    ).toBeDefined();
+    expect(
+      screen.queryByText(
+        "국토정중앙배(양구), 경인지구 연맹전, 춘천소양강배, 하늘내린인제, WEMIX OPEN의 최근 3년간 성적을 바탕으로 산정합니다."
+      )
+    ).toBeNull();
     expect(
       screen
         .getByRole("link", { name: "랭킹 계산 방식 보기" })

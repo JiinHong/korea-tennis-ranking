@@ -2195,6 +2195,13 @@ button:disabled {
   word-break: keep-all;
 }
 
+.national-header-tournaments {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .national-methodology-link {
   display: inline-flex;
   margin-top: 8px;
