@@ -567,7 +567,7 @@ describe("loadNationalRankingDataset", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-07-23-v5");
+    expect(dataset.version).toBe("sources-2026-07-23-v6");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -674,7 +674,7 @@ describe("loadNationalRankingDataset", () => {
         priorEditionKeys.has(result.editionKey)
       ),
     };
-    // Re-baselined after confirming KTC·JTC as Gyeongsang National University's joint team.
+    // Re-baselined after applying the affiliation audit's confirmed official labels.
     const fingerprint = createHash("sha256")
       .update(JSON.stringify(approvedTask4))
       .digest("hex");
@@ -684,7 +684,7 @@ describe("loadNationalRankingDataset", () => {
     expect(approvedTask4.editions).toHaveLength(12);
     expect(approvedTask4.results).toHaveLength(608);
     expect(fingerprint).toBe(
-      "0a5bd4796a7838b78d03148547641645ec159a410d411c6604a2c668e7822ccb"
+      "3c4a3cf81faf806fceea2e819591d784bd6e2d5c002128d2f367807e5fd651cf"
     );
 
     for (const [editionKey, expectedCount] of Object.entries(priorExpectedCounts)) {
@@ -765,8 +765,8 @@ describe("loadNationalRankingDataset", () => {
     expect(dataset.clubs).toContainEqual({
       slug: "gyeongsang-ktc-jtc",
       universityName: "경상국립대학교",
-      clubName: "KTC·JTC",
-      displayName: "경상국립대학교 KTC·JTC",
+      clubName: "가좌 KTC·칠암 JTC 연합팀",
+      displayName: "경상국립대학교 가좌 KTC·칠암 JTC 연합팀",
     });
     expect(
       dataset.aliases.find((alias) => alias.sourceLabel === "KtcJtc")
@@ -783,6 +783,179 @@ describe("loadNationalRankingDataset", () => {
     expect(
       dataset.clubs.some((club) => club.slug === "gangneung-ktcjtc")
     ).toBe(false);
+  });
+
+  it("uses every confirmed campus, college, department, and official club name", () => {
+    const dataset = loadNationalRankingDataset();
+    const clubsBySlug = new Map(
+      dataset.clubs.map((club) => [club.slug, club])
+    );
+    const confirmedLabels = {
+      "catholic-courtrang": [
+        "가톨릭대학교 성심교정",
+        "코트랑",
+        "가톨릭대학교 성심교정 코트랑",
+      ],
+      "chungang-love4t": [
+        "중앙대학교 서울캠퍼스",
+        "LOVE4T",
+        "중앙대학교 서울캠퍼스 LOVE4T",
+      ],
+      "dongguk-dutc": [
+        "동국대학교 서울캠퍼스",
+        "DUTC",
+        "동국대학교 서울캠퍼스 DUTC",
+      ],
+      "ewha-smash": [
+        "이화여자대학교 체육과학부",
+        "SMASH",
+        "이화여자대학교 체육과학부 SMASH",
+      ],
+      "gachon-tiebreak": [
+        "가천대학교 글로벌캠퍼스",
+        "타이브레이크",
+        "가천대학교 글로벌캠퍼스 타이브레이크",
+      ],
+      "gyeongsang-ktc-jtc": [
+        "경상국립대학교",
+        "가좌 KTC·칠암 JTC 연합팀",
+        "경상국립대학교 가좌 KTC·칠암 JTC 연합팀",
+      ],
+      "gangwon-shot": [
+        "강원대학교 삼척캠퍼스",
+        "SHOT",
+        "강원대학교 삼척캠퍼스 SHOT",
+      ],
+      "gyeonggi-ktf": [
+        "경기대학교 수원캠퍼스",
+        "KTF",
+        "경기대학교 수원캠퍼스 KTF",
+      ],
+      "hanbat-masters": [
+        "국립한밭대학교",
+        "마스터즈",
+        "국립한밭대학교 마스터즈",
+      ],
+      "hanyang-erica-hitec": [
+        "한양대학교 ERICA캠퍼스",
+        "HiTEC",
+        "한양대학교 ERICA캠퍼스 HiTEC",
+      ],
+      "hanyang-hytc": [
+        "한양대학교 서울캠퍼스",
+        "HYTC",
+        "한양대학교 서울캠퍼스 HYTC",
+      ],
+      "hongik-hitc": [
+        "홍익대학교 서울캠퍼스",
+        "HITC",
+        "홍익대학교 서울캠퍼스 HITC",
+      ],
+      "inha-rapum": [
+        "인하대학교 중앙동아리",
+        "라품",
+        "인하대학교 중앙동아리 라품",
+      ],
+      "knsu-alley": [
+        "한국체육대학교 사회체육학과",
+        "ALLEY",
+        "한국체육대학교 사회체육학과 ALLEY",
+      ],
+      "kaist-stroke": [
+        "KAIST 학부",
+        "STROKE",
+        "KAIST 학부 STROKE",
+      ],
+      "konkuk-ktc": [
+        "건국대학교 서울캠퍼스",
+        "KTC",
+        "건국대학교 서울캠퍼스 KTC",
+      ],
+      "korea-kutc": ["고려대학교", "KUTC", "고려대학교 KUTC"],
+      "korea-petc": [
+        "고려대학교 체육교육과",
+        "PETC",
+        "고려대학교 체육교육과 PETC",
+      ],
+      "kyunghee-global-impact": [
+        "경희대학교 국제캠퍼스 공과대학",
+        "IMPACT",
+        "경희대학교 국제캠퍼스 공과대학 IMPACT",
+      ],
+      "kyunghee-global-luvis": [
+        "경희대학교 국제캠퍼스",
+        "LOVICE(러비스)",
+        "경희대학교 국제캠퍼스 LOVICE(러비스)",
+      ],
+      "uos-approach": [
+        "서울시립대학교",
+        "UOSTC(어프로치)",
+        "서울시립대학교 UOSTC(어프로치)",
+      ],
+      "yonsei-kookdas": [
+        "연세대학교 상경·경영대학",
+        "쿠크다스",
+        "연세대학교 상경·경영대학 쿠크다스",
+      ],
+      "yonsei-yutt": [
+        "연세대학교 신촌캠퍼스",
+        "YUTT",
+        "연세대학교 신촌캠퍼스 YUTT",
+      ],
+      "chungbuk-ace": ["충북대학교", "ACE", "충북대학교 ACE"],
+      "dankook-ace": [
+        "단국대학교 천안캠퍼스 치과대학",
+        "ACE",
+        "단국대학교 천안캠퍼스 치과대학 ACE",
+      ],
+      "gangneung-wonju-love": [
+        "강원대학교 강릉캠퍼스",
+        "LOVE",
+        "강원대학교 강릉캠퍼스 LOVE",
+      ],
+      "korea-kmtc": [
+        "고려대학교 의과대학",
+        "KMTC",
+        "고려대학교 의과대학 KMTC",
+      ],
+      "kumoh-kotc": [
+        "국립금오공과대학교",
+        "KOTC",
+        "국립금오공과대학교 KOTC",
+      ],
+      "namseoul-winning-shot": [
+        "남서울대학교 스포츠건강관리학과",
+        "위닝샷",
+        "남서울대학교 스포츠건강관리학과 위닝샷",
+      ],
+      "sangmyung-tesla": [
+        "상명대학교 서울캠퍼스",
+        "TESLA",
+        "상명대학교 서울캠퍼스 TESLA",
+      ],
+      "seoul-university": [
+        "서울대학교 운동부",
+        "테니스부",
+        "서울대학교 운동부 테니스부",
+      ],
+      "seoul-tnt": [
+        "서울대학교 경영대학",
+        "TNT",
+        "서울대학교 경영대학 TNT",
+      ],
+      "ajou-tennis": ["아주대학교", "ATC", "아주대학교 ATC"],
+    } as const;
+
+    for (const [slug, [universityName, clubName, displayName]] of Object.entries(
+      confirmedLabels
+    )) {
+      expect(clubsBySlug.get(slug), slug).toEqual({
+        slug,
+        universityName,
+        clubName,
+        displayName,
+      });
+    }
   });
 
   it("uses source entry IDs only for the independently slotted clipped entries", () => {
@@ -882,15 +1055,30 @@ describe("loadNationalRankingDataset", () => {
 
   it("keeps 고려대학교 KUTC, PETC, and KMTC distinct", () => {
     const dataset = loadNationalRankingDataset();
-    const koreaClubSlugs = new Set(
-      dataset.clubs
-        .filter((club) => club.universityName === "고려대학교")
-        .map((club) => club.slug)
+    const koreaClubs = dataset.clubs.filter((club) =>
+      ["korea-kutc", "korea-petc", "korea-kmtc"].includes(club.slug)
     );
 
-    expect(koreaClubSlugs).toEqual(
-      new Set(["korea-kutc", "korea-petc", "korea-kmtc"])
-    );
+    expect(koreaClubs).toEqual([
+      {
+        slug: "korea-kutc",
+        universityName: "고려대학교",
+        clubName: "KUTC",
+        displayName: "고려대학교 KUTC",
+      },
+      {
+        slug: "korea-petc",
+        universityName: "고려대학교 체육교육과",
+        clubName: "PETC",
+        displayName: "고려대학교 체육교육과 PETC",
+      },
+      {
+        slug: "korea-kmtc",
+        universityName: "고려대학교 의과대학",
+        clubName: "KMTC",
+        displayName: "고려대학교 의과대학 KMTC",
+      },
+    ]);
     expect(
       dataset.results.find(
         (result) =>
@@ -1024,15 +1212,15 @@ describe("loadNationalRankingDataset", () => {
       expect.arrayContaining([
         expect.objectContaining({
           slug: "seoul-university",
-          universityName: "서울대학교",
+          universityName: "서울대학교 운동부",
           clubName: "테니스부",
-          displayName: "서울대학교 테니스부",
+          displayName: "서울대학교 운동부 테니스부",
         }),
         expect.objectContaining({
           slug: "seoul-tnt",
-          universityName: "서울대학교",
+          universityName: "서울대학교 경영대학",
           clubName: "TNT",
-          displayName: "서울대학교 TNT",
+          displayName: "서울대학교 경영대학 TNT",
         }),
       ])
     );

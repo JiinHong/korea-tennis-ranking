@@ -1,7 +1,7 @@
 # National ranking source dataset v1
 
 `dataset.json` is the canonical, visually verified source manifest for the
-national university club ranking. Version `sources-2026-07-23-v5` contains the
+national university club ranking. Version `sources-2026-07-23-v6` contains the
 complete Yanggu, Gyeongin, Inje, Chuncheon, and WEMIX source program: 26
 editions and 1,116 terminal result records. Yeongwol is not part of this
 dataset.
@@ -70,8 +70,9 @@ club before the inferred final batch is added. The assignment is stored in
 `clubSlug` and never recomputed at request time. The separately confirmed Seoul
 National University rule maps
 `서울대`, `서울대학교`, and `서울대(학교) 테니스부` labels to the canonical
-`서울대학교 테니스부` club; only labels that explicitly contain `TNT` map to
-`서울대학교 TNT`. Labels that do not identify even a school remain unresolved.
+`서울대학교 운동부 테니스부` club; only labels that explicitly contain `TNT`
+map to `서울대학교 경영대학 TNT`. Labels that do not identify even a school
+remain unresolved.
 
 Canonical clubs consolidate visually explicit spellings plus the
 administrator-confirmed team-name families documented in the 2026-07-13
@@ -89,19 +90,24 @@ lowercased combination of canonical university context and the exact reported
 team name; `sourceLabel` preserves the source spelling.
 
 The visually clipped `KtcJtc` source label is frozen to the joint
-`경상국립대학교 KTC·JTC` entrant. The clubs' official 2024 Yanggu post confirms
-that Gajwa-campus KTC and Chilam-campus JTC entered together as Gyeongsang
-National University's representative team. The earlier Gangneung association
-was unsupported and was corrected in `sources-2026-07-23-v5`.
+`경상국립대학교 가좌 KTC·칠암 JTC 연합팀` entrant. The clubs' official 2024
+Yanggu post confirms that Gajwa-campus KTC and Chilam-campus JTC entered
+together as Gyeongsang National University's representative team. The earlier
+Gangneung association was unsupported and was corrected in
+`sources-2026-07-23-v5`.
+
+Version `sources-2026-07-23-v6` applies the completed affiliation audit to
+canonical display fields. Confirmed campuses, colleges, departments, and
+official club spellings now appear in `universityName`, `clubName`, and
+`displayName`. Historical `sourceTeamName`, `sourceLabel`, and source
+references remain unchanged so the imported brackets stay auditable.
 
 A verified edition requires exactly one champion-stage record and one
 runner-up-stage record. Thirty-one school-qualified finals are frozen under the
 rule above; only source labels `러비스 A` and `A`, which identify no school,
-remain unassigned. 아주대학교 had no existing canonical candidate, so its
-school-qualified final is represented conservatively as `아주대학교 테니스
-동아리` until an administrator supplies the exact club name. An edition whose
-field remains unresolved can still retain a concrete honor owner without
-contributing points.
+remain unassigned. 아주대학교의 canonical candidate is the
+university-confirmed `아주대학교 ATC`. An edition whose field remains unresolved
+can still retain a concrete honor owner without contributing points.
 
 OCR may help locate text, but no OCR output becomes `verified` without visual
 confirmation against the source image or rendered PDF page. Illegible or

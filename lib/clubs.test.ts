@@ -20,15 +20,15 @@ describe("club configuration", () => {
     });
   });
 
-  it("petc slug를 고려대 PETC 단식 랭킹 설정으로 바꾼다", () => {
+  it("petc slug를 고려대 체육교육과 PETC 단식 랭킹 설정으로 바꾼다", () => {
     expect(getClubConfig("petc")).toEqual({
       slug: "petc",
-      title: "고려대학교 PETC 테니스 단식 랭킹",
-      titleLines: ["고려대학교 PETC", "테니스 단식 랭킹"],
-      organization: "고려대학교 PETC 테니스 동아리",
+      title: "고려대학교 체육교육과 PETC 테니스 단식 랭킹",
+      titleLines: ["고려대학교 체육교육과 PETC", "테니스 단식 랭킹"],
+      organization: "고려대학교 체육교육과 PETC",
       subtitle: "도전과 방어로 만들어가는 우리들의 랭킹",
       logoPath: "/petc-logo.png",
-      logoAlt: "고려대학교 PETC 로고",
+      logoAlt: "고려대학교 체육교육과 PETC 로고",
       sheetIdEnv: "PETC_GOOGLE_SHEET_ID",
       apiPath: "/api/clubs/petc/ranking",
       currentSeasonName: "현재",
