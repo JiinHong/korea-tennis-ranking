@@ -96,24 +96,27 @@ export default function MethodologyPage() {
         <section className="methodology-section" aria-labelledby="metric-title">
           <h2 id="metric-title">지표 정의</h2>
           <p>
-            랭킹의 대상은 대학이 아니라 개별 테니스 동아리입니다. 점수의 한
-            단위는 <strong>동아리·부문·대회·개최 연도</strong>이며, 검증된
-            단체전 성적만 계산합니다.
+            랭킹의 대상은 대학이 아니라 개별 테니스 동아리입니다. 점수는
+            <strong> 동아리·부문·대회·개최 연도</strong> 조합별로 계산하며,
+            검증된 단체전 성적만 반영합니다.
           </p>
           <p>
-            각 단위의 대회 점수를 합산해 동아리의 남자부 또는 여자부 점수를
-            구합니다. 모든 입력과 중간 계산, 최종 점수는 정수이며 소수점 반올림을
-            사용하지 않습니다.
+            대회별 점수를 합산해 동아리의 남자부 또는 여자부 총점을 구합니다.
+            모든 입력과 중간 계산, 최종 점수는 정수이며 소수점 반올림을 사용하지
+            않습니다.
           </p>
         </section>
 
         <section className="methodology-section" aria-labelledby="formula-title">
           <h2 id="formula-title">공식</h2>
-          <p>검증된 각 대회 성적에는 아래 네 요소를 곱합니다.</p>
+          <p>
+            진출 성적에 따른 기본 점수에 대회의 위상, 참가 규모, 개최 연도를
+            반영한 가중치를 곱해 대회 점수를 계산합니다.
+          </p>
           <div className="methodology-formula" role="note">
             <code>
-              대회 점수 = 진출 단계 단위 × 대회 위상 단위 × 참가 규모 단위 ×
-              최신 대회 단위
+              대회 점수 = 진출 단계 점수 × 대회 위상 가중치 × 참가 규모 가중치 ×
+              연도 가중치
             </code>
           </div>
           <p>
@@ -125,8 +128,7 @@ export default function MethodologyPage() {
           <h2 id="stage-title">진출 단계 점수</h2>
           <p>
             우승과 깊은 진출을 더 크게 보상하되 점수가 지나치게 커지지 않도록
-            단계 간 관계를 작은 정수 단위로 압축했습니다. 부전승은 승리로 세지
-            않습니다.
+            단계별 점수를 작은 정수로 정했습니다. 부전승은 승리로 세지 않습니다.
           </p>
           <MethodologyTableRegion label="진출 단계별 점수">
             <table className="methodology-table">
@@ -167,7 +169,7 @@ export default function MethodologyPage() {
                 <tr>
                   <th scope="col">대회</th>
                   <th scope="col">등급</th>
-                  <th scope="col">단위</th>
+                  <th scope="col">가중치</th>
                 </tr>
               </thead>
               <tbody>
@@ -187,7 +189,8 @@ export default function MethodologyPage() {
           <h2 id="field-title">참가 규모 가중치</h2>
           <p>
             N은 해당 연도와 부문에서 실제 참가한 팀 수입니다. 부전승과 경기 전
-            기권 팀은 제외하며, 참가 규모를 네 구간의 정수 단위로 나눕니다.
+            기권 팀은 제외하며, 참가 규모에 따라 네 구간의 정수 가중치를
+            적용합니다.
           </p>
           <MethodologyTableRegion label="참가 팀 수별 기준 가중치">
             <table className="methodology-table">
@@ -195,7 +198,7 @@ export default function MethodologyPage() {
               <thead>
                 <tr>
                   <th scope="col">실제 참가 팀 수</th>
-                  <th scope="col">단위</th>
+                  <th scope="col">가중치</th>
                 </tr>
               </thead>
               <tbody>
@@ -213,9 +216,9 @@ export default function MethodologyPage() {
         <section className="methodology-section" aria-labelledby="recency-title">
           <h2 id="recency-title">연도 가중치</h2>
           <p>
-            각 대회의 가장 최근 개최 연도를 기준으로 1년 이내 성적은 3단위,
-            2년 이내는 2단위, 3년 이내는 1단위로 반영합니다. 3년을 초과한
-            성적은 현재 점수에서 제외합니다.
+            각 대회의 가장 최근 개최 연도를 기준으로 1년 이내 성적은 연도 가중치
+            3, 2년 이내는 연도 가중치 2, 3년 이내는 연도 가중치 1로 반영합니다.
+            3년을 초과한 성적은 현재 점수에서 제외합니다.
           </p>
           <MethodologyTableRegion label="대회별 연도 가중치">
             <table className="methodology-table">
@@ -223,7 +226,7 @@ export default function MethodologyPage() {
               <thead>
                 <tr>
                   <th scope="col">기간</th>
-                  <th scope="col">단위</th>
+                  <th scope="col">가중치</th>
                 </tr>
               </thead>
               <tbody>

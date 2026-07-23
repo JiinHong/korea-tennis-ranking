@@ -48,14 +48,20 @@ describe("MethodologyPage", () => {
     ).toEqual(SECTION_HEADINGS);
     expect(
       screen.getByText(
-        "대회 점수 = 진출 단계 단위 × 대회 위상 단위 × 참가 규모 단위 × 최신 대회 단위"
+        "진출 성적에 따른 기본 점수에 대회의 위상, 참가 규모, 개최 연도를 반영한 가중치를 곱해 대회 점수를 계산합니다."
       )
     ).toBeDefined();
+    expect(
+      screen.getByText(
+        "대회 점수 = 진출 단계 점수 × 대회 위상 가중치 × 참가 규모 가중치 × 연도 가중치"
+      )
+    ).toBeDefined();
+    expect(screen.queryAllByText(/단위/)).toHaveLength(0);
     expect(screen.getByText("national-club-v3")).toBeDefined();
     expect(screen.getByText("2026-07-13")).toBeDefined();
   });
 
-  it("공식 v3의 단계 단위와 대회별 위상 단위를 정수로 공개한다", () => {
+  it("공식 v3의 단계 점수와 대회별 위상 가중치를 정수로 공개한다", () => {
     render(<MethodologyPage />);
 
     [
@@ -82,6 +88,9 @@ describe("MethodologyPage", () => {
     });
     expect(within(prestigeTable).getByRole("columnheader", { name: "등급" }))
       .toBeDefined();
+    expect(
+      within(prestigeTable).getByRole("columnheader", { name: "가중치" })
+    ).toBeDefined();
     expect(within(prestigeTable).queryByText("주요")).toBeNull();
     expect(within(prestigeTable).queryByText("신흥")).toBeNull();
   });
@@ -96,6 +105,13 @@ describe("MethodologyPage", () => {
       ["64팀 이상", "4"],
     ].forEach((cells) => expectRow("참가 팀 수별 기준 가중치", cells));
 
+    const fieldSizeTable = screen.getByRole("table", {
+      name: "참가 팀 수별 기준 가중치",
+    });
+    expect(
+      within(fieldSizeTable).getByRole("columnheader", { name: "가중치" })
+    ).toBeDefined();
+
     [
       ["1년 이내", "3"],
       ["2년 이내", "2"],
@@ -108,6 +124,14 @@ describe("MethodologyPage", () => {
     });
     expect(within(recencyTable).getByRole("columnheader", { name: "기간" }))
       .toBeDefined();
+    expect(
+      within(recencyTable).getByRole("columnheader", { name: "가중치" })
+    ).toBeDefined();
+    expect(
+      screen.getByText(
+        "각 대회의 가장 최근 개최 연도를 기준으로 1년 이내 성적은 연도 가중치 3, 2년 이내는 연도 가중치 2, 3년 이내는 연도 가중치 1로 반영합니다. 3년을 초과한 성적은 현재 점수에서 제외합니다."
+      )
+    ).toBeDefined();
     expect(within(recencyTable).queryByText("최신 대회")).toBeNull();
     expect(within(recencyTable).queryByText("직전 대회")).toBeNull();
   });
