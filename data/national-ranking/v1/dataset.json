@@ -1,5 +1,5 @@
 {
-  "version": "sources-2026-07-23-v7",
+  "version": "sources-2026-07-23-v8",
   "clubs": [
     {
       "slug": "catholic-courtrang",
@@ -129,9 +129,9 @@
     },
     {
       "slug": "knsu-alley",
-      "universityName": "한국체육대학교 사회체육학과",
+      "universityName": "한국체육대학교",
       "clubName": "ALLEY",
-      "displayName": "한국체육대학교 사회체육학과 ALLEY"
+      "displayName": "한국체육대학교 ALLEY"
     },
     {
       "slug": "konkuk-ktc",
@@ -183,9 +183,9 @@
     },
     {
       "slug": "kyungpook-kutc",
-      "universityName": "경북대학교 대구캠퍼스",
+      "universityName": "경북대학교",
       "clubName": "KUTC",
-      "displayName": "경북대학교 대구캠퍼스 KUTC"
+      "displayName": "경북대학교 KUTC"
     },
     {
       "slug": "myongji-rushand",
@@ -261,9 +261,9 @@
     },
     {
       "slug": "yonsei-yutt",
-      "universityName": "연세대학교 신촌캠퍼스",
+      "universityName": "연세대학교",
       "clubName": "YUTT",
-      "displayName": "연세대학교 신촌캠퍼스 YUTT"
+      "displayName": "연세대학교 YUTT"
     },
     {
       "slug": "chungbuk-ace",
@@ -345,9 +345,9 @@
     },
     {
       "slug": "namseoul-winning-shot",
-      "universityName": "남서울대학교 스포츠건강관리학과",
+      "universityName": "남서울대학교",
       "clubName": "위닝샷",
-      "displayName": "남서울대학교 스포츠건강관리학과 위닝샷"
+      "displayName": "남서울대학교 위닝샷"
     },
     {
       "slug": "sangji-ace",
@@ -363,9 +363,9 @@
     },
     {
       "slug": "seoul-university",
-      "universityName": "서울대학교 운동부",
+      "universityName": "서울대학교",
       "clubName": "테니스부",
-      "displayName": "서울대학교 운동부 테니스부"
+      "displayName": "서울대학교 테니스부"
     },
     {
       "slug": "seoul-tnt",
@@ -533,7 +533,7 @@
     },
     {
       "clubSlug": "kyungpook-kutc",
-      "normalizedAlias": "경북대학교 대구캠퍼스 경북대 kutc a",
+      "normalizedAlias": "경북대학교 경북대 kutc a",
       "sourceLabel": "경북대 Kutc A"
     },
     {
@@ -1558,7 +1558,7 @@
     },
     {
       "clubSlug": "kyungpook-kutc",
-      "normalizedAlias": "경북대학교 대구캠퍼스 경북대 kutc b",
+      "normalizedAlias": "경북대학교 경북대 kutc b",
       "sourceLabel": "경북대 KUTC B"
     },
     {
@@ -1608,7 +1608,7 @@
     },
     {
       "clubSlug": "kyungpook-kutc",
-      "normalizedAlias": "경북대학교 대구캠퍼스 경북대 kutc c",
+      "normalizedAlias": "경북대학교 경북대 kutc c",
       "sourceLabel": "경북대 KUTC C"
     },
     {
@@ -1628,7 +1628,7 @@
     },
     {
       "clubSlug": "kyungpook-kutc",
-      "normalizedAlias": "경북대학교 대구캠퍼스 경북대 kutc",
+      "normalizedAlias": "경북대학교 경북대 kutc",
       "sourceLabel": "경북대 KUTC"
     },
     {
@@ -1643,7 +1643,7 @@
     },
     {
       "clubSlug": "kyungpook-kutc",
-      "normalizedAlias": "경북대학교 대구캠퍼스 경북대kutc(숫소)",
+      "normalizedAlias": "경북대학교 경북대kutc(숫소)",
       "sourceLabel": "경북대kutc(숫소)"
     },
     {

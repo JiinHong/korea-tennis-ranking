@@ -577,7 +577,7 @@ describe("loadNationalRankingDataset", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-07-23-v7");
+    expect(dataset.version).toBe("sources-2026-07-23-v8");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -684,7 +684,7 @@ describe("loadNationalRankingDataset", () => {
         priorEditionKeys.has(result.editionKey)
       ),
     };
-    // Re-baselined after applying the affiliation audit's confirmed official labels.
+    // Re-baselined after applying the user-confirmed concise university labels.
     const fingerprint = createHash("sha256")
       .update(JSON.stringify(approvedTask4))
       .digest("hex");
@@ -694,7 +694,7 @@ describe("loadNationalRankingDataset", () => {
     expect(approvedTask4.editions).toHaveLength(12);
     expect(approvedTask4.results).toHaveLength(608);
     expect(fingerprint).toBe(
-      "3c4a3cf81faf806fceea2e819591d784bd6e2d5c002128d2f367807e5fd651cf"
+      "8ad766a44f867f7a83002260ccf064fddbe294234f913626f05503cb2eb00429"
     );
 
     for (const [editionKey, expectedCount] of Object.entries(priorExpectedCounts)) {
@@ -993,9 +993,9 @@ describe("loadNationalRankingDataset", () => {
         "인하대학교 중앙동아리 라품",
       ],
       "knsu-alley": [
-        "한국체육대학교 사회체육학과",
+        "한국체육대학교",
         "ALLEY",
-        "한국체육대학교 사회체육학과 ALLEY",
+        "한국체육대학교 ALLEY",
       ],
       "kaist-stroke": [
         "KAIST 학부",
@@ -1034,10 +1034,11 @@ describe("loadNationalRankingDataset", () => {
         "연세대학교 상경·경영대학 쿠크다스",
       ],
       "yonsei-yutt": [
-        "연세대학교 신촌캠퍼스",
+        "연세대학교",
         "YUTT",
-        "연세대학교 신촌캠퍼스 YUTT",
+        "연세대학교 YUTT",
       ],
+      "kyungpook-kutc": ["경북대학교", "KUTC", "경북대학교 KUTC"],
       "chungbuk-ace": ["충북대학교", "ACE", "충북대학교 ACE"],
       "dankook-ace": [
         "단국대학교 천안캠퍼스 치과대학",
@@ -1060,9 +1061,9 @@ describe("loadNationalRankingDataset", () => {
         "국립금오공과대학교 KOTC",
       ],
       "namseoul-winning-shot": [
-        "남서울대학교 스포츠건강관리학과",
+        "남서울대학교",
         "위닝샷",
-        "남서울대학교 스포츠건강관리학과 위닝샷",
+        "남서울대학교 위닝샷",
       ],
       "sangmyung-tesla": [
         "상명대학교 서울캠퍼스",
@@ -1070,9 +1071,9 @@ describe("loadNationalRankingDataset", () => {
         "상명대학교 서울캠퍼스 TESLA",
       ],
       "seoul-university": [
-        "서울대학교 운동부",
+        "서울대학교",
         "테니스부",
-        "서울대학교 운동부 테니스부",
+        "서울대학교 테니스부",
       ],
       "seoul-tnt": [
         "서울대학교 경영대학",
@@ -1348,9 +1349,9 @@ describe("loadNationalRankingDataset", () => {
       expect.arrayContaining([
         expect.objectContaining({
           slug: "seoul-university",
-          universityName: "서울대학교 운동부",
+          universityName: "서울대학교",
           clubName: "테니스부",
-          displayName: "서울대학교 운동부 테니스부",
+          displayName: "서울대학교 테니스부",
         }),
         expect.objectContaining({
           slug: "seoul-tnt",
