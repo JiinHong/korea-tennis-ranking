@@ -85,17 +85,44 @@ const rankings: NationalRankingPageData["rankings"] = {
       runnerUps: 1,
       bestResults: [
         {
+          editionKey: "inje-2026-men",
+          tournamentSlug: "inje",
+          tournamentName: "하늘내린인제",
+          year: 2026,
+          gender: "men",
+          actualEntrants: 32,
+          stage: "champion",
+          sourceTeamName: "KAIST",
+        },
+        {
           editionKey: "inje-2025-men",
           tournamentSlug: "inje",
           tournamentName: "하늘내린인제",
           year: 2025,
           gender: "men",
           actualEntrants: 24,
-          stage: "quarterfinal",
+          stage: "runner_up",
           sourceTeamName: "KAIST",
         },
       ],
-      honors: [],
+      honors: [
+        {
+          editionKey: "inje-2026-men",
+          tournamentSlug: "inje",
+          tournamentName: "하늘내린인제",
+          year: 2026,
+          gender: "men",
+          stage: "champion",
+        },
+        {
+          editionKey: "inje-2025-men",
+          tournamentSlug: "inje",
+          tournamentName: "하늘내린인제",
+          year: 2025,
+          gender: "men",
+          stage: "runner_up",
+        },
+      ],
     },
     {
       rank: 9,
@@ -150,6 +177,14 @@ const rankings: NationalRankingPageData["rankings"] = {
       runnerUps: 1,
       bestResults: [],
       honors: [
+        {
+          editionKey: "inje-2026-women",
+          tournamentSlug: "inje",
+          tournamentName: "하늘내린인제",
+          year: 2026,
+          gender: "women",
+          stage: "semifinal",
+        },
         {
           editionKey: "wemix-2025-women",
           tournamentSlug: "wemix",
@@ -353,16 +388,20 @@ describe("NationalRankingTable", () => {
     ).toBe("/clubs/constructor?gender=men");
   });
 
-  it("동아리 이름 뒤에는 2025년 우승과 준우승 왕관만 표시한다", () => {
+  it("동아리 이름 뒤에는 최근 연도의 모든 왕관을 표시한다", () => {
     render(<NationalRankingTable rankings={rankings} />);
 
-    const champion = screen.getByRole("button", {
+    const yangguChampion = screen.getByRole("button", {
       name: "2025 양구 남자부 우승",
     });
+    const injeChampion = screen.getByRole("button", {
+      name: "2026 인제 남자부 우승",
+    });
 
-    expect(champion).toBeDefined();
-    expect(champion.closest("a")).toBeNull();
-    expect(screen.getByLabelText("2025년 수상 기록")).toBeDefined();
+    expect(yangguChampion).toBeDefined();
+    expect(injeChampion).toBeDefined();
+    expect(yangguChampion.closest("a")).toBeNull();
+    expect(screen.getAllByLabelText("최근 1년 수상 기록")).toHaveLength(2);
     expect(
       screen.getByRole("button", {
         name: "서울과학기술대학교 STC 최고 성적 펼치기",
@@ -372,15 +411,15 @@ describe("NationalRankingTable", () => {
       screen.queryByRole("button", { name: "2024 경인지구 남자부 준우승" })
     ).toBeNull();
     expect(
-      screen.queryByRole("button", { name: "2025 위믹스 여자부 준우승" })
-    ).toBeNull();
+      screen.getByRole("button", { name: "2025 인제 남자부 준우승" })
+    ).toBeDefined();
   });
 
   it("동아리명과 왕관 묶음을 같은 하단 행에 배치한다", () => {
     render(<NationalRankingTable rankings={rankings} />);
 
     const clubName = screen.getByText("STC");
-    const honors = screen.getByLabelText("2025년 수상 기록");
+    const honors = screen.getAllByLabelText("최근 1년 수상 기록")[0];
 
     expect(clubName.classList.contains("national-ranking-club-name")).toBe(
       true

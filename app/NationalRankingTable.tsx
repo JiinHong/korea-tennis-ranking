@@ -5,6 +5,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
 import { parseRankingGender } from "@/lib/nationalRanking/genderQuery";
+import {
+  getCurrentKoreanYear,
+  isRecentHonor,
+} from "@/lib/nationalRanking/recentHonors";
 import type { NationalRankingPageData } from "@/lib/nationalRanking/repository";
 import type { RankingGender } from "@/lib/nationalRanking/types";
 
@@ -21,8 +25,6 @@ type NationalRankingTableProps = {
 const scoreFormatter = new Intl.NumberFormat("ko-KR", {
   maximumFractionDigits: 0,
 });
-
-const DISPLAY_HONOR_YEAR = 2025;
 
 type RankTier = "gold" | "silver" | "bronze";
 
@@ -46,6 +48,7 @@ export default function NationalRankingTable({
   const urlGender = parseRankingGender(searchParams.get("gender"), "men");
   const [activeGender, setActiveGender] = useState<RankingGender>(urlGender);
   const [expandedClubSlug, setExpandedClubSlug] = useState<string | null>(null);
+  const recentHonorReferenceYear = getCurrentKoreanYear();
   const activeTab = rankingDivisionTabs.find(
     (tab) => tab.gender === activeGender
   )!;
@@ -107,7 +110,7 @@ export default function NationalRankingTable({
             ) : (
               rows.map((row) => {
                 const displayedHonors = row.honors.filter(
-                  (honor) => honor.year === DISPLAY_HONOR_YEAR
+                  (honor) => isRecentHonor(honor, recentHonorReferenceYear)
                 );
                 const isExpanded = expandedClubSlug === row.clubSlug;
                 const regionId = `national-ranking-${activeGender}-${row.clubSlug}-results`;
@@ -173,7 +176,7 @@ export default function NationalRankingTable({
                           </span>
                           {displayedHonors.length > 0 ? (
                             <span
-                              aria-label="2025년 수상 기록"
+                              aria-label="최근 1년 수상 기록"
                               className="national-ranking-honors"
                             >
                               {displayedHonors.map((honor) => (
@@ -201,6 +204,7 @@ export default function NationalRankingTable({
                           clubSlug={row.clubSlug}
                           displayName={row.displayName}
                           isOpen={isExpanded}
+                          recentHonorReferenceYear={recentHonorReferenceYear}
                           regionId={regionId}
                         />
                       </td>

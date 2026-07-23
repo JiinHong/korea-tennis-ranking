@@ -13,6 +13,16 @@ vi.mock("@/lib/amplitudeAnalytics", () => analytics);
 
 const bestResults: NationalRankingBestResult[] = [
   {
+    editionKey: "inje-2026-men",
+    tournamentSlug: "inje",
+    tournamentName: "하늘내린인제",
+    year: 2026,
+    gender: "men",
+    actualEntrants: 32,
+    stage: "runner_up",
+    sourceTeamName: "느티나무",
+  },
+  {
     editionKey: "yanggu-2025-men",
     tournamentSlug: "yanggu",
     tournamentName: "국토정중앙배(양구)",
@@ -67,6 +77,7 @@ describe("NationalRankingExpandedResults", () => {
         clubSlug="seoultech-neutinamu"
         displayName="서울과학기술대학교 느티나무"
         isOpen
+        recentHonorReferenceYear={2026}
         regionId="seoultech-results"
       />
     );
@@ -79,7 +90,7 @@ describe("NationalRankingExpandedResults", () => {
     expect(within(region).queryByText("2023 하늘내린인제")).toBeNull();
   });
 
-  it("2025년 입상에만 왕관을 붙이고 전체 성적 링크에 현재 부문을 보존한다", () => {
+  it("대회별 최신 완료 대회 입상에만 왕관을 붙이고 현재 부문을 보존한다", () => {
     const { container } = render(
       <NationalRankingExpandedResults
         activeGender="men"
@@ -87,6 +98,7 @@ describe("NationalRankingExpandedResults", () => {
         clubSlug="seoultech-neutinamu"
         displayName="서울과학기술대학교 느티나무"
         isOpen
+        recentHonorReferenceYear={2026}
         regionId="seoultech-results"
       />
     );
@@ -94,8 +106,11 @@ describe("NationalRankingExpandedResults", () => {
     const crowns = container.querySelectorAll<HTMLImageElement>(
       ".national-result-crown"
     );
-    expect(crowns).toHaveLength(1);
+    expect(crowns).toHaveLength(2);
     expect(crowns[0].getAttribute("src")).toContain(
+      encodeURIComponent("/national-ranking/silver-crown.png")
+    );
+    expect(crowns[1].getAttribute("src")).toContain(
       encodeURIComponent("/national-ranking/bronze-crown.png")
     );
     expect(
@@ -111,6 +126,7 @@ describe("NationalRankingExpandedResults", () => {
         clubSlug="seoultech-neutinamu"
         displayName="서울과학기술대학교 느티나무"
         isOpen={false}
+        recentHonorReferenceYear={2026}
         regionId="seoultech-results"
       />
     );
@@ -134,6 +150,7 @@ describe("NationalRankingExpandedResults", () => {
         clubSlug="seoultech-neutinamu"
         displayName="서울과학기술대학교 느티나무"
         isOpen
+        recentHonorReferenceYear={2026}
         regionId="seoultech-results"
       />
     );
