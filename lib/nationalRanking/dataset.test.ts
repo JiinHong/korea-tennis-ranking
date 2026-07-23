@@ -561,13 +561,23 @@ describe("loadNationalRankingDataset", () => {
       resultCount: 12,
       sourceStatus: "verified",
     },
+    "inje-2026-men": {
+      actualEntrants: 36,
+      resultCount: 36,
+      sourceStatus: "verified",
+    },
+    "inje-2026-women": {
+      actualEntrants: 18,
+      resultCount: 18,
+      sourceStatus: "verified",
+    },
   } as const;
 
-  it("loads the complete 26-edition source manifest", () => {
+  it("loads the complete 28-edition source manifest", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-07-23-v6");
+    expect(dataset.version).toBe("sources-2026-07-23-v7");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -578,7 +588,7 @@ describe("loadNationalRankingDataset", () => {
     expect(dataset.editions.map((edition) => edition.key).sort()).toEqual(
       Object.keys(expectedEditions).sort()
     );
-    expect(dataset.editions).toHaveLength(26);
+    expect(dataset.editions).toHaveLength(28);
     expect(
       dataset.editions.some((edition) => edition.tournamentSlug === "yeongwol")
     ).toBe(false);
@@ -605,12 +615,12 @@ describe("loadNationalRankingDataset", () => {
       expect(results, editionKey).toHaveLength(expected.resultCount);
     }
 
-    expect(dataset.clubs).toHaveLength(63);
-    expect(dataset.aliases).toHaveLength(274);
-    expect(dataset.results).toHaveLength(1_116);
+    expect(dataset.clubs).toHaveLength(68);
+    expect(dataset.aliases).toHaveLength(285);
+    expect(dataset.results).toHaveLength(1_170);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
-    ).toHaveLength(537);
+    ).toHaveLength(591);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
     ).toHaveLength(579);
@@ -757,6 +767,132 @@ describe("loadNationalRankingDataset", () => {
       sourceTeamName: "과기대 느티나무 (1차우...",
       clubSlug: "seoultech-neutinamu",
     });
+  });
+
+  it("records the verified 2026 Inje men's and women's draws", () => {
+    const dataset = loadNationalRankingDataset();
+    const inje2026Results = dataset.results.filter((result) =>
+      result.editionKey.startsWith("inje-2026-")
+    );
+
+    expect(inje2026Results).toHaveLength(54);
+    expect(
+      inje2026Results.every(
+        (result) =>
+          result.clubSlug !== null && result.qualityStatus === "verified"
+      )
+    ).toBe(true);
+    expect(
+      inje2026Results.find(
+        (result) =>
+          result.editionKey === "inje-2026-men" &&
+          result.stage === "champion"
+      )
+    ).toMatchObject({
+      sourceTeamName: "서강대 SGTC A",
+      clubSlug: "sogang-sgtc",
+    });
+    expect(
+      inje2026Results.find(
+        (result) =>
+          result.editionKey === "inje-2026-men" &&
+          result.stage === "runner_up"
+      )
+    ).toMatchObject({
+      sourceTeamName: "가천대 Tiebreak A",
+      clubSlug: "gachon-tiebreak",
+    });
+    expect(
+      inje2026Results.find(
+        (result) =>
+          result.editionKey === "inje-2026-women" &&
+          result.stage === "champion"
+      )
+    ).toMatchObject({
+      sourceTeamName: "고려대 PETC여자 A",
+      clubSlug: "korea-petc",
+    });
+    expect(
+      inje2026Results.find(
+        (result) =>
+          result.editionKey === "inje-2026-women" &&
+          result.sourceTeamName === "단국대 단국 A"
+      )
+    ).toMatchObject({
+      clubSlug: "dankook-cheonan-dkutc",
+      stage: "round_of_16",
+    });
+    expect(
+      inje2026Results
+        .filter(
+          (result) =>
+            result.editionKey === "inje-2026-men" &&
+            ["champion", "runner_up", "semifinal", "quarterfinal"].includes(
+              result.stage ?? ""
+            )
+        )
+        .map(({ sourceTeamName, stage }) => `${stage}:${sourceTeamName}`)
+        .sort()
+    ).toEqual(
+      [
+        "champion:서강대 SGTC A",
+        "quarterfinal:동국대 DUTC A",
+        "quarterfinal:서울과기대 느티나무 A",
+        "quarterfinal:전북대 ACE A",
+        "quarterfinal:한남대 Winners A",
+        "runner_up:가천대 Tiebreak A",
+        "semifinal:고려대 KUTC A",
+        "semifinal:전남대 GRIP A",
+      ].sort()
+    );
+    expect(
+      inje2026Results
+        .filter(
+          (result) =>
+            result.editionKey === "inje-2026-women" &&
+            ["champion", "runner_up", "semifinal", "quarterfinal"].includes(
+              result.stage ?? ""
+            )
+        )
+        .map(({ sourceTeamName, stage }) => `${stage}:${sourceTeamName}`)
+        .sort()
+    ).toEqual(
+      [
+        "champion:고려대 PETC여자 A",
+        "quarterfinal:서울과기대 느티나무 A",
+        "quarterfinal:이화여대 SMASH B",
+        "quarterfinal:충남대 굿샷 A",
+        "quarterfinal:한양대 HYTC A",
+        "runner_up:이화여대 SMASH A",
+        "semifinal:가톨릭대 코트랑 A",
+        "semifinal:연세대 YUTT 진리",
+      ].sort()
+    );
+
+    expect(dataset.clubs).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          slug: "paichai-prima",
+          displayName: "배재대학교 프리마",
+        }),
+        expect.objectContaining({
+          slug: "chonnam-grip",
+          displayName: "전남대학교 GRIP",
+        }),
+        expect.objectContaining({
+          slug: "ut-perfect",
+          displayName: "한국교통대학교 퍼펙트",
+        }),
+        expect.objectContaining({
+          slug: "hufs-ace",
+          displayName: "한국외국어대학교 ACE",
+        }),
+        expect.objectContaining({
+          slug: "jeonbuk-topspin",
+          displayName: "전북대학교 탑스핀",
+        }),
+      ])
+    );
   });
 
   it("maps the KtcJtc source team to Gyeongsang National University's joint team", () => {

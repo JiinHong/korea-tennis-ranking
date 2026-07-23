@@ -1,5 +1,5 @@
 {
-  "version": "sources-2026-07-23-v6",
+  "version": "sources-2026-07-23-v7",
   "clubs": [
     {
       "slug": "catholic-courtrang",
@@ -378,6 +378,36 @@
       "universityName": "아주대학교",
       "clubName": "ATC",
       "displayName": "아주대학교 ATC"
+    },
+    {
+      "slug": "paichai-prima",
+      "universityName": "배재대학교",
+      "clubName": "프리마",
+      "displayName": "배재대학교 프리마"
+    },
+    {
+      "slug": "chonnam-grip",
+      "universityName": "전남대학교",
+      "clubName": "GRIP",
+      "displayName": "전남대학교 GRIP"
+    },
+    {
+      "slug": "ut-perfect",
+      "universityName": "한국교통대학교",
+      "clubName": "퍼펙트",
+      "displayName": "한국교통대학교 퍼펙트"
+    },
+    {
+      "slug": "hufs-ace",
+      "universityName": "한국외국어대학교",
+      "clubName": "ACE",
+      "displayName": "한국외국어대학교 ACE"
+    },
+    {
+      "slug": "jeonbuk-topspin",
+      "universityName": "전북대학교",
+      "clubName": "탑스핀",
+      "displayName": "전북대학교 탑스핀"
     }
   ],
   "aliases": [
@@ -1750,6 +1780,61 @@
       "clubSlug": "korea-kutc",
       "normalizedAlias": "고려대학교 고려대 kutc (3차우승)",
       "sourceLabel": "고려대 KUTC (3차우승)"
+    },
+    {
+      "clubSlug": "paichai-prima",
+      "normalizedAlias": "배재대학교 프리마",
+      "sourceLabel": "배재대 프리마"
+    },
+    {
+      "clubSlug": "paichai-prima",
+      "normalizedAlias": "배재대학교 프리마 a",
+      "sourceLabel": "배재대 프리마 A"
+    },
+    {
+      "clubSlug": "paichai-prima",
+      "normalizedAlias": "배재대학교 프리마 b",
+      "sourceLabel": "배재대 프리마 B"
+    },
+    {
+      "clubSlug": "chonnam-grip",
+      "normalizedAlias": "전남대학교 grip",
+      "sourceLabel": "전남대 GRIP"
+    },
+    {
+      "clubSlug": "chonnam-grip",
+      "normalizedAlias": "전남대학교 grip a",
+      "sourceLabel": "전남대 GRIP A"
+    },
+    {
+      "clubSlug": "chonnam-grip",
+      "normalizedAlias": "전남대학교 grip b",
+      "sourceLabel": "전남대 GRIP B"
+    },
+    {
+      "clubSlug": "ut-perfect",
+      "normalizedAlias": "한국교통대학교 퍼펙트",
+      "sourceLabel": "한국교통대 퍼펙트"
+    },
+    {
+      "clubSlug": "ut-perfect",
+      "normalizedAlias": "한국교통대학교 퍼펙트 a",
+      "sourceLabel": "한국교통대 퍼펙트 A"
+    },
+    {
+      "clubSlug": "hufs-ace",
+      "normalizedAlias": "한국외국어대학교 ace",
+      "sourceLabel": "한국외대 ACE"
+    },
+    {
+      "clubSlug": "hufs-ace",
+      "normalizedAlias": "한국외국어대학교 ace a",
+      "sourceLabel": "한국외대 ACE A"
+    },
+    {
+      "clubSlug": "jeonbuk-topspin",
+      "normalizedAlias": "전북대학교 탑스핀",
+      "sourceLabel": "전북대 탑스핀"
     }
   ],
   "tournaments": [
@@ -1935,6 +2020,28 @@
       "sourceStatus": "verified",
       "sourceRefs": [
         "인제/2025/여자/2025 인제 여자.pdf#page=1"
+      ]
+    },
+    {
+      "key": "inje-2026-men",
+      "tournamentSlug": "inje",
+      "year": 2026,
+      "gender": "men",
+      "actualEntrants": 36,
+      "sourceStatus": "verified",
+      "sourceRefs": [
+        "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1"
+      ]
+    },
+    {
+      "key": "inje-2026-women",
+      "tournamentSlug": "inje",
+      "year": 2026,
+      "gender": "women",
+      "actualEntrants": 18,
+      "sourceStatus": "verified",
+      "sourceRefs": [
+        "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1"
       ]
     },
     {
@@ -13297,6 +13404,546 @@
       "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/여자/KakaoTalk_Photo_2026-07-08-05-18-15.png",
       "note": "After a BYE, beats 경희대 KUTA 2-0 and 서울대학교 2-0, then loses the final 0-2 to 과기대 느티나무 .... Club identity frozen to korea-kutc under the administrator-approved school-only assignment rule."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "jeonbuk-ace",
+      "sourceTeamName": "전북대 ACE B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 1번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "catholic-courtrang",
+      "sourceTeamName": "가톨릭대 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 3번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "hanyang-hytc",
+      "sourceTeamName": "한양대 HYTC A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 4번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "hanyang-hytc",
+      "sourceTeamName": "한양대 HYTC B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 6번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "dongguk-dutc",
+      "sourceTeamName": "동국대 DUTC A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 8번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "kaist-stroke",
+      "sourceTeamName": "KAIST STROKE A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 9번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "kyunghee-seoul-kuta",
+      "sourceTeamName": "경희대 KUTA A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 11번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "kaist-stroke",
+      "sourceTeamName": "KAIST STROKE B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 14번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "gachon-tiebreak",
+      "sourceTeamName": "가천대 Tiebreak A",
+      "teamLabel": "A",
+      "stage": "runner_up",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 16번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "서울과기대 느티나무 A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 17번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 굿샷 B",
+      "teamLabel": "B",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 19번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "paichai-prima",
+      "sourceTeamName": "배재대 프리마 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 20번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "sungkyunkwan-stc",
+      "sourceTeamName": "성균관대 STC A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 22번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 굿샷 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 24번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대 KUTC A",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 25번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "gachon-tiebreak",
+      "sourceTeamName": "가천대 Tiebreak B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 27번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "고려대 PETC A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 30번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "paichai-prima",
+      "sourceTeamName": "배재대 프리마 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 32번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "chonnam-grip",
+      "sourceTeamName": "전남대 GRIP A",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 33번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "chonnam-grip",
+      "sourceTeamName": "전남대 GRIP B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 35번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "sogang-sgtc",
+      "sourceTeamName": "서강대 SGTC B",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 38번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대 KUTC B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 40번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "sejong-stc",
+      "sourceTeamName": "세종대 STC A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 41번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "catholic-courtrang",
+      "sourceTeamName": "가톨릭대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 43번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "hannam-winners",
+      "sourceTeamName": "한남대 Winners A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 45번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 46번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "jeonbuk-topspin",
+      "sourceTeamName": "전북대 탑스핀",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 48번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "ut-perfect",
+      "sourceTeamName": "한국교통대 퍼펙트 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 49번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "dankook-cheonan-dkutc",
+      "sourceTeamName": "단국대 천안캠 DKUTC",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 51번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "hufs-ace",
+      "sourceTeamName": "한국외대 ACE A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 54번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "jeonbuk-ace",
+      "sourceTeamName": "전북대 ACE A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 56번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "서울과기대 느티나무 B",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 57번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "연세대 YUTT 진리",
+      "teamLabel": "진리",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 59번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "고려대 PETC B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 61번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "kyunghee-seoul-kuta",
+      "sourceTeamName": "경희대 KUTA B",
+      "teamLabel": "B",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 62번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-men",
+      "clubSlug": "sogang-sgtc",
+      "sourceTeamName": "서강대 SGTC A",
+      "teamLabel": "A",
+      "stage": "champion",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 64번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "jeonbuk-ace",
+      "sourceTeamName": "전북대 ACE",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 1번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "hanyang-hytc",
+      "sourceTeamName": "한양대 HYTC A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 3번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "chonnam-grip",
+      "sourceTeamName": "전남대 GRIP A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 4번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "ewha-smash",
+      "sourceTeamName": "이화여대 SMASH A",
+      "teamLabel": "A",
+      "stage": "runner_up",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 6번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 8번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 굿샷 A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 9번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "paichai-prima",
+      "sourceTeamName": "배재대 프리마 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 11번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대 KUTC A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 14번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "연세대 YUTT 진리",
+      "teamLabel": "진리",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 16번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "고려대 PETC여자 A",
+      "teamLabel": "A",
+      "stage": "champion",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 17번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "gachon-tiebreak",
+      "sourceTeamName": "가천대 Tiebreak A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 19번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "catholic-courtrang",
+      "sourceTeamName": "가톨릭대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 22번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "ewha-smash",
+      "sourceTeamName": "이화여대 SMASH B",
+      "teamLabel": "B",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 24번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "서울과기대 느티나무 A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 25번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "hannam-winners",
+      "sourceTeamName": "한남대 Winners A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 27번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "고려대 PETC B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 29번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "dankook-cheonan-dkutc",
+      "sourceTeamName": "단국대 단국 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 30번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "inje-2026-women",
+      "clubSlug": "catholic-courtrang",
+      "sourceTeamName": "가톨릭대 코트랑 A",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
+      "note": "2026 하늘내린인제 최종 대진표의 32번 엔트리를 마지막 진출 단계까지 추적했습니다."
     }
   ]
 }
