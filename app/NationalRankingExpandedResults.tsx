@@ -3,7 +3,10 @@
 import Link from "next/link";
 
 import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
-import { isRecentHonor } from "@/lib/nationalRanking/recentHonors";
+import {
+  isLatestTournamentEdition,
+  type LatestEditionYearMap,
+} from "@/lib/nationalRanking/recentHonors";
 import type {
   NationalRankingBestResult,
   PublicTournamentResultStage,
@@ -18,7 +21,7 @@ type NationalRankingExpandedResultsProps = {
   clubSlug: string;
   displayName: string;
   isOpen: boolean;
-  recentHonorReferenceYear: number;
+  latestEditionYears: LatestEditionYearMap;
   regionId: string;
 };
 
@@ -54,7 +57,7 @@ export default function NationalRankingExpandedResults({
   clubSlug,
   displayName,
   isOpen,
-  recentHonorReferenceYear,
+  latestEditionYears,
   regionId,
 }: NationalRankingExpandedResultsProps) {
   const visibleResults = bestResults.slice(0, 3);
@@ -73,7 +76,7 @@ export default function NationalRankingExpandedResults({
             <ol className="national-ranking-best-results">
               {visibleResults.map((result) => {
                 const crownStage =
-                  isRecentHonor(result, recentHonorReferenceYear) &&
+                  isLatestTournamentEdition(result, latestEditionYears) &&
                   isPodiumStage(result.stage)
                     ? result.stage
                     : null;

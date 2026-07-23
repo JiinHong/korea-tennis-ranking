@@ -388,7 +388,7 @@ describe("NationalRankingTable", () => {
     ).toBe("/clubs/constructor?gender=men");
   });
 
-  it("동아리 이름 뒤에는 최근 연도의 모든 왕관을 표시한다", () => {
+  it("동아리 이름 뒤에는 대회·부문별 최신 완료 회차의 왕관만 표시한다", () => {
     render(<NationalRankingTable rankings={rankings} />);
 
     const yangguChampion = screen.getByRole("button", {
@@ -411,8 +411,8 @@ describe("NationalRankingTable", () => {
       screen.queryByRole("button", { name: "2024 경인지구 남자부 준우승" })
     ).toBeNull();
     expect(
-      screen.getByRole("button", { name: "2025 인제 남자부 준우승" })
-    ).toBeDefined();
+      screen.queryByRole("button", { name: "2025 인제 남자부 준우승" })
+    ).toBeNull();
   });
 
   it("동아리명과 왕관 묶음을 같은 하단 행에 배치한다", () => {

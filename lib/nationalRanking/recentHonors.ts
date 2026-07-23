@@ -2,8 +2,16 @@ import type { NationalRankingHonor } from "./types";
 
 type TournamentEditionReference = Pick<
   NationalRankingHonor,
-  "year"
+  "gender" | "tournamentSlug" | "year"
 >;
+
+export type LatestEditionYearMap = ReadonlyMap<string, number>;
+
+function getTournamentDivisionKey(
+  result: TournamentEditionReference
+): string {
+  return `${result.tournamentSlug}:${result.gender}`;
+}
 
 export function getCurrentKoreanYear(date = new Date()): number {
   return Number(
@@ -14,9 +22,34 @@ export function getCurrentKoreanYear(date = new Date()): number {
   );
 }
 
-export function isRecentHonor(
-  result: TournamentEditionReference,
+export function buildLatestEditionYearMap(
+  results: readonly TournamentEditionReference[],
   referenceYear = getCurrentKoreanYear()
+): LatestEditionYearMap {
+  const latestEditionYears = new Map<string, number>();
+  const earliestRecentYear = referenceYear - 1;
+
+  for (const result of results) {
+    if (result.year < earliestRecentYear || result.year > referenceYear) {
+      continue;
+    }
+
+    const key = getTournamentDivisionKey(result);
+    const latestYear = latestEditionYears.get(key);
+
+    if (latestYear === undefined || result.year > latestYear) {
+      latestEditionYears.set(key, result.year);
+    }
+  }
+
+  return latestEditionYears;
+}
+
+export function isLatestTournamentEdition(
+  result: TournamentEditionReference,
+  latestEditionYears: LatestEditionYearMap
 ): boolean {
-  return result.year >= referenceYear - 1 && result.year <= referenceYear;
+  return (
+    latestEditionYears.get(getTournamentDivisionKey(result)) === result.year
+  );
 }

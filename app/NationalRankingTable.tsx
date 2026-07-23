@@ -1,13 +1,14 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
 import { parseRankingGender } from "@/lib/nationalRanking/genderQuery";
 import {
+  buildLatestEditionYearMap,
   getCurrentKoreanYear,
-  isRecentHonor,
+  isLatestTournamentEdition,
 } from "@/lib/nationalRanking/recentHonors";
 import type { NationalRankingPageData } from "@/lib/nationalRanking/repository";
 import type { RankingGender } from "@/lib/nationalRanking/types";
@@ -49,6 +50,16 @@ export default function NationalRankingTable({
   const [activeGender, setActiveGender] = useState<RankingGender>(urlGender);
   const [expandedClubSlug, setExpandedClubSlug] = useState<string | null>(null);
   const recentHonorReferenceYear = getCurrentKoreanYear();
+  const latestEditionYears = useMemo(
+    () =>
+      buildLatestEditionYearMap(
+        Object.values(rankings).flatMap((divisionRows) =>
+          divisionRows.flatMap((row) => row.honors)
+        ),
+        recentHonorReferenceYear
+      ),
+    [rankings, recentHonorReferenceYear]
+  );
   const activeTab = rankingDivisionTabs.find(
     (tab) => tab.gender === activeGender
   )!;
@@ -110,7 +121,8 @@ export default function NationalRankingTable({
             ) : (
               rows.map((row) => {
                 const displayedHonors = row.honors.filter(
-                  (honor) => isRecentHonor(honor, recentHonorReferenceYear)
+                  (honor) =>
+                    isLatestTournamentEdition(honor, latestEditionYears)
                 );
                 const isExpanded = expandedClubSlug === row.clubSlug;
                 const regionId = `national-ranking-${activeGender}-${row.clubSlug}-results`;
@@ -204,7 +216,7 @@ export default function NationalRankingTable({
                           clubSlug={row.clubSlug}
                           displayName={row.displayName}
                           isOpen={isExpanded}
-                          recentHonorReferenceYear={recentHonorReferenceYear}
+                          latestEditionYears={latestEditionYears}
                           regionId={regionId}
                         />
                       </td>

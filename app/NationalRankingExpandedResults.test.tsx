@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import { buildLatestEditionYearMap } from "@/lib/nationalRanking/recentHonors";
 import type { NationalRankingBestResult } from "@/lib/nationalRanking/types";
 
 import NationalRankingExpandedResults from "./NationalRankingExpandedResults";
@@ -63,6 +64,7 @@ const bestResults: NationalRankingBestResult[] = [
     sourceTeamName: "느티나무 B",
   },
 ];
+const latestEditionYears = buildLatestEditionYearMap(bestResults, 2026);
 
 describe("NationalRankingExpandedResults", () => {
   beforeEach(() => {
@@ -77,7 +79,7 @@ describe("NationalRankingExpandedResults", () => {
         clubSlug="seoultech-neutinamu"
         displayName="서울과학기술대학교 느티나무"
         isOpen
-        recentHonorReferenceYear={2026}
+        latestEditionYears={latestEditionYears}
         regionId="seoultech-results"
       />
     );
@@ -98,7 +100,7 @@ describe("NationalRankingExpandedResults", () => {
         clubSlug="seoultech-neutinamu"
         displayName="서울과학기술대학교 느티나무"
         isOpen
-        recentHonorReferenceYear={2026}
+        latestEditionYears={latestEditionYears}
         regionId="seoultech-results"
       />
     );
@@ -126,7 +128,7 @@ describe("NationalRankingExpandedResults", () => {
         clubSlug="seoultech-neutinamu"
         displayName="서울과학기술대학교 느티나무"
         isOpen={false}
-        recentHonorReferenceYear={2026}
+        latestEditionYears={latestEditionYears}
         regionId="seoultech-results"
       />
     );
@@ -150,7 +152,7 @@ describe("NationalRankingExpandedResults", () => {
         clubSlug="seoultech-neutinamu"
         displayName="서울과학기술대학교 느티나무"
         isOpen
-        recentHonorReferenceYear={2026}
+        latestEditionYears={latestEditionYears}
         regionId="seoultech-results"
       />
     );
