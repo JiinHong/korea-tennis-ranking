@@ -567,7 +567,7 @@ describe("loadNationalRankingDataset", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-07-15-v4");
+    expect(dataset.version).toBe("sources-2026-07-23-v5");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -674,7 +674,7 @@ describe("loadNationalRankingDataset", () => {
         priorEditionKeys.has(result.editionKey)
       ),
     };
-    // Re-baselined after reviewing the 2023 Yanggu men's Round-of-16 field.
+    // Re-baselined after confirming KTC·JTC as Gyeongsang National University's joint team.
     const fingerprint = createHash("sha256")
       .update(JSON.stringify(approvedTask4))
       .digest("hex");
@@ -684,7 +684,7 @@ describe("loadNationalRankingDataset", () => {
     expect(approvedTask4.editions).toHaveLength(12);
     expect(approvedTask4.results).toHaveLength(608);
     expect(fingerprint).toBe(
-      "2a63af243fe643754fa52515fb581aae22510eace448e92473a59733d3c25296"
+      "0a5bd4796a7838b78d03148547641645ec159a410d411c6604a2c668e7822ccb"
     );
 
     for (const [editionKey, expectedCount] of Object.entries(priorExpectedCounts)) {
@@ -757,6 +757,32 @@ describe("loadNationalRankingDataset", () => {
       sourceTeamName: "과기대 느티나무 (1차우...",
       clubSlug: "seoultech-neutinamu",
     });
+  });
+
+  it("maps the KtcJtc source team to Gyeongsang National University's joint team", () => {
+    const dataset = loadNationalRankingDataset();
+
+    expect(dataset.clubs).toContainEqual({
+      slug: "gyeongsang-ktc-jtc",
+      universityName: "경상국립대학교",
+      clubName: "KTC·JTC",
+      displayName: "경상국립대학교 KTC·JTC",
+    });
+    expect(
+      dataset.aliases.find((alias) => alias.sourceLabel === "KtcJtc")
+    ).toMatchObject({
+      clubSlug: "gyeongsang-ktc-jtc",
+      normalizedAlias: "경상국립대학교 ktc jtc",
+    });
+    expect(
+      dataset.results.find((result) => result.sourceTeamName === "KtcJtc")
+    ).toMatchObject({
+      editionKey: "yanggu-2024-men",
+      clubSlug: "gyeongsang-ktc-jtc",
+    });
+    expect(
+      dataset.clubs.some((club) => club.slug === "gangneung-ktcjtc")
+    ).toBe(false);
   });
 
   it("uses source entry IDs only for the independently slotted clipped entries", () => {

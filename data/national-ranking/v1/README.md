@@ -1,7 +1,7 @@
 # National ranking source dataset v1
 
 `dataset.json` is the canonical, visually verified source manifest for the
-national university club ranking. Version `sources-2026-07-15-v4` contains the
+national university club ranking. Version `sources-2026-07-23-v5` contains the
 complete Yanggu, Gyeongin, Inje, Chuncheon, and WEMIX source program: 26
 editions and 1,116 terminal result records. Yeongwol is not part of this
 dataset.
@@ -87,6 +87,12 @@ Campus is part of identity. 단국대학교 천안캠퍼스 DKUTC and 단국대�
 frozen to 천안 for women and 죽전 for men. Aliases use an NFKC-normalized,
 lowercased combination of canonical university context and the exact reported
 team name; `sourceLabel` preserves the source spelling.
+
+The visually clipped `KtcJtc` source label is frozen to the joint
+`경상국립대학교 KTC·JTC` entrant. The clubs' official 2024 Yanggu post confirms
+that Gajwa-campus KTC and Chilam-campus JTC entered together as Gyeongsang
+National University's representative team. The earlier Gangneung association
+was unsupported and was corrected in `sources-2026-07-23-v5`.
 
 A verified edition requires exactly one champion-stage record and one
 runner-up-stage record. Thirty-one school-qualified finals are frozen under the
