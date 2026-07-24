@@ -3,15 +3,15 @@
   "clubs": [
     {
       "slug": "catholic-courtrang",
-      "universityName": "가톨릭대학교 성심교정",
+      "universityName": "가톨릭대학교",
       "clubName": "코트랑",
-      "displayName": "가톨릭대학교 성심교정 코트랑"
+      "displayName": "가톨릭대학교 코트랑"
     },
     {
       "slug": "chungang-love4t",
-      "universityName": "중앙대학교 서울캠퍼스",
+      "universityName": "중앙대학교",
       "clubName": "LOVE4T",
-      "displayName": "중앙대학교 서울캠퍼스 LOVE4T"
+      "displayName": "중앙대학교 LOVE4T"
     },
     {
       "slug": "chungnam-goodshot",
@@ -21,21 +21,21 @@
     },
     {
       "slug": "dankook-cheonan-dkutc",
-      "universityName": "단국대학교 천안캠퍼스",
-      "clubName": "DKUTC",
-      "displayName": "단국대학교 천안캠퍼스 DKUTC"
+      "universityName": "단국대학교",
+      "clubName": "DKUTC(천안캠퍼스)",
+      "displayName": "단국대학교 DKUTC(천안캠퍼스)"
     },
     {
       "slug": "dankook-jukjeon-dkutc",
-      "universityName": "단국대학교 죽전캠퍼스",
-      "clubName": "DKUTC",
-      "displayName": "단국대학교 죽전캠퍼스 DKUTC"
+      "universityName": "단국대학교",
+      "clubName": "DKUTC(죽전캠퍼스)",
+      "displayName": "단국대학교 DKUTC(죽전캠퍼스)"
     },
     {
       "slug": "dongguk-dutc",
-      "universityName": "동국대학교 서울캠퍼스",
+      "universityName": "동국대학교",
       "clubName": "DUTC",
-      "displayName": "동국대학교 서울캠퍼스 DUTC"
+      "displayName": "동국대학교 DUTC"
     },
     {
       "slug": "ewha-smash",
@@ -51,9 +51,9 @@
     },
     {
       "slug": "gachon-tiebreak",
-      "universityName": "가천대학교 글로벌캠퍼스",
+      "universityName": "가천대학교",
       "clubName": "타이브레이크",
-      "displayName": "가천대학교 글로벌캠퍼스 타이브레이크"
+      "displayName": "가천대학교 타이브레이크"
     },
     {
       "slug": "gyeongsang-ktc-jtc",
@@ -69,9 +69,9 @@
     },
     {
       "slug": "gyeonggi-ktf",
-      "universityName": "경기대학교 수원캠퍼스",
+      "universityName": "경기대학교",
       "clubName": "KTF",
-      "displayName": "경기대학교 수원캠퍼스 KTF"
+      "displayName": "경기대학교 KTF"
     },
     {
       "slug": "hanbat-masters",
@@ -87,9 +87,9 @@
     },
     {
       "slug": "hanyang-hytc",
-      "universityName": "한양대학교 서울캠퍼스",
+      "universityName": "한양대학교",
       "clubName": "HYTC",
-      "displayName": "한양대학교 서울캠퍼스 HYTC"
+      "displayName": "한양대학교 HYTC"
     },
     {
       "slug": "hanyang-women-hytc",
@@ -99,15 +99,15 @@
     },
     {
       "slug": "hongik-hitc",
-      "universityName": "홍익대학교 서울캠퍼스",
+      "universityName": "홍익대학교",
       "clubName": "HITC",
-      "displayName": "홍익대학교 서울캠퍼스 HITC"
+      "displayName": "홍익대학교 HITC"
     },
     {
       "slug": "inha-rapum",
-      "universityName": "인하대학교 중앙동아리",
+      "universityName": "인하대학교",
       "clubName": "라품",
-      "displayName": "인하대학교 중앙동아리 라품"
+      "displayName": "인하대학교 라품"
     },
     {
       "slug": "inu-uitc",
@@ -135,9 +135,9 @@
     },
     {
       "slug": "konkuk-ktc",
-      "universityName": "건국대학교 서울캠퍼스",
+      "universityName": "건국대학교",
       "clubName": "KTC",
-      "displayName": "건국대학교 서울캠퍼스 KTC"
+      "displayName": "건국대학교 KTC"
     },
     {
       "slug": "kookmin-kmtc",
@@ -357,9 +357,9 @@
     },
     {
       "slug": "sangmyung-tesla",
-      "universityName": "상명대학교 서울캠퍼스",
+      "universityName": "상명대학교",
       "clubName": "TESLA",
-      "displayName": "상명대학교 서울캠퍼스 TESLA"
+      "displayName": "상명대학교 TESLA"
     },
     {
       "slug": "seoul-university",

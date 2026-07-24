@@ -694,7 +694,7 @@ describe("loadNationalRankingDataset", () => {
     expect(approvedTask4.editions).toHaveLength(12);
     expect(approvedTask4.results).toHaveLength(608);
     expect(fingerprint).toBe(
-      "8ad766a44f867f7a83002260ccf064fddbe294234f913626f05503cb2eb00429"
+      "84f2c1e75fa3d896ca84dae24189829ee8ea8c5c082a628300d2e956102fd115"
     );
 
     for (const [editionKey, expectedCount] of Object.entries(priorExpectedCounts)) {
@@ -928,19 +928,29 @@ describe("loadNationalRankingDataset", () => {
     );
     const confirmedLabels = {
       "catholic-courtrang": [
-        "가톨릭대학교 성심교정",
+        "가톨릭대학교",
         "코트랑",
-        "가톨릭대학교 성심교정 코트랑",
+        "가톨릭대학교 코트랑",
       ],
       "chungang-love4t": [
-        "중앙대학교 서울캠퍼스",
+        "중앙대학교",
         "LOVE4T",
-        "중앙대학교 서울캠퍼스 LOVE4T",
+        "중앙대학교 LOVE4T",
+      ],
+      "dankook-cheonan-dkutc": [
+        "단국대학교",
+        "DKUTC(천안캠퍼스)",
+        "단국대학교 DKUTC(천안캠퍼스)",
+      ],
+      "dankook-jukjeon-dkutc": [
+        "단국대학교",
+        "DKUTC(죽전캠퍼스)",
+        "단국대학교 DKUTC(죽전캠퍼스)",
       ],
       "dongguk-dutc": [
-        "동국대학교 서울캠퍼스",
+        "동국대학교",
         "DUTC",
-        "동국대학교 서울캠퍼스 DUTC",
+        "동국대학교 DUTC",
       ],
       "ewha-smash": [
         "이화여자대학교 체육과학부",
@@ -948,9 +958,9 @@ describe("loadNationalRankingDataset", () => {
         "이화여자대학교 체육과학부 SMASH",
       ],
       "gachon-tiebreak": [
-        "가천대학교 글로벌캠퍼스",
+        "가천대학교",
         "타이브레이크",
-        "가천대학교 글로벌캠퍼스 타이브레이크",
+        "가천대학교 타이브레이크",
       ],
       "gyeongsang-ktc-jtc": [
         "경상국립대학교",
@@ -963,9 +973,9 @@ describe("loadNationalRankingDataset", () => {
         "강원대학교 삼척캠퍼스 SHOT",
       ],
       "gyeonggi-ktf": [
-        "경기대학교 수원캠퍼스",
+        "경기대학교",
         "KTF",
-        "경기대학교 수원캠퍼스 KTF",
+        "경기대학교 KTF",
       ],
       "hanbat-masters": [
         "국립한밭대학교",
@@ -978,19 +988,19 @@ describe("loadNationalRankingDataset", () => {
         "한양대학교 ERICA캠퍼스 HiTEC",
       ],
       "hanyang-hytc": [
-        "한양대학교 서울캠퍼스",
+        "한양대학교",
         "HYTC",
-        "한양대학교 서울캠퍼스 HYTC",
+        "한양대학교 HYTC",
       ],
       "hongik-hitc": [
-        "홍익대학교 서울캠퍼스",
+        "홍익대학교",
         "HITC",
-        "홍익대학교 서울캠퍼스 HITC",
+        "홍익대학교 HITC",
       ],
       "inha-rapum": [
-        "인하대학교 중앙동아리",
+        "인하대학교",
         "라품",
-        "인하대학교 중앙동아리 라품",
+        "인하대학교 라품",
       ],
       "knsu-alley": [
         "한국체육대학교",
@@ -1003,9 +1013,9 @@ describe("loadNationalRankingDataset", () => {
         "KAIST 학부 STROKE",
       ],
       "konkuk-ktc": [
-        "건국대학교 서울캠퍼스",
+        "건국대학교",
         "KTC",
-        "건국대학교 서울캠퍼스 KTC",
+        "건국대학교 KTC",
       ],
       "korea-kutc": ["고려대학교", "KUTC", "고려대학교 KUTC"],
       "korea-petc": [
@@ -1066,9 +1076,9 @@ describe("loadNationalRankingDataset", () => {
         "남서울대학교 위닝샷",
       ],
       "sangmyung-tesla": [
-        "상명대학교 서울캠퍼스",
+        "상명대학교",
         "TESLA",
-        "상명대학교 서울캠퍼스 TESLA",
+        "상명대학교 TESLA",
       ],
       "seoul-university": [
         "서울대학교",
@@ -1314,11 +1324,13 @@ describe("loadNationalRankingDataset", () => {
       expect.arrayContaining([
         expect.objectContaining({
           slug: "dankook-cheonan-dkutc",
-          universityName: "단국대학교 천안캠퍼스",
+          universityName: "단국대학교",
+          clubName: "DKUTC(천안캠퍼스)",
         }),
         expect.objectContaining({
           slug: "dankook-jukjeon-dkutc",
-          universityName: "단국대학교 죽전캠퍼스",
+          universityName: "단국대학교",
+          clubName: "DKUTC(죽전캠퍼스)",
         }),
       ])
     );
