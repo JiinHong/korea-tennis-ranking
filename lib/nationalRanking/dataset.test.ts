@@ -694,7 +694,7 @@ describe("loadNationalRankingDataset", () => {
     expect(approvedTask4.editions).toHaveLength(12);
     expect(approvedTask4.results).toHaveLength(608);
     expect(fingerprint).toBe(
-      "84f2c1e75fa3d896ca84dae24189829ee8ea8c5c082a628300d2e956102fd115"
+      "28e4e29777d4669006ee42bb3eae6092a96b23c5b80e1cda757bb8100acba7f5"
     );
 
     for (const [editionKey, expectedCount] of Object.entries(priorExpectedCounts)) {
@@ -1008,9 +1008,9 @@ describe("loadNationalRankingDataset", () => {
         "한국체육대학교 ALLEY",
       ],
       "kaist-stroke": [
-        "KAIST 학부",
+        "KAIST",
         "STROKE",
-        "KAIST 학부 STROKE",
+        "KAIST STROKE",
       ],
       "konkuk-ktc": [
         "건국대학교",
@@ -1051,14 +1051,14 @@ describe("loadNationalRankingDataset", () => {
       "kyungpook-kutc": ["경북대학교", "KUTC", "경북대학교 KUTC"],
       "chungbuk-ace": ["충북대학교", "ACE", "충북대학교 ACE"],
       "dankook-ace": [
-        "단국대학교 천안캠퍼스 치과대학",
+        "단국대학교 치과대학",
         "ACE",
-        "단국대학교 천안캠퍼스 치과대학 ACE",
+        "단국대학교 치과대학 ACE",
       ],
       "gangneung-wonju-love": [
-        "강원대학교 강릉캠퍼스",
+        "강원대학교",
         "LOVE",
-        "강원대학교 강릉캠퍼스 LOVE",
+        "강원대학교 LOVE",
       ],
       "korea-kmtc": [
         "고려대학교 의과대학",

@@ -123,9 +123,9 @@
     },
     {
       "slug": "kaist-stroke",
-      "universityName": "KAIST 학부",
+      "universityName": "KAIST",
       "clubName": "STROKE",
-      "displayName": "KAIST 학부 STROKE"
+      "displayName": "KAIST STROKE"
     },
     {
       "slug": "knsu-alley",
@@ -273,15 +273,15 @@
     },
     {
       "slug": "dankook-ace",
-      "universityName": "단국대학교 천안캠퍼스 치과대학",
+      "universityName": "단국대학교 치과대학",
       "clubName": "ACE",
-      "displayName": "단국대학교 천안캠퍼스 치과대학 ACE"
+      "displayName": "단국대학교 치과대학 ACE"
     },
     {
       "slug": "gangneung-wonju-love",
-      "universityName": "강원대학교 강릉캠퍼스",
+      "universityName": "강원대학교",
       "clubName": "LOVE",
-      "displayName": "강원대학교 강릉캠퍼스 LOVE"
+      "displayName": "강원대학교 LOVE"
     },
     {
       "slug": "ginue-loveace",
