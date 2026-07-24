@@ -577,7 +577,7 @@ describe("loadNationalRankingDataset", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-07-23-v8");
+    expect(dataset.version).toBe("sources-2026-07-24-v9");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -620,10 +620,10 @@ describe("loadNationalRankingDataset", () => {
     expect(dataset.results).toHaveLength(1_170);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
-    ).toHaveLength(591);
+    ).toHaveLength(923);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
-    ).toHaveLength(579);
+    ).toHaveLength(247);
 
     expect(
       dataset.results.find(
@@ -684,7 +684,8 @@ describe("loadNationalRankingDataset", () => {
         priorEditionKeys.has(result.editionKey)
       ),
     };
-    // Re-baselined after applying the user-confirmed concise university labels.
+    // Re-baselined after applying the administrator-approved single-club
+    // university inference to historical source labels.
     const fingerprint = createHash("sha256")
       .update(JSON.stringify(approvedTask4))
       .digest("hex");
@@ -694,7 +695,7 @@ describe("loadNationalRankingDataset", () => {
     expect(approvedTask4.editions).toHaveLength(12);
     expect(approvedTask4.results).toHaveLength(608);
     expect(fingerprint).toBe(
-      "28e4e29777d4669006ee42bb3eae6092a96b23c5b80e1cda757bb8100acba7f5"
+      "48b423c8c50089a72888cbb0777fe74c2594fdee84969825b0f204e6462e9cd9"
     );
 
     for (const [editionKey, expectedCount] of Object.entries(priorExpectedCounts)) {
@@ -730,6 +731,38 @@ describe("loadNationalRankingDataset", () => {
       )
     ).toMatchObject({
       stage: null,
+      qualityStatus: "unresolved",
+    });
+  });
+
+  it("assigns university-only team labels when that university has one site club", () => {
+    const dataset = loadNationalRankingDataset();
+    const findResult = (editionKey: string, sourceTeamName: string) =>
+      dataset.results.find(
+        (result) =>
+          result.editionKey === editionKey &&
+          result.sourceTeamName === sourceTeamName
+      );
+
+    expect(findResult("yanggu-2025-men", "경북대 A")).toMatchObject({
+      clubSlug: "kyungpook-kutc",
+      qualityStatus: "verified",
+    });
+    expect(findResult("yanggu-2025-men", "건국대 A")).toMatchObject({
+      clubSlug: "konkuk-ktc",
+      qualityStatus: "verified",
+    });
+    expect(findResult("yanggu-2025-men", "서강대 A")).toMatchObject({
+      clubSlug: "sogang-sgtc",
+      qualityStatus: "verified",
+    });
+
+    expect(findResult("yanggu-2025-men", "전북대 B")).toMatchObject({
+      clubSlug: null,
+      qualityStatus: "unresolved",
+    });
+    expect(findResult("yanggu-2025-men", "한양대 A [3]")).toMatchObject({
+      clubSlug: null,
       qualityStatus: "unresolved",
     });
   });
