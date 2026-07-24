@@ -1,5 +1,5 @@
 {
-  "version": "sources-2026-07-24-v9",
+  "version": "sources-2026-07-24-v10",
   "clubs": [
     {
       "slug": "catholic-courtrang",
@@ -408,6 +408,18 @@
       "universityName": "전북대학교",
       "clubName": "탑스핀",
       "displayName": "전북대학교 탑스핀"
+    },
+    {
+      "slug": "suwon-ace",
+      "universityName": "수원대학교",
+      "clubName": "ACE",
+      "displayName": "수원대학교 ACE"
+    },
+    {
+      "slug": "knue-tennis",
+      "universityName": "한국교원대학교",
+      "clubName": "테니스부",
+      "displayName": "한국교원대학교 테니스부"
     }
   ],
   "aliases": [
@@ -2275,13 +2287,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-seoul-kuta",
       "sourceTeamName": "Kuta A [Q]",
       "teamLabel": "A",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-egzq.png",
-      "note": "Slot 5 won in the Round of 128, then lost in the Round of 64."
+      "note": "Slot 5 won in the Round of 128, then lost in the Round of 64. Assigned to kyunghee-seoul-kuta from administrator review memo \"경희대 KUTA\"."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -4205,13 +4217,13 @@
     },
     {
       "editionKey": "yanggu-2024-men",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-global-luvis",
       "sourceTeamName": "경희대 국제 A",
       "teamLabel": "A",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/남자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_1.png",
-      "note": "After a BYE it beats Sstc C, then loses in Round 3 to 쿠크다스 A."
+      "note": "After a BYE it beats Sstc C, then loses in Round 3 to 쿠크다스 A. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
     },
     {
       "editionKey": "yanggu-2024-men",
@@ -4225,13 +4237,13 @@
     },
     {
       "editionKey": "yanggu-2024-men",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대 B",
       "teamLabel": "B",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/남자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_1.png",
-      "note": "It beats 서울시립대 O, then loses in Round 2 to 쿠크다스 A."
+      "note": "It beats 서울시립대 O, then loses in Round 2 to 쿠크다스 A. Assigned to jeonbuk-ace from administrator review memo \"ACE\"."
     },
     {
       "editionKey": "yanggu-2024-men",
@@ -4395,13 +4407,13 @@
     },
     {
       "editionKey": "yanggu-2024-men",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-global-luvis",
       "sourceTeamName": "경희대 국제 B",
       "teamLabel": "B",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/남자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_1.png",
-      "note": "It beats 타이브레이크 C, then loses in Round 2 to Petc A."
+      "note": "It beats 타이브레이크 C, then loses in Round 2 to Petc A. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
     },
     {
       "editionKey": "yanggu-2024-men",
@@ -4505,13 +4517,13 @@
     },
     {
       "editionKey": "yanggu-2024-men",
-      "clubSlug": null,
+      "clubSlug": "knue-tennis",
       "sourceTeamName": "교원대 테니스부",
       "teamLabel": "-",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/남자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_1.png",
-      "note": "It beats Stroke B and Kutc C, then loses in Round 3 to 서울시립대 U."
+      "note": "It beats Stroke B and Kutc C, then loses in Round 3 to 서울시립대 U. Assigned to knue-tennis from administrator review memo \"한국교원대학교 테니스부\"."
     },
     {
       "editionKey": "yanggu-2024-men",
@@ -4865,13 +4877,13 @@
     },
     {
       "editionKey": "yanggu-2024-men",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-global-luvis",
       "sourceTeamName": "경희대 국제 C",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/남자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_2.png",
-      "note": "Slot 107 visibly loses Round 1 to Kmtc."
+      "note": "Slot 107 visibly loses Round 1 to Kmtc. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
     },
     {
       "editionKey": "yanggu-2024-men",
@@ -5015,13 +5027,13 @@
     },
     {
       "editionKey": "yanggu-2024-men",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대 A [2]",
       "teamLabel": "A",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/남자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_2.png",
-      "note": "After a BYE it beats Dkutc 죽전 B, then loses in Round 3 to 굿샷 A."
+      "note": "After a BYE it beats Dkutc 죽전 B, then loses in Round 3 to 굿샷 A. Assigned to jeonbuk-ace from administrator review memo \"ACE\"."
     },
     {
       "editionKey": "yanggu-2024-women",
@@ -5055,13 +5067,13 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-global-luvis",
       "sourceTeamName": "경희대 국제 B",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/여자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_4.png",
-      "note": "Slot 5; opening BYE, then first played-match loss to 느티나무 B."
+      "note": "Slot 5; opening BYE, then first played-match loss to 느티나무 B. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
     },
     {
       "editionKey": "yanggu-2024-women",
@@ -5115,13 +5127,13 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대 A",
       "teamLabel": "A",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/여자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_4.png",
-      "note": "Slot 15; beat 굿샷 B, then lost in Round 3 to Stroke A."
+      "note": "Slot 15; beat 굿샷 B, then lost in Round 3 to Stroke A. Assigned to jeonbuk-ace from administrator review memo \"ACE\"."
     },
     {
       "editionKey": "yanggu-2024-women",
@@ -5295,13 +5307,13 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대 B",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/여자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_4.png",
-      "note": "Slot 48; opening BYE and w.o. advance, then first played-match loss to Sstc A in Round 3."
+      "note": "Slot 48; opening BYE and w.o. advance, then first played-match loss to Sstc A in Round 3. Assigned to jeonbuk-ace from administrator review memo \"ACE\"."
     },
     {
       "editionKey": "yanggu-2024-women",
@@ -5645,13 +5657,13 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": null,
+      "clubSlug": "knue-tennis",
       "sourceTeamName": "교원대 테니스부",
       "teamLabel": "",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/여자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_5.png",
-      "note": "Slot 109; beat Ktc A, then lost in Round 3 to 서울시립대 U."
+      "note": "Slot 109; beat Ktc A, then lost in Round 3 to 서울시립대 U. Assigned to knue-tennis from administrator review memo \"한국교원대학교 테니스부\"."
     },
     {
       "editionKey": "yanggu-2024-women",
@@ -5675,13 +5687,13 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-global-luvis",
       "sourceTeamName": "경희대 국제 C",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/여자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_5.png",
-      "note": "Slot 116; opening BYE, then first played-match loss to 쿠크리스 A."
+      "note": "Slot 116; opening BYE, then first played-match loss to 쿠크리스 A. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
     },
     {
       "editionKey": "yanggu-2024-women",
@@ -5825,23 +5837,23 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 자유",
       "teamLabel": "",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=1",
-      "note": "Visually checked slot 11 and traced the bracket to terminal stage round_of_16."
+      "note": "Visually checked slot 11 and traced the bracket to terminal stage round_of_16. Assigned to yonsei-yutt from administrator review memo \"YUTT\"."
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "hanyang-hytc",
       "sourceTeamName": "한양대 D",
       "teamLabel": "D",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=1",
-      "note": "Visually checked slot 12 and terminal first played match."
+      "note": "Visually checked slot 12 and terminal first played match. Assigned to hanyang-hytc from administrator review memo \"HYTC\"."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -5855,13 +5867,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대 B",
       "teamLabel": "B",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=1",
-      "note": "Visually checked slot 14 and traced the bracket to terminal stage round_of_64."
+      "note": "Visually checked slot 14 and traced the bracket to terminal stage round_of_64. Assigned to jeonbuk-ace from administrator review memo \"ACE\"."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -5985,23 +5997,23 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "hanyang-hytc",
       "sourceTeamName": "한양대 B",
       "teamLabel": "B",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=1",
-      "note": "Visually checked slot 32 and traced the bracket to terminal stage round_of_16."
+      "note": "Visually checked slot 32 and traced the bracket to terminal stage round_of_16. Assigned to hanyang-hytc from administrator review memo \"HYTC\"."
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "hanyang-hytc",
       "sourceTeamName": "한양대 A [3]",
       "teamLabel": "A",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=1",
-      "note": "Visually checked slot 33 and traced the bracket to terminal stage round_of_32."
+      "note": "Visually checked slot 33 and traced the bracket to terminal stage round_of_32. Assigned to hanyang-hytc from administrator review memo \"HYTC\"."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -6025,13 +6037,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "hanyang-hytc",
       "sourceTeamName": "한양대 C",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=1",
-      "note": "Visually checked slot 37 and terminal first played match."
+      "note": "Visually checked slot 37 and terminal first played match. Assigned to hanyang-hytc from administrator review memo \"HYTC\"."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -6095,13 +6107,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "suwon-ace",
       "sourceTeamName": "수원대 A",
       "teamLabel": "A",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=1",
-      "note": "Visually checked slot 46 and traced the bracket to terminal stage round_of_64."
+      "note": "Visually checked slot 46 and traced the bracket to terminal stage round_of_64. Assigned to suwon-ace from administrator review memo \"수원대학교 ACE\"."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -6195,13 +6207,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "gyeonggi-ktf",
       "sourceTeamName": "Ktf A",
       "teamLabel": "A",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=1",
-      "note": "Visually checked slot 61 and traced the bracket to terminal stage round_of_64."
+      "note": "Visually checked slot 61 and traced the bracket to terminal stage round_of_64. Assigned to gyeonggi-ktf from administrator review memo \"경기대학교 KTF\"."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -6255,13 +6267,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "knue-tennis",
       "sourceTeamName": "한국교원대",
       "teamLabel": "",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=2",
-      "note": "Visually checked slot 70 and traced the bracket to terminal stage round_of_32."
+      "note": "Visually checked slot 70 and traced the bracket to terminal stage round_of_32. Assigned to knue-tennis from administrator review memo \"한국교원대학교 테니스부\"."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -6325,23 +6337,23 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 평화",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=2",
-      "note": "Visually checked slot 80 and terminal first played match after a Round-of-128 BYE."
+      "note": "Visually checked slot 80 and terminal first played match after a Round-of-128 BYE. Assigned to yonsei-yutt from administrator review memo \"YUTT\"."
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "gyeonggi-ktf",
       "sourceTeamName": "Ktf B",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=2",
-      "note": "Visually checked slot 81 and terminal first played match after a Round-of-128 BYE."
+      "note": "Visually checked slot 81 and terminal first played match after a Round-of-128 BYE. Assigned to gyeonggi-ktf from administrator review memo \"경기대학교 KTF\"."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -6475,13 +6487,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "gyeonggi-ktf",
       "sourceTeamName": "Ktf C",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=2",
-      "note": "Visually checked slot 100 and terminal first played match."
+      "note": "Visually checked slot 100 and terminal first played match. Assigned to gyeonggi-ktf from administrator review memo \"경기대학교 KTF\"."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -6515,13 +6527,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 진리",
       "teamLabel": "",
       "stage": "semifinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=3",
-      "note": "Visually checked slot 105 and traced the bracket to terminal stage semifinal."
+      "note": "Visually checked slot 105 and traced the bracket to terminal stage semifinal. Assigned to yonsei-yutt from administrator review memo \"YUTT\"."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -6615,13 +6627,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 정의",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=2",
-      "note": "Visually checked slot 118 and terminal first played match."
+      "note": "Visually checked slot 118 and terminal first played match. Assigned to yonsei-yutt from administrator review memo \"YUTT\"."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -6725,33 +6737,33 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대 A",
       "teamLabel": "A",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=3",
-      "note": "Visually checked slot 6 and traced the bracket to terminal stage quarterfinal."
+      "note": "Visually checked slot 6 and traced the bracket to terminal stage quarterfinal. Assigned to jeonbuk-ace from administrator review memo \"ACE\"."
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-global-luvis",
       "sourceTeamName": "경희대 국제 B",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=1",
-      "note": "Visually checked slot 8 and terminal first played match after a Round-of-128 BYE."
+      "note": "Visually checked slot 8 and terminal first played match after a Round-of-128 BYE. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 정의",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=1",
-      "note": "Visually checked slot 9 and terminal first played match after a Round-of-128 BYE."
+      "note": "Visually checked slot 9 and terminal first played match after a Round-of-128 BYE. Assigned to yonsei-yutt from administrator review memo \"YUTT\"."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -6905,13 +6917,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-seoul-kuta",
       "sourceTeamName": "경희대 Kuta",
       "teamLabel": "",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=1",
-      "note": "Visually checked slot 38 and traced the bracket to terminal stage round_of_16."
+      "note": "Visually checked slot 38 and traced the bracket to terminal stage round_of_16. Assigned to kyunghee-seoul-kuta from administrator review memo \"경희대 KUTA\"."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -6985,13 +6997,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "hanyang-hytc",
       "sourceTeamName": "한양대 B",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=1",
-      "note": "Visually checked slot 54 and terminal first played match after a Round-of-128 BYE."
+      "note": "Visually checked slot 54 and terminal first played match after a Round-of-128 BYE. Assigned to hanyang-hytc from administrator review memo \"HYTC\"."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -7015,43 +7027,43 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 진리",
       "teamLabel": "",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=3",
-      "note": "Visually checked slot 59 and traced the bracket to terminal stage quarterfinal."
+      "note": "Visually checked slot 59 and traced the bracket to terminal stage quarterfinal. Assigned to yonsei-yutt from administrator review memo \"YUTT\"."
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 평화",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=1",
-      "note": "Visually checked slot 61 and terminal first played match."
+      "note": "Visually checked slot 61 and terminal first played match. Assigned to yonsei-yutt from administrator review memo \"YUTT\"."
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "suwon-ace",
       "sourceTeamName": "수원대 W",
       "teamLabel": "W",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=1",
-      "note": "Visually checked slot 62 and traced the bracket to terminal stage round_of_64."
+      "note": "Visually checked slot 62 and traced the bracket to terminal stage round_of_64. Assigned to suwon-ace from administrator review memo \"수원대학교 ACE\"."
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 자유",
       "teamLabel": "",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=1",
-      "note": "Visually checked slot 64 and traced the bracket to terminal stage round_of_32."
+      "note": "Visually checked slot 64 and traced the bracket to terminal stage round_of_32. Assigned to yonsei-yutt from administrator review memo \"YUTT\"."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -7075,13 +7087,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-global-luvis",
       "sourceTeamName": "경희대 국제 C",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=2",
-      "note": "Visually checked slot 68 and terminal first played match."
+      "note": "Visually checked slot 68 and terminal first played match. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -7145,13 +7157,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "hanyang-hytc",
       "sourceTeamName": "한양대 A",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=2",
-      "note": "Visually checked slot 81 and traced the bracket to terminal stage round_of_16."
+      "note": "Visually checked slot 81 and traced the bracket to terminal stage round_of_16. Assigned to hanyang-hytc from administrator review memo \"HYTC\"."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -7205,13 +7217,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-global-luvis",
       "sourceTeamName": "경희대 국제 D",
       "teamLabel": "D",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=2",
-      "note": "Visually checked slot 93 and terminal first played match."
+      "note": "Visually checked slot 93 and terminal first played match. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -7395,13 +7407,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "knue-tennis",
       "sourceTeamName": "한국교원대",
       "teamLabel": "",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=2",
-      "note": "Visually checked slot 125 and traced the bracket to terminal stage round_of_64."
+      "note": "Visually checked slot 125 and traced the bracket to terminal stage round_of_64. Assigned to knue-tennis from administrator review memo \"한국교원대학교 테니스부\"."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -7415,13 +7427,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-global-luvis",
       "sourceTeamName": "경희대 국제 A [2]",
       "teamLabel": "A",
       "stage": "semifinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=3",
-      "note": "Visually checked slot 128 and traced the bracket to terminal stage semifinal."
+      "note": "Visually checked slot 128 and traced the bracket to terminal stage semifinal. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
     },
     {
       "editionKey": "inje-2023-men",

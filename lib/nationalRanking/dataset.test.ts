@@ -577,7 +577,7 @@ describe("loadNationalRankingDataset", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-07-24-v9");
+    expect(dataset.version).toBe("sources-2026-07-24-v10");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -615,15 +615,15 @@ describe("loadNationalRankingDataset", () => {
       expect(results, editionKey).toHaveLength(expected.resultCount);
     }
 
-    expect(dataset.clubs).toHaveLength(68);
+    expect(dataset.clubs).toHaveLength(70);
     expect(dataset.aliases).toHaveLength(285);
     expect(dataset.results).toHaveLength(1_170);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
-    ).toHaveLength(923);
+    ).toHaveLength(963);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
-    ).toHaveLength(247);
+    ).toHaveLength(207);
 
     expect(
       dataset.results.find(
@@ -684,8 +684,8 @@ describe("loadNationalRankingDataset", () => {
         priorEditionKeys.has(result.editionKey)
       ),
     };
-    // Re-baselined after applying the administrator-approved single-club
-    // university inference to historical source labels.
+    // Re-baselined after applying the administrator-reviewed Yanggu club
+    // mappings while preserving the original edition and result ordering.
     const fingerprint = createHash("sha256")
       .update(JSON.stringify(approvedTask4))
       .digest("hex");
@@ -695,7 +695,7 @@ describe("loadNationalRankingDataset", () => {
     expect(approvedTask4.editions).toHaveLength(12);
     expect(approvedTask4.results).toHaveLength(608);
     expect(fingerprint).toBe(
-      "48b423c8c50089a72888cbb0777fe74c2594fdee84969825b0f204e6462e9cd9"
+      "f4e15c78a32930f6be5519b66f8bb2539dc949ba5a54a7ab84366e7690ea4691"
     );
 
     for (const [editionKey, expectedCount] of Object.entries(priorExpectedCounts)) {
@@ -735,7 +735,7 @@ describe("loadNationalRankingDataset", () => {
     });
   });
 
-  it("assigns university-only team labels when that university has one site club", () => {
+  it("assigns approved single-club and Yanggu review mappings", () => {
     const dataset = loadNationalRankingDataset();
     const findResult = (editionKey: string, sourceTeamName: string) =>
       dataset.results.find(
@@ -758,12 +758,12 @@ describe("loadNationalRankingDataset", () => {
     });
 
     expect(findResult("yanggu-2025-men", "전북대 B")).toMatchObject({
-      clubSlug: null,
-      qualityStatus: "unresolved",
+      clubSlug: "jeonbuk-ace",
+      qualityStatus: "verified",
     });
     expect(findResult("yanggu-2025-men", "한양대 A [3]")).toMatchObject({
-      clubSlug: null,
-      qualityStatus: "unresolved",
+      clubSlug: "hanyang-hytc",
+      qualityStatus: "verified",
     });
   });
 
