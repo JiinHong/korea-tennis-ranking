@@ -51,7 +51,7 @@ describe("경희대학교 대회 결과 통합", () => {
     ]);
   });
 
-  it("LOVICE 준우승을 포함한 일반 경희대 47건과 IMPACT 10건을 각각 통합한다", async () => {
+  it("LOVICE 준우승을 포함한 일반 경희대 49건과 IMPACT 11건을 각각 통합한다", async () => {
     const dataset = await loadDataset();
     const generalResults = dataset.results.filter(
       (result) => result.clubSlug === KYUNGHEE_SLUG
@@ -60,8 +60,8 @@ describe("경희대학교 대회 결과 통합", () => {
       (result) => result.clubSlug === KYUNGHEE_ENGINEERING_SLUG
     );
 
-    expect(generalResults).toHaveLength(47);
-    expect(impactResults).toHaveLength(10);
+    expect(generalResults).toHaveLength(49);
+    expect(impactResults).toHaveLength(11);
     expect(
       [...generalResults, ...impactResults].every(
         (result) => result.qualityStatus === "verified"
@@ -128,6 +128,6 @@ describe("경희대학교 대회 결과 통합", () => {
   it("통합 결과를 새 데이터 버전으로 관리한다", async () => {
     const dataset = await loadDataset();
 
-    expect(dataset.version).toBe("sources-2026-07-26-v15");
+    expect(dataset.version).toBe("sources-2026-07-26-v16");
   });
 });

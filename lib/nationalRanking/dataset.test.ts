@@ -577,7 +577,7 @@ describe("loadNationalRankingDataset", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-07-26-v15");
+    expect(dataset.version).toBe("sources-2026-07-26-v16");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -616,14 +616,14 @@ describe("loadNationalRankingDataset", () => {
     }
 
     expect(dataset.clubs).toHaveLength(63);
-    expect(dataset.aliases).toHaveLength(365);
+    expect(dataset.aliases).toHaveLength(397);
     expect(dataset.results).toHaveLength(1_170);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
-    ).toHaveLength(1_064);
+    ).toHaveLength(1_096);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
-    ).toHaveLength(106);
+    ).toHaveLength(74);
 
     expect(
       dataset.results.find(
@@ -695,7 +695,7 @@ describe("loadNationalRankingDataset", () => {
     expect(approvedTask4.editions).toHaveLength(12);
     expect(approvedTask4.results).toHaveLength(608);
     expect(fingerprint).toBe(
-      "40a83cc7ed4e7387036f9cb6426e7e1807a8b0156d0bf2e09f9f90de57b80780"
+      "f92540cf5725904e15ec94cb31aee19071b5822a601f29e7d102adb615963f82"
     );
 
     for (const [editionKey, expectedCount] of Object.entries(priorExpectedCounts)) {

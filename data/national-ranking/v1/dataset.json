@@ -1,5 +1,5 @@
 {
-  "version": "sources-2026-07-26-v15",
+  "version": "sources-2026-07-26-v16",
   "clubs": [
     {
       "slug": "catholic-courtrang",
@@ -2205,6 +2205,166 @@
       "clubSlug": "kyunghee-engineering-impact",
       "normalizedAlias": "경희대학교 공과대학 경희대 국제 임팩트",
       "sourceLabel": "경희대 국제 임팩트"
+    },
+    {
+      "clubSlug": "kyunghee-kuta-lovice",
+      "normalizedAlias": "경희대학교 경희 b [q]",
+      "sourceLabel": "경희 B [Q]"
+    },
+    {
+      "clubSlug": "hanbat-masters",
+      "normalizedAlias": "국립한밭대학교 꿀복숭아 [q]",
+      "sourceLabel": "꿀복숭아 [Q]"
+    },
+    {
+      "clubSlug": "hufs-ace",
+      "normalizedAlias": "한국외국어대학교 ace a [q]",
+      "sourceLabel": "Ace A [Q]"
+    },
+    {
+      "clubSlug": "ewha-tennis",
+      "normalizedAlias": "이화여자대학교 이대 4화 [q]",
+      "sourceLabel": "이대 4화 [Q]"
+    },
+    {
+      "clubSlug": "hanyang-women-hytc",
+      "normalizedAlias": "한양여자대학교 hytc 사자 [q]",
+      "sourceLabel": "Hytc 사자 [Q]"
+    },
+    {
+      "clubSlug": "hanbat-masters",
+      "normalizedAlias": "국립한밭대학교 햇감자 [q]",
+      "sourceLabel": "햇감자 [Q]"
+    },
+    {
+      "clubSlug": "hanyang-hytc",
+      "normalizedAlias": "한양대학교 hytc 개나리 [q]",
+      "sourceLabel": "Hytc 개나리 [Q]"
+    },
+    {
+      "clubSlug": "hanyang-erica-hitec",
+      "normalizedAlias": "한양대학교 erica캠퍼스 에리카 b [q]",
+      "sourceLabel": "에리카 B [Q]"
+    },
+    {
+      "clubSlug": "yonsei-yutt",
+      "normalizedAlias": "연세대학교 연세대 사랑 [q]",
+      "sourceLabel": "연세대 사랑 [Q]"
+    },
+    {
+      "clubSlug": "yonsei-kookdas",
+      "normalizedAlias": "연세대학교 상경·경영대학 쿠크다스 [q]",
+      "sourceLabel": "쿠크다스 [Q]"
+    },
+    {
+      "clubSlug": "hanyang-hytc",
+      "normalizedAlias": "한양대학교 hytc 블루",
+      "sourceLabel": "Hytc 블루"
+    },
+    {
+      "clubSlug": "dongguk-dutc",
+      "normalizedAlias": "동국대학교 dutc b [q]",
+      "sourceLabel": "Dutc B [Q]"
+    },
+    {
+      "clubSlug": "suwon-ace",
+      "normalizedAlias": "수원대학교 ace w [q]",
+      "sourceLabel": "Ace W [Q]"
+    },
+    {
+      "clubSlug": "korea-kutc",
+      "normalizedAlias": "고려대학교 kutc c [q]",
+      "sourceLabel": "Kutc C [Q]"
+    },
+    {
+      "clubSlug": "dongguk-dutc",
+      "normalizedAlias": "동국대학교 dutc a [q]",
+      "sourceLabel": "Dutc A [Q]"
+    },
+    {
+      "clubSlug": "korea-kutc",
+      "normalizedAlias": "고려대학교 kutc a [q]",
+      "sourceLabel": "Kutc A [Q]"
+    },
+    {
+      "clubSlug": "ewha-tennis",
+      "normalizedAlias": "이화여자대학교 이대 5화 [q]",
+      "sourceLabel": "이대 5화 [Q]"
+    },
+    {
+      "clubSlug": "hanbat-masters",
+      "normalizedAlias": "국립한밭대학교 박고구마 [q]",
+      "sourceLabel": "박고구마 [Q]"
+    },
+    {
+      "clubSlug": "kyunghee-kuta-lovice",
+      "normalizedAlias": "경희대학교 경희 c [q]",
+      "sourceLabel": "경희 C [Q]"
+    },
+    {
+      "clubSlug": "dankook-jukjeon-dkutc",
+      "normalizedAlias": "단국대학교 dkuct 3 [q]",
+      "sourceLabel": "Dkuct 3 [Q]"
+    },
+    {
+      "clubSlug": "dongguk-dutc",
+      "normalizedAlias": "동국대학교 dutc c [q]",
+      "sourceLabel": "Dutc C [Q]"
+    },
+    {
+      "clubSlug": "dankook-jukjeon-dkutc",
+      "normalizedAlias": "단국대학교 dkuct 2 [q]",
+      "sourceLabel": "Dkuct 2 [Q]"
+    },
+    {
+      "clubSlug": "dankook-cheonan-dkutc",
+      "normalizedAlias": "단국대학교 dkuct 1 [q]",
+      "sourceLabel": "Dkuct 1 [Q]"
+    },
+    {
+      "clubSlug": "hanyang-women-hytc",
+      "normalizedAlias": "한양여자대학교 hytc 피스 [q]",
+      "sourceLabel": "Hytc 피스 [Q]"
+    },
+    {
+      "clubSlug": "hufs-ace",
+      "normalizedAlias": "한국외국어대학교 ace b [q]",
+      "sourceLabel": "Ace B [Q]"
+    },
+    {
+      "clubSlug": "ewha-tennis",
+      "normalizedAlias": "이화여자대학교 이대 1화 [q]",
+      "sourceLabel": "이대 1화 [Q]"
+    },
+    {
+      "clubSlug": "inu-uitc",
+      "normalizedAlias": "인천대학교 uitc 초선 [q]",
+      "sourceLabel": "Uitc 초선 [Q]"
+    },
+    {
+      "clubSlug": "kyunghee-engineering-impact",
+      "normalizedAlias": "경희대학교 공과대학 경희 i [q]",
+      "sourceLabel": "경희 I [Q]"
+    },
+    {
+      "clubSlug": "ewha-tennis",
+      "normalizedAlias": "이화여자대학교 이대 2화 [q]",
+      "sourceLabel": "이대 2화 [Q]"
+    },
+    {
+      "clubSlug": "ewha-tennis",
+      "normalizedAlias": "이화여자대학교 이대 3화 [q]",
+      "sourceLabel": "이대 3화 [Q]"
+    },
+    {
+      "clubSlug": "hanyang-erica-hitec",
+      "normalizedAlias": "한양대학교 erica캠퍼스 에리카 a [q]",
+      "sourceLabel": "에리카 A [Q]"
+    },
+    {
+      "clubSlug": "korea-kutc",
+      "normalizedAlias": "고려대학교 kutc b [q]",
+      "sourceLabel": "Kutc B [Q]"
     }
   ],
   "tournaments": [
@@ -3624,33 +3784,33 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희 B [Q]",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-ehzf.png",
-      "note": "Entered after a BYE and visually lost its first played match to Ace A in the Round of 64."
+      "note": "Entered after a BYE and visually lost its first played match to Ace A in the Round of 64. Assigned to 경희대학교 KUTA·LOVICE from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "hanbat-masters",
       "sourceTeamName": "꿀복숭아 [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-ehzf.png",
-      "note": "Visually lost its first played match in the Round of 128 to Ace A."
+      "note": "Visually lost its first played match in the Round of 128 to Ace A. Assigned to 국립한밭대학교 마스터즈 from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "hufs-ace",
       "sourceTeamName": "Ace A [Q]",
       "teamLabel": "A",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-ehzf.png",
-      "note": "Won the first two played matches, then visually lost in the Round of 32 to 경희 A."
+      "note": "Won the first two played matches, then visually lost in the Round of 32 to 경희 A. Assigned to 한국외국어대학교 ACE from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3704,23 +3864,23 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "ewha-tennis",
       "sourceTeamName": "이대 4화 [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-ehzf.png",
-      "note": "Entered after a BYE and visually lost its first played match to 카이스트 K in the Round of 64."
+      "note": "Entered after a BYE and visually lost its first played match to 카이스트 K in the Round of 64. Assigned to 이화여자대학교 이화테니스 from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "hanyang-women-hytc",
       "sourceTeamName": "Hytc 사자 [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-ehzf.png",
-      "note": "Entered after a BYE and visually lost its first played match to 햇감자 in the Round of 64."
+      "note": "Entered after a BYE and visually lost its first played match to 햇감자 in the Round of 64. Assigned to 한양여자대학교 HYTC from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3734,13 +3894,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "hanbat-masters",
       "sourceTeamName": "햇감자 [Q]",
       "teamLabel": "",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eihz.png",
-      "note": "Traced through the Round of 32, then visually lost 0-2 to Hytc 개나리 in the Round of 16."
+      "note": "Traced through the Round of 32, then visually lost 0-2 to Hytc 개나리 in the Round of 16. Assigned to 국립한밭대학교 마스터즈 from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3774,13 +3934,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "hanyang-hytc",
       "sourceTeamName": "Hytc 개나리 [Q]",
       "teamLabel": "",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eihz.png",
-      "note": "Traced into the quarterfinal, where it visually lost 0-2 to 경희 A."
+      "note": "Traced into the quarterfinal, where it visually lost 0-2 to 경희 A. Assigned to 한양대학교 HYTC from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3964,23 +4124,23 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "hanyang-erica-hitec",
       "sourceTeamName": "에리카 B [Q]",
       "teamLabel": "B",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eicp.png",
-      "note": "Won its opening match, then visually lost in the Round of 64 to 한국교원대."
+      "note": "Won its opening match, then visually lost in the Round of 64 to 한국교원대. Assigned to 한양대학교 ERICA캠퍼스 HiTEC from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 사랑 [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eicp.png",
-      "note": "Visually lost its first played match in the Round of 128 to Sgtc C."
+      "note": "Visually lost its first played match in the Round of 128 to Sgtc C. Assigned to 연세대학교 YUTT from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4034,13 +4194,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "yonsei-kookdas",
       "sourceTeamName": "쿠크다스 [Q]",
       "teamLabel": "",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eicp.png",
-      "note": "Won through the Round of 64, then visually lost 1-2 to 타이브레이크 A in the Round of 32."
+      "note": "Won through the Round of 64, then visually lost 1-2 to 타이브레이크 A in the Round of 32. Assigned to 연세대학교 상경·경영대학 쿠크다스 from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4054,23 +4214,23 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "hanyang-hytc",
       "sourceTeamName": "Hytc 블루",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eicp.png",
-      "note": "Entered after a BYE and visually lost its first played match to 쿠크다스 in the Round of 64."
+      "note": "Entered after a BYE and visually lost its first played match to 쿠크다스 in the Round of 64. Assigned to 한양대학교 HYTC from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "dongguk-dutc",
       "sourceTeamName": "Dutc B [Q]",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eieo.png",
-      "note": "Entered after a BYE and visually lost its first played match to 숭실대 B in the Round of 64."
+      "note": "Entered after a BYE and visually lost its first played match to 숭실대 B in the Round of 64. Assigned to 동국대학교 DUTC from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4084,43 +4244,43 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "suwon-ace",
       "sourceTeamName": "Ace W [Q]",
       "teamLabel": "W",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eieo.png",
-      "note": "Won its opening match over Kutc C, then visually lost in the Round of 64 to Dutc A."
+      "note": "Won its opening match over Kutc C, then visually lost in the Round of 64 to Dutc A. Assigned to 수원대학교 ACE from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "korea-kutc",
       "sourceTeamName": "Kutc C [Q]",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eieo.png",
-      "note": "Visually lost its first played match in the Round of 128 to Ace W."
+      "note": "Visually lost its first played match in the Round of 128 to Ace W. Assigned to 고려대학교 KUTC from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "dongguk-dutc",
       "sourceTeamName": "Dutc A [Q]",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eihz.png",
-      "note": "Traced into the Round of 16, where the source marks it disqualified against 서울시립대 A."
+      "note": "Traced into the Round of 16, where the source marks it disqualified against 서울시립대 A. Assigned to 동국대학교 DUTC from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "korea-kutc",
       "sourceTeamName": "Kutc A [Q]",
       "teamLabel": "A",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eieo.png",
-      "note": "Entered after a BYE and visually lost its first played match to 서울시립대 A in the Round of 64."
+      "note": "Entered after a BYE and visually lost its first played match to 서울시립대 A in the Round of 64. Assigned to 고려대학교 KUTC from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4134,13 +4294,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "ewha-tennis",
       "sourceTeamName": "이대 5화 [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eieo.png",
-      "note": "Visually lost its first played match in the Round of 128 to 서울시립대 A."
+      "note": "Visually lost its first played match in the Round of 128 to 서울시립대 A. Assigned to 이화여자대학교 이화테니스 from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4154,13 +4314,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "hanbat-masters",
       "sourceTeamName": "박고구마 [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eieo.png",
-      "note": "Visually lost its first played match in the Round of 128 to 명지대 A."
+      "note": "Visually lost its first played match in the Round of 128 to 명지대 A. Assigned to 국립한밭대학교 마스터즈 from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4174,13 +4334,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희 C [Q]",
       "teamLabel": "C",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eieo.png",
-      "note": "Entered after a BYE, won in the Round of 64, then visually lost in the Round of 32 to 연세대 진리."
+      "note": "Entered after a BYE, won in the Round of 64, then visually lost in the Round of 32 to 연세대 진리. Assigned to 경희대학교 KUTA·LOVICE from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4194,13 +4354,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "dankook-jukjeon-dkutc",
       "sourceTeamName": "Dkuct 3 [Q]",
       "teamLabel": "3",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eieo.png",
-      "note": "Won its opening match, then visually lost in the Round of 64 to 경희 C."
+      "note": "Won its opening match, then visually lost in the Round of 64 to 경희 C. Assigned to 단국대학교 DKUTC(죽전캠퍼스) from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4224,23 +4384,23 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "dongguk-dutc",
       "sourceTeamName": "Dutc C [Q]",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eieo.png",
-      "note": "Entered after a BYE and visually lost its first played match to 연세대 진리 in the Round of 64."
+      "note": "Entered after a BYE and visually lost its first played match to 연세대 진리 in the Round of 64. Assigned to 동국대학교 DUTC from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "dankook-jukjeon-dkutc",
       "sourceTeamName": "Dkuct 2 [Q]",
       "teamLabel": "2",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eieo.png",
-      "note": "Entered after a BYE and visually lost its first played match to 충남대 A in the Round of 64."
+      "note": "Entered after a BYE and visually lost its first played match to 충남대 A in the Round of 64. Assigned to 단국대학교 DKUTC(죽전캠퍼스) from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4254,23 +4414,23 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "dankook-cheonan-dkutc",
       "sourceTeamName": "Dkuct 1 [Q]",
       "teamLabel": "1",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eieo.png",
-      "note": "Won its opening match over Hytc 피스, then visually lost in the Round of 64 to Petc A."
+      "note": "Won its opening match over Hytc 피스, then visually lost in the Round of 64 to Petc A. Assigned to 단국대학교 DKUTC(천안캠퍼스) from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "hanyang-women-hytc",
       "sourceTeamName": "Hytc 피스 [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eieo.png",
-      "note": "Visually lost its first played match in the Round of 128 to Dkuct 1."
+      "note": "Visually lost its first played match in the Round of 128 to Dkuct 1. Assigned to 한양여자대학교 HYTC from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4294,13 +4454,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "hufs-ace",
       "sourceTeamName": "Ace B [Q]",
       "teamLabel": "B",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eigq.png",
-      "note": "Won through the Round of 64, then visually lost in the Round of 32 to 영남대 A."
+      "note": "Won through the Round of 64, then visually lost in the Round of 32 to 영남대 A. Assigned to 한국외국어대학교 ACE from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4344,13 +4504,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "ewha-tennis",
       "sourceTeamName": "이대 1화 [Q]",
       "teamLabel": "",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eigq.png",
-      "note": "Entered after a BYE, won in the Round of 64, then visually lost in the Round of 32 to 가톨릭대 A."
+      "note": "Entered after a BYE, won in the Round of 64, then visually lost in the Round of 32 to 가톨릭대 A. Assigned to 이화여자대학교 이화테니스 from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4364,13 +4524,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "inu-uitc",
       "sourceTeamName": "Uitc 초선 [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eigq.png",
-      "note": "The source marks it disqualified in its first played match in the Round of 128 against 경기대 Sss."
+      "note": "The source marks it disqualified in its first played match in the Round of 128 against 경기대 Sss. Assigned to 인천대학교 UITC from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4384,13 +4544,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-engineering-impact",
       "sourceTeamName": "경희 I [Q]",
       "teamLabel": "I",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eigq.png",
-      "note": "Visually lost its first played match in the Round of 128 to 가톨릭대 A."
+      "note": "Visually lost its first played match in the Round of 128 to 가톨릭대 A. Assigned to 경희대학교 공과대학 IMPACT from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4414,33 +4574,33 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "ewha-tennis",
       "sourceTeamName": "이대 2화 [Q]",
       "teamLabel": "",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eihz.png",
-      "note": "Traced into the Round of 16, where it visually lost 0-2 to Sgtc A."
+      "note": "Traced into the Round of 16, where it visually lost 0-2 to Sgtc A. Assigned to 이화여자대학교 이화테니스 from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "ewha-tennis",
       "sourceTeamName": "이대 3화 [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eigq.png",
-      "note": "Visually lost its first played match in the Round of 128 to 에리카 A."
+      "note": "Visually lost its first played match in the Round of 128 to 에리카 A. Assigned to 이화여자대학교 이화테니스 from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "hanyang-erica-hitec",
       "sourceTeamName": "에리카 A [Q]",
       "teamLabel": "A",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eigq.png",
-      "note": "Won its opening match, then visually lost in the Round of 64 to Kuta A."
+      "note": "Won its opening match, then visually lost in the Round of 64 to Kuta A. Assigned to 한양대학교 ERICA캠퍼스 HiTEC from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4484,13 +4644,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "korea-kutc",
       "sourceTeamName": "Kutc B [Q]",
       "teamLabel": "B",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eigq.png",
-      "note": "Won its opening match, then visually lost in the Round of 64 to Sgtc A."
+      "note": "Won its opening match, then visually lost in the Round of 64 to Sgtc A. Assigned to 고려대학교 KUTC from the administrator-provided 2023 Yanggu women's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-women",

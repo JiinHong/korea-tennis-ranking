@@ -1,7 +1,7 @@
 # National ranking source dataset v1
 
 `dataset.json` is the canonical, visually verified source manifest for the
-national university club ranking. Version `sources-2026-07-26-v15` contains the
+national university club ranking. Version `sources-2026-07-26-v16` contains the
 complete Yanggu, Gyeongin, Inje, Chuncheon, and WEMIX source program: 28
 editions and 1,170 terminal result records. Yeongwol is not part of this
 dataset.
@@ -105,11 +105,17 @@ be reversed later. The same review also adds 한국기술교육대학교 테니�
 Version `sources-2026-07-26-v15` applies the administrator-confirmed Kyunghee
 ranking policy. Historical KUTA, LOVICE/러비스, and 셔틀 entities are
 consolidated into `경희대학교 KUTA·LOVICE`, while every IMPACT/임팩트 entity
-is consolidated into `경희대학교 공과대학 IMPACT`. This produces 47 stored
-results for KUTA·LOVICE and 10 for IMPACT. The previously unassigned
+is consolidated into `경희대학교 공과대학 IMPACT`. This produces 49 stored
+results for KUTA·LOVICE and 11 for IMPACT. The previously unassigned
 `러비스 A` runner-up is now verified as LOVICE. Original entrant labels,
-notes, and source references are preserved; 23 other Kyunghee-like rows that
+notes, and source references are preserved; 20 other Kyunghee-like rows that
 do not distinguish the two ranking groups remain unresolved.
+
+Version `sources-2026-07-26-v16` applies the administrator-provided university
+labels from the 2023 Yanggu women's qualifying draw. All 32 previously
+unresolved entrants are assigned to their confirmed or established club
+families, including the campus-specific Dankook and Hanyang entries. Original
+entrant labels, stages, notes, and source references remain unchanged.
 
 Canonical clubs consolidate visually explicit spellings plus the
 administrator-confirmed team-name families documented in the 2026-07-13
@@ -174,7 +180,7 @@ The two editions and all 20 terminal rows are therefore verified and scoreable.
 
 ## Unresolved mapping log
 
-The policy above leaves 106 of 1,170 rows unresolved. Version
+The policy above leaves 74 of 1,170 rows unresolved. Version
 `sources-2026-07-24-v9` assigned 332 previously unresolved university-only team
 labels to the university's sole public ranking club. Version
 `sources-2026-07-24-v10` applied the administrator-reviewed Yanggu memo
@@ -190,11 +196,13 @@ structurally verified.
 Version `sources-2026-07-26-v15` then resolves the `러비스 A` runner-up and
 consolidates all previously assigned Kyunghee records into the two approved
 ranking entities.
+Version `sources-2026-07-26-v16` resolves all 32 remaining 2023 Yanggu women's
+identities from the administrator-provided university-to-team mapping.
 
 | Edition | Entrants/results | Verified rows | Unresolved rows | Reason summary |
 | --- | ---: | ---: | ---: | --- |
 | `yanggu-2023-men` | 98 | 72 | 26 | Remaining labels identify a multi-club university or lack sufficient university/club context. |
-| `yanggu-2023-women` | 91 | 59 | 32 | Remaining labels identify a multi-club university or lack sufficient university/club context. |
+| `yanggu-2023-women` | 91 | 91 | 0 | All identities are assigned from the administrator-provided qualifying-draw mapping. |
 | `yanggu-2024-men` | 89 | 89 | 0 | All identities are assigned. |
 | `yanggu-2024-women` | 73 | 73 | 0 | All identities are assigned. |
 | `yanggu-2025-men` | 94 | 94 | 0 | All identities are assigned. |
