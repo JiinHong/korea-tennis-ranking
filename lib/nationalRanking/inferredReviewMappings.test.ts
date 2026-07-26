@@ -65,7 +65,7 @@ const inferredFamilies = [
     sourcePattern: /^라중$/u,
   },
   {
-    clubSlug: "kyunghee-seoul-kuta",
+    clubSlug: "kyunghee-kuta-lovice",
     sourcePattern: /^kuta(?:[a-c]|남b|서울a)$/u,
   },
 ] as const;
@@ -147,6 +147,6 @@ describe("review-note and repeated-label inference", () => {
   it("bumps the managed dataset version after applying the inference", async () => {
     const dataset = await loadDataset();
 
-    expect(dataset.version).toBe("sources-2026-07-26-v14");
+    expect(dataset.version).toBe("sources-2026-07-26-v15");
   });
 });

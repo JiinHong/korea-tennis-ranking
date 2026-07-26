@@ -78,7 +78,7 @@ describe("2024 경인지구 남자부 세로 연결 대진", () => {
     const expectedClubs = new Map([
       ["SSTC A", "soongsil-sstc"],
       ["아주대 A", "ajou-tennis"],
-      ["경희대학교 A", "kyunghee-seoul-kuta"],
+      ["경희대학교 A", "kyunghee-kuta-lovice"],
     ]);
 
     for (const [sourceTeamName, clubSlug] of expectedClubs) {

@@ -2,7 +2,7 @@
 
 - 조사일: 2026-07-23
 - 조사 대상: `data/national-ranking/v1/dataset.json`의 63개 동아리
-- 현재 반영 데이터 버전: `sources-2026-07-26-v14`
+- 현재 반영 데이터 버전: `sources-2026-07-26-v15`
 - 조사 범위: 대학, 캠퍼스, 단과대학·학과, 중앙동아리 여부, 동명이 동아리와 중복 표기 가능성
 
 `sources-2026-07-23-v6`에서 확정된 캠퍼스·단과대학·학과와 공식 동아리
@@ -50,10 +50,8 @@
 | 24 | 국민대학교 KMTC | **국민대학교 KMTC** | 중앙동아리 | A | 대학 공식 웹진에서 중앙 테니스 동아리로 소개한다. [국민대 웹진](https://webzine.kookmin.ac.kr/webzine.php?mcode=40&svolume=1&syear=2023) |
 | 25 | 고려대학교 KUTC | **고려대학교 KUTC** | 일반 학생 테니스 동아리 | B | 공개 모집문에서 체육교육과·의과대학과 구분되는 일반 고려대생 동아리로 확인된다. 중앙동아리 등록 여부는 추가 확인이 필요하므로 운영자 지시에 따라 캠퍼스 표현은 붙이지 않는다. [KUTC 모집 기록](https://www.koreapas.com/m/view.php?id=freead&no=238098) |
 | 26 | 고려대학교 PETC | **고려대학교 체육교육과 PETC** | 사범대학 체육교육과 동아리 | 사용자 확인 | 운영자가 학과 소속임을 확인했다. [고려대 체육교육과](https://phyedu.korea.ac.kr/) |
-| 27 | 경희대학교 국제캠퍼스 임팩트 | **경희대학교 국제캠퍼스 공과대학 IMPACT** | 공과대학 동아리 | B | 공식 프로필이 `경희대학교 공과대학 테니스동아리`라고 명시한다. 공과대학은 국제캠퍼스 소속이므로 캠퍼스와 단과대학을 함께 표기하는 것이 정확하다. [IMPACT 공식 계정](https://www.instagram.com/khu_impact/) |
-| 28 | 경희대학교 국제캠퍼스 KUTA | **소속 재확인 필요: 국제캠퍼스 KUTA** | 미확정 | C | 공개된 KUTA 공식 계정과 대학 자료는 서울캠퍼스 중앙동아리만 확인해 준다. 별도의 국제캠퍼스 KUTA를 뒷받침하는 공식 Instagram·대학 자료는 찾지 못했다. [KUTA 공식 계정](https://www.instagram.com/kuta_tennis/) |
-| 29 | 경희대학교 국제캠퍼스 러비스 | **경희대학교 국제캠퍼스 LOVICE(러비스)** | 국제캠퍼스 중앙동아리 | A | 국제캠퍼스 총동아리연합회에서 별도 중앙동아리로 확인된다. [경희대 국제캠퍼스 동아리](https://jajudy.khu.ac.kr/club) |
-| 30 | 경희대학교 서울캠퍼스 KUTA | **경희대학교 서울캠퍼스 KUTA** | 서울캠퍼스 중앙동아리 | A | 대학 공식 중앙동아리 목록과 대학 언론에서 확인된다. [경희대 서울캠퍼스 동아리](https://www.khu.ac.kr/kor/user/contents/view.do?menuNo=200188), [대학주보](https://media.khu.ac.kr/bbs/board.php?bo_table=univJubo&wr_id=34810) |
+| 27 | 경희대학교 KUTA·LOVICE | **경희대학교 KUTA·LOVICE** | 통합 랭킹 항목 | 사용자 확인 | 운영자 지시에 따라 KUTA, LOVICE(러비스), 셔틀로 이미 귀속된 과거 결과를 하나의 랭킹 항목으로 집계한다. 원자료의 출전명은 그대로 보존한다. [KUTA 공식 계정](https://www.instagram.com/kuta_tennis/), [경희대 국제캠퍼스 동아리](https://jajudy.khu.ac.kr/club) |
+| 28 | 경희대학교 공과대학 IMPACT | **경희대학교 공과대학 IMPACT** | 공과대학 동아리 | 사용자 확인·B | 운영자 지시에 따라 IMPACT와 임팩트로 귀속된 과거 결과를 하나로 집계한다. 공식 프로필도 `경희대학교 공과대학 테니스동아리`라고 명시한다. [IMPACT 공식 계정](https://www.instagram.com/khu_impact/) |
 | 31 | 경북대학교 대구캠퍼스 KUTC | **경북대학교 대구캠퍼스 KUTC** | 대표 체육동아리 | A | 대학 공식 게시물에서 대표 체육동아리로 확인된다. [경북대 KUTC](https://www.knu.ac.kr/wbbs/wbbs/bbs/btin/viewBtin.action?bbs_cde=28&btin.appl_no=000000&btin.bbs_cde=28&btin.doc_no=1336060&btin.note_div=row&btin.page=1&menu_idx=214) |
 | 32 | 명지대학교 러시앤·테사랑·티샷 | **명지대학교 MJTA·MTC** | 두 동아리 합산 랭킹 항목 | 사용자 확인 | 운영자 확인에 따라 실제 조직은 MJTA와 MTC 두 곳으로 구분한다. 다만 과거 원자료만으로 두 동아리의 성적을 안정적으로 분리할 수 없어, 현재까지 저장된 명지대 성적은 하나의 랭킹 항목으로 합산한다. [명지대 MJTA](https://ddingdong.mju.ac.kr/club/29) |
 | 35 | 세종대학교 STC | **세종대학교 STC** | 중앙동아리 | A | 대학 공식 동아리 목록에서 확인된다. [세종대 동아리](https://www.sejong.ac.kr/kor/unilife/clubs.do) |
@@ -75,10 +73,6 @@
 | 51 | 고려대학교 KMTC | **고려대학교 의과대학 KMTC** | 의과대학 동아리 | A | 의과대학 공식 소식지에서 확인된다. KUTC·PETC와 별도 조직이다. [고려대 의과대학 소식지](https://medicine.korea.ac.kr/html_portlet_repositories/images/ExtImgFile/10181/10208/102058/2015_7_8%EC%9B%94%ED%98%B8%EB%89%B4%EC%8A%A4%EB%A0%88%ED%84%B0.pdf) |
 | 52 | 금오공과대학교 KOTC | **국립금오공과대학교 KOTC(금오테니스?)** | 대학 테니스 동아리 추정 | B | 2026년 교류전 게시물에서 KOTC가 현재 활동 중인 금오공대 테니스 동아리임은 확인된다. 다만 최신 대학 공식 자료의 `금오테니스`와 정확히 같은 조직인지까지는 확인되지 않았다. [금오공대 공식 안내](https://www.kumoh.ac.kr/cms/fileOpen.do?path=%2F_res%2Fipsi%2Fetc%2F2025susi_mozip.pdf), [KOTC 교류전 기록](https://www.instagram.com/p/DZC9S0agSIa/) |
 | 53 | 광운대학교 KWTC | **광운대학교 KWTC** | 중앙동아리 | A | 대학 공식 중앙동아리 목록에서 확인된다. [광운대 동아리](https://www.kw.ac.kr/ko/life/activity03.jsp) |
-| 54 | 경희대학교 임팩트 | **경희대학교 국제캠퍼스 공과대학 IMPACT와 통합 권장** | 캠퍼스 생략 표기 | B | 공식적으로 확인되는 경희대 IMPACT는 27번 공과대학 동아리이며, 캠퍼스가 생략된 춘천 원자료도 같은 조직으로 귀속하는 것이 가장 타당하다. [IMPACT 공식 계정](https://www.instagram.com/khu_impact/) |
-| 55 | 경희대학교 KUTA | **경희대학교 서울캠퍼스 KUTA와 통합 검토** | 중복 표기 가능성 | B | KUTA의 공식 소속은 서울캠퍼스다. 캠퍼스가 생략된 결과는 30번으로 귀속하는 것이 가장 타당하다. [경희대 서울캠퍼스 동아리](https://www.khu.ac.kr/kor/user/contents/view.do?menuNo=200188) |
-| 56 | 경희대학교 러비스 | **경희대학교 국제캠퍼스 LOVICE(러비스)와 통합 검토** | 중복 표기 가능성 | B | 공식 러비스는 국제캠퍼스 조직이다. 캠퍼스가 생략된 결과는 29번으로 귀속하는 것이 가장 타당하다. [경희대 국제캠퍼스 동아리](https://jajudy.khu.ac.kr/club) |
-| 57 | 경희대학교 셔틀 | **소속 재확인 필요: 경희대학교 셔틀** | 미확정 | C | 춘천 2023 원자료 외에 공식 소속을 확인하지 못했다. 서울·국제캠퍼스와 학과동아리 여부를 확인해야 한다. |
 | 58 | 남서울대학교 위닝샷 | **남서울대학교 스포츠건강관리학과 위닝샷** | 학과동아리 | B | 스포츠건강관리학과 공식 채널이 위닝샷을 테니스 학과동아리로 소개한다. [학과 공식 계정](https://www.instagram.com/nsu_sporthc/) |
 | 59 | 상지대학교 ACE | **상지대학교 ACE** | 대학 체육동아리 | A | 대학 공식 동아리 목록에서 확인된다. [상지대 동아리](https://www.sangji.ac.kr/prog/club/kor/sub06_05_02/E/list.do) |
 | 60 | 상명대학교 테슬라 | **상명대학교 서울캠퍼스 TESLA** | 서울캠퍼스 동아리 | B | 대학 언론의 활동 지역과 교류 기록상 서울캠퍼스 조직으로 확인된다. [상명대 학보](https://seng.smu.ac.kr/newspaper/university.do?article.offset=230&articleLimit=10&articleNo=749526&mode=view) |
@@ -118,14 +112,15 @@ HYTC는 하나의 연합 동아리지만 대회에서 두 학교가 별도 팀�
 
 ### 경희대학교
 
-- 서울캠퍼스 KUTA: 공식 확인
-- 국제캠퍼스 LOVICE(러비스): 공식 확인
-- 국제캠퍼스 공과대학 IMPACT: 공식 동아리 채널로 확인
-- 국제캠퍼스 KUTA: 별도 조직인지 재확인 필요
-- 셔틀: 캠퍼스·학과 미확정
-- 캠퍼스가 빠진 KUTA·러비스·IMPACT: 각각 확인된 공식 캠퍼스 조직으로 귀속하는 것이 타당함
+- 경희대학교 KUTA·LOVICE
+- 경희대학교 공과대학 IMPACT
 
-현재 8개로 나뉜 경희대 엔티티 중 KUTA·러비스·IMPACT의 캠퍼스 생략 표기는 통합할 근거가 마련됐다. 다만 `국제캠퍼스 KUTA`와 `셔틀`은 원자료를 다시 확인하기 전까지 별도 미확정 엔티티로 보존해야 한다.
+운영자 확인에 따라 현재 랭킹에서는 위 두 항목으로 집계한다.
+KUTA·LOVICE에는 과거 KUTA, LOVICE(러비스), 셔틀로 이미 귀속된 47개
+결과가 들어가며, IMPACT에는 IMPACT·임팩트로 이미 귀속된 10개 결과가
+들어간다. 출전명과 출처는 변경하지 않아 나중에 다시 분리할 수 있다.
+단, 원자료에 `경희대 A/B/C`처럼만 적혀 두 그룹 중 어느 쪽인지 판별할
+수 없는 23개 결과는 임의로 합치지 않고 미확정 상태로 둔다.
 
 ### 명지대학교
 

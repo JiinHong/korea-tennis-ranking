@@ -1,7 +1,7 @@
 # National ranking source dataset v1
 
 `dataset.json` is the canonical, visually verified source manifest for the
-national university club ranking. Version `sources-2026-07-26-v14` contains the
+national university club ranking. Version `sources-2026-07-26-v15` contains the
 complete Yanggu, Gyeongin, Inje, Chuncheon, and WEMIX source program: 28
 editions and 1,170 terminal result records. Yeongwol is not part of this
 dataset.
@@ -102,6 +102,15 @@ reality, but their historical source labels cannot yet be separated reliably;
 the original labels remain in result rows and aliases so the aggregation can
 be reversed later. The same review also adds 한국기술교육대학교 테니스부.
 
+Version `sources-2026-07-26-v15` applies the administrator-confirmed Kyunghee
+ranking policy. Historical KUTA, LOVICE/러비스, and 셔틀 entities are
+consolidated into `경희대학교 KUTA·LOVICE`, while every IMPACT/임팩트 entity
+is consolidated into `경희대학교 공과대학 IMPACT`. This produces 47 stored
+results for KUTA·LOVICE and 10 for IMPACT. The previously unassigned
+`러비스 A` runner-up is now verified as LOVICE. Original entrant labels,
+notes, and source references are preserved; 23 other Kyunghee-like rows that
+do not distinguish the two ranking groups remain unresolved.
+
 Canonical clubs consolidate visually explicit spellings plus the
 administrator-confirmed team-name families documented in the 2026-07-13
 design. These include 경기대학교 `KTF`/`Kft`/`테토남`, 연세대학교
@@ -132,8 +141,9 @@ references remain unchanged so the imported brackets stay auditable.
 
 A verified edition requires exactly one champion-stage record and one
 runner-up-stage record. Thirty-one school-qualified finals are frozen under the
-rule above; only source labels `러비스 A` and `A`, which identify no school,
-remain unassigned. 아주대학교의 canonical candidate is the
+rule above. The `러비스 A` runner-up is assigned to the administrator-confirmed
+KUTA·LOVICE group; only a generic `A` source label that identifies no school
+remains unassigned. 아주대학교의 canonical candidate is the
 university-confirmed `아주대학교 ATC`. An edition whose field remains unresolved
 can still retain a concrete honor owner without contributing points.
 
@@ -164,7 +174,7 @@ The two editions and all 20 terminal rows are therefore verified and scoreable.
 
 ## Unresolved mapping log
 
-The policy above leaves 107 of 1,170 rows unresolved. Version
+The policy above leaves 106 of 1,170 rows unresolved. Version
 `sources-2026-07-24-v9` assigned 332 previously unresolved university-only team
 labels to the university's sole public ranking club. Version
 `sources-2026-07-24-v10` applied the administrator-reviewed Yanggu memo
@@ -177,6 +187,9 @@ historical Myongji A/B rows under the approved MJTA·MTC aggregation. This is an
 identity status only; every
 stored row's entrant name and terminal bracket outcome was visually or
 structurally verified.
+Version `sources-2026-07-26-v15` then resolves the `러비스 A` runner-up and
+consolidates all previously assigned Kyunghee records into the two approved
+ranking entities.
 
 | Edition | Entrants/results | Verified rows | Unresolved rows | Reason summary |
 | --- | ---: | ---: | ---: | --- |
@@ -194,7 +207,7 @@ structurally verified.
 | `inje-2025-women` | 12 | 11 | 1 | Generic club-only labels remain. |
 | `inje-2026-men` | 36 | 36 | 0 | All identities are assigned. |
 | `inje-2026-women` | 18 | 18 | 0 | All identities are assigned. |
-| `gyeongin-2023-men` | 42 | 35 | 7 | Generic labels remain; runner-up `러비스 A` has no university context. |
+| `gyeongin-2023-men` | 42 | 36 | 6 | `러비스 A` is assigned to KUTA·LOVICE; other generic labels remain. |
 | `gyeongin-2023-women` | 32 | 24 | 8 | Generic club-only labels remain. |
 | `gyeongin-2024-men` | 48 | 46 | 2 | Bracket is verified; generic 경희대 B/C identities await confirmation. |
 | `gyeongin-2024-women` | 38 | 35 | 3 | Generic club-only and multi-club university labels remain. |

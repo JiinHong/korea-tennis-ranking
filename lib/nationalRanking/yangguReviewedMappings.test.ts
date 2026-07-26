@@ -68,7 +68,7 @@ const reviewedMappings = [
     expectedCount: 3,
   },
   {
-    clubSlug: "kyunghee-seoul-kuta",
+    clubSlug: "kyunghee-kuta-lovice",
     reviewKeys: [
       "yanggu-2023-men::Kuta A [Q]",
       "yanggu-2025-women::경희대 Kuta",
@@ -76,7 +76,7 @@ const reviewedMappings = [
     expectedCount: 2,
   },
   {
-    clubSlug: "kyunghee-global-luvis",
+    clubSlug: "kyunghee-kuta-lovice",
     reviewKeys: [
       "yanggu-2024-men::경희대 국제 A",
       "yanggu-2024-men::경희대 국제 B",
@@ -172,6 +172,6 @@ describe("administrator-reviewed Yanggu mappings", () => {
   it("bumps the managed dataset version after applying the review", async () => {
     const dataset = await loadDataset();
 
-    expect(dataset.version).toBe("sources-2026-07-26-v14");
+    expect(dataset.version).toBe("sources-2026-07-26-v15");
   });
 });

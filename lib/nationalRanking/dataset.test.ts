@@ -577,7 +577,7 @@ describe("loadNationalRankingDataset", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-07-26-v14");
+    expect(dataset.version).toBe("sources-2026-07-26-v15");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -615,15 +615,15 @@ describe("loadNationalRankingDataset", () => {
       expect(results, editionKey).toHaveLength(expected.resultCount);
     }
 
-    expect(dataset.clubs).toHaveLength(69);
-    expect(dataset.aliases).toHaveLength(357);
+    expect(dataset.clubs).toHaveLength(63);
+    expect(dataset.aliases).toHaveLength(365);
     expect(dataset.results).toHaveLength(1_170);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
-    ).toHaveLength(1_063);
+    ).toHaveLength(1_064);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
-    ).toHaveLength(107);
+    ).toHaveLength(106);
 
     expect(
       dataset.results.find(
@@ -684,9 +684,8 @@ describe("loadNationalRankingDataset", () => {
         priorEditionKeys.has(result.editionKey)
       ),
     };
-    // Re-baselined after applying the reviewed Yanggu mappings, the direct
-    // Jeonbuk ACE DM confirmation, and repeated-label inference while
-    // preserving edition/result ordering.
+    // Re-baselined after consolidating the confirmed Kyunghee club identities
+    // while preserving edition/result ordering.
     const fingerprint = createHash("sha256")
       .update(JSON.stringify(approvedTask4))
       .digest("hex");
@@ -696,7 +695,7 @@ describe("loadNationalRankingDataset", () => {
     expect(approvedTask4.editions).toHaveLength(12);
     expect(approvedTask4.results).toHaveLength(608);
     expect(fingerprint).toBe(
-      "628fa3c58cf16085861aba31766890bfac1e04c58d5200e34541f32de7bc50df"
+      "40a83cc7ed4e7387036f9cb6426e7e1807a8b0156d0bf2e09f9f90de57b80780"
     );
 
     for (const [editionKey, expectedCount] of Object.entries(priorExpectedCounts)) {
@@ -1069,15 +1068,15 @@ describe("loadNationalRankingDataset", () => {
         "PETC",
         "고려대학교 체육교육과 PETC",
       ],
-      "kyunghee-global-impact": [
-        "경희대학교 국제캠퍼스 공과대학",
+      "kyunghee-engineering-impact": [
+        "경희대학교 공과대학",
         "IMPACT",
-        "경희대학교 국제캠퍼스 공과대학 IMPACT",
+        "경희대학교 공과대학 IMPACT",
       ],
-      "kyunghee-global-luvis": [
-        "경희대학교 국제캠퍼스",
-        "LOVICE(러비스)",
-        "경희대학교 국제캠퍼스 LOVICE(러비스)",
+      "kyunghee-kuta-lovice": [
+        "경희대학교",
+        "KUTA·LOVICE",
+        "경희대학교 KUTA·LOVICE",
       ],
       "uos-approach": [
         "서울시립대학교",
@@ -1460,7 +1459,7 @@ describe("loadNationalRankingDataset", () => {
   it("maps the reviewed 2023 Yanggu men's Round-of-16 field to canonical clubs", () => {
     const dataset = loadNationalRankingDataset();
     const expectedAssignments = new Map([
-      ["경희 A [1]", "kyunghee-seoul-kuta"],
+      ["경희 A [1]", "kyunghee-kuta-lovice"],
       ["연세대 진리 [Q]", "yonsei-yutt"],
       ["에리카 A [Q]", "hanyang-erica-hitec"],
       ["서울과기대 A [Q]", "seoultech-neutinamu"],
@@ -1499,9 +1498,9 @@ describe("loadNationalRankingDataset", () => {
     const expectedAssignments = new Map([
       ["yanggu-2023-men|연세대 진리 [Q]", "yonsei-yutt"],
       ["yanggu-2023-men|전북대 A [3]", "jeonbuk-ace"],
-      ["yanggu-2023-women|경희 A [1]", "kyunghee-luvis"],
+      ["yanggu-2023-women|경희 A [1]", "kyunghee-kuta-lovice"],
       ["yanggu-2023-women|Sgtc A [2]", "sogang-sgtc"],
-      ["yanggu-2024-women|경희대 국제 A [1]", "kyunghee-global-impact"],
+      ["yanggu-2024-women|경희대 국제 A [1]", "kyunghee-engineering-impact"],
       ["yanggu-2025-men|전북대 A", "jeonbuk-ace"],
       ["yanggu-2025-women|단국대 A", "dankook-cheonan-dkutc"],
       ["inje-2023-men|전북대", "jeonbuk-ace"],
@@ -1513,7 +1512,7 @@ describe("loadNationalRankingDataset", () => {
       ["inje-2025-women|서울과학기술대 A", "seoultech-neutinamu"],
       ["inje-2025-women|카이스트 A", "kaist-stroke"],
       ["gyeongin-2023-men|서울대 A", "seoul-university"],
-      ["gyeongin-2023-women|경희대s", "kyunghee-luvis"],
+      ["gyeongin-2023-women|경희대s", "kyunghee-kuta-lovice"],
       ["gyeongin-2024-men|서울대학교 A", "seoul-university"],
       ["gyeongin-2024-men|아주대 A", "ajou-tennis"],
       ["gyeongin-2024-women|서울시립대A", "uos-approach"],
@@ -1522,10 +1521,10 @@ describe("loadNationalRankingDataset", () => {
       ["gyeongin-2025-men|서울대학교 테니스부 A", "seoul-university"],
       ["gyeongin-2025-men|서강대", "sogang-sgtc"],
       ["chuncheon-2023-men|서울대 A", "seoul-university"],
-      ["chuncheon-2023-women|경희대 국제 A", "kyunghee-global-impact"],
+      ["chuncheon-2023-women|경희대 국제 A", "kyunghee-engineering-impact"],
       ["chuncheon-2023-women|숭실대 A", "soongsil-sstc"],
       ["chuncheon-2024-men|전북대A", "jeonbuk-ace"],
-      ["chuncheon-2024-women|경희대 국제 A", "kyunghee-global-impact"],
+      ["chuncheon-2024-women|경희대 국제 A", "kyunghee-engineering-impact"],
       ["chuncheon-2025-men|서울시립대 장", "uos-approach"],
       ["chuncheon-2025-women|서강대A", "sogang-sgtc"],
     ]);
@@ -1549,7 +1548,7 @@ describe("loadNationalRankingDataset", () => {
       .map((result) => result.sourceTeamName)
       .sort((left, right) => left.localeCompare(right, "ko"));
 
-    expect(unassignedFinals).toEqual(["러비스 A"]);
+    expect(unassignedFinals).toEqual([]);
     expect(dataset.clubs).toContainEqual(
       expect.objectContaining({
         slug: "ajou-tennis",

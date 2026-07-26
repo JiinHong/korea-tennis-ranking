@@ -1,5 +1,5 @@
 {
-  "version": "sources-2026-07-26-v14",
+  "version": "sources-2026-07-26-v15",
   "clubs": [
     {
       "slug": "catholic-courtrang",
@@ -158,28 +158,16 @@
       "displayName": "고려대학교 체육교육과 PETC"
     },
     {
-      "slug": "kyunghee-global-impact",
-      "universityName": "경희대학교 국제캠퍼스 공과대학",
+      "slug": "kyunghee-kuta-lovice",
+      "universityName": "경희대학교",
+      "clubName": "KUTA·LOVICE",
+      "displayName": "경희대학교 KUTA·LOVICE"
+    },
+    {
+      "slug": "kyunghee-engineering-impact",
+      "universityName": "경희대학교 공과대학",
       "clubName": "IMPACT",
-      "displayName": "경희대학교 국제캠퍼스 공과대학 IMPACT"
-    },
-    {
-      "slug": "kyunghee-global-kuta",
-      "universityName": "경희대학교 국제캠퍼스",
-      "clubName": "KUTA",
-      "displayName": "경희대학교 국제캠퍼스 KUTA"
-    },
-    {
-      "slug": "kyunghee-global-luvis",
-      "universityName": "경희대학교 국제캠퍼스",
-      "clubName": "LOVICE(러비스)",
-      "displayName": "경희대학교 국제캠퍼스 LOVICE(러비스)"
-    },
-    {
-      "slug": "kyunghee-seoul-kuta",
-      "universityName": "경희대학교 서울캠퍼스",
-      "clubName": "KUTA",
-      "displayName": "경희대학교 서울캠퍼스 KUTA"
+      "displayName": "경희대학교 공과대학 IMPACT"
     },
     {
       "slug": "kyungpook-kutc",
@@ -306,30 +294,6 @@
       "universityName": "광운대학교",
       "clubName": "KWTC",
       "displayName": "광운대학교 KWTC"
-    },
-    {
-      "slug": "kyunghee-impact",
-      "universityName": "경희대학교",
-      "clubName": "임팩트",
-      "displayName": "경희대학교 임팩트"
-    },
-    {
-      "slug": "kyunghee-kuta",
-      "universityName": "경희대학교",
-      "clubName": "KUTA",
-      "displayName": "경희대학교 KUTA"
-    },
-    {
-      "slug": "kyunghee-luvis",
-      "universityName": "경희대학교",
-      "clubName": "러비스",
-      "displayName": "경희대학교 러비스"
-    },
-    {
-      "slug": "kyunghee-shuttle",
-      "universityName": "경희대학교",
-      "clubName": "셔틀",
-      "displayName": "경희대학교 셔틀"
     },
     {
       "slug": "namseoul-winning-shot",
@@ -543,57 +507,57 @@
       "sourceLabel": "경북대 Kutc A"
     },
     {
-      "clubSlug": "kyunghee-global-impact",
+      "clubSlug": "kyunghee-engineering-impact",
       "normalizedAlias": "경희대학교 국제캠퍼스 경희대 국제 임팩트",
       "sourceLabel": "경희대 국제 임팩트"
     },
     {
-      "clubSlug": "kyunghee-global-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 국제캠퍼스 경희대 러비스 a",
       "sourceLabel": "경희대 러비스 A"
     },
     {
-      "clubSlug": "kyunghee-global-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 국제캠퍼스 경희대 러비스 b",
       "sourceLabel": "경희대 러비스 B"
     },
     {
-      "clubSlug": "kyunghee-global-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 국제캠퍼스 경희대 러비스 c",
       "sourceLabel": "경희대 러비스 C"
     },
     {
-      "clubSlug": "kyunghee-global-impact",
+      "clubSlug": "kyunghee-engineering-impact",
       "normalizedAlias": "경희대학교 국제캠퍼스 경희대 임팩트",
       "sourceLabel": "경희대 임팩트"
     },
     {
-      "clubSlug": "kyunghee-global-impact",
+      "clubSlug": "kyunghee-engineering-impact",
       "normalizedAlias": "경희대학교 국제캠퍼스 경희대 임팩트a",
       "sourceLabel": "경희대 임팩트a"
     },
     {
-      "clubSlug": "kyunghee-global-impact",
+      "clubSlug": "kyunghee-engineering-impact",
       "normalizedAlias": "경희대학교 국제캠퍼스 경희대 임팩트b",
       "sourceLabel": "경희대 임팩트b"
     },
     {
-      "clubSlug": "kyunghee-global-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 국제캠퍼스 kuta",
       "sourceLabel": "Kuta"
     },
     {
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 서울캠퍼스 kuta",
       "sourceLabel": "Kuta"
     },
     {
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 서울캠퍼스 kuta a",
       "sourceLabel": "Kuta A"
     },
     {
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 서울캠퍼스 kuta b",
       "sourceLabel": "Kuta B"
     },
@@ -1273,7 +1237,7 @@
       "sourceLabel": "인천대학교 UITC C"
     },
     {
-      "clubSlug": "kyunghee-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 경희대학교 kuta",
       "sourceLabel": "경희대학교 KUTA"
     },
@@ -1318,7 +1282,7 @@
       "sourceLabel": "한양여대 HYTC A"
     },
     {
-      "clubSlug": "kyunghee-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 경희대 kuta b",
       "sourceLabel": "경희대 KUTA B"
     },
@@ -1338,7 +1302,7 @@
       "sourceLabel": "한양대 HYTC A"
     },
     {
-      "clubSlug": "kyunghee-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 경희대학교 러비스b",
       "sourceLabel": "경희대학교 러비스B"
     },
@@ -1468,7 +1432,7 @@
       "sourceLabel": "중앙대 푸앙이"
     },
     {
-      "clubSlug": "kyunghee-shuttle",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 경희대 셔틀",
       "sourceLabel": "경희대 셔틀"
     },
@@ -1508,12 +1472,12 @@
       "sourceLabel": "연세대 진리"
     },
     {
-      "clubSlug": "kyunghee-impact",
+      "clubSlug": "kyunghee-engineering-impact",
       "normalizedAlias": "경희대학교 경희대 임팩트a",
       "sourceLabel": "경희대 임팩트A"
     },
     {
-      "clubSlug": "kyunghee-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 경희대러비스c",
       "sourceLabel": "경희대러비스C"
     },
@@ -1523,7 +1487,7 @@
       "sourceLabel": "서울과기대 느티나무 B"
     },
     {
-      "clubSlug": "kyunghee-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 경희대 러비스 a",
       "sourceLabel": "경희대 러비스 A"
     },
@@ -1598,7 +1562,7 @@
       "sourceLabel": "인천대 UITC A"
     },
     {
-      "clubSlug": "kyunghee-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 경희대 러비스 b",
       "sourceLabel": "경희대 러비스 B"
     },
@@ -1643,7 +1607,7 @@
       "sourceLabel": "숭실대 sstc"
     },
     {
-      "clubSlug": "kyunghee-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 경희대 kuta",
       "sourceLabel": "경희대 KUTA"
     },
@@ -1683,12 +1647,12 @@
       "sourceLabel": "상지대 ace"
     },
     {
-      "clubSlug": "kyunghee-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 경희대 러비스 에이스",
       "sourceLabel": "경희대 러비스 에이스"
     },
     {
-      "clubSlug": "kyunghee-impact",
+      "clubSlug": "kyunghee-engineering-impact",
       "normalizedAlias": "경희대학교 경희대 임팩트b",
       "sourceLabel": "경희대 임팩트B"
     },
@@ -1703,7 +1667,7 @@
       "sourceLabel": "건국대 KTC 신"
     },
     {
-      "clubSlug": "kyunghee-impact",
+      "clubSlug": "kyunghee-engineering-impact",
       "normalizedAlias": "경희대학교 경희대임팩트a",
       "sourceLabel": "경희대임팩트A"
     },
@@ -1873,7 +1837,7 @@
       "sourceLabel": "전북대학교 A"
     },
     {
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 서울캠퍼스 kuta a [q]",
       "sourceLabel": "Kuta A [Q]"
     },
@@ -1913,7 +1877,7 @@
       "sourceLabel": "Hitc [Q]"
     },
     {
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 서울캠퍼스 kuta b [q]",
       "sourceLabel": "Kuta B [Q]"
     },
@@ -1973,7 +1937,7 @@
       "sourceLabel": "Petc C [Q]"
     },
     {
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 서울캠퍼스 kuta c [q]",
       "sourceLabel": "Kuta C [Q]"
     },
@@ -2048,12 +2012,12 @@
       "sourceLabel": "tiebreak 무한이"
     },
     {
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 서울캠퍼스 kuta 서울 a",
       "sourceLabel": "KUTA 서울 A"
     },
     {
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 서울캠퍼스 kuta 남 b",
       "sourceLabel": "KUTA 남 B"
     },
@@ -2201,6 +2165,46 @@
       "clubSlug": "koreatech-tennis",
       "normalizedAlias": "한국기술교육대학교 한기대 a",
       "sourceLabel": "한기대 A"
+    },
+    {
+      "clubSlug": "kyunghee-kuta-lovice",
+      "normalizedAlias": "경희대학교 kuta",
+      "sourceLabel": "KUTA"
+    },
+    {
+      "clubSlug": "kyunghee-kuta-lovice",
+      "normalizedAlias": "경희대학교 lovice",
+      "sourceLabel": "LOVICE"
+    },
+    {
+      "clubSlug": "kyunghee-kuta-lovice",
+      "normalizedAlias": "경희대학교 러비스",
+      "sourceLabel": "러비스"
+    },
+    {
+      "clubSlug": "kyunghee-kuta-lovice",
+      "normalizedAlias": "경희대학교 러비스 a",
+      "sourceLabel": "러비스 A"
+    },
+    {
+      "clubSlug": "kyunghee-kuta-lovice",
+      "normalizedAlias": "경희대학교 kuta·lovice",
+      "sourceLabel": "KUTA·LOVICE"
+    },
+    {
+      "clubSlug": "kyunghee-engineering-impact",
+      "normalizedAlias": "경희대학교 공과대학 impact",
+      "sourceLabel": "IMPACT"
+    },
+    {
+      "clubSlug": "kyunghee-engineering-impact",
+      "normalizedAlias": "경희대학교 공과대학 임팩트",
+      "sourceLabel": "임팩트"
+    },
+    {
+      "clubSlug": "kyunghee-engineering-impact",
+      "normalizedAlias": "경희대학교 공과대학 경희대 국제 임팩트",
+      "sourceLabel": "경희대 국제 임팩트"
     }
   ],
   "tournaments": [
@@ -2610,13 +2614,13 @@
   "results": [
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희 A [1]",
       "teamLabel": "A",
       "stage": "round_of_16",
       "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehnv.png",
-      "note": "Slot 1 was visually traced from an opening BYE through the bracket; it lost in the Round of 16. Administrator confirmed 경희 A as 경희대학교 서울캠퍼스 KUTA."
+      "note": "Slot 1 was visually traced from an opening BYE through the bracket; it lost in the Round of 16. Administrator confirmed 경희 A as 경희대학교 서울캠퍼스 KUTA. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2640,13 +2644,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "Kuta A [Q]",
       "teamLabel": "A",
       "stage": "round_of_64",
       "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-egzq.png",
-      "note": "Slot 5 won in the Round of 128, then lost in the Round of 64. Assigned to kyunghee-seoul-kuta from administrator review memo \"경희대 KUTA\"."
+      "note": "Slot 5 won in the Round of 128, then lost in the Round of 64. Assigned to kyunghee-seoul-kuta from administrator review memo \"경희대 KUTA\". Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2840,13 +2844,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "Kuta B [Q]",
       "teamLabel": "B",
       "stage": "round_of_64",
       "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-egzq.png",
-      "note": "Slot 30 won in the Round of 128, then lost in the Round of 64. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
+      "note": "Slot 30 won in the Round of 128, then lost in the Round of 64. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3470,13 +3474,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "Kuta C [Q]",
       "teamLabel": "C",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehlp.png",
-      "note": "Slot 115 lost its first played match in the Round of 128. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
+      "note": "Slot 115 lost its first played match in the Round of 128. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3590,13 +3594,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": "kyunghee-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희 A [1]",
       "teamLabel": "A",
       "stage": "champion",
       "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eiiq.png",
-      "note": "School-qualified final frozen to 경희대학교 러비스, the university's pre-assignment women leader (rank 27)."
+      "note": "School-qualified final frozen to 경희대학교 러비스, the university's pre-assignment women leader (rank 27). Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3850,13 +3854,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "Kuta B [Q]",
       "teamLabel": "B",
       "stage": "round_of_64",
       "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eicp.png",
-      "note": "Won its opening match, then visually lost in the Round of 64 to 서울대 A. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
+      "note": "Won its opening match, then visually lost in the Round of 64 to 서울대 A. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4440,13 +4444,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "Kuta A [Q]",
       "teamLabel": "A",
       "stage": "round_of_32",
       "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eigq.png",
-      "note": "Entered after a BYE, won in the Round of 64, then visually lost in the Round of 32 to 이대 2화. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
+      "note": "Entered after a BYE, won in the Round of 64, then visually lost in the Round of 32 to 이대 2화. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4570,13 +4574,13 @@
     },
     {
       "editionKey": "yanggu-2024-men",
-      "clubSlug": "kyunghee-global-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 국제 A",
       "teamLabel": "A",
       "stage": "round_of_32",
       "qualityStatus": "verified",
       "sourceRef": "양구/2024/남자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_1.png",
-      "note": "After a BYE it beats Sstc C, then loses in Round 3 to 쿠크다스 A. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
+      "note": "After a BYE it beats Sstc C, then loses in Round 3 to 쿠크다스 A. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\". Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2024-men",
@@ -4760,13 +4764,13 @@
     },
     {
       "editionKey": "yanggu-2024-men",
-      "clubSlug": "kyunghee-global-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 국제 B",
       "teamLabel": "B",
       "stage": "round_of_64",
       "qualityStatus": "verified",
       "sourceRef": "양구/2024/남자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_1.png",
-      "note": "It beats 타이브레이크 C, then loses in Round 2 to Petc A. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
+      "note": "It beats 타이브레이크 C, then loses in Round 2 to Petc A. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\". Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2024-men",
@@ -4820,13 +4824,13 @@
     },
     {
       "editionKey": "yanggu-2024-men",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "Kuta A",
       "teamLabel": "A",
       "stage": "round_of_16",
       "qualityStatus": "verified",
       "sourceRef": "양구/2024/남자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_3.png",
-      "note": "It wins through Round 3, then loses in Round 4 to Stc 세종 A [3]."
+      "note": "It wins through Round 3, then loses in Round 4 to Stc 세종 A [3]. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2024-men",
@@ -5120,13 +5124,13 @@
     },
     {
       "editionKey": "yanggu-2024-men",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "Kuta B",
       "teamLabel": "B",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "양구/2024/남자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_2.png",
-      "note": "Slot 91 visibly loses Round 1 to Dkutc 죽전 A."
+      "note": "Slot 91 visibly loses Round 1 to Dkutc 죽전 A. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2024-men",
@@ -5230,13 +5234,13 @@
     },
     {
       "editionKey": "yanggu-2024-men",
-      "clubSlug": "kyunghee-global-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 국제 C",
       "teamLabel": "C",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "양구/2024/남자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_2.png",
-      "note": "Slot 107 visibly loses Round 1 to Kmtc. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
+      "note": "Slot 107 visibly loses Round 1 to Kmtc. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\". Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2024-men",
@@ -5390,13 +5394,13 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": "kyunghee-global-impact",
+      "clubSlug": "kyunghee-engineering-impact",
       "sourceTeamName": "경희대 국제 A [1]",
       "teamLabel": "A",
       "stage": "runner_up",
       "qualityStatus": "verified",
       "sourceRef": "양구/2024/여자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_6.png",
-      "note": "School-qualified final frozen to 경희대학교 국제캠퍼스 임팩트, the university's pre-assignment women leader (rank 33)."
+      "note": "School-qualified final frozen to 경희대학교 국제캠퍼스 임팩트, the university's pre-assignment women leader (rank 33). Consolidated into 경희대학교 공과대학 IMPACT by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2024-women",
@@ -5420,13 +5424,13 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": "kyunghee-global-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 국제 B",
       "teamLabel": "B",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "양구/2024/여자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_4.png",
-      "note": "Slot 5; opening BYE, then first played-match loss to 느티나무 B. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
+      "note": "Slot 5; opening BYE, then first played-match loss to 느티나무 B. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\". Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2024-women",
@@ -5940,13 +5944,13 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": "kyunghee-global-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "Kuta",
       "teamLabel": "",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "양구/2024/여자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_5.png",
-      "note": "Slot 97; opening BYE, then first played-match loss to Hitc."
+      "note": "Slot 97; opening BYE, then first played-match loss to Hitc. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2024-women",
@@ -6040,13 +6044,13 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": "kyunghee-global-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 국제 C",
       "teamLabel": "C",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "양구/2024/여자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_5.png",
-      "note": "Slot 116; opening BYE, then first played-match loss to 쿠크리스 A. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
+      "note": "Slot 116; opening BYE, then first played-match loss to 쿠크리스 A. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\". Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2024-women",
@@ -6130,13 +6134,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": "kyunghee-global-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 러비스 C",
       "teamLabel": "C",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=1",
-      "note": "Visually checked slot 3 and terminal first played match."
+      "note": "Visually checked slot 3 and terminal first played match. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -6180,13 +6184,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": "kyunghee-global-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 러비스 B",
       "teamLabel": "B",
       "stage": "round_of_32",
       "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=1",
-      "note": "Visually checked slot 9 and traced the bracket to terminal stage round_of_32."
+      "note": "Visually checked slot 9 and traced the bracket to terminal stage round_of_32. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -6380,13 +6384,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": "kyunghee-global-impact",
+      "clubSlug": "kyunghee-engineering-impact",
       "sourceTeamName": "경희대 임팩트b",
       "teamLabel": "b",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=1",
-      "note": "Visually checked slot 36 and terminal first played match."
+      "note": "Visually checked slot 36 and terminal first played match. Consolidated into 경희대학교 공과대학 IMPACT by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -6720,13 +6724,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": "kyunghee-global-impact",
+      "clubSlug": "kyunghee-engineering-impact",
       "sourceTeamName": "경희대 임팩트a",
       "teamLabel": "a",
       "stage": "round_of_32",
       "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=2",
-      "note": "Visually checked slot 84 and traced the bracket to terminal stage round_of_32."
+      "note": "Visually checked slot 84 and traced the bracket to terminal stage round_of_32. Consolidated into 경희대학교 공과대학 IMPACT by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -7000,13 +7004,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": "kyunghee-global-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 러비스 A",
       "teamLabel": "A",
       "stage": "round_of_32",
       "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=2",
-      "note": "Visually checked slot 121 and traced the bracket to terminal stage round_of_32."
+      "note": "Visually checked slot 121 and traced the bracket to terminal stage round_of_32. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -7100,13 +7104,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": "kyunghee-global-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 국제 B",
       "teamLabel": "B",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=1",
-      "note": "Visually checked slot 8 and terminal first played match after a Round-of-128 BYE. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
+      "note": "Visually checked slot 8 and terminal first played match after a Round-of-128 BYE. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\". Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -7270,13 +7274,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 Kuta",
       "teamLabel": "",
       "stage": "round_of_16",
       "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=1",
-      "note": "Visually checked slot 38 and traced the bracket to terminal stage round_of_16. Assigned to kyunghee-seoul-kuta from administrator review memo \"경희대 KUTA\"."
+      "note": "Visually checked slot 38 and traced the bracket to terminal stage round_of_16. Assigned to kyunghee-seoul-kuta from administrator review memo \"경희대 KUTA\". Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -7440,13 +7444,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": "kyunghee-global-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 국제 C",
       "teamLabel": "C",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=2",
-      "note": "Visually checked slot 68 and terminal first played match. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
+      "note": "Visually checked slot 68 and terminal first played match. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\". Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -7520,13 +7524,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": "kyunghee-global-impact",
+      "clubSlug": "kyunghee-engineering-impact",
       "sourceTeamName": "경희대 국제 임팩트",
       "teamLabel": "",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=2",
-      "note": "Visually checked slot 83 and terminal first played match after a Round-of-128 BYE."
+      "note": "Visually checked slot 83 and terminal first played match after a Round-of-128 BYE. Consolidated into 경희대학교 공과대학 IMPACT by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -7570,13 +7574,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": "kyunghee-global-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 국제 D",
       "teamLabel": "D",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=2",
-      "note": "Visually checked slot 93 and terminal first played match. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
+      "note": "Visually checked slot 93 and terminal first played match. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\". Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -7780,13 +7784,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": "kyunghee-global-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 국제 A [2]",
       "teamLabel": "A",
       "stage": "semifinal",
       "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=3",
-      "note": "Visually checked slot 128 and traced the bracket to terminal stage semifinal. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\"."
+      "note": "Visually checked slot 128 and traced the bracket to terminal stage semifinal. Assigned to kyunghee-global-luvis from administrator review memo \"경희대 러비스\". Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "inje-2023-men",
@@ -8200,13 +8204,13 @@
     },
     {
       "editionKey": "inje-2024-men",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "Kuta",
       "teamLabel": "-",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "인제/2024/남자/Draw_2024_하늘내린인제_전국대학동아리_테니스대회_최종_결과_1.png",
-      "note": "Original PNG pairs 경희대(서울) with Kuta and shows a Round-1 loss to Sgtc."
+      "note": "Original PNG pairs 경희대(서울) with Kuta and shows a Round-1 loss to Sgtc. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "inje-2024-men",
@@ -8450,13 +8454,13 @@
     },
     {
       "editionKey": "inje-2025-men",
-      "clubSlug": "kyunghee-global-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 러비스 A",
       "teamLabel": "A",
       "stage": "semifinal",
       "qualityStatus": "verified",
       "sourceRef": "인제/2025/남자/2025 인제 남자.pdf#page=1",
-      "note": "400-DPI page explicitly pairs the international campus with 경희대 러비스 A; it advances through the quarterfinal before losing the semifinal to 경북대 Kutc A."
+      "note": "400-DPI page explicitly pairs the international campus with 경희대 러비스 A; it advances through the quarterfinal before losing the semifinal to 경북대 Kutc A. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "inje-2025-men",
@@ -8480,23 +8484,23 @@
     },
     {
       "editionKey": "inje-2025-men",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "Kuta A",
       "teamLabel": "A",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "인제/2025/남자/2025 인제 남자.pdf#page=1",
-      "note": "400-DPI page pairs 경희대(서울캠) with Kuta A; after a BYE it loses its first played match to 서울대 테니스부."
+      "note": "400-DPI page pairs 경희대(서울캠) with Kuta A; after a BYE it loses its first played match to 서울대 테니스부. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "inje-2025-men",
-      "clubSlug": "kyunghee-global-impact",
+      "clubSlug": "kyunghee-engineering-impact",
       "sourceTeamName": "경희대 임팩트",
       "teamLabel": "-",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "인제/2025/남자/2025 인제 남자.pdf#page=1",
-      "note": "400-DPI page explicitly pairs the international campus with 경희대 임팩트 and shows a Round-1 loss to 국립금오공과대 A."
+      "note": "400-DPI page explicitly pairs the international campus with 경희대 임팩트 and shows a Round-1 loss to 국립금오공과대 A. Consolidated into 경희대학교 공과대학 IMPACT by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "inje-2025-men",
@@ -8620,13 +8624,13 @@
     },
     {
       "editionKey": "inje-2025-women",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "Kuta",
       "teamLabel": "-",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "인제/2025/여자/2025 인제 여자.pdf#page=1",
-      "note": "400-DPI page pairs 경희대(서울캠) with Kuta and shows a first-round loss to 서울과학기술대 A."
+      "note": "400-DPI page pairs 경희대(서울캠) with Kuta and shows a first-round loss to 서울과학기술대 A. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "inje-2025-women",
@@ -8990,13 +8994,13 @@
     },
     {
       "editionKey": "gyeongin-2023-men",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "KUTA 서울 A",
       "teamLabel": "A",
       "stage": "round_of_16",
       "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/남자/KakaoTalk_Photo_2026-07-08-04-58-21 007.jpeg",
-      "note": "Opening BYE and Round-of-32 win, then lost 1-3 to 고려대 KUTC A; no university is displayed with KUTA. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
+      "note": "Opening BYE and Round-of-32 win, then lost 1-3 to 고려대 KUTC A; no university is displayed with KUTA. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "gyeongin-2023-men",
@@ -9060,23 +9064,23 @@
     },
     {
       "editionKey": "gyeongin-2023-men",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "러비스 A",
       "teamLabel": "A",
       "stage": "runner_up",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/남자/KakaoTalk_Photo_2026-07-08-04-58-22 011.jpeg",
-      "note": "Traced from an opening BYE through the semifinal; lost the final 1-2 to 서울대 A. No university is displayed with 러비스."
+      "note": "Traced from an opening BYE through the semifinal; lost the final 1-2 to 서울대 A. No university is displayed with 러비스. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "gyeongin-2023-men",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "KUTA 남 B",
       "teamLabel": "B",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/남자/KakaoTalk_Photo_2026-07-08-04-58-21 004.jpeg",
-      "note": "Opening BYE, then first played-match loss 0-3 to 러비스 A; no university is displayed with KUTA. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
+      "note": "Opening BYE, then first played-match loss 0-3 to 러비스 A; no university is displayed with KUTA. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "gyeongin-2023-men",
@@ -9110,13 +9114,13 @@
     },
     {
       "editionKey": "gyeongin-2023-women",
-      "clubSlug": "kyunghee-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대s",
       "teamLabel": "s",
       "stage": "champion",
       "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/여자/KakaoTalk_Photo_2026-07-08-04-59-38.jpeg",
-      "note": "School-qualified final frozen to 경희대학교 러비스, the university's pre-assignment women leader (rank 27)."
+      "note": "School-qualified final frozen to 경희대학교 러비스, the university's pre-assignment women leader (rank 27). Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "gyeongin-2023-women",
@@ -9812,13 +9816,13 @@
     },
     {
       "editionKey": "gyeongin-2024-men",
-      "clubSlug": "kyunghee-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대학교 KUTA",
       "teamLabel": "",
       "stage": "round_of_32",
       "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/남자/KakaoTalk_Photo_2026-07-08-04-55-48 004.jpeg",
-      "note": "Won its opener, then lost 0-3 to 한양대 HYTC 사자."
+      "note": "Won its opener, then lost 0-3 to 한양대 HYTC 사자. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "gyeongin-2024-men",
@@ -9902,13 +9906,13 @@
     },
     {
       "editionKey": "gyeongin-2024-men",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대학교 A",
       "teamLabel": "A",
       "stage": "round_of_16",
       "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/남자/KakaoTalk_Photo_2026-07-08-04-55-49 008.jpeg",
-      "note": "Lost 1-3 to 아주대 A. Assigned to 경희대학교 서울캠퍼스 KUTA from the administrator's direct confirmation."
+      "note": "Lost 1-3 to 아주대 A. Assigned to 경희대학교 서울캠퍼스 KUTA from the administrator's direct confirmation. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "gyeongin-2024-women",
@@ -9982,13 +9986,13 @@
     },
     {
       "editionKey": "gyeongin-2024-women",
-      "clubSlug": "kyunghee-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 KUTA B",
       "teamLabel": "B",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/여자/KakaoTalk_Photo_2026-07-08-04-55-33 001.jpeg",
-      "note": "Opening 0-2 loss to 숭실대 B팀."
+      "note": "Opening 0-2 loss to 숭실대 B팀. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "gyeongin-2024-women",
@@ -10012,13 +10016,13 @@
     },
     {
       "editionKey": "gyeongin-2024-women",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "KUTA A",
       "teamLabel": "A",
       "stage": "round_of_16",
       "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/여자/KakaoTalk_Photo_2026-07-08-04-55-34 006.jpeg",
-      "note": "Same source identifies KUTA B with 경희대; KUTA A lost 1-2 to 한양대 HYTC A. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
+      "note": "Same source identifies KUTA B with 경희대; KUTA A lost 1-2 to 한양대 HYTC A. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "gyeongin-2024-women",
@@ -10152,13 +10156,13 @@
     },
     {
       "editionKey": "gyeongin-2024-women",
-      "clubSlug": "kyunghee-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대학교 러비스B",
       "teamLabel": "B",
       "stage": "round_of_32",
       "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/여자/KakaoTalk_Photo_2026-07-08-04-55-33 003.jpeg",
-      "note": "Won the opening tie, then lost 0-2 to 단국대 A."
+      "note": "Won the opening tie, then lost 0-2 to 단국대 A. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "gyeongin-2024-women",
@@ -10452,13 +10456,13 @@
     },
     {
       "editionKey": "gyeongin-2025-women",
-      "clubSlug": "kyunghee-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대학교 KUTA",
       "teamLabel": "",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "경인지구/2025/여자/KakaoTalk_Photo_2026-07-08-05-17-28 001.png",
-      "note": "After an opening BYE, the PNG shows a 1-2 loss to 경인교대 러브에이스A in its first played match."
+      "note": "After an opening BYE, the PNG shows a 1-2 loss to 경인교대 러브에이스A in its first played match. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "gyeongin-2025-women",
@@ -11162,13 +11166,13 @@
     },
     {
       "editionKey": "chuncheon-2023-men",
-      "clubSlug": "kyunghee-shuttle",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 셔틀",
       "teamLabel": "",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "춘천/2023/남자/SCR-20260708-dwxw.png",
-      "note": "Visually verified opening played-match loss; no status marker."
+      "note": "Visually verified opening played-match loss; no status marker. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "chuncheon-2023-men",
@@ -11422,13 +11426,13 @@
     },
     {
       "editionKey": "chuncheon-2023-women",
-      "clubSlug": "kyunghee-global-impact",
+      "clubSlug": "kyunghee-engineering-impact",
       "sourceTeamName": "경희대 국제 A",
       "teamLabel": "A",
       "stage": "runner_up",
       "qualityStatus": "verified",
       "sourceRef": "춘천/2023/여자/SCR-20260708-dxye.png",
-      "note": "School-qualified final frozen to 경희대학교 국제캠퍼스 임팩트, the university's pre-assignment women leader (rank 33)."
+      "note": "School-qualified final frozen to 경희대학교 국제캠퍼스 임팩트, the university's pre-assignment women leader (rank 33). Consolidated into 경희대학교 공과대학 IMPACT by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "chuncheon-2023-women",
@@ -11692,23 +11696,23 @@
     },
     {
       "editionKey": "chuncheon-2024-men",
-      "clubSlug": "kyunghee-impact",
+      "clubSlug": "kyunghee-engineering-impact",
       "sourceTeamName": "경희대 임팩트A",
       "teamLabel": "A",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "춘천/2024/남자/테니스대회_128강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "lost 1-2 to 한국외대 A (64강)"
+      "note": "lost 1-2 to 한국외대 A (64강) Consolidated into 경희대학교 공과대학 IMPACT by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "chuncheon-2024-men",
-      "clubSlug": "kyunghee-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대러비스C",
       "teamLabel": "C",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "춘천/2024/남자/테니스대회_128강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "lost 0-2 to 한국외대 A (128강)"
+      "note": "lost 0-2 to 한국외대 A (128강) Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "chuncheon-2024-men",
@@ -11762,13 +11766,13 @@
     },
     {
       "editionKey": "chuncheon-2024-men",
-      "clubSlug": "kyunghee-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 러비스 A",
       "teamLabel": "A",
       "stage": "quarterfinal",
       "qualityStatus": "verified",
       "sourceRef": "춘천/2024/남자/테니스대회_128강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "lost 1-2 to 전북대A (8강)"
+      "note": "lost 1-2 to 전북대A (8강) Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "chuncheon-2024-men",
@@ -12222,13 +12226,13 @@
     },
     {
       "editionKey": "chuncheon-2024-men",
-      "clubSlug": "kyunghee-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 러비스 B",
       "teamLabel": "B",
       "stage": "round_of_16",
       "qualityStatus": "verified",
       "sourceRef": "춘천/2024/남자/테니스대회_128강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "lost 0-2 to 중앙대 A (16강)"
+      "note": "lost 0-2 to 중앙대 A (16강) Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "chuncheon-2024-men",
@@ -12372,13 +12376,13 @@
     },
     {
       "editionKey": "chuncheon-2024-women",
-      "clubSlug": "kyunghee-global-impact",
+      "clubSlug": "kyunghee-engineering-impact",
       "sourceTeamName": "경희대 국제 A",
       "teamLabel": "A",
       "stage": "runner_up",
       "qualityStatus": "verified",
       "sourceRef": "춘천/2024/여자/여자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "School-qualified final frozen to 경희대학교 국제캠퍼스 임팩트, the university's pre-assignment women leader (rank 33)."
+      "note": "School-qualified final frozen to 경희대학교 국제캠퍼스 임팩트, the university's pre-assignment women leader (rank 33). Consolidated into 경희대학교 공과대학 IMPACT by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "chuncheon-2024-women",
@@ -12782,13 +12786,13 @@
     },
     {
       "editionKey": "chuncheon-2025-men",
-      "clubSlug": "kyunghee-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 KUTA",
       "teamLabel": "",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "춘천/2025/남자/2025년_남자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 64강 row 6 shows a 0-2 loss to 연세대진리."
+      "note": "Rendered 64강 row 6 shows a 0-2 loss to 연세대진리. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "chuncheon-2025-men",
@@ -12942,23 +12946,23 @@
     },
     {
       "editionKey": "chuncheon-2025-men",
-      "clubSlug": "kyunghee-luvis",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 러비스 에이스",
       "teamLabel": "",
       "stage": "round_of_32",
       "qualityStatus": "verified",
       "sourceRef": "춘천/2025/남자/2025년_남자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 32강 row 40 shows a 0-2 loss to 한국외대A."
+      "note": "Rendered 32강 row 40 shows a 0-2 loss to 한국외대A. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "chuncheon-2025-men",
-      "clubSlug": "kyunghee-impact",
+      "clubSlug": "kyunghee-engineering-impact",
       "sourceTeamName": "경희대 임팩트B",
       "teamLabel": "B",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "춘천/2025/남자/2025년_남자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 64강 row 15 shows a 0-2 loss to 한국외대A."
+      "note": "Rendered 64강 row 15 shows a 0-2 loss to 한국외대A. Consolidated into 경희대학교 공과대학 IMPACT by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "chuncheon-2025-men",
@@ -13072,13 +13076,13 @@
     },
     {
       "editionKey": "chuncheon-2025-men",
-      "clubSlug": "kyunghee-impact",
+      "clubSlug": "kyunghee-engineering-impact",
       "sourceTeamName": "경희대임팩트A",
       "teamLabel": "A",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "춘천/2025/남자/2025년_남자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 64강 row 22 shows a 1-2 loss to 전북대 B."
+      "note": "Rendered 64강 row 22 shows a 1-2 loss to 전북대 B. Consolidated into 경희대학교 공과대학 IMPACT by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "chuncheon-2025-men",
@@ -13552,13 +13556,13 @@
     },
     {
       "editionKey": "chuncheon-2025-women",
-      "clubSlug": "kyunghee-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 KUTA",
       "teamLabel": "",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "춘천/2025/여자/2025년_여자부_32강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 32강 row 16 shows a 1-2 loss to 홍익대 HITC A."
+      "note": "Rendered 32강 row 16 shows a 1-2 loss to 홍익대 HITC A. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "chuncheon-2025-women",
@@ -13752,13 +13756,13 @@
     },
     {
       "editionKey": "wemix-2025-women",
-      "clubSlug": "kyunghee-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 KUTA",
       "teamLabel": "",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "위믹스/2025/여자/KakaoTalk_Photo_2026-07-08-05-18-15.png",
-      "note": "After a BYE, loses its first played match 0-2 to 고려대 KUTC (3차우승). Club identity frozen to kyunghee-kuta under the administrator-approved school-only assignment rule."
+      "note": "After a BYE, loses its first played match 0-2 to 고려대 KUTC (3차우승). Club identity frozen to kyunghee-kuta under the administrator-approved school-only assignment rule. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "wemix-2025-women",
@@ -13832,13 +13836,13 @@
     },
     {
       "editionKey": "inje-2026-men",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 KUTA A",
       "teamLabel": "A",
       "stage": "round_of_16",
       "qualityStatus": "verified",
       "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
-      "note": "2026 하늘내린인제 최종 대진표의 11번 엔트리를 마지막 진출 단계까지 추적했습니다."
+      "note": "2026 하늘내린인제 최종 대진표의 11번 엔트리를 마지막 진출 단계까지 추적했습니다. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "inje-2026-men",
@@ -14112,13 +14116,13 @@
     },
     {
       "editionKey": "inje-2026-men",
-      "clubSlug": "kyunghee-seoul-kuta",
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희대 KUTA B",
       "teamLabel": "B",
       "stage": "round_of_32",
       "qualityStatus": "verified",
       "sourceRef": "인제/2026/남자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
-      "note": "2026 하늘내린인제 최종 대진표의 62번 엔트리를 마지막 진출 단계까지 추적했습니다."
+      "note": "2026 하늘내린인제 최종 대진표의 62번 엔트리를 마지막 진출 단계까지 추적했습니다. Consolidated into 경희대학교 KUTA·LOVICE by administrator instruction while preserving the original source team name."
     },
     {
       "editionKey": "inje-2026-men",
