@@ -1,5 +1,5 @@
 {
-  "version": "sources-2026-07-26-v16",
+  "version": "sources-2026-07-26-v17",
   "clubs": [
     {
       "slug": "catholic-courtrang",
@@ -378,6 +378,12 @@
       "universityName": "한국기술교육대학교",
       "clubName": "테니스부",
       "displayName": "한국기술교육대학교 테니스부"
+    },
+    {
+      "slug": "yongin-ace",
+      "universityName": "용인대학교",
+      "clubName": "ACE",
+      "displayName": "용인대학교 ACE"
     }
   ],
   "aliases": [
@@ -2365,6 +2371,76 @@
       "clubSlug": "korea-kutc",
       "normalizedAlias": "고려대학교 kutc b [q]",
       "sourceLabel": "Kutc B [Q]"
+    },
+    {
+      "clubSlug": "korea-kutc",
+      "normalizedAlias": "고려대학교 kutc e [q]",
+      "sourceLabel": "Kutc E [Q]"
+    },
+    {
+      "clubSlug": "gangwon-shot",
+      "normalizedAlias": "강원대학교 삼척캠퍼스 shot [q]",
+      "sourceLabel": "Shot [Q]"
+    },
+    {
+      "clubSlug": "hufs-ace",
+      "normalizedAlias": "한국외국어대학교 ace [3]",
+      "sourceLabel": "Ace [3]"
+    },
+    {
+      "clubSlug": "inu-uitc",
+      "normalizedAlias": "인천대학교 uitc 여포 [q]",
+      "sourceLabel": "Uitc 여포 [Q]"
+    },
+    {
+      "clubSlug": "korea-kutc",
+      "normalizedAlias": "고려대학교 kutc d [q]",
+      "sourceLabel": "Kutc D [Q]"
+    },
+    {
+      "clubSlug": "yongin-ace",
+      "normalizedAlias": "용인대학교 용인대 ace [q]",
+      "sourceLabel": "용인대 Ace [Q]"
+    },
+    {
+      "clubSlug": "namseoul-winning-shot",
+      "normalizedAlias": "남서울대학교 위닝샷 [q]",
+      "sourceLabel": "위닝샷 [Q]"
+    },
+    {
+      "clubSlug": "hanbat-masters",
+      "normalizedAlias": "국립한밭대학교 마스터즈 a [q]",
+      "sourceLabel": "마스터즈 A [Q]"
+    },
+    {
+      "clubSlug": "hanbat-masters",
+      "normalizedAlias": "국립한밭대학교 마스터즈 b [q]",
+      "sourceLabel": "마스터즈 B [Q]"
+    },
+    {
+      "clubSlug": "yonsei-yutt",
+      "normalizedAlias": "연세대학교 연세대 믿음 [q]",
+      "sourceLabel": "연세대 믿음 [Q]"
+    },
+    {
+      "clubSlug": "suwon-ace",
+      "normalizedAlias": "수원대학교 ace m [q]",
+      "sourceLabel": "Ace M [Q]"
+    },
+    {
+      "clubSlug": "hanyang-hytc",
+      "normalizedAlias": "한양대학교 hytc 블루 [q]",
+      "sourceLabel": "Hytc 블루 [Q]"
+    },
+    {
+      "clubSlug": "inu-uitc",
+      "normalizedAlias": "인천대학교 uitc 제갈량 [q]",
+      "sourceLabel": "Uitc 제갈량 [Q]"
+    },
+    {
+      "clubSlug": "sangmyung-tesla",
+      "normalizedAlias": "상명대학교 테슬라 [q]",
+      "sourceLabel": "테슬라 [Q]"
     }
   ],
   "tournaments": [
@@ -2814,23 +2890,23 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "korea-kutc",
       "sourceTeamName": "Kutc E [Q]",
       "teamLabel": "E",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-egzq.png",
-      "note": "Slot 6 lost its first played match in the Round of 128."
+      "note": "Slot 6 lost its first played match in the Round of 128. Assigned to 고려대학교 KUTC from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "korea-kutc",
       "sourceTeamName": "Kutc B [Q]",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-egzq.png",
-      "note": "Slot 7 lost its first played match in the Round of 128."
+      "note": "Slot 7 lost its first played match in the Round of 128. Assigned to 고려대학교 KUTC from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2924,13 +3000,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "hanyang-hytc",
       "sourceTeamName": "Hytc 개나리 [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-egzq.png",
-      "note": "Slot 20 lost its first played match in the Round of 128."
+      "note": "Slot 20 lost its first played match in the Round of 128. Assigned to 한양대학교 HYTC from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2964,23 +3040,23 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "korea-kutc",
       "sourceTeamName": "Kutc A [Q]",
       "teamLabel": "A",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-egzq.png",
-      "note": "Slot 25 received a BYE, won in the Round of 64, then lost in the Round of 32."
+      "note": "Slot 25 received a BYE, won in the Round of 64, then lost in the Round of 32. Assigned to 고려대학교 KUTC from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "gangwon-shot",
       "sourceTeamName": "Shot [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-egzq.png",
-      "note": "Slot 27 lost its first played match in the Round of 128."
+      "note": "Slot 27 lost its first played match in the Round of 128. Assigned to 강원대학교 삼척캠퍼스 SHOT from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2994,13 +3070,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "hanyang-erica-hitec",
       "sourceTeamName": "에리카 B [Q]",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-egzq.png",
-      "note": "Slot 29 lost its first played match in the Round of 128."
+      "note": "Slot 29 lost its first played match in the Round of 128. Assigned to 한양대학교 ERICA캠퍼스 HiTEC from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3024,13 +3100,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "hufs-ace",
       "sourceTeamName": "Ace [3]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehdy.png",
-      "note": "Slot 33 received a Round-of-128 BYE and lost its first played match in the Round of 64."
+      "note": "Slot 33 received a Round-of-128 BYE and lost its first played match in the Round of 64. Assigned to 한국외국어대학교 ACE from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3054,13 +3130,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "dongguk-dutc",
       "sourceTeamName": "Dutc C [Q]",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehdy.png",
-      "note": "Slot 37 lost its first played match in the Round of 128."
+      "note": "Slot 37 lost its first played match in the Round of 128. Assigned to 동국대학교 DUTC from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3074,13 +3150,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 사랑 [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehdy.png",
-      "note": "Slot 40 received a Round-of-128 BYE and lost its first played match in the Round of 64."
+      "note": "Slot 40 received a Round-of-128 BYE and lost its first played match in the Round of 64. Assigned to 연세대학교 YUTT from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3114,13 +3190,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "dongguk-dutc",
       "sourceTeamName": "Dutc B [Q]",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehdy.png",
-      "note": "Slot 45 lost its first played match in the Round of 128."
+      "note": "Slot 45 lost its first played match in the Round of 128. Assigned to 동국대학교 DUTC from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3274,13 +3350,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희 C [Q]",
       "teamLabel": "C",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehhc.png",
-      "note": "Slot 67 won in the Round of 128, then lost in the Round of 64."
+      "note": "Slot 67 won in the Round of 128, then lost in the Round of 64. Assigned to 경희대학교 KUTA·LOVICE from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3324,33 +3400,33 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "inu-uitc",
       "sourceTeamName": "Uitc 여포 [Q]",
       "teamLabel": "",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehhc.png",
-      "note": "Slot 73 advanced from a BYE through the Round of 64, then was marked Disqualified in the Round of 32."
+      "note": "Slot 73 advanced from a BYE through the Round of 64, then was marked Disqualified in the Round of 32. Assigned to 인천대학교 UITC from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "korea-kutc",
       "sourceTeamName": "Kutc D [Q]",
       "teamLabel": "D",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehhc.png",
-      "note": "Slot 75 lost its first played match in the Round of 128."
+      "note": "Slot 75 lost its first played match in the Round of 128. Assigned to 고려대학교 KUTC from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "yongin-ace",
       "sourceTeamName": "용인대 Ace [Q]",
       "teamLabel": "",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehhc.png",
-      "note": "Slot 76 won in the Round of 128, then lost in the Round of 64."
+      "note": "Slot 76 won in the Round of 128, then lost in the Round of 64. Assigned to 용인대학교 ACE from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3394,23 +3470,23 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-engineering-impact",
       "sourceTeamName": "경희 I [Q]",
       "teamLabel": "I",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehhc.png",
-      "note": "Slot 83 lost its first played match in the Round of 128."
+      "note": "Slot 83 lost its first played match in the Round of 128. Assigned to 경희대학교 공과대학 IMPACT from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "dankook-jukjeon-dkutc",
       "sourceTeamName": "Dkuct 2 [Q]",
       "teamLabel": "2",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehhc.png",
-      "note": "Slot 84 advanced through two played matches, then lost in the Round of 32."
+      "note": "Slot 84 advanced through two played matches, then lost in the Round of 32. Assigned to 단국대학교 DKUTC(죽전캠퍼스) from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3434,13 +3510,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "namseoul-winning-shot",
       "sourceTeamName": "위닝샷 [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehhc.png",
-      "note": "Slot 88 received a Round-of-128 BYE and lost its first played match in the Round of 64."
+      "note": "Slot 88 received a Round-of-128 BYE and lost its first played match in the Round of 64. Assigned to 남서울대학교 위닝샷 from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3464,13 +3540,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "hanbat-masters",
       "sourceTeamName": "마스터즈 A [Q]",
       "teamLabel": "A",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehhc.png",
-      "note": "Slot 92 won in the Round of 128, then lost in the Round of 64."
+      "note": "Slot 92 won in the Round of 128, then lost in the Round of 64. Assigned to 국립한밭대학교 마스터즈 from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3534,33 +3610,33 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "hanbat-masters",
       "sourceTeamName": "마스터즈 B [Q]",
       "teamLabel": "B",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehlp.png",
-      "note": "Slot 101 advanced through two played matches, then lost in the Round of 32."
+      "note": "Slot 101 advanced through two played matches, then lost in the Round of 32. Assigned to 국립한밭대학교 마스터즈 from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 믿음 [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehlp.png",
-      "note": "Slot 102 lost its first played match in the Round of 128."
+      "note": "Slot 102 lost its first played match in the Round of 128. Assigned to 연세대학교 YUTT from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "suwon-ace",
       "sourceTeamName": "Ace M [Q]",
       "teamLabel": "M",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehlp.png",
-      "note": "Slot 104 received a Round-of-128 BYE and was marked Disqualified in its first played match, in the Round of 64."
+      "note": "Slot 104 received a Round-of-128 BYE and was marked Disqualified in its first played match, in the Round of 64. Assigned to 수원대학교 ACE from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3644,13 +3720,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "hanyang-hytc",
       "sourceTeamName": "Hytc 블루 [Q]",
       "teamLabel": "",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehlp.png",
-      "note": "Slot 116 advanced through two played matches, then lost in the Round of 32."
+      "note": "Slot 116 advanced through two played matches, then lost in the Round of 32. Assigned to 한양대학교 HYTC from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3664,13 +3740,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "inu-uitc",
       "sourceTeamName": "Uitc 제갈량 [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehlp.png",
-      "note": "Slot 118 lost its first played match in the Round of 128."
+      "note": "Slot 118 lost its first played match in the Round of 128. Assigned to 인천대학교 UITC from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3684,13 +3760,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-kuta-lovice",
       "sourceTeamName": "경희 B [Q]",
       "teamLabel": "B",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehlp.png",
-      "note": "Slot 121 won in the Round of 128, then lost in the Round of 64."
+      "note": "Slot 121 won in the Round of 128, then lost in the Round of 64. Assigned to 경희대학교 KUTA·LOVICE from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3704,13 +3780,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "korea-kutc",
       "sourceTeamName": "Kutc C [Q]",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehlp.png",
-      "note": "Slot 123 lost its first played match in the Round of 128."
+      "note": "Slot 123 lost its first played match in the Round of 128. Assigned to 고려대학교 KUTC from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3724,13 +3800,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "sangmyung-tesla",
       "sourceTeamName": "테슬라 [Q]",
       "teamLabel": "",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehlp.png",
-      "note": "Slot 125 won in the Round of 128, then lost in the Round of 64."
+      "note": "Slot 125 won in the Round of 128, then lost in the Round of 64. Assigned to 상명대학교 TESLA from the administrator-provided 2023 Yanggu men's university-to-team mapping."
     },
     {
       "editionKey": "yanggu-2023-men",

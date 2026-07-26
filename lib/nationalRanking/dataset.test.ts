@@ -577,7 +577,7 @@ describe("loadNationalRankingDataset", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-07-26-v16");
+    expect(dataset.version).toBe("sources-2026-07-26-v17");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -615,15 +615,15 @@ describe("loadNationalRankingDataset", () => {
       expect(results, editionKey).toHaveLength(expected.resultCount);
     }
 
-    expect(dataset.clubs).toHaveLength(63);
-    expect(dataset.aliases).toHaveLength(397);
+    expect(dataset.clubs).toHaveLength(64);
+    expect(dataset.aliases).toHaveLength(411);
     expect(dataset.results).toHaveLength(1_170);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
-    ).toHaveLength(1_096);
+    ).toHaveLength(1_122);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
-    ).toHaveLength(74);
+    ).toHaveLength(48);
 
     expect(
       dataset.results.find(
@@ -684,8 +684,8 @@ describe("loadNationalRankingDataset", () => {
         priorEditionKeys.has(result.editionKey)
       ),
     };
-    // Re-baselined after consolidating the confirmed Kyunghee club identities
-    // while preserving edition/result ordering.
+    // Re-baselined after applying the administrator-provided 2023 Yanggu
+    // university-to-club mappings while preserving edition/result ordering.
     const fingerprint = createHash("sha256")
       .update(JSON.stringify(approvedTask4))
       .digest("hex");
@@ -695,7 +695,7 @@ describe("loadNationalRankingDataset", () => {
     expect(approvedTask4.editions).toHaveLength(12);
     expect(approvedTask4.results).toHaveLength(608);
     expect(fingerprint).toBe(
-      "f92540cf5725904e15ec94cb31aee19071b5822a601f29e7d102adb615963f82"
+      "156010f842c98c90e8b32e342676d884a96f81643f5fecde34164325c5c96e22"
     );
 
     for (const [editionKey, expectedCount] of Object.entries(priorExpectedCounts)) {

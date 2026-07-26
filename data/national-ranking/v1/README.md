@@ -1,7 +1,7 @@
 # National ranking source dataset v1
 
 `dataset.json` is the canonical, visually verified source manifest for the
-national university club ranking. Version `sources-2026-07-26-v16` contains the
+national university club ranking. Version `sources-2026-07-26-v17` contains the
 complete Yanggu, Gyeongin, Inje, Chuncheon, and WEMIX source program: 28
 editions and 1,170 terminal result records. Yeongwol is not part of this
 dataset.
@@ -117,6 +117,13 @@ unresolved entrants are assigned to their confirmed or established club
 families, including the campus-specific Dankook and Hanyang entries. Original
 entrant labels, stages, notes, and source references remain unchanged.
 
+Version `sources-2026-07-26-v17` applies the administrator-provided university
+labels from the 2023 Yanggu men's qualifying draw. All 26 remaining unresolved
+entrants are assigned to their confirmed or established club families. This
+adds `용인대학교 ACE`, assigns the visible KUTA and IMPACT entries to the two
+approved Kyunghee ranking entities, and preserves every original entrant label,
+stage, note, and source reference.
+
 Canonical clubs consolidate visually explicit spellings plus the
 administrator-confirmed team-name families documented in the 2026-07-13
 design. These include 경기대학교 `KTF`/`Kft`/`테토남`, 연세대학교
@@ -180,7 +187,7 @@ The two editions and all 20 terminal rows are therefore verified and scoreable.
 
 ## Unresolved mapping log
 
-The policy above leaves 74 of 1,170 rows unresolved. Version
+The policy above leaves 48 of 1,170 rows unresolved. Version
 `sources-2026-07-24-v9` assigned 332 previously unresolved university-only team
 labels to the university's sole public ranking club. Version
 `sources-2026-07-24-v10` applied the administrator-reviewed Yanggu memo
@@ -198,10 +205,12 @@ consolidates all previously assigned Kyunghee records into the two approved
 ranking entities.
 Version `sources-2026-07-26-v16` resolves all 32 remaining 2023 Yanggu women's
 identities from the administrator-provided university-to-team mapping.
+Version `sources-2026-07-26-v17` resolves all 26 remaining 2023 Yanggu men's
+identities from the administrator-provided university-to-team mapping.
 
 | Edition | Entrants/results | Verified rows | Unresolved rows | Reason summary |
 | --- | ---: | ---: | ---: | --- |
-| `yanggu-2023-men` | 98 | 72 | 26 | Remaining labels identify a multi-club university or lack sufficient university/club context. |
+| `yanggu-2023-men` | 98 | 98 | 0 | All identities are assigned from the administrator-provided qualifying-draw mapping. |
 | `yanggu-2023-women` | 91 | 91 | 0 | All identities are assigned from the administrator-provided qualifying-draw mapping. |
 | `yanggu-2024-men` | 89 | 89 | 0 | All identities are assigned. |
 | `yanggu-2024-women` | 73 | 73 | 0 | All identities are assigned. |
@@ -222,7 +231,6 @@ identities from the administrator-provided university-to-team mapping.
 | `gyeongin-2025-men` | 22 | 22 | 0 | All identities are assigned. |
 | `gyeongin-2025-women` | 26 | 24 | 2 | Generic club-only and multi-club university labels remain. |
 | `chuncheon-2023-men` | 50 | 45 | 5 | Generic club-only and multi-club university labels remain. |
-| `chuncheon-2023-women` | 42 | 35 | 7 | Generic club-only and multi-club university labels remain. |
 | `chuncheon-2024-men` | 68 | 64 | 4 | Generic club-only and multi-club university labels remain. |
 | `chuncheon-2024-women` | 34 | 33 | 1 | Generic club-only and multi-club university labels remain. |
 | `chuncheon-2025-men` | 58 | 56 | 2 | Generic club-only and multi-club university labels remain. |
