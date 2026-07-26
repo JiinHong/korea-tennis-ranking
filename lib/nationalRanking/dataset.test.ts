@@ -577,7 +577,7 @@ describe("loadNationalRankingDataset", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-07-26-v13");
+    expect(dataset.version).toBe("sources-2026-07-26-v14");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -615,15 +615,15 @@ describe("loadNationalRankingDataset", () => {
       expect(results, editionKey).toHaveLength(expected.resultCount);
     }
 
-    expect(dataset.clubs).toHaveLength(70);
-    expect(dataset.aliases).toHaveLength(330);
+    expect(dataset.clubs).toHaveLength(69);
+    expect(dataset.aliases).toHaveLength(357);
     expect(dataset.results).toHaveLength(1_170);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
-    ).toHaveLength(1_034);
+    ).toHaveLength(1_063);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
-    ).toHaveLength(136);
+    ).toHaveLength(107);
 
     expect(
       dataset.results.find(
@@ -696,7 +696,7 @@ describe("loadNationalRankingDataset", () => {
     expect(approvedTask4.editions).toHaveLength(12);
     expect(approvedTask4.results).toHaveLength(608);
     expect(fingerprint).toBe(
-      "c20fb7b66c577b2c7ed503f8ab0d39141f0093831cf29a6e5f246a8afa6ba323"
+      "628fa3c58cf16085861aba31766890bfac1e04c58d5200e34541f32de7bc50df"
     );
 
     for (const [editionKey, expectedCount] of Object.entries(priorExpectedCounts)) {
@@ -734,7 +734,6 @@ describe("loadNationalRankingDataset", () => {
     expect(unresolvedNames).toEqual([
       "경희대학교 B",
       "경희대학교 C",
-      "명지대A",
     ]);
     expect(
       dataset.results.find(
@@ -1550,7 +1549,7 @@ describe("loadNationalRankingDataset", () => {
       .map((result) => result.sourceTeamName)
       .sort((left, right) => left.localeCompare(right, "ko"));
 
-    expect(unassignedFinals).toEqual(["러비스 A", "A"]);
+    expect(unassignedFinals).toEqual(["러비스 A"]);
     expect(dataset.clubs).toContainEqual(
       expect.objectContaining({
         slug: "ajou-tennis",

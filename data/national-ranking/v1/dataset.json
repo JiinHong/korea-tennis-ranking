@@ -1,5 +1,5 @@
 {
-  "version": "sources-2026-07-26-v13",
+  "version": "sources-2026-07-26-v14",
   "clubs": [
     {
       "slug": "catholic-courtrang",
@@ -188,22 +188,10 @@
       "displayName": "경북대학교 KUTC"
     },
     {
-      "slug": "myongji-rushand",
+      "slug": "myongji-mjta-mtc",
       "universityName": "명지대학교",
-      "clubName": "러시앤",
-      "displayName": "명지대학교 러시앤"
-    },
-    {
-      "slug": "myongji-tesarang",
-      "universityName": "명지대학교",
-      "clubName": "테사랑",
-      "displayName": "명지대학교 테사랑"
-    },
-    {
-      "slug": "myongji-tshot",
-      "universityName": "명지대학교",
-      "clubName": "티샷",
-      "displayName": "명지대학교 티샷"
+      "clubName": "MJTA·MTC",
+      "displayName": "명지대학교 MJTA·MTC"
     },
     {
       "slug": "sejong-stc",
@@ -420,6 +408,12 @@
       "universityName": "한국교원대학교",
       "clubName": "테니스부",
       "displayName": "한국교원대학교 테니스부"
+    },
+    {
+      "slug": "koreatech-tennis",
+      "universityName": "한국기술교육대학교",
+      "clubName": "테니스부",
+      "displayName": "한국기술교육대학교 테니스부"
     }
   ],
   "aliases": [
@@ -744,17 +738,17 @@
       "sourceLabel": "Dutc B"
     },
     {
-      "clubSlug": "myongji-rushand",
+      "clubSlug": "myongji-mjta-mtc",
       "normalizedAlias": "명지대학교 러시앤",
       "sourceLabel": "러시앤"
     },
     {
-      "clubSlug": "myongji-tesarang",
+      "clubSlug": "myongji-mjta-mtc",
       "normalizedAlias": "명지대학교 명지대 테사랑",
       "sourceLabel": "명지대 테사랑"
     },
     {
-      "clubSlug": "myongji-tshot",
+      "clubSlug": "myongji-mjta-mtc",
       "normalizedAlias": "명지대학교 티샷",
       "sourceLabel": "티샷"
     },
@@ -2072,6 +2066,141 @@
       "clubSlug": "yonsei-yutt",
       "normalizedAlias": "연세대학교 연세대정의",
       "sourceLabel": "연세대정의"
+    },
+    {
+      "clubSlug": "myongji-mjta-mtc",
+      "normalizedAlias": "명지대학교 mjta",
+      "sourceLabel": "MJTA"
+    },
+    {
+      "clubSlug": "myongji-mjta-mtc",
+      "normalizedAlias": "명지대학교 mtc",
+      "sourceLabel": "MTC"
+    },
+    {
+      "clubSlug": "myongji-mjta-mtc",
+      "normalizedAlias": "명지대학교 mjta·mtc",
+      "sourceLabel": "MJTA·MTC"
+    },
+    {
+      "clubSlug": "koreatech-tennis",
+      "normalizedAlias": "한국기술교육대학교 테니스부",
+      "sourceLabel": "테니스부"
+    },
+    {
+      "clubSlug": "myongji-mjta-mtc",
+      "normalizedAlias": "명지대학교 명지대 b [q]",
+      "sourceLabel": "명지대 B [Q]"
+    },
+    {
+      "clubSlug": "myongji-mjta-mtc",
+      "normalizedAlias": "명지대학교 명지대 a [q]",
+      "sourceLabel": "명지대 A [Q]"
+    },
+    {
+      "clubSlug": "korea-kutc",
+      "normalizedAlias": "고려대학교 고려대 c",
+      "sourceLabel": "고려대 C"
+    },
+    {
+      "clubSlug": "korea-kutc",
+      "normalizedAlias": "고려대학교 고려대",
+      "sourceLabel": "고려대"
+    },
+    {
+      "clubSlug": "ewha-tennis",
+      "normalizedAlias": "이화여자대학교 이화여대 a",
+      "sourceLabel": "이화여대 A"
+    },
+    {
+      "clubSlug": "sungkyunkwan-stc",
+      "normalizedAlias": "성균관대학교 stc",
+      "sourceLabel": "STC"
+    },
+    {
+      "clubSlug": "inu-uitc",
+      "normalizedAlias": "인천대학교 uitc b",
+      "sourceLabel": "UITC B"
+    },
+    {
+      "clubSlug": "inu-uitc",
+      "normalizedAlias": "인천대학교 uitc 남 a",
+      "sourceLabel": "Uitc 남 A"
+    },
+    {
+      "clubSlug": "uos-approach",
+      "normalizedAlias": "서울시립대학교 uostc a",
+      "sourceLabel": "UOSTC A"
+    },
+    {
+      "clubSlug": "ewha-tennis",
+      "normalizedAlias": "이화여자대학교 이화여대 b",
+      "sourceLabel": "이화여대 B"
+    },
+    {
+      "clubSlug": "uos-approach",
+      "normalizedAlias": "서울시립대학교 a",
+      "sourceLabel": "A"
+    },
+    {
+      "clubSlug": "myongji-mjta-mtc",
+      "normalizedAlias": "명지대학교 명지대a",
+      "sourceLabel": "명지대A"
+    },
+    {
+      "clubSlug": "ewha-tennis",
+      "normalizedAlias": "이화여자대학교 이화여대b",
+      "sourceLabel": "이화여대B"
+    },
+    {
+      "clubSlug": "dankook-cheonan-dkutc",
+      "normalizedAlias": "단국대학교 단국대 a",
+      "sourceLabel": "단국대 A"
+    },
+    {
+      "clubSlug": "inu-uitc",
+      "normalizedAlias": "인천대학교 uitc a",
+      "sourceLabel": "UITC A"
+    },
+    {
+      "clubSlug": "dankook-cheonan-dkutc",
+      "normalizedAlias": "단국대학교 단국대",
+      "sourceLabel": "단국대"
+    },
+    {
+      "clubSlug": "hanyang-hytc",
+      "normalizedAlias": "한양대학교 한양대학교 a",
+      "sourceLabel": "한양대학교 A"
+    },
+    {
+      "clubSlug": "ewha-tennis",
+      "normalizedAlias": "이화여자대학교 이화여대a",
+      "sourceLabel": "이화여대A"
+    },
+    {
+      "clubSlug": "gangneung-wonju-love",
+      "normalizedAlias": "강원대학교 강원대학교 a",
+      "sourceLabel": "강원대학교 A"
+    },
+    {
+      "clubSlug": "gangneung-wonju-love",
+      "normalizedAlias": "강원대학교 강원대학교b",
+      "sourceLabel": "강원대학교B"
+    },
+    {
+      "clubSlug": "dankook-cheonan-dkutc",
+      "normalizedAlias": "단국대학교 단국대a",
+      "sourceLabel": "단국대A"
+    },
+    {
+      "clubSlug": "hanyang-hytc",
+      "normalizedAlias": "한양대학교 한양대a",
+      "sourceLabel": "한양대A"
+    },
+    {
+      "clubSlug": "koreatech-tennis",
+      "normalizedAlias": "한국기술교육대학교 한기대 a",
+      "sourceLabel": "한기대 A"
     }
   ],
   "tournaments": [
@@ -2921,13 +3050,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "myongji-mjta-mtc",
       "sourceTeamName": "명지대 B [Q]",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehdy.png",
-      "note": "Slot 59 lost its first played match in the Round of 128."
+      "note": "Slot 59 lost its first played match in the Round of 128. Consolidated into 명지대학교 MJTA·MTC by administrator instruction. MJTA and MTC remain distinct clubs in reality, but all stored Myongji tournament results are combined for this ranking."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3331,13 +3460,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "myongji-mjta-mtc",
       "sourceTeamName": "명지대 A [Q]",
       "teamLabel": "A",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehlp.png",
-      "note": "Slot 113 received a Round-of-128 BYE and lost its first played match in the Round of 64."
+      "note": "Slot 113 received a Round-of-128 BYE and lost its first played match in the Round of 64. Consolidated into 명지대학교 MJTA·MTC by administrator instruction. MJTA and MTC remain distinct clubs in reality, but all stored Myongji tournament results are combined for this ranking."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3911,13 +4040,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "myongji-mjta-mtc",
       "sourceTeamName": "명지대 B [Q]",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eicp.png",
-      "note": "Visually lost its first played match in the Round of 128 to 쿠크다스."
+      "note": "Visually lost its first played match in the Round of 128 to 쿠크다스. Consolidated into 명지대학교 MJTA·MTC by administrator instruction. MJTA and MTC remain distinct clubs in reality, but all stored Myongji tournament results are combined for this ranking."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4011,13 +4140,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "myongji-mjta-mtc",
       "sourceTeamName": "명지대 A [Q]",
       "teamLabel": "A",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eieo.png",
-      "note": "Won its opening match over 박고구마, then visually lost in the Round of 64 to 서울과기대 A."
+      "note": "Won its opening match over 박고구마, then visually lost in the Round of 64 to 서울과기대 A. Consolidated into 명지대학교 MJTA·MTC by administrator instruction. MJTA and MTC remain distinct clubs in reality, but all stored Myongji tournament results are combined for this ranking."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4531,13 +4660,13 @@
     },
     {
       "editionKey": "yanggu-2024-men",
-      "clubSlug": "myongji-rushand",
+      "clubSlug": "myongji-mjta-mtc",
       "sourceTeamName": "러시앤",
       "teamLabel": "-",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "양구/2024/남자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_1.png",
-      "note": "Slot 22 visibly loses Round 1 to Kutc A."
+      "note": "Slot 22 visibly loses Round 1 to Kutc A. Consolidated into 명지대학교 MJTA·MTC by administrator instruction. MJTA and MTC remain distinct clubs in reality, but all stored Myongji tournament results are combined for this ranking."
     },
     {
       "editionKey": "yanggu-2024-men",
@@ -5321,13 +5450,13 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": "myongji-tshot",
+      "clubSlug": "myongji-mjta-mtc",
       "sourceTeamName": "티샷",
       "teamLabel": "",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "양구/2024/여자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_4.png",
-      "note": "Slot 11; lost its first played preliminary match to Stroke A."
+      "note": "Slot 11; lost its first played preliminary match to Stroke A. Consolidated into 명지대학교 MJTA·MTC by administrator instruction. MJTA and MTC remain distinct clubs in reality, but all stored Myongji tournament results are combined for this ranking."
     },
     {
       "editionKey": "yanggu-2024-women",
@@ -6601,13 +6730,13 @@
     },
     {
       "editionKey": "yanggu-2025-men",
-      "clubSlug": "myongji-tesarang",
+      "clubSlug": "myongji-mjta-mtc",
       "sourceTeamName": "명지대 테사랑",
       "teamLabel": "",
       "stage": "round_of_64",
       "qualityStatus": "verified",
       "sourceRef": "양구/2025/남자/2025 양구 남자.pdf#page=2",
-      "note": "Visually checked slot 85 and traced the bracket to terminal stage round_of_64."
+      "note": "Visually checked slot 85 and traced the bracket to terminal stage round_of_64. Consolidated into 명지대학교 MJTA·MTC by administrator instruction. MJTA and MTC remain distinct clubs in reality, but all stored Myongji tournament results are combined for this ranking."
     },
     {
       "editionKey": "yanggu-2025-men",
@@ -7581,13 +7710,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": "myongji-tesarang",
+      "clubSlug": "myongji-mjta-mtc",
       "sourceTeamName": "명지대 테사랑",
       "teamLabel": "",
       "stage": "first_match_loss",
       "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=2",
-      "note": "Visually checked slot 115 and terminal first played match after a Round-of-128 BYE."
+      "note": "Visually checked slot 115 and terminal first played match after a Round-of-128 BYE. Consolidated into 명지대학교 MJTA·MTC by administrator instruction. MJTA and MTC remain distinct clubs in reality, but all stored Myongji tournament results are combined for this ranking."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -7681,13 +7810,13 @@
     },
     {
       "editionKey": "inje-2023-men",
-      "clubSlug": null,
+      "clubSlug": "korea-kutc",
       "sourceTeamName": "고려대 C",
       "teamLabel": "C",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "인제/2023/남자/SCR-20260708-eesm.png",
-      "note": "Original PNG shows the Round-of-32 win over 가톨릭대 C and subsequent R16 loss to 가톨릭대 B."
+      "note": "Original PNG shows the Round-of-32 win over 가톨릭대 C and subsequent R16 loss to 가톨릭대 B. Assigned to 고려대학교 KUTC from the administrator's review memo (“고려대 KUTC”)."
     },
     {
       "editionKey": "inje-2023-men",
@@ -7711,13 +7840,13 @@
     },
     {
       "editionKey": "inje-2023-men",
-      "clubSlug": null,
+      "clubSlug": "korea-kutc",
       "sourceTeamName": "고려대",
       "teamLabel": "-",
       "stage": "semifinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "인제/2023/남자/SCR-20260708-eevg.png",
-      "note": "Later original PNG places 고려대 in the semifinal against 전북대 and visibly marks it Disqualified."
+      "note": "Later original PNG places 고려대 in the semifinal against 전북대 and visibly marks it Disqualified. Assigned to 고려대학교 KUTC from the administrator's review memo (“고려대 KUTC”)."
     },
     {
       "editionKey": "inje-2023-men",
@@ -8521,13 +8650,13 @@
     },
     {
       "editionKey": "inje-2025-women",
-      "clubSlug": null,
+      "clubSlug": "ewha-tennis",
       "sourceTeamName": "이화여대 A",
       "teamLabel": "A",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "인제/2025/여자/2025 인제 여자.pdf#page=1",
-      "note": "400-DPI page shows a win over Yuta and then a quarterfinal loss to 굿샷a."
+      "note": "400-DPI page shows a win over Yuta and then a quarterfinal loss to 굿샷a. Assigned to 이화여자대학교 이화테니스 from the administrator's review memo (“이화테니스”)."
     },
     {
       "editionKey": "inje-2025-women",
@@ -8601,13 +8730,13 @@
     },
     {
       "editionKey": "gyeongin-2023-men",
-      "clubSlug": null,
+      "clubSlug": "sungkyunkwan-stc",
       "sourceTeamName": "STC",
       "teamLabel": "",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/남자/KakaoTalk_Photo_2026-07-08-04-58-21 005.jpeg",
-      "note": "Won through the Round of 32, then lost 0-3 to 서울대 A in the Round of 16."
+      "note": "Won through the Round of 32, then lost 0-3 to 서울대 A in the Round of 16. Assigned to 성균관대학교 STC from the administrator's review memo (“성균관대”)."
     },
     {
       "editionKey": "gyeongin-2023-men",
@@ -8651,13 +8780,13 @@
     },
     {
       "editionKey": "gyeongin-2023-men",
-      "clubSlug": null,
+      "clubSlug": "inu-uitc",
       "sourceTeamName": "UITC B",
       "teamLabel": "B",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/남자/KakaoTalk_Photo_2026-07-08-04-58-21 001.jpeg",
-      "note": "Won its opening match, then lost 1-3 to 경희대 B in the Round of 32."
+      "note": "Won its opening match, then lost 1-3 to 경희대 B in the Round of 32. Assigned to 인천대학교 UITC from the administrator's review memo (“인천대학교 UITC”)."
     },
     {
       "editionKey": "gyeongin-2023-men",
@@ -8711,13 +8840,13 @@
     },
     {
       "editionKey": "gyeongin-2023-men",
-      "clubSlug": null,
+      "clubSlug": "inu-uitc",
       "sourceTeamName": "Uitc 남 A",
       "teamLabel": "A",
       "stage": "semifinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/남자/KakaoTalk_Photo_2026-07-08-04-58-22 009.jpeg",
-      "note": "Traced from an opening BYE to the semifinal; lost 0-3 to 서울대 A."
+      "note": "Traced from an opening BYE to the semifinal; lost 0-3 to 서울대 A. Assigned to 인천대학교 UITC from the administrator's review memo (“인천대학교 UITC”)."
     },
     {
       "editionKey": "gyeongin-2023-men",
@@ -8851,13 +8980,13 @@
     },
     {
       "editionKey": "gyeongin-2023-men",
-      "clubSlug": null,
+      "clubSlug": "hanyang-hytc",
       "sourceTeamName": "한양대 블루",
       "teamLabel": "",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/남자/KakaoTalk_Photo_2026-07-08-04-58-21 003.jpeg",
-      "note": "Won its opening match, then lost 1-3 to KUTA 서울 A."
+      "note": "Won its opening match, then lost 1-3 to KUTA 서울 A. Assigned to 한양대학교 HYTC from the administrator's review memo (“한양대 HYTC”)."
     },
     {
       "editionKey": "gyeongin-2023-men",
@@ -8911,13 +9040,13 @@
     },
     {
       "editionKey": "gyeongin-2023-men",
-      "clubSlug": null,
+      "clubSlug": "uos-approach",
       "sourceTeamName": "UOSTC A",
       "teamLabel": "A",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/남자/KakaoTalk_Photo_2026-07-08-04-58-22 008.jpeg",
-      "note": "Traced through two wins, then lost 1-3 to 러비스 A in the quarterfinal; no university is displayed."
+      "note": "Traced through two wins, then lost 1-3 to 러비스 A in the quarterfinal; no university is displayed. Assigned to 서울시립대학교 UOSTC(어프로치) from the administrator's review memo (“서울시립대”)."
     },
     {
       "editionKey": "gyeongin-2023-men",
@@ -9031,13 +9160,13 @@
     },
     {
       "editionKey": "gyeongin-2023-women",
-      "clubSlug": null,
+      "clubSlug": "ewha-tennis",
       "sourceTeamName": "이화여대 B",
       "teamLabel": "B",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/여자/KakaoTalk_Photo_2026-07-08-04-59-38.jpeg",
-      "note": "Won its opening match, then lost 0-2 to 서울대 A."
+      "note": "Won its opening match, then lost 0-2 to 서울대 A. Assigned to 이화여자대학교 이화테니스 from the administrator's review memo (“이화테니스”)."
     },
     {
       "editionKey": "gyeongin-2023-women",
@@ -9061,13 +9190,13 @@
     },
     {
       "editionKey": "gyeongin-2023-women",
-      "clubSlug": null,
+      "clubSlug": "ewha-tennis",
       "sourceTeamName": "이화여대 A",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/여자/KakaoTalk_Photo_2026-07-08-04-59-38.jpeg",
-      "note": "Won its opening match, then lost 0-2 to 과기대 A."
+      "note": "Won its opening match, then lost 0-2 to 과기대 A. Assigned to 이화여자대학교 이화테니스 from the administrator's review memo (“이화테니스”)."
     },
     {
       "editionKey": "gyeongin-2023-women",
@@ -9261,13 +9390,13 @@
     },
     {
       "editionKey": "gyeongin-2023-women",
-      "clubSlug": null,
+      "clubSlug": "uos-approach",
       "sourceTeamName": "A",
       "teamLabel": "",
       "stage": "runner_up",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/여자/KakaoTalk_Photo_2026-07-08-04-59-38.jpeg",
-      "note": "Source displays only A; traced through four wins, then lost the final 1-2 to 경희대s. It is retained as a named entrant but is a major identity concern."
+      "note": "Source displays only A; traced through four wins, then lost the final 1-2 to 경희대s. It is retained as a named entrant but is a major identity concern. Assigned to 서울시립대학교 UOSTC(어프로치) from the administrator's review memo (“서울시립대”)."
     },
     {
       "editionKey": "gyeongin-2023-women",
@@ -9481,13 +9610,13 @@
     },
     {
       "editionKey": "gyeongin-2024-men",
-      "clubSlug": null,
+      "clubSlug": "myongji-mjta-mtc",
       "sourceTeamName": "명지대A",
       "teamLabel": "A",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/남자/KakaoTalk_Photo_2026-07-08-04-55-49 006.jpeg",
-      "note": "Lost 1-3 to 인천대학교 A."
+      "note": "Lost 1-3 to 인천대학교 A. Assigned to 명지대학교 MJTA·MTC from the administrator's review memo (“명지대”)."
     },
     {
       "editionKey": "gyeongin-2024-men",
@@ -9973,13 +10102,13 @@
     },
     {
       "editionKey": "gyeongin-2024-women",
-      "clubSlug": null,
+      "clubSlug": "ewha-tennis",
       "sourceTeamName": "이화여대B",
       "teamLabel": "B",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/여자/KakaoTalk_Photo_2026-07-08-04-55-34 007.jpeg",
-      "note": "Lost 0-2 to 고려대 KUTC A."
+      "note": "Lost 0-2 to 고려대 KUTC A. Assigned to 이화여자대학교 이화테니스 from the administrator's review memo (“이화테니스”)."
     },
     {
       "editionKey": "gyeongin-2024-women",
@@ -10013,13 +10142,13 @@
     },
     {
       "editionKey": "gyeongin-2024-women",
-      "clubSlug": null,
+      "clubSlug": "dankook-cheonan-dkutc",
       "sourceTeamName": "단국대 A",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/여자/KakaoTalk_Photo_2026-07-08-04-55-34 007.jpeg",
-      "note": "Lost 1-2 to 서울대A."
+      "note": "Lost 1-2 to 서울대A. Assigned to 단국대학교 DKUTC(천안캠퍼스) from the administrator's review memo (“단국대 천안캠”)."
     },
     {
       "editionKey": "gyeongin-2024-women",
@@ -10073,13 +10202,13 @@
     },
     {
       "editionKey": "gyeongin-2024-women",
-      "clubSlug": null,
+      "clubSlug": "inu-uitc",
       "sourceTeamName": "UITC A",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/여자/KakaoTalk_Photo_2026-07-08-04-55-34 008.jpeg",
-      "note": "Same source identifies 인천대학교 uitc b; UITC A lost 1-2 to 서울과기대 A."
+      "note": "Same source identifies 인천대학교 uitc b; UITC A lost 1-2 to 서울과기대 A. Assigned to 인천대학교 UITC from the administrator's review memo (“인천대학교 UITC”)."
     },
     {
       "editionKey": "gyeongin-2024-women",
@@ -10263,13 +10392,13 @@
     },
     {
       "editionKey": "gyeongin-2025-women",
-      "clubSlug": null,
+      "clubSlug": "dankook-cheonan-dkutc",
       "sourceTeamName": "단국대",
       "teamLabel": "",
       "stage": "semifinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2025/여자/KakaoTalk_Photo_2026-07-08-05-17-28 002.jpeg",
-      "note": "After an opening BYE, the PNG shows wins over 한양대에리카 and 연세대학교 더트루트루쓰; the JPEG shows a 0-2 semifinal loss to 서울시립대A."
+      "note": "After an opening BYE, the PNG shows wins over 한양대에리카 and 연세대학교 더트루트루쓰; the JPEG shows a 0-2 semifinal loss to 서울시립대A. Assigned to 단국대학교 DKUTC(천안캠퍼스) from the administrator's review memo (“단국대 천안캠”)."
     },
     {
       "editionKey": "gyeongin-2025-women",
@@ -10353,13 +10482,13 @@
     },
     {
       "editionKey": "gyeongin-2025-women",
-      "clubSlug": null,
+      "clubSlug": "hanyang-hytc",
       "sourceTeamName": "한양대학교 A",
       "teamLabel": "A",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2025/여자/KakaoTalk_Photo_2026-07-08-05-17-28 001.png",
-      "note": "After an opening BYE, the PNG shows a 2-0 Round-of-16 win over 숭실대A and a 1-2 quarterfinal loss to 성균관대 A."
+      "note": "After an opening BYE, the PNG shows a 2-0 Round-of-16 win over 숭실대A and a 1-2 quarterfinal loss to 성균관대 A. Assigned to 한양대학교 HYTC from the administrator's review memo (“한양대 서울캠”)."
     },
     {
       "editionKey": "gyeongin-2025-women",
@@ -10383,13 +10512,13 @@
     },
     {
       "editionKey": "gyeongin-2025-women",
-      "clubSlug": null,
+      "clubSlug": "ewha-tennis",
       "sourceTeamName": "이화여대A",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2025/여자/KakaoTalk_Photo_2026-07-08-05-17-28 001.png",
-      "note": "Original PNG shows a 2-0 opening win over 서울대학교 테니스부 B, then a 1-2 Round-of-16 loss to 성균관대 A."
+      "note": "Original PNG shows a 2-0 opening win over 서울대학교 테니스부 B, then a 1-2 Round-of-16 loss to 성균관대 A. Assigned to 이화여자대학교 이화테니스 from the administrator's review memo (“이화테니스”)."
     },
     {
       "editionKey": "gyeongin-2025-women",
@@ -11003,13 +11132,13 @@
     },
     {
       "editionKey": "chuncheon-2023-men",
-      "clubSlug": null,
+      "clubSlug": "gangneung-wonju-love",
       "sourceTeamName": "강원대학교 A",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2023/남자/SCR-20260708-dxay.png",
-      "note": "Visually traced through connected pages to 16-round loss; no status marker."
+      "note": "Visually traced through connected pages to 16-round loss; no status marker. Assigned to 강원대학교 LOVE from the administrator's review memo (“강원대 LOVE”)."
     },
     {
       "editionKey": "chuncheon-2023-men",
@@ -11123,13 +11252,13 @@
     },
     {
       "editionKey": "chuncheon-2023-men",
-      "clubSlug": null,
+      "clubSlug": "gangneung-wonju-love",
       "sourceTeamName": "강원대학교B",
       "teamLabel": "B",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2023/남자/SCR-20260708-dxay.png",
-      "note": "Visually traced through connected pages to 16-round loss; no status marker."
+      "note": "Visually traced through connected pages to 16-round loss; no status marker. Assigned to 강원대학교 LOVE from the administrator's review memo (“강원대 LOVE”)."
     },
     {
       "editionKey": "chuncheon-2023-men",
@@ -12163,13 +12292,13 @@
     },
     {
       "editionKey": "chuncheon-2024-men",
-      "clubSlug": null,
+      "clubSlug": "myongji-mjta-mtc",
       "sourceTeamName": "명지대A",
       "teamLabel": "A",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2024/남자/테니스대회_128강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "lost 0-2 to 경북대 KUTC C (32강)"
+      "note": "lost 0-2 to 경북대 KUTC C (32강) Assigned to 명지대학교 MJTA·MTC from the administrator's review memo (“명지대”)."
     },
     {
       "editionKey": "chuncheon-2024-men",
@@ -12383,13 +12512,13 @@
     },
     {
       "editionKey": "chuncheon-2024-women",
-      "clubSlug": null,
+      "clubSlug": "dankook-cheonan-dkutc",
       "sourceTeamName": "단국대A",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2024/여자/여자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "lost 0-2 to 한양대 에리카 A (16강)"
+      "note": "lost 0-2 to 한양대 에리카 A (16강) Assigned to 단국대학교 DKUTC(천안캠퍼스) from the administrator's review memo (“단국대 천안캠”)."
     },
     {
       "editionKey": "chuncheon-2024-women",
@@ -12413,13 +12542,13 @@
     },
     {
       "editionKey": "chuncheon-2024-women",
-      "clubSlug": null,
+      "clubSlug": "ewha-tennis",
       "sourceTeamName": "이화여대A",
       "teamLabel": "A",
       "stage": "semifinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2024/여자/여자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "lost 1-2 to 서울과기대 느티나무 A (4강)"
+      "note": "lost 1-2 to 서울과기대 느티나무 A (4강) Assigned to 이화여자대학교 이화테니스 from the administrator's review memo (“이화테니스”)."
     },
     {
       "editionKey": "chuncheon-2024-women",
@@ -12523,13 +12652,13 @@
     },
     {
       "editionKey": "chuncheon-2024-women",
-      "clubSlug": null,
+      "clubSlug": "hanyang-hytc",
       "sourceTeamName": "한양대A",
       "teamLabel": "A",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2024/여자/여자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "lost 0-2 to 서울과기대 느티나무 A (8강)"
+      "note": "lost 0-2 to 서울과기대 느티나무 A (8강) Assigned to 한양대학교 HYTC from the administrator's review memo (“한양대 서울캠”)."
     },
     {
       "editionKey": "chuncheon-2024-women",
@@ -13143,13 +13272,13 @@
     },
     {
       "editionKey": "chuncheon-2025-men",
-      "clubSlug": null,
+      "clubSlug": "koreatech-tennis",
       "sourceTeamName": "한기대 A",
       "teamLabel": "A",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2025/남자/2025년_남자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 32강 row 49 shows a 1-2 loss to 동국대 DUTCA."
+      "note": "Rendered 32강 row 49 shows a 1-2 loss to 동국대 DUTCA. Assigned to 한국기술교육대학교 테니스부 from the administrator's review memo (“한국기술교육대학교”)."
     },
     {
       "editionKey": "chuncheon-2025-men",
