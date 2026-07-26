@@ -1,5 +1,5 @@
 {
-  "version": "sources-2026-07-26-v11",
+  "version": "sources-2026-07-26-v12",
   "clubs": [
     {
       "slug": "catholic-courtrang",
@@ -1877,6 +1877,201 @@
       "clubSlug": "jeonbuk-ace",
       "normalizedAlias": "전북대학교 전북대학교 a",
       "sourceLabel": "전북대학교 A"
+    },
+    {
+      "clubSlug": "kyunghee-seoul-kuta",
+      "normalizedAlias": "경희대학교 서울캠퍼스 kuta a [q]",
+      "sourceLabel": "Kuta A [Q]"
+    },
+    {
+      "clubSlug": "sogang-sgtc",
+      "normalizedAlias": "서강대학교 sgtc a [q]",
+      "sourceLabel": "Sgtc A [Q]"
+    },
+    {
+      "clubSlug": "yonsei-yutt",
+      "normalizedAlias": "연세대학교 연세대 정의 [q]",
+      "sourceLabel": "연세대 정의 [Q]"
+    },
+    {
+      "clubSlug": "gyeongsang-ktc-jtc",
+      "normalizedAlias": "경상국립대학교 ktc x jtc [q]",
+      "sourceLabel": "Ktc X Jtc [Q]"
+    },
+    {
+      "clubSlug": "yonsei-yutt",
+      "normalizedAlias": "연세대학교 연세대 진리 [q]",
+      "sourceLabel": "연세대 진리 [Q]"
+    },
+    {
+      "clubSlug": "sogang-sgtc",
+      "normalizedAlias": "서강대학교 sgtc b [q]",
+      "sourceLabel": "Sgtc B [Q]"
+    },
+    {
+      "clubSlug": "knue-tennis",
+      "normalizedAlias": "한국교원대학교 한국교원대 [q]",
+      "sourceLabel": "한국교원대 [Q]"
+    },
+    {
+      "clubSlug": "hongik-hitc",
+      "normalizedAlias": "홍익대학교 hitc [q]",
+      "sourceLabel": "Hitc [Q]"
+    },
+    {
+      "clubSlug": "kyunghee-seoul-kuta",
+      "normalizedAlias": "경희대학교 서울캠퍼스 kuta b [q]",
+      "sourceLabel": "Kuta B [Q]"
+    },
+    {
+      "clubSlug": "gachon-tiebreak",
+      "normalizedAlias": "가천대학교 타이브레이크 c [q]",
+      "sourceLabel": "타이브레이크 C [Q]"
+    },
+    {
+      "clubSlug": "gachon-tiebreak",
+      "normalizedAlias": "가천대학교 타이브레이크 b [q]",
+      "sourceLabel": "타이브레이크 B [Q]"
+    },
+    {
+      "clubSlug": "korea-petc",
+      "normalizedAlias": "고려대학교 체육교육과 petc a [q]",
+      "sourceLabel": "Petc A [Q]"
+    },
+    {
+      "clubSlug": "yonsei-yutt",
+      "normalizedAlias": "연세대학교 연세대 자유 [q]",
+      "sourceLabel": "연세대 자유 [Q]"
+    },
+    {
+      "clubSlug": "ajou-tennis",
+      "normalizedAlias": "아주대학교 atc a [q]",
+      "sourceLabel": "Atc A [Q]"
+    },
+    {
+      "clubSlug": "sogang-sgtc",
+      "normalizedAlias": "서강대학교 sgtc c [q]",
+      "sourceLabel": "Sgtc C [Q]"
+    },
+    {
+      "clubSlug": "korea-petc",
+      "normalizedAlias": "고려대학교 체육교육과 petc b [q]",
+      "sourceLabel": "Petc B [Q]"
+    },
+    {
+      "clubSlug": "sogang-sgtc",
+      "normalizedAlias": "서강대학교 sgtc d [q]",
+      "sourceLabel": "Sgtc D [Q]"
+    },
+    {
+      "clubSlug": "gachon-tiebreak",
+      "normalizedAlias": "가천대학교 타이브레이크 a [q]",
+      "sourceLabel": "타이브레이크 A [Q]"
+    },
+    {
+      "clubSlug": "yonsei-yutt",
+      "normalizedAlias": "연세대학교 연세대 평화 [q]",
+      "sourceLabel": "연세대 평화 [Q]"
+    },
+    {
+      "clubSlug": "korea-petc",
+      "normalizedAlias": "고려대학교 체육교육과 petc c [q]",
+      "sourceLabel": "Petc C [Q]"
+    },
+    {
+      "clubSlug": "kyunghee-seoul-kuta",
+      "normalizedAlias": "경희대학교 서울캠퍼스 kuta c [q]",
+      "sourceLabel": "Kuta C [Q]"
+    },
+    {
+      "clubSlug": "ajou-tennis",
+      "normalizedAlias": "아주대학교 atc b [q]",
+      "sourceLabel": "Atc B [Q]"
+    },
+    {
+      "clubSlug": "korea-petc",
+      "normalizedAlias": "고려대학교 체육교육과 petc a [3]",
+      "sourceLabel": "Petc A [3]"
+    },
+    {
+      "clubSlug": "sogang-sgtc",
+      "normalizedAlias": "서강대학교 sgtc e [q]",
+      "sourceLabel": "Sgtc E [Q]"
+    },
+    {
+      "clubSlug": "korea-petc",
+      "normalizedAlias": "고려대학교 체육교육과 petc a",
+      "sourceLabel": "Petc A"
+    },
+    {
+      "clubSlug": "knue-tennis",
+      "normalizedAlias": "한국교원대학교 교원대 테니스부",
+      "sourceLabel": "교원대 테니스부"
+    },
+    {
+      "clubSlug": "korea-petc",
+      "normalizedAlias": "고려대학교 체육교육과 petc b",
+      "sourceLabel": "Petc B"
+    },
+    {
+      "clubSlug": "korea-petc",
+      "normalizedAlias": "고려대학교 체육교육과 petc c",
+      "sourceLabel": "Petc C"
+    },
+    {
+      "clubSlug": "inha-rapum",
+      "normalizedAlias": "인하대학교 라중",
+      "sourceLabel": "라중"
+    },
+    {
+      "clubSlug": "yonsei-yutt",
+      "normalizedAlias": "연세대학교 연세대 자유",
+      "sourceLabel": "연세대 자유"
+    },
+    {
+      "clubSlug": "knue-tennis",
+      "normalizedAlias": "한국교원대학교 한국교원대",
+      "sourceLabel": "한국교원대"
+    },
+    {
+      "clubSlug": "yonsei-yutt",
+      "normalizedAlias": "연세대학교 연세대 평화",
+      "sourceLabel": "연세대 평화"
+    },
+    {
+      "clubSlug": "yonsei-yutt",
+      "normalizedAlias": "연세대학교 연세대 정의",
+      "sourceLabel": "연세대 정의"
+    },
+    {
+      "clubSlug": "korea-petc",
+      "normalizedAlias": "고려대학교 체육교육과 petc s",
+      "sourceLabel": "PETC S"
+    },
+    {
+      "clubSlug": "gachon-tiebreak",
+      "normalizedAlias": "가천대학교 tiebreak 무한이",
+      "sourceLabel": "tiebreak 무한이"
+    },
+    {
+      "clubSlug": "kyunghee-seoul-kuta",
+      "normalizedAlias": "경희대학교 서울캠퍼스 kuta 서울 a",
+      "sourceLabel": "KUTA 서울 A"
+    },
+    {
+      "clubSlug": "kyunghee-seoul-kuta",
+      "normalizedAlias": "경희대학교 서울캠퍼스 kuta 남 b",
+      "sourceLabel": "KUTA 남 B"
+    },
+    {
+      "clubSlug": "ajou-tennis",
+      "normalizedAlias": "아주대학교 atc",
+      "sourceLabel": "ATC"
+    },
+    {
+      "clubSlug": "yonsei-yutt",
+      "normalizedAlias": "연세대학교 연세대정의",
+      "sourceLabel": "연세대정의"
     }
   ],
   "tournaments": [
@@ -2347,13 +2542,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "sogang-sgtc",
       "sourceTeamName": "Sgtc A [Q]",
       "teamLabel": "A",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-egzq.png",
-      "note": "Slot 8 advanced through two played matches, then lost in the Round of 32."
+      "note": "Slot 8 advanced through two played matches, then lost in the Round of 32. Assigned to 서강대학교 SGTC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2367,23 +2562,23 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 정의 [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-egzq.png",
-      "note": "Slot 11 lost its first played match in the Round of 128."
+      "note": "Slot 11 lost its first played match in the Round of 128. Assigned to 연세대학교 YUTT from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "gyeongsang-ktc-jtc",
       "sourceTeamName": "Ktc X Jtc [Q]",
       "teamLabel": "",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-egzq.png",
-      "note": "Slot 12 advanced through two played matches, then lost in the Round of 32."
+      "note": "Slot 12 advanced through two played matches, then lost in the Round of 32. Assigned to 경상국립대학교 가좌 KTC·칠암 JTC 연합팀 from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2407,13 +2602,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "sogang-sgtc",
       "sourceTeamName": "Sgtc B [Q]",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-egzq.png",
-      "note": "Slot 16 received a Round-of-128 BYE and lost its first played match in the Round of 64."
+      "note": "Slot 16 received a Round-of-128 BYE and lost its first played match in the Round of 64. Assigned to 서강대학교 SGTC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2427,13 +2622,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "knue-tennis",
       "sourceTeamName": "한국교원대 [Q]",
       "teamLabel": "",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-egzq.png",
-      "note": "Slot 19 won in the Round of 128, then lost in the Round of 64."
+      "note": "Slot 19 won in the Round of 128, then lost in the Round of 64. Assigned to 한국교원대학교 테니스부 from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2447,13 +2642,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "hongik-hitc",
       "sourceTeamName": "Hitc [Q]",
       "teamLabel": "",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-egzq.png",
-      "note": "Slot 21 won in the Round of 128, then lost in the Round of 64."
+      "note": "Slot 21 won in the Round of 128, then lost in the Round of 64. Assigned to 홍익대학교 HITC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity. HITC identifies Hongik University; HiTEC/하이텍 remains the separate Hanyang University ERICA club."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2517,13 +2712,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-seoul-kuta",
       "sourceTeamName": "Kuta B [Q]",
       "teamLabel": "B",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-egzq.png",
-      "note": "Slot 30 won in the Round of 128, then lost in the Round of 64."
+      "note": "Slot 30 won in the Round of 128, then lost in the Round of 64. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2617,13 +2812,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "gachon-tiebreak",
       "sourceTeamName": "타이브레이크 C [Q]",
       "teamLabel": "C",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehdy.png",
-      "note": "Slot 44 advanced from the Round of 128, then was marked Disqualified in the Round of 64."
+      "note": "Slot 44 advanced from the Round of 128, then was marked Disqualified in the Round of 64. Assigned to 가천대학교 타이브레이크 from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2667,13 +2862,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "gachon-tiebreak",
       "sourceTeamName": "타이브레이크 B [Q]",
       "teamLabel": "B",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehdy.png",
-      "note": "Slot 51 won in the Round of 128, then lost in the Round of 64."
+      "note": "Slot 51 won in the Round of 128, then lost in the Round of 64. Assigned to 가천대학교 타이브레이크 from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2687,13 +2882,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "korea-petc",
       "sourceTeamName": "Petc A [Q]",
       "teamLabel": "A",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehdy.png",
-      "note": "Slot 53 advanced through two played matches, then lost in the Round of 32."
+      "note": "Slot 53 advanced through two played matches, then lost in the Round of 32. Assigned to 고려대학교 체육교육과 PETC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2717,13 +2912,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 자유 [Q]",
       "teamLabel": "",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehdy.png",
-      "note": "Slot 57 received a BYE, won in the Round of 64, then lost in the Round of 32."
+      "note": "Slot 57 received a BYE, won in the Round of 64, then lost in the Round of 32. Assigned to 연세대학교 YUTT from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2737,13 +2932,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "ajou-tennis",
       "sourceTeamName": "Atc A [Q]",
       "teamLabel": "A",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehdy.png",
-      "note": "Slot 60 won in the Round of 128, then lost in the Round of 64."
+      "note": "Slot 60 won in the Round of 128, then lost in the Round of 64. Assigned to 아주대학교 ATC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2807,13 +3002,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "sogang-sgtc",
       "sourceTeamName": "Sgtc C [Q]",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehhc.png",
-      "note": "Slot 69 lost its first played match in the Round of 128."
+      "note": "Slot 69 lost its first played match in the Round of 128. Assigned to 서강대학교 SGTC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2887,13 +3082,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "korea-petc",
       "sourceTeamName": "Petc B [Q]",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehhc.png",
-      "note": "Slot 80 received a Round-of-128 BYE and lost its first played match in the Round of 64."
+      "note": "Slot 80 received a Round-of-128 BYE and lost its first played match in the Round of 64. Assigned to 고려대학교 체육교육과 PETC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2927,13 +3122,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "sogang-sgtc",
       "sourceTeamName": "Sgtc D [Q]",
       "teamLabel": "D",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehhc.png",
-      "note": "Slot 85 lost its first played match in the Round of 128."
+      "note": "Slot 85 lost its first played match in the Round of 128. Assigned to 서강대학교 SGTC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2987,13 +3182,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "gachon-tiebreak",
       "sourceTeamName": "타이브레이크 A [Q]",
       "teamLabel": "A",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehhc.png",
-      "note": "Slot 93 won in the Round of 128, then lost in the Round of 64."
+      "note": "Slot 93 won in the Round of 128, then lost in the Round of 64. Assigned to 가천대학교 타이브레이크 from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3027,13 +3222,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 평화 [Q]",
       "teamLabel": "",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehlp.png",
-      "note": "Slot 99 won in the Round of 128, then lost in the Round of 64."
+      "note": "Slot 99 won in the Round of 128, then lost in the Round of 64. Assigned to 연세대학교 YUTT from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3117,13 +3312,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "korea-petc",
       "sourceTeamName": "Petc C [Q]",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehlp.png",
-      "note": "Slot 110 lost its first played match in the Round of 128."
+      "note": "Slot 110 lost its first played match in the Round of 128. Assigned to 고려대학교 체육교육과 PETC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3147,13 +3342,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-seoul-kuta",
       "sourceTeamName": "Kuta C [Q]",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehlp.png",
-      "note": "Slot 115 lost its first played match in the Round of 128."
+      "note": "Slot 115 lost its first played match in the Round of 128. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3247,13 +3442,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "ajou-tennis",
       "sourceTeamName": "Atc B [Q]",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehlp.png",
-      "note": "Slot 126 lost its first played match in the Round of 128."
+      "note": "Slot 126 lost its first played match in the Round of 128. Assigned to 아주대학교 ATC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3277,23 +3472,23 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 정의 [Q]",
       "teamLabel": "",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-ehzf.png",
-      "note": "Won the opening match over slot 4, then visually lost its Round-of-64 match to 경희 A."
+      "note": "Won the opening match over slot 4, then visually lost its Round-of-64 match to 경희 A. Assigned to 연세대학교 YUTT from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "sogang-sgtc",
       "sourceTeamName": "Sgtc D [Q]",
       "teamLabel": "D",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-ehzf.png",
-      "note": "Visually lost its first played match in the Round of 128 to 연세대 정의."
+      "note": "Visually lost its first played match in the Round of 128 to 연세대 정의. Assigned to 서강대학교 SGTC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3367,13 +3562,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "ajou-tennis",
       "sourceTeamName": "Atc B [Q]",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-ehzf.png",
-      "note": "Visually lost its first played match in the Round of 128 to 카이스트 K."
+      "note": "Visually lost its first played match in the Round of 128 to 카이스트 K. Assigned to 아주대학교 ATC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3437,13 +3632,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "gachon-tiebreak",
       "sourceTeamName": "타이브레이크 B [Q]",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-ehzf.png",
-      "note": "Entered after a BYE and visually lost its first played match to 카이스트 O in the Round of 64."
+      "note": "Entered after a BYE and visually lost its first played match to 카이스트 O in the Round of 64. Assigned to 가천대학교 타이브레이크 from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3467,13 +3662,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "korea-petc",
       "sourceTeamName": "Petc B [Q]",
       "teamLabel": "B",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-ehzf.png",
-      "note": "Won its opening match, then visually lost in the Round of 64 to Hytc 개나리."
+      "note": "Won its opening match, then visually lost in the Round of 64 to Hytc 개나리. Assigned to 고려대학교 체육교육과 PETC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3497,13 +3692,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "hongik-hitc",
       "sourceTeamName": "Hitc [Q]",
       "teamLabel": "",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-ehzf.png",
-      "note": "Entered after a BYE, won in the Round of 64, then visually lost in the Round of 32 to Hytc 개나리."
+      "note": "Entered after a BYE, won in the Round of 64, then visually lost in the Round of 32 to Hytc 개나리. Assigned to 홍익대학교 HITC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity. HITC identifies Hongik University; HiTEC/하이텍 remains the separate Hanyang University ERICA club."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3527,13 +3722,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-seoul-kuta",
       "sourceTeamName": "Kuta B [Q]",
       "teamLabel": "B",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eicp.png",
-      "note": "Won its opening match, then visually lost in the Round of 64 to 서울대 A."
+      "note": "Won its opening match, then visually lost in the Round of 64 to 서울대 A. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3547,13 +3742,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "ajou-tennis",
       "sourceTeamName": "Atc A [Q]",
       "teamLabel": "A",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eicp.png",
-      "note": "Won its first played match, then the source marks it disqualified against 서울대 A in the Round of 32."
+      "note": "Won its first played match, then the source marks it disqualified against 서울대 A in the Round of 32. Assigned to 아주대학교 ATC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3587,13 +3782,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "sogang-sgtc",
       "sourceTeamName": "Sgtc B [Q]",
       "teamLabel": "B",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eicp.png",
-      "note": "Won its opening match over 영남대 B, then visually lost in the Round of 64 to 서울대 B."
+      "note": "Won its opening match over 영남대 B, then visually lost in the Round of 64 to 서울대 B. Assigned to 서강대학교 SGTC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3617,13 +3812,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "knue-tennis",
       "sourceTeamName": "한국교원대 [Q]",
       "teamLabel": "",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eihz.png",
-      "note": "Advanced from a Round-of-16 disqualification, then visually lost 0-2 to 서울대 A in the quarterfinal."
+      "note": "Advanced from a Round-of-16 disqualification, then visually lost 0-2 to 서울대 A in the quarterfinal. Assigned to 한국교원대학교 테니스부 from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3657,13 +3852,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "sogang-sgtc",
       "sourceTeamName": "Sgtc C [Q]",
       "teamLabel": "C",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eicp.png",
-      "note": "Won its opening match, then visually lost in the Round of 64 to 건국대 B."
+      "note": "Won its opening match, then visually lost in the Round of 64 to 건국대 B. Assigned to 서강대학교 SGTC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3677,23 +3872,23 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "gachon-tiebreak",
       "sourceTeamName": "타이브레이크 A [Q]",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eihz.png",
-      "note": "Traced into the Round of 16, where the source marks it disqualified against 한국교원대."
+      "note": "Traced into the Round of 16, where the source marks it disqualified against 한국교원대. Assigned to 가천대학교 타이브레이크 from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 자유 [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eicp.png",
-      "note": "Visually lost its first played match in the Round of 128 to 서울대 C."
+      "note": "Visually lost its first played match in the Round of 128 to 서울대 C. Assigned to 연세대학교 YUTT from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3877,23 +4072,23 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 진리 [Q]",
       "teamLabel": "",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eihz.png",
-      "note": "Traced into the quarterfinal, where it visually lost 1-2 to 서울시립대 A."
+      "note": "Traced into the quarterfinal, where it visually lost 1-2 to 서울시립대 A. Assigned to 연세대학교 YUTT from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 평화 [Q]",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eieo.png",
-      "note": "Visually lost its first played match in the Round of 128 to 연세대 진리."
+      "note": "Visually lost its first played match in the Round of 128 to 연세대 진리. Assigned to 연세대학교 YUTT from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3947,23 +4142,23 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "korea-petc",
       "sourceTeamName": "Petc A [3]",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eihz.png",
-      "note": "Traced into the Round of 16, where it visually lost 0-2 to 연세대 진리."
+      "note": "Traced into the Round of 16, where it visually lost 0-2 to 연세대 진리. Assigned to 고려대학교 체육교육과 PETC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "sogang-sgtc",
       "sourceTeamName": "Sgtc E [Q]",
       "teamLabel": "E",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eigq.png",
-      "note": "Entered after a BYE and visually lost its first played match to Ace B in the Round of 64."
+      "note": "Entered after a BYE and visually lost its first played match to Ace B in the Round of 64. Assigned to 서강대학교 SGTC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -3977,13 +4172,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "gachon-tiebreak",
       "sourceTeamName": "타이브레이크 C [Q]",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eigq.png",
-      "note": "Visually lost its first played match in the Round of 128 to Ace B."
+      "note": "Visually lost its first played match in the Round of 128 to Ace B. Assigned to 가천대학교 타이브레이크 from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4117,13 +4312,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-seoul-kuta",
       "sourceTeamName": "Kuta A [Q]",
       "teamLabel": "A",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eigq.png",
-      "note": "Entered after a BYE, won in the Round of 64, then visually lost in the Round of 32 to 이대 2화."
+      "note": "Entered after a BYE, won in the Round of 64, then visually lost in the Round of 32 to 이대 2화. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -5327,13 +5522,13 @@
     },
     {
       "editionKey": "yanggu-2024-women",
-      "clubSlug": null,
+      "clubSlug": "inha-rapum",
       "sourceTeamName": "라중",
       "teamLabel": "",
       "stage": "round_of_64",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2024/여자/Draw_2024_국토정중앙배_전국대학동아리_테니스대회_최종결과_4.png",
-      "note": "Slot 46; beat Hytc in the preliminary match, then the next bracket encounter advances 전북대 B by w.o.."
+      "note": "Slot 46; beat Hytc in the preliminary match, then the next bracket encounter advances 전북대 B by w.o.. Assigned to 인하대학교 라품 from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "yanggu-2024-women",
@@ -7777,13 +7972,13 @@
     },
     {
       "editionKey": "inje-2024-men",
-      "clubSlug": null,
+      "clubSlug": "knue-tennis",
       "sourceTeamName": "교원대 테니스부",
       "teamLabel": "-",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "인제/2024/남자/Draw_2024_하늘내린인제_전국대학동아리_테니스대회_최종_결과_1.png",
-      "note": "Original PNG explicitly pairs 한국교원대 with 교원대 테니스부; after a BYE it loses its first played match to 마스터즈 A."
+      "note": "Original PNG explicitly pairs 한국교원대 with 교원대 테니스부; after a BYE it loses its first played match to 마스터즈 A. Assigned to 한국교원대학교 테니스부 from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "inje-2024-men",
@@ -8507,13 +8702,13 @@
     },
     {
       "editionKey": "gyeongin-2023-men",
-      "clubSlug": null,
+      "clubSlug": "korea-petc",
       "sourceTeamName": "PETC S",
       "teamLabel": "S",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/남자/KakaoTalk_Photo_2026-07-08-04-58-21 002.jpeg",
-      "note": "Lost its first played match 0-3 to 경기대 C; no university is displayed with PETC here."
+      "note": "Lost its first played match 0-3 to 경기대 C; no university is displayed with PETC here. Assigned to 고려대학교 체육교육과 PETC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "gyeongin-2023-men",
@@ -8597,13 +8792,13 @@
     },
     {
       "editionKey": "gyeongin-2023-men",
-      "clubSlug": null,
+      "clubSlug": "gachon-tiebreak",
       "sourceTeamName": "tiebreak 무한이",
       "teamLabel": "",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/남자/KakaoTalk_Photo_2026-07-08-04-58-21 007.jpeg",
-      "note": "Opening BYE and Round-of-32 win, then lost 2-3 to 서강대a; no university is displayed."
+      "note": "Opening BYE and Round-of-32 win, then lost 2-3 to 서강대a; no university is displayed. Assigned to 가천대학교 타이브레이크 from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "gyeongin-2023-men",
@@ -8667,13 +8862,13 @@
     },
     {
       "editionKey": "gyeongin-2023-men",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-seoul-kuta",
       "sourceTeamName": "KUTA 서울 A",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/남자/KakaoTalk_Photo_2026-07-08-04-58-21 007.jpeg",
-      "note": "Opening BYE and Round-of-32 win, then lost 1-3 to 고려대 KUTC A; no university is displayed with KUTA."
+      "note": "Opening BYE and Round-of-32 win, then lost 1-3 to 고려대 KUTC A; no university is displayed with KUTA. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "gyeongin-2023-men",
@@ -8747,13 +8942,13 @@
     },
     {
       "editionKey": "gyeongin-2023-men",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-seoul-kuta",
       "sourceTeamName": "KUTA 남 B",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/남자/KakaoTalk_Photo_2026-07-08-04-58-21 004.jpeg",
-      "note": "Opening BYE, then first played-match loss 0-3 to 러비스 A; no university is displayed with KUTA."
+      "note": "Opening BYE, then first played-match loss 0-3 to 러비스 A; no university is displayed with KUTA. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "gyeongin-2023-men",
@@ -8797,13 +8992,13 @@
     },
     {
       "editionKey": "gyeongin-2023-women",
-      "clubSlug": null,
+      "clubSlug": "ajou-tennis",
       "sourceTeamName": "ATC",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/여자/KakaoTalk_Photo_2026-07-08-04-59-38.jpeg",
-      "note": "Lost its first played match 0-3 to 경희대s."
+      "note": "Lost its first played match 0-3 to 경희대s. Assigned to 아주대학교 ATC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "gyeongin-2023-women",
@@ -9017,23 +9212,23 @@
     },
     {
       "editionKey": "gyeongin-2023-women",
-      "clubSlug": null,
+      "clubSlug": "sogang-sgtc",
       "sourceTeamName": "SGTC",
       "teamLabel": "",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/여자/KakaoTalk_Photo_2026-07-08-04-59-38.jpeg",
-      "note": "Won two matches, then lost 1-2 to 숭실대 A; no university is displayed."
+      "note": "Won two matches, then lost 1-2 to 숭실대 A; no university is displayed. Assigned to 서강대학교 SGTC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "gyeongin-2023-women",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 진리",
       "teamLabel": "",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/여자/KakaoTalk_Photo_2026-07-08-04-59-38.jpeg",
-      "note": "Won two matches, then lost 1-2 to A. The source identifies a university and team nickname, but no distinct club."
+      "note": "Won two matches, then lost 1-2 to A. The source identifies a university and team nickname, but no distinct club. Assigned to 연세대학교 YUTT from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "gyeongin-2023-women",
@@ -9097,13 +9292,13 @@
     },
     {
       "editionKey": "gyeongin-2023-women",
-      "clubSlug": null,
+      "clubSlug": "korea-petc",
       "sourceTeamName": "PETC A",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2023/여자/KakaoTalk_Photo_2026-07-08-04-59-38.jpeg",
-      "note": "Won its opening match, then lost 0-2 to A; no university is displayed with PETC, so it is not inferred as 고려대 PETC."
+      "note": "Won its opening match, then lost 0-2 to A; no university is displayed with PETC, so it is not inferred as 고려대 PETC. Assigned to 고려대학교 체육교육과 PETC from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "gyeongin-2024-men",
@@ -9689,13 +9884,13 @@
     },
     {
       "editionKey": "gyeongin-2024-women",
-      "clubSlug": null,
+      "clubSlug": "kyunghee-seoul-kuta",
       "sourceTeamName": "KUTA A",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "경인지구/2024/여자/KakaoTalk_Photo_2026-07-08-04-55-34 006.jpeg",
-      "note": "Same source identifies KUTA B with 경희대; KUTA A lost 1-2 to 한양대 HYTC A."
+      "note": "Same source identifies KUTA B with 경희대; KUTA A lost 1-2 to 한양대 HYTC A. Assigned to 경희대학교 서울캠퍼스 KUTA from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "gyeongin-2024-women",
@@ -12469,13 +12664,13 @@
     },
     {
       "editionKey": "chuncheon-2025-men",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대진리",
       "teamLabel": "",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2025/남자/2025년_남자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 32강 row 36 shows a 1-2 loss to 경북대kutc(숫소)."
+      "note": "Rendered 32강 row 36 shows a 1-2 loss to 경북대kutc(숫소). Assigned to 연세대학교 YUTT from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "chuncheon-2025-men",
@@ -12599,13 +12794,13 @@
     },
     {
       "editionKey": "chuncheon-2025-men",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대정의",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2025/남자/2025년_남자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 64강 row 13 shows a 1-2 loss to 상지대 ace."
+      "note": "Rendered 64강 row 13 shows a 1-2 loss to 상지대 ace. Assigned to 연세대학교 YUTT from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "chuncheon-2025-men",
@@ -12689,13 +12884,13 @@
     },
     {
       "editionKey": "chuncheon-2025-men",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대자유",
       "teamLabel": "",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2025/남자/2025년_남자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 32강 row 42 shows a 0-2 loss to 성균관대 B."
+      "note": "Rendered 32강 row 42 shows a 0-2 loss to 성균관대 B. Assigned to 연세대학교 YUTT from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "chuncheon-2025-men",
@@ -13079,13 +13274,13 @@
     },
     {
       "editionKey": "chuncheon-2025-women",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대 진리",
       "teamLabel": "",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2025/여자/2025년_여자부_32강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 8강 row 27 shows a 1-2 loss to 경희대 국제A."
+      "note": "Rendered 8강 row 27 shows a 1-2 loss to 경희대 국제A. Assigned to 연세대학교 YUTT from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "chuncheon-2025-women",
@@ -13169,13 +13364,13 @@
     },
     {
       "editionKey": "chuncheon-2025-women",
-      "clubSlug": null,
+      "clubSlug": "yonsei-yutt",
       "sourceTeamName": "연세대자유",
       "teamLabel": "",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2025/여자/2025년_여자부_32강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 16강 row 23 shows a 0-2 loss to 아주대 A."
+      "note": "Rendered 16강 row 23 shows a 0-2 loss to 아주대 A. Assigned to 연세대학교 YUTT from administrator review notes and the same club's repeated confirmed source labels. Draw qualifiers and team letters do not change the club identity."
     },
     {
       "editionKey": "chuncheon-2025-women",
