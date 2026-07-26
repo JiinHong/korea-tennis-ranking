@@ -1,7 +1,7 @@
 # National ranking source dataset v1
 
 `dataset.json` is the canonical, visually verified source manifest for the
-national university club ranking. Version `sources-2026-07-26-v12` contains the
+national university club ranking. Version `sources-2026-07-26-v13` contains the
 complete Yanggu, Gyeongin, Inje, Chuncheon, and WEMIX source program: 28
 editions and 1,170 terminal result records. Yeongwol is not part of this
 dataset.
@@ -44,9 +44,7 @@ NATIONAL_RANKING_SOURCE_ROOT="/absolute/path/to/테니스 랭킹" \
 
 One visually verified terminal record is stored for every named entrant.
 `actualEntrants` therefore equals the number of result rows for each edition.
-`gyeongin-2024-men` retains `DUTC A팀` with a null stage because the supplied
-screenshots conflict about its terminal result. BYE slots and other
-non-team placeholders are excluded. An entrant that loses its first played
+BYE slots and other non-team placeholders are excluded. An entrant that loses its first played
 match is `first_match_loss`, including when its first played match follows one
 or more BYEs. A source-marked `w.o.`, `Dis.`, `Disqualified`, or `Ret.` records
 only the observed bracket outcome; notes do not infer a reason.
@@ -92,6 +90,11 @@ while `HiTEC` and `하이텍` remain the separate 한양대학교 ERICA캠퍼스
 club. Generic labels shared by several universities, such as `ACE`, are not
 inferred by this rule.
 
+Version `sources-2026-07-26-v13` reconstructs the 2024 Gyeongin men's draw
+from the administrator-confirmed vertical image sequence. It also applies
+previously confirmed club identities to DUTC, the generic Dankook label, SSTC,
+Ajou, and Kyunghee A so those results can contribute points.
+
 Canonical clubs consolidate visually explicit spellings plus the
 administrator-confirmed team-name families documented in the 2026-07-13
 design. These include 경기대학교 `KTF`/`Kft`/`테토남`, 연세대학교
@@ -131,13 +134,17 @@ OCR may help locate text, but no OCR output becomes `verified` without visual
 confirmation against the source image or rendered PDF page. Illegible or
 ambiguous identities stay unresolved.
 
-## Source conflicts
+## Resolved bracket reconstruction
 
-`gyeongin-2024-men` remains source-unresolved because image 003 shows `DUTC
-A팀` beating `단국대 A`, while image 007 advances `단국대 A` into the Round of
-16. The 48 named entrants are retained, `DUTC A팀` is stored with a null stage,
-and the farthest explicit `단국대 A` terminal result is stored separately. No
-result from this edition contributes points.
+The 2024 Gyeongin men's screenshots form one continuous bracket when images
+001-004 are joined vertically for the Round of 64 and Round of 32, images
+005-008 for the Round of 16 and quarterfinals, images 009-010 for the
+semifinals, and image 011 for the final. Image 003 shows `DUTC A팀` beating
+`단국대 A` 3-1. The same bracket slot in image 007 is labeled `단국대 A`, but
+the slot continuity proves that it is the advancing `DUTC A팀`; the later label
+is retained only as a source display error in the result note. `DUTC A팀`
+therefore finishes in the Round of 16 and `단국대 A` in the Round of 32. The
+edition is source-verified and its verified club identities contribute points.
 
 Both WEMIX editions use the visually confirmed local final-stage draws: 8 men's
 teams and 12 women's teams, rather than the planning document's proposed
@@ -150,13 +157,15 @@ The two editions and all 20 terminal rows are therefore verified and scoreable.
 
 ## Unresolved mapping log
 
-The policy above leaves 141 of 1,170 rows unresolved. Version
+The policy above leaves 136 of 1,170 rows unresolved. Version
 `sources-2026-07-24-v9` assigned 332 previously unresolved university-only team
 labels to the university's sole public ranking club. Version
 `sources-2026-07-24-v10` applied the administrator-reviewed Yanggu memo
 mappings, and version `sources-2026-07-26-v11` resolved 11 Jeonbuk rows from the
 direct ACE confirmation. Version `sources-2026-07-26-v12` then resolved 55
-review-note and repeated-label rows. This is an identity status only; every
+review-note and repeated-label rows. Version `sources-2026-07-26-v13` resolves
+the 2024 Gyeongin men's draw conflict and five clear identities. This is an
+identity status only; every
 stored row's entrant name and terminal bracket outcome was visually or
 structurally verified.
 
@@ -178,7 +187,7 @@ structurally verified.
 | `inje-2026-women` | 18 | 18 | 0 | All identities are assigned. |
 | `gyeongin-2023-men` | 42 | 30 | 12 | Generic labels remain; runner-up `러비스 A` has no university context. |
 | `gyeongin-2023-women` | 32 | 21 | 11 | Generic labels remain; runner-up is displayed only as `A`. |
-| `gyeongin-2024-men` | 48 | 40 | 8 | Edition conflict above remains; other generic or multi-club labels await confirmation. |
+| `gyeongin-2024-men` | 48 | 45 | 3 | Bracket is verified; 명지대 A and generic 경희대 B/C identities await confirmation. |
 | `gyeongin-2024-women` | 38 | 32 | 6 | Generic club-only and multi-club university labels remain. |
 | `gyeongin-2025-men` | 22 | 22 | 0 | All identities are assigned. |
 | `gyeongin-2025-women` | 26 | 21 | 5 | Generic club-only and multi-club university labels remain. |

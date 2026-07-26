@@ -504,7 +504,7 @@ describe("loadNationalRankingDataset", () => {
     "gyeongin-2024-men": {
       actualEntrants: 48,
       resultCount: 48,
-      sourceStatus: "unresolved",
+      sourceStatus: "verified",
     },
     "gyeongin-2024-women": {
       actualEntrants: 38,
@@ -577,7 +577,7 @@ describe("loadNationalRankingDataset", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-07-26-v12");
+    expect(dataset.version).toBe("sources-2026-07-26-v13");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -620,10 +620,10 @@ describe("loadNationalRankingDataset", () => {
     expect(dataset.results).toHaveLength(1_170);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
-    ).toHaveLength(1_029);
+    ).toHaveLength(1_034);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
-    ).toHaveLength(141);
+    ).toHaveLength(136);
 
     expect(
       dataset.results.find(
@@ -632,9 +632,9 @@ describe("loadNationalRankingDataset", () => {
           result.sourceTeamName === "DUTC A팀"
       )
     ).toMatchObject({
-      clubSlug: null,
-      stage: null,
-      qualityStatus: "unresolved",
+      clubSlug: "dongguk-dutc",
+      stage: "round_of_16",
+      qualityStatus: "verified",
     });
 
     expect(
@@ -707,23 +707,35 @@ describe("loadNationalRankingDataset", () => {
     }
   });
 
-  it("keeps the remaining unresolved source conflict out of scoring", () => {
+  it("scores the resolved 2024 Gyeongin men's draw and excludes only unresolved identities", () => {
     const dataset = loadNationalRankingDataset();
-    const unresolvedEditionKeys = new Set(["gyeongin-2024-men"]);
     const rankings = calculateNationalRankings(dataset);
+    const edition = dataset.editions.find(
+      ({ key }) => key === "gyeongin-2024-men"
+    );
+    const unresolvedNames = dataset.results
+      .filter(
+        (result) =>
+          result.editionKey === "gyeongin-2024-men" &&
+          result.qualityStatus === "unresolved"
+      )
+      .map((result) => result.sourceTeamName)
+      .sort((left, right) => left.localeCompare(right, "ko"));
 
-    expect(
-      dataset.editions
-        .filter((edition) => unresolvedEditionKeys.has(edition.key))
-        .every((edition) => edition.sourceStatus === "unresolved")
-    ).toBe(true);
+    expect(edition?.sourceStatus).toBe("verified");
     expect(
       rankings.rows
         .flatMap((row) => row.contributions)
-        .some((contribution) =>
-          unresolvedEditionKeys.has(contribution.editionKey)
+        .some(
+          (contribution) =>
+            contribution.editionKey === "gyeongin-2024-men"
         )
-    ).toBe(false);
+    ).toBe(true);
+    expect(unresolvedNames).toEqual([
+      "경희대학교 B",
+      "경희대학교 C",
+      "명지대A",
+    ]);
     expect(
       dataset.results.find(
         (result) =>
@@ -731,8 +743,9 @@ describe("loadNationalRankingDataset", () => {
           result.sourceTeamName === "DUTC A팀"
       )
     ).toMatchObject({
-      stage: null,
-      qualityStatus: "unresolved",
+      clubSlug: "dongguk-dutc",
+      stage: "round_of_16",
+      qualityStatus: "verified",
     });
   });
 
