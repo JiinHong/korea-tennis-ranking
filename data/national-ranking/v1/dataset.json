@@ -1,5 +1,5 @@
 {
-  "version": "sources-2026-07-24-v10",
+  "version": "sources-2026-07-26-v11",
   "clubs": [
     {
       "slug": "catholic-courtrang",
@@ -1847,6 +1847,36 @@
       "clubSlug": "jeonbuk-topspin",
       "normalizedAlias": "전북대학교 탑스핀",
       "sourceLabel": "전북대 탑스핀"
+    },
+    {
+      "clubSlug": "jeonbuk-ace",
+      "normalizedAlias": "전북대학교 전북대",
+      "sourceLabel": "전북대"
+    },
+    {
+      "clubSlug": "jeonbuk-ace",
+      "normalizedAlias": "전북대학교 전북대 a",
+      "sourceLabel": "전북대 A"
+    },
+    {
+      "clubSlug": "jeonbuk-ace",
+      "normalizedAlias": "전북대학교 전북대 b",
+      "sourceLabel": "전북대 B"
+    },
+    {
+      "clubSlug": "jeonbuk-ace",
+      "normalizedAlias": "전북대학교 전북대 c",
+      "sourceLabel": "전북대 C"
+    },
+    {
+      "clubSlug": "jeonbuk-ace",
+      "normalizedAlias": "전북대학교 전북대학교",
+      "sourceLabel": "전북대학교"
+    },
+    {
+      "clubSlug": "jeonbuk-ace",
+      "normalizedAlias": "전북대학교 전북대학교 a",
+      "sourceLabel": "전북대학교 A"
     }
   ],
   "tournaments": [
@@ -2367,13 +2397,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대 B [Q]",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-egzq.png",
-      "note": "Slot 14 lost its first played match in the Round of 128."
+      "note": "Slot 14 lost its first played match in the Round of 128. Assigned to 전북대학교 ACE from the 2026-07-24 direct Instagram DM confirmation: generic Jeonbuk labels normally refer to ACE, while Topspin is explicitly labeled."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -2937,13 +2967,13 @@
     },
     {
       "editionKey": "yanggu-2023-men",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대 C [Q]",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/남자/SCR-20260708-ehhc.png",
-      "note": "Slot 91 lost its first played match in the Round of 128."
+      "note": "Slot 91 lost its first played match in the Round of 128. Assigned to 전북대학교 ACE from the 2026-07-24 direct Instagram DM confirmation: generic Jeonbuk labels normally refer to ACE, while Topspin is explicitly labeled."
     },
     {
       "editionKey": "yanggu-2023-men",
@@ -3547,13 +3577,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대 A [Q]",
       "teamLabel": "A",
       "stage": "round_of_32",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eicp.png",
-      "note": "Won through the Round of 64, then visually lost in the Round of 32 to 서울대 B."
+      "note": "Won through the Round of 64, then visually lost in the Round of 32 to 서울대 B. Assigned to 전북대학교 ACE from the 2026-07-24 direct Instagram DM confirmation: generic Jeonbuk labels normally refer to ACE, while Topspin is explicitly labeled."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -4047,13 +4077,13 @@
     },
     {
       "editionKey": "yanggu-2023-women",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대 B [Q]",
       "teamLabel": "B",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2023/여자/SCR-20260708-eigq.png",
-      "note": "Entered after a BYE and visually lost its first played match to 이대 2화 in the Round of 64."
+      "note": "Entered after a BYE and visually lost its first played match to 이대 2화 in the Round of 64. Assigned to 전북대학교 ACE from the 2026-07-24 direct Instagram DM confirmation: generic Jeonbuk labels normally refer to ACE, while Topspin is explicitly labeled."
     },
     {
       "editionKey": "yanggu-2023-women",
@@ -6717,13 +6747,13 @@
     },
     {
       "editionKey": "yanggu-2025-women",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-topspin",
       "sourceTeamName": "전북대 탑스핀",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "양구/2025/여자/2025 양구 여자.pdf#page=1",
-      "note": "Visually checked slot 3 and terminal first played match."
+      "note": "Visually checked slot 3 and terminal first played match. Assigned to 전북대학교 탑스핀 from the 2026-07-24 direct Instagram DM confirmation because the source explicitly names 탑스핀."
     },
     {
       "editionKey": "yanggu-2025-women",
@@ -11059,13 +11089,13 @@
     },
     {
       "editionKey": "chuncheon-2023-women",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대",
       "teamLabel": "",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2023/여자/SCR-20260708-dxuf.png",
-      "note": "Opening BYE, then visually verified first played-match loss; no status marker."
+      "note": "Opening BYE, then visually verified first played-match loss; no status marker. Assigned to 전북대학교 ACE from the 2026-07-24 direct Instagram DM confirmation: generic Jeonbuk labels normally refer to ACE, while Topspin is explicitly labeled."
     },
     {
       "editionKey": "chuncheon-2023-women",
@@ -12039,13 +12069,13 @@
     },
     {
       "editionKey": "chuncheon-2024-women",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대A",
       "teamLabel": "A",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2024/여자/여자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "lost 1-2 to 연세대 YUTT 진리 (64강)"
+      "note": "lost 1-2 to 연세대 YUTT 진리 (64강) Assigned to 전북대학교 ACE from the 2026-07-24 direct Instagram DM confirmation: generic Jeonbuk labels normally refer to ACE, while Topspin is explicitly labeled."
     },
     {
       "editionKey": "chuncheon-2024-women",
@@ -12499,13 +12529,13 @@
     },
     {
       "editionKey": "chuncheon-2025-men",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대 C",
       "teamLabel": "C",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2025/남자/2025년_남자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 64강 row 9 shows a 0-2 loss to 한양대학교 에리카 하이텍 A."
+      "note": "Rendered 64강 row 9 shows a 0-2 loss to 한양대학교 에리카 하이텍 A. Assigned to 전북대학교 ACE from the 2026-07-24 direct Instagram DM confirmation: generic Jeonbuk labels normally refer to ACE, while Topspin is explicitly labeled."
     },
     {
       "editionKey": "chuncheon-2025-men",
@@ -12639,13 +12669,13 @@
     },
     {
       "editionKey": "chuncheon-2025-men",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대학교 A",
       "teamLabel": "A",
       "stage": "quarterfinal",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2025/남자/2025년_남자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 8강 row 59 shows a 1-2 loss to 서강대A."
+      "note": "Rendered 8강 row 59 shows a 1-2 loss to 서강대A. Assigned to 전북대학교 ACE from the 2026-07-24 direct Instagram DM confirmation: generic Jeonbuk labels normally refer to ACE, while Topspin is explicitly labeled."
     },
     {
       "editionKey": "chuncheon-2025-men",
@@ -12729,13 +12759,13 @@
     },
     {
       "editionKey": "chuncheon-2025-men",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대 B",
       "teamLabel": "B",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2025/남자/2025년_남자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 16강 row 55 shows a 0-2 loss to 세종대 a."
+      "note": "Rendered 16강 row 55 shows a 0-2 loss to 세종대 a. Assigned to 전북대학교 ACE from the 2026-07-24 direct Instagram DM confirmation: generic Jeonbuk labels normally refer to ACE, while Topspin is explicitly labeled."
     },
     {
       "editionKey": "chuncheon-2025-men",
@@ -13009,13 +13039,13 @@
     },
     {
       "editionKey": "chuncheon-2025-women",
-      "clubSlug": null,
+      "clubSlug": "jeonbuk-ace",
       "sourceTeamName": "전북대학교 A",
       "teamLabel": "A",
       "stage": "round_of_16",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2025/여자/2025년_여자부_32강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 16강 row 20 shows a 1-2 loss to 경희대 국제A."
+      "note": "Rendered 16강 row 20 shows a 1-2 loss to 경희대 국제A. Assigned to 전북대학교 ACE from the 2026-07-24 direct Instagram DM confirmation: generic Jeonbuk labels normally refer to ACE, while Topspin is explicitly labeled."
     },
     {
       "editionKey": "chuncheon-2025-women",

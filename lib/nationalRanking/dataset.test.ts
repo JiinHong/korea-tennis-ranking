@@ -577,7 +577,7 @@ describe("loadNationalRankingDataset", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-07-24-v10");
+    expect(dataset.version).toBe("sources-2026-07-26-v11");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -616,14 +616,14 @@ describe("loadNationalRankingDataset", () => {
     }
 
     expect(dataset.clubs).toHaveLength(70);
-    expect(dataset.aliases).toHaveLength(285);
+    expect(dataset.aliases).toHaveLength(291);
     expect(dataset.results).toHaveLength(1_170);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
-    ).toHaveLength(963);
+    ).toHaveLength(974);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
-    ).toHaveLength(207);
+    ).toHaveLength(196);
 
     expect(
       dataset.results.find(
@@ -684,8 +684,8 @@ describe("loadNationalRankingDataset", () => {
         priorEditionKeys.has(result.editionKey)
       ),
     };
-    // Re-baselined after applying the administrator-reviewed Yanggu club
-    // mappings while preserving the original edition and result ordering.
+    // Re-baselined after applying the reviewed Yanggu mappings and the direct
+    // Jeonbuk ACE DM confirmation while preserving edition/result ordering.
     const fingerprint = createHash("sha256")
       .update(JSON.stringify(approvedTask4))
       .digest("hex");
@@ -695,7 +695,7 @@ describe("loadNationalRankingDataset", () => {
     expect(approvedTask4.editions).toHaveLength(12);
     expect(approvedTask4.results).toHaveLength(608);
     expect(fingerprint).toBe(
-      "f4e15c78a32930f6be5519b66f8bb2539dc949ba5a54a7ab84366e7690ea4691"
+      "565ef3e1db947992eba846825e0eca4b376680d0ec16691f6bd83bfc0f2de375"
     );
 
     for (const [editionKey, expectedCount] of Object.entries(priorExpectedCounts)) {

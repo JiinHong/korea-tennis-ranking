@@ -155,7 +155,7 @@ describe("administrator-reviewed Yanggu mappings", () => {
     }
   );
 
-  it("keeps the explicitly deferred Jeonbuk Topspin row unresolved", async () => {
+  it("maps the formerly deferred Jeonbuk Topspin row after direct confirmation", async () => {
     const dataset = await loadDataset();
     const deferred = dataset.results.filter(
       (result) =>
@@ -164,14 +164,14 @@ describe("administrator-reviewed Yanggu mappings", () => {
 
     expect(deferred).toHaveLength(1);
     expect(deferred[0]).toMatchObject({
-      clubSlug: null,
-      qualityStatus: "unresolved",
+      clubSlug: "jeonbuk-topspin",
+      qualityStatus: "verified",
     });
   });
 
   it("bumps the managed dataset version after applying the review", async () => {
     const dataset = await loadDataset();
 
-    expect(dataset.version).toBe("sources-2026-07-24-v10");
+    expect(dataset.version).toBe("sources-2026-07-26-v11");
   });
 });

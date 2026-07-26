@@ -1,7 +1,7 @@
 # National ranking source dataset v1
 
 `dataset.json` is the canonical, visually verified source manifest for the
-national university club ranking. Version `sources-2026-07-24-v9` contains the
+national university club ranking. Version `sources-2026-07-26-v11` contains the
 complete Yanggu, Gyeongin, Inje, Chuncheon, and WEMIX source program: 28
 editions and 1,170 terminal result records. Yeongwol is not part of this
 dataset.
@@ -78,6 +78,12 @@ National University rule maps
 map to `서울대학교 경영대학 TNT`. Labels that do not identify even a school
 remain unresolved.
 
+Version `sources-2026-07-26-v11` records the direct 2026-07-24 Instagram DM
+confirmation from 전북대학교 ACE. ACE and 탑스핀 are separate clubs; generic
+source labels such as `전북대`, `전북대 A`, `전북대 B`, and `전북대 C`
+normally identify ACE, while only a source label that explicitly names
+`탑스핀` identifies 탑스핀. This rule is applied to every stored edition.
+
 Canonical clubs consolidate visually explicit spellings plus the
 administrator-confirmed team-name families documented in the 2026-07-13
 design. These include 경기대학교 `KTF`/`Kft`/`테토남`, 연세대학교
@@ -136,20 +142,23 @@ The two editions and all 20 terminal rows are therefore verified and scoreable.
 
 ## Unresolved mapping log
 
-The policy above leaves 247 of 1,170 rows unresolved. Version
+The policy above leaves 196 of 1,170 rows unresolved. Version
 `sources-2026-07-24-v9` assigned 332 previously unresolved university-only team
-labels to the university's sole public ranking club. This is an identity status
-only; every stored row's entrant name and terminal bracket outcome was visually
-or structurally verified.
+labels to the university's sole public ranking club. Version
+`sources-2026-07-24-v10` applied the administrator-reviewed Yanggu memo
+mappings, and version `sources-2026-07-26-v11` resolved 11 Jeonbuk rows from the
+direct ACE confirmation. This is an identity status only; every stored row's
+entrant name and terminal bracket outcome was visually or structurally
+verified.
 
 | Edition | Entrants/results | Verified rows | Unresolved rows | Reason summary |
 | --- | ---: | ---: | ---: | --- |
-| `yanggu-2023-men` | 98 | 47 | 51 | Remaining labels identify a multi-club university or lack sufficient university/club context. |
-| `yanggu-2023-women` | 91 | 36 | 55 | Remaining labels identify a multi-club university or lack sufficient university/club context. |
-| `yanggu-2024-men` | 89 | 83 | 6 | Generic club-only and multi-club university labels remain. |
-| `yanggu-2024-women` | 73 | 67 | 6 | Generic club-only, multi-club university, and source-unresolved `라중` labels remain. |
-| `yanggu-2025-men` | 94 | 80 | 14 | Generic club-only and multi-club university labels remain. |
-| `yanggu-2025-women` | 73 | 58 | 15 | Generic club-only and multi-club university labels remain. |
+| `yanggu-2023-men` | 98 | 50 | 48 | Remaining labels identify a multi-club university or lack sufficient university/club context. |
+| `yanggu-2023-women` | 91 | 38 | 53 | Remaining labels identify a multi-club university or lack sufficient university/club context. |
+| `yanggu-2024-men` | 89 | 89 | 0 | All identities are assigned. |
+| `yanggu-2024-women` | 73 | 72 | 1 | Source-unresolved `라중` remains. |
+| `yanggu-2025-men` | 94 | 94 | 0 | All identities are assigned. |
+| `yanggu-2025-women` | 73 | 73 | 0 | All identities are assigned. |
 | `inje-2023-men` | 18 | 13 | 5 | Generic club-only and multi-club university labels remain. |
 | `inje-2023-women` | 10 | 10 | 0 | All identities are assigned. |
 | `inje-2024-men` | 20 | 19 | 1 | Generic university `테니스부` identities remain except for confirmed Seoul National University entries. |
@@ -165,10 +174,10 @@ or structurally verified.
 | `gyeongin-2025-men` | 22 | 22 | 0 | All identities are assigned. |
 | `gyeongin-2025-women` | 26 | 21 | 5 | Generic club-only and multi-club university labels remain. |
 | `chuncheon-2023-men` | 50 | 43 | 7 | Generic club-only and multi-club university labels remain. |
-| `chuncheon-2023-women` | 42 | 34 | 8 | Generic club-only and multi-club university labels remain. |
+| `chuncheon-2023-women` | 42 | 35 | 7 | Generic club-only and multi-club university labels remain. |
 | `chuncheon-2024-men` | 68 | 63 | 5 | Generic club-only and multi-club university labels remain. |
-| `chuncheon-2024-women` | 34 | 29 | 5 | Generic club-only and multi-club university labels remain. |
-| `chuncheon-2025-men` | 58 | 49 | 9 | Generic club-only and multi-club university labels remain. |
-| `chuncheon-2025-women` | 28 | 21 | 7 | Generic club-only and multi-club university labels remain. |
+| `chuncheon-2024-women` | 34 | 30 | 4 | Generic club-only and multi-club university labels remain. |
+| `chuncheon-2025-men` | 58 | 52 | 6 | Generic club-only and multi-club university labels remain. |
+| `chuncheon-2025-women` | 28 | 22 | 6 | Generic club-only and multi-club university labels remain. |
 | `wemix-2025-men` | 8 | 8 | 0 | School-only entries are frozen under the approved pre-WEMIX ranking rule. |
 | `wemix-2025-women` | 12 | 12 | 0 | Explicit aliases, clipped labels, and school-only entries are frozen under the approved rule. |
