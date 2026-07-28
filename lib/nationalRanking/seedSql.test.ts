@@ -484,7 +484,7 @@ describe("buildNationalRankingSeedSql", () => {
   it("writes exactly the requested output file with a schema-aware source revision", () => {
     const dataset = loadNationalRankingDataset();
     const expectedRevision = createHash("sha256")
-      .update("national-ranking-snapshot-v2")
+      .update("national-ranking-snapshot-v3")
       .update("\0")
       .update(JSON.stringify(dataset))
       .digest("hex");

@@ -288,6 +288,20 @@ function createTieDataset() {
 }
 
 describe("calculateNationalRankings", () => {
+  it("keeps only the best podium honor per club and edition", () => {
+    const result = calculateNationalRankings(dataset);
+    const alphaMen = result.rows.find(
+      (row) => row.clubSlug === "alpha" && row.gender === "men"
+    );
+
+    expect(
+      alphaMen?.honors.map((honor) => [honor.editionKey, honor.stage])
+    ).toEqual([
+      ["national-men-2025", "champion"],
+      ["regional-men-2025", "semifinal"],
+    ]);
+  });
+
   it("uses the approved integer-only v3 formula by default", () => {
     const v3Dataset = {
       version: "integer-v3-test",

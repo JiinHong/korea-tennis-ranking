@@ -243,10 +243,16 @@ export function calculateNationalRankings(
       club.slug,
       honor.editionKey,
       honor.gender,
-      honor.stage,
     ].join(":");
+    const currentHonor = honorByIdentity.get(identity);
 
-    honorByIdentity.set(identity, honor);
+    if (
+      !currentHonor ||
+      PODIUM_STAGE_ORDER[honor.stage] <
+        PODIUM_STAGE_ORDER[currentHonor.stage]
+    ) {
+      honorByIdentity.set(identity, honor);
+    }
   }
 
   const honorsByClubAndGender = new Map<string, NationalRankingHonor[]>();
