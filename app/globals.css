@@ -4956,7 +4956,7 @@ button:disabled {
 }
 
 .site-footer-credit {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.6;
 }
 
@@ -4990,7 +4990,7 @@ button:disabled {
 .site-footer-inquiry {
   display: inline-block;
   margin-top: 12px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 650;
 }
 
@@ -5008,7 +5008,7 @@ button:disabled {
   }
 
   .site-footer-credit {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .site-footer .site-footer-copyright {

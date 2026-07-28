@@ -14,13 +14,13 @@ describe("site footer link styles", () => {
 
   it("운영자와 문의 문구는 저작권 정보보다 조금만 강조되도록 작게 표시한다", () => {
     expect(css).toMatch(
-      /\.site-footer-credit\s*\{[^}]*font-size:\s*15px;[^}]*\}/
+      /\.site-footer-credit\s*\{[^}]*font-size:\s*14px;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.site-footer-inquiry\s*\{[^}]*font-size:\s*13px;[^}]*\}/
+      /\.site-footer-inquiry\s*\{[^}]*font-size:\s*12px;[^}]*\}/
     );
     expect(css).toMatch(
-      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.site-footer-credit\s*\{[^}]*font-size:\s*13px;[^}]*\}/
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.site-footer-credit\s*\{[^}]*font-size:\s*12px;[^}]*\}/
     );
   });
 });
