@@ -4954,6 +4954,7 @@ button:disabled {
 .site-footer a {
   color: inherit;
   text-decoration-color: rgba(255, 255, 255, 0.45);
+  text-decoration-line: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
   transition:

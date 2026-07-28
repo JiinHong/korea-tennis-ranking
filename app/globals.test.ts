@@ -3,6 +3,16 @@ import { join } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
+describe("site footer link styles", () => {
+  const css = readFileSync(join(process.cwd(), "app/globals.css"), "utf8");
+
+  it("푸터의 하이퍼링크에 항상 밑줄을 표시한다", () => {
+    expect(css).toMatch(
+      /\.site-footer a\s*\{[^}]*text-decoration-line:\s*underline;[^}]*\}/
+    );
+  });
+});
+
 describe("shared tennis color palette", () => {
   const css = readFileSync(join(process.cwd(), "app/globals.css"), "utf8");
 
