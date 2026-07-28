@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import AmplitudeAnalytics from "./AmplitudeAnalytics";
+import SiteFooter from "./SiteFooter";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -54,6 +55,7 @@ export default function RootLayout({
       <body className="min-h-full">
         <AmplitudeAnalytics />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );
