@@ -1,7 +1,7 @@
 # National ranking source dataset v1
 
 `dataset.json` is the canonical, visually verified source manifest for the
-national university club ranking. Version `sources-2026-07-26-v17` contains the
+national university club ranking. Version `sources-2026-07-28-v18` contains the
 complete Yanggu, Gyeongin, Inje, Chuncheon, and WEMIX source program: 28
 editions and 1,170 terminal result records. Yeongwol is not part of this
 dataset.
@@ -124,6 +124,13 @@ adds `용인대학교 ACE`, assigns the visible KUTA and IMPACT entries to the t
 approved Kyunghee ranking entities, and preserves every original entrant label,
 stage, note, and source reference.
 
+Version `sources-2026-07-28-v18` applies the administrator-confirmed rule to
+the 17 remaining Kyunghee source labels. Generic `경희대`, `서울`, `국제`,
+KUTA, and LOVICE labels are assigned to `경희대학교 KUTA·LOVICE`; only
+labels that explicitly identify 공과대학 or IMPACT belong to
+`경희대학교 공과대학 IMPACT`. Original entrant labels, stages, notes, and
+source references remain unchanged.
+
 Canonical clubs consolidate visually explicit spellings plus the
 administrator-confirmed team-name families documented in the 2026-07-13
 design. These include 경기대학교 `KTF`/`Kft`/`테토남`, 연세대학교
@@ -187,7 +194,7 @@ The two editions and all 20 terminal rows are therefore verified and scoreable.
 
 ## Unresolved mapping log
 
-The policy above leaves 48 of 1,170 rows unresolved. Version
+The policy above leaves 31 of 1,170 rows unresolved. Version
 `sources-2026-07-24-v9` assigned 332 previously unresolved university-only team
 labels to the university's sole public ranking club. Version
 `sources-2026-07-24-v10` applied the administrator-reviewed Yanggu memo
@@ -207,6 +214,8 @@ Version `sources-2026-07-26-v16` resolves all 32 remaining 2023 Yanggu women's
 identities from the administrator-provided university-to-team mapping.
 Version `sources-2026-07-26-v17` resolves all 26 remaining 2023 Yanggu men's
 identities from the administrator-provided university-to-team mapping.
+Version `sources-2026-07-28-v18` resolves all 17 remaining Kyunghee-labeled
+rows under the approved two-group rule.
 
 | Edition | Entrants/results | Verified rows | Unresolved rows | Reason summary |
 | --- | ---: | ---: | ---: | --- |
@@ -216,7 +225,7 @@ identities from the administrator-provided university-to-team mapping.
 | `yanggu-2024-women` | 73 | 73 | 0 | All identities are assigned. |
 | `yanggu-2025-men` | 94 | 94 | 0 | All identities are assigned. |
 | `yanggu-2025-women` | 73 | 73 | 0 | All identities are assigned. |
-| `inje-2023-men` | 18 | 15 | 3 | Generic club-only and multi-club university labels remain. |
+| `inje-2023-men` | 18 | 16 | 2 | Generic club-only labels remain; the Kyunghee label is assigned. |
 | `inje-2023-women` | 10 | 10 | 0 | All identities are assigned. |
 | `inje-2024-men` | 20 | 20 | 0 | All identities are assigned. |
 | `inje-2024-women` | 10 | 10 | 0 | School-qualified runner-up is frozen. |
@@ -224,16 +233,17 @@ identities from the administrator-provided university-to-team mapping.
 | `inje-2025-women` | 12 | 11 | 1 | Generic club-only labels remain. |
 | `inje-2026-men` | 36 | 36 | 0 | All identities are assigned. |
 | `inje-2026-women` | 18 | 18 | 0 | All identities are assigned. |
-| `gyeongin-2023-men` | 42 | 36 | 6 | `러비스 A` is assigned to KUTA·LOVICE; other generic labels remain. |
-| `gyeongin-2023-women` | 32 | 24 | 8 | Generic club-only labels remain. |
-| `gyeongin-2024-men` | 48 | 46 | 2 | Bracket is verified; generic 경희대 B/C identities await confirmation. |
-| `gyeongin-2024-women` | 38 | 35 | 3 | Generic club-only and multi-club university labels remain. |
+| `gyeongin-2023-men` | 42 | 38 | 4 | Kyunghee labels are assigned; other generic labels remain. |
+| `gyeongin-2023-women` | 32 | 25 | 7 | Kyunghee labels are assigned; other generic labels remain. |
+| `gyeongin-2024-men` | 48 | 48 | 0 | Bracket and every club identity are verified. |
+| `gyeongin-2024-women` | 38 | 36 | 2 | Kyunghee labels are assigned; other generic labels remain. |
 | `gyeongin-2025-men` | 22 | 22 | 0 | All identities are assigned. |
 | `gyeongin-2025-women` | 26 | 24 | 2 | Generic club-only and multi-club university labels remain. |
-| `chuncheon-2023-men` | 50 | 45 | 5 | Generic club-only and multi-club university labels remain. |
-| `chuncheon-2024-men` | 68 | 64 | 4 | Generic club-only and multi-club university labels remain. |
-| `chuncheon-2024-women` | 34 | 33 | 1 | Generic club-only and multi-club university labels remain. |
+| `chuncheon-2023-men` | 50 | 48 | 2 | Kyunghee labels are assigned; other generic labels remain. |
+| `chuncheon-2023-women` | 42 | 39 | 3 | Kyunghee labels are assigned; other generic labels remain. |
+| `chuncheon-2024-men` | 68 | 65 | 3 | Kyunghee labels are assigned; other generic labels remain. |
+| `chuncheon-2024-women` | 34 | 34 | 0 | Every club identity is verified. |
 | `chuncheon-2025-men` | 58 | 56 | 2 | Generic club-only and multi-club university labels remain. |
-| `chuncheon-2025-women` | 28 | 24 | 4 | Generic club-only and multi-club university labels remain. |
+| `chuncheon-2025-women` | 28 | 25 | 3 | Kyunghee labels are assigned; other generic labels remain. |
 | `wemix-2025-men` | 8 | 8 | 0 | School-only entries are frozen under the approved pre-WEMIX ranking rule. |
 | `wemix-2025-women` | 12 | 12 | 0 | Explicit aliases, clipped labels, and school-only entries are frozen under the approved rule. |

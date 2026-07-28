@@ -135,6 +135,6 @@ describe("2023 Yanggu women's administrator-provided university mapping", () => 
   it("bumps the managed dataset version after applying the mapping", async () => {
     const dataset = await loadDataset();
 
-    expect(dataset.version).toBe("sources-2026-07-26-v17");
+    expect(dataset.version).toBe("sources-2026-07-28-v18");
   });
 });

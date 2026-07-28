@@ -577,7 +577,7 @@ describe("loadNationalRankingDataset", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-07-26-v17");
+    expect(dataset.version).toBe("sources-2026-07-28-v18");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -616,14 +616,14 @@ describe("loadNationalRankingDataset", () => {
     }
 
     expect(dataset.clubs).toHaveLength(64);
-    expect(dataset.aliases).toHaveLength(411);
+    expect(dataset.aliases).toHaveLength(426);
     expect(dataset.results).toHaveLength(1_170);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
-    ).toHaveLength(1_122);
+    ).toHaveLength(1_139);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
-    ).toHaveLength(48);
+    ).toHaveLength(31);
 
     expect(
       dataset.results.find(
@@ -684,8 +684,8 @@ describe("loadNationalRankingDataset", () => {
         priorEditionKeys.has(result.editionKey)
       ),
     };
-    // Re-baselined after applying the administrator-provided 2023 Yanggu
-    // university-to-club mappings while preserving edition/result ordering.
+    // Re-baselined after applying the administrator-confirmed Kyunghee
+    // two-group mapping while preserving edition/result ordering.
     const fingerprint = createHash("sha256")
       .update(JSON.stringify(approvedTask4))
       .digest("hex");
@@ -695,7 +695,7 @@ describe("loadNationalRankingDataset", () => {
     expect(approvedTask4.editions).toHaveLength(12);
     expect(approvedTask4.results).toHaveLength(608);
     expect(fingerprint).toBe(
-      "156010f842c98c90e8b32e342676d884a96f81643f5fecde34164325c5c96e22"
+      "4b927761d0dadc1d64a3a2956ba0cbece6df7ceb74cce4f7f593a7d6a5234ed8"
     );
 
     for (const [editionKey, expectedCount] of Object.entries(priorExpectedCounts)) {
@@ -706,7 +706,7 @@ describe("loadNationalRankingDataset", () => {
     }
   });
 
-  it("scores the resolved 2024 Gyeongin men's draw and excludes only unresolved identities", () => {
+  it("scores every resolved identity in the 2024 Gyeongin men's draw", () => {
     const dataset = loadNationalRankingDataset();
     const rankings = calculateNationalRankings(dataset);
     const edition = dataset.editions.find(
@@ -730,10 +730,7 @@ describe("loadNationalRankingDataset", () => {
             contribution.editionKey === "gyeongin-2024-men"
         )
     ).toBe(true);
-    expect(unresolvedNames).toEqual([
-      "경희대학교 B",
-      "경희대학교 C",
-    ]);
+    expect(unresolvedNames).toEqual([]);
     expect(
       dataset.results.find(
         (result) =>

@@ -11,6 +11,25 @@ const DATASET_PATH = resolve(
 );
 const KYUNGHEE_SLUG = "kyunghee-kuta-lovice";
 const KYUNGHEE_ENGINEERING_SLUG = "kyunghee-engineering-impact";
+const REMAINING_GENERAL_KYUNGHEE_RESULTS = new Set([
+  "inje-2023-men::경희대",
+  "gyeongin-2023-men::경희대 B",
+  "gyeongin-2023-men::경희대 D",
+  "gyeongin-2023-women::경희대 쿠웅이",
+  "gyeongin-2024-men::경희대학교 B",
+  "gyeongin-2024-men::경희대학교 C",
+  "gyeongin-2024-women::경희대 s",
+  "chuncheon-2023-men::경희대 국제 C",
+  "chuncheon-2023-men::경희대 국제 B",
+  "chuncheon-2023-men::경희대 국제 A",
+  "chuncheon-2023-women::경희대 국제 C",
+  "chuncheon-2023-women::경희대서울2팀",
+  "chuncheon-2023-women::경희대 국제 B",
+  "chuncheon-2023-women::경희대 서울1팀",
+  "chuncheon-2024-men::경희대A",
+  "chuncheon-2024-women::경희대 국제B",
+  "chuncheon-2025-women::경희대 국제A",
+]);
 const RETIRED_KYUNGHEE_SLUGS = new Set([
   "kyunghee-global-impact",
   "kyunghee-global-kuta",
@@ -51,7 +70,7 @@ describe("경희대학교 대회 결과 통합", () => {
     ]);
   });
 
-  it("LOVICE 준우승을 포함한 일반 경희대 51건과 IMPACT 12건을 각각 통합한다", async () => {
+  it("일반 경희대 68건과 IMPACT 12건을 각각 통합한다", async () => {
     const dataset = await loadDataset();
     const generalResults = dataset.results.filter(
       (result) => result.clubSlug === KYUNGHEE_SLUG
@@ -60,7 +79,7 @@ describe("경희대학교 대회 결과 통합", () => {
       (result) => result.clubSlug === KYUNGHEE_ENGINEERING_SLUG
     );
 
-    expect(generalResults).toHaveLength(51);
+    expect(generalResults).toHaveLength(68);
     expect(impactResults).toHaveLength(12);
     expect(
       [...generalResults, ...impactResults].every(
@@ -77,6 +96,31 @@ describe("경희대학교 대회 결과 통합", () => {
       stage: "runner_up",
       qualityStatus: "verified",
     });
+  });
+
+  it("남아 있던 일반 경희대 원문 17건도 KUTA·LOVICE로 확정한다", async () => {
+    const dataset = await loadDataset();
+    const resolvedResults = dataset.results.filter((result) =>
+      REMAINING_GENERAL_KYUNGHEE_RESULTS.has(
+        `${result.editionKey}::${result.sourceTeamName}`
+      )
+    );
+
+    expect(resolvedResults).toHaveLength(REMAINING_GENERAL_KYUNGHEE_RESULTS.size);
+    expect(
+      resolvedResults.every(
+        (result) =>
+          result.clubSlug === KYUNGHEE_SLUG &&
+          result.qualityStatus === "verified"
+      )
+    ).toBe(true);
+    expect(
+      dataset.results.filter(
+        (result) =>
+          result.qualityStatus === "unresolved" &&
+          result.sourceTeamName.includes("경희")
+      )
+    ).toEqual([]);
   });
 
   it("폐기한 경희대학교 항목을 어느 데이터에서도 참조하지 않는다", async () => {
@@ -128,6 +172,6 @@ describe("경희대학교 대회 결과 통합", () => {
   it("통합 결과를 새 데이터 버전으로 관리한다", async () => {
     const dataset = await loadDataset();
 
-    expect(dataset.version).toBe("sources-2026-07-26-v17");
+    expect(dataset.version).toBe("sources-2026-07-28-v18");
   });
 });
