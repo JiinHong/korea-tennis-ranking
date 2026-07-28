@@ -11,6 +11,18 @@ describe("site footer link styles", () => {
       /\.site-footer a\s*\{[^}]*text-decoration-line:\s*underline;[^}]*\}/
     );
   });
+
+  it("운영자와 문의 문구는 저작권 정보보다 조금만 강조되도록 작게 표시한다", () => {
+    expect(css).toMatch(
+      /\.site-footer-credit\s*\{[^}]*font-size:\s*15px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.site-footer-inquiry\s*\{[^}]*font-size:\s*13px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.site-footer-credit\s*\{[^}]*font-size:\s*13px;[^}]*\}/
+    );
+  });
 });
 
 describe("shared tennis color palette", () => {
