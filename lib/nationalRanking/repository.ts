@@ -118,6 +118,52 @@ function requireBestResultString(
   return value;
 }
 
+const PUBLIC_RESULT_STAGE_ORDER: Record<PublicTournamentResultStage, number> = {
+  champion: 0,
+  runner_up: 1,
+  semifinal: 2,
+  quarterfinal: 3,
+  round_of_16: 4,
+};
+
+const HONOR_STAGE_ORDER: Record<NationalRankingHonor["stage"], number> = {
+  champion: 0,
+  runner_up: 1,
+  semifinal: 2,
+};
+
+function keepBestEditionItem<
+  T extends {
+    editionKey: string;
+    gender: "men" | "women";
+    stage: string;
+  },
+>(
+  items: T[],
+  stageOrder: Readonly<Record<string, number>>
+): T[] {
+  const bestItems: T[] = [];
+  const indexByEdition = new Map<string, number>();
+
+  for (const item of items) {
+    const identity = `${item.editionKey}:${item.gender}`;
+    const currentIndex = indexByEdition.get(identity);
+
+    if (currentIndex === undefined) {
+      indexByEdition.set(identity, bestItems.length);
+      bestItems.push(item);
+      continue;
+    }
+
+    const current = bestItems[currentIndex];
+    if (stageOrder[item.stage] < stageOrder[current.stage]) {
+      bestItems[currentIndex] = item;
+    }
+  }
+
+  return bestItems;
+}
+
 function parseNationalRankingBestResults(
   value: unknown,
   clubSlug: string
@@ -136,7 +182,7 @@ function parseNationalRankingBestResults(
     "round_of_16",
   ]);
 
-  return value.map((item, index) => {
+  const bestResults = value.map<NationalRankingBestResult>((item, index) => {
     if (!item || typeof item !== "object" || Array.isArray(item)) {
       throw new Error(
         `National ranking best results item ${index} is invalid for ${clubSlug}`
@@ -203,6 +249,11 @@ function parseNationalRankingBestResults(
       ),
     };
   });
+
+  return keepBestEditionItem<NationalRankingBestResult>(
+    bestResults,
+    PUBLIC_RESULT_STAGE_ORDER
+  );
 }
 
 function parseNationalRankingHonors(
@@ -213,7 +264,7 @@ function parseNationalRankingHonors(
     throw new Error(`National ranking honors must be an array for ${clubSlug}`);
   }
 
-  return value.map((item, index) => {
+  const honors = value.map<NationalRankingHonor>((item, index) => {
     if (!item || typeof item !== "object" || Array.isArray(item)) {
       throw new Error(
         `National ranking honors item ${index} is invalid for ${clubSlug}`
@@ -262,6 +313,38 @@ function parseNationalRankingHonors(
       stage,
     };
   });
+
+  return keepBestEditionItem<NationalRankingHonor>(
+    honors,
+    HONOR_STAGE_ORDER
+  );
+}
+
+function assertPublicResultStageConsistency(
+  clubSlug: string,
+  bestResults: NationalRankingBestResult[],
+  honors: NationalRankingHonor[]
+): void {
+  const bestResultStages = new Map(
+    bestResults.map((result) => [
+      `${result.editionKey}:${result.gender}`,
+      result.stage,
+    ])
+  );
+
+  for (const honor of honors) {
+    const bestResultStage = bestResultStages.get(
+      `${honor.editionKey}:${honor.gender}`
+    );
+
+    if (bestResultStage && bestResultStage !== honor.stage) {
+      throw new Error(
+        `Inconsistent national ranking edition ${honor.editionKey} for ` +
+          `${clubSlug}: honor ${honor.stage} does not match best result ` +
+          bestResultStage
+      );
+    }
+  }
 }
 
 export async function getNationalRankingPageData(
@@ -300,6 +383,13 @@ export async function getNationalRankingPageData(
       );
     }
 
+    const bestResults = parseNationalRankingBestResults(
+      row.best_results,
+      row.club_slug
+    );
+    const honors = parseNationalRankingHonors(row.honors, row.club_slug);
+    assertPublicResultStageConsistency(row.club_slug, bestResults, honors);
+
     rankings[row.gender].push({
       rank: row.rank,
       clubSlug: row.club_slug,
@@ -310,11 +400,8 @@ export async function getNationalRankingPageData(
       latestEditionPoints: row.latest_edition_points,
       championships: row.championships,
       runnerUps: row.runner_ups,
-      bestResults: parseNationalRankingBestResults(
-        row.best_results,
-        row.club_slug
-      ),
-      honors: parseNationalRankingHonors(row.honors, row.club_slug),
+      bestResults,
+      honors,
     });
   }
 

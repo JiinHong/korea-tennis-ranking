@@ -300,6 +300,78 @@ describe("calculateNationalRankings", () => {
       ["national-men-2025", "champion"],
       ["regional-men-2025", "semifinal"],
     ]);
+    expect(
+      alphaMen?.contributions.map((contribution) => [
+        contribution.editionKey,
+        contribution.stage,
+      ])
+    ).toEqual([
+      ["national-men-2025", "champion"],
+      ["regional-men-2025", "semifinal"],
+    ]);
+    expect(
+      alphaMen?.bestResults.map((bestResult) => [
+        bestResult.editionKey,
+        bestResult.stage,
+      ])
+    ).toEqual([
+      ["national-men-2025", "champion"],
+      ["regional-men-2025", "semifinal"],
+    ]);
+    expect(alphaMen).toMatchObject({
+      championships: 1,
+      runnerUps: 0,
+    });
+  });
+
+  it("calculates recency independently for each tournament division", () => {
+    const divisionDataset = {
+      version: "division-recency-test",
+      clubs: [dataset.clubs[0]],
+      aliases: [],
+      tournaments: [dataset.tournaments[0]],
+      editions: [
+        {
+          ...dataset.editions[0],
+          key: "national-men-2026",
+          year: 2026,
+        },
+        {
+          ...dataset.editions[2],
+          key: "national-women-2025",
+          year: 2025,
+        },
+      ],
+      results: [
+        {
+          ...dataset.results[0],
+          editionKey: "national-men-2026",
+          sourceRef: "national-men-2026.pdf#alpha",
+        },
+        {
+          ...dataset.results[3],
+          editionKey: "national-women-2025",
+          sourceRef: "national-women-2025.pdf#alpha",
+          stage: "champion" as const,
+        },
+      ],
+    } satisfies NationalRankingDataset;
+
+    const result = calculateNationalRankings(divisionDataset);
+    const alphaWomen = result.rows.find(
+      (row) => row.clubSlug === "alpha" && row.gender === "women"
+    );
+
+    expect(alphaWomen).toMatchObject({
+      totalPoints: 100,
+      latestEditionPoints: 100,
+      championships: 1,
+    });
+    expect(alphaWomen?.contributions[0]).toMatchObject({
+      latestEditionYear: 2025,
+      editionYear: 2025,
+      points: 100,
+    });
   });
 
   it("uses the approved integer-only v3 formula by default", () => {

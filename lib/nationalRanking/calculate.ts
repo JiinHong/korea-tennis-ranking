@@ -43,6 +43,13 @@ const PODIUM_STAGE_ORDER: Record<NationalRankingHonor["stage"], number> = {
   semifinal: 2,
 };
 
+function getTournamentDivisionKey(
+  tournamentSlug: string,
+  gender: NationalGender
+): string {
+  return `${tournamentSlug}:${gender}`;
+}
+
 function compareBestResults(
   left: NationalRankingBestResult,
   right: NationalRankingBestResult,
@@ -77,7 +84,7 @@ function createRankingRow(
   contributions: ScoreContribution[],
   honors: NationalRankingHonor[],
   bestResults: NationalRankingBestResult[],
-  latestYear: Map<string, number>
+  latestEditionYearByDivision: Map<string, number>
 ): CalculatedRankingRow {
   return {
     clubSlug,
@@ -87,7 +94,9 @@ function createRankingRow(
     latestEditionPoints: contributions.reduce(
       (total, item) =>
         total +
-        (latestYear.get(item.tournamentSlug) === item.editionYear
+        (latestEditionYearByDivision.get(
+          getTournamentDivisionKey(item.tournamentSlug, item.gender)
+        ) === item.editionYear
           ? item.points
           : 0),
       0
@@ -176,6 +185,134 @@ function sortAndRank(
     .map((row, index) => ({ ...row, rank: index + 1 }));
 }
 
+function assertUniqueEditions(
+  row: CalculatedRankingRow,
+  field: "contributions" | "honors" | "bestResults"
+): void {
+  const identities = new Set<string>();
+
+  for (const item of row[field]) {
+    const identity = `${item.editionKey}:${item.gender}`;
+    if (identities.has(identity)) {
+      throw new Error(
+        `Duplicate ${field} edition "${item.editionKey}" for ${row.clubSlug}:${row.gender}`
+      );
+    }
+    identities.add(identity);
+  }
+}
+
+function assertCalculatedRankingIntegrity(
+  rows: CalculatedRankingRow[]
+): void {
+  const rowsByIdentity = new Map(
+    rows.map((row) => [`${row.clubSlug}:${row.gender}`, row])
+  );
+
+  for (const row of rows) {
+    assertUniqueEditions(row, "contributions");
+    assertUniqueEditions(row, "honors");
+    assertUniqueEditions(row, "bestResults");
+
+    const stageByEdition = new Map<
+      string,
+      { field: string; stage: string }
+    >();
+    for (const [field, items] of [
+      ["contributions", row.contributions],
+      ["honors", row.honors],
+      ["bestResults", row.bestResults],
+    ] as const) {
+      for (const item of items) {
+        const identity = `${item.editionKey}:${item.gender}`;
+        const current = stageByEdition.get(identity);
+
+        if (current && current.stage !== item.stage) {
+          throw new Error(
+            `Inconsistent ${identity} stage for ${row.clubSlug}:${row.gender}: ` +
+              `${current.field}=${current.stage}, ${field}=${item.stage}`
+          );
+        }
+        stageByEdition.set(identity, { field, stage: item.stage });
+      }
+    }
+
+    const contributionTotal = row.contributions.reduce(
+      (total, contribution) => total + contribution.points,
+      0
+    );
+    const championships = row.contributions.filter(
+      (contribution) => contribution.stage === "champion"
+    ).length;
+    const runnerUps = row.contributions.filter(
+      (contribution) => contribution.stage === "runner_up"
+    ).length;
+    const maxContribution = Math.max(
+      0,
+      ...row.contributions.map((contribution) => contribution.points)
+    );
+
+    if (
+      (row.gender !== "combined" &&
+        row.totalPoints !== contributionTotal) ||
+      row.championships !== championships ||
+      row.runnerUps !== runnerUps ||
+      row.maxContribution !== maxContribution
+    ) {
+      throw new Error(
+        `Inconsistent ranking aggregates for ${row.clubSlug}:${row.gender}`
+      );
+    }
+
+    if (
+      row.gender !== "combined" &&
+      [
+        ...row.contributions,
+        ...row.honors,
+        ...row.bestResults,
+      ].some((item) => item.gender !== row.gender)
+    ) {
+      throw new Error(
+        `Cross-division ranking item for ${row.clubSlug}:${row.gender}`
+      );
+    }
+
+    if (row.gender === "combined") {
+      const men = rowsByIdentity.get(`${row.clubSlug}:men`);
+      const women = rowsByIdentity.get(`${row.clubSlug}:women`);
+      const expected = {
+        totalPoints: (men?.totalPoints ?? 0) + (women?.totalPoints ?? 0),
+        latestEditionPoints:
+          (men?.latestEditionPoints ?? 0) +
+          (women?.latestEditionPoints ?? 0),
+        championships:
+          (men?.championships ?? 0) + (women?.championships ?? 0),
+        runnerUps: (men?.runnerUps ?? 0) + (women?.runnerUps ?? 0),
+      };
+
+      if (
+        row.totalPoints !== expected.totalPoints ||
+        row.latestEditionPoints !== expected.latestEditionPoints ||
+        row.championships !== expected.championships ||
+        row.runnerUps !== expected.runnerUps
+      ) {
+        throw new Error(
+          `Inconsistent combined ranking aggregates for ${row.clubSlug}`
+        );
+      }
+    }
+  }
+
+  for (const gender of ["men", "women", "combined"] as const) {
+    const divisionRows = rows.filter((row) => row.gender === gender);
+    for (const [index, row] of divisionRows.entries()) {
+      if (row.rank !== index + 1) {
+        throw new Error(`Non-contiguous ${gender} ranking at ${row.clubSlug}`);
+      }
+    }
+  }
+}
+
 export function calculateNationalRankings(
   dataset: NationalRankingDataset,
   formula: NationalFormula = NATIONAL_FORMULA_V3
@@ -190,7 +327,7 @@ export function calculateNationalRankings(
   const editionsByKey = new Map(
     dataset.editions.map((edition) => [edition.key, edition])
   );
-  const latestYear = new Map<string, number>();
+  const latestEditionYearByDivision = new Map<string, number>();
 
   if (formula.version === "national-club-v2") {
     for (const tournament of dataset.tournaments) {
@@ -205,9 +342,13 @@ export function calculateNationalRankings(
   for (const edition of dataset.editions) {
     if (edition.sourceStatus !== "verified") continue;
 
-    latestYear.set(
+    const divisionKey = getTournamentDivisionKey(
       edition.tournamentSlug,
-      Math.max(latestYear.get(edition.tournamentSlug) ?? 0, edition.year)
+      edition.gender
+    );
+    latestEditionYearByDivision.set(
+      divisionKey,
+      Math.max(latestEditionYearByDivision.get(divisionKey) ?? 0, edition.year)
     );
   }
 
@@ -371,7 +512,10 @@ export function calculateNationalRankings(
     }
     if (edition.sourceStatus !== "verified") continue;
 
-    const latestEditionYear = latestYear.get(tournament.slug) ?? edition.year;
+    const latestEditionYear =
+      latestEditionYearByDivision.get(
+        getTournamentDivisionKey(tournament.slug, edition.gender)
+      ) ?? edition.year;
     const tournamentPrestigeFactor =
       formula.version === "national-club-v2"
         ? getTournamentPrestigeFactor(tournament.slug, formula)
@@ -492,7 +636,7 @@ export function calculateNationalRankings(
       menContributions,
       menHonors,
       menBestResults,
-      latestYear
+      latestEditionYearByDivision
     );
     const womenRow = createRankingRow(
       club.slug,
@@ -500,7 +644,7 @@ export function calculateNationalRankings(
       womenContributions,
       womenHonors,
       womenBestResults,
-      latestYear
+      latestEditionYearByDivision
     );
 
     if (
@@ -536,6 +680,8 @@ export function calculateNationalRankings(
     ...sortAndRank(genderRows.women, clubsBySlug),
     ...sortAndRank(combinedRows, clubsBySlug),
   ];
+
+  assertCalculatedRankingIntegrity(rows);
 
   return { formulaVersion: formula.version, rows };
 }

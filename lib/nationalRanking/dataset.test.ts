@@ -1453,6 +1453,71 @@ describe("loadNationalRankingDataset", () => {
     ).toBe(true);
   });
 
+  it("keeps every published ranking aggregate unique and internally consistent", () => {
+    const rows = calculateNationalRankings(
+      loadNationalRankingDataset()
+    ).rows;
+
+    for (const row of rows) {
+      const contributionEditions = row.contributions.map(
+        (contribution) => `${contribution.editionKey}:${contribution.gender}`
+      );
+      const honorEditions = row.honors.map(
+        (honor) => `${honor.editionKey}:${honor.gender}`
+      );
+      const bestResultEditions = row.bestResults.map(
+        (bestResult) => `${bestResult.editionKey}:${bestResult.gender}`
+      );
+
+      expect(
+        new Set(contributionEditions).size,
+        `${row.clubSlug}:${row.gender} contribution editions`
+      ).toBe(contributionEditions.length);
+      expect(
+        new Set(honorEditions).size,
+        `${row.clubSlug}:${row.gender} honor editions`
+      ).toBe(honorEditions.length);
+      expect(
+        new Set(bestResultEditions).size,
+        `${row.clubSlug}:${row.gender} best-result editions`
+      ).toBe(bestResultEditions.length);
+      expect(row.totalPoints).toBe(
+        row.contributions.reduce(
+          (total, contribution) => total + contribution.points,
+          0
+        )
+      );
+      expect(row.championships).toBe(
+        row.contributions.filter(
+          (contribution) => contribution.stage === "champion"
+        ).length
+      );
+      expect(row.runnerUps).toBe(
+        row.contributions.filter(
+          (contribution) => contribution.stage === "runner_up"
+        ).length
+      );
+
+      const stagesByEdition = new Map<string, string>();
+      for (const [field, items] of [
+        ["contribution", row.contributions],
+        ["honor", row.honors],
+        ["best result", row.bestResults],
+      ] as const) {
+        for (const item of items) {
+          const identity = `${item.editionKey}:${item.gender}`;
+          const currentStage = stagesByEdition.get(identity);
+
+          expect(
+            currentStage,
+            `${row.clubSlug}:${row.gender} ${identity} disagrees at ${field}`
+          ).toBeOneOf([undefined, item.stage]);
+          stagesByEdition.set(identity, item.stage);
+        }
+      }
+    }
+  });
+
   it("maps the reviewed 2023 Yanggu men's Round-of-16 field to canonical clubs", () => {
     const dataset = loadNationalRankingDataset();
     const expectedAssignments = new Map([

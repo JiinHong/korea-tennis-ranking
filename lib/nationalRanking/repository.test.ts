@@ -186,6 +186,80 @@ describe("getNationalRankingPageData", () => {
     ).rejects.toThrow(/best results.*array.*seoultech/i);
   });
 
+  test("keeps only the best honor and result when a snapshot repeats an edition", async () => {
+    const baseRow = rankingRow();
+    const semifinalHonor = baseRow.honors[0] as Record<string, unknown>;
+    const semifinalResult = baseRow.best_results[0] as Record<string, unknown>;
+    const duplicateRow = rankingRow({
+      honors: [
+        {
+          ...semifinalHonor,
+          editionKey: "gyeongin-2025-men",
+          tournamentSlug: "gyeongin",
+          tournamentName: "경인지구 연맹전",
+          stage: "semifinal",
+        },
+        {
+          ...semifinalHonor,
+          editionKey: "gyeongin-2025-men",
+          tournamentSlug: "gyeongin",
+          tournamentName: "경인지구 연맹전",
+          stage: "champion",
+        },
+      ],
+      best_results: [
+        semifinalResult,
+        {
+          ...semifinalResult,
+          stage: "champion",
+          sourceTeamName: "STC B",
+        },
+      ],
+    });
+
+    const pageData = await getNationalRankingPageData(
+      createAdapter([duplicateRow])
+    );
+
+    expect(pageData?.rankings.men[0].honors).toEqual([
+      expect.objectContaining({
+        editionKey: "gyeongin-2025-men",
+        stage: "champion",
+      }),
+    ]);
+    expect(pageData?.rankings.men[0].bestResults).toEqual([
+      expect.objectContaining({
+        editionKey: "gyeongin-2025-men",
+        sourceTeamName: "STC B",
+        stage: "champion",
+      }),
+    ]);
+  });
+
+  test("rejects a snapshot whose honor and best result disagree for one edition", async () => {
+    const baseRow = rankingRow();
+    const semifinalResult = baseRow.best_results[0] as Record<string, unknown>;
+    const championHonor = baseRow.honors[0] as Record<string, unknown>;
+    const inconsistentRow = rankingRow({
+      best_results: [semifinalResult],
+      honors: [
+        {
+          ...championHonor,
+          editionKey: "gyeongin-2025-men",
+          tournamentSlug: "gyeongin",
+          tournamentName: "경인지구 연맹전",
+          stage: "champion",
+        },
+      ],
+    });
+
+    await expect(
+      getNationalRankingPageData(createAdapter([inconsistentRow]))
+    ).rejects.toThrow(
+      /inconsistent.*gyeongin-2025-men.*honor champion.*best result semifinal/i
+    );
+  });
+
   test.each([
     ["stage", { stage: "round_of_32" }],
     ["year", { year: 0 }],
