@@ -275,13 +275,16 @@ describe("ClubRankingClient", () => {
     const { container } = render(<ClubRankingClient club={club} />);
 
     const nationalBackLink = screen.getByRole("link", {
-      name: "전국 대학 랭킹으로 돌아가기",
+      name: "전국 대학 동아리 랭킹 보러가기",
     });
     expect(nationalBackLink.getAttribute("href")).toBe(
       "https://koreatennisranking.com/"
     );
     expect(nationalBackLink.closest(".summary-inner")).not.toBeNull();
     expect(nationalBackLink.querySelector(".national-back-icon")).not.toBeNull();
+    expect(nationalBackLink.querySelector(".national-back-label")?.textContent).toBe(
+      "전국 대학 동아리 랭킹 보러가기"
+    );
 
     const campusKicker = screen.getByText("캠퍼스 랭킹");
     expect(campusKicker).toBeDefined();

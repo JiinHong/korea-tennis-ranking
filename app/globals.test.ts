@@ -116,6 +116,12 @@ describe("campus ranking responsive title styles", () => {
     expect(css).toContain(
       ".national-back-icon {\n  width: 18px;\n  height: 18px;\n  border-bottom: 5px solid currentColor;\n  border-left: 5px solid currentColor;\n  border-radius: 3px;\n  transform: rotate(45deg);\n}"
     );
+    expect(css).toContain(
+      ".national-back-link.is-labeled {\n  width: fit-content;\n  padding: 0 10px 0 8px;\n  gap: 8px;\n}"
+    );
+    expect(css).toContain(
+      ".national-back-label {\n  font-size: 12px;\n  font-weight: 700;\n  line-height: 1;\n}"
+    );
   });
 
   it("관리자 현황은 데스크톱 2열, 모바일 1열로 정렬한다", () => {

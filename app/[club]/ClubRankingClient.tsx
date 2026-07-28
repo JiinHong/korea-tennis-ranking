@@ -269,7 +269,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
     <main className="ranking-page campus-ranking-page">
       <section className="summary-band campus-hero-band">
         <div className="summary-inner">
-          <NationalRankingBackLink />
+          <NationalRankingBackLink showLabel />
           <header className="topbar">
             <div className="brand-lockup">
               <span className="campus-kicker">캠퍼스 랭킹</span>

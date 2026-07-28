@@ -2,7 +2,7 @@ import type { ClubConfig } from "@/lib/clubs";
 import type { PlayerDetail } from "@/lib/playerDetails";
 import Image from "next/image";
 
-import NationalRankingBackLink from "./NationalRankingBackLink";
+import ClubRankingBackLink from "./ClubRankingBackLink";
 
 function formatSummary(wins: number, losses: number) {
   return `${wins}승 ${losses}패`;
@@ -22,7 +22,10 @@ export default function PlayerDetailView({
     <main className="ranking-page campus-ranking-page player-detail-page">
       <section className="summary-band campus-hero-band player-detail-hero">
         <div className="summary-inner">
-          <NationalRankingBackLink />
+          <ClubRankingBackLink
+            clubSlug={club.slug}
+            clubTitle={club.title}
+          />
           <header className="topbar">
             <div className="brand-lockup">
               <div className="brand-title-row">

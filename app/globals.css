@@ -1047,6 +1047,18 @@ button:disabled {
   border-radius: 999px;
 }
 
+.national-back-link.is-labeled {
+  width: fit-content;
+  padding: 0 10px 0 8px;
+  gap: 8px;
+}
+
+.national-back-label {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+
 .national-back-link:hover {
   background: rgba(31, 35, 40, 0.06);
 }
