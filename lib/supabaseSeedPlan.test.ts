@@ -247,6 +247,59 @@ describe("buildSupabaseSeedPlan", () => {
     });
   });
 
+  test("skips incomplete current rows while preserving their original source positions", () => {
+    const plan = buildSupabaseSeedPlan({
+      club: {
+        slug: "petc",
+        title: "고려대학교 체육교육과 PETC 테니스 단식 랭킹",
+        titleLines: ["고려대학교 체육교육과", "PETC 테니스 단식 랭킹"],
+        organization: "고려대학교 체육교육과 PETC",
+        subtitle: "도전과 방어로 만들어가는 우리들의 랭킹",
+        logoPath: "/korea-university-logo.png",
+        logoAlt: "고려대학교 로고",
+        sheetIdEnv: "PETC_GOOGLE_SHEET_ID",
+        apiPath: "/api/clubs/petc/ranking",
+        currentSeasonName: "현재",
+        currentSeasonStartsOn: "2026-07-01",
+      },
+      currentSeasonName: "현재",
+      ranking: [
+        { rank: 1, name: "문준상", note: "" },
+        { rank: 2, name: "박준형", note: "" },
+      ],
+      matches: [
+        {
+          date: "2026. 7. 5",
+          challenger: "박준형",
+          challengerRank: 2,
+          defender: "문준상",
+          defenderRank: 1,
+          winner: "문준상",
+          score: "",
+          defenseResult: "",
+        },
+        {
+          date: "2026. 7. 10",
+          challenger: "박준형",
+          challengerRank: 2,
+          defender: "문준상",
+          defenderRank: 1,
+          winner: "문준상",
+          score: "6:4",
+          defenseResult: "방어 성공",
+        },
+      ],
+      historicalMatches: [],
+    });
+
+    expect(plan.matches).toHaveLength(1);
+    expect(plan.matches[0]).toMatchObject({
+      sourceKey: "current:2",
+      winnerScore: 6,
+      loserScore: 4,
+    });
+  });
+
   test("keeps duplicate-looking source rows distinguishable with source keys", () => {
     const plan = buildSupabaseSeedPlan({
       club: {

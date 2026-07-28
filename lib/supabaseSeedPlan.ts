@@ -235,8 +235,16 @@ export function buildSupabaseSeedPlan(source: SeedSource): SupabaseSeedPlan {
       };
     }),
     matches: [
-      ...source.matches.map((match, index) =>
-        toSeedMatch(match, source.currentSeasonName, `current:${index + 1}`)
+      ...source.matches.flatMap((match, index) =>
+        match.score.trim()
+          ? [
+              toSeedMatch(
+                match,
+                source.currentSeasonName,
+                `current:${index + 1}`
+              ),
+            ]
+          : []
       ),
       ...source.historicalMatches.map((match, index) =>
         toSeedMatch(match, match.season, `historical:${index + 1}`)
