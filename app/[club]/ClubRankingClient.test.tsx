@@ -83,16 +83,11 @@ describe("ClubRankingClient", () => {
     });
     playerLink.addEventListener("click", (event) => event.preventDefault());
     fireEvent.click(screen.getByRole("button", { name: "경기 결과 입력" }));
-    fireEvent.click(screen.getByRole("button", { name: "랭킹 새로고침" }));
     fireEvent.click(screen.getByRole("button", { name: "경기 있음" }));
     fireEvent.click(playerLink);
 
     expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
       "Campus Match Entry Opened",
-      { club_slug: "seoultech" }
-    );
-    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
-      "Campus Ranking Refreshed",
       { club_slug: "seoultech" }
     );
     expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
@@ -319,7 +314,7 @@ describe("ClubRankingClient", () => {
     expect(heroStats?.closest(".hero-meta-row")).not.toBeNull();
     expect(container.querySelector(".hero-live-actions")).not.toBeNull();
     expect(
-      screen.getByRole("button", { name: "랭킹 새로고침" }).closest(".topbar")
+      screen.queryByRole("button", { name: "랭킹 새로고침" })
     ).toBeNull();
     expect(
       screen.getByRole("button", { name: "경기 결과 입력" })

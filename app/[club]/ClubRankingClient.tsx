@@ -207,13 +207,6 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
     void loadRanking();
   }, [loadRanking]);
 
-  const refreshRanking = () => {
-    void trackAmplitudeEvent("Campus Ranking Refreshed", {
-      club_slug: club.slug,
-    });
-    void loadRanking();
-  };
-
   const openMatchEntry = () => {
     void trackAmplitudeEvent("Campus Match Entry Opened", {
       club_slug: club.slug,
@@ -326,16 +319,6 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                       <span className="live-indicator" aria-hidden="true" />
                       {formatLiveTime(loadedAt)}
                     </p>
-                    <button
-                      className="refresh-button refresh-icon-button"
-                      type="button"
-                      onClick={refreshRanking}
-                      disabled={status === "loading"}
-                      aria-label="랭킹 새로고침"
-                      title={status === "loading" ? "불러오는 중" : "새로고침"}
-                    >
-                      <span aria-hidden="true">↻</span>
-                    </button>
                   </div>
                 </div>
               </div>
@@ -350,7 +333,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
           <section className="state-panel" role="alert">
             <strong>랭킹을 불러오지 못했습니다.</strong>
             <p>{errorMessage}</p>
-            <button type="button" onClick={refreshRanking}>
+            <button type="button" onClick={() => void loadRanking()}>
               다시 시도
             </button>
           </section>

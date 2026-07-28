@@ -68,6 +68,15 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
+  it("실시간 상태 점은 밝은 초록색과 넓은 광원으로 또렷하게 표시한다", () => {
+    expect(css).toMatch(
+      /\.campus-ranking-page \.live-indicator\s*\{[^}]*width:\s*10px;[^}]*height:\s*10px;[^}]*background:\s*#22c55e;[^}]*animation:\s*campus-live-indicator-pulse/
+    );
+    expect(css).toMatch(
+      /@keyframes campus-live-indicator-pulse\s*\{[^]*0 0 14px rgba\(34, 197, 94, 0\.8\);[^]*\}/
+    );
+  });
+
   it("선수 상세 최근 경기의 승패 표시는 상자 없이 글자 색으로만 보여준다", () => {
     expect(css).toContain(
       ".recent-match-item {\n  display: grid;\n  grid-template-columns: 42px minmax(0, 1fr) auto;\n  align-items: center;\n  gap: 10px;\n  min-height: 54px;\n  padding: 10px 12px;\n  background: white;\n  border: 1px solid var(--campus-line);\n  border-radius: 8px;\n}"
