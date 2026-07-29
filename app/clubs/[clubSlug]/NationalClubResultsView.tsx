@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { ArrowRight } from "lucide-react";
 
 import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
 import type {
@@ -25,6 +26,19 @@ const stageLabels: Readonly<Record<PublicNationalClubResultStage, string>> = {
   semifinal: "4강",
   quarterfinal: "8강",
   round_of_16: "16강",
+};
+
+const campusRankingLinks: Readonly<
+  Record<string, { campusClubSlug: string; href: string }>
+> = {
+  "seoultech-neutinamu": {
+    campusClubSlug: "seoultech",
+    href: "/seoultech",
+  },
+  "korea-petc": {
+    campusClubSlug: "petc",
+    href: "/petc",
+  },
 };
 
 function isPodiumStage(
@@ -51,6 +65,7 @@ export default function NationalClubResultsView({
   );
   const [activeGender, setActiveGender] =
     useState<RankingGender>(initialGender);
+  const campusRankingLink = campusRankingLinks[pageData.club.slug];
   const visibleResults =
     activeGender === "combined"
       ? pageData.results
@@ -81,6 +96,22 @@ export default function NationalClubResultsView({
         <span className="national-kicker">CLUB TOURNAMENT RESULTS</span>
         <h1>{pageData.club.displayName}</h1>
         <p>16강 이상 대회 최고 성적</p>
+        {campusRankingLink ? (
+          <Link
+            className="national-club-campus-ranking-link"
+            href={campusRankingLink.href}
+            onClick={() => {
+              void trackAmplitudeEvent("Campus Ranking Link Clicked", {
+                source: "national_club_results",
+                club_slug: pageData.club.slug,
+                campus_club_slug: campusRankingLink.campusClubSlug,
+              });
+            }}
+          >
+            동아리 단식 랭킹 보기
+            <ArrowRight aria-hidden="true" size={16} strokeWidth={2} />
+          </Link>
+        ) : null}
       </header>
 
       <section

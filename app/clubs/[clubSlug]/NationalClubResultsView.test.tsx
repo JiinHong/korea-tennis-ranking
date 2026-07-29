@@ -162,4 +162,70 @@ describe("NationalClubResultsView", () => {
       }
     );
   });
+
+  it("서울과기대 동아리 페이지에서 교내 단식 랭킹으로 이동할 수 있다", () => {
+    render(<NationalClubResultsView pageData={pageData} />);
+
+    const campusRankingLink = screen.getByRole("link", {
+      name: "동아리 단식 랭킹 보기",
+    });
+
+    expect(campusRankingLink.getAttribute("href")).toBe("/seoultech");
+
+    campusRankingLink.addEventListener("click", (event) => {
+      event.preventDefault();
+    });
+    fireEvent.click(campusRankingLink);
+
+    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
+      "Campus Ranking Link Clicked",
+      {
+        source: "national_club_results",
+        club_slug: "seoultech-neutinamu",
+        campus_club_slug: "seoultech",
+      }
+    );
+  });
+
+  it("PETC 동아리 페이지에서 PETC 단식 랭킹으로 이동할 수 있다", () => {
+    render(
+      <NationalClubResultsView
+        pageData={{
+          ...pageData,
+          club: {
+            slug: "korea-petc",
+            universityName: "고려대학교 체육교육과",
+            clubName: "PETC",
+            displayName: "고려대학교 체육교육과 PETC",
+          },
+        }}
+      />
+    );
+
+    expect(
+      screen
+        .getByRole("link", { name: "동아리 단식 랭킹 보기" })
+        .getAttribute("href")
+    ).toBe("/petc");
+  });
+
+  it("교내 단식 랭킹이 없는 동아리 페이지에는 이동 버튼을 표시하지 않는다", () => {
+    render(
+      <NationalClubResultsView
+        pageData={{
+          ...pageData,
+          club: {
+            slug: "yonsei-yutt",
+            universityName: "연세대학교",
+            clubName: "YUTT",
+            displayName: "연세대학교 YUTT",
+          },
+        }}
+      />
+    );
+
+    expect(
+      screen.queryByRole("link", { name: "동아리 단식 랭킹 보기" })
+    ).toBeNull();
+  });
 });

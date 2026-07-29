@@ -511,9 +511,11 @@ describe("MatchEntryDialog", () => {
       target: { value: "p1" },
     });
 
-    const blocked = optionByValue("선수 2", "p4");
-    expect(blocked.disabled).toBe(true);
-    expect(blocked.textContent).toContain("7월 24일부터 가능");
+    await waitFor(() => {
+      const blocked = optionByValue("선수 2", "p4");
+      expect(blocked.disabled).toBe(true);
+      expect(blocked.textContent).toContain("7월 24일부터 가능");
+    });
   });
 
   it("disables a cooldown opponent in player 1 after player 2 is selected", async () => {
@@ -549,9 +551,11 @@ describe("MatchEntryDialog", () => {
       target: { value: "p4" },
     });
 
-    const blocked = optionByValue("선수 1", "p1");
-    expect(blocked.disabled).toBe(true);
-    expect(blocked.textContent).toContain("7월 24일부터 가능");
+    await waitFor(() => {
+      const blocked = optionByValue("선수 1", "p1");
+      expect(blocked.disabled).toBe(true);
+      expect(blocked.textContent).toContain("7월 24일부터 가능");
+    });
   });
 
   it("describes in-range cooldown opponents and dates for each player select", async () => {
