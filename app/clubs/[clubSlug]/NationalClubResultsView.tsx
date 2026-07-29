@@ -99,7 +99,7 @@ export default function NationalClubResultsView({
         {campusRankingLink ? (
           <Link
             className="national-club-campus-ranking-link"
-            href={campusRankingLink.href}
+            href={`${campusRankingLink.href}?fromGender=${activeGender}`}
             onClick={() => {
               void trackAmplitudeEvent("Campus Ranking Link Clicked", {
                 source: "national_club_results",

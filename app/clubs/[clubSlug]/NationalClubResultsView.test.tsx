@@ -114,6 +114,11 @@ describe("NationalClubResultsView", () => {
     expect(screen.queryByText("WEMIX OPEN")).toBeNull();
     expect(screen.queryByText("국토정중앙배(양구)")).toBeNull();
     expect(
+      screen
+        .getByRole("link", { name: "동아리 단식 랭킹 보기" })
+        .getAttribute("href")
+    ).toBe("/seoultech?fromGender=women");
+    expect(
       screen.getByRole("link", { name: "전국 랭킹으로 돌아가기" }).getAttribute(
         "href"
       )
@@ -151,6 +156,11 @@ describe("NationalClubResultsView", () => {
       "/clubs/seoultech-neutinamu?gender=men",
       { scroll: false }
     );
+    expect(
+      screen
+        .getByRole("link", { name: "동아리 단식 랭킹 보기" })
+        .getAttribute("href")
+    ).toBe("/seoultech?fromGender=men");
     const list = screen.getByRole("list", { name: "대회 성적" });
     expect(within(list).getAllByRole("listitem")).toHaveLength(2);
     expect(within(list).queryByText("경인지구 연맹전")).toBeNull();
@@ -170,7 +180,9 @@ describe("NationalClubResultsView", () => {
       name: "동아리 단식 랭킹 보기",
     });
 
-    expect(campusRankingLink.getAttribute("href")).toBe("/seoultech");
+    expect(campusRankingLink.getAttribute("href")).toBe(
+      "/seoultech?fromGender=combined"
+    );
 
     campusRankingLink.addEventListener("click", (event) => {
       event.preventDefault();
@@ -206,7 +218,7 @@ describe("NationalClubResultsView", () => {
       screen
         .getByRole("link", { name: "동아리 단식 랭킹 보기" })
         .getAttribute("href")
-    ).toBe("/petc");
+    ).toBe("/petc?fromGender=combined");
   });
 
   it("교내 단식 랭킹이 없는 동아리 페이지에는 이동 버튼을 표시하지 않는다", () => {

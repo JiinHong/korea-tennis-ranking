@@ -6,8 +6,14 @@ import ClubRankingClient from "./ClubRankingClient";
 const analytics = vi.hoisted(() => ({
   trackAmplitudeEvent: vi.fn(() => Promise.resolve()),
 }));
+const navigation = vi.hoisted(() => ({
+  query: "",
+}));
 
 vi.mock("@/lib/amplitudeAnalytics", () => analytics);
+vi.mock("next/navigation", () => ({
+  useSearchParams: () => new URLSearchParams(navigation.query),
+}));
 
 const club = {
   slug: "seoultech",
@@ -23,6 +29,7 @@ const club = {
 describe("ClubRankingClient", () => {
   beforeEach(() => {
     analytics.trackAmplitudeEvent.mockClear();
+    navigation.query = "";
   });
 
   afterEach(() => {
@@ -37,6 +44,40 @@ describe("ClubRankingClient", () => {
 
     expect(screen.getByText("최신 순위를 가져오고 있습니다.")).toBeDefined();
     expect(screen.queryByText(/구글 시트/)).toBeNull();
+  });
+
+  it("서울과기대 랭킹의 뒤로가기는 느티나무 대회 성적으로 이동한다", () => {
+    vi.stubGlobal("fetch", vi.fn(() => new Promise(() => {})));
+
+    render(<ClubRankingClient club={club} />);
+
+    expect(
+      screen
+        .getByRole("link", { name: "동아리 대회 성적으로 돌아가기" })
+        .getAttribute("href")
+    ).toBe("/clubs/seoultech-neutinamu?gender=combined");
+  });
+
+  it("PETC 랭킹은 진입했던 여자부 대회 성적으로 돌아간다", () => {
+    navigation.query = "fromGender=women";
+    vi.stubGlobal("fetch", vi.fn(() => new Promise(() => {})));
+
+    render(
+      <ClubRankingClient
+        club={{
+          ...club,
+          slug: "petc",
+          title: "고려대학교 체육교육과 PETC 테니스 단식 랭킹",
+          titleLines: ["고려대학교 체육교육과 PETC", "테니스 단식 랭킹"],
+        }}
+      />
+    );
+
+    expect(
+      screen
+        .getByRole("link", { name: "동아리 대회 성적으로 돌아가기" })
+        .getAttribute("href")
+    ).toBe("/clubs/korea-petc?gender=women");
   });
 
   it("운영 규칙 문서로 이동하는 링크와 클릭 로그를 제공한다", () => {
@@ -288,15 +329,15 @@ describe("ClubRankingClient", () => {
     const { container } = render(<ClubRankingClient club={club} />);
 
     const nationalBackLink = screen.getByRole("link", {
-      name: "전국 대학 동아리 랭킹 보러가기",
+      name: "동아리 대회 성적으로 돌아가기",
     });
     expect(nationalBackLink.getAttribute("href")).toBe(
-      "https://koreatennisranking.com/"
+      "/clubs/seoultech-neutinamu?gender=combined"
     );
     expect(nationalBackLink.closest(".summary-inner")).not.toBeNull();
     expect(nationalBackLink.querySelector(".national-back-icon")).not.toBeNull();
     expect(nationalBackLink.querySelector(".national-back-label")?.textContent).toBe(
-      "전국 대학 동아리 랭킹 보러가기"
+      "동아리 대회 성적으로 돌아가기"
     );
 
     const campusKicker = screen.getByText("캠퍼스 랭킹");

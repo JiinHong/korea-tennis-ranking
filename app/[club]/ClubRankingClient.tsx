@@ -2,9 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 
 import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
+import CampusResultsBackLink, {
+  CAMPUS_RESULTS_BACK_LABEL,
+  getCampusResultsHref,
+} from "./CampusResultsBackLink";
 import { getPlayerDetailPath } from "./playerPaths";
 import MatchEntryDialog from "./MatchEntryDialog";
 import MatchListSection from "./MatchListSection";
@@ -262,7 +266,17 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
     <main className="ranking-page campus-ranking-page">
       <section className="summary-band campus-hero-band">
         <div className="summary-inner">
-          <NationalRankingBackLink showLabel />
+          <Suspense
+            fallback={
+              <NationalRankingBackLink
+                href={getCampusResultsHref(club.slug, "combined")}
+                label={CAMPUS_RESULTS_BACK_LABEL}
+                showLabel
+              />
+            }
+          >
+            <CampusResultsBackLink clubSlug={club.slug} />
+          </Suspense>
           <header className="topbar">
             <div className="brand-lockup">
               <span className="campus-kicker">캠퍼스 랭킹</span>
