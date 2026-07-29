@@ -202,6 +202,15 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
+  it("운영 규칙 링크는 설명과 같은 행에 두고 통계 영역을 아래로 밀지 않는다", () => {
+    expect(css).toContain(
+      ".campus-ranking-page .hero-copy-heading {\n  display: grid;\n  grid-template-columns: minmax(0, 1fr) auto;\n  align-items: baseline;\n  gap: 16px;\n  margin-bottom: 14px;\n}"
+    );
+    expect(css).toContain(
+      ".campus-ranking-page .hero-copy-heading .subtitle {\n  min-width: 0;\n  margin: 0;\n}"
+    );
+  });
+
   it("PC에서는 클럽 제목 줄을 한 줄로 이어 붙이고 모바일에서만 줄바꿈한다", () => {
     expect(css).toContain(".club-title-line {\n  display: inline;\n}");
     expect(css).toContain(

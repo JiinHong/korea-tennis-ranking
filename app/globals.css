@@ -344,6 +344,118 @@
   line-height: 1.55;
 }
 
+.campus-rules-page {
+  --methodology-accent: #c62917;
+  --methodology-soft: #fff2f0;
+  --methodology-line: #e3e6ea;
+  background: #f5f6f8;
+}
+
+.club-rules-summary {
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--methodology-line);
+}
+
+.club-rules-summary li {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--methodology-line);
+}
+
+.club-rules-number {
+  padding-top: 2px;
+  color: var(--methodology-accent);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.club-rules-summary strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--methodology-ink);
+  font-size: 16px;
+  font-weight: 850;
+}
+
+.club-rules-summary li p {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.club-rules-example code {
+  color: #8f2418;
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.club-rules-steps {
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--methodology-line);
+}
+
+.club-rules-steps li {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--methodology-line);
+}
+
+.club-rules-steps strong {
+  color: var(--methodology-ink);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.club-rules-steps span {
+  color: var(--methodology-muted);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.65;
+}
+
+.club-rules-history {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 20px 0 0;
+  border-top: 1px solid var(--methodology-line);
+}
+
+.club-rules-history > div {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--methodology-line);
+}
+
+.club-rules-history > div:nth-child(odd) {
+  padding-right: 20px;
+}
+
+.club-rules-history > div:nth-child(even) {
+  padding-left: 20px;
+  border-left: 1px solid var(--methodology-line);
+}
+
+.club-rules-history dt {
+  color: var(--methodology-muted);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.club-rules-history dd {
+  margin: 6px 0 0;
+  color: var(--methodology-ink);
+  font-size: 14px;
+  font-weight: 850;
+}
+
 @media (max-width: 640px) {
   .methodology-document {
     width: calc(100% - 24px);
@@ -394,6 +506,28 @@
   .methodology-version > div {
     grid-template-columns: 1fr;
     gap: 6px;
+  }
+
+  .club-rules-summary li {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 10px;
+    padding: 17px 0;
+  }
+
+  .club-rules-steps li {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .club-rules-history {
+    grid-template-columns: 1fr;
+  }
+
+  .club-rules-history > div:nth-child(odd),
+  .club-rules-history > div:nth-child(even) {
+    padding-right: 0;
+    padding-left: 0;
+    border-left: 0;
   }
 }
 
@@ -1225,6 +1359,42 @@ button:disabled {
   font-size: 20px;
   line-height: 1.38;
   font-weight: 850;
+}
+
+.campus-ranking-page .hero-copy-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.campus-ranking-page .hero-copy-heading .subtitle {
+  min-width: 0;
+  margin: 0;
+}
+
+.campus-rules-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+  color: var(--campus-red);
+  font-size: 12px;
+  font-weight: 850;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  white-space: nowrap;
+}
+
+.campus-rules-link:hover {
+  color: #941e12;
+}
+
+.campus-rules-link:focus-visible {
+  outline: 3px solid rgba(198, 41, 23, 0.18);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 .campus-ranking-page .hero-meta-row {
@@ -3150,10 +3320,14 @@ button:disabled {
   }
 
   .campus-ranking-page .subtitle {
-    margin-bottom: 14px;
     font-size: 15px;
     line-height: 1.35;
     word-break: keep-all;
+  }
+
+  .campus-ranking-page .hero-copy-heading {
+    gap: 10px;
+    margin-bottom: 14px;
   }
 
   .campus-ranking-page .hero-copy {

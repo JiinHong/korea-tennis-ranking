@@ -289,7 +289,21 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
 
           <div className="hero-grid">
             <div className="hero-copy">
-              <p className="subtitle">{club.subtitle}</p>
+              <div className="hero-copy-heading">
+                <p className="subtitle">{club.subtitle}</p>
+                <Link
+                  className="campus-rules-link"
+                  href={`/${club.slug}/rules`}
+                  onClick={() => {
+                    void trackAmplitudeEvent("Campus Rules Opened", {
+                      club_slug: club.slug,
+                    });
+                  }}
+                >
+                  운영 규칙 보기
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
               <div className="hero-meta-row">
                 <div className="hero-stats" aria-label="랭킹 요약">
                   <div>

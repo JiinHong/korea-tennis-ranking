@@ -39,6 +39,24 @@ describe("ClubRankingClient", () => {
     expect(screen.queryByText(/구글 시트/)).toBeNull();
   });
 
+  it("운영 규칙 문서로 이동하는 링크와 클릭 로그를 제공한다", () => {
+    vi.stubGlobal("fetch", vi.fn(() => new Promise(() => {})));
+
+    render(<ClubRankingClient club={club} />);
+
+    const rulesLink = screen.getByRole("link", { name: "운영 규칙 보기" });
+    rulesLink.addEventListener("click", (event) => event.preventDefault());
+
+    expect(rulesLink.getAttribute("href")).toBe("/seoultech/rules");
+
+    fireEvent.click(rulesLink);
+
+    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
+      "Campus Rules Opened",
+      { club_slug: "seoultech" }
+    );
+  });
+
   it("랭킹의 핵심 조작을 동아리 정보와 함께 기록한다", async () => {
     const rankingResponse = {
       ok: true,
