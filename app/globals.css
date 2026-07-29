@@ -1554,32 +1554,236 @@ button:disabled {
   line-height: 1.2;
 }
 
-.campus-ranking-page .activity-strip {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.campus-ranking-page .club-match-section + .activity-strip {
-  margin-top: 24px;
-}
-
-.campus-ranking-page .club-match-section + .campus-ranking-list-title {
-  margin-top: 24px;
-}
-
-.campus-ranking-page .activity-heading {
-  grid-column: 1 / -1;
-  margin-bottom: 2px;
-}
-
-.campus-ranking-page .activity-card {
+.campus-highlight-section {
+  padding: 18px 20px;
   background: white;
-  border-color: var(--campus-line);
+  border: 1px solid var(--campus-line);
+  border-radius: 8px;
   box-shadow: var(--campus-shadow);
 }
 
-.campus-ranking-page .activity-card strong {
+.campus-highlight-section + .campus-highlight-section {
+  margin-top: 12px;
+}
+
+.campus-section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.campus-section-heading > div {
+  min-width: 0;
+}
+
+.campus-section-eyebrow {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--campus-red);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.campus-section-heading h2 {
+  margin: 0;
   color: var(--campus-ink);
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.campus-section-scope {
+  color: var(--campus-muted);
+  font-size: 11px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.campus-podium-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  align-items: end;
+  margin-top: 16px;
+}
+
+.campus-podium-grid.has-1 {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.campus-podium-grid.has-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.campus-podium-player {
+  --podium-color: #b87333;
+
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  min-width: 0;
+  padding: 12px 8px 13px;
+  color: var(--campus-ink);
+  text-align: center;
+  text-decoration: none;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease;
+}
+
+.campus-podium-player + .campus-podium-player {
+  border-left: 1px solid var(--campus-line);
+}
+
+.campus-podium-player::after {
+  position: absolute;
+  right: 12px;
+  bottom: 0;
+  left: 12px;
+  height: 3px;
+  background: var(--podium-color);
+  border-radius: 999px;
+  content: "";
+}
+
+.campus-podium-player.is-gold {
+  --podium-color: #e3a008;
+
+  padding-top: 8px;
+}
+
+.campus-podium-player.is-silver {
+  --podium-color: #718096;
+}
+
+.campus-podium-player.is-bronze {
+  --podium-color: #b87333;
+}
+
+.campus-podium-rank {
+  color: var(--podium-color);
+  font-size: 24px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.campus-podium-player.is-gold .campus-podium-rank {
+  font-size: 31px;
+}
+
+.campus-podium-name {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.campus-podium-player.is-gold .campus-podium-name {
+  font-size: 16px;
+}
+
+.campus-podium-record {
+  color: var(--campus-muted);
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+.campus-podium-player:hover {
+  color: var(--campus-red);
+  background: #fafbfc;
+}
+
+.campus-podium-player:focus-visible,
+.campus-recent-record-row:focus-visible,
+.campus-ranking-history-link:focus-visible {
+  outline: 3px solid rgba(198, 41, 23, 0.16);
+  outline-offset: 2px;
+}
+
+.campus-recent-records {
+  margin-top: 12px;
+  border-top: 1px solid var(--campus-line);
+}
+
+.campus-recent-record-row {
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 49px;
+  color: var(--campus-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--campus-line);
+  transition:
+    color 160ms ease,
+    background-color 160ms ease;
+}
+
+.campus-recent-record-row:last-child {
+  border-bottom: 0;
+}
+
+.campus-recent-record-label {
+  color: var(--campus-muted);
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.campus-recent-record-row b,
+.campus-recent-record-row strong {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.campus-recent-record-row b {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.campus-recent-record-row strong {
+  white-space: nowrap;
+}
+
+.campus-recent-record-row:hover {
+  color: var(--campus-red);
+  background: #fafbfc;
+}
+
+.campus-ranking-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 22px 0 10px;
+}
+
+.campus-ranking-page .campus-ranking-heading .campus-ranking-list-title {
+  margin: 0;
+}
+
+.campus-ranking-history-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 0;
+  color: var(--campus-muted);
+  background: transparent;
+  border: 0;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.campus-ranking-history-link:hover {
+  color: var(--campus-red);
 }
 
 .match-entry-backdrop {
@@ -3407,28 +3611,82 @@ button:disabled {
     min-width: 158px;
   }
 
-  .campus-ranking-page .activity-strip {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 6px;
-    overflow: visible;
-    padding-bottom: 0;
+  .campus-highlight-section {
+    padding: 16px;
   }
 
-  .campus-ranking-page .activity-card {
-    min-height: 62px;
-    min-width: 0;
-    padding: 8px;
+  .campus-section-heading {
+    gap: 10px;
   }
 
-  .campus-ranking-page .activity-card span,
-  .campus-ranking-page .activity-card em {
-    font-size: 9px;
+  .campus-section-heading h2 {
+    font-size: 18px;
   }
 
-  .campus-ranking-page .activity-card strong {
-    margin: 4px 0;
+  .campus-section-scope {
+    font-size: 10px;
+  }
+
+  .campus-podium-grid {
+    margin-top: 12px;
+  }
+
+  .campus-podium-player {
+    gap: 2px;
+    padding: 10px 4px 11px;
+  }
+
+  .campus-podium-player.is-gold {
+    padding-top: 7px;
+  }
+
+  .campus-podium-player::after {
+    right: 6px;
+    left: 6px;
+  }
+
+  .campus-podium-rank {
+    font-size: 21px;
+  }
+
+  .campus-podium-player.is-gold .campus-podium-rank {
+    font-size: 27px;
+  }
+
+  .campus-podium-name {
     font-size: 12px;
+  }
+
+  .campus-podium-player.is-gold .campus-podium-name {
+    font-size: 14px;
+  }
+
+  .campus-podium-record {
+    font-size: 10px;
+  }
+
+  .campus-recent-record-row {
+    grid-template-columns: 70px minmax(0, 1fr) auto;
+    gap: 8px;
+    min-height: 46px;
+  }
+
+  .campus-recent-record-label {
+    font-size: 10px;
+  }
+
+  .campus-recent-record-row b,
+  .campus-recent-record-row strong {
+    font-size: 12px;
+  }
+
+  .campus-ranking-heading {
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .campus-ranking-history-link {
+    font-size: 11px;
   }
 
   .club-match-section-head {

@@ -5,13 +5,13 @@ import Link from "next/link";
 import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 
 import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
+import { buildRecent30Highlights } from "@/lib/campusRankingHighlights";
 import CampusResultsBackLink, {
   CAMPUS_RESULTS_BACK_LABEL,
   getCampusResultsHref,
 } from "./CampusResultsBackLink";
 import { getPlayerDetailPath } from "./playerPaths";
 import MatchEntryDialog from "./MatchEntryDialog";
-import MatchListSection from "./MatchListSection";
 import NationalRankingBackLink from "./NationalRankingBackLink";
 
 type Player = {
@@ -211,6 +211,14 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
   const rankedPlayers = useMemo(() => {
     return [...players].sort((a, b) => a.rank - b.rank);
   }, [players]);
+  const topThree = rankedPlayers.slice(0, 3);
+  const podiumPlayers = [topThree[1], topThree[0], topThree[2]].filter(
+    (player): player is Player => player !== undefined
+  );
+  const recentHighlights = useMemo(
+    () => buildRecent30Highlights(players, matches),
+    [matches, players]
+  );
 
   const totalMatches = Math.floor(
     players.reduce((sum, player) => sum + player.matches, 0) / 2
@@ -218,13 +226,6 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
 
   const displayTotalMatches = summary?.totalMatches ?? totalMatches;
   const recent30Matches = summary?.recent30Matches ?? totalMatches;
-
-  const hotPlayers = useMemo(() => {
-    return [...players]
-      .filter((player) => player.matches > 0)
-      .sort((a, b) => b.matches - a.matches || a.rank - b.rank)
-      .slice(0, 4);
-  }, [players]);
 
   return (
     <main className="ranking-page campus-ranking-page">
@@ -340,44 +341,121 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
 
         {status !== "error" ? (
           <>
-            <MatchListSection
-              matches={matches}
-              title="최근 경기"
-              eyebrow="Recent matches"
-              ariaLabel="최근 경기"
-              limit={3}
-              moreHref={`/${club.slug}/matches`}
-            />
-
-            {hotPlayers.length > 0 ? (
-              <section className="activity-strip" aria-label="활동 선수">
-                <div className="activity-heading">
-                  <span>Campus feed</span>
-                  <h2>활동 피드</h2>
+            {podiumPlayers.length > 0 ? (
+              <section
+                className="campus-highlight-section campus-podium-section"
+                aria-label="현재 TOP 3"
+              >
+                <div className="campus-section-heading">
+                  <div>
+                    <span className="campus-section-eyebrow">
+                      Current ranking
+                    </span>
+                    <h2>현재 TOP 3</h2>
+                  </div>
+                  <span className="campus-section-scope">실시간 순위</span>
                 </div>
-                {hotPlayers.map((player) => (
-                  <Link
-                    key={player.name}
-                    className="activity-card"
-                    href={getPlayerDetailPath(club.slug, player.name)}
-                    aria-label={`활동 선수 ${player.name} 상세 전적 보기`}
-                    onClick={() => {
-                      void trackAmplitudeEvent("Player Profile Opened", {
-                        club_slug: club.slug,
-                        rank: player.rank,
-                        source: "activity_feed",
-                      });
-                    }}
-                  >
-                    <span>{player.rank}위</span>
-                    <strong>{player.name}</strong>
-                    <em>{player.matches}경기</em>
-                  </Link>
-                ))}
+
+                <div
+                  className={`campus-podium-grid has-${podiumPlayers.length}`}
+                >
+                  {podiumPlayers.map((player) => {
+                    const medal =
+                      player.rank === 1
+                        ? "gold"
+                        : player.rank === 2
+                          ? "silver"
+                          : "bronze";
+
+                    return (
+                      <Link
+                        key={player.name}
+                        className={`campus-podium-player is-${medal}`}
+                        href={getPlayerDetailPath(club.slug, player.name)}
+                        aria-label={`TOP 3 ${player.name} 상세 전적 보기`}
+                        onClick={() => {
+                          void trackAmplitudeEvent("Player Profile Opened", {
+                            club_slug: club.slug,
+                            rank: player.rank,
+                            source: "top_three",
+                          });
+                        }}
+                      >
+                        <strong className="campus-podium-rank">
+                          {player.rank}
+                        </strong>
+                        <b className="campus-podium-name">{player.name}</b>
+                        <span className="campus-podium-record">
+                          {formatRecord(player)}
+                        </span>
+                      </Link>
+                    );
+                  })}
+                </div>
               </section>
             ) : null}
 
-            <h2 className="campus-ranking-list-title">전체 랭킹</h2>
+            {recentHighlights.length > 0 ? (
+              <section
+                className="campus-highlight-section campus-recent-section"
+                aria-label="최근 30일 기록"
+              >
+                <div className="campus-section-heading">
+                  <div>
+                    <span className="campus-section-eyebrow">
+                      Recent 30 days
+                    </span>
+                    <h2>최근 30일 기록</h2>
+                  </div>
+                  <span className="campus-section-scope">오늘 기준</span>
+                </div>
+
+                <div className="campus-recent-records">
+                  {recentHighlights.map((highlight) => (
+                    <Link
+                      key={highlight.key}
+                      className="campus-recent-record-row"
+                      href={getPlayerDetailPath(
+                        club.slug,
+                        highlight.playerName
+                      )}
+                      aria-label={`${highlight.label} ${highlight.playerName} 상세 전적 보기`}
+                      onClick={() => {
+                        void trackAmplitudeEvent("Player Profile Opened", {
+                          club_slug: club.slug,
+                          rank: highlight.playerRank,
+                          source: "recent_30_days",
+                        });
+                      }}
+                    >
+                      <span className="campus-recent-record-label">
+                        {highlight.label}
+                      </span>
+                      <b>{highlight.playerName}</b>
+                      <strong>{highlight.valueLabel}</strong>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+
+            <div className="campus-ranking-heading">
+              <h2 className="campus-ranking-list-title">전체 랭킹</h2>
+              <Link
+                className="campus-ranking-history-link"
+                href={`/${club.slug}/matches`}
+                aria-label="최근 경기 보기"
+                onClick={() => {
+                  void trackAmplitudeEvent("Campus Match History Opened", {
+                    club_slug: club.slug,
+                    source: "ranking_header",
+                  });
+                }}
+              >
+                최근 경기 보기
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
 
             <section className="ranking-board" aria-label="캠퍼스 랭킹 피드">
               <div className="ranking-head">

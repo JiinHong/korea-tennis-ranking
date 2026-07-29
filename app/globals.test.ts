@@ -65,16 +65,20 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
-  it("상위 10위 행과 활동 피드를 모바일에서 촘촘하게 보여준다", () => {
+  it("상위 10위 행과 하이라이트를 모바일에서도 촘촘하게 보여준다", () => {
     expect(css).toMatch(
       /\.campus-ranking-page \.ranking-row\.is-featured\s*\{[^}]*min-height:\s*64px;/
     );
     expect(css).toMatch(
-      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.activity-strip\s*\{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\);/
+      /\.campus-podium-grid\s*\{[^}]*grid-template-columns:\s*1fr 1\.15fr 1fr;/
+    );
+    expect(css).toMatch(
+      /\.campus-recent-record-row\s*\{[^}]*grid-template-columns:\s*86px minmax\(0,\s*1fr\) auto;[^}]*min-height:\s*49px;/
     );
     expect(css).toMatch(
       /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured\s*\{[^}]*grid-template-columns:\s*42px minmax\(0,\s*1fr\) 84px;[^}]*min-height:\s*62px;/
     );
+    expect(css).not.toContain(".campus-ranking-page .activity-strip {");
   });
 
   it("대회 성적의 교내 랭킹 이동은 밑줄 없는 텍스트 링크로 보여준다", () => {
@@ -154,9 +158,15 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
-  it("최근 경기와 CAMPUS FEED 사이에 명확한 섹션 간격을 둔다", () => {
-    expect(css).toContain(
-      ".campus-ranking-page .club-match-section + .activity-strip {\n  margin-top: 24px;\n}"
+  it("하이라이트와 전체 랭킹 사이에 명확한 위계를 둔다", () => {
+    expect(css).toMatch(
+      /\.campus-highlight-section \+ \.campus-highlight-section\s*\{[^}]*margin-top:\s*12px;/
+    );
+    expect(css).toMatch(
+      /\.campus-ranking-heading\s*\{[^}]*display:\s*flex;[^}]*justify-content:\s*space-between;[^}]*margin:\s*22px 0 10px;/
+    );
+    expect(css).toMatch(
+      /\.campus-ranking-history-link\s*\{[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*text-decoration:\s*none;/
     );
   });
 

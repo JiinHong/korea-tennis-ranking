@@ -380,7 +380,9 @@ describe("ClubRankingClient", () => {
       screen.queryByRole("heading", { name: "오늘의 랭킹" })
     ).toBeNull();
     expect((await screen.findAllByText("박종건")).length).toBeGreaterThan(0);
-    const activityHeading = screen.getByRole("heading", { name: "활동 피드" });
+    const topThreeHeading = screen.getByRole("heading", {
+      name: "현재 TOP 3",
+    });
     const rankingHeading = screen.getByRole("heading", { name: "전체 랭킹" });
 
     expect(rankingHeading.classList.contains("campus-ranking-list-title")).toBe(
@@ -393,9 +395,10 @@ describe("ClubRankingClient", () => {
     expect(screen.queryByRole("button", { name: "경기 있음" })).toBeNull();
     expect(screen.queryByRole("button", { name: "부상" })).toBeNull();
     expect(
-      activityHeading.compareDocumentPosition(rankingHeading) &
+      topThreeHeading.compareDocumentPosition(rankingHeading) &
         Node.DOCUMENT_POSITION_FOLLOWING
     ).toBeTruthy();
+    expect(screen.queryByRole("heading", { name: "활동 피드" })).toBeNull();
     expect(
       screen.getByRole("region", { name: "캠퍼스 랭킹 피드" })
     ).toBeDefined();
@@ -529,21 +532,87 @@ describe("ClubRankingClient", () => {
     expect(within(playerLink).getByText("부상")).toBeDefined();
   });
 
-  it("최근 경기 3개와 View all 링크를 보여준다", async () => {
-    const matches = Array.from({ length: 6 }, (_, index) => {
-      const day = index + 1;
-
-      return {
-        date: `2026. 7. ${day}`,
-        challenger: `도전자${day}`,
-        challengerRank: day + 1,
-        defender: `방어자${day}`,
-        defenderRank: day,
-        winner: `방어자${day}`,
-        score: `6:${day}`,
+  it("TOP 3, 최근 30일 기록, 전체 랭킹을 순서대로 보여준다", async () => {
+    const players = [
+      {
+        rank: 1,
+        name: "오준석",
+        note: "",
+        wins: 3,
+        losses: 0,
+        matches: 3,
+        recent5: ["W", "W", "W"],
+      },
+      {
+        rank: 2,
+        name: "김도훈",
+        note: "",
+        wins: 1,
+        losses: 1,
+        matches: 2,
+        recent5: ["L", "W"],
+      },
+      {
+        rank: 3,
+        name: "박정용",
+        note: "",
+        wins: 2,
+        losses: 1,
+        matches: 3,
+        recent5: ["L", "W", "W"],
+      },
+      {
+        rank: 4,
+        name: "이민우",
+        note: "",
+        wins: 0,
+        losses: 1,
+        matches: 1,
+        recent5: ["L"],
+      },
+    ];
+    const matches = [
+      {
+        date: "2026. 7. 29",
+        challenger: "김도훈",
+        challengerRank: 2,
+        defender: "오준석",
+        defenderRank: 1,
+        winner: "오준석",
+        score: "6:3",
         defenseResult: "방어 성공",
-      };
-    });
+      },
+      {
+        date: "2026. 7. 20",
+        challenger: "박정용",
+        challengerRank: 3,
+        defender: "김도훈",
+        defenderRank: 2,
+        winner: "김도훈",
+        score: "6:4",
+        defenseResult: "방어 성공",
+      },
+      {
+        date: "2026. 7. 10",
+        challenger: "박정용",
+        challengerRank: 3,
+        defender: "오준석",
+        defenderRank: 1,
+        winner: "박정용",
+        score: "6:5",
+        defenseResult: "방어 실패",
+      },
+      {
+        date: "2026. 6. 29",
+        challenger: "이민우",
+        challengerRank: 4,
+        defender: "박정용",
+        defenderRank: 3,
+        winner: "박정용",
+        score: "6:2",
+        defenseResult: "방어 성공",
+      },
+    ];
 
     vi.stubGlobal(
       "fetch",
@@ -555,7 +624,7 @@ describe("ClubRankingClient", () => {
             totalMatches: 6,
             recent30Matches: 6,
           },
-          players: [],
+          players,
           matches,
           detailsByPlayer: {},
         }),
@@ -564,24 +633,48 @@ describe("ClubRankingClient", () => {
 
     render(<ClubRankingClient club={club} />);
 
-    const recentSection = await screen.findByRole("region", {
-      name: "최근 경기",
+    const topThreeSection = await screen.findByRole("region", {
+      name: "현재 TOP 3",
     });
+    const podiumPlayers = within(topThreeSection).getAllByRole("link");
+    expect(
+      podiumPlayers.map((playerLink) =>
+        playerLink.querySelector(".campus-podium-name")?.textContent?.trim()
+      )
+    ).toEqual(["김도훈", "오준석", "박정용"]);
+
+    const recentRecords = screen.getByRole("region", {
+      name: "최근 30일 기록",
+    });
+    expect(within(recentRecords).getByText("최다 출전")).toBeDefined();
+    expect(within(recentRecords).getByText("최다 승리")).toBeDefined();
+    expect(within(recentRecords).getByText("최다 방어")).toBeDefined();
+    expect(within(recentRecords).getAllByText("박정용")).toHaveLength(2);
+    expect(within(recentRecords).getByText("3경기")).toBeDefined();
+    expect(within(recentRecords).getByText("2승")).toBeDefined();
+    expect(within(recentRecords).getByText("1회")).toBeDefined();
+
+    const rankingHeading = screen.getByRole("heading", { name: "전체 랭킹" });
+    const historyLink = screen.getByRole("link", { name: "최근 경기 보기" });
+    historyLink.addEventListener("click", (event) => event.preventDefault());
 
     expect(
-      within(recentSection).getByRole("heading", { name: "최근 경기" })
-    ).toBeDefined();
-    expect(within(recentSection).getAllByRole("listitem")).toHaveLength(3);
-    expect(within(recentSection).getByText("도전자6")).toBeDefined();
-    expect(within(recentSection).getByText("도전자4")).toBeDefined();
-    expect(within(recentSection).queryByText("도전자3")).toBeNull();
-    const matchList = within(recentSection).getByRole("list");
-    const moreLink = within(recentSection).getByRole("link", {
-      name: "View all",
-    });
+      topThreeSection.compareDocumentPosition(recentRecords) &
+        Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy();
+    expect(
+      recentRecords.compareDocumentPosition(rankingHeading) &
+        Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy();
+    expect(historyLink.getAttribute("href")).toBe("/seoultech/matches");
+    expect(historyLink.closest(".campus-ranking-heading")).not.toBeNull();
+    expect(screen.queryByRole("region", { name: "최근 경기" })).toBeNull();
 
-    expect(matchList.nextElementSibling).toBe(moreLink);
-    expect(moreLink.textContent).toBe("View all");
-    expect(moreLink.getAttribute("href")).toBe("/seoultech/matches");
+    fireEvent.click(historyLink);
+
+    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
+      "Campus Match History Opened",
+      { club_slug: "seoultech", source: "ranking_header" }
+    );
   });
 });
