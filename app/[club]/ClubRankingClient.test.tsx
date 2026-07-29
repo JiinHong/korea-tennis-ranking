@@ -53,7 +53,7 @@ describe("ClubRankingClient", () => {
 
     expect(
       screen
-        .getByRole("link", { name: "대회 성적 보기" })
+        .getByRole("link", { name: "대회 성적 보러가기" })
         .getAttribute("href")
     ).toBe("/clubs/seoultech-neutinamu?gender=combined");
   });
@@ -75,7 +75,7 @@ describe("ClubRankingClient", () => {
 
     expect(
       screen
-        .getByRole("link", { name: "대회 성적 보기" })
+        .getByRole("link", { name: "대회 성적 보러가기" })
         .getAttribute("href")
     ).toBe("/clubs/korea-petc?gender=women");
   });
@@ -142,16 +142,11 @@ describe("ClubRankingClient", () => {
     });
     playerLink.addEventListener("click", (event) => event.preventDefault());
     fireEvent.click(screen.getByRole("button", { name: "경기 결과 입력" }));
-    fireEvent.click(screen.getByRole("button", { name: "경기 있음" }));
     fireEvent.click(playerLink);
 
     expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
       "Campus Match Entry Opened",
       { club_slug: "seoultech" }
-    );
-    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
-      "Campus Ranking Filter Changed",
-      { club_slug: "seoultech", filter: "active" }
     );
     expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
       "Player Profile Opened",
@@ -329,7 +324,7 @@ describe("ClubRankingClient", () => {
     const { container } = render(<ClubRankingClient club={club} />);
 
     const nationalBackLink = screen.getByRole("link", {
-      name: "대회 성적 보기",
+      name: "대회 성적 보러가기",
     });
     expect(nationalBackLink.getAttribute("href")).toBe(
       "/clubs/seoultech-neutinamu?gender=combined"
@@ -337,7 +332,7 @@ describe("ClubRankingClient", () => {
     expect(nationalBackLink.closest(".summary-inner")).not.toBeNull();
     expect(nationalBackLink.querySelector(".national-back-icon")).not.toBeNull();
     expect(nationalBackLink.querySelector(".national-back-label")?.textContent).toBe(
-      "대회 성적 보기"
+      "대회 성적 보러가기"
     );
 
     const campusKicker = screen.getByText("캠퍼스 랭킹");
@@ -388,6 +383,15 @@ describe("ClubRankingClient", () => {
     const activityHeading = screen.getByRole("heading", { name: "활동 피드" });
     const rankingHeading = screen.getByRole("heading", { name: "전체 랭킹" });
 
+    expect(rankingHeading.classList.contains("campus-ranking-list-title")).toBe(
+      true
+    );
+    expect(screen.queryByRole("region", { name: "랭킹 필터" })).toBeNull();
+    expect(screen.queryByText("50명이 표시되고 있습니다.")).toBeNull();
+    expect(screen.queryByText("선수 검색")).toBeNull();
+    expect(screen.queryByPlaceholderText("이름 또는 비고")).toBeNull();
+    expect(screen.queryByRole("button", { name: "경기 있음" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "부상" })).toBeNull();
     expect(
       activityHeading.compareDocumentPosition(rankingHeading) &
         Node.DOCUMENT_POSITION_FOLLOWING
@@ -493,7 +497,7 @@ describe("ClubRankingClient", () => {
     ).toBeNull();
   });
 
-  it("비고가 아니라 선수 상태로 부상을 표시하고 필터링한다", async () => {
+  it("비고가 아니라 선수 상태로 부상을 표시한다", async () => {
     vi.stubGlobal(
       "fetch",
       vi.fn().mockResolvedValue({
@@ -523,12 +527,6 @@ describe("ClubRankingClient", () => {
       name: "김도훈 상세 전적 보기",
     });
     expect(within(playerLink).getByText("부상")).toBeDefined();
-
-    fireEvent.click(screen.getByRole("button", { name: "부상" }));
-
-    expect(
-      screen.getByRole("link", { name: "김도훈 상세 전적 보기" })
-    ).toBeDefined();
   });
 
   it("최근 경기 3개와 전체 경기 더보기 링크를 보여준다", async () => {

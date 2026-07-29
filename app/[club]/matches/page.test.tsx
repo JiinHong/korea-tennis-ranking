@@ -75,14 +75,12 @@ describe("MatchesPage", () => {
 
     render(ui);
 
-    const nationalBackLink = screen.getByRole("link", {
-      name: "전국 대학 랭킹으로 돌아가기",
+    const rankingBackLink = screen.getByRole("link", {
+      name: "서울과학기술대학교 테니스 단식 랭킹으로 돌아가기",
     });
-    expect(nationalBackLink.getAttribute("href")).toBe(
-      "https://koreatennisranking.com/"
-    );
-    expect(nationalBackLink.closest(".summary-inner")).not.toBeNull();
-    expect(nationalBackLink.querySelector(".national-back-icon")).not.toBeNull();
+    expect(rankingBackLink.getAttribute("href")).toBe("/seoultech");
+    expect(rankingBackLink.closest(".summary-inner")).not.toBeNull();
+    expect(rankingBackLink.querySelector(".national-back-icon")).not.toBeNull();
 
     expect(
       screen.getByRole("heading", { level: 1, name: "전체 경기" })
@@ -98,7 +96,7 @@ describe("MatchesPage", () => {
     expect(within(matchSection).getByText("김도훈")).toBeDefined();
     expect(within(matchSection).getByText("오준석")).toBeDefined();
     expect(
-      screen.getByRole("link", { name: "랭킹으로 돌아가기" }).getAttribute("href")
-    ).toBe("/seoultech");
+      screen.queryByRole("link", { name: "랭킹으로 돌아가기" })
+    ).toBeNull();
   });
 });

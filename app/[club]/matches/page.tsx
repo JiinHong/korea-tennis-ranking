@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { getClubConfig, listClubConfigs } from "@/lib/clubs";
@@ -37,7 +36,10 @@ export default async function MatchesPage({ params }: MatchesPageProps) {
     <main className="ranking-page campus-ranking-page matches-page">
       <section className="summary-band campus-hero-band player-detail-hero">
         <div className="summary-inner">
-          <NationalRankingBackLink />
+          <NationalRankingBackLink
+            href={`/${club.slug}`}
+            label={`${club.title}으로 돌아가기`}
+          />
           <header className="topbar">
             <div className="brand-lockup">
               <div className="brand-title-row">
@@ -59,10 +61,6 @@ export default async function MatchesPage({ params }: MatchesPageProps) {
       </section>
 
       <div className="content-shell">
-        <Link className="matches-back-link" href={`/${club.slug}`}>
-          랭킹으로 돌아가기
-        </Link>
-
         <MatchListSection
           matches={rankingData.matches}
           title="전체 경기 기록"

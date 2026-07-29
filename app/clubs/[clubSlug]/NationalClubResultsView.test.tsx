@@ -97,7 +97,7 @@ describe("NationalClubResultsView", () => {
     expect(screen.getByText("5개 기록")).toBeDefined();
     expect(screen.getByRole("list", { name: "대회 성적" })).toBeDefined();
     expect(
-      screen.getByRole("link", { name: "전국 랭킹으로 돌아가기" }).getAttribute(
+      screen.getByRole("link", { name: "전국 랭킹 보러가기" }).getAttribute(
         "href"
       )
     ).toBe("/?gender=combined");
@@ -119,7 +119,7 @@ describe("NationalClubResultsView", () => {
         .getAttribute("href")
     ).toBe("/seoultech?fromGender=women");
     expect(
-      screen.getByRole("link", { name: "전국 랭킹으로 돌아가기" }).getAttribute(
+      screen.getByRole("link", { name: "전국 랭킹 보러가기" }).getAttribute(
         "href"
       )
     ).toBe("/?gender=women");

@@ -77,9 +77,12 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
-  it("대회 성적의 교내 랭킹 이동은 상자 없는 텍스트 링크로 보여준다", () => {
+  it("대회 성적의 교내 랭킹 이동은 밑줄 없는 텍스트 링크로 보여준다", () => {
     expect(css).toMatch(
-      /\.national-club-campus-ranking-text-link\s*\{[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*border-bottom:\s*1px solid/
+      /\.national-club-campus-ranking-text-link\s*\{[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*text-decoration:\s*none;/
+    );
+    expect(css).not.toMatch(
+      /\.national-club-campus-ranking-text-link\s*\{[^}]*border-bottom:/
     );
   });
 

@@ -1337,7 +1337,6 @@ button:disabled {
 
 .campus-ranking-page .hero-copy,
 .campus-ranking-page .state-panel,
-.campus-ranking-page .toolbar-section,
 .campus-ranking-page .ranking-board {
   background: white;
   border: 1px solid var(--campus-line);
@@ -1514,33 +1513,11 @@ button:disabled {
   padding-top: 14px;
 }
 
-.campus-ranking-page .toolbar-section {
-  padding: 16px;
-}
-
-.campus-ranking-page .toolbar-section h2 {
+.campus-ranking-page .campus-ranking-list-title {
+  margin: 0 0 10px;
   color: var(--campus-ink);
   font-size: 21px;
-}
-
-.campus-ranking-page .search-field input {
-  background: #fafbfc;
-  border-color: var(--campus-line);
-}
-
-.campus-ranking-page .search-field input:focus {
-  border-color: var(--campus-red);
-  box-shadow: 0 0 0 3px rgba(198, 41, 23, 0.1);
-}
-
-.campus-ranking-page .segment-control {
-  background: #f0f2f4;
-  border-color: var(--campus-line);
-}
-
-.campus-ranking-page .segment-control button[aria-pressed="true"] {
-  color: white;
-  background: var(--campus-ink);
+  line-height: 1.2;
 }
 
 .campus-ranking-page .activity-strip {
@@ -1552,7 +1529,7 @@ button:disabled {
   margin-top: 24px;
 }
 
-.campus-ranking-page .club-match-section + .toolbar-section {
+.campus-ranking-page .club-match-section + .campus-ranking-list-title {
   margin-top: 24px;
 }
 
@@ -1778,26 +1755,6 @@ button:disabled {
   line-height: 1.2;
 }
 
-.matches-back-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 34px;
-  padding: 0 12px;
-  color: var(--campus-red);
-  text-decoration: none;
-  background: var(--campus-red-soft);
-  border: 1px solid #ffd8d2;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 850;
-  white-space: nowrap;
-}
-
-.matches-back-link:hover {
-  background: #ffe4df;
-}
-
 .club-match-more {
   display: flex;
   align-items: center;
@@ -1948,11 +1905,6 @@ button:disabled {
   color: var(--campus-muted);
   font-size: 13px;
   font-weight: 750;
-}
-
-.matches-back-link {
-  width: fit-content;
-  margin-bottom: 10px;
 }
 
 .campus-ranking-page .ranking-board {
@@ -2451,14 +2403,11 @@ button:disabled {
   color: var(--national-accent-strong);
   background: transparent;
   border: 0;
-  border-bottom: 1px solid color-mix(in srgb, currentColor 35%, transparent);
   border-radius: 0;
   font-size: 13px;
   font-weight: 800;
   text-decoration: none;
-  transition:
-    color 160ms ease,
-    border-color 160ms ease;
+  transition: color 160ms ease;
 }
 
 .national-club-campus-ranking-text-link svg {
@@ -2467,7 +2416,6 @@ button:disabled {
 
 .national-club-campus-ranking-text-link:hover {
   color: var(--national-ink);
-  border-bottom-color: currentColor;
 }
 
 .national-club-campus-ranking-text-link:hover svg {

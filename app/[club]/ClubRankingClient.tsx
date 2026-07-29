@@ -67,14 +67,6 @@ type RankingApiResponse =
 
 type LoadStatus = "idle" | "loading" | "success" | "error";
 
-const filters = [
-  { id: "all", label: "전체" },
-  { id: "active", label: "경기 있음" },
-  { id: "injured", label: "부상" },
-] as const;
-
-type RankingFilter = (typeof filters)[number]["id"];
-
 function isInjured(player: Player) {
   return player.status === "injured";
 }
@@ -172,8 +164,6 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
   const [summary, setSummary] = useState<RankingSummary | null>(null);
   const [status, setStatus] = useState<LoadStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState<RankingFilter>("all");
   const [loadedAt, setLoadedAt] = useState<Date | null>(null);
   const [matchEntryOpen, setMatchEntryOpen] = useState(false);
 
@@ -218,14 +208,6 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
     setMatchEntryOpen(true);
   };
 
-  const selectFilter = (nextFilter: RankingFilter) => {
-    void trackAmplitudeEvent("Campus Ranking Filter Changed", {
-      club_slug: club.slug,
-      filter: nextFilter,
-    });
-    setFilter(nextFilter);
-  };
-
   const rankedPlayers = useMemo(() => {
     return [...players].sort((a, b) => a.rank - b.rank);
   }, [players]);
@@ -236,24 +218,6 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
 
   const displayTotalMatches = summary?.totalMatches ?? totalMatches;
   const recent30Matches = summary?.recent30Matches ?? totalMatches;
-
-  const filteredPlayers = useMemo(() => {
-    const trimmedQuery = query.trim();
-
-    return rankedPlayers.filter((player) => {
-      const matchesQuery =
-        trimmedQuery.length === 0 ||
-        player.name.includes(trimmedQuery) ||
-        player.note.includes(trimmedQuery);
-
-      const matchesFilter =
-        filter === "all" ||
-        (filter === "active" && player.matches > 0) ||
-        (filter === "injured" && isInjured(player));
-
-      return matchesQuery && matchesFilter;
-    });
-  }, [filter, query, rankedPlayers]);
 
   const hotPlayers = useMemo(() => {
     return [...players]
@@ -413,36 +377,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
               </section>
             ) : null}
 
-            <section className="toolbar-section" aria-label="랭킹 필터">
-              <div>
-                <h2>전체 랭킹</h2>
-                <p>{filteredPlayers.length}명이 표시되고 있습니다.</p>
-              </div>
-
-              <div className="toolbar-controls">
-                <label className="search-field">
-                  <span>선수 검색</span>
-                  <input
-                    value={query}
-                    onChange={(event) => setQuery(event.target.value)}
-                    placeholder="이름 또는 비고"
-                  />
-                </label>
-
-                <div className="segment-control" aria-label="랭킹 보기 방식">
-                  {filters.map((item) => (
-                    <button
-                      key={item.id}
-                      type="button"
-                      aria-pressed={filter === item.id}
-                      onClick={() => selectFilter(item.id)}
-                    >
-                      {item.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </section>
+            <h2 className="campus-ranking-list-title">전체 랭킹</h2>
 
             <section className="ranking-board" aria-label="캠퍼스 랭킹 피드">
               <div className="ranking-head">
@@ -452,8 +387,8 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                 <span>최근 5경기</span>
               </div>
 
-              {filteredPlayers.length > 0 ? (
-                filteredPlayers.map((player) => (
+              {rankedPlayers.length > 0 ? (
+                rankedPlayers.map((player) => (
                   <RankingRow
                     key={player.name}
                     player={player}
@@ -468,7 +403,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                   />
                 ))
               ) : (
-                <div className="empty-row">조건에 맞는 선수가 없습니다.</div>
+                <div className="empty-row">등록된 선수가 없습니다.</div>
               )}
             </section>
           </>
