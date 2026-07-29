@@ -529,7 +529,7 @@ describe("ClubRankingClient", () => {
     expect(within(playerLink).getByText("부상")).toBeDefined();
   });
 
-  it("최근 경기 3개와 전체 경기 더보기 링크를 보여준다", async () => {
+  it("최근 경기 3개와 View all 링크를 보여준다", async () => {
     const matches = Array.from({ length: 6 }, (_, index) => {
       const day = index + 1;
 
@@ -577,11 +577,11 @@ describe("ClubRankingClient", () => {
     expect(within(recentSection).queryByText("도전자3")).toBeNull();
     const matchList = within(recentSection).getByRole("list");
     const moreLink = within(recentSection).getByRole("link", {
-      name: "전체 경기 더보기",
+      name: "View all",
     });
 
     expect(matchList.nextElementSibling).toBe(moreLink);
-    expect(moreLink.textContent).toBe("⋯");
+    expect(moreLink.textContent).toBe("View all");
     expect(moreLink.getAttribute("href")).toBe("/seoultech/matches");
   });
 });

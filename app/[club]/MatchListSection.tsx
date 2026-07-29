@@ -1,4 +1,5 @@
 import type { MatchRecord } from "@/lib/matchLogTable";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 type MatchListSectionProps = {
@@ -141,10 +142,11 @@ export default function MatchListSection({
         <Link
           className="club-match-more"
           href={moreHref}
-          aria-label="전체 경기 더보기"
-          title="전체 경기 더보기"
+          aria-label="View all"
+          title="View all"
         >
-          <span aria-hidden="true">⋯</span>
+          <span>View all</span>
+          <ArrowRight aria-hidden="true" size={14} strokeWidth={2} />
         </Link>
       ) : null}
     </section>

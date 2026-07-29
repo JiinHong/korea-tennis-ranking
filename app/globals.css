@@ -1793,27 +1793,26 @@ button:disabled {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  gap: 5px;
+  width: fit-content;
+  min-height: 44px;
+  padding: 0 4px;
   margin: 12px auto -4px;
   color: var(--campus-muted);
   text-decoration: none;
-  background: transparent;
-  border-radius: 999px;
-  font-size: 24px;
-  font-weight: 900;
+  font-size: 13px;
+  font-weight: 800;
   line-height: 1;
-  transition: color 140ms ease, background 140ms ease;
+  transition: color 140ms ease;
 }
 
 .club-match-more:hover {
   color: var(--campus-ink);
-  background: #f0f2f4;
 }
 
 .club-match-more:focus-visible {
   outline: 3px solid rgba(198, 41, 23, 0.2);
-  outline-offset: 1px;
+  outline-offset: 2px;
 }
 
 .club-match-list {
