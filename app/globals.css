@@ -1370,8 +1370,7 @@ button:disabled {
 }
 
 .campus-ranking-page .hero-copy,
-.campus-ranking-page .state-panel,
-.campus-ranking-page .ranking-board {
+.campus-ranking-page .state-panel {
   background: white;
   border: 1px solid var(--campus-line);
   border-radius: 8px;
@@ -1555,15 +1554,16 @@ button:disabled {
 }
 
 .campus-highlight-section {
-  padding: 18px 20px;
+  padding: 26px 20px 28px;
   background: white;
-  border: 1px solid var(--campus-line);
-  border-radius: 8px;
-  box-shadow: var(--campus-shadow);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .campus-highlight-section + .campus-highlight-section {
-  margin-top: 12px;
+  margin-top: 0;
+  border-top: 1px solid var(--campus-line);
 }
 
 .campus-section-heading {
@@ -1761,7 +1761,10 @@ button:disabled {
   align-items: flex-end;
   justify-content: space-between;
   gap: 16px;
-  margin: 22px 0 10px;
+  margin: 0;
+  padding: 26px 20px 12px;
+  background: white;
+  border-top: 1px solid var(--campus-line);
 }
 
 .campus-ranking-page .campus-ranking-heading .campus-ranking-list-title {
@@ -1961,12 +1964,12 @@ button:disabled {
   background: #eceff2;
 }
 
-.campus-ranking-page .club-match-section {
-  padding: 16px;
+.matches-page .club-match-section {
+  padding: 26px 20px 32px;
   background: white;
-  border: 1px solid var(--campus-line);
-  border-radius: 8px;
-  box-shadow: var(--campus-shadow);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .club-match-section-head {
@@ -2027,6 +2030,11 @@ button:disabled {
   list-style: none;
 }
 
+.matches-page .club-match-list {
+  gap: 0;
+  border-top: 1px solid var(--campus-line);
+}
+
 .club-match-card {
   display: grid;
   grid-template-columns: 132px minmax(0, 1fr) 118px;
@@ -2037,6 +2045,14 @@ button:disabled {
   background: #fafbfc;
   border: 1px solid var(--campus-line);
   border-radius: 8px;
+}
+
+.matches-page .club-match-card {
+  padding: 16px 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--campus-line);
+  border-radius: 0;
 }
 
 .club-match-date,
@@ -2137,6 +2153,15 @@ button:disabled {
   font-weight: 750;
 }
 
+.matches-page .club-match-empty {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--campus-line);
+  border-bottom: 1px solid var(--campus-line);
+  border-radius: 0;
+  text-align: center;
+}
+
 .matches-page-subtitle {
   margin: 2px 0 0;
   color: var(--campus-muted);
@@ -2145,12 +2170,15 @@ button:disabled {
 }
 
 .campus-ranking-page .ranking-board {
-  box-shadow: var(--campus-shadow);
+  background: white;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .campus-ranking-page .ranking-head {
   color: var(--campus-muted);
-  background: #fafbfc;
+  background: transparent;
 }
 
 .campus-ranking-page .ranking-head,
@@ -2177,8 +2205,8 @@ button:disabled {
 
 .campus-ranking-page .rank-cell span {
   color: var(--campus-red);
-  background: var(--campus-red-soft);
-  border-radius: 8px;
+  background: transparent;
+  border-radius: 0;
 }
 
 .campus-ranking-page .ranking-row.is-featured .rank-cell span {
@@ -3612,7 +3640,7 @@ button:disabled {
   }
 
   .campus-highlight-section {
-    padding: 16px;
+    padding: 22px 16px 24px;
   }
 
   .campus-section-heading {
@@ -3682,7 +3710,8 @@ button:disabled {
 
   .campus-ranking-heading {
     gap: 10px;
-    margin-top: 18px;
+    margin-top: 0;
+    padding: 22px 16px 10px;
   }
 
   .campus-ranking-history-link {
@@ -3693,6 +3722,10 @@ button:disabled {
     align-items: stretch;
     flex-direction: column;
     gap: 10px;
+  }
+
+  .matches-page .club-match-section {
+    padding: 22px 16px 28px;
   }
 
   .club-match-card {

@@ -533,6 +533,11 @@ describe("ClubRankingClient", () => {
   });
 
   it("TOP 3, 최근 30일 기록, 전체 랭킹을 순서대로 보여준다", async () => {
+    vi.useFakeTimers({
+      shouldAdvanceTime: true,
+    });
+    vi.setSystemTime(new Date("2026-07-29T12:00:00+09:00"));
+
     const players = [
       {
         rank: 1,

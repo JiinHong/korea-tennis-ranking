@@ -158,15 +158,36 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
-  it("하이라이트와 전체 랭킹 사이에 명확한 위계를 둔다", () => {
-    expect(css).toMatch(
-      /\.campus-highlight-section \+ \.campus-highlight-section\s*\{[^}]*margin-top:\s*12px;/
+  it("하이라이트와 전체 랭킹은 카드 박스 없이 가로 구분선으로 이어진다", () => {
+    expect(css).toContain(
+      ".campus-highlight-section {\n  padding: 26px 20px 28px;\n  background: white;\n  border: 0;\n  border-radius: 0;\n  box-shadow: none;\n}"
     );
-    expect(css).toMatch(
-      /\.campus-ranking-heading\s*\{[^}]*display:\s*flex;[^}]*justify-content:\s*space-between;[^}]*margin:\s*22px 0 10px;/
+    expect(css).toContain(
+      ".campus-highlight-section + .campus-highlight-section {\n  margin-top: 0;\n  border-top: 1px solid var(--campus-line);\n}"
+    );
+    expect(css).toContain(
+      ".campus-ranking-heading {\n  display: flex;\n  align-items: flex-end;\n  justify-content: space-between;\n  gap: 16px;\n  margin: 0;\n  padding: 26px 20px 12px;\n  background: white;\n  border-top: 1px solid var(--campus-line);\n}"
+    );
+    expect(css).toContain(
+      ".campus-ranking-page .ranking-board {\n  background: white;\n  border: 0;\n  border-radius: 0;\n  box-shadow: none;\n}"
+    );
+    expect(css).toContain(
+      ".campus-ranking-page .rank-cell span {\n  color: var(--campus-red);\n  background: transparent;\n  border-radius: 0;\n}"
     );
     expect(css).toMatch(
       /\.campus-ranking-history-link\s*\{[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*text-decoration:\s*none;/
+    );
+  });
+
+  it("전체 경기 기록은 개별 카드 대신 가로 구분선 목록으로 보여준다", () => {
+    expect(css).toContain(
+      ".matches-page .club-match-section {\n  padding: 26px 20px 32px;\n  background: white;\n  border: 0;\n  border-radius: 0;\n  box-shadow: none;\n}"
+    );
+    expect(css).toContain(
+      ".matches-page .club-match-list {\n  gap: 0;\n  border-top: 1px solid var(--campus-line);\n}"
+    );
+    expect(css).toContain(
+      ".matches-page .club-match-card {\n  padding: 16px 0;\n  background: transparent;\n  border: 0;\n  border-bottom: 1px solid var(--campus-line);\n  border-radius: 0;\n}"
     );
   });
 
