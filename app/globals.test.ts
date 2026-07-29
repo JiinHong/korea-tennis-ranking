@@ -97,7 +97,25 @@ describe("campus ranking responsive title styles", () => {
       ".campus-ranking-page .hero-live-actions {\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  gap: 8px;\n}"
     );
     expect(css).toContain(
-      ".campus-ranking-page .live-stamp {\n  min-height: 38px;\n  padding: 0 14px;\n  background: rgba(47, 125, 91, 0.12);\n  border-radius: 999px;\n}"
+      ".campus-ranking-page .live-stamp {\n  min-height: 38px;\n  padding: 0 14px;\n  background: rgba(47, 125, 91, 0.08);\n  border-radius: 999px;\n}"
+    );
+  });
+
+  it("히어로 설명과 경기 입력 버튼은 모바일에서도 과하게 커 보이지 않는다", () => {
+    expect(css).toContain(
+      ".campus-ranking-page .subtitle {\n  margin-bottom: 16px;\n  color: var(--campus-ink);\n  font-size: 19px;"
+    );
+    expect(css).toContain(
+      ".match-entry-button {\n  min-height: 36px;\n  padding: 0 12px;"
+    );
+    expect(css).toContain(
+      "  border-radius: 8px;\n  font-size: 13px;\n  font-weight: 850;"
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.subtitle\s*\{[^}]*font-size:\s*14px;/
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*860px\)[\s\S]*?\.campus-ranking-page \.subtitle\s*\{[^}]*font-size:\s*18px;/
     );
   });
 

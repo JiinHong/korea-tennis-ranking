@@ -91,7 +91,8 @@ describe("ClubRulesPage", () => {
   it("PETC에서는 공통 운영 규칙만 보여주고 서울과기대 기록은 노출하지 않는다", async () => {
     await renderRulesPage("petc");
 
-    expect(screen.getByText(/고려대학교 체육교육과 PETC/)).toBeDefined();
+    expect(screen.getByText("고려대학교 체육교육과 PETC")).toBeDefined();
+    expect(screen.queryByText("고려대학교 체육교육과 PETC · 현재")).toBeNull();
     expect(screen.queryByText(/37명의 선수/)).toBeNull();
     expect(screen.queryByText(/152경기/)).toBeNull();
     expect(

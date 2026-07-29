@@ -62,7 +62,10 @@ export default async function ClubRulesPage({ params }: ClubRulesPageProps) {
 
         <header className="methodology-header">
           <p className="methodology-kicker">
-            {club.organization} · {club.currentSeasonName}
+            {club.organization}
+            {club.currentSeasonName === "현재"
+              ? null
+              : ` · ${club.currentSeasonName}`}
           </p>
           <h1>단식 랭킹 운영 규칙</h1>
           <p>
