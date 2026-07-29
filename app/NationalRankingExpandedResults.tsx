@@ -20,7 +20,6 @@ type NationalRankingExpandedResultsProps = {
   bestResults: NationalRankingBestResult[];
   clubSlug: string;
   displayName: string;
-  isOpen: boolean;
   latestEditionYears: LatestEditionYearMap;
   regionId: string;
 };
@@ -56,7 +55,6 @@ export default function NationalRankingExpandedResults({
   bestResults,
   clubSlug,
   displayName,
-  isOpen,
   latestEditionYears,
   regionId,
 }: NationalRankingExpandedResultsProps) {
@@ -66,7 +64,6 @@ export default function NationalRankingExpandedResults({
     <div className="national-ranking-expansion">
       <div className="national-ranking-expansion-clip">
         <div
-          aria-hidden={!isOpen}
           aria-label={`${displayName} 최고 성적`}
           className="national-ranking-expanded-results"
           id={regionId}
@@ -118,7 +115,6 @@ export default function NationalRankingExpandedResults({
                 division: activeGender,
               });
             }}
-            tabIndex={isOpen ? 0 : -1}
           >
             전체 성적 보기
           </Link>

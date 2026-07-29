@@ -19,6 +19,40 @@
   --shadow: 0 12px 36px rgba(26, 59, 43, 0.07);
 }
 
+.player-detail-loading-shell {
+  display: grid;
+  min-height: 70vh;
+  place-items: center;
+}
+
+.player-detail-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.player-detail-loading p {
+  margin: 0;
+}
+
+.player-detail-loading-indicator {
+  width: 9px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--green-600);
+  animation: player-detail-loading-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes player-detail-loading-pulse {
+  50% {
+    opacity: 0.35;
+    transform: scale(0.72);
+  }
+}
+
 /* National ranking methodology document */
 .methodology-page {
   --methodology-ink: #171b1f;

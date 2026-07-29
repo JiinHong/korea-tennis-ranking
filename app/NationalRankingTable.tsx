@@ -210,15 +210,16 @@ export default function NationalRankingTable({
                       data-open={isExpanded ? "true" : "false"}
                     >
                       <td colSpan={3}>
-                        <NationalRankingExpandedResults
-                          activeGender={activeGender}
-                          bestResults={row.bestResults}
-                          clubSlug={row.clubSlug}
-                          displayName={row.displayName}
-                          isOpen={isExpanded}
-                          latestEditionYears={latestEditionYears}
-                          regionId={regionId}
-                        />
+                        {isExpanded ? (
+                          <NationalRankingExpandedResults
+                            activeGender={activeGender}
+                            bestResults={row.bestResults}
+                            clubSlug={row.clubSlug}
+                            displayName={row.displayName}
+                            latestEditionYears={latestEditionYears}
+                            regionId={regionId}
+                          />
+                        ) : null}
                       </td>
                     </tr>
                   </Fragment>

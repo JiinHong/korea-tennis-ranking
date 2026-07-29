@@ -34,10 +34,68 @@ describe("Amplitude analytics", () => {
     expect(amplitudeSdk.initAll).toHaveBeenCalledWith(
       "5a5f7a18362a3d5d282689d0e58e00db",
       {
-        analytics: { autocapture: true },
+        analytics: {
+          autocapture: {
+            attribution: true,
+            elementInteractions: true,
+            fileDownloads: true,
+            formInteractions: true,
+            frustrationInteractions: {
+              deadClicks: true,
+              errorClicks: true,
+              rageClicks: true,
+              shouldTrackEventResolver: expect.any(Function),
+              thrashedCursor: true,
+            },
+            networkTracking: true,
+            pageUrlEnrichment: true,
+            pageViews: true,
+            performanceTracking: false,
+            sessions: true,
+            webVitals: true,
+          },
+          remoteConfig: { fetchRemoteConfig: false },
+        },
         sessionReplay: { sampleRate: 1 },
       }
     );
+  });
+
+  it("정상적으로 펼쳐지는 전국 랭킹 행만 좌절 클릭 감지에서 제외한다", async () => {
+    await syncAmplitudeRoute("/");
+
+    type AutocaptureConfig = {
+      frustrationInteractions: {
+        shouldTrackEventResolver: (
+          actionType: "click" | "change",
+          element: Element
+        ) => boolean;
+      };
+    };
+    const [, initOptions] = amplitudeSdk.initAll.mock
+      .calls[0] as unknown as [
+      string,
+      {
+        analytics: {
+          autocapture: boolean | AutocaptureConfig;
+        };
+      },
+    ];
+
+    expect(typeof initOptions.analytics.autocapture).toBe("object");
+
+    const autocapture = initOptions.analytics.autocapture as AutocaptureConfig;
+    const resolver =
+      autocapture.frustrationInteractions.shouldTrackEventResolver;
+    const rankingRow = document.createElement("tr");
+    const rankingCell = document.createElement("td");
+    const ordinaryButton = document.createElement("button");
+
+    rankingRow.className = "national-ranking-main-row";
+    rankingRow.append(rankingCell);
+
+    expect(resolver("click", rankingCell)).toBe(false);
+    expect(resolver("click", ordinaryButton)).toBe(true);
   });
 
   it("관리자 페이지에 직접 접속하면 분석 도구를 초기화하지 않는다", async () => {

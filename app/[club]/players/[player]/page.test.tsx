@@ -6,6 +6,10 @@ import { getRankingDataForClub } from "@/lib/rankingData";
 
 import PlayerPage from "./page";
 
+const analytics = vi.hoisted(() => ({
+  trackAmplitudeEvent: vi.fn(() => Promise.resolve()),
+}));
+
 vi.mock("@/lib/clubs", () => ({
   getClubConfig: vi.fn(),
 }));
@@ -13,6 +17,8 @@ vi.mock("@/lib/clubs", () => ({
 vi.mock("@/lib/rankingData", () => ({
   getRankingDataForClub: vi.fn(),
 }));
+
+vi.mock("@/lib/amplitudeAnalytics", () => analytics);
 
 const club = {
   slug: "seoultech",
@@ -139,5 +145,12 @@ describe("PlayerPage", () => {
     expect(screen.getAllByText("김도훈").length).toBeGreaterThan(0);
     expect(container.querySelector(".result-letter.is-win")).not.toBeNull();
     expect(container.querySelector(".result-pill")).toBeNull();
+    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
+      "Player Profile Viewed",
+      {
+        club_slug: "seoultech",
+        rank: 1,
+      }
+    );
   });
 });

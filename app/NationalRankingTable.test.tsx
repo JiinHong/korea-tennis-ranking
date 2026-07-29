@@ -318,6 +318,28 @@ describe("NationalRankingTable", () => {
     ).toBe("/clubs/seoultech-neutinamu?gender=men");
   });
 
+  it("최고 성적을 열고 닫을 때 상세 DOM을 실제로 삽입하고 제거한다", () => {
+    const { container } = render(
+      <NationalRankingTable rankings={rankings} />
+    );
+
+    const disclosure = screen.getByRole("button", {
+      name: "서울과학기술대학교 STC 최고 성적 펼치기",
+    });
+
+    expect(container.querySelector('[role="region"]')).toBeNull();
+
+    fireEvent.click(disclosure);
+    expect(
+      screen.getByRole("region", {
+        name: "서울과학기술대학교 STC 최고 성적",
+      })
+    ).toBeDefined();
+
+    fireEvent.click(disclosure);
+    expect(container.querySelector('[role="region"]')).toBeNull();
+  });
+
   it("랭킹 행 전체를 펼치기 버튼의 터치 영역으로 두고 닫힌 상태를 복원한다", () => {
     render(<NationalRankingTable rankings={rankings} />);
 

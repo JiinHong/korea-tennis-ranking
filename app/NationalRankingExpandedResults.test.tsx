@@ -78,7 +78,6 @@ describe("NationalRankingExpandedResults", () => {
         bestResults={bestResults}
         clubSlug="seoultech-neutinamu"
         displayName="서울과학기술대학교 느티나무"
-        isOpen
         latestEditionYears={latestEditionYears}
         regionId="seoultech-results"
       />
@@ -99,7 +98,6 @@ describe("NationalRankingExpandedResults", () => {
         bestResults={bestResults}
         clubSlug="seoultech-neutinamu"
         displayName="서울과학기술대학교 느티나무"
-        isOpen
         latestEditionYears={latestEditionYears}
         regionId="seoultech-results"
       />
@@ -120,28 +118,27 @@ describe("NationalRankingExpandedResults", () => {
     ).toBe("/clubs/seoultech-neutinamu?gender=men");
   });
 
-  it("닫힌 영역은 접근성 트리와 탭 순서에서 제외한다", () => {
+  it("마운트된 상세 영역은 접근성 트리와 탭 순서에 포함한다", () => {
     const { container } = render(
       <NationalRankingExpandedResults
         activeGender="women"
         bestResults={bestResults}
         clubSlug="seoultech-neutinamu"
         displayName="서울과학기술대학교 느티나무"
-        isOpen={false}
         latestEditionYears={latestEditionYears}
         regionId="seoultech-results"
       />
     );
 
     expect(
-      screen.queryByRole("region", {
+      screen.getByRole("region", {
         name: "서울과학기술대학교 느티나무 최고 성적",
       })
+    ).toBeDefined();
+    expect(
+      container.querySelector('[role="region"]')?.getAttribute("aria-hidden")
     ).toBeNull();
-    expect(container.querySelector('[role="region"]')?.getAttribute("aria-hidden")).toBe(
-      "true"
-    );
-    expect(container.querySelector("a")?.getAttribute("tabindex")).toBe("-1");
+    expect(container.querySelector("a")?.getAttribute("tabindex")).toBeNull();
   });
 
   it("전체 성적 페이지 이동을 현재 부문과 함께 기록한다", () => {
@@ -151,7 +148,6 @@ describe("NationalRankingExpandedResults", () => {
         bestResults={bestResults}
         clubSlug="seoultech-neutinamu"
         displayName="서울과학기술대학교 느티나무"
-        isOpen
         latestEditionYears={latestEditionYears}
         regionId="seoultech-results"
       />

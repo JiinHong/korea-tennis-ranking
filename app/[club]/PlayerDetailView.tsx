@@ -3,6 +3,7 @@ import type { PlayerDetail } from "@/lib/playerDetails";
 import Image from "next/image";
 
 import ClubRankingBackLink from "./ClubRankingBackLink";
+import PlayerProfileViewTracker from "./PlayerProfileViewTracker";
 
 function formatSummary(wins: number, losses: number) {
   return `${wins}승 ${losses}패`;
@@ -20,6 +21,7 @@ export default function PlayerDetailView({
 
   return (
     <main className="ranking-page campus-ranking-page player-detail-page">
+      <PlayerProfileViewTracker clubSlug={club.slug} rank={detail.rank} />
       <section className="summary-band campus-hero-band player-detail-hero">
         <div className="summary-inner">
           <ClubRankingBackLink
