@@ -11,7 +11,7 @@ const nationalClubPaths: Readonly<Record<string, string>> = {
   petc: "/clubs/korea-petc",
 };
 
-export const CAMPUS_RESULTS_BACK_LABEL = "동아리 대회 성적으로 돌아가기";
+export const CAMPUS_RESULTS_BACK_LABEL = "대회 성적 보기";
 
 export function getCampusResultsHref(
   clubSlug: string,

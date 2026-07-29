@@ -65,6 +65,24 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
+  it("상위 10위 행과 활동 피드를 모바일에서 촘촘하게 보여준다", () => {
+    expect(css).toMatch(
+      /\.campus-ranking-page \.ranking-row\.is-featured\s*\{[^}]*min-height:\s*64px;/
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.activity-strip\s*\{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\);/
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured\s*\{[^}]*grid-template-columns:\s*42px minmax\(0,\s*1fr\) 84px;[^}]*min-height:\s*62px;/
+    );
+  });
+
+  it("대회 성적의 교내 랭킹 이동은 상자 없는 텍스트 링크로 보여준다", () => {
+    expect(css).toMatch(
+      /\.national-club-campus-ranking-text-link\s*\{[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*border-bottom:\s*1px solid/
+    );
+  });
+
   it("히어로 통계는 카드형 네모 없이 한 줄 숫자 묶음과 오른쪽 시간 pill로 보여준다", () => {
     expect(css).toContain(
       ".campus-ranking-page .hero-meta-row {\n  display: flex;\n  align-items: flex-end;\n  justify-content: space-between;\n  gap: 18px;\n}"

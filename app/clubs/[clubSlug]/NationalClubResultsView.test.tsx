@@ -115,7 +115,7 @@ describe("NationalClubResultsView", () => {
     expect(screen.queryByText("국토정중앙배(양구)")).toBeNull();
     expect(
       screen
-        .getByRole("link", { name: "동아리 단식 랭킹 보기" })
+        .getByRole("link", { name: "단식 랭킹 보기" })
         .getAttribute("href")
     ).toBe("/seoultech?fromGender=women");
     expect(
@@ -158,7 +158,7 @@ describe("NationalClubResultsView", () => {
     );
     expect(
       screen
-        .getByRole("link", { name: "동아리 단식 랭킹 보기" })
+        .getByRole("link", { name: "단식 랭킹 보기" })
         .getAttribute("href")
     ).toBe("/seoultech?fromGender=men");
     const list = screen.getByRole("list", { name: "대회 성적" });
@@ -177,12 +177,17 @@ describe("NationalClubResultsView", () => {
     render(<NationalClubResultsView pageData={pageData} />);
 
     const campusRankingLink = screen.getByRole("link", {
-      name: "동아리 단식 랭킹 보기",
+      name: "단식 랭킹 보기",
     });
 
     expect(campusRankingLink.getAttribute("href")).toBe(
       "/seoultech?fromGender=combined"
     );
+    expect(
+      campusRankingLink.classList.contains(
+        "national-club-campus-ranking-text-link"
+      )
+    ).toBe(true);
 
     campusRankingLink.addEventListener("click", (event) => {
       event.preventDefault();
@@ -216,7 +221,7 @@ describe("NationalClubResultsView", () => {
 
     expect(
       screen
-        .getByRole("link", { name: "동아리 단식 랭킹 보기" })
+        .getByRole("link", { name: "단식 랭킹 보기" })
         .getAttribute("href")
     ).toBe("/petc?fromGender=combined");
   });
@@ -237,7 +242,7 @@ describe("NationalClubResultsView", () => {
     );
 
     expect(
-      screen.queryByRole("link", { name: "동아리 단식 랭킹 보기" })
+      screen.queryByRole("link", { name: "단식 랭킹 보기" })
     ).toBeNull();
   });
 });

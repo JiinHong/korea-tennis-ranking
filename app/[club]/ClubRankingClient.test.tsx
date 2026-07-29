@@ -53,7 +53,7 @@ describe("ClubRankingClient", () => {
 
     expect(
       screen
-        .getByRole("link", { name: "동아리 대회 성적으로 돌아가기" })
+        .getByRole("link", { name: "대회 성적 보기" })
         .getAttribute("href")
     ).toBe("/clubs/seoultech-neutinamu?gender=combined");
   });
@@ -75,7 +75,7 @@ describe("ClubRankingClient", () => {
 
     expect(
       screen
-        .getByRole("link", { name: "동아리 대회 성적으로 돌아가기" })
+        .getByRole("link", { name: "대회 성적 보기" })
         .getAttribute("href")
     ).toBe("/clubs/korea-petc?gender=women");
   });
@@ -329,7 +329,7 @@ describe("ClubRankingClient", () => {
     const { container } = render(<ClubRankingClient club={club} />);
 
     const nationalBackLink = screen.getByRole("link", {
-      name: "동아리 대회 성적으로 돌아가기",
+      name: "대회 성적 보기",
     });
     expect(nationalBackLink.getAttribute("href")).toBe(
       "/clubs/seoultech-neutinamu?gender=combined"
@@ -337,7 +337,7 @@ describe("ClubRankingClient", () => {
     expect(nationalBackLink.closest(".summary-inner")).not.toBeNull();
     expect(nationalBackLink.querySelector(".national-back-icon")).not.toBeNull();
     expect(nationalBackLink.querySelector(".national-back-label")?.textContent).toBe(
-      "동아리 대회 성적으로 돌아가기"
+      "대회 성적 보기"
     );
 
     const campusKicker = screen.getByText("캠퍼스 랭킹");
@@ -531,7 +531,7 @@ describe("ClubRankingClient", () => {
     ).toBeDefined();
   });
 
-  it("최근 경기 5개와 전체 경기 더보기 링크를 보여준다", async () => {
+  it("최근 경기 3개와 전체 경기 더보기 링크를 보여준다", async () => {
     const matches = Array.from({ length: 6 }, (_, index) => {
       const day = index + 1;
 
@@ -573,9 +573,10 @@ describe("ClubRankingClient", () => {
     expect(
       within(recentSection).getByRole("heading", { name: "최근 경기" })
     ).toBeDefined();
-    expect(within(recentSection).getAllByRole("listitem")).toHaveLength(5);
+    expect(within(recentSection).getAllByRole("listitem")).toHaveLength(3);
     expect(within(recentSection).getByText("도전자6")).toBeDefined();
-    expect(within(recentSection).queryByText("도전자1")).toBeNull();
+    expect(within(recentSection).getByText("도전자4")).toBeDefined();
+    expect(within(recentSection).queryByText("도전자3")).toBeNull();
     const matchList = within(recentSection).getByRole("list");
     const moreLink = within(recentSection).getByRole("link", {
       name: "전체 경기 더보기",

@@ -98,7 +98,7 @@ export default function NationalClubResultsView({
         <p>16강 이상 대회 최고 성적</p>
         {campusRankingLink ? (
           <Link
-            className="national-club-campus-ranking-link"
+            className="national-club-campus-ranking-text-link"
             href={`${campusRankingLink.href}?fromGender=${activeGender}`}
             onClick={() => {
               void trackAmplitudeEvent("Campus Ranking Link Clicked", {
@@ -108,7 +108,7 @@ export default function NationalClubResultsView({
               });
             }}
           >
-            동아리 단식 랭킹 보기
+            단식 랭킹 보기
             <ArrowRight aria-hidden="true" size={16} strokeWidth={2} />
           </Link>
         ) : null}

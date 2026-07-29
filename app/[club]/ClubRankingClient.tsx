@@ -381,7 +381,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
               title="최근 경기"
               eyebrow="Recent matches"
               ariaLabel="최근 경기"
-              limit={5}
+              limit={3}
               moreHref={`/${club.slug}/matches`}
             />
 
