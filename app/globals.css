@@ -1202,6 +1202,10 @@ button:disabled {
   background: var(--campus-bg);
 }
 
+.campus-ranking-page:not(.player-detail-page) {
+  background: white;
+}
+
 .campus-ranking-page .summary-inner,
 .campus-ranking-page .content-shell {
   width: min(980px, calc(100% - 28px));
@@ -1209,7 +1213,7 @@ button:disabled {
 
 .campus-hero-band {
   color: var(--campus-ink);
-  background: var(--campus-bg);
+  background: white;
   border-bottom: 1px solid var(--campus-line);
 }
 
@@ -1369,7 +1373,6 @@ button:disabled {
   gap: 12px;
 }
 
-.campus-ranking-page .hero-copy,
 .campus-ranking-page .state-panel {
   background: white;
   border: 1px solid var(--campus-line);
@@ -1383,6 +1386,10 @@ button:disabled {
   justify-content: space-between;
   min-height: 142px;
   padding: 20px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .campus-ranking-page .subtitle {
@@ -1555,7 +1562,7 @@ button:disabled {
 
 .campus-highlight-section {
   padding: 26px 20px 28px;
-  background: white;
+  background: transparent;
   border: 0;
   border-radius: 0;
   box-shadow: none;
@@ -1763,7 +1770,7 @@ button:disabled {
   gap: 16px;
   margin: 0;
   padding: 26px 20px 12px;
-  background: white;
+  background: transparent;
   border-top: 1px solid var(--campus-line);
 }
 
@@ -1966,7 +1973,7 @@ button:disabled {
 
 .matches-page .club-match-section {
   padding: 26px 20px 32px;
-  background: white;
+  background: transparent;
   border: 0;
   border-radius: 0;
   box-shadow: none;
@@ -2170,7 +2177,7 @@ button:disabled {
 }
 
 .campus-ranking-page .ranking-board {
-  background: white;
+  background: transparent;
   border: 0;
   border-radius: 0;
   box-shadow: none;
@@ -2192,7 +2199,7 @@ button:disabled {
 
 .campus-ranking-page .ranking-row.is-featured {
   min-height: 64px;
-  background: white;
+  background: transparent;
 }
 
 .campus-ranking-page .ranking-row.is-compact {

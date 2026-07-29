@@ -158,18 +158,24 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
-  it("하이라이트와 전체 랭킹은 카드 박스 없이 가로 구분선으로 이어진다", () => {
+  it("캠퍼스 랭킹 전체를 흰 지면 위의 열린 섹션으로 이어서 보여준다", () => {
+    expect(css).toMatch(
+      /\.campus-ranking-page:not\(\.player-detail-page\)\s*\{[^}]*background:\s*white;[^}]*\}/
+    );
     expect(css).toContain(
-      ".campus-highlight-section {\n  padding: 26px 20px 28px;\n  background: white;\n  border: 0;\n  border-radius: 0;\n  box-shadow: none;\n}"
+      ".campus-ranking-page .hero-copy {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  min-height: 142px;\n  padding: 20px;\n  background: transparent;\n  border: 0;\n  border-radius: 0;\n  box-shadow: none;\n}"
+    );
+    expect(css).toContain(
+      ".campus-highlight-section {\n  padding: 26px 20px 28px;\n  background: transparent;\n  border: 0;\n  border-radius: 0;\n  box-shadow: none;\n}"
     );
     expect(css).toContain(
       ".campus-highlight-section + .campus-highlight-section {\n  margin-top: 0;\n  border-top: 1px solid var(--campus-line);\n}"
     );
     expect(css).toContain(
-      ".campus-ranking-heading {\n  display: flex;\n  align-items: flex-end;\n  justify-content: space-between;\n  gap: 16px;\n  margin: 0;\n  padding: 26px 20px 12px;\n  background: white;\n  border-top: 1px solid var(--campus-line);\n}"
+      ".campus-ranking-heading {\n  display: flex;\n  align-items: flex-end;\n  justify-content: space-between;\n  gap: 16px;\n  margin: 0;\n  padding: 26px 20px 12px;\n  background: transparent;\n  border-top: 1px solid var(--campus-line);\n}"
     );
     expect(css).toContain(
-      ".campus-ranking-page .ranking-board {\n  background: white;\n  border: 0;\n  border-radius: 0;\n  box-shadow: none;\n}"
+      ".campus-ranking-page .ranking-board {\n  background: transparent;\n  border: 0;\n  border-radius: 0;\n  box-shadow: none;\n}"
     );
     expect(css).toContain(
       ".campus-ranking-page .rank-cell span {\n  color: var(--campus-red);\n  background: transparent;\n  border-radius: 0;\n}"
@@ -181,7 +187,7 @@ describe("campus ranking responsive title styles", () => {
 
   it("전체 경기 기록은 개별 카드 대신 가로 구분선 목록으로 보여준다", () => {
     expect(css).toContain(
-      ".matches-page .club-match-section {\n  padding: 26px 20px 32px;\n  background: white;\n  border: 0;\n  border-radius: 0;\n  box-shadow: none;\n}"
+      ".matches-page .club-match-section {\n  padding: 26px 20px 32px;\n  background: transparent;\n  border: 0;\n  border-radius: 0;\n  box-shadow: none;\n}"
     );
     expect(css).toContain(
       ".matches-page .club-match-list {\n  gap: 0;\n  border-top: 1px solid var(--campus-line);\n}"
