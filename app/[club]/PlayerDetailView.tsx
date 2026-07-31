@@ -61,10 +61,6 @@ export default function PlayerDetailView({
                 {detail.matches}경기
               </p>
             </div>
-            <div className="player-profile-record" aria-label="통산 승률">
-              <strong>{detail.winRate}%</strong>
-              <span>승률</span>
-            </div>
           </header>
 
           <div className="detail-stat-strip" aria-label="선수 통산 요약">

@@ -139,6 +139,7 @@ describe("PlayerPage", () => {
     expect(screen.getByRole("heading", { name: "오준석" })).toBeDefined();
     expect(screen.getByText(/통산 2승 1패/)).toBeDefined();
     expect(container.querySelector(".player-profile-header")).not.toBeNull();
+    expect(container.querySelector(".player-profile-record")).toBeNull();
     expect(container.querySelector(".detail-stat-strip")).not.toBeNull();
     expect(container.querySelectorAll(".detail-stat-item")).toHaveLength(4);
     expect(screen.getByText("시즌1")).toBeDefined();

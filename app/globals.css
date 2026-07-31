@@ -1206,6 +1206,10 @@ button:disabled {
   background: white;
 }
 
+.campus-ranking-page.player-detail-page {
+  background: white;
+}
+
 .campus-ranking-page .summary-inner,
 .campus-ranking-page .content-shell {
   width: min(980px, calc(100% - 28px));
@@ -2332,55 +2336,33 @@ button:disabled {
 }
 
 .player-detail-panel {
-  margin-bottom: 18px;
-  padding: 18px;
-  background: white;
-  border: 1px solid var(--campus-line);
-  border-radius: 8px;
-  box-shadow: var(--campus-shadow);
+  margin: 0;
+  padding: 28px 20px 56px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .player-detail-header {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 16px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--campus-line);
+  gap: 24px;
+  margin-bottom: 0;
+  padding-bottom: 26px;
+  border-bottom: 0;
 }
 
 .player-profile-main {
   min-width: 0;
 }
 
-.player-profile-record {
-  flex: 0 0 auto;
-  min-width: 74px;
-  text-align: right;
-}
-
-.player-profile-record strong {
-  display: block;
-  color: var(--campus-ink);
-  font-size: 28px;
-  font-weight: 950;
-  line-height: 1;
-}
-
-.player-profile-record span {
-  display: block;
-  margin-top: 6px;
-  color: var(--campus-muted);
-  font-size: 12px;
-  font-weight: 850;
-}
-
 .player-detail-header h2 {
-  margin: 6px 0 4px;
+  margin: 8px 0 5px;
   color: var(--campus-ink);
-  font-size: 28px;
-  line-height: 1.1;
+  font-size: 34px;
+  line-height: 1.05;
 }
 
 .player-detail-header p {
@@ -2407,11 +2389,11 @@ button:disabled {
 .detail-rank {
   display: inline-flex;
   align-items: center;
-  min-height: 24px;
-  padding: 0 8px;
+  min-height: 0;
+  padding: 0;
   color: var(--campus-red);
-  background: var(--campus-red-soft);
-  border-radius: 6px;
+  background: transparent;
+  border-radius: 0;
   font-size: 12px;
   font-weight: 900;
 }
@@ -2420,27 +2402,33 @@ button:disabled {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0;
-  margin-bottom: 16px;
-  overflow: hidden;
-  background: #fafbfc;
-  border: 1px solid var(--campus-line);
-  border-radius: 8px;
+  margin: 0 0 38px;
+  overflow: visible;
+  background: transparent;
+  border-top: 1px solid var(--campus-line);
+  border-bottom: 1px solid var(--campus-line);
+  border-radius: 0;
 }
 
 .detail-stat-item {
-  min-height: 70px;
-  padding: 12px;
+  min-height: 88px;
+  padding: 20px 18px;
   border-right: 1px solid var(--campus-line);
 }
 
+.detail-stat-item:first-child {
+  padding-left: 0;
+}
+
 .detail-stat-item:last-child {
+  padding-right: 0;
   border-right: 0;
 }
 
 .detail-stat-item strong {
   display: block;
   color: var(--campus-ink);
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 950;
   line-height: 1;
 }
@@ -2456,19 +2444,20 @@ button:disabled {
 .detail-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 48px;
+  margin-bottom: 36px;
 }
 
 .detail-section {
-  padding: 14px;
-  background: #fafbfc;
-  border: 1px solid var(--campus-line);
-  border-radius: 8px;
+  padding: 28px 0 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--campus-line);
+  border-radius: 0;
 }
 
 .detail-section-title {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .detail-section-title span {
@@ -2483,7 +2472,7 @@ button:disabled {
 .detail-section-title h3 {
   margin: 0;
   color: var(--campus-ink);
-  font-size: 17px;
+  font-size: 20px;
   line-height: 1.2;
 }
 
@@ -2491,7 +2480,8 @@ button:disabled {
 .opponent-record-list,
 .recent-match-list {
   display: grid;
-  gap: 7px;
+  gap: 0;
+  border-top: 1px solid var(--campus-line);
 }
 
 .season-record-item,
@@ -2500,11 +2490,12 @@ button:disabled {
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 12px;
-  min-height: 48px;
-  padding: 10px;
-  background: white;
-  border: 1px solid var(--campus-line);
-  border-radius: 8px;
+  min-height: 52px;
+  padding: 15px 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--campus-line);
+  border-radius: 0;
 }
 
 .season-record-item strong,
@@ -2543,11 +2534,12 @@ button:disabled {
   grid-template-columns: 42px minmax(0, 1fr) auto;
   align-items: center;
   gap: 10px;
-  min-height: 54px;
-  padding: 10px 12px;
-  background: white;
-  border: 1px solid var(--campus-line);
-  border-radius: 8px;
+  min-height: 58px;
+  padding: 15px 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--campus-line);
+  border-radius: 0;
 }
 
 .recent-match-main {
@@ -2576,12 +2568,12 @@ button:disabled {
 .match-score {
   justify-self: end;
   min-width: 42px;
+  padding: 0;
   color: var(--campus-ink);
-  background: #f4f5f7;
-  border: 1px solid var(--campus-line);
-  border-radius: 999px;
-  padding: 4px 9px;
-  font-size: 12px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  font-size: 13px;
   font-style: normal;
   font-weight: 900;
   white-space: nowrap;
@@ -2589,6 +2581,8 @@ button:disabled {
 
 .detail-empty {
   margin: 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--campus-line);
   color: var(--campus-muted);
   font-size: 13px;
   font-weight: 750;
@@ -3573,6 +3567,45 @@ button:disabled {
     width: min(100% - 20px, 420px);
   }
 
+  .player-detail-panel {
+    padding: 22px 10px 44px;
+  }
+
+  .player-detail-header {
+    gap: 12px;
+    padding-bottom: 22px;
+  }
+
+  .player-detail-header h2 {
+    font-size: 30px;
+  }
+
+  .detail-stat-strip {
+    margin-bottom: 30px;
+  }
+
+  .detail-stat-item {
+    min-height: 78px;
+    padding: 17px 12px;
+  }
+
+  .detail-stat-item:nth-child(2n + 1) {
+    padding-left: 0;
+  }
+
+  .detail-stat-item:nth-child(2n) {
+    padding-right: 0;
+  }
+
+  .detail-grid {
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+
+  .detail-section {
+    padding-top: 24px;
+  }
+
   .topbar {
     display: grid;
   }
@@ -3947,22 +3980,18 @@ button:disabled {
     align-items: start;
   }
 
-  .player-profile-record {
-    display: none;
-  }
-
   .player-detail-header button {
     justify-self: start;
   }
 
   .season-record-item,
   .opponent-record-item {
-    grid-template-columns: 1fr;
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
   }
 
   .recent-match-item {
-    grid-template-columns: 38px minmax(0, 1fr) auto;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
   }
 
 }

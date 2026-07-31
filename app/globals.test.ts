@@ -134,7 +134,7 @@ describe("campus ranking responsive title styles", () => {
 
   it("선수 상세 최근 경기의 승패 표시는 상자 없이 글자 색으로만 보여준다", () => {
     expect(css).toContain(
-      ".recent-match-item {\n  display: grid;\n  grid-template-columns: 42px minmax(0, 1fr) auto;\n  align-items: center;\n  gap: 10px;\n  min-height: 54px;\n  padding: 10px 12px;\n  background: white;\n  border: 1px solid var(--campus-line);\n  border-radius: 8px;\n}"
+      ".recent-match-item {\n  display: grid;\n  grid-template-columns: 42px minmax(0, 1fr) auto;\n  align-items: center;\n  gap: 10px;\n  min-height: 58px;\n  padding: 15px 0;\n  background: transparent;\n  border: 0;\n  border-bottom: 1px solid var(--campus-line);\n  border-radius: 0;\n}"
     );
     expect(css).toContain(
       ".recent-match-item .result-letter {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  justify-self: center;\n  color: var(--campus-muted);\n  font-size: 18px;\n  font-weight: 950;\n  line-height: 1;\n}"
@@ -150,6 +150,33 @@ describe("campus ranking responsive title styles", () => {
     );
     expect(css).not.toContain(".recent-match-item span {");
     expect(css).not.toContain(".result-pill {");
+  });
+
+  it("선수 상세 페이지는 중첩 카드 없이 열린 기록 레이아웃을 사용한다", () => {
+    expect(css).toContain(
+      ".campus-ranking-page.player-detail-page {\n  background: white;\n}"
+    );
+    expect(css).toContain(
+      ".player-detail-panel {\n  margin: 0;\n  padding: 28px 20px 56px;\n  background: transparent;\n  border: 0;\n  border-radius: 0;\n  box-shadow: none;\n}"
+    );
+    expect(css).toContain(
+      ".detail-rank {\n  display: inline-flex;\n  align-items: center;\n  min-height: 0;\n  padding: 0;\n  color: var(--campus-red);\n  background: transparent;\n  border-radius: 0;"
+    );
+    expect(css).toContain(
+      ".detail-stat-strip {\n  display: grid;\n  grid-template-columns: repeat(4, minmax(0, 1fr));\n  gap: 0;\n  margin: 0 0 38px;\n  overflow: visible;\n  background: transparent;\n  border-top: 1px solid var(--campus-line);\n  border-bottom: 1px solid var(--campus-line);\n  border-radius: 0;\n}"
+    );
+    expect(css).toContain(
+      ".detail-section {\n  padding: 28px 0 0;\n  background: transparent;\n  border: 0;\n  border-top: 1px solid var(--campus-line);\n  border-radius: 0;\n}"
+    );
+    expect(css).toContain(
+      ".season-record-item,\n.opponent-record-item {\n  display: grid;\n  grid-template-columns: minmax(0, 1fr) auto;\n  align-items: center;\n  gap: 12px;\n  min-height: 52px;\n  padding: 15px 0;\n  background: transparent;\n  border: 0;\n  border-bottom: 1px solid var(--campus-line);\n  border-radius: 0;\n}"
+    );
+    expect(css).toContain(
+      ".recent-match-item {\n  display: grid;\n  grid-template-columns: 42px minmax(0, 1fr) auto;\n  align-items: center;\n  gap: 10px;\n  min-height: 58px;\n  padding: 15px 0;\n  background: transparent;\n  border: 0;\n  border-bottom: 1px solid var(--campus-line);\n  border-radius: 0;\n}"
+    );
+    expect(css).toContain(
+      ".match-score {\n  justify-self: end;\n  min-width: 42px;\n  padding: 0;\n  color: var(--campus-ink);\n  background: transparent;\n  border: 0;\n  border-radius: 0;"
+    );
   });
 
   it("선수 상세 페이지는 전용 제목과 촘촘한 상단 여백을 사용한다", () => {
