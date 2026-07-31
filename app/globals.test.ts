@@ -3,6 +3,48 @@ import { join } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
+function findHoverSelectorsOutsideFinePointerMedia(css: string): string[] {
+  const unsafeSelectors: string[] = [];
+  const blockStack: Array<{ isFinePointerMedia: boolean }> = [];
+
+  for (const line of css.split("\n")) {
+    const trimmedLine = line.trim();
+    const leadingClosings = trimmedLine.match(/^}+/)?.[0].length ?? 0;
+
+    for (let index = 0; index < leadingClosings; index += 1) {
+      blockStack.pop();
+    }
+
+    if (
+      trimmedLine.includes(":hover") &&
+      !blockStack.some((block) => block.isFinePointerMedia)
+    ) {
+      unsafeSelectors.push(trimmedLine);
+    }
+
+    const openingCount = (trimmedLine.match(/{/g) ?? []).length;
+    const isFinePointerMedia =
+      /^@media\s*\(hover:\s*hover\)\s*and\s*\(pointer:\s*fine\)/.test(
+        trimmedLine
+      );
+
+    for (let index = 0; index < openingCount; index += 1) {
+      blockStack.push({
+        isFinePointerMedia: index === 0 && isFinePointerMedia,
+      });
+    }
+
+    const closingCount = (trimmedLine.match(/}/g) ?? []).length;
+    const remainingClosings = Math.max(0, closingCount - leadingClosings);
+
+    for (let index = 0; index < remainingClosings; index += 1) {
+      blockStack.pop();
+    }
+  }
+
+  return unsafeSelectors;
+}
+
 describe("site footer link styles", () => {
   const css = readFileSync(join(process.cwd(), "app/globals.css"), "utf8");
 
@@ -221,6 +263,16 @@ describe("campus ranking responsive title styles", () => {
     );
     expect(css).not.toMatch(
       /\n\.campus-recent-record-row:hover\s*\{/
+    );
+  });
+
+  it("사이트 전체 hover 피드백은 마우스가 있는 환경에서만 활성화한다", () => {
+    expect(findHoverSelectorsOutsideFinePointerMedia(css)).toEqual([]);
+  });
+
+  it("터치 환경에서는 링크와 버튼의 기본 탭 하이라이트를 숨긴다", () => {
+    expect(css).toMatch(
+      /@media\s*\(hover:\s*none\),\s*\(pointer:\s*coarse\)\s*\{[\s\S]*?a,\s*button,\s*\[role="button"\],\s*summary\s*\{[^}]*-webkit-tap-highlight-color:\s*transparent;[^}]*\}/
     );
   });
 

@@ -618,6 +618,15 @@ button:disabled {
   cursor: not-allowed;
 }
 
+@media (hover: none), (pointer: coarse) {
+  a,
+  button,
+  [role="button"],
+  summary {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
 @keyframes live-indicator-pulse {
   0%,
   100% {
@@ -728,8 +737,10 @@ button:disabled {
   border-radius: 8px;
 }
 
-.refresh-button:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.18);
+@media (hover: hover) and (pointer: fine) {
+  .refresh-button:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.18);
+  }
 }
 
 .hero-grid {
@@ -1059,8 +1070,10 @@ button:disabled {
   border-bottom: 0;
 }
 
-.ranking-row:hover {
-  background: #fbfdfb;
+@media (hover: hover) and (pointer: fine) {
+  .ranking-row:hover {
+    background: #fbfdfb;
+  }
 }
 
 .ranking-row:focus-visible,
@@ -1273,21 +1286,23 @@ button:disabled {
   transition: transform 160ms ease;
 }
 
-.national-back-link.campus-results-link:hover {
-  background: transparent;
-}
+@media (hover: hover) and (pointer: fine) {
+  .national-back-link.campus-results-link:hover {
+    background: transparent;
+  }
 
-.campus-results-link:hover .national-back-label {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
+  .campus-results-link:hover .national-back-label {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
 
-.campus-results-link:hover .national-back-icon {
-  transform: translateX(-2px) rotate(45deg);
-}
+  .campus-results-link:hover .national-back-icon {
+    transform: translateX(-2px) rotate(45deg);
+  }
 
-.national-back-link:hover {
-  background: rgba(31, 35, 40, 0.06);
+  .national-back-link:hover {
+    background: rgba(31, 35, 40, 0.06);
+  }
 }
 
 .national-back-link:focus-visible {
@@ -1399,8 +1414,10 @@ button:disabled {
   font-weight: 850;
 }
 
-.campus-ranking-page .refresh-button:hover:not(:disabled) {
-  background: var(--campus-red-soft);
+@media (hover: hover) and (pointer: fine) {
+  .campus-ranking-page .refresh-button:hover:not(:disabled) {
+    background: var(--campus-red-soft);
+  }
 }
 
 .campus-ranking-page .hero-grid {
@@ -1462,8 +1479,10 @@ button:disabled {
   white-space: nowrap;
 }
 
-.campus-rules-link:hover {
-  color: #941e12;
+@media (hover: hover) and (pointer: fine) {
+  .campus-rules-link:hover {
+    color: #941e12;
+  }
 }
 
 .campus-rules-link:focus-visible {
@@ -1533,8 +1552,10 @@ button:disabled {
   white-space: nowrap;
 }
 
-.match-entry-button:hover {
-  background: #30353b;
+@media (hover: hover) and (pointer: fine) {
+  .match-entry-button:hover {
+    background: #30353b;
+  }
 }
 
 .campus-ranking-page .live-stamp {
@@ -1736,9 +1757,11 @@ button:disabled {
   line-height: 1.25;
 }
 
-.campus-podium-player:hover {
-  color: var(--campus-red);
-  background: #fafbfc;
+@media (hover: hover) and (pointer: fine) {
+  .campus-podium-player:hover {
+    color: var(--campus-red);
+    background: #fafbfc;
+  }
 }
 
 .campus-podium-player:focus-visible,
@@ -1831,8 +1854,10 @@ button:disabled {
   transition: color 160ms ease;
 }
 
-.campus-ranking-history-link:hover {
-  color: var(--campus-red);
+@media (hover: hover) and (pointer: fine) {
+  .campus-ranking-history-link:hover {
+    color: var(--campus-red);
+  }
 }
 
 .match-entry-backdrop {
@@ -1895,9 +1920,11 @@ button:disabled {
   line-height: 1;
 }
 
-.match-entry-close:hover {
-  color: var(--campus-ink);
-  background: #f0f2f4;
+@media (hover: hover) and (pointer: fine) {
+  .match-entry-close:hover {
+    color: var(--campus-ink);
+    background: #f0f2f4;
+  }
 }
 
 .match-entry-form {
@@ -2001,8 +2028,10 @@ button:disabled {
   font-weight: 850;
 }
 
-.match-entry-submit:hover:not(:disabled) {
-  background: #30353b;
+@media (hover: hover) and (pointer: fine) {
+  .match-entry-submit:hover:not(:disabled) {
+    background: #30353b;
+  }
 }
 
 .match-entry-submit:disabled {
@@ -2059,8 +2088,10 @@ button:disabled {
   transition: color 140ms ease;
 }
 
-.club-match-more:hover {
-  color: var(--campus-ink);
+@media (hover: hover) and (pointer: fine) {
+  .club-match-more:hover {
+    color: var(--campus-ink);
+  }
 }
 
 .club-match-more:focus-visible {
@@ -2245,8 +2276,10 @@ button:disabled {
   min-height: 54px;
 }
 
-.campus-ranking-page .ranking-row:hover {
-  background: #fffafa;
+@media (hover: hover) and (pointer: fine) {
+  .campus-ranking-page .ranking-row:hover {
+    background: #fffafa;
+  }
 }
 
 .campus-ranking-page .rank-cell span {
@@ -2655,8 +2688,10 @@ button:disabled {
   text-underline-offset: 4px;
 }
 
-.national-methodology-link:hover {
-  color: var(--national-accent-strong);
+@media (hover: hover) and (pointer: fine) {
+  .national-methodology-link:hover {
+    color: var(--national-accent-strong);
+  }
 }
 
 .national-club-results-back {
@@ -2670,8 +2705,10 @@ button:disabled {
   font-weight: 800;
 }
 
-.national-club-results-back:hover {
-  color: var(--national-accent-strong);
+@media (hover: hover) and (pointer: fine) {
+  .national-club-results-back:hover {
+    color: var(--national-accent-strong);
+  }
 }
 
 .national-club-results-header {
@@ -2715,12 +2752,14 @@ button:disabled {
   transition: transform 160ms ease;
 }
 
-.national-club-campus-ranking-text-link:hover {
-  color: var(--national-ink);
-}
+@media (hover: hover) and (pointer: fine) {
+  .national-club-campus-ranking-text-link:hover {
+    color: var(--national-ink);
+  }
 
-.national-club-campus-ranking-text-link:hover svg {
-  transform: translateX(3px);
+  .national-club-campus-ranking-text-link:hover svg {
+    transform: translateX(3px);
+  }
 }
 
 .national-club-results-section {
@@ -3158,7 +3197,7 @@ button:disabled {
   transform: translate(-50%, 0);
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .national-ranking-honor:hover .national-ranking-honor-tooltip,
   .national-ranking-honor:focus-within .national-ranking-honor-tooltip {
     opacity: 1;
@@ -5598,9 +5637,11 @@ button:disabled {
     text-decoration-color 160ms ease;
 }
 
-.site-footer a:hover {
-  color: #ffffff;
-  text-decoration-color: #ffffff;
+@media (hover: hover) and (pointer: fine) {
+  .site-footer a:hover {
+    color: #ffffff;
+    text-decoration-color: #ffffff;
+  }
 }
 
 .site-footer a:focus-visible {
