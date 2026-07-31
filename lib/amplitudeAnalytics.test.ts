@@ -1,14 +1,29 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const amplitudeSdk = vi.hoisted(() => ({
-  initAll: vi.fn(() => Promise.resolve()),
-  setOptOut: vi.fn(),
-  track: vi.fn(),
-}));
+const amplitudeSdk = vi.hoisted(() => {
+  const identifyInstance = {
+    set: vi.fn(),
+  };
+  identifyInstance.set.mockReturnValue(identifyInstance);
+
+  return {
+    Identify: vi.fn(function Identify() {
+      return identifyInstance;
+    }),
+    identify: vi.fn(),
+    identifyInstance,
+    initAll: vi.fn(() => Promise.resolve()),
+    reset: vi.fn(),
+    setOptOut: vi.fn(),
+    setUserId: vi.fn(),
+    track: vi.fn(),
+  };
+});
 
 vi.mock("@amplitude/unified", () => amplitudeSdk);
 
 import {
+  setAmplitudeTrafficType,
   syncAmplitudeRoute,
   trackAmplitudeEvent,
 } from "./amplitudeAnalytics";
@@ -17,11 +32,27 @@ const analyticsStateKey = "__KOREA_TENNIS_AMPLITUDE_STATE__";
 
 describe("Amplitude analytics", () => {
   beforeEach(() => {
+    amplitudeSdk.Identify.mockClear();
+    amplitudeSdk.identify.mockClear();
+    amplitudeSdk.identifyInstance.set.mockClear();
     amplitudeSdk.initAll.mockClear();
+    amplitudeSdk.reset.mockClear();
     amplitudeSdk.setOptOut.mockClear();
+    amplitudeSdk.setUserId.mockClear();
     amplitudeSdk.track.mockClear();
     Reflect.deleteProperty(globalThis, analyticsStateKey);
     window.history.replaceState({}, "", "/");
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() =>
+        Promise.resolve(
+          new Response(JSON.stringify({ internal: false }), {
+            status: 200,
+            headers: { "content-type": "application/json" },
+          })
+        )
+      )
+    );
   });
 
   it("공개 페이지에서 Analytics와 Session Replay를 정확히 한 번 초기화한다", async () => {
@@ -54,10 +85,102 @@ describe("Amplitude analytics", () => {
             sessions: true,
             webVitals: true,
           },
+          identify: amplitudeSdk.identifyInstance,
           remoteConfig: { fetchRemoteConfig: false },
         },
         sessionReplay: { sampleRate: 1 },
       }
+    );
+  });
+
+  it("일반 방문자는 익명 상태를 유지하면서 external 속성을 먼저 설정한다", async () => {
+    await syncAmplitudeRoute("/");
+
+    expect(amplitudeSdk.identifyInstance.set).toHaveBeenCalledWith(
+      "traffic_type",
+      "external"
+    );
+
+    const [, initOptions] = amplitudeSdk.initAll.mock.calls[0];
+    expect(initOptions.analytics).not.toHaveProperty("userId");
+  });
+
+  it("등록된 브라우저는 첫 이벤트부터 고정 사용자 ID와 internal 속성을 사용한다", async () => {
+    vi.mocked(fetch).mockResolvedValueOnce(
+      new Response(JSON.stringify({ internal: true }), {
+        status: 200,
+        headers: { "content-type": "application/json" },
+      })
+    );
+
+    await syncAmplitudeRoute("/");
+
+    expect(amplitudeSdk.identifyInstance.set).toHaveBeenCalledWith(
+      "traffic_type",
+      "internal"
+    );
+
+    const [, initOptions] = amplitudeSdk.initAll.mock.calls[0];
+    expect(initOptions.analytics).toMatchObject({
+      userId: "internal:jinhong",
+      identify: amplitudeSdk.identifyInstance,
+    });
+  });
+
+  it("동시에 여러 초기화 요청이 와도 내부 사용자 상태는 한 번만 조회한다", async () => {
+    await Promise.all([
+      syncAmplitudeRoute("/"),
+      syncAmplitudeRoute("/methodology"),
+      syncAmplitudeRoute("/clubs/seoultech-neutinamu"),
+    ]);
+
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fetch).toHaveBeenCalledWith("/api/internal/analytics", {
+      cache: "no-store",
+      credentials: "same-origin",
+    });
+  });
+
+  it("등록 직후 현재 SDK 사용자를 내부 사용자로 전환한다", async () => {
+    await syncAmplitudeRoute("/");
+    amplitudeSdk.Identify.mockClear();
+    amplitudeSdk.identify.mockClear();
+    amplitudeSdk.identifyInstance.set.mockClear();
+
+    await setAmplitudeTrafficType("internal");
+
+    expect(amplitudeSdk.setUserId).toHaveBeenCalledWith("internal:jinhong");
+    expect(amplitudeSdk.identifyInstance.set).toHaveBeenCalledWith(
+      "traffic_type",
+      "internal"
+    );
+    expect(amplitudeSdk.identify).toHaveBeenCalledWith(
+      amplitudeSdk.identifyInstance
+    );
+  });
+
+  it("등록 해제 시 내부 사용자 ID만 제거하고 external 속성을 설정한다", async () => {
+    vi.mocked(fetch).mockResolvedValueOnce(
+      new Response(JSON.stringify({ internal: true }), {
+        status: 200,
+        headers: { "content-type": "application/json" },
+      })
+    );
+    await syncAmplitudeRoute("/");
+    amplitudeSdk.Identify.mockClear();
+    amplitudeSdk.identify.mockClear();
+    amplitudeSdk.identifyInstance.set.mockClear();
+
+    await setAmplitudeTrafficType("external");
+
+    expect(amplitudeSdk.setUserId).toHaveBeenCalledWith(undefined);
+    expect(amplitudeSdk.reset).not.toHaveBeenCalled();
+    expect(amplitudeSdk.identifyInstance.set).toHaveBeenCalledWith(
+      "traffic_type",
+      "external"
+    );
+    expect(amplitudeSdk.identify).toHaveBeenCalledWith(
+      amplitudeSdk.identifyInstance
     );
   });
 
@@ -101,6 +224,7 @@ describe("Amplitude analytics", () => {
   it("관리자 페이지에 직접 접속하면 분석 도구를 초기화하지 않는다", async () => {
     await syncAmplitudeRoute("/admin/players");
 
+    expect(fetch).not.toHaveBeenCalled();
     expect(amplitudeSdk.initAll).not.toHaveBeenCalled();
     expect(amplitudeSdk.setOptOut).not.toHaveBeenCalled();
   });

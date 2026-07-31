@@ -1,0 +1,312 @@
+.page {
+  min-height: 100vh;
+  padding: 72px 20px 96px;
+  color: #171b1f;
+  background:
+    linear-gradient(180deg, rgba(232, 239, 235, 0.66), transparent 360px),
+    #f5f7f6;
+}
+
+.shell {
+  width: min(680px, 100%);
+  margin: 0 auto;
+}
+
+.header {
+  padding: 0 4px 34px;
+  border-bottom: 1px solid #dfe4e1;
+}
+
+.header p {
+  margin: 0 0 12px;
+  color: #1a3b2b;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: clamp(32px, 7vw, 48px);
+  font-weight: 850;
+  line-height: 1.14;
+  letter-spacing: 0;
+}
+
+.header span {
+  display: block;
+  margin-top: 14px;
+  color: #667169;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+.registration {
+  margin-top: 28px;
+  padding: 28px;
+  background: #fff;
+  border: 1px solid #dfe4e1;
+  border-radius: 8px;
+  box-shadow: 0 14px 38px rgba(26, 59, 43, 0.06);
+}
+
+.statusRow {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+}
+
+.statusIcon {
+  display: grid;
+  width: 44px;
+  aspect-ratio: 1;
+  place-items: center;
+  color: #667169;
+  background: #f0f3f1;
+  border-radius: 50%;
+}
+
+.statusIcon.internal {
+  color: #1a3b2b;
+  background: #e8efeb;
+}
+
+.statusIcon svg {
+  width: 21px;
+  height: 21px;
+  stroke-width: 2;
+}
+
+.statusLabel {
+  margin: 0 0 4px;
+  color: #667169;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.statusRow h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #1a3b2b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.verified svg {
+  width: 15px;
+  height: 15px;
+}
+
+.form,
+.registeredActions {
+  margin-top: 26px;
+  padding-top: 24px;
+  border-top: 1px solid #e7ebe8;
+}
+
+.form label {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.inputRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+}
+
+.inputRow input {
+  min-width: 0;
+  height: 48px;
+  padding: 0 14px;
+  color: #171b1f;
+  font: inherit;
+  font-size: 14px;
+  background: #f8f9f8;
+  border: 1px solid #d6dcd8;
+  border-radius: 6px;
+  outline: none;
+}
+
+.inputRow input:focus {
+  border-color: #1a3b2b;
+  box-shadow: 0 0 0 3px rgba(26, 59, 43, 0.12);
+}
+
+.inputRow button,
+.removeButton {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 17px;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  background: #1a3b2b;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.inputRow button:disabled,
+.removeButton:disabled {
+  cursor: wait;
+  opacity: 0.48;
+}
+
+.formHint {
+  margin: 9px 0 0;
+  color: #7a837d;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.registeredActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.registeredActions p {
+  max-width: 410px;
+  margin: 0;
+  color: #667169;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.65;
+}
+
+.registeredActions strong {
+  color: #171b1f;
+  font-weight: 800;
+}
+
+.removeButton {
+  min-height: 42px;
+  color: #9b3f3d;
+  background: #fff;
+  border: 1px solid #dcc3c2;
+}
+
+.removeButton svg {
+  width: 16px;
+  height: 16px;
+}
+
+.message {
+  margin: 18px 0 0;
+  padding-top: 16px;
+  color: #1a3b2b;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.55;
+  border-top: 1px solid #e7ebe8;
+}
+
+.guide {
+  padding: 36px 4px 0;
+}
+
+.guide h2 {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 850;
+}
+
+.guide ol {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 24px;
+  color: #353d38;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.guide p {
+  margin: 20px 0 0;
+  color: #737d76;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+.loading {
+  display: flex;
+  min-height: 140px;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 28px;
+  color: #667169;
+  font-size: 14px;
+  font-weight: 750;
+  background: #fff;
+  border: 1px solid #dfe4e1;
+  border-radius: 8px;
+}
+
+.loading span {
+  width: 9px;
+  aspect-ratio: 1;
+  background: #1a3b2b;
+  border-radius: 50%;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.3;
+    transform: scale(0.72);
+  }
+}
+
+@media (max-width: 560px) {
+  .page {
+    padding: 48px 16px 72px;
+  }
+
+  .registration {
+    padding: 22px 18px;
+  }
+
+  .statusRow {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .verified {
+    grid-column: 2;
+  }
+
+  .inputRow {
+    grid-template-columns: 1fr;
+  }
+
+  .inputRow button {
+    width: 100%;
+  }
+
+  .registeredActions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
