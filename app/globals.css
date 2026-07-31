@@ -1752,6 +1752,7 @@ button:disabled {
 }
 
 .campus-recent-record-row {
+  -webkit-tap-highlight-color: transparent;
   display: grid;
   grid-template-columns: 86px minmax(0, 1fr) auto;
   align-items: center;
@@ -1792,9 +1793,11 @@ button:disabled {
   white-space: nowrap;
 }
 
-.campus-recent-record-row:hover {
-  color: var(--campus-red);
-  background: #fafbfc;
+@media (hover: hover) and (pointer: fine) {
+  .campus-recent-record-row:hover {
+    color: var(--campus-red);
+    background: #fafbfc;
+  }
 }
 
 .campus-ranking-heading {

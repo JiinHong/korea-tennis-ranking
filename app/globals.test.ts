@@ -185,6 +185,18 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
+  it("최근 30일 기록은 터치 스크롤 중 hover 색으로 바뀌지 않는다", () => {
+    expect(css).toContain(
+      ".campus-recent-record-row {\n  -webkit-tap-highlight-color: transparent;"
+    );
+    expect(css).toMatch(
+      /@media \(hover: hover\) and \(pointer: fine\)\s*\{[^]*\.campus-recent-record-row:hover\s*\{[^}]*color:\s*var\(--campus-red\);[^}]*background:\s*#fafbfc;[^}]*\}[^]*\}/
+    );
+    expect(css).not.toMatch(
+      /\n\.campus-recent-record-row:hover\s*\{/
+    );
+  });
+
   it("전체 경기 기록은 개별 카드 대신 가로 구분선 목록으로 보여준다", () => {
     expect(css).toContain(
       ".matches-page .club-match-section {\n  padding: 26px 20px 32px;\n  background: transparent;\n  border: 0;\n  border-radius: 0;\n  box-shadow: none;\n}"
