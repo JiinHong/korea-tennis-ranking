@@ -11,7 +11,14 @@ const nationalClubPaths: Readonly<Record<string, string>> = {
   petc: "/clubs/korea-petc",
 };
 
-export const CAMPUS_RESULTS_BACK_LABEL = "대회 성적 보러가기";
+const campusResultsLabels: Readonly<Record<string, string>> = {
+  seoultech: "느티나무 대회 성적 보러가기",
+  petc: "PETC 대회 성적 보러가기",
+};
+
+export function getCampusResultsBackLabel(clubSlug: string) {
+  return campusResultsLabels[clubSlug] ?? "대회 성적 보러가기";
+}
 
 export function getCampusResultsHref(
   clubSlug: string,
@@ -36,8 +43,9 @@ export default function CampusResultsBackLink({
 
   return (
     <NationalRankingBackLink
+      className="campus-results-link is-forward"
       href={getCampusResultsHref(clubSlug, gender)}
-      label={CAMPUS_RESULTS_BACK_LABEL}
+      label={getCampusResultsBackLabel(clubSlug)}
       showLabel
     />
   );

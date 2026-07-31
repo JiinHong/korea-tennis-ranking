@@ -1250,6 +1250,40 @@ button:disabled {
   line-height: 1;
 }
 
+.campus-results-link {
+  flex-direction: row-reverse;
+  min-height: 40px;
+  margin-bottom: 12px;
+  padding-inline: 4px 8px;
+  color: var(--green-800);
+}
+
+.campus-results-link .national-back-label {
+  font-size: 15px;
+  font-weight: 850;
+}
+
+.campus-results-link .national-back-icon {
+  width: 15px;
+  height: 15px;
+  border-width: 0 0 3px 3px;
+  transform: rotate(225deg);
+  transition: transform 160ms ease;
+}
+
+.national-back-link.campus-results-link:hover {
+  background: transparent;
+}
+
+.campus-results-link:hover .national-back-label {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.campus-results-link:hover .national-back-icon {
+  transform: translateX(2px) rotate(225deg);
+}
+
 .national-back-link:hover {
   background: rgba(31, 35, 40, 0.06);
 }

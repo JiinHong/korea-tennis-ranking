@@ -7,7 +7,7 @@ import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
 import { buildRecent30Highlights } from "@/lib/campusRankingHighlights";
 import CampusResultsBackLink, {
-  CAMPUS_RESULTS_BACK_LABEL,
+  getCampusResultsBackLabel,
   getCampusResultsHref,
 } from "./CampusResultsBackLink";
 import { getPlayerDetailPath } from "./playerPaths";
@@ -234,8 +234,9 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
           <Suspense
             fallback={
               <NationalRankingBackLink
+                className="campus-results-link is-forward"
                 href={getCampusResultsHref(club.slug, "combined")}
-                label={CAMPUS_RESULTS_BACK_LABEL}
+                label={getCampusResultsBackLabel(club.slug)}
                 showLabel
               />
             }

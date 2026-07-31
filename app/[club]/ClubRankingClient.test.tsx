@@ -53,7 +53,7 @@ describe("ClubRankingClient", () => {
 
     expect(
       screen
-        .getByRole("link", { name: "대회 성적 보러가기" })
+        .getByRole("link", { name: "느티나무 대회 성적 보러가기" })
         .getAttribute("href")
     ).toBe("/clubs/seoultech-neutinamu?gender=combined");
   });
@@ -75,7 +75,7 @@ describe("ClubRankingClient", () => {
 
     expect(
       screen
-        .getByRole("link", { name: "대회 성적 보러가기" })
+        .getByRole("link", { name: "PETC 대회 성적 보러가기" })
         .getAttribute("href")
     ).toBe("/clubs/korea-petc?gender=women");
   });
@@ -324,15 +324,17 @@ describe("ClubRankingClient", () => {
     const { container } = render(<ClubRankingClient club={club} />);
 
     const nationalBackLink = screen.getByRole("link", {
-      name: "대회 성적 보러가기",
+      name: "느티나무 대회 성적 보러가기",
     });
     expect(nationalBackLink.getAttribute("href")).toBe(
       "/clubs/seoultech-neutinamu?gender=combined"
     );
+    expect(nationalBackLink.classList.contains("campus-results-link")).toBe(true);
+    expect(nationalBackLink.classList.contains("is-forward")).toBe(true);
     expect(nationalBackLink.closest(".summary-inner")).not.toBeNull();
     expect(nationalBackLink.querySelector(".national-back-icon")).not.toBeNull();
     expect(nationalBackLink.querySelector(".national-back-label")?.textContent).toBe(
-      "대회 성적 보러가기"
+      "느티나무 대회 성적 보러가기"
     );
 
     const campusKicker = screen.getByText("캠퍼스 랭킹");

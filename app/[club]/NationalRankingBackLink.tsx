@@ -4,10 +4,12 @@ export default function NationalRankingBackLink({
   showLabel = false,
   href = NATIONAL_RANKING_URL,
   label: customLabel,
+  className,
 }: {
   showLabel?: boolean;
   href?: string;
   label?: string;
+  className?: string;
 }) {
   const label =
     customLabel ??
@@ -17,7 +19,13 @@ export default function NationalRankingBackLink({
 
   return (
     <a
-      className={`national-back-link${showLabel ? " is-labeled" : ""}`}
+      className={[
+        "national-back-link",
+        showLabel ? "is-labeled" : "",
+        className ?? "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
       href={href}
       aria-label={label}
     >
