@@ -330,7 +330,7 @@ describe("ClubRankingClient", () => {
       "/clubs/seoultech-neutinamu?gender=combined"
     );
     expect(nationalBackLink.classList.contains("campus-results-link")).toBe(true);
-    expect(nationalBackLink.classList.contains("is-forward")).toBe(true);
+    expect(nationalBackLink.classList.contains("is-forward")).toBe(false);
     expect(nationalBackLink.closest(".summary-inner")).not.toBeNull();
     expect(nationalBackLink.querySelector(".national-back-icon")).not.toBeNull();
     expect(nationalBackLink.querySelector(".national-back-label")?.textContent).toBe(

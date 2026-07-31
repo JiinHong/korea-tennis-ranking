@@ -1255,10 +1255,9 @@ button:disabled {
 }
 
 .campus-results-link {
-  flex-direction: row-reverse;
   min-height: 40px;
   margin-bottom: 12px;
-  padding-inline: 4px 8px;
+  padding-inline: 8px 4px;
   color: var(--green-800);
 }
 
@@ -1271,7 +1270,6 @@ button:disabled {
   width: 15px;
   height: 15px;
   border-width: 0 0 3px 3px;
-  transform: rotate(225deg);
   transition: transform 160ms ease;
 }
 
@@ -1285,7 +1283,7 @@ button:disabled {
 }
 
 .campus-results-link:hover .national-back-icon {
-  transform: translateX(2px) rotate(225deg);
+  transform: translateX(-2px) rotate(45deg);
 }
 
 .national-back-link:hover {

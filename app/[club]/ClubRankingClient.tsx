@@ -234,7 +234,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
           <Suspense
             fallback={
               <NationalRankingBackLink
-                className="campus-results-link is-forward"
+                className="campus-results-link"
                 href={getCampusResultsHref(club.slug, "combined")}
                 label={getCampusResultsBackLabel(club.slug)}
                 showLabel

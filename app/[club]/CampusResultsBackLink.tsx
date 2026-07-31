@@ -43,7 +43,7 @@ export default function CampusResultsBackLink({
 
   return (
     <NationalRankingBackLink
-      className="campus-results-link is-forward"
+      className="campus-results-link"
       href={getCampusResultsHref(clubSlug, gender)}
       label={getCampusResultsBackLabel(clubSlug)}
       showLabel
