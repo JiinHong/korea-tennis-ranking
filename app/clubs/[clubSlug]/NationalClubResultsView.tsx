@@ -86,7 +86,7 @@ export default function NationalClubResultsView({
     <>
       <Link
         className="national-club-results-back"
-        href={`/?gender=${activeGender}`}
+        href="/?gender=men"
       >
         <span aria-hidden="true">←</span>
         전국 랭킹 보러가기

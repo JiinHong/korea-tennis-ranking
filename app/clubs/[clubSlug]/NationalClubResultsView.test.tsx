@@ -100,10 +100,10 @@ describe("NationalClubResultsView", () => {
       screen.getByRole("link", { name: "전국 랭킹 보러가기" }).getAttribute(
         "href"
       )
-    ).toBe("/?gender=combined");
+    ).toBe("/?gender=men");
   });
 
-  it("여자부 URL로 들어오면 여자 기록만 보여주고 뒤로가기도 여자부를 보존한다", () => {
+  it("여자부 URL로 들어와도 전국 랭킹 링크는 남자부로 이동한다", () => {
     navigation.query = "gender=women";
     render(<NationalClubResultsView pageData={pageData} />);
 
@@ -122,7 +122,7 @@ describe("NationalClubResultsView", () => {
       screen.getByRole("link", { name: "전국 랭킹 보러가기" }).getAttribute(
         "href"
       )
-    ).toBe("/?gender=women");
+    ).toBe("/?gender=men");
   });
 
   it("전체 연도의 우승·준우승·4강에 금·은·동 왕관을 표시한다", () => {

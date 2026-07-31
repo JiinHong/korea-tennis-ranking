@@ -71,7 +71,7 @@ describe("NationalClubResultsPage", () => {
       screen.getByRole("link", { name: "전국 랭킹 보러가기" }).getAttribute(
         "href"
       )
-    ).toBe("/?gender=combined");
+    ).toBe("/?gender=men");
   });
 
   it("확인된 16강 이상 성적이 없으면 조용한 빈 상태를 보여준다", async () => {
