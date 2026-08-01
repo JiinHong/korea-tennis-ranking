@@ -305,6 +305,18 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
+  it("모바일 랭킹의 순위와 변동 숫자를 한눈에 읽을 수 있게 표시한다", () => {
+    expect(css).toMatch(
+      /@media \(max-width: 560px\)\s*\{[^]*?\.campus-ranking-page \.ranking-row\.is-featured \.rank-cell span\s*\{[^}]*font-size:\s*15px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /@media \(max-width: 560px\)\s*\{[^]*?\.campus-ranking-page \.ranking-row\.is-compact \.rank-cell span\s*\{[^}]*font-size:\s*13px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /@media \(max-width: 560px\)\s*\{[^]*?\.campus-ranking-page \.rank-movement\s*\{[^}]*font-size:\s*12px;[^}]*\}/
+    );
+  });
+
   it("사이트 전체 hover 피드백은 마우스가 있는 환경에서만 활성화한다", () => {
     expect(findHoverSelectorsOutsideFinePointerMedia(css)).toEqual([]);
   });

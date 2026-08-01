@@ -104,7 +104,7 @@ function parseMatchDate(dateText: string) {
   }
 
   return {
-    label: `${month}.${day}`,
+    label: `${month}/${day}`,
     sortKey: year * 10_000 + month * 100 + day,
   };
 }

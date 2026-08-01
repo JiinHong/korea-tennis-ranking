@@ -4158,7 +4158,11 @@ button:disabled {
     width: auto;
     min-width: 18px;
     height: auto;
-    font-size: 13px;
+    font-size: 15px;
+  }
+
+  .campus-ranking-page .rank-movement {
+    font-size: 12px;
   }
 
   .campus-ranking-page .ranking-row.is-featured .rank-cell,
@@ -4231,7 +4235,7 @@ button:disabled {
     width: auto;
     min-width: 18px;
     height: auto;
-    font-size: 11px;
+    font-size: 13px;
   }
 
   .campus-ranking-page .ranking-row.is-compact .rank-cell {

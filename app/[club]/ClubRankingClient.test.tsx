@@ -396,7 +396,7 @@ describe("ClubRankingClient", () => {
       name: "홍순범 상세 전적 보기",
     });
 
-    expect(within(playedRow).getByText("최근 경기 7.29")).toBeDefined();
+    expect(within(playedRow).getByText("최근 경기 7/29")).toBeDefined();
     expect(within(playedRow).queryByText("2경기 출전")).toBeNull();
     expect(within(playedRow).getByText("2경기")).toBeDefined();
     expect(playedRow.querySelectorAll(".form-dot")).toHaveLength(5);
