@@ -125,7 +125,7 @@ function RankMovement({ rankChange }: { rankChange: number }) {
         className="rank-movement is-up"
         aria-label={`최근 ${RANKING_MOVEMENT_WINDOW_DAYS}일 동안 ${rankChange}계단 상승`}
       >
-        ▲ {rankChange}
+        ↑ {rankChange}
       </small>
     );
   }
@@ -138,7 +138,7 @@ function RankMovement({ rankChange }: { rankChange: number }) {
         className="rank-movement is-down"
         aria-label={`최근 ${RANKING_MOVEMENT_WINDOW_DAYS}일 동안 ${drop}계단 하락`}
       >
-        ▼ {drop}
+        ↓ {drop}
       </small>
     );
   }

@@ -191,10 +191,10 @@ describe("ClubRankingClient", () => {
 
     expect(
       (await screen.findByLabelText("최근 30일 동안 2계단 상승")).textContent
-    ).toBe("▲ 2");
+    ).toBe("↑ 2");
     expect(
       screen.getByLabelText("최근 30일 동안 1계단 하락").textContent
-    ).toBe("▼ 1");
+    ).toBe("↓ 1");
     expect(screen.queryByLabelText("지난주와 같은 순위")).toBeNull();
   });
 

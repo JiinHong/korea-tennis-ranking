@@ -118,7 +118,7 @@ describe("campus ranking responsive title styles", () => {
       /\.campus-recent-record-row\s*\{[^}]*grid-template-columns:\s*86px minmax\(0,\s*1fr\) auto;[^}]*min-height:\s*49px;/
     );
     expect(css).toMatch(
-      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured\s*\{[^}]*grid-template-columns:\s*42px minmax\(0,\s*1fr\) 84px;[^}]*min-height:\s*62px;/
+      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured\s*\{[^}]*grid-template-columns:\s*60px minmax\(0,\s*1fr\) 84px;[^}]*min-height:\s*62px;/
     );
     expect(css).not.toContain(".campus-ranking-page .activity-strip {");
   });
@@ -255,14 +255,17 @@ describe("campus ranking responsive title styles", () => {
     expect(css).toContain(
       ".campus-ranking-page .ranking-board {\n  background: transparent;\n  border: 0;\n  border-radius: 0;\n  box-shadow: none;\n}"
     );
+    expect(css).toMatch(
+      /\.campus-ranking-page \.rank-cell span\s*\{[^}]*color:\s*var\(--campus-ink\);[^}]*background:\s*transparent;[^}]*border-radius:\s*0;/
+    );
+    expect(css).toMatch(
+      /\.rank-movement\.is-up\s*\{[^}]*color:\s*#168a4b;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.rank-movement\.is-down\s*\{[^}]*color:\s*#d62961;[^}]*\}/
+    );
     expect(css).toContain(
-      ".campus-ranking-page .rank-cell span {\n  color: var(--campus-red);\n  background: transparent;\n  border-radius: 0;\n}"
-    );
-    expect(css).toMatch(
-      /\.rank-movement\.is-up\s*\{[^}]*color:\s*#2563eb;[^}]*\}/
-    );
-    expect(css).toMatch(
-      /\.rank-movement\.is-down\s*\{[^}]*color:\s*#d72d1f;[^}]*\}/
+      ".campus-ranking-page .rank-cell {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  gap: 5px;\n}"
     );
     expect(css).toMatch(
       /\.campus-ranking-history-link\s*\{[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*text-decoration:\s*none;/
