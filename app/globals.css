@@ -3768,8 +3768,9 @@ button:disabled {
 
   .campus-ranking-page .ranking-row.is-compact {
     grid-template-columns: 60px minmax(0, 1fr) 132px;
-    min-height: 58px;
-    padding: 8px 0;
+    min-height: 54px;
+    padding: 5px 0;
+    row-gap: 0;
   }
 
   .rank-cell,
@@ -3798,6 +3799,15 @@ button:disabled {
     font-size: 12px;
   }
 
+  .campus-ranking-page .ranking-row.is-compact .rank-cell {
+    grid-row: 1 / span 2;
+  }
+
+  .campus-ranking-page .ranking-row.is-compact .player-cell,
+  .campus-ranking-page .ranking-row.is-compact .record-cell {
+    grid-row: 1;
+  }
+
   .campus-ranking-page .ranking-row.is-compact .player-name-line strong {
     font-size: 14px;
   }
@@ -3818,7 +3828,12 @@ button:disabled {
   }
 
   .campus-ranking-page .ranking-row.is-compact .recent-form {
-    display: none;
+    display: flex;
+    grid-column: 2 / 4;
+    grid-row: 2;
+    justify-content: flex-end;
+    min-width: 0;
+    padding-top: 0;
   }
 
   .club-match-card {
@@ -4130,8 +4145,8 @@ button:disabled {
 
   .campus-ranking-page .ranking-row.is-featured {
     grid-template-columns: 60px minmax(0, 1fr) 84px;
-    min-height: 62px;
-    padding: 6px 0;
+    min-height: 58px;
+    padding: 4px 0;
     row-gap: 1px;
   }
 
@@ -4201,8 +4216,9 @@ button:disabled {
 
   .campus-ranking-page .ranking-row.is-compact {
     grid-template-columns: 60px minmax(0, 1fr) 96px;
-    min-height: 54px;
-    padding: 7px 0;
+    min-height: 50px;
+    padding: 4px 0;
+    row-gap: 0;
   }
 
   .campus-ranking-page .ranking-row.is-compact .rank-cell,
@@ -4219,6 +4235,7 @@ button:disabled {
   }
 
   .campus-ranking-page .ranking-row.is-compact .rank-cell {
+    grid-row: 1 / span 2;
     padding: 0 4px;
   }
 
@@ -4239,7 +4256,7 @@ button:disabled {
 
   .campus-ranking-page .ranking-row.is-compact .record-cell {
     grid-column: 3;
-    grid-row: 1 / span 2;
+    grid-row: 1;
     align-self: center;
     justify-items: end;
     text-align: right;
@@ -4253,6 +4270,22 @@ button:disabled {
 
   .campus-ranking-page .ranking-row.is-compact .record-cell span {
     font-size: 10px;
+  }
+
+  .campus-ranking-page .ranking-row.is-compact .recent-form {
+    display: flex;
+    grid-column: 2 / 4;
+    grid-row: 2;
+    justify-content: flex-end;
+    gap: 4px;
+    min-width: 0;
+    padding: 0 10px 0 6px;
+  }
+
+  .campus-ranking-page .ranking-row.is-compact .form-dot {
+    width: 14px;
+    height: 14px;
+    font-size: 6px;
   }
 
   .recent-form {

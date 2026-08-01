@@ -96,6 +96,59 @@ function formatRecord(player: Player) {
   return `${player.wins}승 ${player.losses}패`;
 }
 
+function parseMatchDate(dateText: string) {
+  const [year, month, day] = dateText.match(/\d+/g)?.map(Number) ?? [];
+
+  if (!year || !month || !day) {
+    return null;
+  }
+
+  return {
+    label: `${month}.${day}`,
+    sortKey: year * 10_000 + month * 100 + day,
+  };
+}
+
+function buildLatestMatchDates(matches: MatchRecord[]) {
+  const latestByPlayer = new Map<
+    string,
+    { label: string; sortKey: number }
+  >();
+
+  for (const match of matches) {
+    const parsedDate = parseMatchDate(match.date);
+
+    if (!parsedDate) {
+      continue;
+    }
+
+    for (const playerName of [match.challenger, match.defender]) {
+      const previous = latestByPlayer.get(playerName);
+
+      if (!previous || parsedDate.sortKey > previous.sortKey) {
+        latestByPlayer.set(playerName, parsedDate);
+      }
+    }
+  }
+
+  return latestByPlayer;
+}
+
+function formatPlayerActivity(
+  player: Player,
+  latestMatchDate: string | null
+) {
+  if (player.matches === 0) {
+    return "경기 기록 없음";
+  }
+
+  if (latestMatchDate) {
+    return `최근 경기 ${latestMatchDate}`;
+  }
+
+  return "최근 경기일 확인 중";
+}
+
 function RecentForm({ recent5 }: { recent5: string[] }) {
   const form = recent5.slice(-5);
   const blanks = Array.from({ length: Math.max(0, 5 - form.length) });
@@ -148,10 +201,12 @@ function RankMovement({ rankChange }: { rankChange: number }) {
 
 function RankingRow({
   player,
+  latestMatchDate,
   detailHref,
   onOpen,
 }: {
   player: Player;
+  latestMatchDate: string | null;
   detailHref: string;
   onOpen: () => void;
 }) {
@@ -180,7 +235,7 @@ function RankingRow({
           ) : null}
         </div>
         <span className="player-sub">
-          {player.matches > 0 ? `${player.matches}경기 출전` : "경기 기록 없음"}
+          {formatPlayerActivity(player, latestMatchDate)}
         </span>
       </div>
       <div className="record-cell">
@@ -245,6 +300,10 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
   const rankedPlayers = useMemo(() => {
     return [...players].sort((a, b) => a.rank - b.rank);
   }, [players]);
+  const latestMatchDates = useMemo(
+    () => buildLatestMatchDates(matches),
+    [matches]
+  );
   const topThree = rankedPlayers.slice(0, 3);
   const podiumPlayers = [topThree[1], topThree[0], topThree[2]].filter(
     (player): player is Player => player !== undefined
@@ -557,6 +616,9 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                   <RankingRow
                     key={player.name}
                     player={player}
+                    latestMatchDate={
+                      latestMatchDates.get(player.name)?.label ?? null
+                    }
                     detailHref={getPlayerDetailPath(club.slug, player.name)}
                     onOpen={() => {
                       void trackAmplitudeEvent("Player Profile Opened", {

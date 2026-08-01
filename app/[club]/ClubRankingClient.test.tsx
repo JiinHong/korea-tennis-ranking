@@ -329,6 +329,78 @@ describe("ClubRankingClient", () => {
     expect(tenthRow.classList.contains("is-compact")).toBe(false);
     expect(eleventhRow.classList.contains("is-compact")).toBe(true);
     expect(eleventhRow.classList.contains("is-featured")).toBe(false);
+    expect(tenthRow.querySelectorAll(".form-dot")).toHaveLength(5);
+    expect(eleventhRow.querySelectorAll(".form-dot")).toHaveLength(5);
+  });
+
+  it("이름 아래 중복 경기 수 대신 선수의 가장 최근 경기일을 보여준다", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          players: [
+            {
+              rank: 11,
+              name: "배진욱",
+              note: "",
+              wins: 1,
+              losses: 1,
+              matches: 2,
+              recent5: ["W", "L"],
+            },
+            {
+              rank: 12,
+              name: "홍순범",
+              note: "",
+              wins: 0,
+              losses: 0,
+              matches: 0,
+              recent5: [],
+            },
+          ],
+          matches: [
+            {
+              date: "2026. 7. 29",
+              challenger: "배진욱",
+              challengerRank: 11,
+              defender: "조인석",
+              defenderRank: 9,
+              winner: "배진욱",
+              score: "6:4",
+              defenseResult: "방어 실패",
+            },
+            {
+              date: "2026. 7. 2",
+              challenger: "홍순범",
+              challengerRank: 15,
+              defender: "배진욱",
+              defenderRank: 13,
+              winner: "홍순범",
+              score: "6:3",
+              defenseResult: "방어 실패",
+            },
+          ],
+          detailsByPlayer: {},
+        }),
+      })
+    );
+
+    render(<ClubRankingClient club={club} />);
+
+    const playedRow = await screen.findByRole("link", {
+      name: "배진욱 상세 전적 보기",
+    });
+    const idleRow = screen.getByRole("link", {
+      name: "홍순범 상세 전적 보기",
+    });
+
+    expect(within(playedRow).getByText("최근 경기 7.29")).toBeDefined();
+    expect(within(playedRow).queryByText("2경기 출전")).toBeNull();
+    expect(within(playedRow).getByText("2경기")).toBeDefined();
+    expect(playedRow.querySelectorAll(".form-dot")).toHaveLength(5);
+    expect(within(idleRow).getByText("경기 기록 없음")).toBeDefined();
   });
 
   it("캠퍼스 피드형 랭킹 화면 언어를 보여준다", async () => {

@@ -118,9 +118,24 @@ describe("campus ranking responsive title styles", () => {
       /\.campus-recent-record-row\s*\{[^}]*grid-template-columns:\s*86px minmax\(0,\s*1fr\) auto;[^}]*min-height:\s*49px;/
     );
     expect(css).toMatch(
-      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured\s*\{[^}]*grid-template-columns:\s*60px minmax\(0,\s*1fr\) 84px;[^}]*min-height:\s*62px;/
+      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured\s*\{[^}]*grid-template-columns:\s*60px minmax\(0,\s*1fr\) 84px;[^}]*min-height:\s*58px;/
     );
     expect(css).not.toContain(".campus-ranking-page .activity-strip {");
+  });
+
+  it("모바일의 모든 선수 행에 최근 5경기 슬롯을 유지하면서 행 높이를 줄인다", () => {
+    expect(css).not.toContain(
+      ".campus-ranking-page .ranking-row.is-compact .recent-form {\n    display: none;\n  }"
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured\s*\{[^}]*min-height:\s*58px;[^}]*padding:\s*4px 0;/
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-compact\s*\{[^}]*min-height:\s*50px;[^}]*padding:\s*4px 0;/
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-compact \.recent-form\s*\{[^}]*display:\s*flex;[^}]*grid-column:\s*2 \/ 4;[^}]*grid-row:\s*2;/
+    );
   });
 
   it("대회 성적의 교내 랭킹 이동은 밑줄 없는 텍스트 링크로 보여준다", () => {
