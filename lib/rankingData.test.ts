@@ -40,6 +40,7 @@ describe("buildPlayer", () => {
         rank: 1,
         name: "오준석",
         note: "",
+        rankChange: 0,
         wins: 0,
         losses: 1,
         matches: 1,
@@ -49,6 +50,7 @@ describe("buildPlayer", () => {
         rank: 2,
         name: "김도훈",
         note: "",
+        rankChange: 0,
         wins: 2,
         losses: 0,
         matches: 2,
@@ -58,6 +60,7 @@ describe("buildPlayer", () => {
         rank: 3,
         name: "박정용",
         note: "손목 부상",
+        rankChange: 0,
         wins: 0,
         losses: 1,
         matches: 1,
@@ -81,5 +84,24 @@ describe("buildPlayer", () => {
       note: "왼손잡이",
       status: "injured",
     });
+  });
+
+  it("지난 월요일 순위와 현재 순위의 차이를 선수 데이터에 전달한다", () => {
+    const ranking: RankingData[] = [
+      { rank: 1, name: "오준석", note: "" },
+      { rank: 2, name: "김도훈", note: "" },
+      { rank: 3, name: "박정용", note: "" },
+    ];
+
+    expect(
+      buildPlayer(ranking, [], {
+        오준석: 2,
+        김도훈: -1,
+      }).map(({ name, rankChange }) => ({ name, rankChange }))
+    ).toEqual([
+      { name: "오준석", rankChange: 2 },
+      { name: "김도훈", rankChange: -1 },
+      { name: "박정용", rankChange: 0 },
+    ]);
   });
 });

@@ -241,6 +241,15 @@ describe("campus ranking responsive title styles", () => {
       ".campus-highlight-section + .campus-highlight-section {\n  margin-top: 0;\n  border-top: 1px solid var(--campus-line);\n}"
     );
     expect(css).toContain(
+      ".campus-result-update {\n  margin: 20px 20px 5px;\n  padding: 14px 15px;\n  background: #fff7f5;\n  border-left: 3px solid var(--campus-red);\n}"
+    );
+    expect(css).toContain(
+      ".campus-result-update-title {\n  display: block;\n  margin-top: 5px;\n  color: var(--campus-ink);\n  font-size: 16px;\n  font-weight: 900;\n  line-height: 1.45;\n}"
+    );
+    expect(css).toContain(
+      ".campus-result-update-link {\n  display: inline-flex;\n  align-items: center;\n  margin-top: 9px;\n  color: var(--campus-green);\n  font-size: 13px;\n  font-weight: 850;\n  text-decoration: none;\n}"
+    );
+    expect(css).toContain(
       ".campus-ranking-heading {\n  display: flex;\n  align-items: flex-end;\n  justify-content: space-between;\n  gap: 16px;\n  margin: 0;\n  padding: 26px 20px 12px;\n  background: transparent;\n  border-top: 1px solid var(--campus-line);\n}"
     );
     expect(css).toContain(
@@ -248,6 +257,12 @@ describe("campus ranking responsive title styles", () => {
     );
     expect(css).toContain(
       ".campus-ranking-page .rank-cell span {\n  color: var(--campus-red);\n  background: transparent;\n  border-radius: 0;\n}"
+    );
+    expect(css).toMatch(
+      /\.rank-movement\.is-up\s*\{[^}]*color:\s*#2563eb;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.rank-movement\.is-down\s*\{[^}]*color:\s*#d72d1f;[^}]*\}/
     );
     expect(css).toMatch(
       /\.campus-ranking-history-link\s*\{[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*text-decoration:\s*none;/

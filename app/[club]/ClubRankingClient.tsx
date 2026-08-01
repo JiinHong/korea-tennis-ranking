@@ -10,6 +10,7 @@ import CampusResultsBackLink, {
   getCampusResultsBackLabel,
   getCampusResultsHref,
 } from "./CampusResultsBackLink";
+import CampusResultUpdateLink from "./CampusResultUpdateLink";
 import { getPlayerDetailPath } from "./playerPaths";
 import MatchEntryDialog from "./MatchEntryDialog";
 import NationalRankingBackLink from "./NationalRankingBackLink";
@@ -18,6 +19,7 @@ type Player = {
   rank: number;
   name: string;
   note: string;
+  rankChange: number;
   status?: "active" | "injured" | "inactive" | "left";
   wins: number;
   losses: number;
@@ -115,6 +117,38 @@ function RecentForm({ recent5 }: { recent5: string[] }) {
   );
 }
 
+function RankMovement({ rankChange }: { rankChange: number }) {
+  if (rankChange > 0) {
+    return (
+      <small
+        className="rank-movement is-up"
+        aria-label={`지난주보다 ${rankChange}계단 상승`}
+      >
+        ▲ {rankChange}
+      </small>
+    );
+  }
+
+  if (rankChange < 0) {
+    const drop = Math.abs(rankChange);
+
+    return (
+      <small
+        className="rank-movement is-down"
+        aria-label={`지난주보다 ${drop}계단 하락`}
+      >
+        ▼ {drop}
+      </small>
+    );
+  }
+
+  return (
+    <small className="rank-movement is-steady" aria-label="지난주와 같은 순위">
+      –
+    </small>
+  );
+}
+
 function RankingRow({
   player,
   detailHref,
@@ -136,6 +170,7 @@ function RankingRow({
     >
       <div className="rank-cell">
         <span>{player.rank}</span>
+        <RankMovement rankChange={player.rankChange ?? 0} />
       </div>
       <div className="player-cell">
         <div className="player-name-line">
@@ -449,6 +484,24 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                 </div>
               </section>
             ) : null}
+
+            <Suspense
+              fallback={
+                <aside
+                  className="campus-result-update"
+                  aria-label="대회 결과 업데이트"
+                >
+                  <span className="campus-result-update-kicker">
+                    Tournament update
+                  </span>
+                  <strong className="campus-result-update-title">
+                    2026 하늘내린인제 결과가 반영됐어요
+                  </strong>
+                </aside>
+              }
+            >
+              <CampusResultUpdateLink clubSlug={club.slug} />
+            </Suspense>
 
             <div className="campus-ranking-heading">
               <h2 className="campus-ranking-list-title">전체 랭킹</h2>

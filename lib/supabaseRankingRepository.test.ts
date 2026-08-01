@@ -66,6 +66,10 @@ function createAdapter(): SupabaseRankingAdapter {
         source: "import",
       },
     ]),
+    listWeeklyRankingSnapshots: vi.fn().mockResolvedValue([
+      { playerId: "p1", rank: 3 },
+      { playerId: "p2", rank: 1 },
+    ]),
     getRuleConfig: vi.fn().mockResolvedValue({
       challengeRange: 4,
       rematchCooldownDays: 14,
@@ -78,12 +82,20 @@ describe("getSupabaseRankingTables", () => {
   test("maps Supabase rows into current ranking, current matches, and historical matches", async () => {
     const adapter = createAdapter();
 
-    const result = await getSupabaseRankingTables("seoultech", adapter);
+    const result = await getSupabaseRankingTables(
+      "seoultech",
+      adapter,
+      new Date("2026-08-01T12:00:00Z")
+    );
 
     expect(adapter.getClubBySlug).toHaveBeenCalledWith("seoultech");
     expect(adapter.getCurrentSeason).toHaveBeenCalledWith("club-1");
     expect(adapter.listSeasonPlayers).toHaveBeenCalledWith("season-3");
     expect(adapter.listConfirmedMatches).toHaveBeenCalledWith("club-1");
+    expect(adapter.listWeeklyRankingSnapshots).toHaveBeenCalledWith(
+      "season-3",
+      "2026-07-27"
+    );
     expect(result).toEqual({
       currentSeasonName: "시즌3",
       ranking: [
@@ -116,6 +128,10 @@ describe("getSupabaseRankingTables", () => {
           sourceNote: "import",
         },
       ],
+      rankChanges: {
+        오준석: 2,
+        김도훈: -1,
+      },
     });
   });
 

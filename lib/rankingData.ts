@@ -13,12 +13,14 @@ type RankingSourceTables = {
     ranking: RankingData[];
     matches: MatchRecord[];
     historicalMatches: Awaited<ReturnType<typeof getHistoricalMatchLogTable>>;
+    rankChanges: Record<string, number>;
 }
 
 export type Player = {
     rank: number;
     name: string;
     note: string;
+    rankChange: number;
     status?: PlayerStatus;
     wins: number;
     losses: number;
@@ -87,7 +89,8 @@ function lose(player: Player): Player {
 
 export function buildPlayer(
     ranking: RankingData[],
-    matches: MatchRecord[]
+    matches: MatchRecord[],
+    rankChanges: Record<string, number> = {}
 ): Player[] {
     // Record는 파이썬으로 따지면 dict임.
     const stats: Record<string, Player> = {};
@@ -97,6 +100,7 @@ export function buildPlayer(
             rank: rankingData.rank,
             name: rankingData.name,
             note: rankingData.note,
+            rankChange: rankChanges[rankingData.name] ?? 0,
             ...(rankingData.status ? {status: rankingData.status} : {}),
             wins: 0,
             losses: 0,
@@ -143,9 +147,9 @@ export async function getRankingData() {
 }
 
 export async function getRankingDataForClub(club: ClubConfig) {
-    const {currentSeasonName, ranking, matches, historicalMatches} =
+    const {currentSeasonName, ranking, matches, historicalMatches, rankChanges} =
         await getRankingSourceTables(club);
-    const players = buildPlayer(ranking, matches);
+    const players = buildPlayer(ranking, matches, rankChanges);
     const summary = buildRankingSummary(matches);
     const detailsByPlayer = buildPlayerDetails(
         players,
@@ -187,5 +191,6 @@ async function getRankingSourceTables(club: ClubConfig): Promise<RankingSourceTa
         ranking,
         matches,
         historicalMatches,
+        rankChanges: {},
     };
 }

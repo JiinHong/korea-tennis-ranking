@@ -8,6 +8,7 @@ import type {
   RankingRuleConfig,
 } from "@/lib/rankingRules";
 import { getSupabaseReadClient } from "@/lib/supabaseServer";
+import { getKstWeekStart } from "@/lib/weeklyRankingSnapshots";
 
 export type SupabaseClubRow = {
   id: string;
@@ -47,10 +48,19 @@ export type SupabaseMatchRow = {
   source: string;
 };
 
+export type SupabaseWeeklyRankingSnapshotRow = {
+  playerId: string;
+  rank: number;
+};
+
 export type SupabaseRankingAdapter = {
   getClubBySlug(slug: string): Promise<SupabaseClubRow | null>;
   getCurrentSeason(clubId: string): Promise<SupabaseSeasonRow | null>;
   listSeasonPlayers(seasonId: string): Promise<SupabaseSeasonPlayerRow[]>;
+  listWeeklyRankingSnapshots(
+    seasonId: string,
+    weekStart: string
+  ): Promise<SupabaseWeeklyRankingSnapshotRow[]>;
   listConfirmedMatches(clubId: string): Promise<SupabaseMatchRow[]>;
   getRuleConfig(
     clubId: string,
@@ -63,6 +73,7 @@ export type SupabaseRankingTables = {
   ranking: RankingData[];
   matches: MatchRecord[];
   historicalMatches: HistoricalMatchRecord[];
+  rankChanges: Record<string, number>;
 };
 
 export type SupabaseMatchValidationContext = {
@@ -102,7 +113,8 @@ function toMatchRecord(match: SupabaseMatchRow): MatchRecord {
 
 export async function getSupabaseRankingTables(
   clubSlug: string,
-  adapter: SupabaseRankingAdapter = createSupabaseRankingAdapter()
+  adapter: SupabaseRankingAdapter = createSupabaseRankingAdapter(),
+  now = new Date()
 ): Promise<SupabaseRankingTables> {
   const club = await adapter.getClubBySlug(clubSlug);
 
@@ -116,19 +128,35 @@ export async function getSupabaseRankingTables(
     throw new Error(`Current season not found for club: ${clubSlug}`);
   }
 
-  const [seasonPlayers, confirmedMatches] = await Promise.all([
+  const weekStart = getKstWeekStart(now);
+  const [seasonPlayers, confirmedMatches, weeklySnapshots] = await Promise.all([
     adapter.listSeasonPlayers(currentSeason.id),
     adapter.listConfirmedMatches(club.id),
+    adapter.listWeeklyRankingSnapshots(currentSeason.id, weekStart),
   ]);
+
+  const snapshotRanks = new Map(
+    weeklySnapshots.map((snapshot) => [snapshot.playerId, snapshot.rank])
+  );
+  const rankChanges: Record<string, number> = {};
 
   const ranking = seasonPlayers
     .filter((seasonPlayer) => seasonPlayer.status !== "left")
-    .map((seasonPlayer) => ({
-      rank: seasonPlayer.rank,
-      name: displayName(seasonPlayer.player),
-      note: seasonPlayer.note,
-      status: seasonPlayer.status,
-    }));
+    .map((seasonPlayer) => {
+      const name = displayName(seasonPlayer.player);
+      const snapshotRank = snapshotRanks.get(seasonPlayer.player.id);
+
+      rankChanges[name] = snapshotRank
+        ? snapshotRank - seasonPlayer.rank
+        : 0;
+
+      return {
+        rank: seasonPlayer.rank,
+        name,
+        note: seasonPlayer.note,
+        status: seasonPlayer.status,
+      };
+    });
 
   const matches: MatchRecord[] = [];
   const historicalMatches: HistoricalMatchRecord[] = [];
@@ -152,6 +180,7 @@ export async function getSupabaseRankingTables(
     ranking,
     matches,
     historicalMatches,
+    rankChanges,
   };
 }
 
@@ -276,6 +305,22 @@ export function createSupabaseRankingAdapter(): SupabaseRankingAdapter {
           player: toPlayerIdentity(player),
         };
       });
+    },
+    async listWeeklyRankingSnapshots(seasonId, weekStart) {
+      const { data, error } = await supabase
+        .from("weekly_ranking_snapshots")
+        .select("player_id, rank")
+        .eq("season_id", seasonId)
+        .eq("week_start", weekStart);
+
+      if (error) {
+        throw error;
+      }
+
+      return (data ?? []).map((row) => ({
+        playerId: row.player_id,
+        rank: row.rank,
+      }));
     },
     async listConfirmedMatches(clubId) {
       const { data, error } = await supabase

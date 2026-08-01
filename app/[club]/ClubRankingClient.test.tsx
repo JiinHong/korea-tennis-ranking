@@ -95,6 +95,103 @@ describe("ClubRankingClient", () => {
     ).toBe("/clubs/korea-petc?gender=women");
   });
 
+  it("동아리별 최신 대회 결과 안내를 성별을 유지한 링크로 보여준다", async () => {
+    navigation.query = "fromGender=women";
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          players: [],
+          detailsByPlayer: {},
+        }),
+      })
+    );
+
+    const { rerender } = render(<ClubRankingClient club={club} />);
+
+    const seoultechLink = await screen.findByRole("link", {
+      name: "느티나무 대회 기록 확인하기",
+    });
+    expect(screen.getByText("2026 하늘내린인제 결과가 반영됐어요")).toBeDefined();
+    expect(seoultechLink.getAttribute("href")).toBe(
+      "/clubs/seoultech-neutinamu?gender=women"
+    );
+
+    rerender(
+      <ClubRankingClient
+        club={{
+          ...club,
+          slug: "petc",
+          title: "고려대학교 체육교육과 PETC 테니스 단식 랭킹",
+          titleLines: ["고려대학교 체육교육과 PETC", "테니스 단식 랭킹"],
+        }}
+      />
+    );
+
+    expect(
+      await screen.findByRole("link", {
+        name: "PETC 대회 기록 확인하기",
+      })
+    ).toBeDefined();
+  });
+
+  it("지난 월요일과 비교한 순위 상승, 하락, 유지를 랭킹 옆에 표시한다", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          players: [
+            {
+              rank: 1,
+              name: "오준석",
+              note: "",
+              rankChange: 2,
+              wins: 0,
+              losses: 0,
+              matches: 0,
+              recent5: [],
+            },
+            {
+              rank: 2,
+              name: "김도훈",
+              note: "",
+              rankChange: -1,
+              wins: 0,
+              losses: 0,
+              matches: 0,
+              recent5: [],
+            },
+            {
+              rank: 3,
+              name: "박정용",
+              note: "",
+              rankChange: 0,
+              wins: 0,
+              losses: 0,
+              matches: 0,
+              recent5: [],
+            },
+          ],
+          detailsByPlayer: {},
+        }),
+      })
+    );
+
+    render(<ClubRankingClient club={club} />);
+
+    expect(
+      (await screen.findByLabelText("지난주보다 2계단 상승")).textContent
+    ).toBe("▲ 2");
+    expect(screen.getByLabelText("지난주보다 1계단 하락").textContent).toBe(
+      "▼ 1"
+    );
+    expect(screen.getByLabelText("지난주와 같은 순위").textContent).toBe("–");
+  });
+
   it("운영 규칙 문서로 이동하는 링크와 클릭 로그를 제공한다", async () => {
     vi.stubGlobal(
       "fetch",
@@ -563,7 +660,7 @@ describe("ClubRankingClient", () => {
     expect(within(playerLink).getByText("부상")).toBeDefined();
   });
 
-  it("TOP 3, 최근 30일 기록, 전체 랭킹을 순서대로 보여준다", async () => {
+  it("TOP 3, 최근 30일 기록, 대회 결과 안내, 전체 랭킹을 순서대로 보여준다", async () => {
     vi.useFakeTimers({
       shouldAdvanceTime: true,
     });
@@ -691,6 +788,10 @@ describe("ClubRankingClient", () => {
     expect(within(recentRecords).getByText("1회")).toBeDefined();
 
     const rankingHeading = screen.getByRole("heading", { name: "전체 랭킹" });
+    const resultUpdateLink = screen.getByRole("link", {
+      name: "느티나무 대회 기록 확인하기",
+    });
+    const resultUpdate = resultUpdateLink.closest("aside");
     const historyLink = screen.getByRole("link", { name: "최근 경기 보기" });
     historyLink.addEventListener("click", (event) => event.preventDefault());
 
@@ -700,6 +801,15 @@ describe("ClubRankingClient", () => {
     ).toBeTruthy();
     expect(
       recentRecords.compareDocumentPosition(rankingHeading) &
+        Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy();
+    expect(resultUpdate).not.toBeNull();
+    expect(
+      recentRecords.compareDocumentPosition(resultUpdate as Node) &
+        Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy();
+    expect(
+      (resultUpdate as Node).compareDocumentPosition(rankingHeading) &
         Node.DOCUMENT_POSITION_FOLLOWING
     ).toBeTruthy();
     expect(historyLink.getAttribute("href")).toBe("/seoultech/matches");
