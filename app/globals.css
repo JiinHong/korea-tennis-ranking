@@ -1434,26 +1434,116 @@ button:disabled {
 }
 
 .campus-ranking-loading-state {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  min-height: clamp(280px, 48vh, 520px);
+  width: min(100%, 720px);
+  min-height: clamp(300px, 48vh, 520px);
+  margin: 0 auto;
+  padding: 54px 0 72px;
   color: var(--campus-ink);
 }
 
+.campus-ranking-loading-copy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
 .campus-ranking-loading-state strong {
-  font-size: 16px;
-  line-height: 1;
+  display: block;
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.campus-ranking-loading-state p {
+  margin: 4px 0 0;
+  color: var(--campus-muted);
+  font-size: 13px;
+  line-height: 1.45;
 }
 
 .campus-ranking-loading-indicator {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   flex: 0 0 auto;
   background: var(--green-700);
   border-radius: 999px;
   animation: campus-ranking-loading-pulse 1.2s ease-in-out infinite;
+}
+
+.campus-ranking-loading-list {
+  width: min(100%, 620px);
+  margin: 38px auto 0;
+  border-top: 1px solid var(--campus-line);
+}
+
+.campus-ranking-loading-row {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 88px;
+  align-items: center;
+  gap: 18px;
+  min-height: 72px;
+  border-bottom: 1px solid var(--campus-line);
+}
+
+.campus-ranking-skeleton-rank,
+.campus-ranking-skeleton-player > span,
+.campus-ranking-skeleton-record > span {
+  background: linear-gradient(
+    90deg,
+    #e9eeeb 20%,
+    #f7f9f8 38%,
+    #e9eeeb 58%
+  );
+  background-size: 220% 100%;
+  animation: campus-ranking-skeleton-shimmer 1.6s ease-in-out infinite;
+}
+
+.campus-ranking-skeleton-rank {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+.campus-ranking-skeleton-player,
+.campus-ranking-skeleton-record {
+  display: grid;
+  gap: 8px;
+}
+
+.campus-ranking-skeleton-player > span:first-child {
+  width: 104px;
+  height: 12px;
+  border-radius: 999px;
+}
+
+.campus-ranking-skeleton-player > span:last-child {
+  width: 64px;
+  height: 9px;
+  border-radius: 999px;
+}
+
+.campus-ranking-skeleton-record {
+  justify-items: end;
+}
+
+.campus-ranking-skeleton-record > span:first-child {
+  width: 56px;
+  height: 12px;
+  border-radius: 999px;
+}
+
+.campus-ranking-skeleton-record > span:last-child {
+  width: 34px;
+  height: 9px;
+  border-radius: 999px;
+}
+
+.campus-ranking-loading-row:nth-child(2) span {
+  animation-delay: 120ms;
+}
+
+.campus-ranking-loading-row:nth-child(3) span {
+  animation-delay: 240ms;
 }
 
 @keyframes campus-ranking-loading-pulse {
@@ -1466,6 +1556,45 @@ button:disabled {
   50% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes campus-ranking-skeleton-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .campus-ranking-loading-state {
+    padding: 44px 0 64px;
+  }
+
+  .campus-ranking-loading-copy {
+    justify-content: flex-start;
+  }
+
+  .campus-ranking-loading-list {
+    margin-top: 32px;
+  }
+
+  .campus-ranking-loading-row {
+    grid-template-columns: 34px minmax(0, 1fr) 72px;
+    gap: 12px;
+    min-height: 66px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .campus-ranking-loading-indicator,
+  .campus-ranking-skeleton-rank,
+  .campus-ranking-skeleton-player > span,
+  .campus-ranking-skeleton-record > span {
+    animation: none;
   }
 }
 

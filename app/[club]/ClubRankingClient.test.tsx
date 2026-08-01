@@ -37,10 +37,10 @@ describe("ClubRankingClient", () => {
     vi.useRealTimers();
   });
 
-  it("초기 로딩 중에는 브랜드와 로딩 문구만 보여준다", () => {
+  it("초기 로딩 중에는 브랜드와 랭킹 스켈레톤만 보여준다", () => {
     vi.stubGlobal("fetch", vi.fn(() => new Promise(() => {})));
 
-    render(<ClubRankingClient club={club} />);
+    const { container } = render(<ClubRankingClient club={club} />);
 
     expect(
       screen.getByRole("heading", {
@@ -50,7 +50,13 @@ describe("ClubRankingClient", () => {
     expect(
       screen.getByRole("img", { name: "서울과학기술대학교 로고" })
     ).toBeDefined();
-    expect(screen.getByRole("status").textContent).toBe("랭킹 불러오는 중");
+    expect(
+      screen.getByText("실시간 순위를 불러오고 있어요")
+    ).toBeDefined();
+    expect(screen.getByText("잠시만 기다려주세요")).toBeDefined();
+    expect(
+      container.querySelectorAll(".campus-ranking-loading-row")
+    ).toHaveLength(3);
     expect(screen.queryByLabelText("랭킹 요약")).toBeNull();
     expect(
       screen.queryByRole("button", { name: "경기 결과 입력" })

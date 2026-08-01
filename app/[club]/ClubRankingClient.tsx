@@ -377,8 +377,32 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
             role="status"
             aria-live="polite"
           >
-            <span className="campus-ranking-loading-indicator" aria-hidden="true" />
-            <strong>랭킹 불러오는 중</strong>
+            <div className="campus-ranking-loading-copy">
+              <span
+                className="campus-ranking-loading-indicator"
+                aria-hidden="true"
+              />
+              <div>
+                <strong>실시간 순위를 불러오고 있어요</strong>
+                <p>잠시만 기다려주세요</p>
+              </div>
+            </div>
+
+            <div className="campus-ranking-loading-list" aria-hidden="true">
+              {[0, 1, 2].map((row) => (
+                <div className="campus-ranking-loading-row" key={row}>
+                  <span className="campus-ranking-skeleton-rank" />
+                  <span className="campus-ranking-skeleton-player">
+                    <span />
+                    <span />
+                  </span>
+                  <span className="campus-ranking-skeleton-record">
+                    <span />
+                    <span />
+                  </span>
+                </div>
+              ))}
+            </div>
           </section>
         ) : null}
 
