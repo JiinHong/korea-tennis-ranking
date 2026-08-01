@@ -167,7 +167,9 @@ function RankingRow({
     >
       <div className="rank-cell">
         <span>{player.rank}</span>
-        <RankMovement rankChange={player.rankChange ?? 0} />
+        {player.matches > 0 ? (
+          <RankMovement rankChange={player.rankChange ?? 0} />
+        ) : null}
       </div>
       <div className="player-cell">
         <div className="player-name-line">

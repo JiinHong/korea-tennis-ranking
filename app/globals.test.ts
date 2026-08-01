@@ -265,7 +265,10 @@ describe("campus ranking responsive title styles", () => {
       /\.rank-movement\.is-down\s*\{[^}]*color:\s*#d62961;[^}]*\}/
     );
     expect(css).toContain(
-      ".campus-ranking-page .rank-cell {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  gap: 5px;\n}"
+      ".campus-ranking-page .rank-cell {\n  display: grid;\n  grid-template-columns: 22px 26px;\n  align-items: center;\n  justify-content: center;\n  column-gap: 4px;\n}"
+    );
+    expect(css).toMatch(
+      /\.campus-ranking-page \.rank-cell span\s*\{[^}]*text-align:\s*right;[^}]*font-variant-numeric:\s*tabular-nums;/
     );
     expect(css).toMatch(
       /\.campus-ranking-history-link\s*\{[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*text-decoration:\s*none;/

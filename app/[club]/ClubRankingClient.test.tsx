@@ -143,7 +143,7 @@ describe("ClubRankingClient", () => {
     ).toBeDefined();
   });
 
-  it("최근 30일 경기로 생긴 순위 상승과 하락만 랭킹 옆에 표시한다", async () => {
+  it("경기가 있는 선수의 최근 30일 순위 변동만 랭킹 옆에 표시한다", async () => {
     vi.stubGlobal(
       "fetch",
       vi.fn().mockResolvedValue({
@@ -156,10 +156,10 @@ describe("ClubRankingClient", () => {
               name: "오준석",
               note: "",
               rankChange: 2,
-              wins: 0,
+              wins: 1,
               losses: 0,
-              matches: 0,
-              recent5: [],
+              matches: 1,
+              recent5: ["W"],
             },
             {
               rank: 2,
@@ -167,15 +167,15 @@ describe("ClubRankingClient", () => {
               note: "",
               rankChange: -1,
               wins: 0,
-              losses: 0,
-              matches: 0,
-              recent5: [],
+              losses: 1,
+              matches: 1,
+              recent5: ["L"],
             },
             {
               rank: 3,
               name: "박정용",
               note: "",
-              rankChange: 0,
+              rankChange: -3,
               wins: 0,
               losses: 0,
               matches: 0,
@@ -195,6 +195,9 @@ describe("ClubRankingClient", () => {
     expect(
       screen.getByLabelText("최근 30일 동안 1계단 하락").textContent
     ).toBe("↓ 1");
+    expect(
+      screen.queryByLabelText("최근 30일 동안 3계단 하락")
+    ).toBeNull();
     expect(screen.queryByLabelText("지난주와 같은 순위")).toBeNull();
   });
 

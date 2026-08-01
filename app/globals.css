@@ -2500,14 +2500,16 @@ button:disabled {
   color: var(--campus-ink);
   background: transparent;
   border-radius: 0;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 .campus-ranking-page .rank-cell {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 22px 26px;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  column-gap: 4px;
 }
 
 .rank-movement {
@@ -2517,6 +2519,7 @@ button:disabled {
   font-size: 10px;
   font-weight: 900;
   line-height: 1;
+  justify-self: start;
   white-space: nowrap;
 }
 
