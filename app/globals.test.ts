@@ -241,10 +241,10 @@ describe("campus ranking responsive title styles", () => {
       ".campus-highlight-section + .campus-highlight-section {\n  margin-top: 0;\n  border-top: 1px solid var(--campus-line);\n}"
     );
     expect(css).toContain(
-      ".campus-result-update {\n  position: relative;\n  margin: 0 20px;\n  padding: 20px 0 22px 16px;\n  background: transparent;\n  border: 0;\n  border-top: 1px solid var(--campus-line);\n}"
+      ".campus-result-update {\n  position: relative;\n  margin: 0 16px;\n  padding: 20px 0 22px;\n  background: transparent;\n  border: 0;\n  border-top: 1px solid var(--campus-line);\n}"
     );
     expect(css).toContain(
-      ".campus-result-update::before {\n  position: absolute;\n  top: 20px;\n  bottom: 22px;\n  left: 0;\n  width: 3px;\n  background: var(--campus-red);\n  content: \"\";\n}"
+      ".campus-result-update::before {\n  position: absolute;\n  top: 20px;\n  bottom: 22px;\n  left: -12px;\n  width: 3px;\n  background: var(--campus-red);\n  content: \"\";\n}"
     );
     expect(css).toContain(
       ".campus-result-update-title {\n  display: block;\n  margin-top: 5px;\n  color: var(--campus-ink);\n  font-size: 16px;\n  font-weight: 900;\n  line-height: 1.45;\n}"
