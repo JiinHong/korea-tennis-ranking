@@ -241,7 +241,7 @@ describe("campus ranking responsive title styles", () => {
       ".campus-highlight-section + .campus-highlight-section {\n  margin-top: 0;\n  border-top: 1px solid var(--campus-line);\n}"
     );
     expect(css).toContain(
-      ".campus-result-update {\n  margin: 20px 20px 5px;\n  padding: 14px 15px;\n  background: #fff7f5;\n  border-left: 3px solid var(--campus-red);\n}"
+      ".campus-result-update {\n  margin: 0 20px;\n  padding: 20px 0 22px;\n  background: transparent;\n  border: 0;\n  border-top: 1px solid var(--campus-line);\n}"
     );
     expect(css).toContain(
       ".campus-result-update-title {\n  display: block;\n  margin-top: 5px;\n  color: var(--campus-ink);\n  font-size: 16px;\n  font-weight: 900;\n  line-height: 1.45;\n}"
