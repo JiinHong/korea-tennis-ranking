@@ -1433,6 +1433,42 @@ button:disabled {
   box-shadow: var(--campus-shadow);
 }
 
+.campus-ranking-loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: clamp(280px, 48vh, 520px);
+  color: var(--campus-ink);
+}
+
+.campus-ranking-loading-state strong {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.campus-ranking-loading-indicator {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  background: var(--green-700);
+  border-radius: 999px;
+  animation: campus-ranking-loading-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes campus-ranking-loading-pulse {
+  0%,
+  100% {
+    opacity: 0.28;
+    transform: scale(0.82);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .campus-ranking-page .hero-copy {
   display: flex;
   flex-direction: column;

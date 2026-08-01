@@ -226,6 +226,8 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
 
   const displayTotalMatches = summary?.totalMatches ?? totalMatches;
   const recent30Matches = summary?.recent30Matches ?? totalMatches;
+  const isInitialLoading =
+    players.length === 0 && (status === "idle" || status === "loading");
 
   return (
     <main className="ranking-page campus-ranking-page">
@@ -267,58 +269,62 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
             </div>
           </header>
 
-          <div className="hero-grid">
-            <div className="hero-copy">
-              <div className="hero-copy-heading">
-                <p className="subtitle">{club.subtitle}</p>
-                <Link
-                  className="campus-rules-link"
-                  href={`/${club.slug}/rules`}
-                  onClick={() => {
-                    void trackAmplitudeEvent("Campus Rules Opened", {
-                      club_slug: club.slug,
-                    });
-                  }}
-                >
-                  운영 규칙 보기
-                  <span aria-hidden="true">→</span>
-                </Link>
-              </div>
-              <div className="hero-meta-row">
-                <div className="hero-stats" aria-label="랭킹 요약">
-                  <div>
-                    <strong>{players.length}</strong>
-                    <span>선수</span>
-                  </div>
-                  <div>
-                    <strong>{displayTotalMatches}</strong>
-                    <span>경기</span>
-                  </div>
-                  <div>
-                    <strong>{recent30Matches}</strong>
-                    <span>최근 30일</span>
-                  </div>
-                </div>
-
-                <div className="hero-live-actions">
-                  <button
-                    className="match-entry-button"
-                    type="button"
-                    onClick={openMatchEntry}
+          {!isInitialLoading && status !== "error" ? (
+            <div className="hero-grid">
+              <div className="hero-copy">
+                <div className="hero-copy-heading">
+                  <p className="subtitle">{club.subtitle}</p>
+                  <Link
+                    className="campus-rules-link"
+                    href={`/${club.slug}/rules`}
+                    onClick={() => {
+                      void trackAmplitudeEvent("Campus Rules Opened", {
+                        club_slug: club.slug,
+                      });
+                    }}
                   >
-                    경기 결과 입력
-                  </button>
-                  <div className="live-status-group">
-                    <p className="live-stamp" aria-label="실시간 업데이트 시간">
-                      <span className="live-indicator" aria-hidden="true" />
-                      {formatLiveTime(loadedAt)}
-                    </p>
+                    운영 규칙 보기
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                </div>
+                <div className="hero-meta-row">
+                  <div className="hero-stats" aria-label="랭킹 요약">
+                    <div>
+                      <strong>{players.length}</strong>
+                      <span>선수</span>
+                    </div>
+                    <div>
+                      <strong>{displayTotalMatches}</strong>
+                      <span>경기</span>
+                    </div>
+                    <div>
+                      <strong>{recent30Matches}</strong>
+                      <span>최근 30일</span>
+                    </div>
+                  </div>
+
+                  <div className="hero-live-actions">
+                    <button
+                      className="match-entry-button"
+                      type="button"
+                      onClick={openMatchEntry}
+                    >
+                      경기 결과 입력
+                    </button>
+                    <div className="live-status-group">
+                      <p
+                        className="live-stamp"
+                        aria-label="실시간 업데이트 시간"
+                      >
+                        <span className="live-indicator" aria-hidden="true" />
+                        {formatLiveTime(loadedAt)}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-
-          </div>
+          ) : null}
         </div>
       </section>
 
@@ -333,14 +339,18 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
           </section>
         ) : null}
 
-        {status === "loading" && players.length === 0 ? (
-          <section className="state-panel">
+        {isInitialLoading ? (
+          <section
+            className="campus-ranking-loading-state"
+            role="status"
+            aria-live="polite"
+          >
+            <span className="campus-ranking-loading-indicator" aria-hidden="true" />
             <strong>랭킹 불러오는 중</strong>
-            <p>최신 순위를 가져오고 있습니다.</p>
           </section>
         ) : null}
 
-        {status !== "error" ? (
+        {!isInitialLoading && status !== "error" ? (
           <>
             {podiumPlayers.length > 0 ? (
               <section

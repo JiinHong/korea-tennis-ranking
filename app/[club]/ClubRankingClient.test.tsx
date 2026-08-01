@@ -37,12 +37,27 @@ describe("ClubRankingClient", () => {
     vi.useRealTimers();
   });
 
-  it("로딩 상태에서 특정 데이터 저장소 이름을 노출하지 않는다", () => {
+  it("초기 로딩 중에는 브랜드와 로딩 문구만 보여준다", () => {
     vi.stubGlobal("fetch", vi.fn(() => new Promise(() => {})));
 
     render(<ClubRankingClient club={club} />);
 
-    expect(screen.getByText("최신 순위를 가져오고 있습니다.")).toBeDefined();
+    expect(
+      screen.getByRole("heading", {
+        name: "서울과학기술대학교 테니스 단식 랭킹",
+      })
+    ).toBeDefined();
+    expect(
+      screen.getByRole("img", { name: "서울과학기술대학교 로고" })
+    ).toBeDefined();
+    expect(screen.getByRole("status").textContent).toBe("랭킹 불러오는 중");
+    expect(screen.queryByLabelText("랭킹 요약")).toBeNull();
+    expect(
+      screen.queryByRole("button", { name: "경기 결과 입력" })
+    ).toBeNull();
+    expect(screen.queryByRole("link", { name: "운영 규칙 보기" })).toBeNull();
+    expect(screen.queryByRole("heading", { name: "전체 랭킹" })).toBeNull();
+    expect(screen.queryByText("등록된 선수가 없습니다.")).toBeNull();
     expect(screen.queryByText(/구글 시트/)).toBeNull();
   });
 
@@ -80,12 +95,26 @@ describe("ClubRankingClient", () => {
     ).toBe("/clubs/korea-petc?gender=women");
   });
 
-  it("운영 규칙 문서로 이동하는 링크와 클릭 로그를 제공한다", () => {
-    vi.stubGlobal("fetch", vi.fn(() => new Promise(() => {})));
+  it("운영 규칙 문서로 이동하는 링크와 클릭 로그를 제공한다", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() =>
+        Promise.resolve({
+          ok: true,
+          json: async () => ({
+            ok: true,
+            players: [],
+            detailsByPlayer: {},
+          }),
+        })
+      )
+    );
 
     render(<ClubRankingClient club={club} />);
 
-    const rulesLink = screen.getByRole("link", { name: "운영 규칙 보기" });
+    const rulesLink = await screen.findByRole("link", {
+      name: "운영 규칙 보기",
+    });
     rulesLink.addEventListener("click", (event) => event.preventDefault());
 
     expect(rulesLink.getAttribute("href")).toBe("/seoultech/rules");
