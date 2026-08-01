@@ -89,7 +89,7 @@ export default function NationalClubResultsView({
         href="/?gender=men"
       >
         <span aria-hidden="true">←</span>
-        전국 랭킹 보러가기
+        전국 대학 랭킹 보러가기
       </Link>
 
       <header className="national-club-results-header">

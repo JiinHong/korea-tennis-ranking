@@ -68,7 +68,7 @@ describe("NationalClubResultsPage", () => {
     expect(within(list).getByText("8강")).toBeDefined();
     expect(within(list).getByText("16강")).toBeDefined();
     expect(
-      screen.getByRole("link", { name: "전국 랭킹 보러가기" }).getAttribute(
+      screen.getByRole("link", { name: "전국 대학 랭킹 보러가기" }).getAttribute(
         "href"
       )
     ).toBe("/?gender=men");
