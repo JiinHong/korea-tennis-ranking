@@ -1796,11 +1796,22 @@ button:disabled {
 }
 
 .campus-result-update {
+  position: relative;
   margin: 0 20px;
-  padding: 20px 0 22px;
+  padding: 20px 0 22px 16px;
   background: transparent;
   border: 0;
   border-top: 1px solid var(--campus-line);
+}
+
+.campus-result-update::before {
+  position: absolute;
+  top: 20px;
+  bottom: 22px;
+  left: 0;
+  width: 3px;
+  background: var(--campus-red);
+  content: "";
 }
 
 .campus-result-update-kicker {
