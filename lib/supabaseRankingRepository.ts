@@ -7,8 +7,11 @@ import type {
   RankedPlayer,
   RankingRuleConfig,
 } from "@/lib/rankingRules";
+import {
+  buildRankChanges,
+  getKstRollingDateRange,
+} from "@/lib/rankingMovementWindow";
 import { getSupabaseReadClient } from "@/lib/supabaseServer";
-import { getKstWeekStart } from "@/lib/weeklyRankingSnapshots";
 
 export type SupabaseClubRow = {
   id: string;
@@ -48,19 +51,20 @@ export type SupabaseMatchRow = {
   source: string;
 };
 
-export type SupabaseWeeklyRankingSnapshotRow = {
+export type SupabaseMatchRankingMovementRow = {
   playerId: string;
-  rank: number;
+  rankDelta: number;
 };
 
 export type SupabaseRankingAdapter = {
   getClubBySlug(slug: string): Promise<SupabaseClubRow | null>;
   getCurrentSeason(clubId: string): Promise<SupabaseSeasonRow | null>;
   listSeasonPlayers(seasonId: string): Promise<SupabaseSeasonPlayerRow[]>;
-  listWeeklyRankingSnapshots(
+  listMatchRankingMovements(
     seasonId: string,
-    weekStart: string
-  ): Promise<SupabaseWeeklyRankingSnapshotRow[]>;
+    startDate: string,
+    endDate: string
+  ): Promise<SupabaseMatchRankingMovementRow[]>;
   listConfirmedMatches(clubId: string): Promise<SupabaseMatchRow[]>;
   getRuleConfig(
     clubId: string,
@@ -128,27 +132,21 @@ export async function getSupabaseRankingTables(
     throw new Error(`Current season not found for club: ${clubSlug}`);
   }
 
-  const weekStart = getKstWeekStart(now);
-  const [seasonPlayers, confirmedMatches, weeklySnapshots] = await Promise.all([
+  const { startDate, endDate } = getKstRollingDateRange(now);
+  const [seasonPlayers, confirmedMatches, rankingMovements] = await Promise.all([
     adapter.listSeasonPlayers(currentSeason.id),
     adapter.listConfirmedMatches(club.id),
-    adapter.listWeeklyRankingSnapshots(currentSeason.id, weekStart),
+    adapter.listMatchRankingMovements(currentSeason.id, startDate, endDate),
   ]);
 
-  const snapshotRanks = new Map(
-    weeklySnapshots.map((snapshot) => [snapshot.playerId, snapshot.rank])
-  );
+  const rankChangesByPlayerId = buildRankChanges(rankingMovements);
   const rankChanges: Record<string, number> = {};
 
   const ranking = seasonPlayers
     .filter((seasonPlayer) => seasonPlayer.status !== "left")
     .map((seasonPlayer) => {
       const name = displayName(seasonPlayer.player);
-      const snapshotRank = snapshotRanks.get(seasonPlayer.player.id);
-
-      rankChanges[name] = snapshotRank
-        ? snapshotRank - seasonPlayer.rank
-        : 0;
+      rankChanges[name] = rankChangesByPlayerId[seasonPlayer.player.id] ?? 0;
 
       return {
         rank: seasonPlayer.rank,
@@ -306,12 +304,13 @@ export function createSupabaseRankingAdapter(): SupabaseRankingAdapter {
         };
       });
     },
-    async listWeeklyRankingSnapshots(seasonId, weekStart) {
+    async listMatchRankingMovements(seasonId, startDate, endDate) {
       const { data, error } = await supabase
-        .from("weekly_ranking_snapshots")
-        .select("player_id, rank")
+        .from("match_ranking_movements")
+        .select("player_id, rank_delta")
         .eq("season_id", seasonId)
-        .eq("week_start", weekStart);
+        .gte("played_on", startDate)
+        .lte("played_on", endDate);
 
       if (error) {
         throw error;
@@ -319,7 +318,7 @@ export function createSupabaseRankingAdapter(): SupabaseRankingAdapter {
 
       return (data ?? []).map((row) => ({
         playerId: row.player_id,
-        rank: row.rank,
+        rankDelta: row.rank_delta,
       }));
     },
     async listConfirmedMatches(clubId) {

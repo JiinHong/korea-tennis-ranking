@@ -66,9 +66,10 @@ function createAdapter(): SupabaseRankingAdapter {
         source: "import",
       },
     ]),
-    listWeeklyRankingSnapshots: vi.fn().mockResolvedValue([
-      { playerId: "p1", rank: 3 },
-      { playerId: "p2", rank: 1 },
+    listMatchRankingMovements: vi.fn().mockResolvedValue([
+      { playerId: "p1", rankDelta: 3 },
+      { playerId: "p1", rankDelta: -1 },
+      { playerId: "p2", rankDelta: -1 },
     ]),
     getRuleConfig: vi.fn().mockResolvedValue({
       challengeRange: 4,
@@ -92,9 +93,10 @@ describe("getSupabaseRankingTables", () => {
     expect(adapter.getCurrentSeason).toHaveBeenCalledWith("club-1");
     expect(adapter.listSeasonPlayers).toHaveBeenCalledWith("season-3");
     expect(adapter.listConfirmedMatches).toHaveBeenCalledWith("club-1");
-    expect(adapter.listWeeklyRankingSnapshots).toHaveBeenCalledWith(
+    expect(adapter.listMatchRankingMovements).toHaveBeenCalledWith(
       "season-3",
-      "2026-07-27"
+      "2026-07-03",
+      "2026-08-01"
     );
     expect(result).toEqual({
       currentSeasonName: "시즌3",

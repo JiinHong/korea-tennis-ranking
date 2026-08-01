@@ -137,7 +137,7 @@ describe("ClubRankingClient", () => {
     ).toBeDefined();
   });
 
-  it("지난 월요일과 비교한 순위 상승, 하락, 유지를 랭킹 옆에 표시한다", async () => {
+  it("최근 30일 경기로 생긴 순위 상승과 하락만 랭킹 옆에 표시한다", async () => {
     vi.stubGlobal(
       "fetch",
       vi.fn().mockResolvedValue({
@@ -184,12 +184,12 @@ describe("ClubRankingClient", () => {
     render(<ClubRankingClient club={club} />);
 
     expect(
-      (await screen.findByLabelText("지난주보다 2계단 상승")).textContent
+      (await screen.findByLabelText("최근 30일 동안 2계단 상승")).textContent
     ).toBe("▲ 2");
-    expect(screen.getByLabelText("지난주보다 1계단 하락").textContent).toBe(
-      "▼ 1"
-    );
-    expect(screen.getByLabelText("지난주와 같은 순위").textContent).toBe("–");
+    expect(
+      screen.getByLabelText("최근 30일 동안 1계단 하락").textContent
+    ).toBe("▼ 1");
+    expect(screen.queryByLabelText("지난주와 같은 순위")).toBeNull();
   });
 
   it("운영 규칙 문서로 이동하는 링크와 클릭 로그를 제공한다", async () => {

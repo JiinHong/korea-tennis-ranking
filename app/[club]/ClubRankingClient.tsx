@@ -6,6 +6,7 @@ import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 
 import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
 import { buildRecent30Highlights } from "@/lib/campusRankingHighlights";
+import { RANKING_MOVEMENT_WINDOW_DAYS } from "@/lib/rankingMovementWindow";
 import CampusResultsBackLink, {
   getCampusResultsBackLabel,
   getCampusResultsHref,
@@ -122,7 +123,7 @@ function RankMovement({ rankChange }: { rankChange: number }) {
     return (
       <small
         className="rank-movement is-up"
-        aria-label={`지난주보다 ${rankChange}계단 상승`}
+        aria-label={`최근 ${RANKING_MOVEMENT_WINDOW_DAYS}일 동안 ${rankChange}계단 상승`}
       >
         ▲ {rankChange}
       </small>
@@ -135,18 +136,14 @@ function RankMovement({ rankChange }: { rankChange: number }) {
     return (
       <small
         className="rank-movement is-down"
-        aria-label={`지난주보다 ${drop}계단 하락`}
+        aria-label={`최근 ${RANKING_MOVEMENT_WINDOW_DAYS}일 동안 ${drop}계단 하락`}
       >
         ▼ {drop}
       </small>
     );
   }
 
-  return (
-    <small className="rank-movement is-steady" aria-label="지난주와 같은 순위">
-      –
-    </small>
-  );
+  return null;
 }
 
 function RankingRow({

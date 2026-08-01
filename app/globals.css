@@ -2394,10 +2394,6 @@ button:disabled {
   color: #d72d1f;
 }
 
-.rank-movement.is-steady {
-  color: var(--campus-muted);
-}
-
 .campus-ranking-page .ranking-row.is-featured .rank-cell span {
   width: 36px;
   height: 36px;
