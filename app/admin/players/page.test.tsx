@@ -9,7 +9,7 @@ vi.mock("@/lib/supabase/admin/players", () => ({
   getAdminPlayerClubs: vi.fn(),
 }));
 
-vi.mock("./AdminPlayerManager", () => ({
+vi.mock("./_components/AdminPlayerManager", () => ({
   default: ({ clubs }: { clubs: Array<{ name: string }> }) => (
     <div>{clubs.map((club) => club.name).join(", ")}</div>
   ),

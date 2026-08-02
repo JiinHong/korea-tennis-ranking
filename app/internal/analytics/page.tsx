@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-import InternalAnalyticsRegistration from "./InternalAnalyticsRegistration";
-import styles from "./internalAnalytics.module.css";
+import InternalAnalyticsRegistration from "./_components/InternalAnalyticsRegistration";
+import styles from "./_components/internalAnalytics.module.css";
 
 export const metadata: Metadata = {
   title: "내부 분석 사용자 | Korea Tennis Ranking",

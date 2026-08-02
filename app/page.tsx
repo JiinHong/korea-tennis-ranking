@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { getCachedNationalRankingPageData } from "@/lib/nationalRanking/repository";
 
-import NationalRankingTable from "./NationalRankingTable";
+import NationalRankingTable from "./_components/national-ranking/NationalRankingTable";
 
 export default async function Home() {
   let pageData: Awaited<ReturnType<typeof getCachedNationalRankingPageData>> =

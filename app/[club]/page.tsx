@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 import { getClubConfig, listClubConfigs } from "@/lib/campusRanking/config";
 
-import ClubRankingClient from "./ClubRankingClient";
+import ClubRankingClient from "./_components/ClubRankingClient";
 
 type ClubPageProps = {
   params: Promise<{

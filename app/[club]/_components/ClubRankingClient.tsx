@@ -12,7 +12,7 @@ import CampusResultsBackLink, {
   getCampusResultsHref,
 } from "./CampusResultsBackLink";
 import CampusResultUpdateLink from "./CampusResultUpdateLink";
-import { getPlayerDetailPath } from "./playerPaths";
+import { getPlayerDetailPath } from "../_lib/playerPaths";
 import MatchEntryDialog from "./MatchEntryDialog";
 import NationalRankingBackLink from "./NationalRankingBackLink";
 

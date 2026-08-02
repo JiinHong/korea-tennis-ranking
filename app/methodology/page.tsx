@@ -6,7 +6,7 @@ import {
   NATIONAL_FORMULA_V3,
 } from "@/lib/nationalRanking/formula";
 
-import MethodologyTableRegion from "./MethodologyTableRegion";
+import MethodologyTableRegion from "./_components/MethodologyTableRegion";
 
 const FORMULA_EFFECTIVE_ON = "2026-07-13";
 

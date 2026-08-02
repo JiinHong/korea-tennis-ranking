@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 import type {
   NationalRankingDataset,
   TeamResultInput,
-} from "../lib/nationalRanking/types";
+} from "../../../lib/nationalRanking/types";
 
 type UniversityResolutionRule = {
   clubSlug: string;

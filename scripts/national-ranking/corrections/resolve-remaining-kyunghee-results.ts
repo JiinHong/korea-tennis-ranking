@@ -5,7 +5,7 @@ import type {
   NationalClubAliasInput,
   NationalRankingDataset,
   TeamResultInput,
-} from "../lib/nationalRanking/types";
+} from "../../../lib/nationalRanking/types";
 
 const DATASET_PATH = resolve(
   process.cwd(),

@@ -13,8 +13,8 @@ import type {
 import { parseRankingGender } from "@/lib/nationalRanking/genderQuery";
 import type { RankingGender } from "@/lib/nationalRanking/types";
 
-import NationalPodiumCrown from "@/app/NationalPodiumCrown";
-import NationalRankingDivisionTabs from "@/app/NationalRankingDivisionTabs";
+import NationalPodiumCrown from "@/app/_components/national-ranking/NationalPodiumCrown";
+import NationalRankingDivisionTabs from "@/app/_components/national-ranking/NationalRankingDivisionTabs";
 
 type NationalClubResultsViewProps = {
   pageData: NationalClubResultsPageData;

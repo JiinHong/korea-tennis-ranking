@@ -6,7 +6,7 @@ import type {
   NationalClubInput,
   NationalRankingDataset,
   TeamResultInput,
-} from "../lib/nationalRanking/types";
+} from "../../../lib/nationalRanking/types";
 
 type MappingRule = {
   clubSlug: string;
@@ -17,87 +17,80 @@ const DATASET_PATH = resolve(
   process.cwd(),
   "data/national-ranking/v1/dataset.json"
 );
-const SOURCE_VERSION = "sources-2026-07-26-v16";
-const TARGET_VERSION = "sources-2026-07-26-v17";
-const EDITION_KEY = "yanggu-2023-men";
-
-const YONGIN_ACE: NationalClubInput = {
-  slug: "yongin-ace",
-  universityName: "용인대학교",
-  clubName: "ACE",
-  displayName: "용인대학교 ACE",
-};
+const SOURCE_VERSION = "sources-2026-07-26-v15";
+const TARGET_VERSION = "sources-2026-07-26-v16";
+const EDITION_KEY = "yanggu-2023-women";
 
 const MAPPING_RULES: readonly MappingRule[] = [
   {
-    clubSlug: "korea-kutc",
-    sourceTeamNames: [
-      "Kutc E [Q]",
-      "Kutc B [Q]",
-      "Kutc A [Q]",
-      "Kutc D [Q]",
-      "Kutc C [Q]",
-    ],
-  },
-  {
-    clubSlug: "hanyang-hytc",
-    sourceTeamNames: ["Hytc 개나리 [Q]", "Hytc 블루 [Q]"],
-  },
-  {
-    clubSlug: "gangwon-shot",
-    sourceTeamNames: ["Shot [Q]"],
-  },
-  {
-    clubSlug: "hanyang-erica-hitec",
-    sourceTeamNames: ["에리카 B [Q]"],
-  },
-  {
-    clubSlug: "hufs-ace",
-    sourceTeamNames: ["Ace [3]"],
-  },
-  {
-    clubSlug: "dongguk-dutc",
-    sourceTeamNames: ["Dutc C [Q]", "Dutc B [Q]"],
-  },
-  {
-    clubSlug: "yonsei-yutt",
-    sourceTeamNames: ["연세대 사랑 [Q]", "연세대 믿음 [Q]"],
-  },
-  {
     clubSlug: "kyunghee-kuta-lovice",
-    sourceTeamNames: ["경희 C [Q]", "경희 B [Q]"],
-  },
-  {
-    clubSlug: "inu-uitc",
-    sourceTeamNames: ["Uitc 여포 [Q]", "Uitc 제갈량 [Q]"],
-  },
-  {
-    clubSlug: "yongin-ace",
-    sourceTeamNames: ["용인대 Ace [Q]"],
+    sourceTeamNames: ["경희 B [Q]", "경희 C [Q]"],
   },
   {
     clubSlug: "kyunghee-engineering-impact",
     sourceTeamNames: ["경희 I [Q]"],
   },
   {
-    clubSlug: "dankook-jukjeon-dkutc",
-    sourceTeamNames: ["Dkuct 2 [Q]"],
-  },
-  {
-    clubSlug: "namseoul-winning-shot",
-    sourceTeamNames: ["위닝샷 [Q]"],
-  },
-  {
     clubSlug: "hanbat-masters",
-    sourceTeamNames: ["마스터즈 A [Q]", "마스터즈 B [Q]"],
+    sourceTeamNames: ["꿀복숭아 [Q]", "햇감자 [Q]", "박고구마 [Q]"],
+  },
+  {
+    clubSlug: "hufs-ace",
+    sourceTeamNames: ["Ace A [Q]", "Ace B [Q]"],
   },
   {
     clubSlug: "suwon-ace",
-    sourceTeamNames: ["Ace M [Q]"],
+    sourceTeamNames: ["Ace W [Q]"],
   },
   {
-    clubSlug: "sangmyung-tesla",
-    sourceTeamNames: ["테슬라 [Q]"],
+    clubSlug: "ewha-tennis",
+    sourceTeamNames: [
+      "이대 1화 [Q]",
+      "이대 2화 [Q]",
+      "이대 3화 [Q]",
+      "이대 4화 [Q]",
+      "이대 5화 [Q]",
+    ],
+  },
+  {
+    clubSlug: "hanyang-women-hytc",
+    sourceTeamNames: ["Hytc 사자 [Q]", "Hytc 피스 [Q]"],
+  },
+  {
+    clubSlug: "hanyang-hytc",
+    sourceTeamNames: ["Hytc 개나리 [Q]", "Hytc 블루"],
+  },
+  {
+    clubSlug: "hanyang-erica-hitec",
+    sourceTeamNames: ["에리카 A [Q]", "에리카 B [Q]"],
+  },
+  {
+    clubSlug: "yonsei-yutt",
+    sourceTeamNames: ["연세대 사랑 [Q]"],
+  },
+  {
+    clubSlug: "yonsei-kookdas",
+    sourceTeamNames: ["쿠크다스 [Q]"],
+  },
+  {
+    clubSlug: "dongguk-dutc",
+    sourceTeamNames: ["Dutc A [Q]", "Dutc B [Q]", "Dutc C [Q]"],
+  },
+  {
+    clubSlug: "korea-kutc",
+    sourceTeamNames: ["Kutc A [Q]", "Kutc B [Q]", "Kutc C [Q]"],
+  },
+  {
+    clubSlug: "dankook-jukjeon-dkutc",
+    sourceTeamNames: ["Dkuct 2 [Q]", "Dkuct 3 [Q]"],
+  },
+  {
+    clubSlug: "dankook-cheonan-dkutc",
+    sourceTeamNames: ["Dkuct 1 [Q]"],
+  },
+  {
+    clubSlug: "inu-uitc",
+    sourceTeamNames: ["Uitc 초선 [Q]"],
   },
 ];
 
@@ -153,14 +146,6 @@ async function main(): Promise<void> {
       `Expected ${SOURCE_VERSION}, received ${dataset.version}`
     );
   }
-
-  const existingYonginAce = dataset.clubs.find(
-    (club) => club.slug === YONGIN_ACE.slug
-  );
-  if (existingYonginAce) {
-    throw new Error(`Club already exists: ${YONGIN_ACE.slug}`);
-  }
-  dataset.clubs.push(YONGIN_ACE);
 
   const clubsBySlug = new Map(dataset.clubs.map((club) => [club.slug, club]));
   const targetsByResultKey = new Map<string, string>();
@@ -219,7 +204,7 @@ async function main(): Promise<void> {
       note: appendNote(
         result.note,
         `Assigned to ${club.displayName} from the administrator-provided ` +
-          "2023 Yanggu men's university-to-team mapping."
+          "2023 Yanggu women's university-to-team mapping."
       ),
     };
   });
@@ -254,7 +239,6 @@ async function main(): Promise<void> {
         unresolvedResults: dataset.results.filter(
           (result) => result.qualityStatus === "unresolved"
         ).length,
-        clubs: dataset.clubs.length,
         aliases: dataset.aliases.length,
         resolvedByClub: Object.fromEntries(
           [...resolvedByClub].sort(([left], [right]) =>

@@ -2,7 +2,7 @@ import { getClubConfig } from "@/lib/campusRanking/config";
 import { getRankingDataForClub } from "@/lib/campusRanking/rankingData";
 import { notFound } from "next/navigation";
 
-import PlayerDetailView from "../../PlayerDetailView";
+import PlayerDetailView from "../../_components/PlayerDetailView";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { getAdminPlayerClubs } from "@/lib/supabase/admin/players";
 
-import AdminPlayerManager from "./AdminPlayerManager";
+import AdminPlayerManager from "./_components/AdminPlayerManager";
 
 export const dynamic = "force-dynamic";
 

@@ -6,7 +6,7 @@ import type {
   NationalClubInput,
   NationalRankingDataset,
   TeamResultInput,
-} from "../lib/nationalRanking/types";
+} from "../../../lib/nationalRanking/types";
 
 type ReviewResolution = {
   clubSlug: string;

@@ -4,8 +4,8 @@ import { notFound } from "next/navigation";
 import { getClubConfig, listClubConfigs } from "@/lib/campusRanking/config";
 import { getRankingDataForClub } from "@/lib/campusRanking/rankingData";
 
-import MatchListSection from "../MatchListSection";
-import NationalRankingBackLink from "../NationalRankingBackLink";
+import MatchListSection from "../_components/MatchListSection";
+import NationalRankingBackLink from "../_components/NationalRankingBackLink";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";

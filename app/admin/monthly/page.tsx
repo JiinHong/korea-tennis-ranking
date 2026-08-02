@@ -7,7 +7,7 @@ import {
 } from "@/lib/supabase/monthly/automationStatus";
 import { getAdminMonthlyClubs } from "@/lib/supabase/monthly/settlements";
 
-import AdminMonthlyManager from "./AdminMonthlyManager";
+import AdminMonthlyManager from "./_components/AdminMonthlyManager";
 
 export const dynamic = "force-dynamic";
 

@@ -19,7 +19,7 @@ vi.mock("@/lib/supabase/monthly/automationStatus", () => ({
   })),
 }));
 
-vi.mock("./AdminMonthlyManager", () => ({
+vi.mock("./_components/AdminMonthlyManager", () => ({
   default: ({
     clubs,
     automationStatus,

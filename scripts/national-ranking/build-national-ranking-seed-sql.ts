@@ -3,10 +3,10 @@ import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
-import { loadNationalRankingDataset } from "../lib/nationalRanking/dataset";
-import { buildNationalRankingSeedPlan } from "../lib/nationalRanking/seedPlan";
-import { buildNationalRankingSeedSql } from "../lib/nationalRanking/seedSql";
-import type { NationalRankingDataset } from "../lib/nationalRanking/types";
+import { loadNationalRankingDataset } from "../../lib/nationalRanking/dataset";
+import { buildNationalRankingSeedPlan } from "../../lib/nationalRanking/seedPlan";
+import { buildNationalRankingSeedSql } from "../../lib/nationalRanking/seedSql";
+import type { NationalRankingDataset } from "../../lib/nationalRanking/types";
 
 export const NATIONAL_RANKING_SNAPSHOT_SCHEMA_VERSION =
   "national-ranking-snapshot-v3";

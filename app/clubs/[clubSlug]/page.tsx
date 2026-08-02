@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { getCachedNationalClubResultsPageData } from "@/lib/nationalRanking/clubResults";
 
-import NationalClubResultsView from "./NationalClubResultsView";
+import NationalClubResultsView from "./_components/NationalClubResultsView";
 
 type NationalClubResultsPageProps = {
   params: Promise<{

@@ -16,7 +16,7 @@ import { loadNationalRankingDataset } from "@/lib/nationalRanking/dataset";
 import { buildNationalRankingSeedPlan } from "@/lib/nationalRanking/seedPlan";
 import { buildNationalRankingSeedSql } from "@/lib/nationalRanking/seedSql";
 import type { NationalRankingDataset } from "@/lib/nationalRanking/types";
-import { runNationalRankingSeedSqlCli } from "../../scripts/build-national-ranking-seed-sql";
+import { runNationalRankingSeedSqlCli } from "../../scripts/national-ranking/build-national-ranking-seed-sql";
 
 const dataset = {
   version: "seed-sql-test-v1",
@@ -100,9 +100,9 @@ const dataset = {
   ],
 } satisfies NationalRankingDataset;
 
-const cliPath = "scripts/build-national-ranking-seed-sql.ts";
+const cliPath = "scripts/national-ranking/build-national-ranking-seed-sql.ts";
 const packageScriptCommand =
-  "node --import tsx scripts/build-national-ranking-seed-sql.ts";
+  "node --import tsx scripts/national-ranking/build-national-ranking-seed-sql.ts";
 
 function buildSql(): string {
   return buildNationalRankingSeedSql(

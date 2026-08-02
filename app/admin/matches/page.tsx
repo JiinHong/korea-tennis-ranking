@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { getAdminMatchClubs } from "@/lib/supabase/admin/matches";
 
-import AdminMatchManager from "./AdminMatchManager";
+import AdminMatchManager from "./_components/AdminMatchManager";
 
 export const dynamic = "force-dynamic";
 
