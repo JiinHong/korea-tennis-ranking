@@ -1,9 +1,9 @@
-import { getClubConfig } from "@/lib/clubs";
-import { validateScore } from "@/lib/rankingRules";
+import { getClubConfig } from "@/lib/campusRanking/config";
+import { validateScore } from "@/lib/campusRanking/rules";
 import {
   AdminMatchCommandError,
   manageAdminMatch,
-} from "@/lib/supabaseAdminMatchCommands";
+} from "@/lib/supabase/admin/matchCommands";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

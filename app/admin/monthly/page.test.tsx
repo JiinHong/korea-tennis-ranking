@@ -1,16 +1,16 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
-import { getAdminMonthlyClubs } from "@/lib/supabaseMonthlySettlements";
-import { getAdminMonthlyAutomationStatus } from "@/lib/supabaseMonthlyAutomationStatus";
+import { getAdminMonthlyClubs } from "@/lib/supabase/monthly/settlements";
+import { getAdminMonthlyAutomationStatus } from "@/lib/supabase/monthly/automationStatus";
 
 import AdminMonthlyPage, { metadata } from "./page";
 
-vi.mock("@/lib/supabaseMonthlySettlements", () => ({
+vi.mock("@/lib/supabase/monthly/settlements", () => ({
   getAdminMonthlyClubs: vi.fn(),
 }));
 
-vi.mock("@/lib/supabaseMonthlyAutomationStatus", () => ({
+vi.mock("@/lib/supabase/monthly/automationStatus", () => ({
   getAdminMonthlyAutomationStatus: vi.fn(),
   createUnavailableMonthlyAutomationStatus: vi.fn(() => ({
     available: false,

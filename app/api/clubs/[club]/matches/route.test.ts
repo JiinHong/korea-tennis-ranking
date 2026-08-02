@@ -1,15 +1,15 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { recordSupabaseMatch } from "@/lib/supabaseMatchCommands";
-import { getSupabaseMatchValidationContext } from "@/lib/supabaseRankingRepository";
+import { recordSupabaseMatch } from "@/lib/supabase/matchCommands";
+import { getSupabaseMatchValidationContext } from "@/lib/supabase/rankingRepository";
 
 import { GET, POST } from "./route";
 
-vi.mock("@/lib/supabaseRankingRepository", () => ({
+vi.mock("@/lib/supabase/rankingRepository", () => ({
   getSupabaseMatchValidationContext: vi.fn(),
 }));
 
-vi.mock("@/lib/supabaseMatchCommands", () => ({
+vi.mock("@/lib/supabase/matchCommands", () => ({
   recordSupabaseMatch: vi.fn(),
 }));
 

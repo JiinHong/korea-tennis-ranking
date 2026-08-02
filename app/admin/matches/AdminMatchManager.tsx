@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import type {
   AdminMatchClub,
   AdminMatchRecord,
-} from "@/lib/supabaseAdminMatches";
+} from "@/lib/supabase/admin/matches";
 
 type AdminMatchManagerProps = {
   clubs: AdminMatchClub[];

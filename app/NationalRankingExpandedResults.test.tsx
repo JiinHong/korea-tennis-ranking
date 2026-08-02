@@ -10,7 +10,7 @@ const analytics = vi.hoisted(() => ({
   trackAmplitudeEvent: vi.fn(() => Promise.resolve()),
 }));
 
-vi.mock("@/lib/amplitudeAnalytics", () => analytics);
+vi.mock("@/lib/analytics/amplitude", () => analytics);
 
 const bestResults: NationalRankingBestResult[] = [
   {

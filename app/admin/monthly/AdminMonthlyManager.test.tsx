@@ -1,11 +1,11 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import type { AdminMonthlyClub } from "@/lib/supabaseMonthlySettlements";
+import type { AdminMonthlyClub } from "@/lib/supabase/monthly/settlements";
 import type {
   AdminMonthlyAutomationStatus,
   MonthlyAutomationRunStatus,
-} from "@/lib/supabaseMonthlyAutomationStatus";
+} from "@/lib/supabase/monthly/automationStatus";
 
 import AdminMonthlyManager from "./AdminMonthlyManager";
 

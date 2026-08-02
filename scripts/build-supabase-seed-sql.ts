@@ -3,16 +3,16 @@ import { resolve } from "node:path";
 
 import { loadEnvConfig } from "@next/env";
 
-import { getClubConfig } from "../lib/clubs";
-import { getSpreadsheetId } from "../lib/googleSheets";
-import { getHistoricalMatchLogTable } from "../lib/historicalMatchLogTable";
-import { getMatchLogTable } from "../lib/matchLogTable";
-import { getRankingTable } from "../lib/rankingTable";
-import { buildSupabaseSeedPlan } from "../lib/supabaseSeedPlan";
+import { getClubConfig } from "../lib/campusRanking/config";
+import { getSpreadsheetId } from "../lib/googleSheets/client";
+import { getHistoricalMatchLogTable } from "../lib/googleSheets/historicalMatches";
+import { getMatchLogTable } from "../lib/googleSheets/currentMatches";
+import { getRankingTable } from "../lib/googleSheets/currentRanking";
+import { buildSupabaseSeedPlan } from "../lib/supabase/seed/plan";
 import {
   buildSupabaseSeedSql,
   buildSupabaseSeedSqlFiles,
-} from "../lib/supabaseSeedSql";
+} from "../lib/supabase/seed/sql";
 
 function parseArgs(argv: string[]) {
   const [clubSlug = "seoultech", ...rest] = argv;

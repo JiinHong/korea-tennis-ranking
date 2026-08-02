@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { getAdminPlayerClubs } from "@/lib/supabaseAdminPlayers";
+import { getAdminPlayerClubs } from "@/lib/supabase/admin/players";
 
 import AdminPlayerManager from "./AdminPlayerManager";
 

@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import type { AdminMatchClub } from "@/lib/supabaseAdminMatches";
+import type { AdminMatchClub } from "@/lib/supabase/admin/matches";
 
 import AdminMatchManager from "./AdminMatchManager";
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { getClubConfig, listClubConfigs } from "@/lib/clubs";
+import { getClubConfig, listClubConfigs } from "@/lib/campusRanking/config";
 
 type ClubRulesPageProps = {
   params: Promise<{

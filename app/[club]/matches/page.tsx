@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import { getClubConfig, listClubConfigs } from "@/lib/clubs";
-import { getRankingDataForClub } from "@/lib/rankingData";
+import { getClubConfig, listClubConfigs } from "@/lib/campusRanking/config";
+import { getRankingDataForClub } from "@/lib/campusRanking/rankingData";
 
 import MatchListSection from "../MatchListSection";
 import NationalRankingBackLink from "../NationalRankingBackLink";

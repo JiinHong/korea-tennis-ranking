@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
-import { getAdminPlayerClubs } from "@/lib/supabaseAdminPlayers";
+import { getAdminPlayerClubs } from "@/lib/supabase/admin/players";
 
 import AdminPlayersPage, { metadata } from "./page";
 
-vi.mock("@/lib/supabaseAdminPlayers", () => ({
+vi.mock("@/lib/supabase/admin/players", () => ({
   getAdminPlayerClubs: vi.fn(),
 }));
 

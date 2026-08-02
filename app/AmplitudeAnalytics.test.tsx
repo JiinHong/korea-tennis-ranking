@@ -8,7 +8,7 @@ vi.mock("next/navigation", () => ({
   usePathname: () => navigation.pathname,
 }));
 
-vi.mock("@/lib/amplitudeAnalytics", () => analytics);
+vi.mock("@/lib/analytics/amplitude", () => analytics);
 
 import AmplitudeAnalytics from "./AmplitudeAnalytics";
 

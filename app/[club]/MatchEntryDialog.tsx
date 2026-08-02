@@ -9,7 +9,7 @@ import {
   type FormEvent,
 } from "react";
 
-import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
+import { trackAmplitudeEvent } from "@/lib/analytics/amplitude";
 
 type MatchOption = {
   id: string;

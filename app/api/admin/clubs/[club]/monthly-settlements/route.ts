@@ -1,9 +1,9 @@
-import { getClubConfig } from "@/lib/clubs";
+import { getClubConfig } from "@/lib/campusRanking/config";
 import {
   AdminMonthlySettlementCommandError,
   applyAdminMonthlySettlement,
-} from "@/lib/supabaseMonthlySettlementCommands";
-import { getAdminMonthlyClub } from "@/lib/supabaseMonthlySettlements";
+} from "@/lib/supabase/monthly/settlementCommands";
+import { getAdminMonthlyClub } from "@/lib/supabase/monthly/settlements";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

@@ -5,13 +5,13 @@ vi.mock("server-only", () => ({}));
 import {
   AdminPlayerCommandError,
   manageAdminPlayer,
-} from "@/lib/supabaseAdminPlayerCommands";
+} from "@/lib/supabase/admin/playerCommands";
 
 import { PATCH, POST } from "./route";
 
-vi.mock("@/lib/supabaseAdminPlayerCommands", async (importOriginal) => {
+vi.mock("@/lib/supabase/admin/playerCommands", async (importOriginal) => {
   const original = await importOriginal<
-    typeof import("@/lib/supabaseAdminPlayerCommands")
+    typeof import("@/lib/supabase/admin/playerCommands")
   >();
 
   return { ...original, manageAdminPlayer: vi.fn() };

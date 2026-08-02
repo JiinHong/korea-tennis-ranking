@@ -7,7 +7,7 @@ import {
 } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import type { AdminPlayerClub } from "@/lib/supabaseAdminPlayers";
+import type { AdminPlayerClub } from "@/lib/supabase/admin/players";
 
 import AdminPlayerManager from "./AdminPlayerManager";
 

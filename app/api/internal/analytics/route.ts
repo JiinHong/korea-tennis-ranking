@@ -5,7 +5,7 @@ import {
   INTERNAL_ANALYTICS_COOKIE_NAME,
   verifyInternalAnalyticsSecret,
   verifyInternalAnalyticsToken,
-} from "@/lib/internalAnalytics";
+} from "@/lib/analytics/internalTraffic";
 
 const INTERNAL_COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 365;
 const MINIMUM_INTERNAL_SECRET_LENGTH = 16;

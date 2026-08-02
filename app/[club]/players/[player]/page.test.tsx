@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
-import { getClubConfig } from "@/lib/clubs";
-import { getRankingDataForClub } from "@/lib/rankingData";
+import { getClubConfig } from "@/lib/campusRanking/config";
+import { getRankingDataForClub } from "@/lib/campusRanking/rankingData";
 
 import PlayerPage from "./page";
 
@@ -10,15 +10,15 @@ const analytics = vi.hoisted(() => ({
   trackAmplitudeEvent: vi.fn(() => Promise.resolve()),
 }));
 
-vi.mock("@/lib/clubs", () => ({
+vi.mock("@/lib/campusRanking/config", () => ({
   getClubConfig: vi.fn(),
 }));
 
-vi.mock("@/lib/rankingData", () => ({
+vi.mock("@/lib/campusRanking/rankingData", () => ({
   getRankingDataForClub: vi.fn(),
 }));
 
-vi.mock("@/lib/amplitudeAnalytics", () => analytics);
+vi.mock("@/lib/analytics/amplitude", () => analytics);
 
 const club = {
   slug: "seoultech",

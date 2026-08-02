@@ -10,7 +10,7 @@ const navigation = vi.hoisted(() => ({
   query: "",
 }));
 
-vi.mock("@/lib/amplitudeAnalytics", () => analytics);
+vi.mock("@/lib/analytics/amplitude", () => analytics);
 vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams(navigation.query),
 }));

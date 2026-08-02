@@ -9,7 +9,7 @@ const mocks = vi.hoisted(() => ({
 }));
 
 vi.mock("server-only", () => ({}));
-vi.mock("@/lib/supabaseServer", () => ({
+vi.mock("@/lib/supabase/client", () => ({
   getSupabaseReadClient: mocks.getSupabaseReadClient,
 }));
 vi.mock("next/cache", () => ({

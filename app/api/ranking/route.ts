@@ -1,4 +1,4 @@
-import {getRankingData} from "@/lib/rankingData";
+import {getRankingData} from "@/lib/campusRanking/rankingData";
 
 
 // 변수를 이렇게 설정해놓으면 이 api route를 nodejs 환경에서 실행하겠다는 것임.

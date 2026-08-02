@@ -1,5 +1,5 @@
-import { getClubConfig } from "@/lib/clubs";
-import { getRankingDataForClub } from "@/lib/rankingData";
+import { getClubConfig } from "@/lib/campusRanking/config";
+import { getRankingDataForClub } from "@/lib/campusRanking/rankingData";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

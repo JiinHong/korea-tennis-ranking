@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
+import { trackAmplitudeEvent } from "@/lib/analytics/amplitude";
 import {
   isLatestTournamentEdition,
   type LatestEditionYearMap,

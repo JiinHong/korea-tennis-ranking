@@ -1,5 +1,5 @@
-import { getClubConfig } from "@/lib/clubs";
-import { getRankingDataForClub } from "@/lib/rankingData";
+import { getClubConfig } from "@/lib/campusRanking/config";
+import { getRankingDataForClub } from "@/lib/campusRanking/rankingData";
 import { notFound } from "next/navigation";
 
 import PlayerDetailView from "../../PlayerDetailView";

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
+import { trackAmplitudeEvent } from "@/lib/analytics/amplitude";
 
 export default function PlayerProfileViewTracker({
   clubSlug,

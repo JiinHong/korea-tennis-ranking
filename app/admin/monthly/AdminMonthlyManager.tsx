@@ -3,12 +3,12 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
-import type { PlayerStatus } from "@/lib/rankingRules";
+import type { PlayerStatus } from "@/lib/campusRanking/rules";
 import type {
   AdminMonthlyAutomationRun,
   AdminMonthlyAutomationStatus,
-} from "@/lib/supabaseMonthlyAutomationStatus";
-import type { AdminMonthlyClub } from "@/lib/supabaseMonthlySettlements";
+} from "@/lib/supabase/monthly/automationStatus";
+import type { AdminMonthlyClub } from "@/lib/supabase/monthly/settlements";
 
 type AdminMonthlyManagerProps = {
   clubs: AdminMonthlyClub[];

@@ -1,4 +1,4 @@
-import {getMatchLogTable} from "@/lib/matchLogTable";
+import {getMatchLogTable} from "@/lib/googleSheets/currentMatches";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

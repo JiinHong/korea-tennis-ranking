@@ -1,5 +1,5 @@
-import type { ClubConfig } from "@/lib/clubs";
-import type { PlayerDetail } from "@/lib/playerDetails";
+import type { ClubConfig } from "@/lib/campusRanking/config";
+import type { PlayerDetail } from "@/lib/campusRanking/playerDetails";
 import Image from "next/image";
 
 import ClubRankingBackLink from "./ClubRankingBackLink";

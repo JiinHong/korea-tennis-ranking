@@ -1,4 +1,4 @@
-import type { MatchRecord } from "@/lib/matchLogTable";
+import type { MatchRecord } from "@/lib/googleSheets/currentMatches";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 

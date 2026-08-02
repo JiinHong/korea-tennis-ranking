@@ -2,7 +2,7 @@ import "server-only";
 
 import { unstable_cache } from "next/cache";
 
-import { getSupabaseReadClient } from "@/lib/supabaseServer";
+import { getSupabaseReadClient } from "@/lib/supabase/client";
 import type {
   NationalRankingBestResult,
   NationalRankingHonor,

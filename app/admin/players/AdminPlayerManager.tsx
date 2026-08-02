@@ -3,12 +3,12 @@
 import { useMemo, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
-import { buildAdminRankAdjustmentPreview } from "@/lib/adminRankAdjustment";
+import { buildAdminRankAdjustmentPreview } from "@/lib/admin/rankAdjustment";
 import type {
   AdminPlayerClub,
   AdminSeasonPlayer,
-} from "@/lib/supabaseAdminPlayers";
-import type { PlayerStatus } from "@/lib/rankingRules";
+} from "@/lib/supabase/admin/players";
+import type { PlayerStatus } from "@/lib/campusRanking/rules";
 
 type AdminPlayerManagerProps = {
   clubs: AdminPlayerClub[];

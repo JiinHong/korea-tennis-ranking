@@ -5,19 +5,19 @@ vi.mock("server-only", () => ({}));
 import {
   AdminMonthlySettlementCommandError,
   applyAdminMonthlySettlement,
-} from "@/lib/supabaseMonthlySettlementCommands";
-import { getAdminMonthlyClub } from "@/lib/supabaseMonthlySettlements";
+} from "@/lib/supabase/monthly/settlementCommands";
+import { getAdminMonthlyClub } from "@/lib/supabase/monthly/settlements";
 
 import { GET, POST } from "./route";
 
-vi.mock("@/lib/supabaseMonthlySettlementCommands", async (importOriginal) => {
+vi.mock("@/lib/supabase/monthly/settlementCommands", async (importOriginal) => {
   const original = await importOriginal<
-    typeof import("@/lib/supabaseMonthlySettlementCommands")
+    typeof import("@/lib/supabase/monthly/settlementCommands")
   >();
   return { ...original, applyAdminMonthlySettlement: vi.fn() };
 });
 
-vi.mock("@/lib/supabaseMonthlySettlements", () => ({
+vi.mock("@/lib/supabase/monthly/settlements", () => ({
   getAdminMonthlyClub: vi.fn(),
 }));
 

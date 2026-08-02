@@ -7,7 +7,7 @@ const analytics = vi.hoisted(() => ({
   trackAmplitudeEvent: vi.fn(() => Promise.resolve()),
 }));
 
-vi.mock("@/lib/amplitudeAnalytics", () => analytics);
+vi.mock("@/lib/analytics/amplitude", () => analytics);
 
 function rankedPlayers(count: number) {
   return Array.from({ length: count }, (_, index) => ({

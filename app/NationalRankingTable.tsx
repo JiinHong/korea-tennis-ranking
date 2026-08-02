@@ -3,7 +3,7 @@
 import { Fragment, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
+import { trackAmplitudeEvent } from "@/lib/analytics/amplitude";
 import { parseRankingGender } from "@/lib/nationalRanking/genderQuery";
 import {
   buildLatestEditionYearMap,

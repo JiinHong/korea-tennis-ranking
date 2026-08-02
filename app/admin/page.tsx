@@ -4,8 +4,8 @@ import Link from "next/link";
 import {
   ADMIN_ACTIONS,
   type AdminActionGroup,
-} from "@/lib/adminActionPolicy";
-import { getAdminClubOverviews } from "@/lib/supabaseAdminRepository";
+} from "@/lib/admin/actionPolicy";
+import { getAdminClubOverviews } from "@/lib/supabase/admin/repository";
 
 export const dynamic = "force-dynamic";
 

@@ -1,11 +1,11 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { setAmplitudeTrafficType } from "@/lib/amplitudeAnalytics";
+import { setAmplitudeTrafficType } from "@/lib/analytics/amplitude";
 
 import InternalAnalyticsRegistration from "./InternalAnalyticsRegistration";
 
-vi.mock("@/lib/amplitudeAnalytics", () => ({
+vi.mock("@/lib/analytics/amplitude", () => ({
   setAmplitudeTrafficType: vi.fn(() => Promise.resolve()),
 }));
 

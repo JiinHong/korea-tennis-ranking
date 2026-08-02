@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
+import { trackAmplitudeEvent } from "@/lib/analytics/amplitude";
 import { parseRankingGender } from "@/lib/nationalRanking/genderQuery";
 import { getCampusResultsHref } from "./CampusResultsBackLink";
 

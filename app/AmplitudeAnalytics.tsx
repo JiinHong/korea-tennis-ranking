@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-import { syncAmplitudeRoute } from "@/lib/amplitudeAnalytics";
+import { syncAmplitudeRoute } from "@/lib/analytics/amplitude";
 
 export default function AmplitudeAnalytics() {
   const pathname = usePathname();

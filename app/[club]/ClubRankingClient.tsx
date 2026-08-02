@@ -4,9 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 
-import { trackAmplitudeEvent } from "@/lib/amplitudeAnalytics";
-import { buildRecent30Highlights } from "@/lib/campusRankingHighlights";
-import { RANKING_MOVEMENT_WINDOW_DAYS } from "@/lib/rankingMovementWindow";
+import { trackAmplitudeEvent } from "@/lib/analytics/amplitude";
+import { buildRecent30Highlights } from "@/lib/campusRanking/highlights";
+import { RANKING_MOVEMENT_WINDOW_DAYS } from "@/lib/campusRanking/movementWindow";
 import CampusResultsBackLink, {
   getCampusResultsBackLabel,
   getCampusResultsHref,

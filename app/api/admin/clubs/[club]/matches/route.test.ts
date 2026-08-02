@@ -5,13 +5,13 @@ vi.mock("server-only", () => ({}));
 import {
   AdminMatchCommandError,
   manageAdminMatch,
-} from "@/lib/supabaseAdminMatchCommands";
+} from "@/lib/supabase/admin/matchCommands";
 
 import { PATCH } from "./route";
 
-vi.mock("@/lib/supabaseAdminMatchCommands", async (importOriginal) => {
+vi.mock("@/lib/supabase/admin/matchCommands", async (importOriginal) => {
   const original = await importOriginal<
-    typeof import("@/lib/supabaseAdminMatchCommands")
+    typeof import("@/lib/supabase/admin/matchCommands")
   >();
   return { ...original, manageAdminMatch: vi.fn() };
 });

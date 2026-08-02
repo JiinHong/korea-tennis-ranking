@@ -3,7 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Check, KeyRound, ShieldCheck, Trash2 } from "lucide-react";
 
-import { setAmplitudeTrafficType } from "@/lib/amplitudeAnalytics";
+import { setAmplitudeTrafficType } from "@/lib/analytics/amplitude";
 
 import styles from "./internalAnalytics.module.css";
 

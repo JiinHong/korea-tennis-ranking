@@ -1,8 +1,8 @@
-import { getClubConfig } from "@/lib/clubs";
-import { recordSupabaseMatch } from "@/lib/supabaseMatchCommands";
+import { getClubConfig } from "@/lib/campusRanking/config";
+import { recordSupabaseMatch } from "@/lib/supabase/matchCommands";
 import {
   getSupabaseMatchValidationContext,
-} from "@/lib/supabaseRankingRepository";
+} from "@/lib/supabase/rankingRepository";
 import {
   getRematchAvailableOn,
   validateScore,
@@ -10,7 +10,7 @@ import {
   type PreviousMatch,
   type RankedPlayer,
   type RuleResult,
-} from "@/lib/rankingRules";
+} from "@/lib/campusRanking/rules";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

@@ -18,7 +18,7 @@ vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams(navigation.query),
 }));
 
-vi.mock("@/lib/amplitudeAnalytics", () => analytics);
+vi.mock("@/lib/analytics/amplitude", () => analytics);
 
 const rankings: NationalRankingPageData["rankings"] = {
   men: [

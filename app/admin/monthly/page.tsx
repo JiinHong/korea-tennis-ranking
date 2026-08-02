@@ -4,8 +4,8 @@ import Link from "next/link";
 import {
   createUnavailableMonthlyAutomationStatus,
   getAdminMonthlyAutomationStatus,
-} from "@/lib/supabaseMonthlyAutomationStatus";
-import { getAdminMonthlyClubs } from "@/lib/supabaseMonthlySettlements";
+} from "@/lib/supabase/monthly/automationStatus";
+import { getAdminMonthlyClubs } from "@/lib/supabase/monthly/settlements";
 
 import AdminMonthlyManager from "./AdminMonthlyManager";
 

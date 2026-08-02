@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { getClubConfig, listClubConfigs } from "@/lib/clubs";
+import { getClubConfig, listClubConfigs } from "@/lib/campusRanking/config";
 
 import ClubRankingClient from "./ClubRankingClient";
 

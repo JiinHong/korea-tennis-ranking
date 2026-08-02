@@ -5,7 +5,7 @@ import {
   createInternalAnalyticsToken,
   INTERNAL_ANALYTICS_COOKIE_NAME,
   verifyInternalAnalyticsToken,
-} from "@/lib/internalAnalytics";
+} from "@/lib/analytics/internalTraffic";
 
 import { DELETE, GET, POST } from "./route";
 

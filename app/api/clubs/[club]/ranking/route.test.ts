@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { getRankingDataForClub } from "@/lib/rankingData";
+import { getRankingDataForClub } from "@/lib/campusRanking/rankingData";
 
 import { GET } from "./route";
 
-vi.mock("@/lib/rankingData", () => ({
+vi.mock("@/lib/campusRanking/rankingData", () => ({
   getRankingDataForClub: vi.fn(),
 }));
 

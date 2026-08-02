@@ -1,9 +1,9 @@
-import { getClubConfig } from "@/lib/clubs";
+import { getClubConfig } from "@/lib/campusRanking/config";
 import {
   AdminPlayerCommandError,
   manageAdminPlayer,
-} from "@/lib/supabaseAdminPlayerCommands";
-import type { PlayerStatus } from "@/lib/rankingRules";
+} from "@/lib/supabase/admin/playerCommands";
+import type { PlayerStatus } from "@/lib/campusRanking/rules";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
