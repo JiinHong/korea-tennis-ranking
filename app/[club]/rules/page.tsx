@@ -1,6 +1,8 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { createCampusRulesMetadata } from "@/lib/analytics/pageMetadata";
 import { getClubConfig, listClubConfigs } from "@/lib/campusRanking/config";
 
 type ClubRulesPageProps = {
@@ -35,6 +37,14 @@ const CORE_RULES = [
       "한 달 동안 확정된 경기가 0경기인 선수는 다음 달 정산에서 2계단 강등됩니다. 부상 중인 선수도 같은 기준을 적용받습니다.",
   },
 ] as const;
+
+export async function generateMetadata({
+  params,
+}: ClubRulesPageProps): Promise<Metadata> {
+  const { club: clubSlug } = await params;
+
+  return createCampusRulesMetadata(clubSlug);
+}
 
 export function generateStaticParams() {
   return listClubConfigs().map((club) => ({

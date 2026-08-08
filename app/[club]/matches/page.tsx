@@ -1,6 +1,8 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { createCampusMatchHistoryMetadata } from "@/lib/analytics/pageMetadata";
 import { getClubConfig, listClubConfigs } from "@/lib/campusRanking/config";
 import { getRankingDataForClub } from "@/lib/campusRanking/rankingData";
 
@@ -15,6 +17,14 @@ type MatchesPageProps = {
     club: string;
   }>;
 };
+
+export async function generateMetadata({
+  params,
+}: MatchesPageProps): Promise<Metadata> {
+  const { club: clubSlug } = await params;
+
+  return createCampusMatchHistoryMetadata(clubSlug);
+}
 
 export function generateStaticParams() {
   return listClubConfigs().map((club) => ({

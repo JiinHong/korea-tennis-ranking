@@ -1,6 +1,8 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { getClubConfig, listClubConfigs } from "@/lib/campusRanking/config";
+import { createCampusRankingMetadata } from "@/lib/analytics/pageMetadata";
 
 import ClubRankingClient from "./_components/ClubRankingClient";
 
@@ -9,6 +11,14 @@ type ClubPageProps = {
     club: string;
   }>;
 };
+
+export async function generateMetadata({
+  params,
+}: ClubPageProps): Promise<Metadata> {
+  const { club: clubSlug } = await params;
+
+  return createCampusRankingMetadata(clubSlug);
+}
 
 export function generateStaticParams() {
   return listClubConfigs().map((club) => ({

@@ -2,6 +2,8 @@
 
 import * as amplitude from "@amplitude/unified";
 
+import { getAnalyticsPageContext } from "./pageTracking";
+
 const AMPLITUDE_API_KEY = "5a5f7a18362a3d5d282689d0e58e00db";
 const ANALYTICS_STATE_KEY = "__KOREA_TENNIS_AMPLITUDE_STATE__";
 const INTERNAL_ANALYTICS_USER_ID = "internal:jinhong";
@@ -13,6 +15,7 @@ type TrafficType = "external" | "internal";
 type AnalyticsState = {
   initPromise?: Promise<void>;
   initialized: boolean;
+  lastTrackedPagePath?: string;
   optedOut: boolean;
   trafficPromise?: Promise<TrafficType>;
 };
@@ -37,8 +40,13 @@ function getAnalyticsState(): AnalyticsState {
   return analyticsGlobal[ANALYTICS_STATE_KEY];
 }
 
-function isAdminPath(pathname: string): boolean {
-  return pathname === "/admin" || pathname.startsWith("/admin/");
+function isAnalyticsExcludedPath(pathname: string): boolean {
+  return (
+    pathname === "/admin" ||
+    pathname.startsWith("/admin/") ||
+    pathname === "/internal/analytics" ||
+    pathname.startsWith("/internal/analytics/")
+  );
 }
 
 function shouldTrackFrustrationInteraction(
@@ -75,7 +83,7 @@ export async function syncAmplitudeRoute(pathname: string): Promise<void> {
 
   const state = getAnalyticsState();
 
-  if (isAdminPath(pathname)) {
+  if (isAnalyticsExcludedPath(pathname)) {
     if (state.initPromise && !state.optedOut) {
       await state.initPromise;
 
@@ -185,7 +193,7 @@ export async function trackAmplitudeEvent(
 ): Promise<void> {
   if (
     typeof window === "undefined" ||
-    isAdminPath(window.location.pathname)
+    isAnalyticsExcludedPath(window.location.pathname)
   ) {
     return;
   }
@@ -197,4 +205,40 @@ export async function trackAmplitudeEvent(
   }
 
   amplitude.track(eventName, properties);
+}
+
+export async function trackAmplitudePageView(
+  pathname: string
+): Promise<void> {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  await syncAmplitudeRoute(pathname);
+
+  const state = getAnalyticsState();
+  const page = getAnalyticsPageContext(pathname);
+
+  if (!page) {
+    // 제외 화면을 거쳐 같은 공개 페이지로 돌아오면 새 조회로 기록한다.
+    state.lastTrackedPagePath = undefined;
+    return;
+  }
+
+  if (!state.initialized || state.lastTrackedPagePath === page.pagePath) {
+    return;
+  }
+
+  amplitude.track("Site Page Viewed", {
+    page_name: page.pageName,
+    page_path: page.pagePath,
+    page_title: document.title,
+    page_type: page.pageType,
+    ...(page.clubSlug ? { club_slug: page.clubSlug } : {}),
+    ...(page.nationalClubSlug
+      ? { national_club_slug: page.nationalClubSlug }
+      : {}),
+    ...(page.playerName ? { player_name: page.playerName } : {}),
+  });
+  state.lastTrackedPagePath = page.pagePath;
 }

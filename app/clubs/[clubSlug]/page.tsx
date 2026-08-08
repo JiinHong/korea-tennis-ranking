@@ -1,6 +1,8 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { createNationalClubResultsMetadata } from "@/lib/analytics/pageMetadata";
 import { getCachedNationalClubResultsPageData } from "@/lib/nationalRanking/clubResults";
 
 import NationalClubResultsView from "./_components/NationalClubResultsView";
@@ -10,6 +12,18 @@ type NationalClubResultsPageProps = {
     clubSlug: string;
   }>;
 };
+
+export async function generateMetadata({
+  params,
+}: NationalClubResultsPageProps): Promise<Metadata> {
+  const { clubSlug } = await params;
+  const pageData = await getCachedNationalClubResultsPageData(clubSlug);
+
+  return createNationalClubResultsMetadata(
+    clubSlug,
+    pageData?.club.displayName,
+  );
+}
 
 export default async function NationalClubResultsPage({
   params,

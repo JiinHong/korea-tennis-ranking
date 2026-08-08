@@ -1,5 +1,7 @@
+import type { Metadata } from "next";
 import { getClubConfig } from "@/lib/campusRanking/config";
 import { getRankingDataForClub } from "@/lib/campusRanking/rankingData";
+import { createPlayerProfileMetadata } from "@/lib/analytics/pageMetadata";
 import { notFound } from "next/navigation";
 
 import PlayerDetailView from "../../_components/PlayerDetailView";
@@ -13,6 +15,14 @@ type PlayerPageProps = {
     player: string;
   }>;
 };
+
+export async function generateMetadata({
+  params,
+}: PlayerPageProps): Promise<Metadata> {
+  const { club: clubSlug, player } = await params;
+
+  return createPlayerProfileMetadata(clubSlug, decodeURIComponent(player));
+}
 
 export default async function PlayerPage({ params }: PlayerPageProps) {
   const { club: clubSlug, player } = await params;

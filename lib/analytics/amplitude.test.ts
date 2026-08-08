@@ -26,6 +26,7 @@ import {
   setAmplitudeTrafficType,
   syncAmplitudeRoute,
   trackAmplitudeEvent,
+  trackAmplitudePageView,
 } from "./amplitude";
 
 const analyticsStateKey = "__KOREA_TENNIS_AMPLITUDE_STATE__";
@@ -260,6 +261,49 @@ describe("Amplitude analytics", () => {
     expect(amplitudeSdk.initAll).not.toHaveBeenCalled();
     expect(amplitudeSdk.track).not.toHaveBeenCalled();
   });
+
+  it("경로별 페이지 이름과 유형을 이름 있는 조회 이벤트로 전송한다", async () => {
+    document.title =
+      "오준석 선수 상세 | 서울과학기술대학교 테니스 단식 랭킹";
+
+    await trackAmplitudePageView(
+      "/seoultech/players/%EC%98%A4%EC%A4%80%EC%84%9D"
+    );
+
+    expect(amplitudeSdk.track).toHaveBeenCalledWith("Site Page Viewed", {
+      club_slug: "seoultech",
+      page_name: "서울과학기술대학교 테니스 선수 상세",
+      page_path: "/seoultech/players/%EC%98%A4%EC%A4%80%EC%84%9D",
+      page_title:
+        "오준석 선수 상세 | 서울과학기술대학교 테니스 단식 랭킹",
+      page_type: "player_profile",
+      player_name: "오준석",
+    });
+  });
+
+  it("같은 경로의 재렌더링은 페이지 조회를 중복 전송하지 않는다", async () => {
+    await trackAmplitudePageView("/petc");
+    await trackAmplitudePageView("/petc/");
+
+    expect(amplitudeSdk.track).toHaveBeenCalledTimes(1);
+  });
+
+  it("다른 페이지를 거쳐 돌아오면 페이지 조회를 다시 전송한다", async () => {
+    await trackAmplitudePageView("/petc");
+    await trackAmplitudePageView("/petc/matches");
+    await trackAmplitudePageView("/petc");
+
+    expect(amplitudeSdk.track).toHaveBeenCalledTimes(3);
+  });
+
+  it.each(["/admin", "/internal/analytics"])(
+    "%s 화면은 페이지 조회 이벤트에서 제외한다",
+    async (pathname) => {
+      await trackAmplitudePageView(pathname);
+
+      expect(amplitudeSdk.track).not.toHaveBeenCalled();
+    }
+  );
 
   it("SDK 초기화가 실패해도 사용자 기능으로 오류를 전파하지 않는다", async () => {
     amplitudeSdk.initAll.mockRejectedValueOnce(new Error("Amplitude unavailable"));

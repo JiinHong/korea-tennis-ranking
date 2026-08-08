@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { createMethodologyMetadata } from "@/lib/analytics/pageMetadata";
 import {
   getFieldSizeUnits,
   getRecencyUnits,
@@ -7,6 +8,8 @@ import {
 } from "@/lib/nationalRanking/formula";
 
 import MethodologyTableRegion from "./_components/MethodologyTableRegion";
+
+export const metadata = createMethodologyMetadata();
 
 const FORMULA_EFFECTIVE_ON = "2026-07-13";
 
