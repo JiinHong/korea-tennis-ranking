@@ -113,12 +113,12 @@ describe("buildNationalRankingSeedPlan", () => {
 
     expect(plan.sourceRevision).toBe("revision-123");
     expect(plan.formula).toMatchObject({
-      version: "national-club-v3",
-      displayName: "National Club Ranking v3",
-      effectiveOn: "2026-07-13",
+      version: "national-club-v4",
+      displayName: "National Club Ranking v4",
+      effectiveOn: "2026-08-08",
     });
     expect(plan.formula.config).toMatchObject({
-      version: "national-club-v3",
+      version: "national-club-v4",
       stageUnits: {
         champion: 21,
         runner_up: 13,
@@ -129,6 +129,7 @@ describe("buildNationalRankingSeedPlan", () => {
         chuncheon: 2,
         wemix: 1,
         inje: 1,
+        yeongwol: 1,
       },
     });
     expect(plan.formula.sourceReferences).toEqual(PRIMARY_METHODOLOGY_REFERENCES);

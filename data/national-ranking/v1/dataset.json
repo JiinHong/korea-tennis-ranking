@@ -1,5 +1,5 @@
 {
-  "version": "sources-2026-07-28-v18",
+  "version": "sources-2026-08-08-v19",
   "clubs": [
     {
       "slug": "catholic-courtrang",
@@ -2548,6 +2548,12 @@
       "name": "WEMIX OPEN",
       "scope": "national",
       "scopeFactor": 1
+    },
+    {
+      "slug": "yeongwol",
+      "name": "영월 전국대학 동아리 테니스 대회",
+      "scope": "national",
+      "scopeFactor": 1
     }
   ],
   "editions": [
@@ -2919,6 +2925,94 @@
       "sourceStatus": "verified",
       "sourceRefs": [
         "위믹스/2025/여자/KakaoTalk_Photo_2026-07-08-05-18-15.png"
+      ]
+    },
+    {
+      "key": "yeongwol-2023-men",
+      "tournamentSlug": "yeongwol",
+      "year": 2023,
+      "gender": "men",
+      "actualEntrants": 4,
+      "sourceStatus": "verified",
+      "sourceRefs": [
+        "영월/2023/남자/SCR-20260808-khof.jpeg"
+      ]
+    },
+    {
+      "key": "yeongwol-2023-women",
+      "tournamentSlug": "yeongwol",
+      "year": 2023,
+      "gender": "women",
+      "actualEntrants": 4,
+      "sourceStatus": "verified",
+      "sourceRefs": [
+        "영월/2023/여자/SCR-20260808-khnq.jpeg"
+      ]
+    },
+    {
+      "key": "yeongwol-2024-men",
+      "tournamentSlug": "yeongwol",
+      "year": 2024,
+      "gender": "men",
+      "actualEntrants": 14,
+      "sourceStatus": "verified",
+      "sourceRefs": [
+        "영월/2024/남자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1"
+      ]
+    },
+    {
+      "key": "yeongwol-2024-women",
+      "tournamentSlug": "yeongwol",
+      "year": 2024,
+      "gender": "women",
+      "actualEntrants": 8,
+      "sourceStatus": "verified",
+      "sourceRefs": [
+        "영월/2024/여자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1"
+      ]
+    },
+    {
+      "key": "yeongwol-2025-men",
+      "tournamentSlug": "yeongwol",
+      "year": 2025,
+      "gender": "men",
+      "actualEntrants": 16,
+      "sourceStatus": "verified",
+      "sourceRefs": [
+        "영월/2025/남자/남자최종결과.pdf#page=1"
+      ]
+    },
+    {
+      "key": "yeongwol-2025-women",
+      "tournamentSlug": "yeongwol",
+      "year": 2025,
+      "gender": "women",
+      "actualEntrants": 10,
+      "sourceStatus": "verified",
+      "sourceRefs": [
+        "영월/2025/여자/여자최종결과.pdf#page=1"
+      ]
+    },
+    {
+      "key": "yeongwol-2026-men",
+      "tournamentSlug": "yeongwol",
+      "year": 2026,
+      "gender": "men",
+      "actualEntrants": 28,
+      "sourceStatus": "verified",
+      "sourceRefs": [
+        "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1"
+      ]
+    },
+    {
+      "key": "yeongwol-2026-women",
+      "tournamentSlug": "yeongwol",
+      "year": 2026,
+      "gender": "women",
+      "actualEntrants": 16,
+      "sourceStatus": "verified",
+      "sourceRefs": [
+        "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1"
       ]
     }
   ],
@@ -14624,6 +14718,1006 @@
       "qualityStatus": "verified",
       "sourceRef": "인제/2026/여자/Draw 제4회 하늘내린인제 전국대학동아리 테니스대회 최종결과.pdf#page=1",
       "note": "2026 하늘내린인제 최종 대진표의 32번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yeongwol-2023-men",
+      "clubSlug": "jeonbuk-ace",
+      "sourceTeamName": "전북대",
+      "teamLabel": "",
+      "stage": "champion",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2023/남자/SCR-20260808-khof.jpeg",
+      "note": "영월 원자료가 제공하는 4강 이상 네 팀만 기록했습니다. 최신 세 시즌 점수에서는 제외하고 통산 성적과 입상 기록에만 사용합니다."
+    },
+    {
+      "editionKey": "yeongwol-2023-men",
+      "clubSlug": "sogang-sgtc",
+      "sourceTeamName": "서강대",
+      "teamLabel": "",
+      "stage": "runner_up",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2023/남자/SCR-20260808-khof.jpeg",
+      "note": "영월 원자료가 제공하는 4강 이상 네 팀만 기록했습니다. 최신 세 시즌 점수에서는 제외하고 통산 성적과 입상 기록에만 사용합니다."
+    },
+    {
+      "editionKey": "yeongwol-2023-men",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 러비스",
+      "teamLabel": "",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2023/남자/SCR-20260808-khof.jpeg",
+      "note": "영월 원자료가 제공하는 4강 이상 네 팀만 기록했습니다. 최신 세 시즌 점수에서는 제외하고 통산 성적과 입상 기록에만 사용합니다."
+    },
+    {
+      "editionKey": "yeongwol-2023-men",
+      "clubSlug": "chungang-love4t",
+      "sourceTeamName": "중앙대",
+      "teamLabel": "",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2023/남자/SCR-20260808-khof.jpeg",
+      "note": "영월 원자료가 제공하는 4강 이상 네 팀만 기록했습니다. 최신 세 시즌 점수에서는 제외하고 통산 성적과 입상 기록에만 사용합니다."
+    },
+    {
+      "editionKey": "yeongwol-2023-women",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 국제",
+      "teamLabel": "",
+      "stage": "champion",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2023/여자/SCR-20260808-khnq.jpeg",
+      "note": "영월 원자료가 제공하는 4강 이상 네 팀만 기록했습니다. 최신 세 시즌 점수에서는 제외하고 통산 성적과 입상 기록에만 사용합니다."
+    },
+    {
+      "editionKey": "yeongwol-2023-women",
+      "clubSlug": "sogang-sgtc",
+      "sourceTeamName": "서강대",
+      "teamLabel": "",
+      "stage": "runner_up",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2023/여자/SCR-20260808-khnq.jpeg",
+      "note": "영월 원자료가 제공하는 4강 이상 네 팀만 기록했습니다. 최신 세 시즌 점수에서는 제외하고 통산 성적과 입상 기록에만 사용합니다."
+    },
+    {
+      "editionKey": "yeongwol-2023-women",
+      "clubSlug": "soongsil-sstc",
+      "sourceTeamName": "숭실대",
+      "teamLabel": "",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2023/여자/SCR-20260808-khnq.jpeg",
+      "note": "영월 원자료가 제공하는 4강 이상 네 팀만 기록했습니다. 최신 세 시즌 점수에서는 제외하고 통산 성적과 입상 기록에만 사용합니다."
+    },
+    {
+      "editionKey": "yeongwol-2023-women",
+      "clubSlug": "uos-approach",
+      "sourceTeamName": "서울시립대",
+      "teamLabel": "",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2023/여자/SCR-20260808-khnq.jpeg",
+      "note": "영월 원자료가 제공하는 4강 이상 네 팀만 기록했습니다. 최신 세 시즌 점수에서는 제외하고 통산 성적과 입상 기록에만 사용합니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-men",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 a",
+      "teamLabel": "A",
+      "stage": "champion",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/남자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-men",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대 KUTC",
+      "teamLabel": "",
+      "stage": "runner_up",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/남자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-men",
+      "clubSlug": "hanbat-masters",
+      "sourceTeamName": "한밭대 a",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/남자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-men",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 러비스",
+      "teamLabel": "",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/남자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-men",
+      "clubSlug": "ajou-tennis",
+      "sourceTeamName": "아주대 a",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/남자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-men",
+      "clubSlug": "jeonbuk-ace",
+      "sourceTeamName": "전북대 a",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/남자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-men",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 C",
+      "teamLabel": "C",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/남자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-men",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "고려대 PETC",
+      "teamLabel": "",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/남자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-men",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 b",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/남자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-men",
+      "clubSlug": "dankook-cheonan-dkutc",
+      "sourceTeamName": "DKUTC",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/남자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-men",
+      "clubSlug": "jeonbuk-ace",
+      "sourceTeamName": "전북대 b",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/남자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-men",
+      "clubSlug": "catholic-courtrang",
+      "sourceTeamName": "가톨릭대 b",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/남자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-men",
+      "clubSlug": "chungang-love4t",
+      "sourceTeamName": "중앙대 푸앙이",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/남자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-men",
+      "clubSlug": "soongsil-sstc",
+      "sourceTeamName": "숭실대",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/남자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-women",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 러비스",
+      "teamLabel": "",
+      "stage": "champion",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/여자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-women",
+      "clubSlug": "catholic-courtrang",
+      "sourceTeamName": "가톨릭대 a",
+      "teamLabel": "A",
+      "stage": "runner_up",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/여자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-women",
+      "clubSlug": "hufs-ace",
+      "sourceTeamName": "한국외대 a",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/여자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-women",
+      "clubSlug": "uos-approach",
+      "sourceTeamName": "서울시립대 UOSTC A",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/여자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-women",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 a",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/여자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-women",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대 KUTC",
+      "teamLabel": "",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/여자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-women",
+      "clubSlug": "ewha-smash",
+      "sourceTeamName": "이화여대 SMASH",
+      "teamLabel": "",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/여자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2024-women",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대(서울) KUTA A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2024/여자/Draw 제2회 영월 전국대학동아리 테니스대회 본선 Final.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-men",
+      "clubSlug": "kyungpook-kutc",
+      "sourceTeamName": "경북대 KUTC A",
+      "teamLabel": "A",
+      "stage": "champion",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/남자/남자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-men",
+      "clubSlug": "sejong-stc",
+      "sourceTeamName": "세종대 STC A",
+      "teamLabel": "A",
+      "stage": "runner_up",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/남자/남자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-men",
+      "clubSlug": "ajou-tennis",
+      "sourceTeamName": "아주대 ATC A",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/남자/남자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-men",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 러비스 A",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/남자/남자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-men",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대 KUTC B",
+      "teamLabel": "B",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/남자/남자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-men",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 굿샷 A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/남자/남자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-men",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대 KUTC A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/남자/남자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-men",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "서울과기대 느티나무 A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/남자/남자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-men",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "서울과기대 느티나무 B",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/남자/남자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-men",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 굿샷 B",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/남자/남자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-men",
+      "clubSlug": "kaist-stroke",
+      "sourceTeamName": "카이스트 스트로크 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/남자/남자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-men",
+      "clubSlug": "gyeonggi-ktf",
+      "sourceTeamName": "경기대 KTF A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/남자/남자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-men",
+      "clubSlug": "jeonbuk-ace",
+      "sourceTeamName": "전북대 ACE A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/남자/남자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-men",
+      "clubSlug": "gachon-tiebreak",
+      "sourceTeamName": "가천대 타이브레이크 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/남자/남자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-men",
+      "clubSlug": "dankook-cheonan-dkutc",
+      "sourceTeamName": "단국대 DKUTC A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/남자/남자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-men",
+      "clubSlug": "catholic-courtrang",
+      "sourceTeamName": "가톨릭대 코트랑 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/남자/남자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-women",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 러비스 A",
+      "teamLabel": "A",
+      "stage": "champion",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/여자/여자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-women",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대 KUTC A",
+      "teamLabel": "A",
+      "stage": "runner_up",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/여자/여자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-women",
+      "clubSlug": "uos-approach",
+      "sourceTeamName": "서울시립대 UOSTC A",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/여자/여자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-women",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 굿샷 A",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/여자/여자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-women",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "고려대 PETC A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/여자/여자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-women",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 굿샷 B",
+      "teamLabel": "B",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/여자/여자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-women",
+      "clubSlug": "hanbat-masters",
+      "sourceTeamName": "한밭대 마스터즈 딸기시루",
+      "teamLabel": "",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/여자/여자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-women",
+      "clubSlug": "ewha-smash",
+      "sourceTeamName": "이화여대 SMASH A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/여자/여자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-women",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대 KUTC B",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/여자/여자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2025-women",
+      "clubSlug": "kyungpook-kutc",
+      "sourceTeamName": "경북대 KUTC A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2025/여자/여자최종결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "sogang-sgtc",
+      "sourceTeamName": "서강대",
+      "teamLabel": "",
+      "stage": "champion",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "서울과학기술대 느티나무 A",
+      "teamLabel": "A",
+      "stage": "runner_up",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "jeonbuk-ace",
+      "sourceTeamName": "전북대학교",
+      "teamLabel": "",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 굿샷 A",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "sejong-stc",
+      "sourceTeamName": "세종대 STC A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "dongguk-dutc",
+      "sourceTeamName": "동국대 DUTC",
+      "teamLabel": "",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "sungkyunkwan-stc",
+      "sourceTeamName": "성균관대 STC A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "hannam-winners",
+      "sourceTeamName": "한남대 강동호와아이들 A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "hufs-ace",
+      "sourceTeamName": "한국외대 ACE",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "ajou-tennis",
+      "sourceTeamName": "아주대 ATC A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "kyungpook-kutc",
+      "sourceTeamName": "경북대 KUTC A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "고려대 PETC A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "hanyang-hytc",
+      "sourceTeamName": "한양대 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대 KUTC A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "gachon-tiebreak",
+      "sourceTeamName": "가천대 타이브레이크 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "hanyang-erica-hitec",
+      "sourceTeamName": "한양대 ERICA HiTEC A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 KUTA A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "chungang-love4t",
+      "sourceTeamName": "중앙대 LOVE4T B",
+      "teamLabel": "B",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "kyungpook-kutc",
+      "sourceTeamName": "경북대 KUTC B",
+      "teamLabel": "B",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 러비스 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "hanbat-masters",
+      "sourceTeamName": "한밭대 마스터즈 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "hanyang-hytc",
+      "sourceTeamName": "한양대 B",
+      "teamLabel": "B",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 굿샷 B",
+      "teamLabel": "B",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "dankook-cheonan-dkutc",
+      "sourceTeamName": "단국대 천안 호두과자",
+      "teamLabel": "",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "sangji-ace",
+      "sourceTeamName": "상지대 ACE A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "uos-approach",
+      "sourceTeamName": "서울시립대 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-men",
+      "clubSlug": "hanbat-masters",
+      "sourceTeamName": "한밭대 마스터즈 B",
+      "teamLabel": "B",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/남자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-women",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "서울과학기술대 과기대 A",
+      "teamLabel": "A",
+      "stage": "champion",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-women",
+      "clubSlug": "ewha-smash",
+      "sourceTeamName": "이화여대 SMASH A",
+      "teamLabel": "A",
+      "stage": "runner_up",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-women",
+      "clubSlug": "uos-approach",
+      "sourceTeamName": "서울시립대",
+      "teamLabel": "",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-women",
+      "clubSlug": "hanyang-erica-hitec",
+      "sourceTeamName": "한양대 ERICA HiTEC",
+      "teamLabel": "",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-women",
+      "clubSlug": "jeonbuk-ace",
+      "sourceTeamName": "전북대 A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-women",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 굿샷 A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-women",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 러비스 A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-women",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대 KUTC A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-women",
+      "clubSlug": "ewha-smash",
+      "sourceTeamName": "이화여대 SMASH B",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-women",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 KUTA A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-women",
+      "clubSlug": "hongik-hitc",
+      "sourceTeamName": "홍익대 HITC A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-women",
+      "clubSlug": "hufs-ace",
+      "sourceTeamName": "한국외대",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-women",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "고려대 PETC",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-women",
+      "clubSlug": "hanbat-masters",
+      "sourceTeamName": "한밭대 마스터즈 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-women",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대 KUTC B",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yeongwol-2026-women",
+      "clubSlug": "dongguk-dutc",
+      "sourceTeamName": "동국대 DUTC",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
+      "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
     }
   ]
 }

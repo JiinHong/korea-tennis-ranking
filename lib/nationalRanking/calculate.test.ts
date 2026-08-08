@@ -408,7 +408,7 @@ describe("calculateNationalRankings", () => {
       (row) => row.clubSlug === "alpha" && row.gender === "men"
     );
 
-    expect(result.formulaVersion).toBe("national-club-v3");
+    expect(result.formulaVersion).toBe("national-club-v4");
     expect(alphaMen?.totalPoints).toBe(756);
     expect(alphaMen?.contributions[0]).toMatchObject({
       tournamentUnits: 3,

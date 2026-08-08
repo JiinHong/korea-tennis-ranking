@@ -4,14 +4,14 @@ import { createMethodologyMetadata } from "@/lib/analytics/pageMetadata";
 import {
   getFieldSizeUnits,
   getRecencyUnits,
-  NATIONAL_FORMULA_V3,
+  NATIONAL_FORMULA_V4,
 } from "@/lib/nationalRanking/formula";
 
 import MethodologyTableRegion from "./_components/MethodologyTableRegion";
 
 export const metadata = createMethodologyMetadata();
 
-const FORMULA_EFFECTIVE_ON = "2026-07-13";
+const FORMULA_EFFECTIVE_ON = "2026-08-08";
 
 const STAGE_ROWS = [
   ["우승", "champion"],
@@ -30,6 +30,7 @@ const COMPETITION_PRESTIGE_ROWS = [
   ["춘천소양강배", "2등급", 2],
   ["WEMIX OPEN", "3등급", 1],
   ["하늘내린인제", "3등급", 1],
+  ["영월 전국대학 동아리 테니스 대회", "3등급", 1],
 ] as const;
 
 const FIELD_SIZE_ROWS = [
@@ -146,7 +147,7 @@ export default function MethodologyPage() {
                 {STAGE_ROWS.map(([label, stage]) => (
                   <tr key={stage}>
                     <th scope="row">{label}</th>
-                    <td>{NATIONAL_FORMULA_V3.stageUnits[stage]}</td>
+                    <td>{NATIONAL_FORMULA_V4.stageUnits[stage]}</td>
                   </tr>
                 ))}
               </tbody>
@@ -163,7 +164,8 @@ export default function MethodologyPage() {
           <p>
             전국·지역이라는 명칭만으로 일괄 감점하지 않고, 대학 동아리 대회로서의
             권위와 축적된 역사를 반영해 대회별 가중치를 적용합니다. 양구는 1등급,
-            경인지구와 춘천은 2등급, WEMIX OPEN과 인제는 3등급으로 구분합니다.
+            경인지구와 춘천은 2등급, WEMIX OPEN과 인제, 영월은 3등급으로
+            구분합니다.
           </p>
           <MethodologyTableRegion label="대회 위상별 가중치">
             <table className="methodology-table">
@@ -363,6 +365,10 @@ export default function MethodologyPage() {
             WEMIX OPEN 2025는 확인된 남자부·여자부 대진과 참가 규모를 현재 공개
             점수에 반영합니다.
           </p>
+          <p className="methodology-note">
+            영월 대회는 2023년부터 2026년까지 확인된 결과를 기록합니다. 2023년은
+            현재 점수에서 제외하되 동아리별 통산 성적과 입상 기록에는 남깁니다.
+          </p>
         </section>
 
         <section className="methodology-section" aria-labelledby="version-title">
@@ -371,7 +377,7 @@ export default function MethodologyPage() {
             <div>
               <dt>공식 버전</dt>
               <dd>
-                <code>{NATIONAL_FORMULA_V3.version}</code>
+                <code>{NATIONAL_FORMULA_V4.version}</code>
               </dd>
             </div>
             <div>

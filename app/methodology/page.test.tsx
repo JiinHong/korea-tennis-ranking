@@ -57,8 +57,8 @@ describe("MethodologyPage", () => {
       )
     ).toBeDefined();
     expect(screen.queryAllByText(/단위/)).toHaveLength(0);
-    expect(screen.getByText("national-club-v3")).toBeDefined();
-    expect(screen.getByText("2026-07-13")).toBeDefined();
+    expect(screen.getByText("national-club-v4")).toBeDefined();
+    expect(screen.getByText("2026-08-08")).toBeDefined();
   });
 
   it("공식 v3의 단계 점수와 대회별 위상 가중치를 정수로 공개한다", () => {
@@ -81,6 +81,7 @@ describe("MethodologyPage", () => {
       ["춘천소양강배", "2등급", "2"],
       ["WEMIX OPEN", "3등급", "1"],
       ["하늘내린인제", "3등급", "1"],
+      ["영월 전국대학 동아리 테니스 대회", "3등급", "1"],
     ].forEach((cells) => expectRow("대회 위상별 가중치", cells));
 
     const prestigeTable = screen.getByRole("table", {
@@ -199,6 +200,11 @@ describe("MethodologyPage", () => {
     expect(
       screen.getByText(
         "WEMIX OPEN 2025는 확인된 남자부·여자부 대진과 참가 규모를 현재 공개 점수에 반영합니다."
+      )
+    ).toBeDefined();
+    expect(
+      screen.getByText(
+        "영월 대회는 2023년부터 2026년까지 확인된 결과를 기록합니다. 2023년은 현재 점수에서 제외하되 동아리별 통산 성적과 입상 기록에는 남깁니다."
       )
     ).toBeDefined();
   });

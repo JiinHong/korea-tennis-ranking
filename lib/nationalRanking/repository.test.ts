@@ -379,7 +379,7 @@ describe("getCachedNationalRankingPageData", () => {
     expect(getCachedNationalRankingPageData).toBeTypeOf("function");
     expect(mocks.unstableCache).toHaveBeenCalledWith(
       expect.any(Function),
-      ["national-ranking-v3"],
+      ["national-ranking-v4"],
       { tags: ["national-ranking"], revalidate: 300 }
     );
   });

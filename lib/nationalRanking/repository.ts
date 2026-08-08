@@ -418,6 +418,6 @@ export async function getNationalRankingPageData(
 
 export const getCachedNationalRankingPageData = unstable_cache(
   () => getNationalRankingPageData(),
-  ["national-ranking-v3"],
+  ["national-ranking-v4"],
   { tags: ["national-ranking"], revalidate: 300 }
 );

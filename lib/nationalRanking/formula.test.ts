@@ -4,6 +4,8 @@ import * as nationalFormula from "@/lib/nationalRanking/formula";
 import {
   NATIONAL_FORMULA_V1,
   NATIONAL_FORMULA_V2,
+  NATIONAL_FORMULA_V3,
+  NATIONAL_FORMULA_V4,
   getFieldSizeFactor,
   getRecencyFactor,
   getStagePoints,
@@ -135,6 +137,16 @@ describe("national ranking formula v3", () => {
     });
   });
 
+  it("keeps the historical v3 tournament units unchanged", () => {
+    expect(NATIONAL_FORMULA_V3.tournamentUnits).toEqual({
+      yanggu: 3,
+      gyeongin: 2,
+      chuncheon: 2,
+      inje: 1,
+      wemix: 1,
+    });
+  });
+
   it.each([
     [1, 1],
     [8, 1],
@@ -219,5 +231,22 @@ describe("national ranking formula v3", () => {
         )
       ).toBe(expected);
     }
+  });
+});
+
+describe("national ranking formula v4", () => {
+  it("adds Yeongwol without rewriting the historical v3 formula", () => {
+    expect(NATIONAL_FORMULA_V4).toMatchObject({
+      version: "national-club-v4",
+      tournamentUnits: {
+        yanggu: 3,
+        gyeongin: 2,
+        chuncheon: 2,
+        inje: 1,
+        wemix: 1,
+        yeongwol: 1,
+      },
+    });
+    expect(NATIONAL_FORMULA_V3.tournamentUnits).not.toHaveProperty("yeongwol");
   });
 });

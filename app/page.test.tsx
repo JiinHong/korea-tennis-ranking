@@ -58,11 +58,11 @@ describe("Home", () => {
     ).toBeDefined();
     expect(
       screen.getByText(
-        "최근 3년간 5개 대학 테니스 대회 성적을 반영한 랭킹입니다."
+        "최근 3년간 6개 대학 테니스 대회 성적을 반영한 랭킹입니다."
       )
     ).toBeDefined();
     expect(
-      screen.getByText("양구 · 경인지구 · 춘천 · 인제 · WEMIX OPEN")
+      screen.getByText("양구 · 경인지구 · 춘천 · 인제 · 영월 · WEMIX OPEN")
     ).toBeDefined();
     expect(
       screen.queryByText(
@@ -95,7 +95,7 @@ describe("Home", () => {
     expect(screen.getByRole("table")).toBeDefined();
     expect(screen.getByText("서울과학기술대학교")).toBeDefined();
     expect(screen.queryByText(/구축할 예정입니다/)).toBeNull();
-    expect(screen.queryByText("영월")).toBeNull();
+    expect(screen.getByText(/영월/)).toBeDefined();
 
     expect(
       screen.queryByRole("link", { name: "서울과기대 단식 랭킹" })

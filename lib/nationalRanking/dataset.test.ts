@@ -571,27 +571,70 @@ describe("loadNationalRankingDataset", () => {
       resultCount: 18,
       sourceStatus: "verified",
     },
+    "yeongwol-2023-men": {
+      actualEntrants: 4,
+      resultCount: 4,
+      sourceStatus: "verified",
+    },
+    "yeongwol-2023-women": {
+      actualEntrants: 4,
+      resultCount: 4,
+      sourceStatus: "verified",
+    },
+    "yeongwol-2024-men": {
+      actualEntrants: 14,
+      resultCount: 14,
+      sourceStatus: "verified",
+    },
+    "yeongwol-2024-women": {
+      actualEntrants: 8,
+      resultCount: 8,
+      sourceStatus: "verified",
+    },
+    "yeongwol-2025-men": {
+      actualEntrants: 16,
+      resultCount: 16,
+      sourceStatus: "verified",
+    },
+    "yeongwol-2025-women": {
+      actualEntrants: 10,
+      resultCount: 10,
+      sourceStatus: "verified",
+    },
+    "yeongwol-2026-men": {
+      actualEntrants: 28,
+      resultCount: 28,
+      sourceStatus: "verified",
+    },
+    "yeongwol-2026-women": {
+      actualEntrants: 16,
+      resultCount: 16,
+      sourceStatus: "verified",
+    },
   } as const;
 
-  it("loads the complete 28-edition source manifest", () => {
+  it("loads the complete 36-edition source manifest", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-07-28-v18");
+    expect(dataset.version).toBe("sources-2026-08-08-v19");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
       { slug: "inje", name: "하늘내린인제", scope: "national", scopeFactor: 1 },
       { slug: "chuncheon", name: "춘천소양강배", scope: "national", scopeFactor: 1 },
       { slug: "wemix", name: "WEMIX OPEN", scope: "national", scopeFactor: 1 },
+      {
+        slug: "yeongwol",
+        name: "영월 전국대학 동아리 테니스 대회",
+        scope: "national",
+        scopeFactor: 1,
+      },
     ]);
     expect(dataset.editions.map((edition) => edition.key).sort()).toEqual(
       Object.keys(expectedEditions).sort()
     );
-    expect(dataset.editions).toHaveLength(28);
-    expect(
-      dataset.editions.some((edition) => edition.tournamentSlug === "yeongwol")
-    ).toBe(false);
+    expect(dataset.editions).toHaveLength(36);
     const wemixEditions = dataset.editions.filter(
       (edition) => edition.tournamentSlug === "wemix"
     );
@@ -617,10 +660,10 @@ describe("loadNationalRankingDataset", () => {
 
     expect(dataset.clubs).toHaveLength(64);
     expect(dataset.aliases).toHaveLength(426);
-    expect(dataset.results).toHaveLength(1_170);
+    expect(dataset.results).toHaveLength(1_270);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
-    ).toHaveLength(1_139);
+    ).toHaveLength(1_239);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
     ).toHaveLength(31);

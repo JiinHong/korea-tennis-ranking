@@ -172,6 +172,6 @@ describe("administrator-reviewed Yanggu mappings", () => {
   it("bumps the managed dataset version after applying the review", async () => {
     const dataset = await loadDataset();
 
-    expect(dataset.version).toBe("sources-2026-07-28-v18");
+    expect(dataset.version).toBe("sources-2026-08-08-v19");
   });
 });
