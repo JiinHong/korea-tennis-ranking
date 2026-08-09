@@ -9,7 +9,7 @@ import { buildNationalRankingSeedSql } from "../../lib/nationalRanking/seedSql";
 import type { NationalRankingDataset } from "../../lib/nationalRanking/types";
 
 export const NATIONAL_RANKING_SNAPSHOT_SCHEMA_VERSION =
-  "national-ranking-snapshot-v4";
+  "national-ranking-snapshot-v5";
 
 type CliArgs = {
   outPath?: string;

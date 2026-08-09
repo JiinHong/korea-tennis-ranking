@@ -2,16 +2,15 @@ import Link from "next/link";
 
 import { createMethodologyMetadata } from "@/lib/analytics/pageMetadata";
 import {
-  getFieldSizeUnits,
   getRecencyUnits,
-  NATIONAL_FORMULA_V4,
+  NATIONAL_FORMULA_V5,
 } from "@/lib/nationalRanking/formula";
 
 import MethodologyTableRegion from "./_components/MethodologyTableRegion";
 
 export const metadata = createMethodologyMetadata();
 
-const FORMULA_EFFECTIVE_ON = "2026-08-08";
+const FORMULA_EFFECTIVE_ON = "2026-08-09";
 
 const STAGE_ROWS = [
   ["우승", "champion"],
@@ -34,17 +33,15 @@ const COMPETITION_PRESTIGE_ROWS = [
 ] as const;
 
 const FIELD_SIZE_ROWS = [
-  ["1~12팀", 12],
-  ["13~31팀", 31],
-  ["32~63팀", 63],
-  ["64팀 이상", 64],
+  ["점수 계산", "반영하지 않음"],
+  ["데이터 보존", "대회·연도·성별 참고 정보로 유지"],
 ] as const;
 
 const RECENCY_ROWS = [
-  ["1년 이내", 0],
-  ["2년 이내", 1],
-  ["3년 이내", 2],
-  ["3년 초과", 3],
+  ["최신 개최연도", 0],
+  ["1년 전", 1],
+  ["2년 전", 2],
+  ["그 이전", 3],
 ] as const;
 
 const REFERENCE_LINKS = [
@@ -57,11 +54,6 @@ const REFERENCE_LINKS = [
     label: "BWF 세계 랭킹 시스템",
     description: "대회 등급과 성적을 결합하는 국제 종목 랭킹 사례",
     href: "https://system.bwfbadminton.com/documents/folder_1_81/folder_1_82/New-Regulations-2018/5.3.3.1%20World%20Ranking%20System.pdf",
-  },
-  {
-    label: "OWGR 랭킹 방식",
-    description: "대회 성적과 참가 규모를 다루는 골프 랭킹 사례",
-    href: "https://www.owgr.com/how-the-ranking-works",
   },
   {
     label: "UEFA 클럽 랭킹",
@@ -114,13 +106,13 @@ export default function MethodologyPage() {
         <section className="methodology-section" aria-labelledby="formula-title">
           <h2 id="formula-title">공식</h2>
           <p>
-            진출 성적에 따른 기본 점수에 대회의 위상, 참가 규모, 개최 연도를
-            반영한 가중치를 곱해 대회 점수를 계산합니다.
+            진출 성적에 따른 기본 점수에 대회 위상과 개최 연도 가중치를 곱해
+            대회 점수를 계산합니다. 참가 팀 수는 참고 정보로만 유지하며 점수에는
+            반영하지 않습니다.
           </p>
           <div className="methodology-formula" role="note">
             <code>
-              대회 점수 = 진출 단계 점수 × 대회 위상 가중치 × 참가 규모 가중치 ×
-              연도 가중치
+              대회 점수 = 진출 단계 점수 × 대회 위상 가중치 × 연도 가중치
             </code>
           </div>
           <p>
@@ -147,7 +139,7 @@ export default function MethodologyPage() {
                 {STAGE_ROWS.map(([label, stage]) => (
                   <tr key={stage}>
                     <th scope="row">{label}</th>
-                    <td>{NATIONAL_FORMULA_V4.stageUnits[stage]}</td>
+                    <td>{NATIONAL_FORMULA_V5.stageUnits[stage]}</td>
                   </tr>
                 ))}
               </tbody>
@@ -191,26 +183,25 @@ export default function MethodologyPage() {
         </section>
 
         <section className="methodology-section" aria-labelledby="field-title">
-          <h2 id="field-title">참가 규모 가중치</h2>
+          <h2 id="field-title">참가 팀 수</h2>
           <p>
-            N은 해당 연도와 부문에서 실제 참가한 팀 수입니다. 부전승과 경기 전
-            기권 팀은 제외하며, 참가 규모에 따라 네 구간의 정수 가중치를
-            적용합니다.
+            참가 팀 수 데이터는 삭제하지 않고 대회·개최 연도·성별의 참고 정보로
+            유지합니다. 다만 현재 공식에서는 점수 계산에 사용하지 않습니다.
           </p>
-          <MethodologyTableRegion label="참가 팀 수별 기준 가중치">
+          <MethodologyTableRegion label="참가 팀 수 활용 기준">
             <table className="methodology-table">
-              <caption>참가 팀 수별 기준 가중치</caption>
+              <caption>참가 팀 수 활용 기준</caption>
               <thead>
                 <tr>
-                  <th scope="col">실제 참가 팀 수</th>
-                  <th scope="col">가중치</th>
+                  <th scope="col">구분</th>
+                  <th scope="col">활용</th>
                 </tr>
               </thead>
               <tbody>
-                {FIELD_SIZE_ROWS.map(([label, entrants]) => (
+                {FIELD_SIZE_ROWS.map(([label, usage]) => (
                   <tr key={label}>
                     <th scope="row">{label}</th>
-                    <td>{getFieldSizeUnits(entrants)}</td>
+                    <td>{usage}</td>
                   </tr>
                 ))}
               </tbody>
@@ -221,9 +212,9 @@ export default function MethodologyPage() {
         <section className="methodology-section" aria-labelledby="recency-title">
           <h2 id="recency-title">연도 가중치</h2>
           <p>
-            각 대회의 가장 최근 개최 연도를 기준으로 1년 이내 성적은 연도 가중치
-            3, 2년 이내는 연도 가중치 2, 3년 이내는 연도 가중치 1로 반영합니다.
-            3년을 초과한 성적은 현재 점수에서 제외합니다.
+            각 대회·성별의 가장 최근 개최연도를 기준으로 최신 개최연도는 연도
+            가중치 4, 1년 전은 2, 2년 전은 1로 반영합니다. 그 이전 성적은 현재
+            점수에서 제외합니다.
           </p>
           <MethodologyTableRegion label="대회별 연도 가중치">
             <table className="methodology-table">
@@ -306,16 +297,16 @@ export default function MethodologyPage() {
           <h2 id="example-title">계산 예시</h2>
           <ol className="methodology-examples">
             <li>
-              <span>최신 94팀 국토정중앙배(양구) 우승</span>
-              <code>21 × 3 × 4 × 3 = 756점</code>
+              <span>최신 개최연도 국토정중앙배(양구) 우승</span>
+              <code>21 × 3 × 4 = 252점</code>
             </li>
             <li>
-              <span>같은 규모와 성적의 직전 대회</span>
-              <code>21 × 3 × 4 × 2 = 504점</code>
+              <span>1년 전 같은 대회 우승</span>
+              <code>21 × 3 × 2 = 126점</code>
             </li>
             <li>
-              <span>최신 22팀 경인지구 연맹전 준우승</span>
-              <code>13 × 2 × 2 × 3 = 156점</code>
+              <span>최신 개최연도 경인지구 연맹전 준우승</span>
+              <code>13 × 2 × 4 = 104점</code>
             </li>
           </ol>
         </section>
@@ -362,8 +353,8 @@ export default function MethodologyPage() {
             공개 페이지에 노출하지 않습니다.
           </p>
           <p className="methodology-note">
-            WEMIX OPEN 2025는 확인된 남자부·여자부 대진과 참가 규모를 현재 공개
-            점수에 반영합니다.
+            WEMIX OPEN 2025는 확인된 남자부·여자부 대진과 참가 규모를 참고
+            정보로 보존하며, 참가 규모는 공개 점수에 반영하지 않습니다.
           </p>
           <p className="methodology-note">
             영월 대회는 2023년부터 2026년까지 확인된 결과를 기록합니다. 2023년은
@@ -377,7 +368,7 @@ export default function MethodologyPage() {
             <div>
               <dt>공식 버전</dt>
               <dd>
-                <code>{NATIONAL_FORMULA_V4.version}</code>
+                <code>{NATIONAL_FORMULA_V5.version}</code>
               </dd>
             </div>
             <div>

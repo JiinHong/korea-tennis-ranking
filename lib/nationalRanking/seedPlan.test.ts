@@ -113,12 +113,12 @@ describe("buildNationalRankingSeedPlan", () => {
 
     expect(plan.sourceRevision).toBe("revision-123");
     expect(plan.formula).toMatchObject({
-      version: "national-club-v4",
-      displayName: "National Club Ranking v4",
-      effectiveOn: "2026-08-08",
+      version: "national-club-v5",
+      displayName: "National Club Ranking v5",
+      effectiveOn: "2026-08-09",
     });
     expect(plan.formula.config).toMatchObject({
-      version: "national-club-v4",
+      version: "national-club-v5",
       stageUnits: {
         champion: 21,
         runner_up: 13,

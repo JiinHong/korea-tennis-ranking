@@ -6,8 +6,10 @@ import {
   NATIONAL_FORMULA_V2,
   NATIONAL_FORMULA_V3,
   NATIONAL_FORMULA_V4,
+  NATIONAL_FORMULA_V5,
   getFieldSizeFactor,
   getRecencyFactor,
+  getRecencyUnits,
   getStagePoints,
   scoreVerifiedResult,
 } from "@/lib/nationalRanking/formula";
@@ -160,10 +162,12 @@ describe("national ranking formula v3", () => {
     const getFieldSizeUnits = Reflect.get(
       nationalFormula,
       "getFieldSizeUnits"
-    ) as undefined | ((actualEntrants: number) => number);
+    ) as
+      | undefined
+      | ((actualEntrants: number, formula: typeof NATIONAL_FORMULA_V3) => number);
 
     expect(getFieldSizeUnits).toBeTypeOf("function");
-    expect(getFieldSizeUnits?.(entrants)).toBe(expected);
+    expect(getFieldSizeUnits?.(entrants, NATIONAL_FORMULA_V3)).toBe(expected);
   });
 
   it.each([
@@ -179,10 +183,20 @@ describe("national ranking formula v3", () => {
         "getRecencyUnits"
       ) as
         | undefined
-        | ((latestEditionYear: number, editionYear: number) => number);
+        | ((
+            latestEditionYear: number,
+            editionYear: number,
+            formula: typeof NATIONAL_FORMULA_V3
+          ) => number);
 
       expect(getRecencyUnits).toBeTypeOf("function");
-      expect(getRecencyUnits?.(latestEditionYear, editionYear)).toBe(expected);
+      expect(
+        getRecencyUnits?.(
+          latestEditionYear,
+          editionYear,
+          NATIONAL_FORMULA_V3
+        )
+      ).toBe(expected);
     }
   );
 
@@ -196,10 +210,14 @@ describe("national ranking formula v3", () => {
     const getTournamentUnits = Reflect.get(
       nationalFormula,
       "getTournamentUnits"
-    ) as undefined | ((slug: string) => number);
+    ) as
+      | undefined
+      | ((slug: string, formula: typeof NATIONAL_FORMULA_V3) => number);
 
     expect(getTournamentUnits).toBeTypeOf("function");
-    expect(getTournamentUnits?.(tournamentSlug)).toBe(expected);
+    expect(getTournamentUnits?.(tournamentSlug, NATIONAL_FORMULA_V3)).toBe(
+      expected
+    );
   });
 
   it("calculates exact integer examples without rounding", () => {
@@ -249,4 +267,51 @@ describe("national ranking formula v4", () => {
     });
     expect(NATIONAL_FORMULA_V3.tournamentUnits).not.toHaveProperty("yeongwol");
   });
+});
+
+describe("national ranking formula v5", () => {
+  it("removes participant scale from scoring and uses 4:2:1 recency", () => {
+    expect(NATIONAL_FORMULA_V5).toMatchObject({
+      version: "national-club-v5",
+      stageUnits: NATIONAL_FORMULA_V4.stageUnits,
+      tournamentUnits: NATIONAL_FORMULA_V4.tournamentUnits,
+      recencyUnits: [4, 2, 1],
+    });
+    expect(NATIONAL_FORMULA_V5).not.toHaveProperty("fieldSizeTiers");
+  });
+
+  it("awards the same points regardless of participant count", () => {
+    const score = (actualEntrants: number) =>
+      scoreVerifiedResult(
+        {
+          stage: "champion",
+          tournamentSlug: "yanggu",
+          actualEntrants,
+          latestEditionYear: 2026,
+          editionYear: 2026,
+        },
+        NATIONAL_FORMULA_V5
+      );
+
+    expect(score(12)).toBe(252);
+    expect(score(128)).toBe(252);
+  });
+
+  it.each([
+    [2026, 2026, 4],
+    [2026, 2025, 2],
+    [2026, 2024, 1],
+    [2026, 2023, 0],
+  ])(
+    "maps latest year %i and edition year %i to %i recency units",
+    (latestEditionYear, editionYear, expected) => {
+      expect(
+        getRecencyUnits(
+          latestEditionYear,
+          editionYear,
+          NATIONAL_FORMULA_V5
+        )
+      ).toBe(expected);
+    }
+  );
 });

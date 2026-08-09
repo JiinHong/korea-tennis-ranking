@@ -374,7 +374,7 @@ describe("calculateNationalRankings", () => {
     });
   });
 
-  it("uses the approved integer-only v3 formula by default", () => {
+  it("uses the participant-neutral v5 formula by default", () => {
     const v3Dataset = {
       version: "integer-v3-test",
       clubs: [dataset.clubs[0]],
@@ -408,14 +408,15 @@ describe("calculateNationalRankings", () => {
       (row) => row.clubSlug === "alpha" && row.gender === "men"
     );
 
-    expect(result.formulaVersion).toBe("national-club-v4");
-    expect(alphaMen?.totalPoints).toBe(756);
+    expect(result.formulaVersion).toBe("national-club-v5");
+    expect(alphaMen?.totalPoints).toBe(252);
     expect(alphaMen?.contributions[0]).toMatchObject({
       tournamentUnits: 3,
-      fieldSizeUnits: 4,
-      recencyUnits: 3,
-      points: 756,
+      recencyUnits: 4,
+      actualEntrants: 64,
+      points: 252,
     });
+    expect(alphaMen?.contributions[0].fieldSizeUnits).toBeUndefined();
     expect(result.rows.every((row) => Number.isInteger(row.totalPoints))).toBe(
       true
     );

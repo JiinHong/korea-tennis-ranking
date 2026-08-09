@@ -1,5 +1,5 @@
 import { calculateNationalRankings } from "./calculate";
-import { NATIONAL_FORMULA_V4 } from "./formula";
+import { NATIONAL_FORMULA_V5 } from "./formula";
 import type {
   CalculatedRankingRow,
   NationalRankingDataset,
@@ -15,10 +15,6 @@ export const PRIMARY_METHODOLOGY_REFERENCES = [
     url: "https://system.bwfbadminton.com/documents/folder_1_81/folder_1_82/New-Regulations-2018/5.3.3.1%20World%20Ranking%20System.pdf",
   },
   {
-    label: "Official World Golf Ranking methodology",
-    url: "https://www.owgr.com/how-the-ranking-works",
-  },
-  {
     label: "UEFA club ranking overview",
     url: "https://www.uefa.com/nationalassociations/uefarankings/",
   },
@@ -31,9 +27,9 @@ export const PRIMARY_METHODOLOGY_REFERENCES = [
 export type NationalRankingSeedPlan = {
   datasetVersion: NationalRankingDataset["version"];
   formula: {
-    version: typeof NATIONAL_FORMULA_V4.version;
+    version: typeof NATIONAL_FORMULA_V5.version;
     displayName: string;
-    config: typeof NATIONAL_FORMULA_V4;
+    config: typeof NATIONAL_FORMULA_V5;
     effectiveOn: string;
     sourceReferences: typeof PRIMARY_METHODOLOGY_REFERENCES;
   };
@@ -55,10 +51,10 @@ export function buildNationalRankingSeedPlan(
   return {
     datasetVersion: dataset.version,
     formula: {
-      version: NATIONAL_FORMULA_V4.version,
-      displayName: "National Club Ranking v4",
-      config: NATIONAL_FORMULA_V4,
-      effectiveOn: "2026-08-08",
+      version: NATIONAL_FORMULA_V5.version,
+      displayName: "National Club Ranking v5",
+      config: NATIONAL_FORMULA_V5,
+      effectiveOn: "2026-08-09",
       sourceReferences: PRIMARY_METHODOLOGY_REFERENCES,
     },
     sourceRevision,

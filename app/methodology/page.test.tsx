@@ -8,7 +8,7 @@ const SECTION_HEADINGS = [
   "공식",
   "진출 단계 점수",
   "대회 위상 가중치",
-  "참가 규모 가중치",
+  "참가 팀 수",
   "연도 가중치",
   "A/B/C팀 처리",
   "수상 기록",
@@ -48,20 +48,20 @@ describe("MethodologyPage", () => {
     ).toEqual(SECTION_HEADINGS);
     expect(
       screen.getByText(
-        "진출 성적에 따른 기본 점수에 대회의 위상, 참가 규모, 개최 연도를 반영한 가중치를 곱해 대회 점수를 계산합니다."
+        "진출 성적에 따른 기본 점수에 대회 위상과 개최 연도 가중치를 곱해 대회 점수를 계산합니다. 참가 팀 수는 참고 정보로만 유지하며 점수에는 반영하지 않습니다."
       )
     ).toBeDefined();
     expect(
       screen.getByText(
-        "대회 점수 = 진출 단계 점수 × 대회 위상 가중치 × 참가 규모 가중치 × 연도 가중치"
+        "대회 점수 = 진출 단계 점수 × 대회 위상 가중치 × 연도 가중치"
       )
     ).toBeDefined();
     expect(screen.queryAllByText(/단위/)).toHaveLength(0);
-    expect(screen.getByText("national-club-v4")).toBeDefined();
-    expect(screen.getByText("2026-08-08")).toBeDefined();
+    expect(screen.getByText("national-club-v5")).toBeDefined();
+    expect(screen.getByText("2026-08-09")).toBeDefined();
   });
 
-  it("공식 v3의 단계 점수와 대회별 위상 가중치를 정수로 공개한다", () => {
+  it("공식 v5의 단계 점수와 대회별 위상 가중치를 정수로 공개한다", () => {
     render(<MethodologyPage />);
 
     [
@@ -96,28 +96,26 @@ describe("MethodologyPage", () => {
     expect(within(prestigeTable).queryByText("신흥")).toBeNull();
   });
 
-  it("참가 규모와 연도 가중치 기준값을 표로 공개한다", () => {
+  it("참가 팀 수 참고 기준과 연도 가중치 기준값을 표로 공개한다", () => {
     render(<MethodologyPage />);
 
     [
-      ["1~12팀", "1"],
-      ["13~31팀", "2"],
-      ["32~63팀", "3"],
-      ["64팀 이상", "4"],
-    ].forEach((cells) => expectRow("참가 팀 수별 기준 가중치", cells));
+      ["점수 계산", "반영하지 않음"],
+      ["데이터 보존", "대회·연도·성별 참고 정보로 유지"],
+    ].forEach((cells) => expectRow("참가 팀 수 활용 기준", cells));
 
     const fieldSizeTable = screen.getByRole("table", {
-      name: "참가 팀 수별 기준 가중치",
+      name: "참가 팀 수 활용 기준",
     });
     expect(
-      within(fieldSizeTable).getByRole("columnheader", { name: "가중치" })
+      within(fieldSizeTable).getByRole("columnheader", { name: "활용" })
     ).toBeDefined();
 
     [
-      ["1년 이내", "3"],
-      ["2년 이내", "2"],
-      ["3년 이내", "1"],
-      ["3년 초과", "0"],
+      ["최신 개최연도", "4"],
+      ["1년 전", "2"],
+      ["2년 전", "1"],
+      ["그 이전", "0"],
     ].forEach((cells) => expectRow("대회별 연도 가중치", cells));
 
     const recencyTable = screen.getByRole("table", {
@@ -130,7 +128,7 @@ describe("MethodologyPage", () => {
     ).toBeDefined();
     expect(
       screen.getByText(
-        "각 대회의 가장 최근 개최 연도를 기준으로 1년 이내 성적은 연도 가중치 3, 2년 이내는 연도 가중치 2, 3년 이내는 연도 가중치 1로 반영합니다. 3년을 초과한 성적은 현재 점수에서 제외합니다."
+        "각 대회·성별의 가장 최근 개최연도를 기준으로 최신 개최연도는 연도 가중치 4, 1년 전은 2, 2년 전은 1로 반영합니다. 그 이전 성적은 현재 점수에서 제외합니다."
       )
     ).toBeDefined();
     expect(within(recencyTable).queryByText("최신 대회")).toBeNull();
@@ -161,9 +159,9 @@ describe("MethodologyPage", () => {
       )
     ).toBeDefined();
     expect(screen.queryByText(/오래된 왕관/)).toBeNull();
-    expect(screen.getByText(/= 756점$/)).toBeDefined();
-    expect(screen.getByText(/= 504점$/)).toBeDefined();
-    expect(screen.getByText(/= 156점$/)).toBeDefined();
+    expect(screen.getByText(/= 252점$/)).toBeDefined();
+    expect(screen.getByText(/= 126점$/)).toBeDefined();
+    expect(screen.getByText(/= 104점$/)).toBeDefined();
   });
 
   it("총점이 같을 때 적용하는 동점 처리 순서를 공개한다", () => {
@@ -199,7 +197,7 @@ describe("MethodologyPage", () => {
     ).toBeDefined();
     expect(
       screen.getByText(
-        "WEMIX OPEN 2025는 확인된 남자부·여자부 대진과 참가 규모를 현재 공개 점수에 반영합니다."
+        "WEMIX OPEN 2025는 확인된 남자부·여자부 대진과 참가 규모를 참고 정보로 보존하며, 참가 규모는 공개 점수에 반영하지 않습니다."
       )
     ).toBeDefined();
     expect(
@@ -215,7 +213,6 @@ describe("MethodologyPage", () => {
     const outboundLinks = [
       "ATP 랭킹 점수표",
       "BWF 세계 랭킹 시스템",
-      "OWGR 랭킹 방식",
       "UEFA 클럽 랭킹",
       "WEMIX OPEN 2025 공식 대회 요강",
       "solved.ac 도움말 UX 참고",

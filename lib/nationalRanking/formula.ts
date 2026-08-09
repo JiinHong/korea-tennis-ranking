@@ -52,29 +52,38 @@ export type NationalFormulaV2 = NationalFormulaBase & {
 type IntegerNationalFormulaBase = {
   readonly stageUnits: Readonly<Record<TournamentStage, number>>;
   readonly tournamentUnits: Readonly<Record<string, number>>;
+  readonly recencyUnits: readonly [number, number, number];
+};
+
+type FieldSizeNationalFormulaBase = IntegerNationalFormulaBase & {
   readonly fieldSizeTiers: ReadonlyArray<{
     readonly maximumEntrants: number | null;
     readonly units: number;
   }>;
-  readonly recencyUnits: readonly [number, number, number];
 };
 
-export type NationalFormulaV3 = IntegerNationalFormulaBase & {
+export type NationalFormulaV3 = FieldSizeNationalFormulaBase & {
   readonly version: "national-club-v3";
 };
 
-export type NationalFormulaV4 = IntegerNationalFormulaBase & {
+export type NationalFormulaV4 = FieldSizeNationalFormulaBase & {
   readonly version: "national-club-v4";
+};
+
+export type NationalFormulaV5 = IntegerNationalFormulaBase & {
+  readonly version: "national-club-v5";
 };
 
 export type NationalFormula =
   | NationalFormulaV1
   | NationalFormulaV2
   | NationalFormulaV3
-  | NationalFormulaV4;
+  | NationalFormulaV4
+  | NationalFormulaV5;
 
 type LegacyNationalFormula = NationalFormulaV1 | NationalFormulaV2;
-export type IntegerNationalFormula = NationalFormulaV3 | NationalFormulaV4;
+export type FieldSizeNationalFormula = NationalFormulaV3 | NationalFormulaV4;
+export type IntegerNationalFormula = FieldSizeNationalFormula | NationalFormulaV5;
 
 export const NATIONAL_FORMULA_V1: NationalFormulaV1 = Object.freeze({
   version: "national-club-v1",
@@ -156,9 +165,26 @@ export const NATIONAL_FORMULA_V4: NationalFormulaV4 = Object.freeze({
   recencyUnits: Object.freeze([3, 2, 1] as const),
 });
 
+export const NATIONAL_FORMULA_V5: NationalFormulaV5 = Object.freeze({
+  version: "national-club-v5",
+  stageUnits: NATIONAL_FORMULA_V4.stageUnits,
+  tournamentUnits: NATIONAL_FORMULA_V4.tournamentUnits,
+  recencyUnits: Object.freeze([4, 2, 1] as const),
+});
+
 export function isIntegerNationalFormula(
   formula: NationalFormula
 ): formula is IntegerNationalFormula {
+  return (
+    formula.version === "national-club-v3" ||
+    formula.version === "national-club-v4" ||
+    formula.version === "national-club-v5"
+  );
+}
+
+export function usesFieldSizeUnits(
+  formula: NationalFormula
+): formula is FieldSizeNationalFormula {
   return (
     formula.version === "national-club-v3" ||
     formula.version === "national-club-v4"
@@ -167,7 +193,7 @@ export function isIntegerNationalFormula(
 
 export function getStagePoints(
   stage: TournamentStage,
-  formula: NationalFormula = NATIONAL_FORMULA_V4
+  formula: NationalFormula = NATIONAL_FORMULA_V5
 ): number {
   return isIntegerNationalFormula(formula)
     ? formula.stageUnits[stage]
@@ -227,7 +253,7 @@ export function getTournamentPrestigeFactor(
 
 export function getFieldSizeUnits(
   actualEntrants: number,
-  formula: IntegerNationalFormula = NATIONAL_FORMULA_V4
+  formula: FieldSizeNationalFormula = NATIONAL_FORMULA_V4
 ): number {
   if (!Number.isInteger(actualEntrants) || actualEntrants <= 0) {
     throw new Error("actualEntrants must be a positive integer");
@@ -248,7 +274,7 @@ export function getFieldSizeUnits(
 export function getRecencyUnits(
   latestEditionYear: number,
   editionYear: number,
-  formula: IntegerNationalFormula = NATIONAL_FORMULA_V4
+  formula: IntegerNationalFormula = NATIONAL_FORMULA_V5
 ): number {
   const age = latestEditionYear - editionYear;
 
@@ -264,7 +290,7 @@ export function getRecencyUnits(
 
 export function getTournamentUnits(
   tournamentSlug: string,
-  formula: IntegerNationalFormula = NATIONAL_FORMULA_V4
+  formula: IntegerNationalFormula = NATIONAL_FORMULA_V5
 ): number {
   const units = formula.tournamentUnits[tournamentSlug];
 
@@ -275,6 +301,10 @@ export function getTournamentUnits(
   return units;
 }
 
+export function scoreVerifiedResult(
+  input: FormulaV3Input,
+  formula?: NationalFormulaV5
+): number;
 export function scoreVerifiedResult(
   input: FormulaV3Input,
   formula?: NationalFormulaV4
@@ -298,23 +328,25 @@ export function scoreVerifiedResult(
 ): number;
 export function scoreVerifiedResult(
   input: FormulaInput,
-  formula: NationalFormula = NATIONAL_FORMULA_V4
+  formula: NationalFormula = NATIONAL_FORMULA_V5
 ): number {
   if (isIntegerNationalFormula(formula)) {
     if (!("tournamentSlug" in input)) {
       throw new Error(`tournamentSlug is required for ${formula.version}`);
     }
 
-    return (
+    const points =
       getStagePoints(input.stage, formula) *
       getTournamentUnits(input.tournamentSlug, formula) *
-      getFieldSizeUnits(input.actualEntrants, formula) *
       getRecencyUnits(
         input.latestEditionYear,
         input.editionYear,
         formula
-      )
-    );
+      );
+
+    return usesFieldSizeUnits(formula)
+      ? points * getFieldSizeUnits(input.actualEntrants, formula)
+      : points;
   }
 
   const weightingFactor =
