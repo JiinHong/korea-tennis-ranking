@@ -8,7 +8,6 @@ const SECTION_HEADINGS = [
   "공식",
   "진출 단계 점수",
   "대회 위상 가중치",
-  "참가 팀 수",
   "연도 가중치",
   "A/B/C팀 처리",
   "수상 기록",
@@ -48,7 +47,7 @@ describe("MethodologyPage", () => {
     ).toEqual(SECTION_HEADINGS);
     expect(
       screen.getByText(
-        "진출 성적에 따른 기본 점수에 대회 위상과 개최 연도 가중치를 곱해 대회 점수를 계산합니다. 참가 팀 수는 참고 정보로만 유지하며 점수에는 반영하지 않습니다."
+        "진출 성적에 따른 기본 점수에 대회 위상과 개최 연도 가중치를 곱해 대회 점수를 계산합니다."
       )
     ).toBeDefined();
     expect(
@@ -57,21 +56,23 @@ describe("MethodologyPage", () => {
       )
     ).toBeDefined();
     expect(screen.queryAllByText(/단위/)).toHaveLength(0);
-    expect(screen.getByText("national-club-v5")).toBeDefined();
+    expect(screen.getByText("national-club-v6")).toBeDefined();
     expect(screen.getByText("2026-08-09")).toBeDefined();
+    expect(screen.queryByRole("heading", { name: "참가 팀 수" })).toBeNull();
+    expect(screen.queryByText(/참가 팀 수 데이터/)).toBeNull();
   });
 
-  it("공식 v5의 단계 점수와 대회별 위상 가중치를 정수로 공개한다", () => {
+  it("공식 v6의 피보나치 단계 점수와 대회별 위상 가중치를 정수로 공개한다", () => {
     render(<MethodologyPage />);
 
     [
-      ["우승", "21"],
-      ["준우승", "13"],
-      ["4강", "8"],
-      ["8강", "5"],
-      ["16강", "3"],
-      ["32강", "2"],
-      ["64강", "1"],
+      ["우승", "55"],
+      ["준우승", "34"],
+      ["4강", "21"],
+      ["8강", "13"],
+      ["16강", "8"],
+      ["32강", "5"],
+      ["64강", "3"],
       ["실제로 치른 첫 경기 패배", "0"],
     ].forEach((cells) => expectRow("진출 단계별 점수", cells));
 
@@ -96,20 +97,8 @@ describe("MethodologyPage", () => {
     expect(within(prestigeTable).queryByText("신흥")).toBeNull();
   });
 
-  it("참가 팀 수 참고 기준과 연도 가중치 기준값을 표로 공개한다", () => {
+  it("연도 가중치 기준값을 표로 공개한다", () => {
     render(<MethodologyPage />);
-
-    [
-      ["점수 계산", "반영하지 않음"],
-      ["데이터 보존", "대회·연도·성별 참고 정보로 유지"],
-    ].forEach((cells) => expectRow("참가 팀 수 활용 기준", cells));
-
-    const fieldSizeTable = screen.getByRole("table", {
-      name: "참가 팀 수 활용 기준",
-    });
-    expect(
-      within(fieldSizeTable).getByRole("columnheader", { name: "활용" })
-    ).toBeDefined();
 
     [
       ["최신 개최연도", "4"],
@@ -159,9 +148,9 @@ describe("MethodologyPage", () => {
       )
     ).toBeDefined();
     expect(screen.queryByText(/오래된 왕관/)).toBeNull();
-    expect(screen.getByText(/= 252점$/)).toBeDefined();
-    expect(screen.getByText(/= 126점$/)).toBeDefined();
-    expect(screen.getByText(/= 104점$/)).toBeDefined();
+    expect(screen.getByText(/= 660점$/)).toBeDefined();
+    expect(screen.getByText(/= 330점$/)).toBeDefined();
+    expect(screen.getByText(/= 272점$/)).toBeDefined();
   });
 
   it("총점이 같을 때 적용하는 동점 처리 순서를 공개한다", () => {
@@ -197,7 +186,7 @@ describe("MethodologyPage", () => {
     ).toBeDefined();
     expect(
       screen.getByText(
-        "WEMIX OPEN 2025는 확인된 남자부·여자부 대진과 참가 규모를 참고 정보로 보존하며, 참가 규모는 공개 점수에 반영하지 않습니다."
+        "WEMIX OPEN 2025는 확인된 남자부·여자부 대진을 원자료로 보존합니다."
       )
     ).toBeDefined();
     expect(

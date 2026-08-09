@@ -186,6 +186,24 @@
   word-break: keep-all;
 }
 
+.methodology-page .methodology-formula {
+  margin: 24px 0;
+  padding: 7px 0 7px 20px;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  border-left: 4px solid #cf3120;
+  border-radius: 0;
+}
+
+.methodology-page .methodology-formula code {
+  color: var(--methodology-text);
+  font-family: inherit;
+  font-size: 19px;
+  font-weight: 820;
+  line-height: 1.6;
+}
+
 .methodology-formula-secondary code {
   font-size: 14px;
   font-weight: 750;
@@ -524,6 +542,14 @@
   .methodology-formula code,
   .methodology-examples code {
     font-size: 13px;
+  }
+
+  .methodology-page .methodology-formula {
+    padding: 5px 0 5px 15px;
+  }
+
+  .methodology-page .methodology-formula code {
+    font-size: 16px;
   }
 
   .methodology-table caption {

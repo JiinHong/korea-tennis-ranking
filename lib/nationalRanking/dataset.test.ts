@@ -1661,4 +1661,24 @@ describe("loadNationalRankingDataset", () => {
       })
     );
   });
+
+  it("keeps the men's published scale at exactly three clubs above 1,000 points", () => {
+    const men = calculateNationalRankings(loadNationalRankingDataset()).rows
+      .filter((row) => row.gender === "men")
+      .sort((left, right) => right.totalPoints - left.totalPoints);
+
+    expect(
+      men
+        .filter((row) => row.totalPoints > 1_000)
+        .map((row) => [row.clubSlug, row.totalPoints])
+    ).toEqual([
+      ["seoul-university", 1512],
+      ["jeonbuk-ace", 1425],
+      ["sogang-sgtc", 1197],
+    ]);
+    expect(men[3]).toMatchObject({
+      clubSlug: "korea-kutc",
+      totalPoints: 993,
+    });
+  });
 });

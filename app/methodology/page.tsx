@@ -3,7 +3,7 @@ import Link from "next/link";
 import { createMethodologyMetadata } from "@/lib/analytics/pageMetadata";
 import {
   getRecencyUnits,
-  NATIONAL_FORMULA_V5,
+  NATIONAL_FORMULA_V6,
 } from "@/lib/nationalRanking/formula";
 
 import MethodologyTableRegion from "./_components/MethodologyTableRegion";
@@ -32,11 +32,6 @@ const COMPETITION_PRESTIGE_ROWS = [
   ["영월 전국대학 동아리 테니스 대회", "3등급", 1],
 ] as const;
 
-const FIELD_SIZE_ROWS = [
-  ["점수 계산", "반영하지 않음"],
-  ["데이터 보존", "대회·연도·성별 참고 정보로 유지"],
-] as const;
-
 const RECENCY_ROWS = [
   ["최신 개최연도", 0],
   ["1년 전", 1],
@@ -62,7 +57,7 @@ const REFERENCE_LINKS = [
   },
   {
     label: "WEMIX OPEN 2025 공식 대회 요강",
-    description: "2025 대회의 공식 참가 규모 확인 자료",
+    description: "2025 공식 대회 원자료 확인",
     href: "https://wepublic.blob.core.windows.net/wemix-open/overview/contest_overview.pdf",
   },
   {
@@ -107,8 +102,7 @@ export default function MethodologyPage() {
           <h2 id="formula-title">공식</h2>
           <p>
             진출 성적에 따른 기본 점수에 대회 위상과 개최 연도 가중치를 곱해
-            대회 점수를 계산합니다. 참가 팀 수는 참고 정보로만 유지하며 점수에는
-            반영하지 않습니다.
+            대회 점수를 계산합니다.
           </p>
           <div className="methodology-formula" role="note">
             <code>
@@ -139,7 +133,7 @@ export default function MethodologyPage() {
                 {STAGE_ROWS.map(([label, stage]) => (
                   <tr key={stage}>
                     <th scope="row">{label}</th>
-                    <td>{NATIONAL_FORMULA_V5.stageUnits[stage]}</td>
+                    <td>{NATIONAL_FORMULA_V6.stageUnits[stage]}</td>
                   </tr>
                 ))}
               </tbody>
@@ -175,33 +169,6 @@ export default function MethodologyPage() {
                     <th scope="row">{competition}</th>
                     <td>{prestige}</td>
                     <td>{factor}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </MethodologyTableRegion>
-        </section>
-
-        <section className="methodology-section" aria-labelledby="field-title">
-          <h2 id="field-title">참가 팀 수</h2>
-          <p>
-            참가 팀 수 데이터는 삭제하지 않고 대회·개최 연도·성별의 참고 정보로
-            유지합니다. 다만 현재 공식에서는 점수 계산에 사용하지 않습니다.
-          </p>
-          <MethodologyTableRegion label="참가 팀 수 활용 기준">
-            <table className="methodology-table">
-              <caption>참가 팀 수 활용 기준</caption>
-              <thead>
-                <tr>
-                  <th scope="col">구분</th>
-                  <th scope="col">활용</th>
-                </tr>
-              </thead>
-              <tbody>
-                {FIELD_SIZE_ROWS.map(([label, usage]) => (
-                  <tr key={label}>
-                    <th scope="row">{label}</th>
-                    <td>{usage}</td>
                   </tr>
                 ))}
               </tbody>
@@ -298,15 +265,15 @@ export default function MethodologyPage() {
           <ol className="methodology-examples">
             <li>
               <span>최신 개최연도 국토정중앙배(양구) 우승</span>
-              <code>21 × 3 × 4 = 252점</code>
+              <code>55 × 3 × 4 = 660점</code>
             </li>
             <li>
               <span>1년 전 같은 대회 우승</span>
-              <code>21 × 3 × 2 = 126점</code>
+              <code>55 × 3 × 2 = 330점</code>
             </li>
             <li>
               <span>최신 개최연도 경인지구 연맹전 준우승</span>
-              <code>13 × 2 × 4 = 104점</code>
+              <code>34 × 2 × 4 = 272점</code>
             </li>
           </ol>
         </section>
@@ -319,7 +286,7 @@ export default function MethodologyPage() {
                 <code>verified</code>
               </dt>
               <dd>
-                동아리, 부문, 개최 연도, 참가 규모, 진출 단계가 확인되어 점수에
+                동아리, 부문, 개최 연도, 진출 단계가 확인되어 점수에
                 반영할 수 있는 결과
               </dd>
             </div>
@@ -353,8 +320,7 @@ export default function MethodologyPage() {
             공개 페이지에 노출하지 않습니다.
           </p>
           <p className="methodology-note">
-            WEMIX OPEN 2025는 확인된 남자부·여자부 대진과 참가 규모를 참고
-            정보로 보존하며, 참가 규모는 공개 점수에 반영하지 않습니다.
+            WEMIX OPEN 2025는 확인된 남자부·여자부 대진을 원자료로 보존합니다.
           </p>
           <p className="methodology-note">
             영월 대회는 2023년부터 2026년까지 확인된 결과를 기록합니다. 2023년은
@@ -368,7 +334,7 @@ export default function MethodologyPage() {
             <div>
               <dt>공식 버전</dt>
               <dd>
-                <code>{NATIONAL_FORMULA_V5.version}</code>
+                <code>{NATIONAL_FORMULA_V6.version}</code>
               </dd>
             </div>
             <div>

@@ -408,13 +408,13 @@ describe("calculateNationalRankings", () => {
       (row) => row.clubSlug === "alpha" && row.gender === "men"
     );
 
-    expect(result.formulaVersion).toBe("national-club-v5");
-    expect(alphaMen?.totalPoints).toBe(252);
+    expect(result.formulaVersion).toBe("national-club-v6");
+    expect(alphaMen?.totalPoints).toBe(660);
     expect(alphaMen?.contributions[0]).toMatchObject({
       tournamentUnits: 3,
       recencyUnits: 4,
       actualEntrants: 64,
-      points: 252,
+      points: 660,
     });
     expect(alphaMen?.contributions[0].fieldSizeUnits).toBeUndefined();
     expect(result.rows.every((row) => Number.isInteger(row.totalPoints))).toBe(

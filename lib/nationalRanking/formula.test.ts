@@ -7,6 +7,7 @@ import {
   NATIONAL_FORMULA_V3,
   NATIONAL_FORMULA_V4,
   NATIONAL_FORMULA_V5,
+  NATIONAL_FORMULA_V6,
   getFieldSizeFactor,
   getRecencyFactor,
   getRecencyUnits,
@@ -314,4 +315,42 @@ describe("national ranking formula v5", () => {
       ).toBe(expected);
     }
   );
+});
+
+describe("national ranking formula v6", () => {
+  it("uses an exact Fibonacci-shaped stage curve without changing other weights", () => {
+    expect(NATIONAL_FORMULA_V6).toMatchObject({
+      version: "national-club-v6",
+      stageUnits: {
+        champion: 55,
+        runner_up: 34,
+        semifinal: 21,
+        quarterfinal: 13,
+        round_of_16: 8,
+        round_of_32: 5,
+        round_of_64: 3,
+        first_match_loss: 0,
+      },
+      tournamentUnits: NATIONAL_FORMULA_V5.tournamentUnits,
+      recencyUnits: NATIONAL_FORMULA_V5.recencyUnits,
+    });
+    expect(NATIONAL_FORMULA_V6).not.toHaveProperty("fieldSizeTiers");
+  });
+
+  it("awards 660 points for a current Yanggu champion regardless of field size", () => {
+    const score = (actualEntrants: number) =>
+      scoreVerifiedResult(
+        {
+          stage: "champion",
+          tournamentSlug: "yanggu",
+          actualEntrants,
+          latestEditionYear: 2026,
+          editionYear: 2026,
+        },
+        NATIONAL_FORMULA_V6
+      );
+
+    expect(score(12)).toBe(660);
+    expect(score(128)).toBe(660);
+  });
 });
