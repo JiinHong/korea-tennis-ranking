@@ -7,6 +7,7 @@ import {
   isLatestTournamentEdition,
   type LatestEditionYearMap,
 } from "@/lib/nationalRanking/recentHonors";
+import { getTournamentResultDisplayName } from "@/lib/nationalRanking/tournamentPresentation";
 import type {
   NationalRankingBestResult,
   PublicTournamentResultStage,
@@ -90,7 +91,11 @@ export default function NationalRankingExpandedResults({
                     </span>
                     <span className="national-ranking-best-result-main">
                       <strong>
-                        {result.year} {result.tournamentName}
+                        {result.year}{" "}
+                        {getTournamentResultDisplayName(
+                          result.tournamentSlug,
+                          result.tournamentName
+                        )}
                       </strong>
                       <span>
                         {genderLabels[result.gender]} · {stageLabels[result.stage]}

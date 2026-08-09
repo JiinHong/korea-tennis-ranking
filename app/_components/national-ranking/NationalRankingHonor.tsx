@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 
+import { getTournamentShortName } from "@/lib/nationalRanking/tournamentPresentation";
 import type { NationalRankingHonor as NationalRankingHonorRecord } from "@/lib/nationalRanking/types";
 
 import NationalPodiumCrown from "./NationalPodiumCrown";
@@ -10,17 +11,11 @@ type NationalRankingHonorProps = {
   honor: NationalRankingHonorRecord;
 };
 
-const tournamentShortNames: Readonly<Record<string, string>> = {
-  yanggu: "양구",
-  gyeongin: "경인지구",
-  inje: "인제",
-  chuncheon: "춘천",
-  wemix: "위믹스",
-};
-
 function getHonorLabel(honor: NationalRankingHonorRecord): string {
-  const tournamentName =
-    tournamentShortNames[honor.tournamentSlug] ?? honor.tournamentName;
+  const tournamentName = getTournamentShortName(
+    honor.tournamentSlug,
+    honor.tournamentName
+  );
   const gender = honor.gender === "men" ? "남자부" : "여자부";
   const result = {
     champion: "우승",

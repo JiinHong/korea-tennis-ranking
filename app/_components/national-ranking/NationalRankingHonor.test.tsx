@@ -128,4 +128,23 @@ describe("NationalRankingHonor", () => {
     expect(trigger.getAttribute("aria-expanded")).toBe("false");
     expect(document.activeElement).toBe(trigger);
   });
+
+  it("영월 왕관 설명에는 짧은 대회명을 사용한다", () => {
+    render(
+      <NationalRankingHonor
+        honor={{
+          editionKey: "yeongwol-2026-men",
+          tournamentSlug: "yeongwol",
+          tournamentName: "영월 전국대학 동아리 테니스 대회",
+          year: 2026,
+          gender: "men",
+          stage: "champion",
+        }}
+      />
+    );
+
+    expect(
+      screen.getByRole("button", { name: "2026 영월 남자부 우승" })
+    ).toBeDefined();
+  });
 });

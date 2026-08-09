@@ -11,6 +11,7 @@ import type {
   PublicNationalClubResultStage,
 } from "@/lib/nationalRanking/clubResults";
 import { parseRankingGender } from "@/lib/nationalRanking/genderQuery";
+import { getTournamentResultDisplayName } from "@/lib/nationalRanking/tournamentPresentation";
 import type { RankingGender } from "@/lib/nationalRanking/types";
 
 import NationalPodiumCrown from "@/app/_components/national-ranking/NationalPodiumCrown";
@@ -165,7 +166,12 @@ export default function NationalClubResultsView({
                       <span>{result.gender === "men" ? "남자부" : "여자부"}</span>
                     </div>
                     <div className="national-club-result-competition">
-                      <strong>{result.tournamentName}</strong>
+                      <strong>
+                        {getTournamentResultDisplayName(
+                          result.tournamentSlug,
+                          result.tournamentName
+                        )}
+                      </strong>
                       <span>출전명 {result.sourceTeamName}</span>
                     </div>
                     <strong className="national-club-result-stage">

@@ -10,6 +10,7 @@ import {
   usesFieldSizeUnits,
 } from "./formula";
 import type { NationalFormula } from "./formula";
+import { compareTournamentOccurrences } from "./tournamentPresentation";
 import type {
   CalculatedNationalRanking,
   CalculatedRankingRow,
@@ -129,10 +130,7 @@ function combineRankingRows(
     championships: menRow.championships + womenRow.championships,
     runnerUps: menRow.runnerUps + womenRow.runnerUps,
     contributions: [...menRow.contributions, ...womenRow.contributions],
-    honors: sortHonors(
-      [...menRow.honors, ...womenRow.honors],
-      tournamentOrder
-    ),
+    honors: sortHonors([...menRow.honors, ...womenRow.honors]),
     bestResults: [...menRow.bestResults, ...womenRow.bestResults]
       .sort((left, right) =>
         compareBestResults(left, right, tournamentOrder)
@@ -142,16 +140,10 @@ function combineRankingRows(
 }
 
 function sortHonors(
-  honors: NationalRankingHonor[],
-  tournamentOrder: Map<string, number>
+  honors: NationalRankingHonor[]
 ): NationalRankingHonor[] {
   return honors.sort((left, right) => {
-    const yearDifference = right.year - left.year;
-    if (yearDifference !== 0) return yearDifference;
-
-    const tournamentDifference =
-      (tournamentOrder.get(left.tournamentSlug) ?? Number.MAX_SAFE_INTEGER) -
-      (tournamentOrder.get(right.tournamentSlug) ?? Number.MAX_SAFE_INTEGER);
+    const tournamentDifference = compareTournamentOccurrences(left, right);
     if (tournamentDifference !== 0) return tournamentDifference;
 
     if (left.gender !== right.gender) {
@@ -408,7 +400,7 @@ export function calculateNationalRankings(
     honorsByClubAndGender.set(key, honors);
   }
   for (const [key, honors] of honorsByClubAndGender) {
-    honorsByClubAndGender.set(key, sortHonors(honors, tournamentOrder));
+    honorsByClubAndGender.set(key, sortHonors(honors));
   }
 
   const bestResultByIdentity = new Map<string, NationalRankingBestResult>();

@@ -3,6 +3,7 @@ import "server-only";
 import { unstable_cache } from "next/cache";
 
 import { getSupabaseReadClient } from "@/lib/supabase/client";
+import { compareTournamentOccurrences } from "./tournamentPresentation";
 import type { NationalGender, TournamentStage } from "./types";
 
 export type PublicNationalClubResultStage = Extract<
@@ -202,8 +203,7 @@ export async function getNationalClubResultsPageData(
 
   results.sort(
     (left, right) =>
-      right.year - left.year ||
-      left.tournamentName.localeCompare(right.tournamentName, "ko-KR") ||
+      compareTournamentOccurrences(left, right) ||
       left.gender.localeCompare(right.gender)
   );
 
@@ -212,6 +212,6 @@ export async function getNationalClubResultsPageData(
 
 export const getCachedNationalClubResultsPageData = unstable_cache(
   (clubSlug: string) => getNationalClubResultsPageData(clubSlug),
-  ["national-club-results-v1"],
+  ["national-club-results-v2"],
   { tags: ["national-club-results"], revalidate: 300 }
 );
