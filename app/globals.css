@@ -3328,7 +3328,11 @@ button:disabled {
 }
 
 .national-ranking-score-column {
-  width: 140px;
+  width: 112px;
+}
+
+.national-ranking-action-column {
+  width: 112px;
 }
 
 .national-ranking-table th,
@@ -3354,7 +3358,7 @@ button:disabled {
   text-align: center;
 }
 
-.national-ranking-table th:last-child {
+.national-ranking-table th:nth-last-child(-n + 2) {
   text-align: right;
 }
 
@@ -3418,6 +3422,15 @@ button:disabled {
   pointer-events: none;
 }
 
+.national-ranking-club-meta {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  gap: 3px 8px;
+  min-width: 0;
+}
+
 .national-ranking-main-row[data-expanded="true"] td {
   background: var(--national-accent-soft);
 }
@@ -3439,12 +3452,64 @@ button:disabled {
   line-height: 1.45;
 }
 
+.national-ranking-operating-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 20px;
+  padding: 0 6px;
+  color: var(--national-accent-strong);
+  border: 1px solid color-mix(in srgb, var(--national-accent) 48%, transparent);
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 850;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.national-ranking-operating-badge.is-mobile {
+  display: none;
+}
+
 .national-ranking-score {
   color: var(--national-ink);
   text-align: right;
   white-space: nowrap;
   font-size: 14px;
   font-weight: 850;
+}
+
+.national-ranking-row-action {
+  color: var(--national-muted);
+  text-align: right;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.national-ranking-row-action > span:first-child {
+  vertical-align: middle;
+}
+
+.national-ranking-row-chevron {
+  display: inline-block;
+  margin-left: 5px;
+  color: var(--national-accent);
+  font-size: 15px;
+  line-height: 1;
+  transform-origin: center;
+  transition: transform 160ms ease;
+  vertical-align: middle;
+}
+
+.national-ranking-main-row[data-expanded="true"]
+  .national-ranking-row-chevron {
+  transform: rotate(90deg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .national-ranking-main-row:not([data-expanded="true"]):hover td {
+    background: var(--national-accent-soft);
+  }
 }
 
 .national-ranking-honors {
@@ -3623,15 +3688,35 @@ button:disabled {
   padding: 18px 0 10px;
 }
 
+.national-ranking-results-actions {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  width: 100%;
+  margin-top: 10px;
+}
+
 .national-ranking-results-link {
   display: inline-flex;
   align-items: center;
   min-height: 34px;
-  margin-top: 10px;
-  color: var(--national-accent);
+  color: var(--national-ink);
   font-size: 12px;
   font-weight: 850;
-  text-underline-offset: 4px;
+  text-decoration: none;
+}
+
+.national-ranking-results-link.is-campus {
+  margin-left: auto;
+  color: var(--national-accent-strong);
+  text-align: right;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .national-ranking-results-link:hover {
+    color: var(--national-accent);
+  }
 }
 
 .national-ranking-loading {
@@ -3645,7 +3730,8 @@ button:disabled {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .national-ranking-expansion {
+  .national-ranking-expansion,
+  .national-ranking-row-chevron {
     transition: none;
   }
 }
@@ -3669,7 +3755,11 @@ button:disabled {
   }
 
   .national-ranking-score-column {
-    width: 96px;
+    width: 76px;
+  }
+
+  .national-ranking-action-column {
+    width: 40px;
   }
 
   .national-ranking-table th,
@@ -3679,15 +3769,14 @@ button:disabled {
   }
 
   .national-ranking-club {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 2px;
+    align-items: center;
+    gap: 5px;
   }
 
   .national-ranking-club-cell {
     display: grid;
     align-items: center;
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto auto;
     gap: 2px 6px;
   }
@@ -3697,20 +3786,47 @@ button:disabled {
     grid-row: 1;
   }
 
-  .national-ranking-club-name {
-    grid-column: 1;
+  .national-ranking-club-meta {
+    grid-column: 1 / -1;
     grid-row: 2;
+    gap: 2px 5px;
   }
 
-  .national-ranking-honors {
-    grid-column: 2;
-    grid-row: 2;
-    justify-self: start;
-    padding-top: 0;
+  .national-ranking-club strong {
+    font-size: 12px;
+  }
+
+  .national-ranking-operating-badge.is-desktop {
+    display: none;
+  }
+
+  .national-ranking-operating-badge.is-mobile {
+    display: inline-flex;
+    min-height: 18px;
+    padding: 0 5px;
+    font-size: 8px;
+  }
+
+  .national-ranking-row-action {
+    padding-right: 8px;
+    padding-left: 4px;
+  }
+
+  .national-ranking-row-action > span:first-child {
+    display: none;
+  }
+
+  .national-ranking-row-chevron {
+    margin-left: 0;
+    font-size: 17px;
   }
 
   .national-ranking-expanded-results {
     padding: 4px 10px 16px 48px;
+  }
+
+  .national-ranking-results-link {
+    min-height: 44px;
   }
 
   .national-club-results-back {
