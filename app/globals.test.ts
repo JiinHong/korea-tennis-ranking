@@ -534,6 +534,12 @@ describe("national ranking responsive contracts", () => {
     expect(css).toMatch(
       /\.national-ranking-row-chevron\s*\{[^}]*margin-left:\s*12px;[^}]*\}/
     );
+    expect(css).toMatch(
+      /\.national-ranking-row-chevron svg\s*\{[^}]*display:\s*block;[^}]*width:\s*10px;[^}]*height:\s*14px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-ranking-row-chevron path\s*\{[^}]*fill:\s*none;[^}]*stroke:\s*currentColor;[^}]*stroke-width:\s*1\.6;[^}]*stroke-linecap:\s*round;[^}]*stroke-linejoin:\s*round;[^}]*\}/
+    );
   });
 
   it("레퍼런스 색상으로 금·은·브론즈 순위 번호를 구분한다", () => {

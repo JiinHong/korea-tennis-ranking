@@ -513,6 +513,14 @@ describe("NationalRankingTable", () => {
     expect(
       firstScore?.querySelector(".national-ranking-row-chevron")
     ).not.toBeNull();
+    const chevron = firstScore?.querySelector(
+      ".national-ranking-row-chevron"
+    );
+    expect(chevron?.querySelector("svg")).not.toBeNull();
+    expect(chevron?.querySelector("path")?.getAttribute("d")).toBe(
+      "M1 1.5 9 7 1 12.5"
+    );
+    expect(chevron?.textContent?.trim()).toBe("");
 
     fireEvent.click(
       screen.getByRole("button", {

@@ -3479,11 +3479,26 @@ button:disabled {
   display: inline-block;
   margin-left: 12px;
   color: var(--national-accent);
-  font-size: 15px;
   line-height: 1;
   transform-origin: center;
   transition: transform 160ms ease;
   vertical-align: middle;
+}
+
+.national-ranking-row-chevron svg {
+  display: block;
+  width: 10px;
+  height: 14px;
+  overflow: visible;
+}
+
+.national-ranking-row-chevron path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
 }
 
 .national-ranking-main-row[data-expanded="true"]
@@ -3790,7 +3805,6 @@ button:disabled {
 
   .national-ranking-row-chevron {
     margin-left: 8px;
-    font-size: 17px;
   }
 
   .national-ranking-expanded-results {
