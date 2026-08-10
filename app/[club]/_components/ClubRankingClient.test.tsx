@@ -50,6 +50,7 @@ describe("ClubRankingClient", () => {
     const seoultechLogo = screen.getByRole("img", {
       name: "서울과학기술대학교 로고",
     });
+    expect(seoultechLogo.classList.contains("is-monochrome")).toBe(false);
     expect(seoultechLogo.getAttribute("width")).toBe("576");
     expect(seoultechLogo.getAttribute("height")).toBe("395");
     expect(

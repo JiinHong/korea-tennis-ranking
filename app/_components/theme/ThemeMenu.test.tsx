@@ -32,9 +32,10 @@ describe("ThemeMenu", () => {
     themeState.resolvedTheme = "light";
     render(<ThemeMenu />);
 
-    fireEvent.click(
-      screen.getByRole("button", { name: "다크 테마로 전환" })
-    );
+    const toggle = screen.getByRole("button", { name: "다크 테마로 전환" });
+
+    expect(toggle.getAttribute("aria-pressed")).toBe("false");
+    fireEvent.click(toggle);
 
     expect(themeState.setTheme).toHaveBeenCalledWith("dark");
   });
