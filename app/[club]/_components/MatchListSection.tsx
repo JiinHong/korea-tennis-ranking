@@ -1,5 +1,5 @@
 import type { MatchRecord } from "@/lib/googleSheets/currentMatches";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
 
 type MatchListSectionProps = {
@@ -38,24 +38,60 @@ function sortRecentMatches(matches: MatchRecord[]) {
 }
 
 function formatRank(rank: number | null) {
-  if (rank === null) {
-    return "순위 없음";
-  }
-
-  return `${rank}위`;
+  return rank === null ? "–" : String(rank);
 }
 
-function getPlayerResult(match: MatchRecord, playerName: string) {
-  if (match.winner === playerName) {
-    return "W";
+function getPlayerScores(match: MatchRecord) {
+  const parsedScore = match.score.match(/^\s*(\d+)\s*:\s*(\d+)\s*$/);
+
+  if (!parsedScore) {
+    return null;
   }
 
-  return "L";
+  const [, winnerScore, loserScore] = parsedScore;
+
+  if (match.winner === match.challenger) {
+    return { challenger: winnerScore, defender: loserScore };
+  }
+
+  if (match.winner === match.defender) {
+    return { challenger: loserScore, defender: winnerScore };
+  }
+
+  return null;
+}
+
+function MatchPlayerRow({
+  isWinner,
+  name,
+  rank,
+  score,
+}: {
+  isWinner: boolean;
+  name: string;
+  rank: number | null;
+  score: string | null;
+}) {
+  return (
+    <div className="club-match-player-row">
+      <span className="club-match-player-identity">
+        <strong>{name}</strong>
+        <span className="club-match-player-rank">({formatRank(rank)})</span>
+        {isWinner ? (
+          <span aria-label="승자" className="match-winner-check">
+            <Check aria-hidden="true" />
+          </span>
+        ) : null}
+      </span>
+      {score ? (
+        <strong className="club-match-player-score">{score}</strong>
+      ) : null}
+    </div>
+  );
 }
 
 function MatchCard({ match }: { match: MatchRecord }) {
-  const challengerResult = getPlayerResult(match, match.challenger);
-  const defenderResult = getPlayerResult(match, match.defender);
+  const playerScores = getPlayerScores(match);
 
   return (
     <li className="club-match-card">
@@ -65,40 +101,21 @@ function MatchCard({ match }: { match: MatchRecord }) {
       </div>
 
       <div className="club-match-players">
-        <div>
-          <span
-            className={`match-result-letter ${
-              challengerResult === "W" ? "is-win" : "is-loss"
-            }`}
-            aria-label={challengerResult === "W" ? "도전자 승리" : "도전자 패배"}
-          >
-            {challengerResult}
-          </span>
-          <strong>{match.challenger}</strong>
-          <em>도전자 · {formatRank(match.challengerRank)}</em>
-        </div>
-
-        <span className="match-versus" aria-hidden="true">
-          vs
-        </span>
-
-        <div>
-          <span
-            className={`match-result-letter ${
-              defenderResult === "W" ? "is-win" : "is-loss"
-            }`}
-            aria-label={defenderResult === "W" ? "방어자 승리" : "방어자 패배"}
-          >
-            {defenderResult}
-          </span>
-          <strong>{match.defender}</strong>
-          <em>방어자 · {formatRank(match.defenderRank)}</em>
-        </div>
-      </div>
-
-      <div className="club-match-score">
-        <strong>{match.score}</strong>
-        <span>{match.winner} 승</span>
+        <MatchPlayerRow
+          isWinner={match.winner === match.challenger}
+          name={match.challenger}
+          rank={match.challengerRank}
+          score={playerScores?.challenger ?? null}
+        />
+        <MatchPlayerRow
+          isWinner={match.winner === match.defender}
+          name={match.defender}
+          rank={match.defenderRank}
+          score={playerScores?.defender ?? null}
+        />
+        {playerScores === null && match.score ? (
+          <span className="club-match-score-fallback">{match.score}</span>
+        ) : null}
       </div>
     </li>
   );

@@ -129,8 +129,86 @@ describe("MatchesPage", () => {
     expect(within(matchSection).getByText("김선우")).toBeDefined();
     expect(within(matchSection).getByText("김도훈")).toBeDefined();
     expect(within(matchSection).getByText("오준석")).toBeDefined();
+    const kimDohunRow = screen
+      .getByText("김도훈")
+      .closest(".club-match-player-row");
+    const ohJunseokRow = screen
+      .getByText("오준석")
+      .closest(".club-match-player-row");
+    const parkJonggeonRow = screen
+      .getByText("박종건")
+      .closest(".club-match-player-row");
+    const kimSunwooRow = screen
+      .getByText("김선우")
+      .closest(".club-match-player-row");
+
+    expect(kimDohunRow).not.toBeNull();
+    expect(ohJunseokRow).not.toBeNull();
+    expect(parkJonggeonRow).not.toBeNull();
+    expect(kimSunwooRow).not.toBeNull();
+    expect(within(kimDohunRow as HTMLElement).getByText("(2)")).toBeDefined();
+    expect(within(kimDohunRow as HTMLElement).getByText("6")).toBeDefined();
+    expect(
+      within(kimDohunRow as HTMLElement).getByLabelText("승자")
+    ).toBeDefined();
+    expect(within(ohJunseokRow as HTMLElement).getByText("4")).toBeDefined();
+    expect(
+      within(ohJunseokRow as HTMLElement).queryByLabelText("승자")
+    ).toBeNull();
+    expect(within(parkJonggeonRow as HTMLElement).getByText("3")).toBeDefined();
+    expect(within(kimSunwooRow as HTMLElement).getByText("6")).toBeDefined();
+    expect(
+      within(kimSunwooRow as HTMLElement).getByLabelText("승자")
+    ).toBeDefined();
+    expect(screen.queryByText("W")).toBeNull();
+    expect(screen.queryByText("L")).toBeNull();
+    expect(screen.queryByText("vs")).toBeNull();
+    expect(screen.queryByText("김도훈 승")).toBeNull();
+    expect(screen.queryByText("김선우 승")).toBeNull();
+    expect(screen.queryByText(/도전자 ·/)).toBeNull();
+    expect(screen.queryByText(/방어자 ·/)).toBeNull();
     expect(
       screen.queryByRole("link", { name: "랭킹으로 돌아가기" })
     ).toBeNull();
+  });
+
+  it("순위나 정형 점수가 없어도 원본 기록을 잃지 않는다", async () => {
+    vi.mocked(getClubConfig).mockReturnValue(club);
+    vi.mocked(getRankingDataForClub).mockResolvedValue({
+      club,
+      players: [],
+      summary: {
+        totalMatches: 1,
+        recent30Matches: 1,
+      },
+      matches: [
+        {
+          date: "2026. 7. 3",
+          challenger: "순위없는선수",
+          challengerRank: null,
+          defender: "상대선수",
+          defenderRank: 1,
+          winner: "알 수 없음",
+          score: "기권",
+          defenseResult: "방어 성공",
+        },
+      ],
+      detailsByPlayer: {},
+    });
+
+    const ui = await MatchesPage({
+      params: Promise.resolve({ club: "seoultech" }),
+    });
+
+    render(ui);
+
+    const playerRow = screen
+      .getByText("순위없는선수")
+      .closest(".club-match-player-row");
+
+    expect(playerRow).not.toBeNull();
+    expect(within(playerRow as HTMLElement).getByText("(–)")).toBeDefined();
+    expect(screen.getByText("기권")).toBeDefined();
+    expect(screen.queryByLabelText("승자")).toBeNull();
   });
 });
