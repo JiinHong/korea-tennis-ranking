@@ -12,12 +12,14 @@ vi.mock("next/font/google", () => ({
 import { metadata } from "./layout";
 
 describe("root metadata", () => {
-  it("브라우저 탭 파비콘에 잔디 코트 이미지를 사용한다", () => {
+  it("브라우저 탭 파비콘에 단색 2:3 잔디 코트 이미지를 사용한다", () => {
     const icon = readFileSync(join(process.cwd(), "app/icon.png"));
     const iconHash = createHash("sha256").update(icon).digest("hex");
 
-    expect(iconHash).not.toBe(
-      "b0ad0de7ca64263b6f52fe5e038ea02ba560a676b3ff316b8a51e416f95c7d2a"
+    expect(icon.readUInt32BE(16)).toBe(1024);
+    expect(icon.readUInt32BE(20)).toBe(1536);
+    expect(iconHash).toBe(
+      "9fef73382b5ebbed298526c015f24f5542575f4bd3d1ce238775d3fc8e6d1f53"
     );
   });
 
