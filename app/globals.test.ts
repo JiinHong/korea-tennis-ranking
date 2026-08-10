@@ -265,7 +265,7 @@ describe("campus ranking responsive title styles", () => {
       ".campus-result-update-title {\n  display: block;\n  margin-top: 5px;\n  color: var(--campus-ink);\n  font-size: 16px;\n  font-weight: 900;\n  line-height: 1.45;\n}"
     );
     expect(css).toContain(
-      ".campus-result-update-link {\n  display: inline-flex;\n  align-items: center;\n  margin-top: 9px;\n  color: var(--campus-green);\n  font-size: 13px;\n  font-weight: 850;\n  text-decoration: none;\n}"
+      ".campus-result-update-link {\n  display: inline-flex;\n  align-items: center;\n  margin-top: 9px;\n  color: var(--campus-ink);\n  font-size: 13px;\n  font-weight: 850;\n  text-decoration: none;\n}"
     );
     expect(css).toContain(
       ".campus-ranking-heading {\n  display: flex;\n  align-items: flex-end;\n  justify-content: space-between;\n  gap: 16px;\n  margin: 0;\n  padding: 26px 20px 12px;\n  background: transparent;\n  border-top: 1px solid var(--campus-line);\n}"

@@ -1912,7 +1912,7 @@ button:disabled {
   display: inline-flex;
   align-items: center;
   margin-top: 9px;
-  color: var(--campus-green);
+  color: var(--campus-ink);
   font-size: 13px;
   font-weight: 850;
   text-decoration: none;
