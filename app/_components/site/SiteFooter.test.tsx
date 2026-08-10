@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import SiteFooter from "./SiteFooter";
@@ -34,12 +34,19 @@ describe("SiteFooter", () => {
     }
   });
 
-  it("시스템·라이트·다크 화면 테마를 선택할 수 있다", () => {
-    render(<SiteFooter />);
+  it("footer 최하단에 라이트·다크 토글을 배치한다", () => {
+    const { container } = render(<SiteFooter />);
 
-    expect(screen.getByText("화면 테마")).toBeTruthy();
-    expect(screen.getByRole("button", { name: "시스템 테마" })).toBeTruthy();
-    expect(screen.getByRole("button", { name: "라이트 테마" })).toBeTruthy();
-    expect(screen.getByRole("button", { name: "다크 테마" })).toBeTruthy();
+    const bottom = container.querySelector(".site-footer-bottom");
+    expect(bottom).not.toBeNull();
+    expect(bottom?.textContent).toContain(
+      "© 2026 Korea Campus Tennis Ranking"
+    );
+    expect(
+      within(bottom as HTMLElement).getAllByRole("button")
+    ).toHaveLength(1);
+    expect(
+      screen.queryByRole("button", { name: "시스템 테마" })
+    ).toBeNull();
   });
 });

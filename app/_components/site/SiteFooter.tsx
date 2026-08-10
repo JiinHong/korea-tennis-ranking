@@ -9,7 +9,6 @@ export default function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="site-footer-inner">
-        <ThemeMenu />
         <p className="site-footer-credit">
           <strong>koreatennisranking.com</strong>
           <span> by </span>
@@ -25,9 +24,12 @@ export default function SiteFooter() {
         >
           랭킹 데이터 관련 문의
         </a>
-        <p className="site-footer-copyright">
-          © 2026 Korea Campus Tennis Ranking
-        </p>
+        <div className="site-footer-bottom">
+          <p className="site-footer-copyright">
+            © 2026 Korea Campus Tennis Ranking
+          </p>
+          <ThemeMenu />
+        </div>
       </div>
     </footer>
   );

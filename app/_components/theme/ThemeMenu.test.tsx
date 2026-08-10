@@ -1,52 +1,52 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const setTheme = vi.fn();
+const themeState = vi.hoisted(() => ({
+  resolvedTheme: "dark",
+  setTheme: vi.fn(),
+}));
 
 vi.mock("next-themes", () => ({
-  useTheme: () => ({ theme: "system", setTheme }),
+  useTheme: () => themeState,
 }));
 
 import ThemeMenu from "./ThemeMenu";
 
 describe("ThemeMenu", () => {
   beforeEach(() => {
-    setTheme.mockClear();
+    themeState.resolvedTheme = "dark";
+    themeState.setTheme.mockClear();
   });
 
-  it.each([
-    ["시스템 테마", "system"],
-    ["라이트 테마", "light"],
-    ["다크 테마", "dark"],
-  ])("%s 선택을 next-themes에 전달한다", (label, theme) => {
+  it("다크 테마에서 라이트 테마로 전환한다", () => {
     render(<ThemeMenu />);
 
-    fireEvent.click(screen.getByRole("button", { name: label }));
+    fireEvent.click(
+      screen.getByRole("button", { name: "라이트 테마로 전환" })
+    );
 
-    expect(setTheme).toHaveBeenCalledWith(theme);
+    expect(themeState.setTheme).toHaveBeenCalledWith("light");
   });
 
-  it("현재 테마를 보조 기술에 선택 상태로 알린다", () => {
+  it("라이트 테마에서 다크 테마로 전환한다", () => {
+    themeState.resolvedTheme = "light";
     render(<ThemeMenu />);
 
+    fireEvent.click(
+      screen.getByRole("button", { name: "다크 테마로 전환" })
+    );
+
+    expect(themeState.setTheme).toHaveBeenCalledWith("dark");
+  });
+
+  it("시스템 선택지 없이 한 개의 라이트·다크 토글만 제공한다", () => {
+    render(<ThemeMenu />);
+
+    expect(screen.getAllByRole("button")).toHaveLength(1);
+    expect(screen.queryByRole("button", { name: "시스템 테마" })).toBeNull();
     expect(
-      screen.getByRole("button", { name: "시스템 테마" }).getAttribute(
-        "aria-pressed",
-      ),
+      screen.getByRole("button", { name: "라이트 테마로 전환" })
+        .getAttribute("aria-pressed")
     ).toBe("true");
-    expect(
-      screen.getByRole("button", { name: "다크 테마" }).getAttribute(
-        "aria-pressed",
-      ),
-    ).toBe("false");
-  });
-
-  it("작은 아이콘 전용 컨트롤로 세 가지 테마를 제공한다", () => {
-    render(<ThemeMenu />);
-
-    expect(screen.getByLabelText("화면 테마")).toBeTruthy();
-    expect(screen.queryByText("자동")).toBeNull();
-    expect(screen.queryByText("라이트")).toBeNull();
-    expect(screen.queryByText("다크")).toBeNull();
   });
 });

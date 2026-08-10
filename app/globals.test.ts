@@ -717,13 +717,14 @@ describe("theme color contracts", () => {
     );
   });
 
-  it("테마 선택기는 우측 하단의 작은 아이콘 세그먼트로 고정한다", () => {
+  it("테마 토글은 footer 오른쪽 하단의 작은 pill로 배치한다", () => {
     expect(css).toMatch(
-      /\.theme-menu\s*\{[^}]*position:\s*fixed;[^}]*right:\s*16px;[^}]*bottom:\s*16px;[^}]*z-index:\s*90;[^}]*\}/
+      /\.site-footer-bottom\s*\{[^}]*display:\s*flex;[^}]*justify-content:\s*space-between;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.theme-menu-option\s*\{[^}]*width:\s*32px;[^}]*height:\s*32px;[^}]*padding:\s*0;[^}]*\}/
+      /\.theme-toggle\s*\{[^}]*width:\s*64px;[^}]*height:\s*34px;[^}]*border-radius:\s*999px;[^}]*\}/
     );
+    expect(css).not.toMatch(/\.theme-menu\s*\{[^}]*position:\s*fixed;/);
   });
 
   it("다크 모드의 초록 텍스트는 밝은 세이지 색으로 충분히 대비한다", () => {
