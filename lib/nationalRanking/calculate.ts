@@ -4,8 +4,8 @@ import {
   getRecencyUnits,
   getTournamentPrestigeFactor,
   getTournamentUnits,
-  isIntegerNationalFormula,
-  NATIONAL_FORMULA_V6,
+  isUnitNationalFormula,
+  NATIONAL_FORMULA_V7,
   scoreVerifiedResult,
   usesFieldSizeUnits,
 } from "./formula";
@@ -63,8 +63,8 @@ function compareBestResults(
   if (stageDifference !== 0) return stageDifference;
 
   const tournamentUnitDifference =
-    (NATIONAL_FORMULA_V6.tournamentUnits[right.tournamentSlug] ?? 0) -
-    (NATIONAL_FORMULA_V6.tournamentUnits[left.tournamentSlug] ?? 0);
+    (NATIONAL_FORMULA_V7.tournamentUnits[right.tournamentSlug] ?? 0) -
+    (NATIONAL_FORMULA_V7.tournamentUnits[left.tournamentSlug] ?? 0);
   if (tournamentUnitDifference !== 0) return tournamentUnitDifference;
 
   const yearDifference = right.year - left.year;
@@ -309,7 +309,7 @@ function assertCalculatedRankingIntegrity(
 
 export function calculateNationalRankings(
   dataset: NationalRankingDataset,
-  formula: NationalFormula = NATIONAL_FORMULA_V6
+  formula: NationalFormula = NATIONAL_FORMULA_V7
 ): CalculatedNationalRanking {
   const clubsBySlug = new Map(dataset.clubs.map((club) => [club.slug, club]));
   const tournamentsBySlug = new Map(
@@ -327,7 +327,7 @@ export function calculateNationalRankings(
     for (const tournament of dataset.tournaments) {
       getTournamentPrestigeFactor(tournament.slug, formula);
     }
-  } else if (isIntegerNationalFormula(formula)) {
+  } else if (isUnitNationalFormula(formula)) {
     for (const tournament of dataset.tournaments) {
       getTournamentUnits(tournament.slug, formula);
     }
@@ -515,19 +515,19 @@ export function calculateNationalRankings(
         ? getTournamentPrestigeFactor(tournament.slug, formula)
         : undefined;
     const tournamentUnits =
-      isIntegerNationalFormula(formula)
+      isUnitNationalFormula(formula)
         ? getTournamentUnits(tournament.slug, formula)
         : undefined;
     const fieldSizeUnits = usesFieldSizeUnits(formula)
       ? getFieldSizeUnits(edition.actualEntrants, formula)
       : undefined;
     const recencyUnits =
-      isIntegerNationalFormula(formula)
+      isUnitNationalFormula(formula)
         ? getRecencyUnits(latestEditionYear, edition.year, formula)
         : undefined;
 
     if (
-      isIntegerNationalFormula(formula)
+      isUnitNationalFormula(formula)
         ? recencyUnits === 0
         : getRecencyFactor(latestEditionYear, edition.year, formula) === 0
     ) {
@@ -535,7 +535,7 @@ export function calculateNationalRankings(
     }
 
     const points =
-      isIntegerNationalFormula(formula)
+      isUnitNationalFormula(formula)
         ? scoreVerifiedResult(
             {
               stage: result.stage,

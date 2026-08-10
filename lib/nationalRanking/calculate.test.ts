@@ -374,7 +374,7 @@ describe("calculateNationalRankings", () => {
     });
   });
 
-  it("uses the participant-neutral v5 formula by default", () => {
+  it("uses the recency-rebalanced v7 formula by default", () => {
     const v3Dataset = {
       version: "integer-v3-test",
       clubs: [dataset.clubs[0]],
@@ -408,18 +408,18 @@ describe("calculateNationalRankings", () => {
       (row) => row.clubSlug === "alpha" && row.gender === "men"
     );
 
-    expect(result.formulaVersion).toBe("national-club-v6");
-    expect(alphaMen?.totalPoints).toBe(660);
+    expect(result.formulaVersion).toBe("national-club-v7");
+    expect(alphaMen?.totalPoints).toBe(577.5);
     expect(alphaMen?.contributions[0]).toMatchObject({
       tournamentUnits: 3,
-      recencyUnits: 4,
+      recencyUnits: 3.5,
       actualEntrants: 64,
-      points: 660,
+      points: 577.5,
     });
     expect(alphaMen?.contributions[0].fieldSizeUnits).toBeUndefined();
-    expect(result.rows.every((row) => Number.isInteger(row.totalPoints))).toBe(
-      true
-    );
+    expect(
+      result.rows.every((row) => Number.isInteger(row.totalPoints * 2))
+    ).toBe(true);
   });
 
   it("preserves an expired or non-scoreable title as one all-time honor", () => {

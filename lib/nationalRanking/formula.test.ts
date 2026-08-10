@@ -8,6 +8,7 @@ import {
   NATIONAL_FORMULA_V4,
   NATIONAL_FORMULA_V5,
   NATIONAL_FORMULA_V6,
+  NATIONAL_FORMULA_V7,
   getFieldSizeFactor,
   getRecencyFactor,
   getRecencyUnits,
@@ -352,5 +353,35 @@ describe("national ranking formula v6", () => {
 
     expect(score(12)).toBe(660);
     expect(score(128)).toBe(660);
+  });
+});
+
+describe("national ranking formula v7", () => {
+  it("rebalances recency to 3.5:2.5:1 without changing the v6 score scale", () => {
+    expect(NATIONAL_FORMULA_V7).toMatchObject({
+      version: "national-club-v7",
+      stageUnits: NATIONAL_FORMULA_V6.stageUnits,
+      tournamentUnits: NATIONAL_FORMULA_V6.tournamentUnits,
+      recencyUnits: [3.5, 2.5, 1],
+    });
+    expect(NATIONAL_FORMULA_V6.recencyUnits).toEqual([4, 2, 1]);
+  });
+
+  it("preserves exact half-point scores without rounding", () => {
+    const score = (editionYear: number) =>
+      scoreVerifiedResult(
+        {
+          stage: "champion",
+          tournamentSlug: "yanggu",
+          actualEntrants: 64,
+          latestEditionYear: 2026,
+          editionYear,
+        },
+        NATIONAL_FORMULA_V7
+      );
+
+    expect(score(2026)).toBe(577.5);
+    expect(score(2025)).toBe(412.5);
+    expect(score(2024)).toBe(165);
   });
 });

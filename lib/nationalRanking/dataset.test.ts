@@ -1662,8 +1662,9 @@ describe("loadNationalRankingDataset", () => {
     );
   });
 
-  it("keeps the men's published scale at exactly three clubs above 1,000 points", () => {
-    const men = calculateNationalRankings(loadNationalRankingDataset()).rows
+  it("publishes the approved v7 scale and Neutinamu totals", () => {
+    const rows = calculateNationalRankings(loadNationalRankingDataset()).rows;
+    const men = rows
       .filter((row) => row.gender === "men")
       .sort((left, right) => right.totalPoints - left.totalPoints);
 
@@ -1672,13 +1673,32 @@ describe("loadNationalRankingDataset", () => {
         .filter((row) => row.totalPoints > 1_000)
         .map((row) => [row.clubSlug, row.totalPoints])
     ).toEqual([
-      ["seoul-university", 1512],
-      ["jeonbuk-ace", 1425],
-      ["sogang-sgtc", 1197],
+      ["seoul-university", 1493.5],
+      ["jeonbuk-ace", 1406.5],
+      ["sogang-sgtc", 1121],
     ]);
     expect(men[3]).toMatchObject({
       clubSlug: "korea-kutc",
-      totalPoints: 993,
+      totalPoints: 991.5,
+    });
+
+    expect(
+      rows.find(
+        (row) =>
+          row.clubSlug === "seoultech-neutinamu" && row.gender === "women"
+      )
+    ).toMatchObject({
+      rank: 1,
+      totalPoints: 2517,
+    });
+    expect(
+      rows.find(
+        (row) =>
+          row.clubSlug === "seoultech-neutinamu" && row.gender === "combined"
+      )
+    ).toMatchObject({
+      rank: 1,
+      totalPoints: 3295,
     });
   });
 });
