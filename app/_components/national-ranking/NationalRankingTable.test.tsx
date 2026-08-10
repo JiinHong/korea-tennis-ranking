@@ -79,7 +79,7 @@ const rankings: NationalRankingPageData["rankings"] = {
       universityName: "한국과학기술원",
       clubName: "KAIST Tennis",
       displayName: "한국과학기술원 KAIST Tennis",
-      points: 1100,
+      points: 1234.5,
       latestEditionPoints: 70,
       championships: 0,
       runnerUps: 1,
@@ -276,6 +276,8 @@ describe("NationalRankingTable", () => {
     expect(screen.getByText("서울과학기술대학교")).toBeDefined();
     expect(screen.getByText("STC")).toBeDefined();
     expect(screen.getByText("1,234")).toBeDefined();
+    expect(screen.getByText("1,234.5")).toBeDefined();
+    expect(screen.queryByText("1,234.0")).toBeNull();
     expect(screen.queryByText("연세대학교")).toBeNull();
   });
 

@@ -25,7 +25,7 @@ type NationalRankingTableProps = {
 };
 
 const scoreFormatter = new Intl.NumberFormat("ko-KR", {
-  maximumFractionDigits: 0,
+  maximumFractionDigits: 1,
 });
 
 type RankTier = "gold" | "silver" | "bronze";
