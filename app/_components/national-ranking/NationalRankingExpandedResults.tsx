@@ -14,11 +14,13 @@ import type {
   RankingGender,
 } from "@/lib/nationalRanking/types";
 
+import type { CampusRankingLink } from "./campusRankingLinks";
 import NationalPodiumCrown from "./NationalPodiumCrown";
 
 type NationalRankingExpandedResultsProps = {
   activeGender: RankingGender;
   bestResults: NationalRankingBestResult[];
+  campusRankingLink?: CampusRankingLink | null;
   clubSlug: string;
   displayName: string;
   latestEditionYears: LatestEditionYearMap;
@@ -54,6 +56,7 @@ function isPodiumStage(
 export default function NationalRankingExpandedResults({
   activeGender,
   bestResults,
+  campusRankingLink = null,
   clubSlug,
   displayName,
   latestEditionYears,
@@ -111,18 +114,36 @@ export default function NationalRankingExpandedResults({
             </p>
           )}
 
-          <Link
-            className="national-ranking-results-link"
-            href={`/clubs/${clubSlug}?gender=${activeGender}`}
-            onClick={() => {
-              void trackAmplitudeEvent("National Club Results Opened", {
-                club_slug: clubSlug,
-                division: activeGender,
-              });
-            }}
-          >
-            전체 성적 보기
-          </Link>
+          <div className="national-ranking-results-actions">
+            <Link
+              className="national-ranking-results-link is-results"
+              href={`/clubs/${clubSlug}?gender=${activeGender}`}
+              onClick={() => {
+                void trackAmplitudeEvent("National Club Results Opened", {
+                  club_slug: clubSlug,
+                  division: activeGender,
+                });
+              }}
+            >
+              전체 성적 보기
+            </Link>
+            {campusRankingLink ? (
+              <Link
+                className="national-ranking-results-link is-campus"
+                href={`${campusRankingLink.href}?fromGender=${activeGender}`}
+                onClick={() => {
+                  void trackAmplitudeEvent("Campus Ranking Link Clicked", {
+                    source: "national_ranking_preview",
+                    club_slug: clubSlug,
+                    campus_club_slug: campusRankingLink.campusClubSlug,
+                    division: activeGender,
+                  });
+                }}
+              >
+                단식 랭킹 보기
+              </Link>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>

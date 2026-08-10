@@ -165,4 +165,61 @@ describe("NationalRankingExpandedResults", () => {
       }
     );
   });
+
+  it("운영 동아리의 단식 랭킹 링크에 현재 부문을 전달하고 클릭을 기록한다", () => {
+    render(
+      <NationalRankingExpandedResults
+        activeGender="women"
+        bestResults={bestResults}
+        campusRankingLink={{
+          campusClubSlug: "seoultech",
+          href: "/seoultech",
+        }}
+        clubSlug="seoultech-neutinamu"
+        displayName="서울과학기술대학교 느티나무"
+        latestEditionYears={latestEditionYears}
+        regionId="seoultech-results"
+      />
+    );
+
+    const campusLink = screen.getByRole("link", {
+      name: "단식 랭킹 보기",
+    });
+    expect(campusLink.getAttribute("href")).toBe(
+      "/seoultech?fromGender=women"
+    );
+    campusLink.addEventListener("click", (event) => event.preventDefault());
+    fireEvent.click(campusLink);
+
+    expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
+      "Campus Ranking Link Clicked",
+      {
+        source: "national_ranking_preview",
+        club_slug: "seoultech-neutinamu",
+        campus_club_slug: "seoultech",
+        division: "women",
+      }
+    );
+  });
+
+  it("미운영 동아리는 전체 성적 링크만 보여준다", () => {
+    render(
+      <NationalRankingExpandedResults
+        activeGender="men"
+        bestResults={bestResults}
+        campusRankingLink={null}
+        clubSlug="kaist"
+        displayName="한국과학기술원 KAIST Tennis"
+        latestEditionYears={latestEditionYears}
+        regionId="kaist-results"
+      />
+    );
+
+    expect(
+      screen.getByRole("link", { name: "전체 성적 보기" })
+    ).toBeDefined();
+    expect(
+      screen.queryByRole("link", { name: "단식 랭킹 보기" })
+    ).toBeNull();
+  });
 });
