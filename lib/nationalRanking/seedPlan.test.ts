@@ -113,12 +113,12 @@ describe("buildNationalRankingSeedPlan", () => {
 
     expect(plan.sourceRevision).toBe("revision-123");
     expect(plan.formula).toMatchObject({
-      version: "national-club-v6",
-      displayName: "National Club Ranking v6",
-      effectiveOn: "2026-08-09",
+      version: "national-club-v7",
+      displayName: "National Club Ranking v7",
+      effectiveOn: "2026-08-11",
     });
     expect(plan.formula.config).toMatchObject({
-      version: "national-club-v6",
+      version: "national-club-v7",
       stageUnits: {
         champion: 55,
         runner_up: 34,
@@ -131,6 +131,7 @@ describe("buildNationalRankingSeedPlan", () => {
         inje: 1,
         yeongwol: 1,
       },
+      recencyUnits: [3.5, 2.5, 1],
     });
     expect(plan.formula.sourceReferences).toEqual(PRIMARY_METHODOLOGY_REFERENCES);
     expect(
@@ -185,9 +186,9 @@ describe("buildNationalRankingSeedPlan", () => {
         expect.objectContaining({ editionKey: "national-2024-men-unresolved" }),
       ])
     );
-    expect(plan.rows.every((row) => Number.isInteger(row.totalPoints))).toBe(
-      true
-    );
+    expect(
+      plan.rows.every((row) => Number.isInteger(row.totalPoints * 2))
+    ).toBe(true);
     expect(alphaMen?.honors).toEqual([
       expect.objectContaining({
         editionKey: "national-2025-men",

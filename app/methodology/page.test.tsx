@@ -55,14 +55,18 @@ describe("MethodologyPage", () => {
         "대회 점수 = 진출 단계 점수 × 대회 위상 가중치 × 연도 가중치"
       )
     ).toBeDefined();
-    expect(screen.queryAllByText(/단위/)).toHaveLength(0);
-    expect(screen.getByText("national-club-v6")).toBeDefined();
-    expect(screen.getByText("2026-08-09")).toBeDefined();
+    expect(
+      screen.getByText(
+        "대회별 점수를 합산해 동아리의 남자부 또는 여자부 총점을 구합니다. 모든 입력은 정수이며, 연도 가중치 적용 후 최종 점수는 0.5점 단위로 계산합니다. 별도의 반올림은 사용하지 않습니다."
+      )
+    ).toBeDefined();
+    expect(screen.getByText("national-club-v7")).toBeDefined();
+    expect(screen.getByText("2026-08-11")).toBeDefined();
     expect(screen.queryByRole("heading", { name: "참가 팀 수" })).toBeNull();
     expect(screen.queryByText(/참가 팀 수 데이터/)).toBeNull();
   });
 
-  it("공식 v6의 피보나치 단계 점수와 대회별 위상 가중치를 정수로 공개한다", () => {
+  it("공식 v7의 피보나치 단계 점수와 대회별 위상 가중치를 공개한다", () => {
     render(<MethodologyPage />);
 
     [
@@ -101,8 +105,8 @@ describe("MethodologyPage", () => {
     render(<MethodologyPage />);
 
     [
-      ["최신 개최연도", "4"],
-      ["1년 전", "2"],
+      ["최신 개최연도", "3.5"],
+      ["1년 전", "2.5"],
       ["2년 전", "1"],
       ["그 이전", "0"],
     ].forEach((cells) => expectRow("대회별 연도 가중치", cells));
@@ -117,7 +121,7 @@ describe("MethodologyPage", () => {
     ).toBeDefined();
     expect(
       screen.getByText(
-        "각 대회·성별의 가장 최근 개최연도를 기준으로 최신 개최연도는 연도 가중치 4, 1년 전은 2, 2년 전은 1로 반영합니다. 그 이전 성적은 현재 점수에서 제외합니다."
+        "각 대회·성별의 가장 최근 개최연도를 기준으로 최신 개최연도는 연도 가중치 3.5, 1년 전은 2.5, 2년 전은 1로 반영합니다. 그 이전 성적은 현재 점수에서 제외합니다."
       )
     ).toBeDefined();
     expect(within(recencyTable).queryByText("최신 대회")).toBeNull();
@@ -148,9 +152,9 @@ describe("MethodologyPage", () => {
       )
     ).toBeDefined();
     expect(screen.queryByText(/오래된 왕관/)).toBeNull();
-    expect(screen.getByText(/= 660점$/)).toBeDefined();
-    expect(screen.getByText(/= 330점$/)).toBeDefined();
-    expect(screen.getByText(/= 272점$/)).toBeDefined();
+    expect(screen.getByText(/= 577\.5점$/)).toBeDefined();
+    expect(screen.getByText(/= 412\.5점$/)).toBeDefined();
+    expect(screen.getByText(/= 238점$/)).toBeDefined();
   });
 
   it("총점이 같을 때 적용하는 동점 처리 순서를 공개한다", () => {
