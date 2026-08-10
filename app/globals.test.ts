@@ -107,6 +107,18 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
+  it("선수 이름과 최근 경기 날짜를 한 묶음으로 행 중앙에 정렬한다", () => {
+    expect(css).toContain(
+      ".player-cell {\n  display: flex;\n  align-self: stretch;\n  flex-direction: column;\n  justify-content: center;\n  min-width: 0;\n}"
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*860px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured \.player-cell,\s*\.campus-ranking-page \.ranking-row\.is-compact \.player-cell\s*\{[^}]*grid-row:\s*1 \/ span 2;[^}]*align-self:\s*center;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured \.player-cell\s*\{[^}]*grid-column:\s*2;[^}]*grid-row:\s*1 \/ span 2;[^}]*\}/
+    );
+  });
+
   it("상위 10위 행과 하이라이트를 모바일에서도 촘촘하게 보여준다", () => {
     expect(css).toMatch(
       /\.campus-ranking-page \.ranking-row\.is-featured\s*\{[^}]*min-height:\s*64px;/
@@ -189,7 +201,7 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
-  it("선수 상세 최근 경기는 원형 체크와 X로 승패를 보여준다", () => {
+  it("선수 상세 최근 경기는 배경 없는 체크와 X로 승패를 보여준다", () => {
     expect(css).toContain(
       ".recent-match-item {\n  display: grid;\n  grid-template-columns: 42px minmax(0, 1fr) auto;\n  align-items: center;\n  gap: 10px;\n  min-height: 58px;\n  padding: 15px 0;\n  background: transparent;\n  border: 0;\n  border-bottom: 1px solid var(--campus-line);\n  border-radius: 0;\n}"
     );
@@ -865,15 +877,21 @@ describe("theme color contracts", () => {
     );
   });
 
-  it("최근 경기 승패 아이콘은 모바일과 다크 모드에서도 구분된다", () => {
+  it("최근 경기 승패 아이콘은 원형 배경 없이 색과 크기로 구분된다", () => {
     expect(css).toMatch(
-      /\.match-outcome-icon\s*\{[^}]*display:\s*inline-flex;[^}]*color:\s*#fff;[^}]*border-radius:\s*999px;[^}]*\}/
+      /\.match-outcome-icon\s*\{[^}]*display:\s*inline-flex;[^}]*background:\s*transparent;[^}]*border-radius:\s*0;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.match-outcome-icon\.is-win\s*\{[^}]*background:\s*#187b42;[^}]*\}/
+      /\.match-outcome-icon svg\s*\{[^}]*width:\s*84%;[^}]*height:\s*84%;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.match-outcome-icon\.is-loss\s*\{[^}]*background:\s*#d91e4d;[^}]*\}/
+      /\.match-outcome-icon\.is-win\s*\{[^}]*color:\s*#168a4b;[^}]*background:\s*transparent;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.match-outcome-icon\.is-loss\s*\{[^}]*color:\s*#d62961;[^}]*background:\s*transparent;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.form-dot\.is-empty\s*\{[^}]*color:\s*transparent;[^}]*background:\s*#e8edea;[^}]*border-radius:\s*999px;[^}]*\}/
     );
     expect(css).toMatch(
       /\.campus-ranking-page \.ranking-row\.is-featured \.form-dot\s*\{[^}]*width:\s*22px;[^}]*height:\s*22px;[^}]*font-size:\s*11px;[^}]*\}/
@@ -882,7 +900,7 @@ describe("theme color contracts", () => {
       /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured \.form-dot\s*\{[^}]*width:\s*18px;[^}]*height:\s*18px;[^}]*font-size:\s*9px;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.dark \.match-outcome-icon\.is-win\s*\{[^}]*background:\s*#258a50;[^}]*\}[\s\S]*?\.dark \.match-outcome-icon\.is-loss\s*\{[^}]*background:\s*#e53662;[^}]*\}/
+      /\.dark \.match-outcome-icon\.is-win\s*\{[^}]*color:\s*#6bd99d;[^}]*background:\s*transparent;[^}]*\}[\s\S]*?\.dark \.match-outcome-icon\.is-loss\s*\{[^}]*color:\s*#ff6b8d;[^}]*background:\s*transparent;[^}]*\}/
     );
   });
 

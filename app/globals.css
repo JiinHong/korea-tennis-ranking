@@ -1170,6 +1170,10 @@ button:disabled {
 }
 
 .player-cell {
+  display: flex;
+  align-self: stretch;
+  flex-direction: column;
+  justify-content: center;
   min-width: 0;
 }
 
@@ -1244,22 +1248,24 @@ button:disabled {
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  color: #fff;
-  border-radius: 999px;
+  background: transparent;
+  border-radius: 0;
 }
 
 .match-outcome-icon svg {
-  width: 60%;
-  height: 60%;
+  width: 84%;
+  height: 84%;
   stroke-width: 3;
 }
 
 .match-outcome-icon.is-win {
-  background: #187b42;
+  color: #168a4b;
+  background: transparent;
 }
 
 .match-outcome-icon.is-loss {
-  background: #d91e4d;
+  color: #d62961;
+  background: transparent;
 }
 
 .form-dot {
@@ -1268,8 +1274,8 @@ button:disabled {
   justify-content: center;
   width: 24px;
   height: 24px;
-  color: white;
-  border-radius: 999px;
+  color: inherit;
+  border-radius: 0;
   font-size: 10px;
   font-weight: 850;
 }
@@ -1277,6 +1283,7 @@ button:disabled {
 .form-dot.is-empty {
   color: transparent;
   background: #e8edea;
+  border-radius: 999px;
 }
 
 .empty-row {
@@ -4094,7 +4101,12 @@ button:disabled {
     grid-row: 1 / span 2;
   }
 
-  .campus-ranking-page .ranking-row.is-compact .player-cell,
+  .campus-ranking-page .ranking-row.is-featured .player-cell,
+  .campus-ranking-page .ranking-row.is-compact .player-cell {
+    grid-row: 1 / span 2;
+    align-self: center;
+  }
+
   .campus-ranking-page .ranking-row.is-compact .record-cell {
     grid-row: 1;
   }
@@ -4454,7 +4466,7 @@ button:disabled {
 
   .campus-ranking-page .ranking-row.is-featured .player-cell {
     grid-column: 2;
-    grid-row: 1;
+    grid-row: 1 / span 2;
   }
 
   .campus-ranking-page .ranking-row.is-featured .player-sub {
@@ -6473,16 +6485,18 @@ button:disabled {
   box-shadow: 0 0 0 4px rgba(167, 199, 183, 0.12);
 }
 
-.dark .form-dot {
+.dark .form-dot.is-empty {
   background: #26333c;
 }
 
 .dark .match-outcome-icon.is-win {
-  background: #258a50;
+  color: #6bd99d;
+  background: transparent;
 }
 
 .dark .match-outcome-icon.is-loss {
-  background: #e53662;
+  color: #ff6b8d;
+  background: transparent;
 }
 
 .dark .recent-match-item {
