@@ -40,4 +40,13 @@ describe("ThemeMenu", () => {
       ),
     ).toBe("false");
   });
+
+  it("작은 아이콘 전용 컨트롤로 세 가지 테마를 제공한다", () => {
+    render(<ThemeMenu />);
+
+    expect(screen.getByLabelText("화면 테마")).toBeTruthy();
+    expect(screen.queryByText("자동")).toBeNull();
+    expect(screen.queryByText("라이트")).toBeNull();
+    expect(screen.queryByText("다크")).toBeNull();
+  });
 });

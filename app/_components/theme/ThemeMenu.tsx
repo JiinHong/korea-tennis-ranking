@@ -5,9 +5,9 @@ import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
 
 const THEME_OPTIONS = [
-  { value: "system", label: "시스템 테마", shortLabel: "자동", Icon: Monitor },
-  { value: "light", label: "라이트 테마", shortLabel: "라이트", Icon: Sun },
-  { value: "dark", label: "다크 테마", shortLabel: "다크", Icon: Moon },
+  { value: "system", label: "시스템 테마", Icon: Monitor },
+  { value: "light", label: "라이트 테마", Icon: Sun },
+  { value: "dark", label: "다크 테마", Icon: Moon },
 ] as const;
 
 const subscribeToHydration = () => () => undefined;
@@ -24,9 +24,9 @@ export default function ThemeMenu() {
 
   return (
     <div className="theme-menu" aria-label="화면 테마">
-      <span className="theme-menu-label">화면 테마</span>
+      <span className="visually-hidden">화면 테마</span>
       <div className="theme-menu-options">
-        {THEME_OPTIONS.map(({ value, label, shortLabel, Icon }) => {
+        {THEME_OPTIONS.map(({ value, label, Icon }) => {
           const isSelected = mounted && theme === value;
 
           return (
@@ -40,7 +40,6 @@ export default function ThemeMenu() {
               onClick={() => setTheme(value)}
             >
               <Icon aria-hidden="true" size={15} strokeWidth={1.9} />
-              <span>{shortLabel}</span>
             </button>
           );
         })}

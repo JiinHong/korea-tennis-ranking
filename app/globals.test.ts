@@ -689,7 +689,7 @@ describe("theme color contracts", () => {
       /:root\s*\{[^}]*--bg-canvas:\s*#f5f7f6;[^}]*--bg-surface:\s*#ffffff;[^}]*--text-primary:\s*#171b1f;[^}]*--brand:\s*#1a3b2b;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.dark\s*\{[^}]*--bg-canvas:\s*#101820;[^}]*--bg-surface:\s*#151f28;[^}]*--text-primary:\s*#f2f5f7;[^}]*--brand:\s*#7ea894;[^}]*\}/
+      /\.dark\s*\{[^}]*--bg-canvas:\s*#101820;[^}]*--bg-surface:\s*#151f28;[^}]*--text-primary:\s*#f2f5f7;[^}]*--brand:\s*#a7c7b7;[^}]*\}/
     );
   });
 
@@ -714,6 +714,108 @@ describe("theme color contracts", () => {
     );
     expect(css).toMatch(
       /\.dark \.campus-ranking-page\.player-detail-page\s*\{[^}]*background:\s*var\(--bg-canvas\);[^}]*\}/
+    );
+  });
+
+  it("테마 선택기는 우측 하단의 작은 아이콘 세그먼트로 고정한다", () => {
+    expect(css).toMatch(
+      /\.theme-menu\s*\{[^}]*position:\s*fixed;[^}]*right:\s*16px;[^}]*bottom:\s*16px;[^}]*z-index:\s*90;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.theme-menu-option\s*\{[^}]*width:\s*32px;[^}]*height:\s*32px;[^}]*padding:\s*0;[^}]*\}/
+    );
+  });
+
+  it("다크 모드의 초록 텍스트는 밝은 세이지 색으로 충분히 대비한다", () => {
+    expect(css).toMatch(
+      /\.dark \.campus-ranking-page\s*\{[^}]*--campus-green:\s*#a7c7b7;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.rank-movement\.is-up\s*\{[^}]*color:\s*#6bd99d;[^}]*\}/
+    );
+  });
+
+  it("전국 랭킹 표와 탭은 다크 모드에서도 별도 박스 배경을 만들지 않는다", () => {
+    expect(css).toMatch(
+      /\.national-ranking-surface\s*\{[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*border-radius:\s*0;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.national-ranking-surface\s*\{[^}]*background:\s*transparent;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.national-ranking-tabs\s*\{[^}]*background:\s*transparent;[^}]*\}/
+    );
+  });
+
+  it("최근 경기 W는 모바일에서도 읽을 수 있는 크기와 다크 전용 배경을 사용한다", () => {
+    expect(css).toMatch(
+      /\.campus-ranking-page \.ranking-row\.is-featured \.form-dot\s*\{[^}]*width:\s*22px;[^}]*height:\s*22px;[^}]*font-size:\s*11px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured \.form-dot\s*\{[^}]*width:\s*18px;[^}]*height:\s*18px;[^}]*font-size:\s*9px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.campus-ranking-page \.form-dot\.is-win\s*\{[^}]*color:\s*#f7fbf9;[^}]*background:\s*#347a59;[^}]*\}/
+    );
+  });
+
+  it("경기 입력과 제출 버튼은 다크 모드 전용 전경·배경 토큰을 공유한다", () => {
+    expect(css).toMatch(
+      /\.campus-ranking-page\s*\{[^}]*--campus-action-bg:\s*#1f2328;[^}]*--campus-action-ink:\s*#ffffff;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.campus-ranking-page\s*\{[^}]*--campus-action-bg:\s*#a7c7b7;[^}]*--campus-action-ink:\s*#101820;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.match-entry-button\s*\{[^}]*color:\s*var\(--campus-action-ink\);[^}]*background:\s*var\(--campus-action-bg\);[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.match-entry-submit\s*\{[^}]*color:\s*var\(--campus-action-ink\);[^}]*background:\s*var\(--campus-action-bg\);[^}]*\}/
+    );
+  });
+
+  it("운영 페이지의 탭·필터·정책 제목도 어두운 표면을 유지한다", () => {
+    expect(css).toMatch(
+      /\.dark \.admin-page \.admin-club-tabs,\s*\.dark \.admin-page \.admin-match-filter\s*\{[^}]*border-color:\s*var\(--admin-line\);[^}]*background:\s*var\(--admin-soft\);[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.admin-page \.admin-club-tabs button\[aria-pressed="true"\],\s*\.dark \.admin-page \.admin-match-filter button\[aria-pressed="true"\]\s*\{[^}]*color:\s*var\(--admin-ink\);[^}]*background:\s*#26333c;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.admin-page \.admin-policy-group h3\s*\{[^}]*background:\s*var\(--admin-soft\);[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.admin-page \.admin-primary-button:disabled,\s*\.dark \.admin-page \.admin-monthly-summary > button:disabled\s*\{[^}]*color:\s*#81909c;[^}]*background:\s*#26333c;[^}]*border-color:\s*#26333c;[^}]*\}/
+    );
+  });
+
+  it("운영 페이지의 기본·보조·강조 텍스트가 다크 모드 토큰을 사용한다", () => {
+    expect(css).toMatch(
+      /\.dark \.admin-page :is\([\s\S]*?\.admin-rule-summary strong,[\s\S]*?\.admin-monthly-summary strong[\s\S]*?\)\s*\{[^}]*color:\s*var\(--admin-ink\);[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.admin-page :is\([\s\S]*?\.admin-root-link,[\s\S]*?\.admin-player-table-head,[\s\S]*?\.admin-monthly-table-head[\s\S]*?\)\s*\{[^}]*color:\s*var\(--admin-muted\);[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.admin-page :is\([\s\S]*?\.admin-kicker,[\s\S]*?\.admin-season-label[\s\S]*?\)\s*\{[^}]*color:\s*#79b9c8;[^}]*\}/
+    );
+  });
+
+  it("운영 페이지의 성공·경고·오류 상태는 다크 모드 고대비 색을 사용한다", () => {
+    expect(css).toMatch(
+      /\.dark \.admin-page :is\([\s\S]*?\.admin-policy-group strong\.is-open,[\s\S]*?\.admin-match-actions button\.is-restore[\s\S]*?\)\s*\{[^}]*color:\s*#6bd99d;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.admin-page :is\([\s\S]*?\.admin-policy-group strong\.is-sensitive,[\s\S]*?\.admin-monthly-row\.is-penalized \.admin-monthly-expected[\s\S]*?\)\s*\{[^}]*color:\s*#ff8f86;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.admin-page \.admin-monthly-automation\.is-skipped \.admin-monthly-automation-state,\s*\.dark \.admin-page \.admin-monthly-player span\.is-inactive\s*\{[^}]*color:\s*#e7b96f;[^}]*\}/
+    );
+  });
+
+  it("월간 정산의 비활성 버튼도 밝은 박스로 남지 않는다", () => {
+    expect(css).toMatch(
+      /\.dark \.admin-page \.admin-primary-button:disabled,\s*\.dark \.admin-page \.admin-monthly-summary > button:disabled\s*\{[^}]*color:\s*#81909c;[^}]*background:\s*#26333c;[^}]*border-color:\s*#26333c;[^}]*\}/
     );
   });
 });

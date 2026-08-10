@@ -35,7 +35,7 @@
   --border-default: #2b3742;
   --text-primary: #f2f5f7;
   --text-secondary: #9ba7b2;
-  --brand: #7ea894;
+  --brand: #a7c7b7;
   --status-win: #6aa9d0;
   --status-loss: #ff7267;
   --background: var(--bg-canvas);
@@ -1274,11 +1274,15 @@ button:disabled {
 .campus-ranking-page {
   --campus-red: #c62917;
   --campus-red-soft: #fff0ee;
+  --campus-green: #1f6a4a;
   --campus-ink: #1f2328;
   --campus-muted: #707780;
   --campus-line: #e7e9ee;
   --campus-bg: #f5f6f8;
   --campus-shadow: 0 10px 26px rgba(31, 35, 40, 0.06);
+  --campus-action-bg: #1f2328;
+  --campus-action-ink: #ffffff;
+  --campus-action-hover: #30353b;
   background: var(--campus-bg);
 }
 
@@ -1775,9 +1779,9 @@ button:disabled {
 .match-entry-button {
   min-height: 36px;
   padding: 0 12px;
-  color: white;
-  background: var(--campus-ink);
-  border: 1px solid var(--campus-ink);
+  color: var(--campus-action-ink);
+  background: var(--campus-action-bg);
+  border: 1px solid var(--campus-action-bg);
   border-radius: 8px;
   font-size: 13px;
   font-weight: 850;
@@ -1786,7 +1790,8 @@ button:disabled {
 
 @media (hover: hover) and (pointer: fine) {
   .match-entry-button:hover {
-    background: #30353b;
+    background: var(--campus-action-hover);
+    border-color: var(--campus-action-hover);
   }
 }
 
@@ -2310,8 +2315,8 @@ button:disabled {
 
 .match-entry-submit {
   min-height: 48px;
-  color: white;
-  background: var(--campus-ink);
+  color: var(--campus-action-ink);
+  background: var(--campus-action-bg);
   border: 0;
   border-radius: 8px;
   font-weight: 850;
@@ -2319,7 +2324,7 @@ button:disabled {
 
 @media (hover: hover) and (pointer: fine) {
   .match-entry-submit:hover:not(:disabled) {
-    background: #30353b;
+    background: var(--campus-action-hover);
   }
 }
 
@@ -2649,9 +2654,9 @@ button:disabled {
 }
 
 .campus-ranking-page .ranking-row.is-featured .form-dot {
-  width: 21px;
-  height: 21px;
-  font-size: 9px;
+  width: 22px;
+  height: 22px;
+  font-size: 11px;
 }
 
 .campus-ranking-page .ranking-row.is-compact .player-name-line strong {
@@ -2676,13 +2681,13 @@ button:disabled {
 }
 
 .campus-ranking-page .ranking-row.is-compact .form-dot {
-  width: 18px;
-  height: 18px;
-  font-size: 8px;
+  width: 19px;
+  height: 19px;
+  font-size: 9px;
 }
 
 .campus-ranking-page .form-dot.is-win {
-  background: #111827;
+  background: #1f5f45;
 }
 
 .campus-ranking-page .form-dot.is-loss {
@@ -3249,7 +3254,7 @@ button:disabled {
 .national-ranking-surface {
   width: 100%;
   overflow: visible;
-  background: white;
+  background: transparent;
   border: 0;
   border-radius: 0;
 }
@@ -4280,9 +4285,9 @@ button:disabled {
   }
 
   .campus-ranking-page .ranking-row.is-featured .form-dot {
-    width: 16px;
-    height: 16px;
-    font-size: 7px;
+    width: 18px;
+    height: 18px;
+    font-size: 9px;
   }
 
   .campus-ranking-page .ranking-row.is-compact {
@@ -4354,9 +4359,9 @@ button:disabled {
   }
 
   .campus-ranking-page .ranking-row.is-compact .form-dot {
-    width: 14px;
-    height: 14px;
-    font-size: 6px;
+    width: 16px;
+    height: 16px;
+    font-size: 8px;
   }
 
   .recent-form {
@@ -5981,19 +5986,15 @@ button:disabled {
 }
 
 .theme-menu {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 90;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 26px;
-  padding-bottom: 22px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.theme-menu-label {
-  color: #aab4af;
-  font-size: 12px;
-  font-weight: 750;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
 }
 
 .theme-menu-options {
@@ -6001,37 +6002,42 @@ button:disabled {
   grid-template-columns: repeat(3, auto);
   gap: 3px;
   padding: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 7px;
-  background: rgba(255, 255, 255, 0.06);
+  pointer-events: auto;
+  color: var(--text-secondary);
+  background: color-mix(in srgb, var(--bg-surface) 92%, transparent);
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(10, 24, 18, 0.14);
+  backdrop-filter: blur(12px);
 }
 
 .theme-menu-option {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  min-width: 66px;
-  height: 31px;
-  padding: 0 8px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
   border: 0;
-  border-radius: 4px;
-  color: #aab4af;
+  border-radius: 7px;
+  color: var(--text-secondary);
   background: transparent;
-  font-size: 11px;
-  font-weight: 750;
   transition: color 150ms ease, background-color 150ms ease;
 }
 
 .theme-menu-option[aria-pressed="true"] {
+  color: #f7f9fa;
+  background: var(--brand);
+}
+
+.dark .theme-menu-option[aria-pressed="true"] {
   color: #101820;
-  background: #f2f5f7;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .theme-menu-option:not([aria-pressed="true"]):hover {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    background: var(--bg-subtle);
   }
 }
 
@@ -6103,19 +6109,8 @@ button:disabled {
   }
 
   .theme-menu {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .theme-menu-options {
-    width: 100%;
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .theme-menu-option {
-    width: 100%;
-    min-width: 0;
+    right: 12px;
+    bottom: 12px;
   }
 
   .site-footer .site-footer-copyright {
@@ -6190,13 +6185,21 @@ button:disabled {
 .dark .campus-ranking-page {
   --campus-red: #ff7267;
   --campus-red-soft: #35211f;
+  --campus-green: #a7c7b7;
   --campus-ink: var(--text-primary);
   --campus-muted: var(--text-secondary);
   --campus-line: var(--border-default);
   --campus-bg: var(--bg-canvas);
   --campus-shadow: none;
+  --campus-action-bg: #a7c7b7;
+  --campus-action-ink: #101820;
+  --campus-action-hover: #bdd7ca;
   color: var(--text-primary);
   background: var(--bg-canvas);
+}
+
+.dark .rank-movement.is-up {
+  color: #6bd99d;
 }
 
 .dark .campus-ranking-page:not(.player-detail-page),
@@ -6228,6 +6231,11 @@ button:disabled {
 .dark .campus-ranking-skeleton-record > span,
 .dark .form-dot {
   background: #26333c;
+}
+
+.dark .campus-ranking-page .form-dot.is-win {
+  color: #f7fbf9;
+  background: #347a59;
 }
 
 .dark .recent-match-item {
@@ -6275,15 +6283,37 @@ button:disabled {
   background: var(--bg-canvas);
 }
 
-.dark .national-status,
-.dark .national-ranking-surface {
+.dark .national-status {
   border-color: var(--border-default);
   background: var(--bg-surface);
 }
 
-.dark .national-ranking-tabs,
+.dark .national-ranking-surface {
+  background: transparent;
+}
+
+.dark .national-ranking-tabs {
+  background: transparent;
+}
+
 .dark .national-ranking-expanded-results {
   background: var(--bg-subtle);
+}
+
+.dark .national-ranking-crown-guide img {
+  filter: invert(1) brightness(1.4);
+}
+
+.dark .national-ranking-rank[data-rank-tier="gold"] {
+  color: #ffc95c;
+}
+
+.dark .national-ranking-rank[data-rank-tier="silver"] {
+  color: #a8bad0;
+}
+
+.dark .national-ranking-rank[data-rank-tier="bronze"] {
+  color: #e4a070;
 }
 
 .dark .national-ranking-main-row[data-expanded="true"] td {
@@ -6340,6 +6370,7 @@ button:disabled {
     .admin-player-summary,
     .admin-player-table-head,
     .admin-player-row.is-left,
+    .admin-rank-player,
     .admin-rank-preview,
     .admin-match-table-head,
     .admin-match-row.is-voided,
@@ -6365,6 +6396,142 @@ button:disabled {
   border-color: var(--border-default);
   color: var(--text-primary);
   background: var(--bg-subtle);
+}
+
+.dark .admin-page .admin-club-tabs,
+.dark .admin-page .admin-match-filter {
+  border-color: var(--admin-line);
+  background: var(--admin-soft);
+}
+
+.dark .admin-page .admin-club-tabs button[aria-pressed="true"],
+.dark .admin-page .admin-match-filter button[aria-pressed="true"] {
+  color: var(--admin-ink);
+  background: #26333c;
+  box-shadow: none;
+}
+
+.dark .admin-page .admin-policy-group h3 {
+  border-color: var(--admin-line);
+  color: var(--admin-muted);
+  background: var(--admin-soft);
+}
+
+.dark .admin-page .admin-primary-button:disabled,
+.dark .admin-page .admin-monthly-summary > button:disabled {
+  color: #81909c;
+  background: #26333c;
+  border-color: #26333c;
+}
+
+.dark .admin-page * {
+  border-color: var(--admin-line);
+}
+
+.dark .admin-page :is(
+    .admin-rule-summary strong,
+    .admin-rank-player strong,
+    .admin-rank-preview > header strong,
+    .admin-match-confirmation strong,
+    .admin-monthly-automation-header h3,
+    .admin-monthly-automation-details dd,
+    .admin-monthly-empty strong,
+    .admin-monthly-summary strong
+  ) {
+  color: var(--admin-ink);
+}
+
+.dark .admin-page :is(
+    .admin-root-link,
+    .admin-access-state,
+    .admin-section-heading p,
+    .admin-club-header a,
+    .admin-metric-grid dt,
+    .admin-roster-status,
+    .admin-rule-summary,
+    .admin-empty-rule,
+    .admin-club-tabs button,
+    .admin-player-search span,
+    .admin-dialog-field > span,
+    .admin-player-summary span,
+    .admin-player-table-head,
+    .admin-player-row.is-left,
+    .admin-player-identity span,
+    .admin-player-status button.is-inactive,
+    .admin-player-status button.is-left,
+    .admin-player-empty,
+    .admin-player-dialog > header button,
+    .admin-rank-player span,
+    .admin-rank-preview > header span,
+    .admin-rank-preview li span,
+    .admin-rank-preview-empty,
+    .admin-dialog-help,
+    .admin-match-filter button,
+    .admin-match-table-head,
+    .admin-match-row.is-voided,
+    .admin-match-date span,
+    .admin-match-result span,
+    .admin-match-state span,
+    .admin-match-players span,
+    .admin-match-state strong.is-voided,
+    .admin-match-confirmation,
+    .admin-monthly-month-select,
+    .admin-monthly-automation-state,
+    .admin-monthly-automation-details dt,
+    .admin-monthly-automation-message p,
+    .admin-monthly-empty,
+    .admin-monthly-summary span,
+    .admin-monthly-table-head,
+    .admin-monthly-player span,
+    .admin-monthly-matches
+  ) {
+  color: var(--admin-muted);
+}
+
+.dark .admin-page :is(
+    .admin-kicker,
+    .admin-section-heading > div > span,
+    .admin-season-label
+  ) {
+  color: #79b9c8;
+}
+
+.dark .admin-page :is(
+    .admin-policy-group strong.is-open,
+    .admin-player-notice.is-success,
+    .admin-player-status button.is-active,
+    .admin-match-state strong.is-confirmed,
+    .admin-match-actions button.is-restore,
+    .admin-monthly-automation.is-succeeded .admin-monthly-automation-state
+  ) {
+  color: #6bd99d;
+}
+
+.dark .admin-page :is(
+    .admin-policy-group strong.is-sensitive,
+    .admin-player-notice.is-error,
+    .admin-player-status button.is-injured,
+    .admin-player-dialog > header span,
+    .admin-match-actions button.is-danger,
+    .admin-monthly-automation-header > div > span,
+    .admin-monthly-automation.is-failed .admin-monthly-automation-state,
+    .admin-monthly-automation-message span,
+    .admin-monthly-automation.is-failed .admin-monthly-automation-message p,
+    .admin-monthly-player span.is-injured,
+    .admin-monthly-row.is-penalized .admin-monthly-expected
+  ) {
+  color: #ff8f86;
+}
+
+.dark .admin-page .admin-monthly-automation.is-skipped .admin-monthly-automation-state,
+.dark .admin-page .admin-monthly-player span.is-inactive {
+  color: #e7b96f;
+}
+
+.dark .admin-page .admin-monthly-summary > button:not(:disabled) {
+  color: #101820;
+  background: var(--admin-accent);
+  border-color: var(--admin-accent);
 }
 
 .dark .admin-player-dialog-backdrop {
