@@ -383,5 +383,6 @@ describe("national ranking formula v7", () => {
     expect(score(2026)).toBe(577.5);
     expect(score(2025)).toBe(412.5);
     expect(score(2024)).toBe(165);
+    expect(score(2023)).toBe(0);
   });
 });
