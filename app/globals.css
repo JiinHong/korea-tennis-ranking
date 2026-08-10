@@ -6460,11 +6460,15 @@ button:disabled {
 
 .dark .campus-hero-band,
 .dark .campus-ranking-page .state-panel,
-.dark .player-detail-panel,
 .dark .match-entry-dialog {
   border-color: var(--border-default);
   background: var(--bg-surface);
   box-shadow: none;
+}
+
+.dark .player-detail-panel {
+  border-color: transparent;
+  background: transparent;
 }
 
 .dark .campus-ranking-page .refresh-button,
@@ -6500,7 +6504,7 @@ button:disabled {
 }
 
 .dark .recent-match-item {
-  background: var(--bg-subtle);
+  background: transparent;
 }
 
 .dark .campus-highlight-section,

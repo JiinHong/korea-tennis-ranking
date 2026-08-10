@@ -792,6 +792,18 @@ describe("theme color contracts", () => {
     );
   });
 
+  it("선수 상세 본문과 최근 경기 행은 다크 모드에서도 열린 표면을 유지한다", () => {
+    expect(css).toContain(
+      ".dark .player-detail-panel {\n  border-color: transparent;\n  background: transparent;\n}"
+    );
+    expect(css).toContain(
+      ".dark .recent-match-item {\n  background: transparent;\n}"
+    );
+    expect(css).not.toContain(
+      ".dark .campus-ranking-page .state-panel,\n.dark .player-detail-panel,"
+    );
+  });
+
   it("테마 토글은 footer 오른쪽 하단의 작은 pill로 배치한다", () => {
     expect(css).toMatch(
       /\.site-footer-bottom\s*\{[^}]*display:\s*flex;[^}]*justify-content:\s*space-between;[^}]*\}/
