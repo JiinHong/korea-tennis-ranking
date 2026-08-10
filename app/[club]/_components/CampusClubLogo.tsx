@@ -9,18 +9,18 @@ type CampusClubLogoProps = {
 };
 
 export default function CampusClubLogo({ club }: CampusClubLogoProps) {
-  const className =
-    club.slug === "petc"
-      ? "campus-club-logo is-monochrome"
-      : "campus-club-logo";
+  const isMonochrome = club.slug === "petc";
+  const dimensions = isMonochrome
+    ? { width: 547, height: 451 }
+    : { width: 576, height: 395 };
 
   return (
     <Image
-      className={className}
+      className={`campus-club-logo${isMonochrome ? " is-monochrome" : ""}`}
       src={club.logoPath}
       alt={club.logoAlt}
-      width={48}
-      height={48}
+      width={dimensions.width}
+      height={dimensions.height}
       priority
     />
   );

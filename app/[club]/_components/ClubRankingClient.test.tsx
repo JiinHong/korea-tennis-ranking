@@ -47,9 +47,11 @@ describe("ClubRankingClient", () => {
         name: "서울과학기술대학교 테니스 단식 랭킹",
       })
     ).toBeDefined();
-    expect(
-      screen.getByRole("img", { name: "서울과학기술대학교 로고" })
-    ).toBeDefined();
+    const seoultechLogo = screen.getByRole("img", {
+      name: "서울과학기술대학교 로고",
+    });
+    expect(seoultechLogo.getAttribute("width")).toBe("576");
+    expect(seoultechLogo.getAttribute("height")).toBe("395");
     expect(
       screen.getByText("실시간 순위를 불러오고 있어요")
     ).toBeDefined();
@@ -101,11 +103,12 @@ describe("ClubRankingClient", () => {
         .getByRole("link", { name: "PETC 대회 성적 보러가기" })
         .getAttribute("href")
     ).toBe("/clubs/korea-petc?gender=women");
-    expect(
-      screen
-        .getByRole("img", { name: "고려대학교 체육교육과 PETC 로고" })
-        .classList.contains("is-monochrome")
-    ).toBe(true);
+    const petcLogo = screen.getByRole("img", {
+      name: "고려대학교 체육교육과 PETC 로고",
+    });
+    expect(petcLogo.classList.contains("is-monochrome")).toBe(true);
+    expect(petcLogo.getAttribute("width")).toBe("547");
+    expect(petcLogo.getAttribute("height")).toBe("451");
   });
 
   it("동아리별 최신 대회 결과 안내를 성별을 유지한 링크로 보여준다", async () => {
