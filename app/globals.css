@@ -3468,11 +3468,8 @@ button:disabled {
 }
 
 .national-ranking-score {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 12px;
   color: var(--national-ink);
+  text-align: right;
   white-space: nowrap;
   font-size: 14px;
   font-weight: 850;
@@ -3480,7 +3477,7 @@ button:disabled {
 
 .national-ranking-row-chevron {
   display: inline-block;
-  margin-left: 0;
+  margin-left: 12px;
   color: var(--national-accent);
   font-size: 15px;
   line-height: 1;
@@ -3791,12 +3788,8 @@ button:disabled {
     font-size: 8px;
   }
 
-  .national-ranking-score {
-    gap: 8px;
-  }
-
   .national-ranking-row-chevron {
-    margin-left: 0;
+    margin-left: 8px;
     font-size: 17px;
   }
 

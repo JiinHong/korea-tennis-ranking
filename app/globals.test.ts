@@ -518,7 +518,7 @@ describe("national ranking responsive contracts", () => {
     );
   });
 
-  it("동아리 이름은 줄바꿈하고 순위와 점수는 각 기준선에 고정한다", () => {
+  it("점수 셀은 표 셀 높이를 유지하며 점수와 화살표를 오른쪽에 붙인다", () => {
     expect(css).toMatch(
       /\.national-ranking-club\s*\{[\s\S]*?min-width:\s*0;[^}]*overflow-wrap:\s*anywhere;[^}]*\}/
     );
@@ -526,7 +526,13 @@ describe("national ranking responsive contracts", () => {
       /\.national-ranking-rank\s*\{[\s\S]*?text-align:\s*center;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.national-ranking-score\s*\{[\s\S]*?display:\s*flex;[^}]*align-items:\s*center;[^}]*justify-content:\s*flex-end;[^}]*gap:\s*12px;[^}]*white-space:\s*nowrap;[^}]*\}/
+      /\.national-ranking-score\s*\{[^}]*text-align:\s*right;[^}]*white-space:\s*nowrap;[^}]*\}/
+    );
+    expect(css).not.toMatch(
+      /\.national-ranking-score\s*\{[^}]*display\s*:/
+    );
+    expect(css).toMatch(
+      /\.national-ranking-row-chevron\s*\{[^}]*margin-left:\s*12px;[^}]*\}/
     );
   });
 
@@ -650,7 +656,7 @@ describe("national ranking responsive contracts", () => {
   it("640px 이하에서 표 열을 압축한다", () => {
     expect(css).toMatch(/@media\s*\(max-width:\s*640px\)/);
     expect(css).toMatch(
-      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.national-ranking-rank-column\s*\{[^}]*width:\s*48px;[^}]*\}[\s\S]*?\.national-ranking-score-column\s*\{[^}]*width:\s*94px;[^}]*\}[\s\S]*?\.national-ranking-score\s*\{[^}]*gap:\s*8px;[^}]*\}/
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.national-ranking-rank-column\s*\{[^}]*width:\s*48px;[^}]*\}[\s\S]*?\.national-ranking-score-column\s*\{[^}]*width:\s*94px;[^}]*\}[\s\S]*?\.national-ranking-row-chevron\s*\{[^}]*margin-left:\s*8px;[^}]*\}/
     );
   });
 
