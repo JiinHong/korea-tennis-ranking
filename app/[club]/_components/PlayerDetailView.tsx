@@ -1,7 +1,7 @@
 import type { ClubConfig } from "@/lib/campusRanking/config";
 import type { PlayerDetail } from "@/lib/campusRanking/playerDetails";
-import Image from "next/image";
 
+import CampusClubLogo from "./CampusClubLogo";
 import ClubRankingBackLink from "./ClubRankingBackLink";
 import PlayerProfileViewTracker from "./PlayerProfileViewTracker";
 
@@ -31,13 +31,7 @@ export default function PlayerDetailView({
           <header className="topbar">
             <div className="brand-lockup">
               <div className="brand-title-row">
-                <Image
-                  src={club.logoPath}
-                  alt={club.logoAlt}
-                  width={48}
-                  height={48}
-                  priority
-                />
+                <CampusClubLogo club={club} />
                 <div className="brand-title-stack">
                   <h1>선수 상세</h1>
                 </div>

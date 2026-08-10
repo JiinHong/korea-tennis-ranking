@@ -93,6 +93,41 @@ const detail = {
 };
 
 describe("PlayerPage", () => {
+  it("PETC의 단색 로고를 구분한다", async () => {
+    const petcClub = {
+      ...club,
+      slug: "petc",
+      title: "고려대학교 체육교육과 PETC 테니스 단식 랭킹",
+      organization: "고려대학교 체육교육과 PETC",
+      logoPath: "/petc-logo.png",
+      logoAlt: "고려대학교 체육교육과 PETC 로고",
+    };
+    vi.mocked(getClubConfig).mockReturnValue(petcClub);
+    vi.mocked(getRankingDataForClub).mockResolvedValue({
+      club: petcClub,
+      players: [],
+      matches: [],
+      detailsByPlayer: {
+        오준석: detail,
+      },
+    });
+
+    const ui = await PlayerPage({
+      params: Promise.resolve({
+        club: "petc",
+        player: encodeURIComponent("오준석"),
+      }),
+    });
+
+    render(ui);
+
+    expect(
+      screen
+        .getByRole("img", { name: "고려대학교 체육교육과 PETC 로고" })
+        .classList.contains("is-monochrome")
+    ).toBe(true);
+  });
+
   it("선수 상세 전적을 별도 페이지에서 보여준다", async () => {
     vi.mocked(getClubConfig).mockReturnValue(club);
     vi.mocked(getRankingDataForClub).mockResolvedValue({

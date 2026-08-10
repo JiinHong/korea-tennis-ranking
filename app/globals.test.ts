@@ -736,6 +736,12 @@ describe("theme color contracts", () => {
     );
   });
 
+  it("PETC 단색 로고만 다크 모드에서 밝게 변환한다", () => {
+    expect(css).toMatch(
+      /\.dark \.campus-club-logo\.is-monochrome\s*\{[^}]*filter:\s*[^;]+;[^}]*\}/
+    );
+  });
+
   it("전국 랭킹 표와 탭은 다크 모드에서도 별도 박스 배경을 만들지 않는다", () => {
     expect(css).toMatch(
       /\.national-ranking-surface\s*\{[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*border-radius:\s*0;[^}]*\}/

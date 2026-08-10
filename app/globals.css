@@ -6220,6 +6220,11 @@ button:disabled {
   background: var(--bg-canvas);
 }
 
+.dark .campus-club-logo.is-monochrome {
+  filter: invert(87%) sepia(14%) saturate(350%) hue-rotate(96deg)
+    brightness(91%) contrast(91%);
+}
+
 .dark .rank-movement.is-up {
   color: #6bd99d;
 }

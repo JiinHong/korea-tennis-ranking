@@ -90,6 +90,8 @@ describe("ClubRankingClient", () => {
           slug: "petc",
           title: "고려대학교 체육교육과 PETC 테니스 단식 랭킹",
           titleLines: ["고려대학교 체육교육과 PETC", "테니스 단식 랭킹"],
+          logoPath: "/petc-logo.png",
+          logoAlt: "고려대학교 체육교육과 PETC 로고",
         }}
       />
     );
@@ -99,6 +101,11 @@ describe("ClubRankingClient", () => {
         .getByRole("link", { name: "PETC 대회 성적 보러가기" })
         .getAttribute("href")
     ).toBe("/clubs/korea-petc?gender=women");
+    expect(
+      screen
+        .getByRole("img", { name: "고려대학교 체육교육과 PETC 로고" })
+        .classList.contains("is-monochrome")
+    ).toBe(true);
   });
 
   it("동아리별 최신 대회 결과 안내를 성별을 유지한 링크로 보여준다", async () => {

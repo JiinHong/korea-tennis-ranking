@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 
@@ -12,6 +11,7 @@ import CampusResultsBackLink, {
   getCampusResultsHref,
 } from "./CampusResultsBackLink";
 import CampusResultUpdateLink from "./CampusResultUpdateLink";
+import CampusClubLogo from "./CampusClubLogo";
 import { getPlayerDetailPath } from "../_lib/playerPaths";
 import MatchEntryDialog from "./MatchEntryDialog";
 import NationalRankingBackLink from "./NationalRankingBackLink";
@@ -342,13 +342,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
             <div className="brand-lockup">
               <span className="campus-kicker">캠퍼스 랭킹</span>
               <div className="brand-title-row">
-                <Image
-                  src={club.logoPath}
-                  alt={club.logoAlt}
-                  width={48}
-                  height={48}
-                  priority
-                />
+                <CampusClubLogo club={club} />
                 <div className="brand-title-stack">
                   <h1 aria-label={club.title}>
                     {club.titleLines.map((line) => (
