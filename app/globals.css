@@ -3191,6 +3191,103 @@ button:disabled {
   margin-top: 24px;
 }
 
+.national-campus-ranking-promo {
+  margin-top: 30px;
+  padding: 24px 0 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--national-line);
+}
+
+.national-campus-ranking-promo h2 {
+  margin: 0 0 13px;
+  color: var(--national-ink);
+  font-size: 16px;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.national-campus-ranking-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.national-campus-ranking-link {
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr) 16px;
+  align-items: center;
+  gap: 10px;
+  min-height: 68px;
+  padding: 10px 14px;
+  color: var(--national-ink);
+  background: transparent;
+  border: 1px solid var(--national-line);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+.national-campus-ranking-logo {
+  display: block;
+  justify-self: start;
+  height: auto;
+  max-height: 46px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  object-fit: contain;
+}
+
+.national-campus-ranking-logo.is-petc {
+  width: 52px;
+}
+
+.national-campus-ranking-logo.is-seoultech {
+  width: 57px;
+}
+
+.national-campus-ranking-arrow {
+  color: var(--national-muted);
+  font-size: 16px;
+  line-height: 1;
+  transition: transform 160ms ease;
+}
+
+.national-campus-ranking-inquiry {
+  display: inline-flex;
+  margin-top: 14px;
+  color: var(--national-muted);
+  font-size: 13px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.national-campus-ranking-link:focus-visible,
+.national-campus-ranking-inquiry:focus-visible {
+  outline: 3px solid var(--national-accent);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .national-campus-ranking-link:hover {
+    background: var(--national-accent-soft);
+    border-color: var(--national-accent);
+  }
+
+  .national-campus-ranking-link:hover .national-campus-ranking-arrow {
+    transform: translateX(2px);
+  }
+
+  .national-campus-ranking-inquiry:hover {
+    color: var(--national-ink);
+  }
+}
+
 .national-ranking-header {
   display: flex;
   align-items: center;
@@ -3748,6 +3845,21 @@ button:disabled {
 
   .national-ranking-tabs button {
     padding: 0 6px;
+  }
+
+  .national-campus-ranking-promo {
+    margin-top: 26px;
+    padding-top: 21px;
+  }
+
+  .national-campus-ranking-links {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .national-campus-ranking-link {
+    min-height: 66px;
+    padding: 9px 12px;
   }
 
   .national-ranking-rank-column {
@@ -6431,6 +6543,10 @@ button:disabled {
 
 .dark .national-ranking-surface {
   background: transparent;
+}
+
+.dark .national-campus-ranking-logo.is-petc {
+  filter: invert(1) brightness(1.1);
 }
 
 .dark .national-ranking-tabs {

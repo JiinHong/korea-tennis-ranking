@@ -109,8 +109,23 @@ describe("Home", () => {
     expect(screen.getByText(/영월/)).toBeDefined();
 
     expect(
-      screen.queryByRole("link", { name: "서울과기대 단식 랭킹" })
-    ).toBeNull();
+      screen.getByRole("heading", { name: "단식 랭킹 운영 중!" })
+    ).toBeDefined();
+    expect(
+      screen
+        .getByRole("link", { name: "PETC 단식 랭킹" })
+        .getAttribute("href")
+    ).toBe("/petc");
+    expect(
+      screen
+        .getByRole("link", { name: "느티나무 단식 랭킹" })
+        .getAttribute("href")
+    ).toBe("/seoultech");
+    expect(
+      screen
+        .getByRole("link", { name: "우리 동아리도 운영해보기 →" })
+        .getAttribute("href")
+    ).toBe("https://open.kakao.com/o/sFSnlgIi");
   });
 
   it("게시된 스냅샷이 없으면 준비 상태를 보여준다", async () => {
@@ -122,6 +137,9 @@ describe("Home", () => {
       screen.getByText("검증된 전국 랭킹을 준비하고 있습니다.")
     ).toBeDefined();
     expect(screen.queryByRole("table")).toBeNull();
+    expect(
+      screen.queryByRole("heading", { name: "단식 랭킹 운영 중!" })
+    ).toBeNull();
   });
 
   it("랭킹 조회 실패 시 다시 시도 링크를 보여주고 다음 요청에서 복구한다", async () => {
@@ -139,6 +157,9 @@ describe("Home", () => {
       within(alert).getByRole("link", { name: "다시 시도" }).getAttribute("href")
     ).toBe("/");
     expect(screen.queryByRole("table")).toBeNull();
+    expect(
+      screen.queryByRole("heading", { name: "단식 랭킹 운영 중!" })
+    ).toBeNull();
 
     firstRender.unmount();
     render(await Home());

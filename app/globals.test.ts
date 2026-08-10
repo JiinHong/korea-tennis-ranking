@@ -451,6 +451,39 @@ describe("campus ranking responsive title styles", () => {
 describe("national ranking responsive contracts", () => {
   const css = readFileSync(join(process.cwd(), "app/globals.css"), "utf8");
 
+  it("운영 중인 단식 랭킹을 로고 원형 배경 없이 반응형으로 안내한다", () => {
+    expect(css).toMatch(
+      /\.national-campus-ranking-promo\s*\{[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*border-top:\s*1px solid var\(--national-line\);[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-campus-ranking-links\s*\{[^}]*display:\s*grid;[^}]*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\);[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-campus-ranking-logo\s*\{[^}]*height:\s*auto;[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*border-radius:\s*0;[^}]*object-fit:\s*contain;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-campus-ranking-logo\.is-petc\s*\{[^}]*width:\s*52px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.national-campus-ranking-logo\.is-seoultech\s*\{[^}]*width:\s*57px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.national-campus-ranking-logo\.is-petc\s*\{[^}]*filter:\s*invert\(1\) brightness\(1\.1\);[^}]*\}/
+    );
+    expect(css).not.toMatch(
+      /\.dark \.national-campus-ranking-logo\.is-seoultech\s*\{[^}]*filter:/
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.national-campus-ranking-links\s*\{[^}]*grid-template-columns:\s*minmax\(0, 1fr\);[^}]*\}/
+    );
+    expect(css).toMatch(
+      /@media\s*\(hover:\s*hover\)\s*and\s*\(pointer:\s*fine\)[\s\S]*?\.national-campus-ranking-link:hover\s*\{[^}]*background:\s*var\(--national-accent-soft\);[^}]*\}/
+    );
+    expect(css).not.toMatch(
+      /\.dark \.national-campus-ranking-link:hover\s*\{[^}]*background:\s*(?:white|#fff(?:fff)?);/
+    );
+  });
+
   it("전국 랭킹은 톤다운된 딥 보틀 그린 팔레트를 사용한다", () => {
     expect(css).toMatch(
       /\.national-page\s*\{[^}]*--national-ink:\s*#171b1f;[^}]*--national-muted:\s*#66717c;[^}]*--national-line:\s*#dfe4e1;[^}]*--national-accent:\s*#1a3b2b;[^}]*--national-accent-strong:\s*#0d2e27;[^}]*--national-accent-soft:\s*#edf2ef;[^}]*\}/

@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { getCachedNationalRankingPageData } from "@/lib/nationalRanking/repository";
 
+import CampusRankingPromotion from "./_components/national-ranking/CampusRankingPromotion";
 import NationalRankingTable from "./_components/national-ranking/NationalRankingTable";
 
 export default async function Home() {
@@ -74,6 +75,7 @@ export default async function Home() {
             >
               <NationalRankingTable rankings={pageData.rankings} />
             </Suspense>
+            <CampusRankingPromotion />
           </section>
         )}
       </div>
