@@ -449,6 +449,75 @@ describe("NationalRankingTable", () => {
     expect(clubName.parentElement).toBe(honors.parentElement);
   });
 
+  it("운영 동아리에만 단식 랭킹 상태와 링크를 표시한다", () => {
+    render(<NationalRankingTable rankings={rankings} />);
+
+    expect(screen.getAllByText("단식 랭킹 운영 중")).toHaveLength(4);
+    expect(
+      screen
+        .getByRole("button", {
+          name: "한국과학기술원 KAIST Tennis 최고 성적 펼치기",
+        })
+        .closest("tr")?.textContent
+    ).not.toContain("단식 랭킹 운영 중");
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: "서울과학기술대학교 STC 최고 성적 펼치기",
+      })
+    );
+    expect(
+      screen
+        .getByRole("link", { name: "단식 랭킹 보기" })
+        .getAttribute("href")
+    ).toBe("/seoultech?fromGender=men");
+  });
+
+  it("운영 배지를 데스크톱에서는 동아리명 옆, 모바일에서는 학교명 옆에 둔다", () => {
+    render(<NationalRankingTable rankings={rankings} />);
+
+    const rankingRow = screen
+      .getByRole("button", {
+        name: "서울과학기술대학교 STC 최고 성적 펼치기",
+      })
+      .closest("tr");
+    const clubName = within(rankingRow as HTMLTableRowElement).getByText("STC");
+    const universityName = within(
+      rankingRow as HTMLTableRowElement
+    ).getByText("서울과학기술대학교");
+    const badges = within(rankingRow as HTMLTableRowElement).getAllByText(
+      "단식 랭킹 운영 중"
+    );
+    const desktopBadge = badges.find((badge) =>
+      badge.classList.contains("is-desktop")
+    );
+    const mobileBadge = badges.find((badge) =>
+      badge.classList.contains("is-mobile")
+    );
+
+    expect(desktopBadge?.parentElement).toBe(clubName.parentElement);
+    expect(mobileBadge?.parentElement).toBe(universityName.parentElement);
+  });
+
+  it("성적 열과 상세 행을 네 열 구조로 유지한다", () => {
+    const { container } = render(<NationalRankingTable rankings={rankings} />);
+
+    expect(screen.getByRole("columnheader", { name: "성적" })).toBeDefined();
+    expect(screen.getAllByText("성적 보기").length).toBeGreaterThan(0);
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: "서울과학기술대학교 STC 최고 성적 펼치기",
+      })
+    );
+    expect(screen.getByText("성적 접기")).toBeDefined();
+    expect(
+      container
+        .querySelector(".national-ranking-detail-row > td")
+        ?.getAttribute("colspan")
+    ).toBe("4");
+  });
+
   it("여자부와 종합 랭킹을 부가 라벨 없이 같은 표 안에서 전환한다", () => {
     render(<NationalRankingTable rankings={rankings} />);
 

@@ -18,6 +18,7 @@ import NationalRankingDivisionTabs, {
   rankingDivisionTabs,
 } from "./NationalRankingDivisionTabs";
 import NationalRankingHonor from "./NationalRankingHonor";
+import { getCampusRankingLink } from "./campusRankingLinks";
 
 type NationalRankingTableProps = {
   rankings: NationalRankingPageData["rankings"];
@@ -103,18 +104,20 @@ export default function NationalRankingTable({
             <col className="national-ranking-rank-column" />
             <col />
             <col className="national-ranking-score-column" />
+            <col className="national-ranking-action-column" />
           </colgroup>
           <thead>
             <tr>
               <th scope="col">순위</th>
               <th scope="col">동아리</th>
               <th scope="col">점수</th>
+              <th scope="col">성적</th>
             </tr>
           </thead>
           <tbody>
             {rows.length === 0 ? (
               <tr>
-                <td className="national-ranking-empty" colSpan={3}>
+                <td className="national-ranking-empty" colSpan={4}>
                   공개된 랭킹이 없습니다.
                 </td>
               </tr>
@@ -126,6 +129,7 @@ export default function NationalRankingTable({
                 );
                 const isExpanded = expandedClubSlug === row.clubSlug;
                 const regionId = `national-ranking-${activeGender}-${row.clubSlug}-results`;
+                const campusRankingLink = getCampusRankingLink(row.clubSlug);
                 const toggleClubResults = () => {
                   if (!isExpanded) {
                     void trackAmplitudeEvent("National Club Preview Opened", {
@@ -179,41 +183,64 @@ export default function NationalRankingTable({
                         <span className="national-ranking-club-cell">
                           <span className="national-ranking-club">
                             <strong>{row.universityName}</strong>
+                            {campusRankingLink ? (
+                              <span
+                                aria-hidden="true"
+                                className="national-ranking-operating-badge is-mobile"
+                              >
+                                단식 랭킹 운영 중
+                              </span>
+                            ) : null}
                           </span>
-                          <span
-                            aria-hidden="true"
-                            className="national-ranking-club-name"
-                          >
-                            {row.clubName}
-                          </span>
-                          {displayedHonors.length > 0 ? (
+                          <span className="national-ranking-club-meta">
                             <span
-                              aria-label="최근 1년 수상 기록"
-                              className="national-ranking-honors"
+                              aria-hidden="true"
+                              className="national-ranking-club-name"
                             >
-                              {displayedHonors.map((honor) => (
-                                <NationalRankingHonor
-                                  honor={honor}
-                                  key={`${honor.editionKey}-${honor.stage}`}
-                                />
-                              ))}
+                              {row.clubName}
                             </span>
-                          ) : null}
+                            {campusRankingLink ? (
+                              <span
+                                aria-hidden="true"
+                                className="national-ranking-operating-badge is-desktop"
+                              >
+                                단식 랭킹 운영 중
+                              </span>
+                            ) : null}
+                            {displayedHonors.length > 0 ? (
+                              <span
+                                aria-label="최근 1년 수상 기록"
+                                className="national-ranking-honors"
+                              >
+                                {displayedHonors.map((honor) => (
+                                  <NationalRankingHonor
+                                    honor={honor}
+                                    key={`${honor.editionKey}-${honor.stage}`}
+                                  />
+                                ))}
+                              </span>
+                            ) : null}
+                          </span>
                         </span>
                       </td>
                       <td className="national-ranking-score">
                         {scoreFormatter.format(row.points)}
+                      </td>
+                      <td aria-hidden="true" className="national-ranking-row-action">
+                        <span>{isExpanded ? "성적 접기" : "성적 보기"}</span>
+                        <span className="national-ranking-row-chevron">〉</span>
                       </td>
                     </tr>
                     <tr
                       className="national-ranking-detail-row"
                       data-open={isExpanded ? "true" : "false"}
                     >
-                      <td colSpan={3}>
+                      <td colSpan={4}>
                         {isExpanded ? (
                           <NationalRankingExpandedResults
                             activeGender={activeGender}
                             bestResults={row.bestResults}
+                            campusRankingLink={campusRankingLink}
                             clubSlug={row.clubSlug}
                             displayName={row.displayName}
                             latestEditionYears={latestEditionYears}
