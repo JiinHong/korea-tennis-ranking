@@ -58,9 +58,20 @@ describe("Home", () => {
     ).toBeDefined();
     expect(
       screen.getByText(
-        "최근 3년간 6개 대학 테니스 대회 성적을 반영한 랭킹입니다."
+        "양구 대회 전에 각 학교의 최근 성적을 비교해 보면 재미있을 것 같아 정리해봤습니다."
       )
     ).toBeDefined();
+    expect(screen.getByText("최근 3년간 6개 대회 성적 반영")).toBeDefined();
+    expect(
+      screen.queryByText(
+        "최근 3년간 6개 대학 테니스 대회 성적을 반영한 랭킹입니다."
+      )
+    ).toBeNull();
+    expect(
+      screen.queryByText(
+        "동아리를 누르면 주요 대회 성적을 볼 수 있어요."
+      )
+    ).toBeNull();
     expect(
       screen.getByText("양구 · 경인지구 · 춘천 · 인제 · 영월 · WEMIX OPEN")
     ).toBeDefined();
