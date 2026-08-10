@@ -499,23 +499,29 @@ describe("NationalRankingTable", () => {
     expect(mobileBadge?.parentElement).toBe(universityName.parentElement);
   });
 
-  it("성적 열과 상세 행을 네 열 구조로 유지한다", () => {
+  it("점수와 화살표를 같은 셀에 두고 세 열 구조를 유지한다", () => {
     const { container } = render(<NationalRankingTable rankings={rankings} />);
+    const firstScore = screen
+      .getByText("1,234")
+      .closest(".national-ranking-score");
 
-    expect(screen.getByRole("columnheader", { name: "성적" })).toBeDefined();
-    expect(screen.getAllByText("성적 보기").length).toBeGreaterThan(0);
+    expect(screen.queryByRole("columnheader", { name: "성적" })).toBeNull();
+    expect(screen.queryByText("성적 보기")).toBeNull();
+    expect(screen.queryByText("성적 접기")).toBeNull();
+    expect(
+      firstScore?.querySelector(".national-ranking-row-chevron")
+    ).not.toBeNull();
 
     fireEvent.click(
       screen.getByRole("button", {
         name: "서울과학기술대학교 STC 최고 성적 펼치기",
       })
     );
-    expect(screen.getByText("성적 접기")).toBeDefined();
     expect(
       container
         .querySelector(".national-ranking-detail-row > td")
         ?.getAttribute("colspan")
-    ).toBe("4");
+    ).toBe("3");
   });
 
   it("여자부와 종합 랭킹을 부가 라벨 없이 같은 표 안에서 전환한다", () => {

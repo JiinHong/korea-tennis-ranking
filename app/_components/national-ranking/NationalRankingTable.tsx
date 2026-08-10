@@ -104,20 +104,18 @@ export default function NationalRankingTable({
             <col className="national-ranking-rank-column" />
             <col />
             <col className="national-ranking-score-column" />
-            <col className="national-ranking-action-column" />
           </colgroup>
           <thead>
             <tr>
               <th scope="col">순위</th>
               <th scope="col">동아리</th>
               <th scope="col">점수</th>
-              <th scope="col">성적</th>
             </tr>
           </thead>
           <tbody>
             {rows.length === 0 ? (
               <tr>
-                <td className="national-ranking-empty" colSpan={4}>
+                <td className="national-ranking-empty" colSpan={3}>
                   공개된 랭킹이 없습니다.
                 </td>
               </tr>
@@ -224,18 +222,22 @@ export default function NationalRankingTable({
                         </span>
                       </td>
                       <td className="national-ranking-score">
-                        {scoreFormatter.format(row.points)}
-                      </td>
-                      <td aria-hidden="true" className="national-ranking-row-action">
-                        <span>{isExpanded ? "성적 접기" : "성적 보기"}</span>
-                        <span className="national-ranking-row-chevron">〉</span>
+                        <span className="national-ranking-score-value">
+                          {scoreFormatter.format(row.points)}
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className="national-ranking-row-chevron"
+                        >
+                          〉
+                        </span>
                       </td>
                     </tr>
                     <tr
                       className="national-ranking-detail-row"
                       data-open={isExpanded ? "true" : "false"}
                     >
-                      <td colSpan={4}>
+                      <td colSpan={3}>
                         {isExpanded ? (
                           <NationalRankingExpandedResults
                             activeGender={activeGender}
