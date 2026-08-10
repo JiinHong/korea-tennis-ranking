@@ -410,6 +410,10 @@ describe("ClubRankingClient", () => {
     expect(within(playedRow).getByText("최근 경기 7/29")).toBeDefined();
     expect(within(playedRow).queryByText("2경기 출전")).toBeNull();
     expect(within(playedRow).getByText("2경기")).toBeDefined();
+    expect(within(playedRow).getByLabelText("승리")).toBeDefined();
+    expect(within(playedRow).getByLabelText("패배")).toBeDefined();
+    expect(within(playedRow).queryByText("W")).toBeNull();
+    expect(within(playedRow).queryByText("L")).toBeNull();
     expect(playedRow.querySelectorAll(".form-dot")).toHaveLength(5);
     expect(within(idleRow).getByText("경기 기록 없음")).toBeDefined();
   });

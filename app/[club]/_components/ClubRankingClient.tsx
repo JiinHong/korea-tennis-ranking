@@ -14,6 +14,7 @@ import CampusResultUpdateLink from "./CampusResultUpdateLink";
 import CampusClubLogo from "./CampusClubLogo";
 import { getPlayerDetailPath } from "../_lib/playerPaths";
 import MatchEntryDialog from "./MatchEntryDialog";
+import MatchOutcomeIcon from "./MatchOutcomeIcon";
 import NationalRankingBackLink from "./NationalRankingBackLink";
 
 type Player = {
@@ -159,13 +160,11 @@ function RecentForm({ recent5 }: { recent5: string[] }) {
         <span key={`blank-${index}`} className="form-dot is-empty" />
       ))}
       {form.map((result, index) => (
-        <span
+        <MatchOutcomeIcon
+          className="form-dot"
           key={`${result}-${index}`}
-          className={`form-dot ${result === "W" ? "is-win" : "is-loss"}`}
-          title={result === "W" ? "승" : "패"}
-        >
-          {result}
-        </span>
+          result={result === "W" ? "W" : "L"}
+        />
       ))}
     </div>
   );
