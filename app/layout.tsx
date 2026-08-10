@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import AmplitudeAnalytics from "./_components/analytics/AmplitudeAnalytics";
 import SiteFooter from "./_components/site/SiteFooter";
+import ThemeProvider from "./_components/theme/ThemeProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -50,12 +51,15 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
-        <AmplitudeAnalytics />
-        {children}
-        <SiteFooter />
+        <ThemeProvider>
+          <AmplitudeAnalytics />
+          {children}
+          <SiteFooter />
+        </ThemeProvider>
       </body>
     </html>
   );

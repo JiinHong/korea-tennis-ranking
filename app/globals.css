@@ -1,6 +1,15 @@
 @import "tailwindcss";
 
 :root {
+  --bg-canvas: #f5f7f6;
+  --bg-surface: #ffffff;
+  --bg-subtle: #f0f3f1;
+  --border-default: #dfe4e1;
+  --text-primary: #171b1f;
+  --text-secondary: #667169;
+  --brand: #1a3b2b;
+  --status-win: #3e6d88;
+  --status-loss: #b94a48;
   --background: #f5f7f6;
   --foreground: #171b1f;
   --panel: #ffffff;
@@ -17,6 +26,33 @@
   --blue: #3e6d88;
   --danger: #b94a48;
   --shadow: 0 12px 36px rgba(26, 59, 43, 0.07);
+}
+
+.dark {
+  --bg-canvas: #101820;
+  --bg-surface: #151f28;
+  --bg-subtle: #1b2731;
+  --border-default: #2b3742;
+  --text-primary: #f2f5f7;
+  --text-secondary: #9ba7b2;
+  --brand: #7ea894;
+  --status-win: #6aa9d0;
+  --status-loss: #ff7267;
+  --background: var(--bg-canvas);
+  --foreground: var(--text-primary);
+  --panel: var(--bg-surface);
+  --panel-soft: var(--bg-subtle);
+  --line: var(--border-default);
+  --line-strong: #42505c;
+  --muted: var(--text-secondary);
+  --green-950: #0a1815;
+  --green-800: var(--brand);
+  --green-600: var(--brand);
+  --green-100: #20342d;
+  --clay: #ff8a72;
+  --blue: var(--status-win);
+  --danger: var(--status-loss);
+  --shadow: none;
 }
 
 .player-detail-loading-shell {
@@ -612,6 +648,11 @@
 html {
   min-height: 100%;
   background: var(--background);
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
 }
 
 body {
@@ -5939,6 +5980,66 @@ button:disabled {
   border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
 
+.theme-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 26px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.theme-menu-label {
+  color: #aab4af;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.theme-menu-options {
+  display: inline-grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 3px;
+  padding: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.theme-menu-option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 66px;
+  height: 31px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 4px;
+  color: #aab4af;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 750;
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+.theme-menu-option[aria-pressed="true"] {
+  color: #101820;
+  background: #f2f5f7;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .theme-menu-option:not([aria-pressed="true"]):hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.theme-menu-option:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 2px;
+}
+
 .site-footer p {
   margin: 0;
 }
@@ -6001,8 +6102,276 @@ button:disabled {
     font-size: 12px;
   }
 
+  .theme-menu {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .theme-menu-options {
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .theme-menu-option {
+    width: 100%;
+    min-width: 0;
+  }
+
   .site-footer .site-footer-copyright {
     margin-top: 20px;
     font-size: 12px;
   }
+}
+
+/* Dark theme ------------------------------------------------------------- */
+
+.dark .methodology-page {
+  --methodology-ink: var(--text-primary);
+  --methodology-muted: var(--text-secondary);
+  --methodology-line: var(--border-default);
+  --methodology-accent: var(--brand);
+  --methodology-soft: var(--bg-subtle);
+  background: var(--bg-canvas);
+}
+
+.dark .methodology-table-scroll {
+  border-color: var(--border-default);
+  background: var(--bg-surface);
+}
+
+.dark .methodology-table thead th,
+.dark .methodology-status-list > div,
+.dark .methodology-version > div {
+  background: var(--bg-subtle);
+}
+
+.dark .methodology-section .methodology-note {
+  color: #d5bd86;
+}
+
+.dark .campus-rules-page {
+  --methodology-ink: var(--text-primary);
+  --methodology-muted: var(--text-secondary);
+  --methodology-line: var(--border-default);
+  --methodology-accent: #ff7267;
+  --methodology-soft: #35211f;
+  background: var(--bg-canvas);
+}
+
+.dark .ranking-page {
+  --background: var(--bg-canvas);
+  --foreground: var(--text-primary);
+  --panel: var(--bg-surface);
+  --panel-soft: var(--bg-subtle);
+  --line: var(--border-default);
+  --line-strong: #44515c;
+  --muted: var(--text-secondary);
+  --green-950: #a7c7b7;
+  --green-800: var(--brand);
+  --green-600: #86aa98;
+  --green-100: #20342d;
+  --blue: var(--status-win);
+  --danger: var(--status-loss);
+  --shadow: none;
+}
+
+.dark .ranking-head,
+.dark .ranking-row {
+  border-color: var(--border-default);
+  background: var(--bg-surface);
+}
+
+.dark .status-chip.is-injured {
+  color: #ff9a91;
+  background: #35211f;
+}
+
+.dark .campus-ranking-page {
+  --campus-red: #ff7267;
+  --campus-red-soft: #35211f;
+  --campus-ink: var(--text-primary);
+  --campus-muted: var(--text-secondary);
+  --campus-line: var(--border-default);
+  --campus-bg: var(--bg-canvas);
+  --campus-shadow: none;
+  color: var(--text-primary);
+  background: var(--bg-canvas);
+}
+
+.dark .campus-ranking-page:not(.player-detail-page),
+.dark .campus-ranking-page.player-detail-page {
+  background: var(--bg-canvas);
+}
+
+.dark .campus-hero-band,
+.dark .campus-ranking-page .state-panel,
+.dark .player-detail-panel,
+.dark .match-entry-dialog {
+  border-color: var(--border-default);
+  background: var(--bg-surface);
+  box-shadow: none;
+}
+
+.dark .campus-ranking-page .refresh-button,
+.dark .match-entry-close,
+.dark .match-entry-field select,
+.dark .match-entry-field input {
+  border-color: var(--border-default);
+  color: var(--text-primary);
+  background: var(--bg-subtle);
+}
+
+.dark .campus-ranking-loading-row,
+.dark .campus-ranking-skeleton-rank,
+.dark .campus-ranking-skeleton-player > span,
+.dark .campus-ranking-skeleton-record > span,
+.dark .form-dot {
+  background: #26333c;
+}
+
+.dark .recent-match-item {
+  background: var(--bg-subtle);
+}
+
+.dark .campus-highlight-section,
+.dark .campus-ranking-page .ranking-board,
+.dark .campus-ranking-page .ranking-head,
+.dark .campus-ranking-page .ranking-row,
+.dark .recent-detail-section {
+  border-color: var(--border-default);
+}
+
+.dark .campus-ranking-page .ranking-head,
+.dark .campus-ranking-page .ranking-row {
+  background: transparent;
+}
+
+.dark .campus-result-update {
+  border-color: var(--border-default);
+  background: #1b242b;
+}
+
+.dark .match-entry-backdrop {
+  background: rgba(4, 9, 13, 0.72);
+}
+
+.dark .match-entry-guidance,
+.dark .match-entry-error {
+  border-color: var(--border-default);
+  background: var(--bg-subtle);
+}
+
+.dark .national-page {
+  --national-bg: var(--bg-canvas);
+  --national-ink: var(--text-primary);
+  --national-muted: var(--text-secondary);
+  --national-line: var(--border-default);
+  --national-accent: var(--brand);
+  --national-accent-strong: #a7c7b7;
+  --national-accent-soft: #20342d;
+  --national-secondary: #d5ad70;
+  color: var(--text-primary);
+  background: var(--bg-canvas);
+}
+
+.dark .national-status,
+.dark .national-ranking-surface {
+  border-color: var(--border-default);
+  background: var(--bg-surface);
+}
+
+.dark .national-ranking-tabs,
+.dark .national-ranking-expanded-results {
+  background: var(--bg-subtle);
+}
+
+.dark .national-ranking-main-row[data-expanded="true"] td {
+  background: #1b242b;
+}
+
+.dark .national-ranking-table th,
+.dark .national-ranking-table td,
+.dark .national-club-results-list li,
+.dark .national-ranking-best-results li {
+  border-color: var(--border-default);
+}
+
+.dark .national-ranking-honor-tooltip {
+  color: #f7f9fa;
+  background: #27323b;
+}
+
+.dark .admin-page {
+  --admin-ink: var(--text-primary);
+  --admin-muted: var(--text-secondary);
+  --admin-line: var(--border-default);
+  --admin-accent: var(--brand);
+  --admin-soft: var(--bg-subtle);
+  color: var(--text-primary);
+  background: var(--bg-canvas);
+}
+
+.dark .admin-page :where(input, select, textarea) {
+  border-color: var(--border-default);
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+}
+
+.dark .admin-page :where(
+    .admin-club-card,
+    .admin-policy-group,
+    .admin-player-controls,
+    .admin-player-table,
+    .admin-player-dialog,
+    .admin-match-table,
+    .admin-monthly-automation,
+    .admin-monthly-empty,
+    .admin-monthly-table
+  ) {
+  border-color: var(--border-default);
+  background: var(--bg-surface);
+  box-shadow: none;
+}
+
+.dark .admin-page :where(
+    .admin-rule-summary,
+    .admin-player-notice,
+    .admin-player-summary,
+    .admin-player-table-head,
+    .admin-player-row.is-left,
+    .admin-rank-preview,
+    .admin-match-table-head,
+    .admin-match-row.is-voided,
+    .admin-match-confirmation,
+    .admin-monthly-summary,
+    .admin-monthly-table-head,
+    .admin-monthly-row.is-penalized
+  ) {
+  border-color: var(--border-default);
+  background: var(--bg-subtle);
+}
+
+.dark .admin-page :where(
+    .admin-nav-action.is-secondary,
+    .admin-club-tabs button[aria-pressed="true"],
+    .admin-player-status button,
+    .admin-player-actions button,
+    .admin-dialog-actions button,
+    .admin-match-filter button[aria-pressed="true"],
+    .admin-match-actions button,
+    .admin-monthly-summary > button
+  ) {
+  border-color: var(--border-default);
+  color: var(--text-primary);
+  background: var(--bg-subtle);
+}
+
+.dark .admin-player-dialog-backdrop {
+  background: rgba(4, 9, 13, 0.72);
+}
+
+.dark ::selection {
+  color: #101820;
+  background: #a7c7b7;
 }

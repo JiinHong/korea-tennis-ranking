@@ -680,3 +680,40 @@ describe("methodology accessibility contracts", () => {
     expect(css).not.toMatch(/\.methodology-table\s*\{[^}]*min-width:\s*(?:480|520)px;/);
   });
 });
+
+describe("theme color contracts", () => {
+  const css = readFileSync(join(process.cwd(), "app/globals.css"), "utf8");
+
+  it("밝은 화면과 어두운 화면이 같은 의미 기반 색상 토큰을 공유한다", () => {
+    expect(css).toMatch(
+      /:root\s*\{[^}]*--bg-canvas:\s*#f5f7f6;[^}]*--bg-surface:\s*#ffffff;[^}]*--text-primary:\s*#171b1f;[^}]*--brand:\s*#1a3b2b;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark\s*\{[^}]*--bg-canvas:\s*#101820;[^}]*--bg-surface:\s*#151f28;[^}]*--text-primary:\s*#f2f5f7;[^}]*--brand:\s*#7ea894;[^}]*\}/
+    );
+  });
+
+  it("브라우저 기본 컨트롤도 선택한 테마의 색상 체계를 따른다", () => {
+    expect(css).toMatch(/html\s*\{[^}]*color-scheme:\s*light;[^}]*\}/);
+    expect(css).toMatch(/html\.dark\s*\{[^}]*color-scheme:\s*dark;[^}]*\}/);
+  });
+
+  it.each([
+    ".methodology-page",
+    ".campus-rules-page",
+    ".campus-ranking-page",
+    ".national-page",
+    ".admin-page",
+  ])("%s의 자체 팔레트도 다크 모드 토큰으로 전환한다", (selector) => {
+    expect(css).toContain(`.dark ${selector} {`);
+  });
+
+  it("다크 모드의 입력 요소와 주요 표면은 밝은 배경으로 남지 않는다", () => {
+    expect(css).toMatch(
+      /\.dark \.admin-page :where\(input, select, textarea\)\s*\{[^}]*background:\s*var\(--bg-subtle\);[^}]*color:\s*var\(--text-primary\);[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.campus-ranking-page\.player-detail-page\s*\{[^}]*background:\s*var\(--bg-canvas\);[^}]*\}/
+    );
+  });
+});

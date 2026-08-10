@@ -33,4 +33,13 @@ describe("SiteFooter", () => {
       expect(link.getAttribute("rel")).toBe("noreferrer");
     }
   });
+
+  it("시스템·라이트·다크 화면 테마를 선택할 수 있다", () => {
+    render(<SiteFooter />);
+
+    expect(screen.getByText("화면 테마")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "시스템 테마" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "라이트 테마" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "다크 테마" })).toBeTruthy();
+  });
 });

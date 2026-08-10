@@ -1,3 +1,6 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("next/font/google", () => ({
@@ -28,5 +31,23 @@ describe("root metadata", () => {
         },
       ],
     });
+  });
+
+  it("시스템 테마를 기본값으로 사용하고 루트의 테마 클래스를 안전하게 동기화한다", () => {
+    const layoutSource = readFileSync(
+      join(process.cwd(), "app/layout.tsx"),
+      "utf8"
+    );
+    const providerSource = readFileSync(
+      join(process.cwd(), "app/_components/theme/ThemeProvider.tsx"),
+      "utf8"
+    );
+
+    expect(layoutSource).toContain("<ThemeProvider>");
+    expect(layoutSource).toContain("suppressHydrationWarning");
+    expect(providerSource).toContain('attribute="class"');
+    expect(providerSource).toContain('defaultTheme="system"');
+    expect(providerSource).toContain("enableSystem");
+    expect(providerSource).toContain("enableColorScheme");
   });
 });
