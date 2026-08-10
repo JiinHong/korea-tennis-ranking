@@ -89,6 +89,15 @@ const detail = {
       role: "방어자",
       defenseResult: "방어 성공",
     },
+    {
+      date: "2026. 6. 30",
+      season: "시즌3",
+      opponent: "이도현",
+      result: "L",
+      score: "4:6",
+      role: "도전자",
+      defenseResult: "방어 성공",
+    },
   ],
 };
 
@@ -179,7 +188,13 @@ describe("PlayerPage", () => {
     expect(container.querySelectorAll(".detail-stat-item")).toHaveLength(4);
     expect(screen.getByText("시즌1")).toBeDefined();
     expect(screen.getAllByText("김도훈").length).toBeGreaterThan(0);
-    expect(container.querySelector(".result-letter.is-win")).not.toBeNull();
+    expect(screen.getByLabelText("승리")).toBeDefined();
+    expect(screen.getByLabelText("패배")).toBeDefined();
+    expect(screen.queryByText("W")).toBeNull();
+    expect(screen.queryByText("L")).toBeNull();
+    expect(
+      container.querySelectorAll(".result-letter.match-outcome-icon")
+    ).toHaveLength(2);
     expect(container.querySelector(".result-pill")).toBeNull();
     expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
       "Player Profile Viewed",

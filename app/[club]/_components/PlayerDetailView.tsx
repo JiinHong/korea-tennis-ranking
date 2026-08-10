@@ -3,6 +3,7 @@ import type { PlayerDetail } from "@/lib/campusRanking/playerDetails";
 
 import CampusClubLogo from "./CampusClubLogo";
 import ClubRankingBackLink from "./ClubRankingBackLink";
+import MatchOutcomeIcon from "./MatchOutcomeIcon";
 import PlayerProfileViewTracker from "./PlayerProfileViewTracker";
 
 function formatSummary(wins: number, losses: number) {
@@ -143,14 +144,10 @@ export default function PlayerDetailView({
                     key={`${match.date}-${match.opponent}-${index}`}
                     className="recent-match-item"
                   >
-                    <span
-                      className={`result-letter ${
-                        match.result === "W" ? "is-win" : "is-loss"
-                      }`}
-                      aria-label={match.result === "W" ? "승리" : "패배"}
-                    >
-                      {match.result}
-                    </span>
+                    <MatchOutcomeIcon
+                      className="result-letter"
+                      result={match.result === "W" ? "W" : "L"}
+                    />
                     <div className="recent-match-main">
                       <strong>{match.opponent}</strong>
                       <span>
