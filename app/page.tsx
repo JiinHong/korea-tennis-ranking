@@ -28,11 +28,7 @@ export default async function Home() {
             <h1>전국 대학 테니스 동아리 랭킹</h1>
             <p className="national-header-description">
               <span>
-                양구 대회 전에 각 학교의 최근 성적을 비교해 보면 재미있을
-                것 같아 정리해봤습니다.
-              </span>
-              <span className="national-header-tournaments">
-                최근 3년간 6개 대회 성적 반영
+                최근 3년간 6개 대학 테니스 대회 성적을 반영한 랭킹입니다.
               </span>
               <span className="national-header-tournaments">
                 양구 · 경인지구 · 춘천 · 인제 · 영월 · WEMIX OPEN
