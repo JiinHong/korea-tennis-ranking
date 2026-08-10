@@ -1283,6 +1283,11 @@ button:disabled {
   --campus-action-bg: #1f2328;
   --campus-action-ink: #ffffff;
   --campus-action-hover: #30353b;
+  --campus-label-ink: #4b5563;
+  --campus-label-border: #d7dce2;
+  --campus-hover-bg: #fafbfc;
+  --campus-skeleton-edge: #e9eeeb;
+  --campus-skeleton-highlight: #f7f9f8;
   background: var(--campus-bg);
 }
 
@@ -1442,9 +1447,9 @@ button:disabled {
   width: fit-content;
   min-height: 22px;
   padding: 0 7px;
-  color: #4b5563;
+  color: var(--campus-label-ink);
   background: transparent;
-  border: 1px solid #d7dce2;
+  border: 1px solid var(--campus-label-border);
   border-radius: 999px;
   font-size: 11px;
   font-weight: 850;
@@ -1536,7 +1541,7 @@ button:disabled {
   width: 9px;
   height: 9px;
   flex: 0 0 auto;
-  background: var(--green-700);
+  background: var(--campus-green);
   border-radius: 999px;
   animation: campus-ranking-loading-pulse 1.2s ease-in-out infinite;
 }
@@ -1561,9 +1566,9 @@ button:disabled {
 .campus-ranking-skeleton-record > span {
   background: linear-gradient(
     90deg,
-    #e9eeeb 20%,
-    #f7f9f8 38%,
-    #e9eeeb 58%
+    var(--campus-skeleton-edge) 20%,
+    var(--campus-skeleton-highlight) 38%,
+    var(--campus-skeleton-edge) 58%
   );
   background-size: 220% 100%;
   animation: campus-ranking-skeleton-shimmer 1.6s ease-in-out infinite;
@@ -2054,7 +2059,7 @@ button:disabled {
 @media (hover: hover) and (pointer: fine) {
   .campus-podium-player:hover {
     color: var(--campus-red);
-    background: #fafbfc;
+    background: var(--campus-hover-bg);
   }
 }
 
@@ -2115,7 +2120,7 @@ button:disabled {
 @media (hover: hover) and (pointer: fine) {
   .campus-recent-record-row:hover {
     color: var(--campus-red);
-    background: #fafbfc;
+    background: var(--campus-hover-bg);
   }
 }
 
@@ -2572,7 +2577,7 @@ button:disabled {
 
 @media (hover: hover) and (pointer: fine) {
   .campus-ranking-page .ranking-row:hover {
-    background: #fffafa;
+    background: var(--campus-hover-bg);
   }
 }
 
@@ -6216,6 +6221,11 @@ button:disabled {
   --campus-action-bg: #a7c7b7;
   --campus-action-ink: #101820;
   --campus-action-hover: #bdd7ca;
+  --campus-label-ink: #b8d6c7;
+  --campus-label-border: rgba(184, 214, 199, 0.55);
+  --campus-hover-bg: #18232b;
+  --campus-skeleton-edge: #22313a;
+  --campus-skeleton-highlight: #3b4b56;
   color: var(--text-primary);
   background: var(--bg-canvas);
 }
@@ -6252,10 +6262,15 @@ button:disabled {
   background: var(--bg-subtle);
 }
 
-.dark .campus-ranking-loading-row,
-.dark .campus-ranking-skeleton-rank,
-.dark .campus-ranking-skeleton-player > span,
-.dark .campus-ranking-skeleton-record > span,
+.dark .campus-ranking-loading-row {
+  background: transparent;
+}
+
+.dark .campus-ranking-loading-indicator {
+  background: var(--campus-green);
+  box-shadow: 0 0 0 4px rgba(167, 199, 183, 0.12);
+}
+
 .dark .form-dot {
   background: #26333c;
 }
@@ -6282,9 +6297,15 @@ button:disabled {
   background: transparent;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .dark .campus-ranking-page .ranking-row:hover {
+    background: var(--campus-hover-bg);
+  }
+}
+
 .dark .campus-result-update {
   border-color: var(--border-default);
-  background: #1b242b;
+  background: transparent;
 }
 
 .dark .match-entry-backdrop {

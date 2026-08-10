@@ -86,12 +86,12 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
-  it("캠퍼스 랭킹 라벨은 좌상단의 중립적인 작은 라벨로 보여준다", () => {
+  it("캠퍼스 랭킹 라벨은 좌상단의 작은 테마 대응 라벨로 보여준다", () => {
     expect(css).toContain(
       ".campus-ranking-page .brand-lockup {\n  display: grid;\n  justify-items: start;\n  gap: 10px;\n  min-width: 0;\n}"
     );
-    expect(css).toContain(
-      ".campus-kicker {\n  display: inline-flex;\n  align-items: center;\n  width: fit-content;\n  min-height: 22px;\n  padding: 0 7px;\n  color: #4b5563;\n  background: transparent;\n  border: 1px solid #d7dce2;\n  border-radius: 999px;\n  font-size: 11px;\n  font-weight: 850;\n  letter-spacing: 0;\n}"
+    expect(css).toMatch(
+      /\.campus-kicker\s*\{[^}]*color:\s*var\(--campus-label-ink\);[^}]*border:\s*1px solid var\(--campus-label-border\);[^}]*\}/
     );
   });
 
@@ -298,7 +298,7 @@ describe("campus ranking responsive title styles", () => {
       ".campus-recent-record-row {\n  -webkit-tap-highlight-color: transparent;"
     );
     expect(css).toMatch(
-      /@media \(hover: hover\) and \(pointer: fine\)\s*\{[^]*\.campus-recent-record-row:hover\s*\{[^}]*color:\s*var\(--campus-red\);[^}]*background:\s*#fafbfc;[^}]*\}[^]*\}/
+      /@media \(hover: hover\) and \(pointer: fine\)\s*\{[^]*\.campus-recent-record-row:hover\s*\{[^}]*color:\s*var\(--campus-red\);[^}]*background:\s*var\(--campus-hover-bg\);[^}]*\}[^]*\}/
     );
     expect(css).not.toMatch(
       /\n\.campus-recent-record-row:hover\s*\{/
@@ -739,6 +739,54 @@ describe("theme color contracts", () => {
   it("PETC 단색 로고만 다크 모드에서 밝게 변환한다", () => {
     expect(css).toMatch(
       /\.dark \.campus-club-logo\.is-monochrome\s*\{[^}]*filter:\s*[^;]+;[^}]*\}/
+    );
+  });
+
+  it("캠퍼스 라벨과 hover는 라이트·다크 전용 토큰을 사용한다", () => {
+    expect(css).toMatch(
+      /\.campus-ranking-page\s*\{[^}]*--campus-label-ink:\s*#4b5563;[^}]*--campus-label-border:\s*#d7dce2;[^}]*--campus-hover-bg:\s*#fafbfc;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.campus-ranking-page\s*\{[^}]*--campus-label-ink:\s*#b8d6c7;[^}]*--campus-label-border:\s*rgba\(184, 214, 199, 0\.55\);[^}]*--campus-hover-bg:\s*#18232b;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.campus-podium-player:hover\s*\{[^}]*background:\s*var\(--campus-hover-bg\);[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.campus-recent-record-row:hover\s*\{[^}]*background:\s*var\(--campus-hover-bg\);[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.campus-ranking-page \.ranking-row:hover\s*\{[^}]*background:\s*var\(--campus-hover-bg\);[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.campus-ranking-page \.ranking-row:hover\s*\{[^}]*background:\s*var\(--campus-hover-bg\);[^}]*\}/
+    );
+  });
+
+  it("다크 대회 안내는 열린 배경을 유지한다", () => {
+    expect(css).toMatch(
+      /\.dark \.campus-result-update\s*\{[^}]*background:\s*transparent;[^}]*\}/
+    );
+  });
+
+  it("다크 로딩 행은 투명하고 skeleton shimmer는 명암 토큰을 유지한다", () => {
+    expect(css).toMatch(
+      /\.campus-ranking-page\s*\{[^}]*--campus-skeleton-edge:\s*#e9eeeb;[^}]*--campus-skeleton-highlight:\s*#f7f9f8;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.campus-ranking-page\s*\{[^}]*--campus-skeleton-edge:\s*#22313a;[^}]*--campus-skeleton-highlight:\s*#3b4b56;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.campus-ranking-skeleton-rank,[\s\S]*?background:\s*linear-gradient\([\s\S]*?var\(--campus-skeleton-highlight\)[\s\S]*?\);[\s\S]*?animation:\s*campus-ranking-skeleton-shimmer/
+    );
+    expect(css).toMatch(
+      /\.dark \.campus-ranking-loading-row\s*\{[^}]*background:\s*transparent;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.campus-ranking-loading-indicator\s*\{[^}]*background:\s*var\(--campus-green\);[^}]*animation:\s*campus-ranking-loading-pulse[^;]*;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.campus-ranking-loading-indicator\s*\{[^}]*background:\s*var\(--campus-green\);[^}]*box-shadow:[^}]*\}/
     );
   });
 
