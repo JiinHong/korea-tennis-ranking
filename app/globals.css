@@ -3328,11 +3328,7 @@ button:disabled {
 }
 
 .national-ranking-score-column {
-  width: 112px;
-}
-
-.national-ranking-action-column {
-  width: 112px;
+  width: 136px;
 }
 
 .national-ranking-table th,
@@ -3358,7 +3354,7 @@ button:disabled {
   text-align: center;
 }
 
-.national-ranking-table th:nth-last-child(-n + 2) {
+.national-ranking-table th:last-child {
   text-align: right;
 }
 
@@ -3471,28 +3467,19 @@ button:disabled {
 }
 
 .national-ranking-score {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
   color: var(--national-ink);
-  text-align: right;
   white-space: nowrap;
   font-size: 14px;
   font-weight: 850;
 }
 
-.national-ranking-row-action {
-  color: var(--national-muted);
-  text-align: right;
-  white-space: nowrap;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.national-ranking-row-action > span:first-child {
-  vertical-align: middle;
-}
-
 .national-ranking-row-chevron {
   display: inline-block;
-  margin-left: 5px;
+  margin-left: 0;
   color: var(--national-accent);
   font-size: 15px;
   line-height: 1;
@@ -3755,11 +3742,7 @@ button:disabled {
   }
 
   .national-ranking-score-column {
-    width: 76px;
-  }
-
-  .national-ranking-action-column {
-    width: 40px;
+    width: 94px;
   }
 
   .national-ranking-table th,
@@ -3807,13 +3790,8 @@ button:disabled {
     font-size: 8px;
   }
 
-  .national-ranking-row-action {
-    padding-right: 8px;
-    padding-left: 4px;
-  }
-
-  .national-ranking-row-action > span:first-child {
-    display: none;
+  .national-ranking-score {
+    gap: 8px;
   }
 
   .national-ranking-row-chevron {

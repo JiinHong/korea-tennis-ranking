@@ -488,7 +488,7 @@ describe("national ranking responsive contracts", () => {
     );
   });
 
-  it("조용한 전체 너비 랭킹 표에 고정 순위·점수·성적 열을 둔다", () => {
+  it("조용한 전체 너비 랭킹 표에 고정 순위와 점수 열을 둔다", () => {
     expect(css).toMatch(
       /\.national-ranking-section\s*\{[\s\S]*?width:\s*100%;[^}]*\}/
     );
@@ -499,10 +499,14 @@ describe("national ranking responsive contracts", () => {
       /\.national-ranking-rank-column\s*\{[\s\S]*?width:\s*72px;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.national-ranking-score-column\s*\{[\s\S]*?width:\s*112px;[^}]*\}/
+      /\.national-ranking-score-column\s*\{[\s\S]*?width:\s*136px;[^}]*\}/
     );
+    expect(css).not.toContain(".national-ranking-action-column");
     expect(css).toMatch(
-      /\.national-ranking-action-column\s*\{[\s\S]*?width:\s*112px;[^}]*\}/
+      /\.national-ranking-table th:last-child\s*\{[^}]*text-align:\s*right;[^}]*\}/
+    );
+    expect(css).not.toContain(
+      ".national-ranking-table th:nth-last-child(-n + 2)"
     );
   });
 
@@ -514,7 +518,7 @@ describe("national ranking responsive contracts", () => {
       /\.national-ranking-rank\s*\{[\s\S]*?text-align:\s*center;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.national-ranking-score\s*\{[\s\S]*?text-align:\s*right;[^}]*white-space:\s*nowrap;[^}]*\}/
+      /\.national-ranking-score\s*\{[\s\S]*?display:\s*flex;[^}]*align-items:\s*center;[^}]*justify-content:\s*flex-end;[^}]*gap:\s*12px;[^}]*white-space:\s*nowrap;[^}]*\}/
     );
   });
 
@@ -638,7 +642,7 @@ describe("national ranking responsive contracts", () => {
   it("640px 이하에서 표 열을 압축한다", () => {
     expect(css).toMatch(/@media\s*\(max-width:\s*640px\)/);
     expect(css).toMatch(
-      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.national-ranking-rank-column\s*\{[^}]*width:\s*48px;[^}]*\}[\s\S]*?\.national-ranking-score-column\s*\{[^}]*width:\s*76px;[^}]*\}[\s\S]*?\.national-ranking-action-column\s*\{[^}]*width:\s*40px;[^}]*\}/
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.national-ranking-rank-column\s*\{[^}]*width:\s*48px;[^}]*\}[\s\S]*?\.national-ranking-score-column\s*\{[^}]*width:\s*94px;[^}]*\}[\s\S]*?\.national-ranking-score\s*\{[^}]*gap:\s*8px;[^}]*\}/
     );
   });
 
