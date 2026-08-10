@@ -185,4 +185,3 @@ Run: `git diff --check` and inspect `git diff main...HEAD`.
 - [ ] **Step 4: Merge, push, and verify production**
 
 Fast-forward `main`, push to `origin/main`, wait for the Vercel production deployment, publish the pending `national-club-v7` snapshot, and verify the public pages and database snapshot.
-

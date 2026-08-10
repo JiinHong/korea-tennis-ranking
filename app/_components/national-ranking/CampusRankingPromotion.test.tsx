@@ -46,5 +46,9 @@ describe("CampusRankingPromotion", () => {
     expect(images[1]?.getAttribute("src")).toContain(
       encodeURIComponent("/seoultech-symbol.png")
     );
+    expect(images[0]?.getAttribute("width")).toBe("547");
+    expect(images[0]?.getAttribute("height")).toBe("451");
+    expect(images[1]?.getAttribute("width")).toBe("576");
+    expect(images[1]?.getAttribute("height")).toBe("395");
   });
 });
