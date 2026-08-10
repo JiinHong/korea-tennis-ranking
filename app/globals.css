@@ -1239,6 +1239,29 @@ button:disabled {
   gap: 5px;
 }
 
+.match-outcome-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: #fff;
+  border-radius: 999px;
+}
+
+.match-outcome-icon svg {
+  width: 60%;
+  height: 60%;
+  stroke-width: 3;
+}
+
+.match-outcome-icon.is-win {
+  background: #187b42;
+}
+
+.match-outcome-icon.is-loss {
+  background: #d91e4d;
+}
+
 .form-dot {
   display: inline-flex;
   align-items: center;
@@ -1249,14 +1272,6 @@ button:disabled {
   border-radius: 999px;
   font-size: 10px;
   font-weight: 850;
-}
-
-.form-dot.is-win {
-  background: var(--green-600);
-}
-
-.form-dot.is-loss {
-  background: var(--clay);
 }
 
 .form-dot.is-empty {
@@ -2413,9 +2428,9 @@ button:disabled {
 
 .club-match-card {
   display: grid;
-  grid-template-columns: 132px minmax(0, 1fr) 118px;
-  align-items: center;
-  gap: 12px;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: stretch;
+  gap: 10px;
   min-height: 70px;
   padding: 12px;
   background: #fafbfc;
@@ -2431,27 +2446,23 @@ button:disabled {
   border-radius: 0;
 }
 
-.club-match-date,
-.club-match-score {
-  display: grid;
-  gap: 4px;
+.club-match-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   min-width: 0;
 }
 
-.club-match-date strong,
-.club-match-score strong {
+.club-match-date strong {
   color: var(--campus-ink);
   font-size: 14px;
   line-height: 1.2;
 }
 
-.club-match-date span,
-.club-match-score span,
-.club-match-players em {
+.club-match-date span {
   overflow: hidden;
   color: var(--campus-muted);
   font-size: 12px;
-  font-style: normal;
   font-weight: 750;
   line-height: 1.25;
   text-overflow: ellipsis;
@@ -2460,21 +2471,28 @@ button:disabled {
 
 .club-match-players {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr);
-  align-items: center;
-  gap: 10px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 4px;
   min-width: 0;
 }
 
-.club-match-players div {
+.club-match-player-row {
   display: grid;
-  grid-template-columns: 20px minmax(0, 1fr);
-  column-gap: 8px;
+  grid-template-columns: minmax(0, 1fr) 34px;
   align-items: center;
+  gap: 8px;
+  min-height: 30px;
   min-width: 0;
 }
 
-.club-match-players strong {
+.club-match-player-identity {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+
+.club-match-player-identity strong {
   overflow: hidden;
   color: var(--campus-ink);
   font-size: 15px;
@@ -2483,40 +2501,44 @@ button:disabled {
   white-space: nowrap;
 }
 
-.club-match-players em {
-  grid-column: 2;
+.club-match-player-rank {
+  flex: 0 0 auto;
+  color: var(--campus-muted);
+  font-size: 13px;
+  font-weight: 750;
 }
 
-.match-result-letter {
-  justify-self: center;
-  font-size: 13px;
-  font-weight: 950;
+.match-winner-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  color: #18833f;
+  background: transparent;
+}
+
+.match-winner-check svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 3;
+}
+
+.club-match-player-score,
+.club-match-score-fallback {
+  justify-self: end;
+  color: var(--campus-ink);
+  font-size: 16px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
   line-height: 1;
 }
 
-.match-result-letter.is-win {
-  color: #2563eb;
-}
-
-.match-result-letter.is-loss {
-  color: var(--campus-red);
-}
-
-.match-versus {
+.club-match-score-fallback {
+  padding-top: 3px;
   color: var(--campus-muted);
-  font-size: 11px;
-  font-weight: 900;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.club-match-score {
-  justify-items: end;
-  text-align: right;
-}
-
-.club-match-score strong {
-  font-size: 18px;
+  font-size: 13px;
 }
 
 .club-match-empty {
@@ -2689,14 +2711,6 @@ button:disabled {
   width: 19px;
   height: 19px;
   font-size: 9px;
-}
-
-.campus-ranking-page .form-dot.is-win {
-  background: #1f5f45;
-}
-
-.campus-ranking-page .form-dot.is-loss {
-  background: var(--campus-red);
 }
 
 .player-detail-panel {
@@ -2910,23 +2924,10 @@ button:disabled {
   min-width: 0;
 }
 
-.recent-match-item .result-letter {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.recent-match-item .result-letter.match-outcome-icon {
   justify-self: center;
-  color: var(--campus-muted);
-  font-size: 18px;
-  font-weight: 950;
-  line-height: 1;
-}
-
-.result-letter.is-win {
-  color: #2563eb;
-}
-
-.result-letter.is-loss {
-  color: var(--campus-red);
+  width: 26px;
+  height: 26px;
 }
 
 .match-score {
@@ -4007,19 +4008,6 @@ button:disabled {
     padding-top: 0;
   }
 
-  .club-match-card {
-    grid-template-columns: 112px minmax(0, 1fr) 96px;
-  }
-
-  .club-match-players {
-    grid-template-columns: 1fr;
-    gap: 6px;
-  }
-
-  .match-versus {
-    display: none;
-  }
-
   .detail-grid,
   .detail-stat-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4286,28 +4274,24 @@ button:disabled {
   }
 
   .club-match-card {
-    grid-template-columns: 1fr auto;
-    gap: 10px;
+    gap: 8px;
   }
 
   .club-match-date {
-    grid-column: 1 / -1;
-    grid-template-columns: auto 1fr;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px 6px;
   }
 
-  .club-match-players {
-    grid-column: 1;
+  .club-match-player-row {
+    gap: 6px;
   }
 
-  .club-match-score {
-    grid-column: 2;
-    grid-row: 2;
-    align-self: center;
+  .club-match-player-identity strong {
+    font-size: 14px;
   }
 
-  .club-match-score strong {
-    font-size: 16px;
+  .club-match-player-rank {
+    font-size: 12px;
   }
 
   .ranking-row {
@@ -4501,6 +4485,11 @@ button:disabled {
 
   .recent-match-item {
     grid-template-columns: 34px minmax(0, 1fr) auto;
+  }
+
+  .recent-match-item .result-letter.match-outcome-icon {
+    width: 24px;
+    height: 24px;
   }
 
 }
@@ -6369,9 +6358,12 @@ button:disabled {
   background: #26333c;
 }
 
-.dark .campus-ranking-page .form-dot.is-win {
-  color: #f7fbf9;
-  background: #347a59;
+.dark .match-outcome-icon.is-win {
+  background: #258a50;
+}
+
+.dark .match-outcome-icon.is-loss {
+  background: #e53662;
 }
 
 .dark .recent-match-item {

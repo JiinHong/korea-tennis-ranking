@@ -189,19 +189,15 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
-  it("선수 상세 최근 경기의 승패 표시는 상자 없이 글자 색으로만 보여준다", () => {
+  it("선수 상세 최근 경기는 원형 체크와 X로 승패를 보여준다", () => {
     expect(css).toContain(
       ".recent-match-item {\n  display: grid;\n  grid-template-columns: 42px minmax(0, 1fr) auto;\n  align-items: center;\n  gap: 10px;\n  min-height: 58px;\n  padding: 15px 0;\n  background: transparent;\n  border: 0;\n  border-bottom: 1px solid var(--campus-line);\n  border-radius: 0;\n}"
     );
-    expect(css).toContain(
-      ".recent-match-item .result-letter {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  justify-self: center;\n  color: var(--campus-muted);\n  font-size: 18px;\n  font-weight: 950;\n  line-height: 1;\n}"
+    expect(css).toMatch(
+      /\.recent-match-item \.result-letter\.match-outcome-icon\s*\{[^}]*width:\s*26px;[^}]*height:\s*26px;[^}]*\}/
     );
-    expect(css).toContain(
-      ".result-letter.is-win {\n  color: #2563eb;\n}"
-    );
-    expect(css).toContain(
-      ".result-letter.is-loss {\n  color: var(--campus-red);\n}"
-    );
+    expect(css).not.toContain(".result-letter.is-win");
+    expect(css).not.toContain(".result-letter.is-loss");
     expect(css).toContain(
       ".season-record-item span,\n.opponent-record-item span,\n.recent-match-main span {"
     );
@@ -337,6 +333,18 @@ describe("campus ranking responsive title styles", () => {
     expect(css).toContain(
       ".matches-page .club-match-card {\n  padding: 16px 0;\n  background: transparent;\n  border: 0;\n  border-bottom: 1px solid var(--campus-line);\n  border-radius: 0;\n}"
     );
+    expect(css).toMatch(
+      /\.club-match-card\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\);[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.club-match-player-row\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\) 34px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.match-winner-check\s*\{[^}]*color:\s*#18833f;[^}]*background:\s*transparent;[^}]*\}/
+    );
+    expect(css).not.toContain(".match-result-letter");
+    expect(css).not.toContain(".match-versus");
+    expect(css).not.toContain(".club-match-score {");
   });
 
   it("모바일 경기 입력창은 화면 아래에 붙는 시트로 보여준다", () => {
@@ -812,7 +820,16 @@ describe("theme color contracts", () => {
     );
   });
 
-  it("최근 경기 W는 모바일에서도 읽을 수 있는 크기와 다크 전용 배경을 사용한다", () => {
+  it("최근 경기 승패 아이콘은 모바일과 다크 모드에서도 구분된다", () => {
+    expect(css).toMatch(
+      /\.match-outcome-icon\s*\{[^}]*display:\s*inline-flex;[^}]*color:\s*#fff;[^}]*border-radius:\s*999px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.match-outcome-icon\.is-win\s*\{[^}]*background:\s*#187b42;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.match-outcome-icon\.is-loss\s*\{[^}]*background:\s*#d91e4d;[^}]*\}/
+    );
     expect(css).toMatch(
       /\.campus-ranking-page \.ranking-row\.is-featured \.form-dot\s*\{[^}]*width:\s*22px;[^}]*height:\s*22px;[^}]*font-size:\s*11px;[^}]*\}/
     );
@@ -820,7 +837,7 @@ describe("theme color contracts", () => {
       /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured \.form-dot\s*\{[^}]*width:\s*18px;[^}]*height:\s*18px;[^}]*font-size:\s*9px;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.dark \.campus-ranking-page \.form-dot\.is-win\s*\{[^}]*color:\s*#f7fbf9;[^}]*background:\s*#347a59;[^}]*\}/
+      /\.dark \.match-outcome-icon\.is-win\s*\{[^}]*background:\s*#258a50;[^}]*\}[\s\S]*?\.dark \.match-outcome-icon\.is-loss\s*\{[^}]*background:\s*#e53662;[^}]*\}/
     );
   });
 
