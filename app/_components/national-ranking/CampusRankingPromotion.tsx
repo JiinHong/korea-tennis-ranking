@@ -39,6 +39,7 @@ export default function CampusRankingPromotion() {
               alt=""
               className={`national-campus-ranking-logo ${ranking.logoClassName}`}
               height={ranking.logoHeight}
+              sizes="57px"
               src={ranking.logoSrc}
               width={ranking.logoWidth}
             />

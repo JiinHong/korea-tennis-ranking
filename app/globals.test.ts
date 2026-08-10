@@ -112,7 +112,7 @@ describe("campus ranking responsive title styles", () => {
       ".player-cell {\n  display: flex;\n  align-self: stretch;\n  flex-direction: column;\n  justify-content: center;\n  min-width: 0;\n}"
     );
     expect(css).toMatch(
-      /@media\s*\(max-width:\s*860px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured \.player-cell,\s*\.campus-ranking-page \.ranking-row\.is-compact \.player-cell\s*\{[^}]*grid-row:\s*1 \/ span 2;[^}]*align-self:\s*center;[^}]*\}/
+      /@media\s*\(max-width:\s*860px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured \.player-cell,\s*\.campus-ranking-page \.ranking-row\.is-compact \.player-cell\s*\{[^}]*grid-column:\s*2;[^}]*grid-row:\s*1 \/ span 2;[^}]*align-self:\s*center;[^}]*\}/
     );
     expect(css).toMatch(
       /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured \.player-cell\s*\{[^}]*grid-column:\s*2;[^}]*grid-row:\s*1 \/ span 2;[^}]*\}/
@@ -480,7 +480,7 @@ describe("national ranking responsive contracts", () => {
       /\.national-campus-ranking-logo\.is-seoultech\s*\{[^}]*width:\s*57px;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.dark \.national-campus-ranking-logo\.is-petc\s*\{[^}]*filter:\s*invert\(1\) brightness\(1\.1\);[^}]*\}/
+      /\.dark \.national-campus-ranking-logo\.is-petc\s*\{[^}]*filter:\s*brightness\(0\) invert\(1\) drop-shadow\(0 0 0 #fff\);[^}]*\}/
     );
     expect(css).not.toMatch(
       /\.dark \.national-campus-ranking-logo\.is-seoultech\s*\{[^}]*filter:/
@@ -825,7 +825,7 @@ describe("theme color contracts", () => {
 
   it("PETC 단색 로고만 다크 모드에서 밝게 변환한다", () => {
     expect(css).toMatch(
-      /\.dark \.campus-club-logo\.is-monochrome\s*\{[^}]*filter:\s*[^;]+;[^}]*\}/
+      /\.dark \.campus-club-logo\.is-monochrome\s*\{[^}]*filter:\s*brightness\(0\) invert\(1\) drop-shadow\(0 0 0 #fff\);[^}]*\}/
     );
   });
 

@@ -4103,6 +4103,7 @@ button:disabled {
 
   .campus-ranking-page .ranking-row.is-featured .player-cell,
   .campus-ranking-page .ranking-row.is-compact .player-cell {
+    grid-column: 2;
     grid-row: 1 / span 2;
     align-self: center;
   }
@@ -6445,8 +6446,7 @@ button:disabled {
 }
 
 .dark .campus-club-logo.is-monochrome {
-  filter: invert(87%) sepia(14%) saturate(350%) hue-rotate(96deg)
-    brightness(91%) contrast(91%);
+  filter: brightness(0) invert(1) drop-shadow(0 0 0 #fff);
 }
 
 .dark .rank-movement.is-up {
@@ -6564,7 +6564,7 @@ button:disabled {
 }
 
 .dark .national-campus-ranking-logo.is-petc {
-  filter: invert(1) brightness(1.1);
+  filter: brightness(0) invert(1) drop-shadow(0 0 0 #fff);
 }
 
 .dark .national-ranking-tabs {
