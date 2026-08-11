@@ -2642,7 +2642,7 @@ button:disabled {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.4;
+  opacity: 0.28;
   outline: none;
 }
 

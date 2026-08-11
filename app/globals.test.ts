@@ -451,7 +451,7 @@ describe("campus ranking responsive title styles", () => {
 
   it("과거 시즌 결과와 선수 상세 꺾쇠를 현재 랭킹보다 조용하게 표시한다", () => {
     expect(css).toMatch(
-      /\.historical-form-result\s*\{[^}]*position:\s*relative;[^}]*opacity:\s*0\.4;[^}]*\}/
+      /\.historical-form-result\s*\{[^}]*position:\s*relative;[^}]*opacity:\s*0\.28;[^}]*\}/
     );
     expect(css).toMatch(
       /\.historical-form-result:focus-visible \.historical-form-tooltip\s*\{[^}]*opacity:\s*1;[^}]*visibility:\s*visible;[^}]*\}/
