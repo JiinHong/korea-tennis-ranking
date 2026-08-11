@@ -733,6 +733,15 @@ describe("national ranking responsive contracts", () => {
 describe("methodology accessibility contracts", () => {
   const css = readFileSync(join(process.cwd(), "app/globals.css"), "utf8");
 
+  it("대회 점수 계산식은 본문 흐름을 압도하지 않는 크기로 표시한다", () => {
+    expect(css).toMatch(
+      /\.methodology-page \.methodology-formula code\s*\{[^}]*font-size:\s*17px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.methodology-page \.methodology-formula code\s*\{[^}]*font-size:\s*15px;[^}]*\}/
+    );
+  });
+
   it("계산 방식 문서도 전국 랭킹과 같은 딥 그린 팔레트를 공유한다", () => {
     expect(css).toMatch(
       /\.methodology-page\s*\{[^}]*--methodology-ink:\s*#171b1f;[^}]*--methodology-muted:\s*#66717c;[^}]*--methodology-line:\s*#dfe4e1;[^}]*--methodology-accent:\s*#1a3b2b;[^}]*--methodology-soft:\s*#edf2ef;[^}]*\}/
@@ -889,6 +898,12 @@ describe("theme color contracts", () => {
     );
     expect(css).toMatch(
       /\.dark \.national-ranking-tabs\s*\{[^}]*background:\s*transparent;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.national-ranking-main-row\[data-expanded="true"\] td\s*\{[^}]*background:\s*transparent;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.national-ranking-expanded-results\s*\{[^}]*background:\s*transparent;[^}]*\}/
     );
   });
 

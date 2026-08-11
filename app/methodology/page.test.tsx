@@ -13,8 +13,6 @@ const SECTION_HEADINGS = [
   "수상 기록",
   "남자부·여자부·종합",
   "계산 예시",
-  "데이터 검증 원칙",
-  "버전과 시행일",
   "공식 참고 자료",
 ];
 
@@ -60,8 +58,12 @@ describe("MethodologyPage", () => {
         "대회별 점수를 합산해 동아리의 남자부 또는 여자부 총점을 구합니다. 모든 가중치와 진출 단계 점수가 정수이므로 최종 점수도 정수로 계산하며, 별도의 반올림은 사용하지 않습니다."
       )
     ).toBeDefined();
-    expect(screen.getByText("national-club-v8")).toBeDefined();
-    expect(screen.getByText("2026-08-11")).toBeDefined();
+    expect(
+      screen.queryByRole("heading", { name: "데이터 검증 원칙" })
+    ).toBeNull();
+    expect(
+      screen.queryByRole("heading", { name: "버전과 시행일" })
+    ).toBeNull();
     expect(screen.queryByRole("heading", { name: "참가 팀 수" })).toBeNull();
     expect(screen.queryByText(/참가 팀 수 데이터/)).toBeNull();
   });
@@ -176,28 +178,15 @@ describe("MethodologyPage", () => {
     ]);
   });
 
-  it("검증 상태를 설명하되 미해결 원본 행은 공개하지 않는다", () => {
+  it("내부 검증 상태와 공식 버전 정보는 공개 문서에서 제외한다", () => {
     render(<MethodologyPage />);
 
-    expect(screen.getByText("verified")).toBeDefined();
-    expect(screen.getByText("unresolved")).toBeDefined();
-    expect(screen.getByText("missing")).toBeDefined();
-    expect(screen.getByText("did_not_enter")).toBeDefined();
-    expect(
-      screen.getByText(
-        "unresolved와 missing 결과는 점수에서 제외하며, 미해결 원본 행은 공개 페이지에 노출하지 않습니다."
-      )
-    ).toBeDefined();
-    expect(
-      screen.getByText(
-        "WEMIX OPEN 2025는 확인된 남자부·여자부 대진을 원자료로 보존합니다."
-      )
-    ).toBeDefined();
-    expect(
-      screen.getByText(
-        "영월 대회는 2023년부터 2026년까지 확인된 결과를 기록합니다. 2023년은 현재 점수에서 제외하되 동아리별 통산 성적과 입상 기록에는 남깁니다."
-      )
-    ).toBeDefined();
+    expect(screen.queryByText("verified")).toBeNull();
+    expect(screen.queryByText("unresolved")).toBeNull();
+    expect(screen.queryByText("missing")).toBeNull();
+    expect(screen.queryByText("did_not_enter")).toBeNull();
+    expect(screen.queryByText("national-club-v8")).toBeNull();
+    expect(screen.queryByText("2026-08-11")).toBeNull();
   });
 
   it("안전한 외부 참고 링크와 전국 랭킹 복귀 링크를 제공한다", () => {

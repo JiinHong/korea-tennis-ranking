@@ -10,8 +10,6 @@ import MethodologyTableRegion from "./_components/MethodologyTableRegion";
 
 export const metadata = createMethodologyMetadata();
 
-const FORMULA_EFFECTIVE_ON = "2026-08-11";
-
 const STAGE_ROWS = [
   ["우승", "champion"],
   ["준우승", "runner_up"],
@@ -278,80 +276,6 @@ export default function MethodologyPage() {
               <code>34 × 2 × 4 = 272점</code>
             </li>
           </ol>
-        </section>
-
-        <section className="methodology-section" aria-labelledby="quality-title">
-          <h2 id="quality-title">데이터 검증 원칙</h2>
-          <dl className="methodology-status-list">
-            <div>
-              <dt>
-                <code>verified</code>
-              </dt>
-              <dd>
-                동아리, 부문, 개최 연도, 진출 단계가 확인되어 점수에
-                반영할 수 있는 결과
-              </dd>
-            </div>
-            <div>
-              <dt>
-                <code>unresolved</code>
-              </dt>
-              <dd>
-                출처는 실제이지만 동아리 정체성이나 진출 단계가 모호해 해결
-                전에는 점수에 반영하지 않는 결과
-              </dd>
-            </div>
-            <div>
-              <dt>
-                <code>missing</code>
-              </dt>
-              <dd>
-                있어야 할 출처를 확보하지 못한 상태로, 임의로 불참 처리하지
-                않는 결과
-              </dd>
-            </div>
-            <div>
-              <dt>
-                <code>did_not_enter</code>
-              </dt>
-              <dd>불참이 확인되어 대회 기여 점수가 0인 결과</dd>
-            </div>
-          </dl>
-          <p className="methodology-note">
-            unresolved와 missing 결과는 점수에서 제외하며, 미해결 원본 행은
-            공개 페이지에 노출하지 않습니다.
-          </p>
-          <p className="methodology-note">
-            WEMIX OPEN 2025는 확인된 남자부·여자부 대진을 원자료로 보존합니다.
-          </p>
-          <p className="methodology-note">
-            영월 대회는 2023년부터 2026년까지 확인된 결과를 기록합니다. 2023년은
-            현재 점수에서 제외하되 동아리별 통산 성적과 입상 기록에는 남깁니다.
-          </p>
-        </section>
-
-        <section className="methodology-section" aria-labelledby="version-title">
-          <h2 id="version-title">버전과 시행일</h2>
-          <dl className="methodology-version">
-            <div>
-              <dt>공식 버전</dt>
-              <dd>
-                <code>{NATIONAL_FORMULA_V8.version}</code>
-              </dd>
-            </div>
-            <div>
-              <dt>시행일</dt>
-              <dd>
-                <time dateTime={FORMULA_EFFECTIVE_ON}>
-                  {FORMULA_EFFECTIVE_ON}
-                </time>
-              </dd>
-            </div>
-          </dl>
-          <p>
-            계산 스냅샷에는 공식 버전과 각 가중치 설정을 함께 저장합니다. 공식이
-            바뀌면 기존 점수의 의미를 덮어쓰지 않고 새 버전을 발행합니다.
-          </p>
         </section>
 
         <section className="methodology-section" aria-labelledby="references-title">

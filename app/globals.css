@@ -235,7 +235,7 @@
 .methodology-page .methodology-formula code {
   color: var(--methodology-text);
   font-family: inherit;
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 820;
   line-height: 1.6;
 }
@@ -353,53 +353,6 @@
   font-size: 15px;
   font-weight: 850;
   line-height: 1.6;
-}
-
-.methodology-status-list,
-.methodology-version {
-  margin: 4px 0 0;
-}
-
-.methodology-status-list > div,
-.methodology-version > div {
-  display: grid;
-  grid-template-columns: 150px minmax(0, 1fr);
-  gap: 18px;
-  padding: 15px 0;
-  border-bottom: 1px solid var(--methodology-line);
-}
-
-.methodology-status-list > div:first-child,
-.methodology-version > div:first-child {
-  border-top: 1px solid var(--methodology-line);
-}
-
-.methodology-status-list dt,
-.methodology-version dt {
-  color: var(--methodology-ink);
-  font-size: 13px;
-  font-weight: 850;
-}
-
-.methodology-status-list dd,
-.methodology-version dd {
-  margin: 0;
-  color: var(--methodology-muted);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.65;
-}
-
-.methodology-status-list code,
-.methodology-version code,
-.methodology-version time {
-  color: var(--methodology-accent);
-  font-family: var(--font-geist-mono), monospace;
-  font-weight: 800;
-}
-
-.methodology-version {
-  margin-bottom: 16px;
 }
 
 .methodology-references {
@@ -585,7 +538,7 @@
   }
 
   .methodology-page .methodology-formula code {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .methodology-table caption {
@@ -596,12 +549,6 @@
   .methodology-table td {
     padding: 11px 8px;
     font-size: 12px;
-  }
-
-  .methodology-status-list > div,
-  .methodology-version > div {
-    grid-template-columns: 1fr;
-    gap: 6px;
   }
 
   .club-rules-summary li {
@@ -6392,9 +6339,7 @@ button:disabled {
   background: var(--bg-surface);
 }
 
-.dark .methodology-table thead th,
-.dark .methodology-status-list > div,
-.dark .methodology-version > div {
+.dark .methodology-table thead th {
   background: var(--bg-subtle);
 }
 
@@ -6595,7 +6540,7 @@ button:disabled {
 }
 
 .dark .national-ranking-expanded-results {
-  background: var(--bg-subtle);
+  background: transparent;
 }
 
 .dark .national-ranking-crown-guide img {
@@ -6615,7 +6560,7 @@ button:disabled {
 }
 
 .dark .national-ranking-main-row[data-expanded="true"] td {
-  background: #1b242b;
+  background: transparent;
 }
 
 .dark .national-ranking-table th,
