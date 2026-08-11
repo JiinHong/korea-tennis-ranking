@@ -105,11 +105,11 @@ describe("getRankingDataForClub", () => {
         wins: 1,
         losses: 1,
         matches: 2,
-        recent5: ["L", "W"],
+        recent5: ["W", "L"],
         recentForm: [
           { result: "W", season: "시즌1", isHistorical: true },
-          { result: "L", season: "시즌3", isHistorical: false },
           { result: "W", season: "시즌3", isHistorical: false },
+          { result: "L", season: "시즌3", isHistorical: false },
         ],
       },
       {
@@ -120,11 +120,11 @@ describe("getRankingDataForClub", () => {
         wins: 1,
         losses: 1,
         matches: 2,
-        recent5: ["W", "L"],
+        recent5: ["L", "W"],
         recentForm: [
           { result: "L", season: "시즌1", isHistorical: true },
-          { result: "W", season: "시즌3", isHistorical: false },
           { result: "L", season: "시즌3", isHistorical: false },
+          { result: "W", season: "시즌3", isHistorical: false },
         ],
       },
     ]);

@@ -103,7 +103,7 @@ describe("campus ranking responsive title styles", () => {
       ".campus-ranking-page .record-cell {\n  justify-items: end;\n  text-align: right;\n}"
     );
     expect(css).toContain(
-      ".campus-ranking-page .recent-form {\n  justify-content: flex-end;\n  min-width: 170px;\n}"
+      ".campus-ranking-page .recent-form {\n  grid-column: 4;\n  grid-row: 1;\n  justify-content: flex-end;\n  min-width: 170px;\n  padding-right: 34px;\n}"
     );
   });
 
@@ -185,7 +185,7 @@ describe("campus ranking responsive title styles", () => {
       "  border-radius: 8px;\n  font-size: 13px;\n  font-weight: 850;"
     );
     expect(css).toMatch(
-      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.subtitle\s*\{[^}]*font-size:\s*14px;/
+      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.subtitle\s*\{[^}]*font-size:\s*clamp\(11px, 3\.4vw, 14px\);/
     );
     expect(css).toMatch(
       /@media\s*\(max-width:\s*860px\)[\s\S]*?\.campus-ranking-page \.subtitle\s*\{[^}]*font-size:\s*18px;/
@@ -445,7 +445,7 @@ describe("campus ranking responsive title styles", () => {
       ".campus-ranking-page .hero-copy-heading {\n  display: grid;\n  grid-template-columns: minmax(0, 1fr) auto;\n  align-items: baseline;\n  gap: 16px;\n  margin-bottom: 14px;\n}"
     );
     expect(css).toContain(
-      ".campus-ranking-page .hero-copy-heading .subtitle {\n  min-width: 0;\n  margin: 0;\n}"
+      ".campus-ranking-page .hero-copy-heading .subtitle {\n  min-width: 0;\n  margin: 0;\n  white-space: nowrap;\n}"
     );
   });
 
@@ -460,7 +460,22 @@ describe("campus ranking responsive title styles", () => {
       /@media \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.historical-form-result:hover \.historical-form-tooltip\s*\{[^}]*opacity:\s*1;[^}]*visibility:\s*visible;[^}]*\}/
     );
     expect(css).toMatch(
+      /\.campus-ranking-row-chevron\s*\{[^}]*grid-column:\s*-2 \/ -1;[^}]*grid-row:\s*1 \/ -1;[^}]*justify-self:\s*end;[^}]*margin-right:\s*12px;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured \.recent-form\s*\{[^}]*padding-right:\s*34px;[^}]*\}[\s\S]*?\.campus-ranking-page \.ranking-row\.is-compact \.recent-form\s*\{[^}]*padding:\s*0 34px 0 6px;[^}]*\}/
+    );
+    expect(css).toMatch(
       /\.campus-ranking-row-chevron svg\s*\{[^}]*width:\s*10px;[^}]*height:\s*10px;[^}]*\}/
+    );
+  });
+
+  it("캠퍼스 설명은 한 줄을 유지하며 화면 폭에 맞춰 축소한다", () => {
+    expect(css).toMatch(
+      /\.campus-ranking-page \.hero-copy-heading \.subtitle\s*\{[^}]*white-space:\s*nowrap;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /@media \(max-width: 640px\)[\s\S]*?\.campus-ranking-page \.subtitle\s*\{[^}]*font-size:\s*clamp\(11px, 3\.4vw, 14px\);[^}]*\}/
     );
   });
 

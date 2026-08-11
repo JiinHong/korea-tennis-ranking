@@ -86,6 +86,38 @@ describe("buildPlayer", () => {
     });
   });
 
+  it("경기 입력 순서와 관계없이 가장 최근 결과를 오른쪽에 둔다", () => {
+    const ranking: RankingData[] = [
+      { rank: 1, name: "오준석", note: "" },
+      { rank: 2, name: "김도훈", note: "" },
+    ];
+    const matches: MatchRecord[] = [
+      {
+        date: "2026. 7. 2",
+        challenger: "김도훈",
+        challengerRank: 2,
+        defender: "오준석",
+        defenderRank: 1,
+        winner: "김도훈",
+        score: "6:3",
+        defenseResult: "방어 실패",
+      },
+      {
+        date: "2026. 7. 1",
+        challenger: "김도훈",
+        challengerRank: 2,
+        defender: "오준석",
+        defenderRank: 1,
+        winner: "오준석",
+        score: "6:4",
+        defenseResult: "방어 성공",
+      },
+    ];
+
+    expect(buildPlayer(ranking, matches)[0]?.recent5).toEqual(["W", "L"]);
+    expect(buildPlayer(ranking, matches)[1]?.recent5).toEqual(["L", "W"]);
+  });
+
   it("지난 월요일 순위와 현재 순위의 차이를 선수 데이터에 전달한다", () => {
     const ranking: RankingData[] = [
       { rank: 1, name: "오준석", note: "" },

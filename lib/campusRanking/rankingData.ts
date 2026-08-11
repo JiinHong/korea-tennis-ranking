@@ -206,7 +206,14 @@ export function buildPlayer(
         };
     }
 
-    for (const match of matches) {
+    const chronologicalMatches = [...matches].sort((a, b) => {
+        const aTime = parseMatchDate(a.date)?.getTime() ?? 0;
+        const bTime = parseMatchDate(b.date)?.getTime() ?? 0;
+
+        return aTime - bTime;
+    });
+
+    for (const match of chronologicalMatches) {
         // 기록지의 이름이 실시간랭킹표에 없으면 continue
         // 나중에 중간 탈퇴자가 생기면 수정해야함
         if (!stats[match.challenger] || !stats[match.defender]) {

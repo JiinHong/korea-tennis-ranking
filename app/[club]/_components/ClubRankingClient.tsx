@@ -230,9 +230,6 @@ function RecentForm({
           />
         )
       )}
-      <span aria-hidden="true" className="campus-ranking-row-chevron">
-        <ChevronRight />
-      </span>
     </div>
   );
 }
@@ -309,6 +306,9 @@ function RankingRow({
         <span>{player.matches}경기</span>
       </div>
       <RecentForm recent5={player.recent5} recentForm={player.recentForm} />
+      <span aria-hidden="true" className="campus-ranking-row-chevron">
+        <ChevronRight />
+      </span>
     </Link>
   );
 }
@@ -388,9 +388,9 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
   const displayTotalMatches = summary?.totalMatches ?? totalMatches;
   const recent30Matches = summary?.recent30Matches ?? totalMatches;
   const currentSeason = seasonSummaries.find((season) => season.isCurrent);
-  const historicalSeasons = seasonSummaries.filter(
-    (season) => !season.isCurrent
-  );
+  const historicalSeasons = seasonSummaries
+    .filter((season) => !season.isCurrent)
+    .sort((a, b) => a.name.localeCompare(b.name, "ko", { numeric: true }));
   const currentMatchesLabel =
     currentSeason && currentSeason.name !== "현재"
       ? `${currentSeason.name} 경기`
@@ -436,7 +436,18 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
             <div className="hero-grid">
               <div className="hero-copy">
                 <div className="hero-copy-heading">
-                  <p className="subtitle">{club.subtitle}</p>
+                  <div className="campus-subtitle-group">
+                    <p className="subtitle">{club.subtitle}</p>
+                    {historicalSeasons.length > 0 ? (
+                      <p className="campus-season-history">
+                        {historicalSeasons
+                          .map(
+                            (season) => `${season.name} ${season.matches}경기`
+                          )
+                          .join(" · ")}
+                      </p>
+                    ) : null}
+                  </div>
                   <Link
                     className="campus-rules-link"
                     href={`/${club.slug}/rules`}
@@ -451,30 +462,19 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                   </Link>
                 </div>
                 <div className="hero-meta-row">
-                  <div className="hero-stats-group">
-                    <div className="hero-stats" aria-label="랭킹 요약">
-                      <div>
-                        <strong>{players.length}</strong>
-                        <span>선수</span>
-                      </div>
-                      <div>
-                        <strong>{displayTotalMatches}</strong>
-                        <span>{currentMatchesLabel}</span>
-                      </div>
-                      <div>
-                        <strong>{recent30Matches}</strong>
-                        <span>최근 30일</span>
-                      </div>
+                  <div className="hero-stats" aria-label="랭킹 요약">
+                    <div>
+                      <strong>{players.length}</strong>
+                      <span>선수</span>
                     </div>
-                    {historicalSeasons.length > 0 ? (
-                      <p className="campus-season-history">
-                        {historicalSeasons
-                          .map(
-                            (season) => `${season.name} ${season.matches}경기`
-                          )
-                          .join(" · ")}
-                      </p>
-                    ) : null}
+                    <div>
+                      <strong>{displayTotalMatches}</strong>
+                      <span>{currentMatchesLabel}</span>
+                    </div>
+                    <div>
+                      <strong>{recent30Matches}</strong>
+                      <span>최근 30일</span>
+                    </div>
                   </div>
 
                   <div className="hero-live-actions">

@@ -468,7 +468,14 @@ describe("ClubRankingClient", () => {
     render(<ClubRankingClient club={club} />);
 
     expect(await screen.findByText("시즌3 경기")).toBeDefined();
-    expect(screen.getByText("시즌2 154경기 · 시즌1 30경기")).toBeDefined();
+    const seasonHistory = screen.getByText(
+      "시즌1 30경기 · 시즌2 154경기"
+    );
+    expect(seasonHistory).toBeDefined();
+    expect(seasonHistory.closest(".campus-subtitle-group")?.textContent).toBe(
+      "도전과 방어로 만들어가는 우리들의 랭킹시즌1 30경기 · 시즌2 154경기"
+    );
+    expect(seasonHistory.closest(".hero-stats-group")).toBeNull();
 
     const playedRow = screen.getByRole("link", {
       name: "오준석 상세 전적 보기",
