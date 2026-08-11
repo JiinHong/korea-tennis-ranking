@@ -97,13 +97,13 @@ describe("campus ranking responsive title styles", () => {
 
   it("랭킹 행의 전적과 최근 5경기 컬럼을 오른쪽 기준선에 맞춘다", () => {
     expect(css).toContain(
-      ".campus-ranking-page .ranking-head,\n.campus-ranking-page .ranking-row {\n  grid-template-columns: 76px minmax(220px, 1fr) 156px 170px;\n}"
+      ".campus-ranking-page .ranking-head,\n.campus-ranking-page .ranking-row {\n  grid-template-columns: 76px minmax(220px, 1fr) 156px 170px 28px;\n}"
     );
     expect(css).toContain(
       ".campus-ranking-page .record-cell {\n  justify-items: end;\n  text-align: right;\n}"
     );
     expect(css).toContain(
-      ".campus-ranking-page .recent-form {\n  grid-column: 4;\n  grid-row: 1;\n  justify-content: flex-end;\n  min-width: 170px;\n  padding-right: 34px;\n}"
+      ".campus-ranking-page .recent-form {\n  grid-column: 4;\n  grid-row: 1;\n  justify-content: flex-end;\n  min-width: 170px;\n  padding-right: 8px;\n}"
     );
   });
 
@@ -130,7 +130,7 @@ describe("campus ranking responsive title styles", () => {
       /\.campus-recent-record-row\s*\{[^}]*grid-template-columns:\s*86px minmax\(0,\s*1fr\) auto;[^}]*min-height:\s*49px;/
     );
     expect(css).toMatch(
-      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured\s*\{[^}]*grid-template-columns:\s*60px minmax\(0,\s*1fr\) 84px;[^}]*min-height:\s*58px;/
+      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured\s*\{[^}]*grid-template-columns:\s*60px minmax\(0,\s*1fr\) 84px 24px;[^}]*min-height:\s*58px;/
     );
     expect(css).not.toContain(".campus-ranking-page .activity-strip {");
   });
@@ -460,10 +460,13 @@ describe("campus ranking responsive title styles", () => {
       /@media \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.historical-form-result:hover \.historical-form-tooltip\s*\{[^}]*opacity:\s*1;[^}]*visibility:\s*visible;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.campus-ranking-row-chevron\s*\{[^}]*grid-column:\s*-2 \/ -1;[^}]*grid-row:\s*1 \/ -1;[^}]*justify-self:\s*end;[^}]*margin-right:\s*12px;[^}]*\}/
+      /\.campus-ranking-row-chevron\s*\{[^}]*grid-column:\s*5;[^}]*grid-row:\s*1;[^}]*justify-self:\s*end;[^}]*margin-right:\s*8px;[^}]*\}/
     );
     expect(css).toMatch(
-      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured \.recent-form\s*\{[^}]*padding-right:\s*34px;[^}]*\}[\s\S]*?\.campus-ranking-page \.ranking-row\.is-compact \.recent-form\s*\{[^}]*padding:\s*0 34px 0 6px;[^}]*\}/
+      /@media\s*\(max-width:\s*860px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured\s*\{[^}]*grid-template-columns:\s*60px minmax\(0, 1fr\) 132px 24px;[^}]*\}[\s\S]*?\.campus-ranking-page \.ranking-row\.is-compact\s*\{[^}]*grid-template-columns:\s*60px minmax\(0, 1fr\) 132px 24px;[^}]*\}[\s\S]*?\.campus-ranking-row-chevron\s*\{[^}]*grid-column:\s*4;[^}]*grid-row:\s*1 \/ span 2;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured\s*\{[^}]*grid-template-columns:\s*60px minmax\(0, 1fr\) 84px 24px;[^}]*\}[\s\S]*?\.campus-ranking-page \.ranking-row\.is-compact\s*\{[^}]*grid-template-columns:\s*60px minmax\(0, 1fr\) 96px 24px;[^}]*\}/
     );
     expect(css).toMatch(
       /\.campus-ranking-row-chevron svg\s*\{[^}]*width:\s*10px;[^}]*height:\s*10px;[^}]*\}/
