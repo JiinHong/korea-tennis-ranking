@@ -247,6 +247,7 @@ export default function NationalRankingTable({
                             campusRankingLink={campusRankingLink}
                             clubSlug={row.clubSlug}
                             displayName={row.displayName}
+                            honors={row.honors}
                             latestEditionYears={latestEditionYears}
                             regionId={regionId}
                           />

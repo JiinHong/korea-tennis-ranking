@@ -2,7 +2,10 @@ import { fireEvent, render, screen, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { buildLatestEditionYearMap } from "@/lib/nationalRanking/recentHonors";
-import type { NationalRankingBestResult } from "@/lib/nationalRanking/types";
+import type {
+  NationalRankingBestResult,
+  NationalRankingHonor,
+} from "@/lib/nationalRanking/types";
 
 import NationalRankingExpandedResults from "./NationalRankingExpandedResults";
 
@@ -89,6 +92,91 @@ describe("NationalRankingExpandedResults", () => {
 
     expect(within(region).getAllByRole("listitem")).toHaveLength(3);
     expect(within(region).queryByText("2023 하늘내린인제")).toBeNull();
+  });
+
+  it("최근 왕관 기록을 먼저 포함하고 남는 자리를 기존 최고 성적으로 채운다", () => {
+    const seoulBestResults: NationalRankingBestResult[] = [
+      {
+        editionKey: "gyeongin-2025-men",
+        tournamentSlug: "gyeongin",
+        tournamentName: "경인지구 연맹전",
+        year: 2025,
+        gender: "men",
+        actualEntrants: 48,
+        stage: "champion",
+        sourceTeamName: "서울대학교 테니스부",
+      },
+      {
+        editionKey: "gyeongin-2024-men",
+        tournamentSlug: "gyeongin",
+        tournamentName: "경인지구 연맹전",
+        year: 2024,
+        gender: "men",
+        actualEntrants: 42,
+        stage: "champion",
+        sourceTeamName: "서울대학교 테니스부",
+      },
+      {
+        editionKey: "chuncheon-2023-men",
+        tournamentSlug: "chuncheon",
+        tournamentName: "춘천소양강배",
+        year: 2023,
+        gender: "men",
+        actualEntrants: 36,
+        stage: "champion",
+        sourceTeamName: "서울대학교 테니스부",
+      },
+    ];
+    const seoulHonors: NationalRankingHonor[] = [
+      {
+        editionKey: "inje-2026-men",
+        tournamentSlug: "inje",
+        tournamentName: "하늘내린인제",
+        year: 2026,
+        gender: "men",
+        stage: "champion",
+      },
+      {
+        editionKey: "gyeongin-2025-men",
+        tournamentSlug: "gyeongin",
+        tournamentName: "경인지구 연맹전",
+        year: 2025,
+        gender: "men",
+        stage: "champion",
+      },
+    ];
+    const seoulLatestEditionYears = buildLatestEditionYearMap(
+      seoulHonors,
+      2026
+    );
+
+    const { container } = render(
+      <NationalRankingExpandedResults
+        activeGender="men"
+        bestResults={seoulBestResults}
+        clubSlug="snu-tennis"
+        displayName="서울대학교 테니스부"
+        honors={seoulHonors}
+        latestEditionYears={seoulLatestEditionYears}
+        regionId="snu-results"
+      />
+    );
+
+    const region = screen.getByRole("region", {
+      name: "서울대학교 테니스부 최고 성적",
+    });
+    const items = within(region)
+      .getAllByRole("listitem")
+      .map((item) => item.textContent);
+
+    expect(items).toEqual([
+      "2026 하늘내린인제남자부 · 우승",
+      "2025 경인지구 연맹전남자부 · 우승",
+      "2024 경인지구 연맹전남자부 · 우승",
+    ]);
+    expect(
+      container.querySelectorAll<HTMLImageElement>(".national-result-crown")
+    ).toHaveLength(2);
   });
 
   it("대회별 최신 완료 대회 입상에만 왕관을 붙이고 현재 부문을 보존한다", () => {

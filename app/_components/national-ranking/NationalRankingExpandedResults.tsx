@@ -7,9 +7,13 @@ import {
   isLatestTournamentEdition,
   type LatestEditionYearMap,
 } from "@/lib/nationalRanking/recentHonors";
-import { getTournamentResultDisplayName } from "@/lib/nationalRanking/tournamentPresentation";
+import {
+  compareTournamentOccurrences,
+  getTournamentResultDisplayName,
+} from "@/lib/nationalRanking/tournamentPresentation";
 import type {
   NationalRankingBestResult,
+  NationalRankingHonor,
   PublicTournamentResultStage,
   RankingGender,
 } from "@/lib/nationalRanking/types";
@@ -23,6 +27,7 @@ type NationalRankingExpandedResultsProps = {
   campusRankingLink?: CampusRankingLink | null;
   clubSlug: string;
   displayName: string;
+  honors?: NationalRankingHonor[];
   latestEditionYears: LatestEditionYearMap;
   regionId: string;
 };
@@ -59,10 +64,24 @@ export default function NationalRankingExpandedResults({
   campusRankingLink = null,
   clubSlug,
   displayName,
+  honors = [],
   latestEditionYears,
   regionId,
 }: NationalRankingExpandedResultsProps) {
-  const visibleResults = bestResults.slice(0, 3);
+  const currentHonors = honors
+    .filter((honor) =>
+      isLatestTournamentEdition(honor, latestEditionYears)
+    )
+    .sort(compareTournamentOccurrences);
+  const seenEditions = new Set<string>();
+  const visibleResults = [...currentHonors, ...bestResults]
+    .filter((result) => {
+      if (seenEditions.has(result.editionKey)) return false;
+
+      seenEditions.add(result.editionKey);
+      return true;
+    })
+    .slice(0, 3);
 
   return (
     <div className="national-ranking-expansion">
