@@ -5,7 +5,7 @@ import {
   getTournamentPrestigeFactor,
   getTournamentUnits,
   isUnitNationalFormula,
-  NATIONAL_FORMULA_V7,
+  NATIONAL_FORMULA_V8,
   scoreVerifiedResult,
   usesFieldSizeUnits,
 } from "./formula";
@@ -63,8 +63,8 @@ function compareBestResults(
   if (stageDifference !== 0) return stageDifference;
 
   const tournamentUnitDifference =
-    (NATIONAL_FORMULA_V7.tournamentUnits[right.tournamentSlug] ?? 0) -
-    (NATIONAL_FORMULA_V7.tournamentUnits[left.tournamentSlug] ?? 0);
+    (NATIONAL_FORMULA_V8.tournamentUnits[right.tournamentSlug] ?? 0) -
+    (NATIONAL_FORMULA_V8.tournamentUnits[left.tournamentSlug] ?? 0);
   if (tournamentUnitDifference !== 0) return tournamentUnitDifference;
 
   const yearDifference = right.year - left.year;
@@ -309,7 +309,7 @@ function assertCalculatedRankingIntegrity(
 
 export function calculateNationalRankings(
   dataset: NationalRankingDataset,
-  formula: NationalFormula = NATIONAL_FORMULA_V7
+  formula: NationalFormula = NATIONAL_FORMULA_V8
 ): CalculatedNationalRanking {
   const clubsBySlug = new Map(dataset.clubs.map((club) => [club.slug, club]));
   const tournamentsBySlug = new Map(

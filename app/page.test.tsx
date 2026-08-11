@@ -113,12 +113,12 @@ describe("Home", () => {
     ).toBeDefined();
     expect(
       screen
-        .getByRole("link", { name: "PETC 단식 랭킹" })
+        .getByRole("link", { name: "고려대 PETC 단식 랭킹" })
         .getAttribute("href")
     ).toBe("/petc");
     expect(
       screen
-        .getByRole("link", { name: "느티나무 단식 랭킹" })
+        .getByRole("link", { name: "서울과기대 느티나무 단식 랭킹" })
         .getAttribute("href")
     ).toBe("/seoultech");
     expect(

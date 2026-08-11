@@ -471,6 +471,9 @@ describe("national ranking responsive contracts", () => {
       /\.national-campus-ranking-links\s*\{[^}]*display:\s*grid;[^}]*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\);[^}]*\}/
     );
     expect(css).toMatch(
+      /\.national-campus-ranking-inquiry\s*\{[^}]*margin:\s*0 0 14px;[^}]*font-size:\s*14px;[^}]*\}/
+    );
+    expect(css).toMatch(
       /\.national-campus-ranking-logo\s*\{[^}]*height:\s*auto;[^}]*background:\s*transparent;[^}]*border:\s*0;[^}]*border-radius:\s*0;[^}]*object-fit:\s*contain;[^}]*\}/
     );
     expect(css).toMatch(
@@ -580,7 +583,7 @@ describe("national ranking responsive contracts", () => {
       /\.national-ranking-row-chevron\s*\{[^}]*margin-left:\s*12px;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.national-ranking-row-chevron svg\s*\{[^}]*display:\s*block;[^}]*width:\s*10px;[^}]*height:\s*14px;[^}]*\}/
+      /\.national-ranking-row-chevron svg\s*\{[^}]*display:\s*block;[^}]*width:\s*10px;[^}]*height:\s*10px;[^}]*\}/
     );
     expect(css).toMatch(
       /\.national-ranking-row-chevron path\s*\{[^}]*fill:\s*none;[^}]*stroke:\s*currentColor;[^}]*stroke-width:\s*1\.6;[^}]*stroke-linecap:\s*round;[^}]*stroke-linejoin:\s*round;[^}]*\}/
@@ -889,18 +892,27 @@ describe("theme color contracts", () => {
     );
   });
 
-  it("최근 경기 승패 아이콘은 원형 배경 없이 색과 크기로 구분된다", () => {
+  it("랭킹 승패 아이콘은 원형으로, 선수 상세 승패 아이콘은 배경 없이 보여준다", () => {
     expect(css).toMatch(
-      /\.match-outcome-icon\s*\{[^}]*display:\s*inline-flex;[^}]*background:\s*transparent;[^}]*border-radius:\s*0;[^}]*\}/
+      /\.match-outcome-icon\s*\{[^}]*display:\s*inline-flex;[^}]*color:\s*#fff;[^}]*border-radius:\s*999px;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.match-outcome-icon svg\s*\{[^}]*width:\s*84%;[^}]*height:\s*84%;[^}]*\}/
+      /\.match-outcome-icon svg\s*\{[^}]*width:\s*60%;[^}]*height:\s*60%;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.match-outcome-icon\.is-win\s*\{[^}]*color:\s*#168a4b;[^}]*background:\s*transparent;[^}]*\}/
+      /\.match-outcome-icon\.is-win\s*\{[^}]*background:\s*#187b42;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.match-outcome-icon\.is-loss\s*\{[^}]*color:\s*#d62961;[^}]*background:\s*transparent;[^}]*\}/
+      /\.match-outcome-icon\.is-loss\s*\{[^}]*background:\s*#d91e4d;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.recent-match-item \.result-letter\.match-outcome-icon\s*\{[^}]*background:\s*transparent;[^}]*border-radius:\s*0;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.recent-match-item \.result-letter\.match-outcome-icon\.is-win\s*\{[^}]*color:\s*#168a4b;[^}]*background:\s*transparent;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.recent-match-item \.result-letter\.match-outcome-icon\.is-loss\s*\{[^}]*color:\s*#d62961;[^}]*background:\s*transparent;[^}]*\}/
     );
     expect(css).toMatch(
       /\.form-dot\.is-empty\s*\{[^}]*color:\s*transparent;[^}]*background:\s*#e8edea;[^}]*border-radius:\s*999px;[^}]*\}/
@@ -912,7 +924,10 @@ describe("theme color contracts", () => {
       /@media\s*\(max-width:\s*560px\)[\s\S]*?\.campus-ranking-page \.ranking-row\.is-featured \.form-dot\s*\{[^}]*width:\s*18px;[^}]*height:\s*18px;[^}]*font-size:\s*9px;[^}]*\}/
     );
     expect(css).toMatch(
-      /\.dark \.match-outcome-icon\.is-win\s*\{[^}]*color:\s*#6bd99d;[^}]*background:\s*transparent;[^}]*\}[\s\S]*?\.dark \.match-outcome-icon\.is-loss\s*\{[^}]*color:\s*#ff6b8d;[^}]*background:\s*transparent;[^}]*\}/
+      /\.dark \.match-outcome-icon\.is-win\s*\{[^}]*background:\s*#258a50;[^}]*\}[\s\S]*?\.dark \.match-outcome-icon\.is-loss\s*\{[^}]*background:\s*#e53662;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.dark \.recent-match-item \.result-letter\.match-outcome-icon\.is-win\s*\{[^}]*color:\s*#6bd99d;[^}]*background:\s*transparent;[^}]*\}[\s\S]*?\.dark \.recent-match-item \.result-letter\.match-outcome-icon\.is-loss\s*\{[^}]*color:\s*#ff6b8d;[^}]*background:\s*transparent;[^}]*\}/
     );
   });
 

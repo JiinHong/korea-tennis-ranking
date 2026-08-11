@@ -386,3 +386,37 @@ describe("national ranking formula v7", () => {
     expect(score(2023)).toBe(0);
   });
 });
+
+describe("national ranking formula v8", () => {
+  it("uses integer 4:2:1 recency units without changing the v7 score scale", () => {
+    const formula = Reflect.get(nationalFormula, "NATIONAL_FORMULA_V8");
+
+    expect(formula).toMatchObject({
+      version: "national-club-v8",
+      stageUnits: NATIONAL_FORMULA_V7.stageUnits,
+      tournamentUnits: NATIONAL_FORMULA_V7.tournamentUnits,
+      recencyUnits: [4, 2, 1],
+    });
+    expect(NATIONAL_FORMULA_V7.recencyUnits).toEqual([3.5, 2.5, 1]);
+  });
+
+  it("produces integer scores for every eligible year", () => {
+    const formula = Reflect.get(nationalFormula, "NATIONAL_FORMULA_V8");
+    const score = (editionYear: number) =>
+      scoreVerifiedResult(
+        {
+          stage: "champion",
+          tournamentSlug: "yanggu",
+          actualEntrants: 64,
+          latestEditionYear: 2026,
+          editionYear,
+        },
+        formula
+      );
+
+    expect(score(2026)).toBe(660);
+    expect(score(2025)).toBe(330);
+    expect(score(2024)).toBe(165);
+    expect(score(2023)).toBe(0);
+  });
+});

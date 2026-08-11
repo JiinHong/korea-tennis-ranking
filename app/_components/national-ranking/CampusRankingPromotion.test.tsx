@@ -12,12 +12,12 @@ describe("CampusRankingPromotion", () => {
     ).toBeDefined();
     expect(
       screen
-        .getByRole("link", { name: "PETC 단식 랭킹" })
+        .getByRole("link", { name: "고려대 PETC 단식 랭킹" })
         .getAttribute("href")
     ).toBe("/petc");
     expect(
       screen
-        .getByRole("link", { name: "느티나무 단식 랭킹" })
+        .getByRole("link", { name: "서울과기대 느티나무 단식 랭킹" })
         .getAttribute("href")
     ).toBe("/seoultech");
 
@@ -30,6 +30,15 @@ describe("CampusRankingPromotion", () => {
     );
     expect(inquiry.getAttribute("target")).toBe("_blank");
     expect(inquiry.getAttribute("rel")).toBe("noopener noreferrer");
+
+    const promotion = screen
+      .getByRole("heading", { name: "단식 랭킹 운영 중!" })
+      .closest("section");
+
+    expect(promotion?.children[1]).toBe(inquiry);
+    expect(promotion?.children[2]?.classList).toContain(
+      "national-campus-ranking-links"
+    );
   });
 
   it("학교 마크는 링크 문구와 중복되지 않는 장식 이미지로 사용한다", () => {

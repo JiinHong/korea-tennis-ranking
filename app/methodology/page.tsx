@@ -3,7 +3,7 @@ import Link from "next/link";
 import { createMethodologyMetadata } from "@/lib/analytics/pageMetadata";
 import {
   getRecencyUnits,
-  NATIONAL_FORMULA_V7,
+  NATIONAL_FORMULA_V8,
 } from "@/lib/nationalRanking/formula";
 
 import MethodologyTableRegion from "./_components/MethodologyTableRegion";
@@ -93,8 +93,8 @@ export default function MethodologyPage() {
           </p>
           <p>
             대회별 점수를 합산해 동아리의 남자부 또는 여자부 총점을 구합니다.
-            모든 입력은 정수이며, 연도 가중치 적용 후 최종 점수는 0.5점 단위로
-            계산합니다. 별도의 반올림은 사용하지 않습니다.
+            모든 가중치와 진출 단계 점수가 정수이므로 최종 점수도 정수로
+            계산하며, 별도의 반올림은 사용하지 않습니다.
           </p>
         </section>
 
@@ -133,7 +133,7 @@ export default function MethodologyPage() {
                 {STAGE_ROWS.map(([label, stage]) => (
                   <tr key={stage}>
                     <th scope="row">{label}</th>
-                    <td>{NATIONAL_FORMULA_V7.stageUnits[stage]}</td>
+                    <td>{NATIONAL_FORMULA_V8.stageUnits[stage]}</td>
                   </tr>
                 ))}
               </tbody>
@@ -180,7 +180,7 @@ export default function MethodologyPage() {
           <h2 id="recency-title">연도 가중치</h2>
           <p>
             각 대회·성별의 가장 최근 개최연도를 기준으로 최신 개최연도는 연도
-            가중치 3.5, 1년 전은 2.5, 2년 전은 1로 반영합니다. 그 이전 성적은
+            가중치 4, 1년 전은 2, 2년 전은 1로 반영합니다. 그 이전 성적은
             현재 점수에서 제외합니다.
           </p>
           <MethodologyTableRegion label="대회별 연도 가중치">
@@ -197,7 +197,7 @@ export default function MethodologyPage() {
                   <tr key={label}>
                     <th scope="row">{label}</th>
                     <td>
-                      {getRecencyUnits(2026, 2026 - age, NATIONAL_FORMULA_V7)}
+                      {getRecencyUnits(2026, 2026 - age, NATIONAL_FORMULA_V8)}
                     </td>
                   </tr>
                 ))}
@@ -267,15 +267,15 @@ export default function MethodologyPage() {
           <ol className="methodology-examples">
             <li>
               <span>최신 개최연도 국토정중앙배(양구) 우승</span>
-              <code>55 × 3 × 3.5 = 577.5점</code>
+              <code>55 × 3 × 4 = 660점</code>
             </li>
             <li>
               <span>1년 전 같은 대회 우승</span>
-              <code>55 × 3 × 2.5 = 412.5점</code>
+              <code>55 × 3 × 2 = 330점</code>
             </li>
             <li>
               <span>최신 개최연도 경인지구 연맹전 준우승</span>
-              <code>34 × 2 × 3.5 = 238점</code>
+              <code>34 × 2 × 4 = 272점</code>
             </li>
           </ol>
         </section>
@@ -336,7 +336,7 @@ export default function MethodologyPage() {
             <div>
               <dt>공식 버전</dt>
               <dd>
-                <code>{NATIONAL_FORMULA_V7.version}</code>
+                <code>{NATIONAL_FORMULA_V8.version}</code>
               </dd>
             </div>
             <div>

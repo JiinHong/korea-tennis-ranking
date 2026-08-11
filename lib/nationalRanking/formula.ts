@@ -82,6 +82,10 @@ export type NationalFormulaV7 = UnitNationalFormulaBase & {
   readonly version: "national-club-v7";
 };
 
+export type NationalFormulaV8 = UnitNationalFormulaBase & {
+  readonly version: "national-club-v8";
+};
+
 export type NationalFormula =
   | NationalFormulaV1
   | NationalFormulaV2
@@ -89,7 +93,8 @@ export type NationalFormula =
   | NationalFormulaV4
   | NationalFormulaV5
   | NationalFormulaV6
-  | NationalFormulaV7;
+  | NationalFormulaV7
+  | NationalFormulaV8;
 
 type LegacyNationalFormula = NationalFormulaV1 | NationalFormulaV2;
 export type FieldSizeNationalFormula = NationalFormulaV3 | NationalFormulaV4;
@@ -97,7 +102,8 @@ export type UnitNationalFormula =
   | FieldSizeNationalFormula
   | NationalFormulaV5
   | NationalFormulaV6
-  | NationalFormulaV7;
+  | NationalFormulaV7
+  | NationalFormulaV8;
 
 export const NATIONAL_FORMULA_V1: NationalFormulaV1 = Object.freeze({
   version: "national-club-v1",
@@ -209,6 +215,13 @@ export const NATIONAL_FORMULA_V7: NationalFormulaV7 = Object.freeze({
   recencyUnits: Object.freeze([3.5, 2.5, 1] as const),
 });
 
+export const NATIONAL_FORMULA_V8: NationalFormulaV8 = Object.freeze({
+  version: "national-club-v8",
+  stageUnits: NATIONAL_FORMULA_V7.stageUnits,
+  tournamentUnits: NATIONAL_FORMULA_V7.tournamentUnits,
+  recencyUnits: Object.freeze([4, 2, 1] as const),
+});
+
 export function isUnitNationalFormula(
   formula: NationalFormula
 ): formula is UnitNationalFormula {
@@ -217,7 +230,8 @@ export function isUnitNationalFormula(
     formula.version === "national-club-v4" ||
     formula.version === "national-club-v5" ||
     formula.version === "national-club-v6" ||
-    formula.version === "national-club-v7"
+    formula.version === "national-club-v7" ||
+    formula.version === "national-club-v8"
   );
 }
 
@@ -232,7 +246,7 @@ export function usesFieldSizeUnits(
 
 export function getStagePoints(
   stage: TournamentStage,
-  formula: NationalFormula = NATIONAL_FORMULA_V7
+  formula: NationalFormula = NATIONAL_FORMULA_V8
 ): number {
   return isUnitNationalFormula(formula)
     ? formula.stageUnits[stage]
@@ -313,7 +327,7 @@ export function getFieldSizeUnits(
 export function getRecencyUnits(
   latestEditionYear: number,
   editionYear: number,
-  formula: UnitNationalFormula = NATIONAL_FORMULA_V7
+  formula: UnitNationalFormula = NATIONAL_FORMULA_V8
 ): number {
   const age = latestEditionYear - editionYear;
 
@@ -329,7 +343,7 @@ export function getRecencyUnits(
 
 export function getTournamentUnits(
   tournamentSlug: string,
-  formula: UnitNationalFormula = NATIONAL_FORMULA_V7
+  formula: UnitNationalFormula = NATIONAL_FORMULA_V8
 ): number {
   const units = formula.tournamentUnits[tournamentSlug];
 
@@ -340,6 +354,10 @@ export function getTournamentUnits(
   return units;
 }
 
+export function scoreVerifiedResult(
+  input: FormulaV3Input,
+  formula?: NationalFormulaV8
+): number;
 export function scoreVerifiedResult(
   input: FormulaV3Input,
   formula?: NationalFormulaV7
@@ -375,7 +393,7 @@ export function scoreVerifiedResult(
 ): number;
 export function scoreVerifiedResult(
   input: FormulaInput,
-  formula: NationalFormula = NATIONAL_FORMULA_V7
+  formula: NationalFormula = NATIONAL_FORMULA_V8
 ): number {
   if (isUnitNationalFormula(formula)) {
     if (!("tournamentSlug" in input)) {

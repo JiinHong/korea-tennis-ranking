@@ -1248,24 +1248,22 @@ button:disabled {
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  background: transparent;
-  border-radius: 0;
+  color: #fff;
+  border-radius: 999px;
 }
 
 .match-outcome-icon svg {
-  width: 84%;
-  height: 84%;
+  width: 60%;
+  height: 60%;
   stroke-width: 3;
 }
 
 .match-outcome-icon.is-win {
-  color: #168a4b;
-  background: transparent;
+  background: #187b42;
 }
 
 .match-outcome-icon.is-loss {
-  color: #d62961;
-  background: transparent;
+  background: #d91e4d;
 }
 
 .form-dot {
@@ -1274,8 +1272,8 @@ button:disabled {
   justify-content: center;
   width: 24px;
   height: 24px;
-  color: inherit;
-  border-radius: 0;
+  color: white;
+  border-radius: 999px;
   font-size: 10px;
   font-weight: 850;
 }
@@ -2935,6 +2933,23 @@ button:disabled {
   justify-self: center;
   width: 26px;
   height: 26px;
+  background: transparent;
+  border-radius: 0;
+}
+
+.recent-match-item .result-letter.match-outcome-icon svg {
+  width: 84%;
+  height: 84%;
+}
+
+.recent-match-item .result-letter.match-outcome-icon.is-win {
+  color: #168a4b;
+  background: transparent;
+}
+
+.recent-match-item .result-letter.match-outcome-icon.is-loss {
+  color: #d62961;
+  background: transparent;
 }
 
 .match-score {
@@ -3207,7 +3222,7 @@ button:disabled {
 }
 
 .national-campus-ranking-promo h2 {
-  margin: 0 0 13px;
+  margin: 0 0 6px;
   color: var(--national-ink);
   font-size: 16px;
   font-weight: 850;
@@ -3267,9 +3282,9 @@ button:disabled {
 
 .national-campus-ranking-inquiry {
   display: inline-flex;
-  margin-top: 14px;
+  margin: 0 0 14px;
   color: var(--national-muted);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 750;
   text-decoration: none;
 }
@@ -3592,7 +3607,7 @@ button:disabled {
 .national-ranking-row-chevron svg {
   display: block;
   width: 10px;
-  height: 14px;
+  height: 10px;
   overflow: visible;
 }
 
@@ -6494,11 +6509,19 @@ button:disabled {
 }
 
 .dark .match-outcome-icon.is-win {
+  background: #258a50;
+}
+
+.dark .match-outcome-icon.is-loss {
+  background: #e53662;
+}
+
+.dark .recent-match-item .result-letter.match-outcome-icon.is-win {
   color: #6bd99d;
   background: transparent;
 }
 
-.dark .match-outcome-icon.is-loss {
+.dark .recent-match-item .result-letter.match-outcome-icon.is-loss {
   color: #ff6b8d;
   background: transparent;
 }

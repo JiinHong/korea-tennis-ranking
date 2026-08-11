@@ -4,7 +4,7 @@ import Link from "next/link";
 const activeCampusRankings = [
   {
     href: "/petc",
-    label: "PETC 단식 랭킹",
+    label: "고려대 PETC 단식 랭킹",
     logoClassName: "is-petc",
     logoHeight: 451,
     logoSrc: "/petc-logo.png",
@@ -12,7 +12,7 @@ const activeCampusRankings = [
   },
   {
     href: "/seoultech",
-    label: "느티나무 단식 랭킹",
+    label: "서울과기대 느티나무 단식 랭킹",
     logoClassName: "is-seoultech",
     logoHeight: 395,
     logoSrc: "/seoultech-symbol.png",
@@ -27,6 +27,15 @@ export default function CampusRankingPromotion() {
       className="national-campus-ranking-promo"
     >
       <h2 id="campus-ranking-promotion-title">단식 랭킹 운영 중!</h2>
+
+      <a
+        className="national-campus-ranking-inquiry"
+        href="https://open.kakao.com/o/sFSnlgIi"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        우리 동아리도 운영해보기 →
+      </a>
 
       <div className="national-campus-ranking-links">
         {activeCampusRankings.map((ranking) => (
@@ -50,15 +59,6 @@ export default function CampusRankingPromotion() {
           </Link>
         ))}
       </div>
-
-      <a
-        className="national-campus-ranking-inquiry"
-        href="https://open.kakao.com/o/sFSnlgIi"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        우리 동아리도 운영해보기 →
-      </a>
     </section>
   );
 }

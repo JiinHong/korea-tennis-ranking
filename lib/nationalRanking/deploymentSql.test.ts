@@ -10,7 +10,7 @@ describe("buildIncrementalNationalRankingDeploymentSql", () => {
   it("keeps the current snapshot live until the final publish step", () => {
     const dataset = loadNationalRankingDataset();
     const sourceRevision = createHash("sha256")
-      .update("national-ranking-snapshot-v7")
+      .update("national-ranking-snapshot-v8")
       .update("\0")
       .update(JSON.stringify(dataset))
       .digest("hex");
@@ -39,7 +39,7 @@ describe("buildIncrementalNationalRankingDeploymentSql", () => {
 
     const formulaSql = stages.find((stage) => stage.name === "02-formula.sql")!
       .sql;
-    expect(formulaSql).toContain("'national-club-v7'");
+    expect(formulaSql).toContain("'national-club-v8'");
     expect(formulaSql).toContain("false");
     expect(formulaSql).not.toContain("set is_active = true");
 

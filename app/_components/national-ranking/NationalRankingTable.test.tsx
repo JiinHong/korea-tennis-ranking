@@ -517,8 +517,11 @@ describe("NationalRankingTable", () => {
       ".national-ranking-row-chevron"
     );
     expect(chevron?.querySelector("svg")).not.toBeNull();
+    expect(chevron?.querySelector("svg")?.getAttribute("viewBox")).toBe(
+      "0 0 12 12"
+    );
     expect(chevron?.querySelector("path")?.getAttribute("d")).toBe(
-      "M1 1.5 9 7 1 12.5"
+      "M2 1 7 6 2 11"
     );
     expect(chevron?.textContent?.trim()).toBe("");
 

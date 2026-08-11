@@ -229,8 +229,8 @@ export default function NationalRankingTable({
                           aria-hidden="true"
                           className="national-ranking-row-chevron"
                         >
-                          <svg focusable="false" viewBox="0 0 10 14">
-                            <path d="M1 1.5 9 7 1 12.5" />
+                          <svg focusable="false" viewBox="0 0 12 12">
+                            <path d="M2 1 7 6 2 11" />
                           </svg>
                         </span>
                       </td>
