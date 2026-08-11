@@ -418,6 +418,88 @@ describe("ClubRankingClient", () => {
     expect(within(idleRow).getByText("경기 기록 없음")).toBeDefined();
   });
 
+  it("현재 시즌 결과를 유지하고 빈칸만 시즌 툴팁이 있는 과거 결과로 채운다", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          summary: { totalMatches: 2, recent30Matches: 2 },
+          seasonSummaries: [
+            { name: "시즌3", matches: 2, isCurrent: true },
+            { name: "시즌2", matches: 154, isCurrent: false },
+            { name: "시즌1", matches: 30, isCurrent: false },
+          ],
+          players: [
+            {
+              rank: 1,
+              name: "오준석",
+              note: "",
+              wins: 1,
+              losses: 1,
+              matches: 2,
+              recent5: ["L", "W"],
+              recentForm: [
+                { result: "W", season: "시즌2", isHistorical: true },
+                { result: "L", season: "시즌3", isHistorical: false },
+                { result: "W", season: "시즌3", isHistorical: false },
+              ],
+            },
+            {
+              rank: 2,
+              name: "신규선수",
+              note: "",
+              wins: 1,
+              losses: 0,
+              matches: 1,
+              recent5: ["W"],
+              recentForm: [
+                { result: "W", season: "시즌3", isHistorical: false },
+              ],
+            },
+          ],
+          matches: [],
+          detailsByPlayer: {},
+        }),
+      })
+    );
+
+    render(<ClubRankingClient club={club} />);
+
+    expect(await screen.findByText("시즌3 경기")).toBeDefined();
+    expect(screen.getByText("시즌2 154경기 · 시즌1 30경기")).toBeDefined();
+
+    const playedRow = screen.getByRole("link", {
+      name: "오준석 상세 전적 보기",
+    });
+    const noHistoryRow = screen.getByRole("link", {
+      name: "신규선수 상세 전적 보기",
+    });
+
+    expect(playedRow.querySelectorAll(".form-dot.is-empty")).toHaveLength(2);
+    expect(noHistoryRow.querySelectorAll(".form-dot.is-empty")).toHaveLength(
+      4
+    );
+    expect(
+      within(playedRow).getByLabelText("시즌2 · 승리")
+    ).toBeDefined();
+    expect(within(playedRow).getByRole("tooltip").textContent).toBe(
+      "시즌2 · 승리"
+    );
+    expect(noHistoryRow.querySelector(".historical-form-result")).toBeNull();
+
+    for (const row of [playedRow, noHistoryRow]) {
+      const chevron = row.querySelector(".campus-ranking-row-chevron");
+      expect(chevron?.querySelector("svg")?.getAttribute("viewBox")).toBe(
+        "0 0 24 24"
+      );
+      expect(chevron?.querySelector("path")?.getAttribute("d")).toBe(
+        "m9 18 6-6-6-6"
+      );
+    }
+  });
+
   it("캠퍼스 피드형 랭킹 화면 언어를 보여준다", async () => {
     vi.stubGlobal(
       "fetch",

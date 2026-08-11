@@ -5,7 +5,9 @@ import CampusRankingPromotion from "./CampusRankingPromotion";
 
 describe("CampusRankingPromotion", () => {
   it("운영 중인 두 단식 랭킹과 도입 문의 링크를 보여준다", () => {
-    render(<CampusRankingPromotion />);
+    render(
+      <CampusRankingPromotion matchCounts={{ petc: 11, seoultech: 214 }} />
+    );
 
     expect(
       screen.getByRole("heading", { name: "단식 랭킹 운영 중!" })
@@ -20,6 +22,20 @@ describe("CampusRankingPromotion", () => {
         .getByRole("link", { name: "서울과기대 느티나무 단식 랭킹" })
         .getAttribute("href")
     ).toBe("/seoultech");
+    expect(screen.getByText("누적 11경기")).toBeDefined();
+    expect(screen.getByText("누적 214경기")).toBeDefined();
+
+    for (const linkName of [
+      "고려대 PETC 단식 랭킹",
+      "서울과기대 느티나무 단식 랭킹",
+    ]) {
+      const link = screen.getByRole("link", { name: linkName });
+      const chevron = link.querySelector(".national-campus-ranking-arrow svg");
+
+      expect(chevron?.querySelector("path")?.getAttribute("d")).toBe(
+        "m9 18 6-6-6-6"
+      );
+    }
 
     const inquiry = screen.getByRole("link", {
       name: "우리 동아리도 운영해보기 →",
@@ -42,7 +58,7 @@ describe("CampusRankingPromotion", () => {
   });
 
   it("학교 마크는 링크 문구와 중복되지 않는 장식 이미지로 사용한다", () => {
-    const { container } = render(<CampusRankingPromotion />);
+    const { container } = render(<CampusRankingPromotion matchCounts={{}} />);
 
     const images = container.querySelectorAll("img");
 

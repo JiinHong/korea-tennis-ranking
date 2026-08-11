@@ -49,6 +49,11 @@ describe("GET /api/clubs/[club]/ranking", () => {
         totalMatches: 0,
         recent30Matches: 0,
       },
+      seasonSummaries: [
+        { name: "시즌3", matches: 0, isCurrent: true },
+        { name: "시즌2", matches: 154, isCurrent: false },
+        { name: "시즌1", matches: 30, isCurrent: false },
+      ],
       detailsByPlayer: {
         오준석: {
           name: "오준석",
@@ -133,6 +138,11 @@ describe("GET /api/clubs/[club]/ranking", () => {
         totalMatches: 0,
         recent30Matches: 0,
       },
+      seasonSummaries: [
+        { name: "시즌3", matches: 0, isCurrent: true },
+        { name: "시즌2", matches: 154, isCurrent: false },
+        { name: "시즌1", matches: 30, isCurrent: false },
+      ],
       matches: [
         {
           date: "2026. 7. 2",

@@ -1,7 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
+import { ChevronRight } from "lucide-react";
+import {
+  Suspense,
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useState,
+} from "react";
 
 import { trackAmplitudeEvent } from "@/lib/analytics/amplitude";
 import { buildRecent30Highlights } from "@/lib/campusRanking/highlights";
@@ -27,6 +35,19 @@ type Player = {
   losses: number;
   matches: number;
   recent5: string[];
+  recentForm?: RecentFormResult[];
+};
+
+type RecentFormResult = {
+  result: "W" | "L";
+  season: string;
+  isHistorical: boolean;
+};
+
+type SeasonSummary = {
+  name: string;
+  matches: number;
+  isCurrent: boolean;
 };
 
 type RankingSummary = {
@@ -62,6 +83,7 @@ type RankingApiResponse =
       players: Player[];
       matches?: MatchRecord[];
       summary?: RankingSummary;
+      seasonSummaries?: SeasonSummary[];
       detailsByPlayer: unknown;
     }
   | {
@@ -150,8 +172,43 @@ function formatPlayerActivity(
   return "최근 경기일 확인 중";
 }
 
-function RecentForm({ recent5 }: { recent5: string[] }) {
-  const form = recent5.slice(-5);
+function HistoricalFormResult({ entry }: { entry: RecentFormResult }) {
+  const tooltipId = useId();
+  const resultLabel = entry.result === "W" ? "승리" : "패배";
+  const label = `${entry.season} · ${resultLabel}`;
+
+  return (
+    <span
+      aria-describedby={tooltipId}
+      aria-label={label}
+      className="historical-form-result"
+      role="img"
+      tabIndex={0}
+    >
+      <span aria-hidden="true" className="historical-form-icon">
+        <MatchOutcomeIcon className="form-dot" result={entry.result} />
+      </span>
+      <span className="historical-form-tooltip" id={tooltipId} role="tooltip">
+        {label}
+      </span>
+    </span>
+  );
+}
+
+function RecentForm({
+  recent5,
+  recentForm,
+}: {
+  recent5: string[];
+  recentForm?: RecentFormResult[];
+}) {
+  const form =
+    recentForm?.slice(-5) ??
+    recent5.slice(-5).map((result) => ({
+      result: result === "W" ? ("W" as const) : ("L" as const),
+      season: "",
+      isHistorical: false,
+    }));
   const blanks = Array.from({ length: Math.max(0, 5 - form.length) });
 
   return (
@@ -159,13 +216,23 @@ function RecentForm({ recent5 }: { recent5: string[] }) {
       {blanks.map((_, index) => (
         <span key={`blank-${index}`} className="form-dot is-empty" />
       ))}
-      {form.map((result, index) => (
-        <MatchOutcomeIcon
-          className="form-dot"
-          key={`${result}-${index}`}
-          result={result === "W" ? "W" : "L"}
-        />
-      ))}
+      {form.map((entry, index) =>
+        entry.isHistorical ? (
+          <HistoricalFormResult
+            entry={entry}
+            key={`${entry.season}-${entry.result}-${index}`}
+          />
+        ) : (
+          <MatchOutcomeIcon
+            className="form-dot"
+            key={`${entry.result}-${index}`}
+            result={entry.result}
+          />
+        )
+      )}
+      <span aria-hidden="true" className="campus-ranking-row-chevron">
+        <ChevronRight />
+      </span>
     </div>
   );
 }
@@ -241,7 +308,7 @@ function RankingRow({
         <strong>{formatRecord(player)}</strong>
         <span>{player.matches}경기</span>
       </div>
-      <RecentForm recent5={player.recent5} />
+      <RecentForm recent5={player.recent5} recentForm={player.recentForm} />
     </Link>
   );
 }
@@ -250,6 +317,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
   const [players, setPlayers] = useState<Player[]>([]);
   const [matches, setMatches] = useState<MatchRecord[]>([]);
   const [summary, setSummary] = useState<RankingSummary | null>(null);
+  const [seasonSummaries, setSeasonSummaries] = useState<SeasonSummary[]>([]);
   const [status, setStatus] = useState<LoadStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [loadedAt, setLoadedAt] = useState<Date | null>(null);
@@ -276,6 +344,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
       setPlayers(data.players);
       setMatches(data.matches ?? []);
       setSummary(data.summary ?? null);
+      setSeasonSummaries(data.seasonSummaries ?? []);
       setLoadedAt(new Date());
       setStatus("success");
     } catch (error) {
@@ -318,6 +387,14 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
 
   const displayTotalMatches = summary?.totalMatches ?? totalMatches;
   const recent30Matches = summary?.recent30Matches ?? totalMatches;
+  const currentSeason = seasonSummaries.find((season) => season.isCurrent);
+  const historicalSeasons = seasonSummaries.filter(
+    (season) => !season.isCurrent
+  );
+  const currentMatchesLabel =
+    currentSeason && currentSeason.name !== "현재"
+      ? `${currentSeason.name} 경기`
+      : "경기";
   const isInitialLoading =
     players.length === 0 && (status === "idle" || status === "loading");
 
@@ -374,19 +451,30 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                   </Link>
                 </div>
                 <div className="hero-meta-row">
-                  <div className="hero-stats" aria-label="랭킹 요약">
-                    <div>
-                      <strong>{players.length}</strong>
-                      <span>선수</span>
+                  <div className="hero-stats-group">
+                    <div className="hero-stats" aria-label="랭킹 요약">
+                      <div>
+                        <strong>{players.length}</strong>
+                        <span>선수</span>
+                      </div>
+                      <div>
+                        <strong>{displayTotalMatches}</strong>
+                        <span>{currentMatchesLabel}</span>
+                      </div>
+                      <div>
+                        <strong>{recent30Matches}</strong>
+                        <span>최근 30일</span>
+                      </div>
                     </div>
-                    <div>
-                      <strong>{displayTotalMatches}</strong>
-                      <span>경기</span>
-                    </div>
-                    <div>
-                      <strong>{recent30Matches}</strong>
-                      <span>최근 30일</span>
-                    </div>
+                    {historicalSeasons.length > 0 ? (
+                      <p className="campus-season-history">
+                        {historicalSeasons
+                          .map(
+                            (season) => `${season.name} ${season.matches}경기`
+                          )
+                          .join(" · ")}
+                      </p>
+                    ) : null}
                   </div>
 
                   <div className="hero-live-actions">

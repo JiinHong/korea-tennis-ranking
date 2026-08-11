@@ -40,6 +40,7 @@ export async function GET(_request: Request, context: RankingRouteContext) {
       players: data.players,
       matches: data.matches,
       summary: data.summary,
+      seasonSummaries: data.seasonSummaries,
       detailsByPlayer: data.detailsByPlayer,
     });
   } catch (error) {

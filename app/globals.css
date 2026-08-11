@@ -1713,6 +1713,19 @@ button:disabled {
   margin: 0;
 }
 
+.campus-ranking-page .hero-stats-group {
+  display: grid;
+  gap: 7px;
+}
+
+.campus-season-history {
+  margin: 0;
+  color: var(--campus-muted);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+}
+
 .campus-ranking-page .hero-stats div {
   min-width: 0;
   padding: 0;
@@ -2624,6 +2637,84 @@ button:disabled {
   min-width: 170px;
 }
 
+.historical-form-result {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.4;
+  outline: none;
+}
+
+.historical-form-icon {
+  display: inline-flex;
+}
+
+.historical-form-tooltip {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 7px);
+  z-index: 5;
+  width: max-content;
+  padding: 5px 7px;
+  color: #fff;
+  background: #27323b;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.2;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(3px);
+  transition: opacity 120ms ease, transform 120ms ease,
+    visibility 120ms ease;
+}
+
+.historical-form-result:focus-visible {
+  opacity: 1;
+}
+
+.historical-form-result:focus-visible .historical-form-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .historical-form-result:hover {
+    opacity: 1;
+  }
+
+  .historical-form-result:hover .historical-form-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+.historical-form-result:focus-visible {
+  border-radius: 999px;
+  outline: 2px solid var(--campus-green);
+  outline-offset: 2px;
+}
+
+.campus-ranking-row-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  margin-left: 4px;
+  color: var(--campus-green);
+}
+
+.campus-ranking-row-chevron svg {
+  width: 10px;
+  height: 10px;
+  stroke-width: 2.4;
+}
+
 .campus-ranking-page .ranking-row.is-featured .player-name-line strong {
   font-size: 16px;
 }
@@ -3201,6 +3292,26 @@ button:disabled {
     background 160ms ease;
 }
 
+.national-campus-ranking-label {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.national-campus-ranking-label strong {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1.25;
+}
+
+.national-campus-ranking-label small {
+  color: var(--national-muted);
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.2;
+}
+
 .national-campus-ranking-logo {
   display: block;
   justify-self: start;
@@ -3221,10 +3332,17 @@ button:disabled {
 }
 
 .national-campus-ranking-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--national-muted);
-  font-size: 16px;
-  line-height: 1;
   transition: transform 160ms ease;
+}
+
+.national-campus-ranking-arrow svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2.25;
 }
 
 .national-campus-ranking-inquiry {

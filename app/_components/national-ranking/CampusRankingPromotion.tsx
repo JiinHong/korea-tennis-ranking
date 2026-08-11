@@ -1,9 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
+
+import type { CampusRankingPromotionStats } from "@/lib/campusRanking/promotionStats";
 
 const activeCampusRankings = [
   {
     href: "/petc",
+    slug: "petc",
     label: "고려대 PETC 단식 랭킹",
     logoClassName: "is-petc",
     logoHeight: 451,
@@ -12,6 +16,7 @@ const activeCampusRankings = [
   },
   {
     href: "/seoultech",
+    slug: "seoultech",
     label: "서울과기대 느티나무 단식 랭킹",
     logoClassName: "is-seoultech",
     logoHeight: 395,
@@ -20,7 +25,11 @@ const activeCampusRankings = [
   },
 ] as const;
 
-export default function CampusRankingPromotion() {
+export default function CampusRankingPromotion({
+  matchCounts,
+}: {
+  matchCounts: CampusRankingPromotionStats;
+}) {
   return (
     <section
       aria-labelledby="campus-ranking-promotion-title"
@@ -40,6 +49,7 @@ export default function CampusRankingPromotion() {
       <div className="national-campus-ranking-links">
         {activeCampusRankings.map((ranking) => (
           <Link
+            aria-label={ranking.label}
             className="national-campus-ranking-link"
             href={ranking.href}
             key={ranking.href}
@@ -52,9 +62,16 @@ export default function CampusRankingPromotion() {
               src={ranking.logoSrc}
               width={ranking.logoWidth}
             />
-            <span>{ranking.label}</span>
+            <span className="national-campus-ranking-label">
+              <strong>{ranking.label}</strong>
+              {matchCounts[ranking.slug] !== undefined ? (
+                <small aria-hidden="true">
+                  누적 {matchCounts[ranking.slug]?.toLocaleString("ko-KR")}경기
+                </small>
+              ) : null}
+            </span>
             <span aria-hidden="true" className="national-campus-ranking-arrow">
-              →
+              <ChevronRight />
             </span>
           </Link>
         ))}

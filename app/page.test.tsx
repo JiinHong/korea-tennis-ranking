@@ -2,11 +2,16 @@ import { render, screen, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { getCachedNationalRankingPageData } from "@/lib/nationalRanking/repository";
+import { getCachedCampusRankingPromotionStats } from "@/lib/campusRanking/promotionStats";
 
 import Home from "./page";
 
 vi.mock("@/lib/nationalRanking/repository", () => ({
   getCachedNationalRankingPageData: vi.fn(),
+}));
+
+vi.mock("@/lib/campusRanking/promotionStats", () => ({
+  getCachedCampusRankingPromotionStats: vi.fn(),
 }));
 
 vi.mock("next/navigation", () => ({
@@ -41,6 +46,11 @@ const rankingPageData = {
 describe("Home", () => {
   beforeEach(() => {
     vi.mocked(getCachedNationalRankingPageData).mockReset();
+    vi.mocked(getCachedCampusRankingPromotionStats).mockReset();
+    vi.mocked(getCachedCampusRankingPromotionStats).mockResolvedValue({
+      petc: 11,
+      seoultech: 214,
+    });
   });
 
   it("게시된 전국 랭킹과 최근 1년 왕관 안내를 보여준다", async () => {
@@ -121,6 +131,8 @@ describe("Home", () => {
         .getByRole("link", { name: "서울과기대 느티나무 단식 랭킹" })
         .getAttribute("href")
     ).toBe("/seoultech");
+    expect(screen.getByText("누적 11경기")).toBeDefined();
+    expect(screen.getByText("누적 214경기")).toBeDefined();
     expect(
       screen
         .getByRole("link", { name: "우리 동아리도 운영해보기 →" })

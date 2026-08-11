@@ -57,11 +57,11 @@ Expected: 모든 테스트 통과.
 
 **Interfaces:**
 - Consumes: Task 1의 `seasonSummaries`와 `recentForm`
-- Produces: 현재 시즌 경기 레이블, 과거 시즌 요약 줄, 과거 결과 전용 `.is-historical` 스타일과 시즌 툴팁
+- Produces: 현재 시즌 경기 레이블, 과거 시즌 요약 줄, 과거 결과 전용 `.is-historical` 스타일과 시즌 툴팁, 선수 행 오른쪽 꺾쇠
 
 - [ ] **Step 1: Write the failing component and style tests**
 
-`시즌3 경기`, `시즌2 154경기 · 시즌1 30경기`, 현재·과거 결과 아이콘 수, 과거 아이콘 클래스, 과거 기록이 없을 때 빈 원 유지 여부를 검증한다. 과거 아이콘의 버튼 접근성 이름과 `role="tooltip"` 문구도 검증한다.
+`시즌3 경기`, `시즌2 154경기 · 시즌1 30경기`, 현재·과거 결과 아이콘 수, 과거 아이콘 클래스, 과거 기록이 없을 때 빈 원 유지 여부를 검증한다. 과거 아이콘의 버튼 접근성 이름과 `role="tooltip"` 문구, 선수 행 오른쪽 `ChevronRight` SVG도 검증한다.
 
 - [ ] **Step 2: Run tests to verify RED**
 
@@ -71,7 +71,7 @@ Expected: 시즌 문구와 과거 결과 클래스가 없어 실패한다.
 
 - [ ] **Step 3: Implement the UI**
 
-API 응답의 시즌 데이터를 상태로 저장하고, 현재 경기 수 레이블에 시즌명을 붙인다. 과거 시즌 요약은 과거 시즌이 있을 때만 렌더링한다. `RecentForm`은 `recentForm`을 우선 사용하고 기존 응답에는 현재 시즌 `recent5`를 대체값으로 사용한다. 과거 결과는 포커스 가능한 버튼으로 감싸고 왕관과 같은 호버·포커스·터치 툴팁 동작을 제공한다.
+API 응답의 시즌 데이터를 상태로 저장하고, 현재 경기 수 레이블에 시즌명을 붙인다. 과거 시즌 요약은 과거 시즌이 있을 때만 렌더링한다. `RecentForm`은 `recentForm`을 우선 사용하고 기존 응답에는 현재 시즌 `recent5`를 대체값으로 사용한다. 과거 결과는 포커스 가능한 버튼으로 감싸고 왕관과 같은 호버·포커스·터치 툴팁 동작을 제공한다. 선수 행에는 작은 `ChevronRight`를 마지막 열에 배치한다.
 
 - [ ] **Step 4: Run tests to verify GREEN**
 

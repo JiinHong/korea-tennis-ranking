@@ -449,6 +449,21 @@ describe("campus ranking responsive title styles", () => {
     );
   });
 
+  it("과거 시즌 결과와 선수 상세 꺾쇠를 현재 랭킹보다 조용하게 표시한다", () => {
+    expect(css).toMatch(
+      /\.historical-form-result\s*\{[^}]*position:\s*relative;[^}]*opacity:\s*0\.4;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.historical-form-result:focus-visible \.historical-form-tooltip\s*\{[^}]*opacity:\s*1;[^}]*visibility:\s*visible;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /@media \(hover: hover\) and \(pointer: fine\)\s*\{[\s\S]*?\.historical-form-result:hover \.historical-form-tooltip\s*\{[^}]*opacity:\s*1;[^}]*visibility:\s*visible;[^}]*\}/
+    );
+    expect(css).toMatch(
+      /\.campus-ranking-row-chevron svg\s*\{[^}]*width:\s*10px;[^}]*height:\s*10px;[^}]*\}/
+    );
+  });
+
   it("PC에서는 클럽 제목 줄을 한 줄로 이어 붙이고 모바일에서만 줄바꿈한다", () => {
     expect(css).toContain(".club-title-line {\n  display: inline;\n}");
     expect(css).toContain(

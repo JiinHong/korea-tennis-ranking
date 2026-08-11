@@ -26,11 +26,24 @@ export type Player = {
     losses: number;
     matches: number;
     recent5: string[];
+    recentForm?: RecentFormResult[];
 }
 
 export type RankingSummary = {
     totalMatches: number;
     recent30Matches: number;
+}
+
+export type RecentFormResult = {
+    result: "W" | "L";
+    season: string;
+    isHistorical: boolean;
+}
+
+export type SeasonSummary = {
+    name: string;
+    matches: number;
+    isCurrent: boolean;
 }
 
 function parseMatchDate(date: string): Date | null {
@@ -42,6 +55,90 @@ function parseMatchDate(date: string): Date | null {
     }
 
     return new Date(year, month - 1, day);
+}
+
+function getMatchResult(
+    playerName: string,
+    match: MatchRecord
+): "W" | "L" | null {
+    if (match.challenger !== playerName && match.defender !== playerName) {
+        return null;
+    }
+
+    return match.winner === playerName ? "W" : "L";
+}
+
+function buildRecentForm(
+    player: Player,
+    historicalMatches: Awaited<ReturnType<typeof getHistoricalMatchLogTable>>,
+    currentSeasonName: string
+): RecentFormResult[] {
+    const currentForm = player.recent5.slice(-5).map((result) => ({
+        result: result === "W" ? "W" as const : "L" as const,
+        season: currentSeasonName,
+        isHistorical: false,
+    }));
+    const historicalLimit = Math.max(0, 5 - currentForm.length);
+
+    const historicalForm = historicalMatches
+        .map((match) => ({ match, result: getMatchResult(player.name, match) }))
+        .filter(
+            (entry): entry is {
+                match: (typeof historicalMatches)[number];
+                result: "W" | "L";
+            } => entry.result !== null
+        )
+        .sort((a, b) => {
+            const aTime = parseMatchDate(a.match.date)?.getTime() ?? 0;
+            const bTime = parseMatchDate(b.match.date)?.getTime() ?? 0;
+
+            return bTime - aTime;
+        })
+        .slice(0, historicalLimit)
+        .reverse()
+        .map(({ match, result }) => ({
+            result,
+            season: match.season,
+            isHistorical: true,
+        }));
+
+    return [...historicalForm, ...currentForm];
+}
+
+function seasonSortValue(seasonName: string): number {
+    const seasonNumber = seasonName.match(/\d+/)?.[0];
+
+    return seasonNumber ? Number(seasonNumber) : Number.NEGATIVE_INFINITY;
+}
+
+function buildSeasonSummaries(
+    currentSeasonName: string,
+    matches: MatchRecord[],
+    historicalMatches: Awaited<ReturnType<typeof getHistoricalMatchLogTable>>
+): SeasonSummary[] {
+    const historicalCounts = new Map<string, number>();
+
+    for (const match of historicalMatches) {
+        historicalCounts.set(
+            match.season,
+            (historicalCounts.get(match.season) ?? 0) + 1
+        );
+    }
+
+    const historicalSummaries = Array.from(historicalCounts.entries())
+        .sort(([a], [b]) => {
+            return seasonSortValue(b) - seasonSortValue(a) || b.localeCompare(a);
+        })
+        .map(([name, matchCount]) => ({
+            name,
+            matches: matchCount,
+            isCurrent: false,
+        }));
+
+    return [
+        { name: currentSeasonName, matches: matches.length, isCurrent: true },
+        ...historicalSummaries,
+    ];
 }
 
 export function buildRankingSummary(
@@ -150,7 +247,20 @@ export async function getRankingDataForClub(club: ClubConfig) {
     const {currentSeasonName, ranking, matches, historicalMatches, rankChanges} =
         await getRankingSourceTables(club);
     const players = buildPlayer(ranking, matches, rankChanges);
+    const playersWithRecentForm = players.map((player) => ({
+        ...player,
+        recentForm: buildRecentForm(
+            player,
+            historicalMatches,
+            currentSeasonName
+        ),
+    }));
     const summary = buildRankingSummary(matches);
+    const seasonSummaries = buildSeasonSummaries(
+        currentSeasonName,
+        matches,
+        historicalMatches
+    );
     const detailsByPlayer = buildPlayerDetails(
         players,
         matches,
@@ -160,9 +270,10 @@ export async function getRankingDataForClub(club: ClubConfig) {
 
     return {
         club,
-        players,
+        players: playersWithRecentForm,
         matches,
         summary,
+        seasonSummaries,
         detailsByPlayer,
     };
 }

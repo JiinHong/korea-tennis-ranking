@@ -106,6 +106,11 @@ describe("getRankingDataForClub", () => {
         losses: 1,
         matches: 2,
         recent5: ["L", "W"],
+        recentForm: [
+          { result: "W", season: "시즌1", isHistorical: true },
+          { result: "L", season: "시즌3", isHistorical: false },
+          { result: "W", season: "시즌3", isHistorical: false },
+        ],
       },
       {
         rank: 2,
@@ -116,6 +121,11 @@ describe("getRankingDataForClub", () => {
         losses: 1,
         matches: 2,
         recent5: ["W", "L"],
+        recentForm: [
+          { result: "L", season: "시즌1", isHistorical: true },
+          { result: "W", season: "시즌3", isHistorical: false },
+          { result: "L", season: "시즌3", isHistorical: false },
+        ],
       },
     ]);
     expect(data.summary).toEqual({
@@ -185,6 +195,112 @@ describe("getRankingDataForClub", () => {
       totalMatches: 1,
       recent30Matches: 1,
     });
+    expect(data.seasonSummaries).toEqual([
+      { name: "현재", matches: 1, isCurrent: true },
+    ]);
+    expect(data.players[0]?.recentForm).toEqual([
+      { result: "W", season: "현재", isHistorical: false },
+    ]);
+  });
+
+  it("최근 5경기의 빈칸만 과거 시즌의 최신 결과로 채운다", async () => {
+    const club = getClubConfig("seoultech");
+
+    vi.mocked(getRankingTable).mockResolvedValue([
+      { rank: 1, name: "오준석", note: "" },
+      { rank: 2, name: "김도훈", note: "" },
+    ]);
+    vi.mocked(getMatchLogTable).mockResolvedValue([
+      {
+        date: "2026. 7. 1",
+        challenger: "김도훈",
+        challengerRank: 2,
+        defender: "오준석",
+        defenderRank: 1,
+        winner: "김도훈",
+        score: "6:4",
+        defenseResult: "방어 실패",
+      },
+      {
+        date: "2026. 7. 2",
+        challenger: "김도훈",
+        challengerRank: 2,
+        defender: "오준석",
+        defenderRank: 1,
+        winner: "오준석",
+        score: "6:2",
+        defenseResult: "방어 성공",
+      },
+    ]);
+    vi.mocked(getHistoricalMatchLogTable).mockResolvedValue([
+      {
+        date: "2026. 6. 30",
+        challenger: "김도훈",
+        challengerRank: 2,
+        defender: "오준석",
+        defenderRank: 1,
+        winner: "오준석",
+        score: "6:1",
+        defenseResult: "방어 성공",
+        season: "시즌2",
+        sourceNote: "import",
+      },
+      {
+        date: "2026. 6. 15",
+        challenger: "김도훈",
+        challengerRank: 2,
+        defender: "오준석",
+        defenderRank: 1,
+        winner: "김도훈",
+        score: "6:3",
+        defenseResult: "방어 실패",
+        season: "시즌2",
+        sourceNote: "import",
+      },
+      {
+        date: "2025. 12. 18",
+        challenger: "김도훈",
+        challengerRank: 2,
+        defender: "오준석",
+        defenderRank: 1,
+        winner: "오준석",
+        score: "6:2",
+        defenseResult: "방어 성공",
+        season: "시즌1",
+        sourceNote: "import",
+      },
+      {
+        date: "2025. 11. 1",
+        challenger: "김도훈",
+        challengerRank: 2,
+        defender: "오준석",
+        defenderRank: 1,
+        winner: "김도훈",
+        score: "6:4",
+        defenseResult: "방어 실패",
+        season: "시즌1",
+        sourceNote: "import",
+      },
+    ]);
+
+    if (!club) {
+      throw new Error("seoultech club config should exist");
+    }
+
+    const data = await getRankingDataForClub(club);
+
+    expect(data.seasonSummaries).toEqual([
+      { name: "시즌3", matches: 2, isCurrent: true },
+      { name: "시즌2", matches: 2, isCurrent: false },
+      { name: "시즌1", matches: 2, isCurrent: false },
+    ]);
+    expect(data.players[0]?.recentForm).toEqual([
+      { result: "W", season: "시즌1", isHistorical: true },
+      { result: "L", season: "시즌2", isHistorical: true },
+      { result: "W", season: "시즌2", isHistorical: true },
+      { result: "L", season: "시즌3", isHistorical: false },
+      { result: "W", season: "시즌3", isHistorical: false },
+    ]);
   });
 
   it("RANKING_DATA_SOURCE가 supabase이면 시트 대신 Supabase repository에서 랭킹 원천 데이터를 읽는다", async () => {
@@ -245,6 +361,10 @@ describe("getRankingDataForClub", () => {
         losses: 0,
         matches: 1,
         recent5: ["W"],
+        recentForm: [
+          { result: "L", season: "시즌2", isHistorical: true },
+          { result: "W", season: "시즌4", isHistorical: false },
+        ],
       },
       {
         rank: 2,
@@ -255,6 +375,10 @@ describe("getRankingDataForClub", () => {
         losses: 1,
         matches: 1,
         recent5: ["L"],
+        recentForm: [
+          { result: "W", season: "시즌2", isHistorical: true },
+          { result: "L", season: "시즌4", isHistorical: false },
+        ],
       },
     ]);
     expect(data.detailsByPlayer["오준석"].seasonRecords).toEqual([

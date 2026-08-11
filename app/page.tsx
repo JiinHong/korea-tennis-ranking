@@ -3,6 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { getCachedNationalRankingPageData } from "@/lib/nationalRanking/repository";
+import {
+  getCachedCampusRankingPromotionStats,
+  type CampusRankingPromotionStats,
+} from "@/lib/campusRanking/promotionStats";
 
 import CampusRankingPromotion from "./_components/national-ranking/CampusRankingPromotion";
 import NationalRankingTable from "./_components/national-ranking/NationalRankingTable";
@@ -11,11 +15,20 @@ export default async function Home() {
   let pageData: Awaited<ReturnType<typeof getCachedNationalRankingPageData>> =
     null;
   let readFailed = false;
+  let promotionStats: CampusRankingPromotionStats = {};
 
   try {
     pageData = await getCachedNationalRankingPageData();
   } catch {
     readFailed = true;
+  }
+
+  if (pageData !== null) {
+    try {
+      promotionStats = await getCachedCampusRankingPromotionStats();
+    } catch {
+      promotionStats = {};
+    }
   }
 
   return (
@@ -75,7 +88,7 @@ export default async function Home() {
             >
               <NationalRankingTable rankings={pageData.rankings} />
             </Suspense>
-            <CampusRankingPromotion />
+            <CampusRankingPromotion matchCounts={promotionStats} />
           </section>
         )}
       </div>
