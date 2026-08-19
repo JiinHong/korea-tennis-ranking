@@ -70,7 +70,7 @@ describe("경희대학교 대회 결과 통합", () => {
     ]);
   });
 
-  it("일반 경희대 79건과 IMPACT 12건을 각각 통합한다", async () => {
+  it("일반 경희대 87건과 IMPACT 16건을 각각 통합한다", async () => {
     const dataset = await loadDataset();
     const generalResults = dataset.results.filter(
       (result) => result.clubSlug === KYUNGHEE_SLUG
@@ -79,8 +79,8 @@ describe("경희대학교 대회 결과 통합", () => {
       (result) => result.clubSlug === KYUNGHEE_ENGINEERING_SLUG
     );
 
-    expect(generalResults).toHaveLength(79);
-    expect(impactResults).toHaveLength(12);
+    expect(generalResults).toHaveLength(87);
+    expect(impactResults).toHaveLength(16);
     expect(
       [...generalResults, ...impactResults].every(
         (result) => result.qualityStatus === "verified"
@@ -172,6 +172,6 @@ describe("경희대학교 대회 결과 통합", () => {
   it("통합 결과를 새 데이터 버전으로 관리한다", async () => {
     const dataset = await loadDataset();
 
-    expect(dataset.version).toBe("sources-2026-08-08-v19");
+    expect(dataset.version).toBe("sources-2026-08-20-v20");
   });
 });

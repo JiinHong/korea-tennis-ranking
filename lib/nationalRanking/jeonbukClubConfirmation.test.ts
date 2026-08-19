@@ -39,7 +39,7 @@ describe("Jeonbuk National University club confirmation", () => {
     const genericJeonbukResults = dataset.results.filter(
       (result) =>
         result.sourceTeamName.includes("전북") &&
-        !result.sourceTeamName.includes("탑스핀")
+        !/(탑스핀|topspin)/i.test(result.sourceTeamName)
     );
 
     expect(genericJeonbukResults.length).toBeGreaterThan(0);
@@ -55,7 +55,7 @@ describe("Jeonbuk National University club confirmation", () => {
   it("maps every explicitly named Topspin result only to Topspin", async () => {
     const dataset = await loadDataset();
     const explicitTopspinResults = dataset.results.filter((result) =>
-      result.sourceTeamName.includes("탑스핀")
+      /(탑스핀|topspin)/i.test(result.sourceTeamName)
     );
 
     expect(explicitTopspinResults.length).toBeGreaterThan(0);
@@ -86,6 +86,6 @@ describe("Jeonbuk National University club confirmation", () => {
   it("bumps the managed dataset version after applying the DM confirmation", async () => {
     const dataset = await loadDataset();
 
-    expect(dataset.version).toBe("sources-2026-08-08-v19");
+    expect(dataset.version).toBe("sources-2026-08-20-v20");
   });
 });

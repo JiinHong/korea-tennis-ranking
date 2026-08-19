@@ -18,7 +18,9 @@ import CampusResultsBackLink, {
   getCampusResultsBackLabel,
   getCampusResultsHref,
 } from "./CampusResultsBackLink";
-import CampusResultUpdateLink from "./CampusResultUpdateLink";
+import CampusResultUpdateLink, {
+  CAMPUS_RESULT_UPDATE_TITLE,
+} from "./CampusResultUpdateLink";
 import CampusClubLogo from "./CampusClubLogo";
 import { getPlayerDetailPath } from "../_lib/playerPaths";
 import MatchEntryDialog from "./MatchEntryDialog";
@@ -658,7 +660,7 @@ export default function ClubRankingClient({ club }: { club: ClubPageConfig }) {
                     Tournament update
                   </span>
                   <strong className="campus-result-update-title">
-                    2026 하늘내린인제 결과가 반영됐어요
+                    {CAMPUS_RESULT_UPDATE_TITLE}
                   </strong>
                 </aside>
               }

@@ -19,7 +19,7 @@ describe("Yeongwol results v19", () => {
   it("loads all supplied 2023-2026 men's and women's results", () => {
     const dataset = loadNationalRankingDataset();
 
-    expect(dataset.version).toBe("sources-2026-08-08-v19");
+    expect(dataset.version).toBe("sources-2026-08-20-v20");
     expect(dataset.tournaments).toContainEqual({
       slug: "yeongwol",
       name: "영월 전국대학 동아리 테니스 대회",

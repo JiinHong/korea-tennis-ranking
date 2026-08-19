@@ -90,7 +90,7 @@ describe("검수 메모 반영과 명지대학교 결과 통합", () => {
         displayName: "명지대학교 MJTA·MTC",
       },
     ]);
-    expect(myongjiResults).toHaveLength(10);
+    expect(myongjiResults).toHaveLength(11);
     expect(
       myongjiResults.every(
         (result) =>
@@ -145,7 +145,7 @@ describe("검수 메모 반영과 명지대학교 결과 통합", () => {
   it("한국기술교육대학교 항목과 새 데이터 버전을 보관한다", async () => {
     const dataset = await loadDataset();
 
-    expect(dataset.version).toBe("sources-2026-08-08-v19");
+    expect(dataset.version).toBe("sources-2026-08-20-v20");
     expect(
       dataset.clubs.find((club) => club.slug === "koreatech-tennis")
     ).toEqual({

@@ -491,6 +491,16 @@ describe("loadNationalRankingDataset", () => {
         { actualEntrants, resultCount: actualEntrants, sourceStatus: "verified" },
       ])
     ),
+    "yanggu-2026-men": {
+      actualEntrants: 73,
+      resultCount: 73,
+      sourceStatus: "verified",
+    },
+    "yanggu-2026-women": {
+      actualEntrants: 62,
+      resultCount: 62,
+      sourceStatus: "verified",
+    },
     "gyeongin-2023-men": {
       actualEntrants: 42,
       resultCount: 42,
@@ -613,11 +623,11 @@ describe("loadNationalRankingDataset", () => {
     },
   } as const;
 
-  it("loads the complete 36-edition source manifest", () => {
+  it("loads the complete 38-edition source manifest", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-08-08-v19");
+    expect(dataset.version).toBe("sources-2026-08-20-v20");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -634,7 +644,7 @@ describe("loadNationalRankingDataset", () => {
     expect(dataset.editions.map((edition) => edition.key).sort()).toEqual(
       Object.keys(expectedEditions).sort()
     );
-    expect(dataset.editions).toHaveLength(36);
+    expect(dataset.editions).toHaveLength(38);
     const wemixEditions = dataset.editions.filter(
       (edition) => edition.tournamentSlug === "wemix"
     );
@@ -658,15 +668,15 @@ describe("loadNationalRankingDataset", () => {
       expect(results, editionKey).toHaveLength(expected.resultCount);
     }
 
-    expect(dataset.clubs).toHaveLength(64);
-    expect(dataset.aliases).toHaveLength(426);
-    expect(dataset.results).toHaveLength(1_270);
+    expect(dataset.clubs).toHaveLength(66);
+    expect(dataset.aliases).toHaveLength(430);
+    expect(dataset.results).toHaveLength(1_405);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
-    ).toHaveLength(1_239);
+    ).toHaveLength(1_372);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
-    ).toHaveLength(31);
+    ).toHaveLength(33);
 
     expect(
       dataset.results.find(
@@ -712,6 +722,144 @@ describe("loadNationalRankingDataset", () => {
     ).toBe(true);
     expect(() => parseNationalRankingDataset(dataset)).not.toThrow();
     expect(() => calculateNationalRankings(dataset)).not.toThrow();
+  });
+
+  it("records the visually verified 2026 Yanggu men's and women's draws", () => {
+    const dataset = loadNationalRankingDataset();
+    const yanggu2026Results = dataset.results.filter((result) =>
+      result.editionKey.startsWith("yanggu-2026-")
+    );
+    const stageCounts = (editionKey: string) =>
+      Object.fromEntries(
+        Object.entries(
+          yanggu2026Results
+            .filter((result) => result.editionKey === editionKey)
+            .reduce<Record<string, number>>((counts, result) => {
+              const stage = result.stage ?? "unknown";
+              counts[stage] = (counts[stage] ?? 0) + 1;
+              return counts;
+            }, {})
+        ).sort(([left], [right]) => left.localeCompare(right))
+      );
+
+    expect(yanggu2026Results).toHaveLength(135);
+    expect(stageCounts("yanggu-2026-men")).toEqual({
+      champion: 1,
+      first_match_loss: 35,
+      quarterfinal: 4,
+      round_of_16: 8,
+      round_of_32: 16,
+      round_of_64: 6,
+      runner_up: 1,
+      semifinal: 2,
+    });
+    expect(stageCounts("yanggu-2026-women")).toEqual({
+      champion: 1,
+      first_match_loss: 30,
+      quarterfinal: 4,
+      round_of_16: 8,
+      round_of_32: 16,
+      runner_up: 1,
+      semifinal: 2,
+    });
+
+    expect(
+      yanggu2026Results
+        .filter(
+          (result) =>
+            result.editionKey === "yanggu-2026-men" &&
+            ["champion", "runner_up", "semifinal", "quarterfinal"].includes(
+              result.stage ?? ""
+            )
+        )
+        .map(({ sourceTeamName, stage }) => `${stage}:${sourceTeamName}`)
+        .sort()
+    ).toEqual(
+      [
+        "champion:느티나무 A [3]",
+        "quarterfinal:Hytc A",
+        "quarterfinal:서울대 A",
+        "quarterfinal:전북대 Ace A [1]",
+        "quarterfinal:한국교원대 테니스부",
+        "runner_up:Kutc A [2]",
+        "semifinal:서강대a",
+        "semifinal:진리 [3]",
+      ].sort()
+    );
+    expect(
+      yanggu2026Results
+        .filter(
+          (result) =>
+            result.editionKey === "yanggu-2026-women" &&
+            ["champion", "runner_up", "semifinal", "quarterfinal"].includes(
+              result.stage ?? ""
+            )
+        )
+        .map(({ sourceTeamName, stage }) => `${stage}:${sourceTeamName}`)
+        .sort()
+    ).toEqual(
+      [
+        "champion:러비스 A [3]",
+        "quarterfinal:Ktf A",
+        "quarterfinal:서울대 A",
+        "quarterfinal:진리",
+        "quarterfinal:한국외대 A [2]",
+        "runner_up:느티나무 A [1]",
+        "semifinal:Uostc A",
+        "semifinal:홍익대 Hitc A",
+      ].sort()
+    );
+
+    expect(
+      yanggu2026Results.find(
+        (result) =>
+          result.editionKey === "yanggu-2026-men" &&
+          result.sourceTeamName === "백령"
+      )
+    ).toMatchObject({
+      clubSlug: "kangwon-baekryeong",
+      stage: "round_of_16",
+      qualityStatus: "verified",
+    });
+    expect(
+      yanggu2026Results.find(
+        (result) =>
+          result.editionKey === "yanggu-2026-men" &&
+          result.sourceTeamName === "한림대"
+      )
+    ).toMatchObject({
+      clubSlug: "hallym-tiebreak",
+      stage: "round_of_32",
+      qualityStatus: "verified",
+    });
+    expect(
+      yanggu2026Results
+        .filter(
+          (result) =>
+            result.editionKey === "yanggu-2026-women" &&
+            ["고려대 A", "고려대 B"].includes(result.sourceTeamName)
+        )
+        .map(({ clubSlug, qualityStatus, sourceTeamName, stage }) => ({
+          clubSlug,
+          qualityStatus,
+          sourceTeamName,
+          stage,
+        }))
+        .sort((left, right) => left.sourceTeamName.localeCompare(right.sourceTeamName))
+    ).toEqual([
+      {
+        clubSlug: null,
+        qualityStatus: "unresolved",
+        sourceTeamName: "고려대 A",
+        stage: "round_of_16",
+      },
+      {
+        clubSlug: null,
+        qualityStatus: "unresolved",
+        sourceTeamName: "고려대 B",
+        stage: "round_of_32",
+      },
+    ]);
   });
 
   it("preserves the exact approved Task 4 ordered content", () => {
@@ -1215,6 +1363,18 @@ describe("loadNationalRankingDataset", () => {
         teamLabel: "",
         sourceEntryId: "slot-46",
       },
+      {
+        editionKey: "yanggu-2026-women",
+        sourceTeamName: "Hytc A",
+        teamLabel: "A",
+        sourceEntryId: "slot-49",
+      },
+      {
+        editionKey: "yanggu-2026-women",
+        sourceTeamName: "Hytc A",
+        teamLabel: "A",
+        sourceEntryId: "slot-55",
+      },
     ]);
   });
 
@@ -1662,7 +1822,7 @@ describe("loadNationalRankingDataset", () => {
     );
   });
 
-  it("publishes the approved v8 integer scale and Neutinamu totals", () => {
+  it("publishes the approved v8 integer scale with the 2026 Yanggu results", () => {
     const rows = calculateNationalRankings(loadNationalRankingDataset()).rows;
     const men = rows
       .filter((row) => row.gender === "men")
@@ -1673,13 +1833,15 @@ describe("loadNationalRankingDataset", () => {
         .filter((row) => row.totalPoints > 1_000)
         .map((row) => [row.clubSlug, row.totalPoints])
     ).toEqual([
-      ["seoul-university", 1512],
-      ["jeonbuk-ace", 1425],
-      ["sogang-sgtc", 1197],
+      ["seoul-university", 1566],
+      ["sogang-sgtc", 1389],
+      ["seoultech-neutinamu", 1328],
+      ["jeonbuk-ace", 1134],
+      ["korea-kutc", 1119],
     ]);
     expect(men[3]).toMatchObject({
-      clubSlug: "korea-kutc",
-      totalPoints: 993,
+      clubSlug: "jeonbuk-ace",
+      totalPoints: 1134,
     });
 
     expect(
@@ -1698,7 +1860,7 @@ describe("loadNationalRankingDataset", () => {
       )
     ).toMatchObject({
       rank: 1,
-      totalPoints: 3492,
+      totalPoints: 3972,
     });
   });
 });

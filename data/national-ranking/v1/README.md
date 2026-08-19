@@ -1,25 +1,25 @@
 # National ranking source dataset v1
 
 `dataset.json` is the canonical, visually verified source manifest for the
-national university club ranking. Version `sources-2026-07-28-v18` contains the
-complete Yanggu, Gyeongin, Inje, Chuncheon, and WEMIX source program: 28
-editions and 1,170 terminal result records. Yeongwol is not part of this
-dataset.
+national university club ranking. Version `sources-2026-08-20-v20` contains the
+complete Yanggu, Gyeongin, Inje, Chuncheon, WEMIX, and Yeongwol source program:
+38 editions and 1,405 terminal result records.
 
 ## Expected source units
 
-The complete source program contains 28 edition/gender units. Every unit is a
+The complete source program contains 38 edition/gender units. Every unit is a
 separate men's or women's draw:
 
 | Tournament | Expected units |
 | --- | --- |
-| Yanggu | `yanggu-2023-men`, `yanggu-2023-women`, `yanggu-2024-men`, `yanggu-2024-women`, `yanggu-2025-men`, `yanggu-2025-women` |
+| Yanggu | `yanggu-2023-men`, `yanggu-2023-women`, `yanggu-2024-men`, `yanggu-2024-women`, `yanggu-2025-men`, `yanggu-2025-women`, `yanggu-2026-men`, `yanggu-2026-women` |
 | Gyeongin | `gyeongin-2023-men`, `gyeongin-2023-women`, `gyeongin-2024-men`, `gyeongin-2024-women`, `gyeongin-2025-men`, `gyeongin-2025-women` |
 | Inje | `inje-2023-men`, `inje-2023-women`, `inje-2024-men`, `inje-2024-women`, `inje-2025-men`, `inje-2025-women`, `inje-2026-men`, `inje-2026-women` |
 | Chuncheon | `chuncheon-2023-men`, `chuncheon-2023-women`, `chuncheon-2024-men`, `chuncheon-2024-women`, `chuncheon-2025-men`, `chuncheon-2025-women` |
 | WEMIX | `wemix-2025-men`, `wemix-2025-women` |
+| Yeongwol | `yeongwol-2023-men`, `yeongwol-2023-women`, `yeongwol-2024-men`, `yeongwol-2024-women`, `yeongwol-2025-men`, `yeongwol-2025-women`, `yeongwol-2026-men`, `yeongwol-2026-women` |
 
-WEMIX is the only 2025-only exception. All 28 units above are present.
+WEMIX is the only 2025-only exception. All 38 units above are present.
 
 ## Source references
 
@@ -51,8 +51,9 @@ only the observed bracket outcome; notes do not infer a reason.
 
 `sourceEntryId` is optional and used only when independently slotted source
 entries have identical visible names and team labels. Gyeongin 2024 men's two
-UI-clipped `한국항공대학교 ACE...` entries use `slot-35` and `slot-46`; their
-source names and empty team labels remain exact.
+UI-clipped `한국항공대학교 ACE...` entries use `slot-35` and `slot-46`.
+Yanggu 2026 women's two `Hytc A` entries use `slot-49` and `slot-55`.
+Their source names and team labels remain exact.
 
 ## Club identity and aliases
 
@@ -131,6 +132,16 @@ labels that explicitly identify 공과대학 or IMPACT belong to
 `경희대학교 공과대학 IMPACT`. Original entrant labels, stages, notes, and
 source references remain unchanged.
 
+Version `sources-2026-08-08-v19` adds the visually verified 2023–2026
+Yeongwol men's and women's result tables: eight editions and 100 terminal
+result records.
+
+Version `sources-2026-08-20-v20` adds the visually verified 2026 Yanggu draws:
+73 men's entrants and 62 women's entrants. It also adds the confirmed
+`강원대학교 백령테니스` and `한림대학교 Tie-break` club identities. The two
+generic Korea University women's labels remain unresolved because the source
+does not distinguish KUTC, PETC, or KMTC.
+
 Canonical clubs consolidate visually explicit spellings plus the
 administrator-confirmed team-name families documented in the 2026-07-13
 design. These include 경기대학교 `KTF`/`Kft`/`테토남`, 연세대학교
@@ -194,7 +205,7 @@ The two editions and all 20 terminal rows are therefore verified and scoreable.
 
 ## Unresolved mapping log
 
-The policy above leaves 31 of 1,170 rows unresolved. Version
+The policy above leaves 33 of 1,405 rows unresolved. Version
 `sources-2026-07-24-v9` assigned 332 previously unresolved university-only team
 labels to the university's sole public ranking club. Version
 `sources-2026-07-24-v10` applied the administrator-reviewed Yanggu memo
@@ -216,6 +227,9 @@ Version `sources-2026-07-26-v17` resolves all 26 remaining 2023 Yanggu men's
 identities from the administrator-provided university-to-team mapping.
 Version `sources-2026-07-28-v18` resolves all 17 remaining Kyunghee-labeled
 rows under the approved two-group rule.
+Version `sources-2026-08-08-v19` adds 100 fully assigned Yeongwol rows.
+Version `sources-2026-08-20-v20` adds 133 verified Yanggu rows and keeps two
+generic Korea University labels unresolved.
 
 | Edition | Entrants/results | Verified rows | Unresolved rows | Reason summary |
 | --- | ---: | ---: | ---: | --- |
@@ -225,6 +239,8 @@ rows under the approved two-group rule.
 | `yanggu-2024-women` | 73 | 73 | 0 | All identities are assigned. |
 | `yanggu-2025-men` | 94 | 94 | 0 | All identities are assigned. |
 | `yanggu-2025-women` | 73 | 73 | 0 | All identities are assigned. |
+| `yanggu-2026-men` | 73 | 73 | 0 | All identities are assigned. |
+| `yanggu-2026-women` | 62 | 60 | 2 | Generic Korea University A/B labels remain unresolved. |
 | `inje-2023-men` | 18 | 16 | 2 | Generic club-only labels remain; the Kyunghee label is assigned. |
 | `inje-2023-women` | 10 | 10 | 0 | All identities are assigned. |
 | `inje-2024-men` | 20 | 20 | 0 | All identities are assigned. |
@@ -247,3 +263,11 @@ rows under the approved two-group rule.
 | `chuncheon-2025-women` | 28 | 25 | 3 | Kyunghee labels are assigned; other generic labels remain. |
 | `wemix-2025-men` | 8 | 8 | 0 | School-only entries are frozen under the approved pre-WEMIX ranking rule. |
 | `wemix-2025-women` | 12 | 12 | 0 | Explicit aliases, clipped labels, and school-only entries are frozen under the approved rule. |
+| `yeongwol-2023-men` | 4 | 4 | 0 | All identities are assigned. |
+| `yeongwol-2023-women` | 4 | 4 | 0 | All identities are assigned. |
+| `yeongwol-2024-men` | 14 | 14 | 0 | All identities are assigned. |
+| `yeongwol-2024-women` | 8 | 8 | 0 | All identities are assigned. |
+| `yeongwol-2025-men` | 16 | 16 | 0 | All identities are assigned. |
+| `yeongwol-2025-women` | 10 | 10 | 0 | All identities are assigned. |
+| `yeongwol-2026-men` | 28 | 28 | 0 | All identities are assigned. |
+| `yeongwol-2026-women` | 16 | 16 | 0 | All identities are assigned. |

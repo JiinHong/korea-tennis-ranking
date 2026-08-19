@@ -12,6 +12,9 @@ const resultLinkLabels: Readonly<Record<string, string>> = {
   petc: "PETC 대회 기록 확인하기",
 };
 
+export const CAMPUS_RESULT_UPDATE_TITLE =
+  "2026 국토정중앙배 결과가 반영됐어요";
+
 export default function CampusResultUpdateLink({
   clubSlug,
 }: {
@@ -25,7 +28,7 @@ export default function CampusResultUpdateLink({
     <aside className="campus-result-update" aria-label="대회 결과 업데이트">
       <span className="campus-result-update-kicker">Tournament update</span>
       <strong className="campus-result-update-title">
-        2026 하늘내린인제 결과가 반영됐어요
+        {CAMPUS_RESULT_UPDATE_TITLE}
       </strong>
       <Link
         className="campus-result-update-link"

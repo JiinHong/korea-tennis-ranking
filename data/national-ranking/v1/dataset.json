@@ -1,5 +1,5 @@
 {
-  "version": "sources-2026-08-08-v19",
+  "version": "sources-2026-08-20-v20",
   "clubs": [
     {
       "slug": "catholic-courtrang",
@@ -384,6 +384,18 @@
       "universityName": "용인대학교",
       "clubName": "ACE",
       "displayName": "용인대학교 ACE"
+    },
+    {
+      "slug": "kangwon-baekryeong",
+      "universityName": "강원대학교",
+      "clubName": "백령테니스",
+      "displayName": "강원대학교 백령테니스"
+    },
+    {
+      "slug": "hallym-tiebreak",
+      "universityName": "한림대학교",
+      "clubName": "Tie-break",
+      "displayName": "한림대학교 Tie-break"
     }
   ],
   "aliases": [
@@ -2516,6 +2528,26 @@
       "clubSlug": "kyunghee-kuta-lovice",
       "normalizedAlias": "경희대학교 경희대 국제a",
       "sourceLabel": "경희대 국제A"
+    },
+    {
+      "clubSlug": "kangwon-baekryeong",
+      "normalizedAlias": "강원대학교 백령테니스",
+      "sourceLabel": "강원대 백령테니스"
+    },
+    {
+      "clubSlug": "kangwon-baekryeong",
+      "normalizedAlias": "강원대학교 백령",
+      "sourceLabel": "백령"
+    },
+    {
+      "clubSlug": "hallym-tiebreak",
+      "normalizedAlias": "한림대학교 tie-break",
+      "sourceLabel": "한림대 Tie-break"
+    },
+    {
+      "clubSlug": "hallym-tiebreak",
+      "normalizedAlias": "한림대학교 한림대",
+      "sourceLabel": "한림대"
     }
   ],
   "tournaments": [
@@ -2639,6 +2671,30 @@
         "양구/2025/여자/2025 양구 여자.pdf#page=1",
         "양구/2025/여자/2025 양구 여자.pdf#page=2",
         "양구/2025/여자/2025 양구 여자.pdf#page=3"
+      ]
+    },
+    {
+      "key": "yanggu-2026-men",
+      "tournamentSlug": "yanggu",
+      "year": 2026,
+      "gender": "men",
+      "actualEntrants": 73,
+      "sourceStatus": "verified",
+      "sourceRefs": [
+        "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+        "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+        "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=3"
+      ]
+    },
+    {
+      "key": "yanggu-2026-women",
+      "tournamentSlug": "yanggu",
+      "year": 2026,
+      "gender": "women",
+      "actualEntrants": 62,
+      "sourceStatus": "verified",
+      "sourceRefs": [
+        "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1"
       ]
     },
     {
@@ -15718,6 +15774,1358 @@
       "qualityStatus": "verified",
       "sourceRef": "영월/2026/여자/Draw 제4회 영월 전국대학 동아리 테니스 대회 결과.pdf#page=1",
       "note": "영월 최종 결과표에서 확인한 마지막 진출 단계입니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "jeonbuk-ace",
+      "sourceTeamName": "전북대 Ace A [1]",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=3",
+      "note": "2026 국토정중앙배 최종 대진표의 1번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "chungang-love4t",
+      "sourceTeamName": "중앙대 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 3번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "gachon-tiebreak",
+      "sourceTeamName": "타이브레이크 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 5번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "Kuta A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 7번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "suwon-ace",
+      "sourceTeamName": "수원대 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 9번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "kau-ace",
+      "sourceTeamName": "피트",
+      "teamLabel": "",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 11번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "hanbat-masters",
+      "sourceTeamName": "한밭대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 12번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "gyeonggi-ktf",
+      "sourceTeamName": "경기대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 13번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "dankook-jukjeon-dkutc",
+      "sourceTeamName": "Dkutc B",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 15번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "kyunghee-engineering-impact",
+      "sourceTeamName": "임팩트 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 17번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "러비스 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 19번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "sogang-sgtc",
+      "sourceTeamName": "서강대a",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=3",
+      "note": "2026 국토정중앙배 최종 대진표의 21번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "kookmin-kmtc",
+      "sourceTeamName": "국민대 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 23번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "sungkyunkwan-stc",
+      "sourceTeamName": "성균관대 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 25번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "jeonbuk-topspin",
+      "sourceTeamName": "전북대 Topspin A",
+      "teamLabel": "A",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 27번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "kookmin-kmtc",
+      "sourceTeamName": "국민대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 28번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "sogang-sgtc",
+      "sourceTeamName": "서강대b",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 29번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "dongguk-dutc",
+      "sourceTeamName": "Dutc",
+      "teamLabel": "",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 31번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "느티나무 A [3]",
+      "teamLabel": "A",
+      "stage": "champion",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=3",
+      "note": "2026 국토정중앙배 최종 대진표의 33번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "kyunghee-engineering-impact",
+      "sourceTeamName": "임팩트 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 35번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "자유",
+      "teamLabel": "자유",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 37번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "hannam-winners",
+      "sourceTeamName": "위너술 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 39번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "inu-uitc",
+      "sourceTeamName": "인천대 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 41번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "uos-approach",
+      "sourceTeamName": "어프로치 A",
+      "teamLabel": "A",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 43번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "uos-approach",
+      "sourceTeamName": "어프로치 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 44번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "Petc A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 45번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "kangwon-baekryeong",
+      "sourceTeamName": "백령",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 47번 엔트리를 마지막 진출 단계까지 추적했습니다. 강원대학교 공식 2026년 중앙동아리 목록의 백령테니스로 확인했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "hongik-hitc",
+      "sourceTeamName": "Hitc B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 49번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "uos-approach",
+      "sourceTeamName": "Uostc B",
+      "teamLabel": "B",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 51번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "hanbat-masters",
+      "sourceTeamName": "한밭대 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 53번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "inu-uitc",
+      "sourceTeamName": "인천대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 55번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대 A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=3",
+      "note": "2026 국토정중앙배 최종 대진표의 57번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "Petc B",
+      "teamLabel": "B",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 59번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "inha-rapum",
+      "sourceTeamName": "인하대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 60번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "굿샷 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 61번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "myongji-mjta-mtc",
+      "sourceTeamName": "Mtc A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 63번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "kaist-stroke",
+      "sourceTeamName": "카이스트 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 66번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "knue-tennis",
+      "sourceTeamName": "한국교원대 테니스부",
+      "teamLabel": "",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=3",
+      "note": "2026 국토정중앙배 최종 대진표의 68번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "느티나무 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 69번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "sejong-stc",
+      "sourceTeamName": "세종대 Stc A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 70번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "gachon-tiebreak",
+      "sourceTeamName": "타이브레이크 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 72번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "catholic-courtrang",
+      "sourceTeamName": "가톨릭대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 74번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "kaist-stroke",
+      "sourceTeamName": "카이스트 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 76번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "chungbuk-ace",
+      "sourceTeamName": "Ace",
+      "teamLabel": "",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 77번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "러비스 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 78번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "konkuk-ktc",
+      "sourceTeamName": "건덕이",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 80번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "catholic-courtrang",
+      "sourceTeamName": "가톨릭대 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 82번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "hanyang-hytc",
+      "sourceTeamName": "Hytc B",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 84번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "konkuk-ktc",
+      "sourceTeamName": "건구스",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 85번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "hanyang-erica-hitec",
+      "sourceTeamName": "한양대 에리카 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 86번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "uos-approach",
+      "sourceTeamName": "Uostc A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 88번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "hanyang-erica-hitec",
+      "sourceTeamName": "한양대 에리카 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 90번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "dankook-jukjeon-dkutc",
+      "sourceTeamName": "Dkutc A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 92번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "chungang-love4t",
+      "sourceTeamName": "중앙대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 94번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "진리 [3]",
+      "teamLabel": "진리",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=3",
+      "note": "2026 국토정중앙배 최종 대진표의 96번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "hufs-ace",
+      "sourceTeamName": "한국외대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 98번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "hanyang-hytc",
+      "sourceTeamName": "Hytc A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=3",
+      "note": "2026 국토정중앙배 최종 대진표의 100번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "sungkyunkwan-stc",
+      "sourceTeamName": "성균관대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 101번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "hongik-hitc",
+      "sourceTeamName": "Hitc A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 102번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "yeungnam-yuta",
+      "sourceTeamName": "Yuta",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 104번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "ajou-tennis",
+      "sourceTeamName": "아주대 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 106번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "gyeonggi-ktf",
+      "sourceTeamName": "경기대 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 108번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "Kuta B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 110번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대 B",
+      "teamLabel": "B",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 112번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "hallym-tiebreak",
+      "sourceTeamName": "한림대",
+      "teamLabel": "",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 114번 엔트리를 마지막 진출 단계까지 추적했습니다. 한림대학교 공식 동아리 목록의 테니스 동아리 Tie-break로 확인했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "Kutc B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 116번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "hufs-ace",
+      "sourceTeamName": "한국외대 A",
+      "teamLabel": "A",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 117번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "kwangwoon-kwtc",
+      "sourceTeamName": "광운대 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 118번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "kyungpook-kutc",
+      "sourceTeamName": "경북대 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 120번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "kau-ace",
+      "sourceTeamName": "마하",
+      "teamLabel": "",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 122번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "inha-rapum",
+      "sourceTeamName": "인하대 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 124번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "ajou-tennis",
+      "sourceTeamName": "아주대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=2",
+      "note": "2026 국토정중앙배 최종 대진표의 126번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-men",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "Kutc A [2]",
+      "teamLabel": "A",
+      "stage": "runner_up",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/남자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=3",
+      "note": "2026 국토정중앙배 최종 대진표의 128번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "느티나무 A [1]",
+      "teamLabel": "A",
+      "stage": "runner_up",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 1번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "knue-tennis",
+      "sourceTeamName": "한국교원대 테니스부",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 3번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "kookmin-kmtc",
+      "sourceTeamName": "국민대",
+      "teamLabel": "",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 4번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "자유",
+      "teamLabel": "자유",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 5번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "uos-approach",
+      "sourceTeamName": "Uostc B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 6번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "chungang-love4t",
+      "sourceTeamName": "중앙대",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 7번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "uos-approach",
+      "sourceTeamName": "Approach B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 8번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "ajou-tennis",
+      "sourceTeamName": "아주대 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 9번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "konkuk-ktc",
+      "sourceTeamName": "건덕이",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 10번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "Petc A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 11번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "dongguk-dutc",
+      "sourceTeamName": "동국대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 12번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대 A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 13번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 14번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "러비스 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 15번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "kaist-stroke",
+      "sourceTeamName": "카이스트 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 16번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "gyeonggi-ktf",
+      "sourceTeamName": "Ktf A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 17번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "suwon-ace",
+      "sourceTeamName": "수원대 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 18번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "sungkyunkwan-stc",
+      "sourceTeamName": "성균관대 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 19번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "gyeonggi-ktf",
+      "sourceTeamName": "Ktf B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 20번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "Kuta A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 21번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "inha-rapum",
+      "sourceTeamName": "인하대 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 22번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "uos-approach",
+      "sourceTeamName": "Approach A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 23번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "hanyang-erica-hitec",
+      "sourceTeamName": "하이텍 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 24번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "sogang-sgtc",
+      "sourceTeamName": "서강대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 25번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "sogang-sgtc",
+      "sourceTeamName": "서강대 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 26번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "hongik-hitc",
+      "sourceTeamName": "홍익대 Hitc A",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 27번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "ewha-tennis",
+      "sourceTeamName": "이화테니스",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 28번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "gachon-tiebreak",
+      "sourceTeamName": "타이브레이크 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 29번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "kaist-stroke",
+      "sourceTeamName": "카이스트 B",
+      "teamLabel": "B",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 30번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "inu-uitc",
+      "sourceTeamName": "인천대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 31번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "dongguk-dutc",
+      "sourceTeamName": "동국대 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 32번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "굿샷 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 33번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "gachon-tiebreak",
+      "sourceTeamName": "타이브레이크 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 34번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "hanbat-masters",
+      "sourceTeamName": "복숭아시루",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 35번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "konkuk-ktc",
+      "sourceTeamName": "건구스",
+      "teamLabel": "",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 36번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "hongik-hitc",
+      "sourceTeamName": "홍익대 Hitc B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 37번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "inu-uitc",
+      "sourceTeamName": "인천대 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 38번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "느티나무 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 39번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "진리",
+      "teamLabel": "진리",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 40번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "dankook-cheonan-dkutc",
+      "sourceTeamName": "Dkutc A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 41번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "kyunghee-engineering-impact",
+      "sourceTeamName": "임팩트 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 42번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": null,
+      "sourceTeamName": "고려대 B",
+      "teamLabel": "B",
+      "stage": "round_of_32",
+      "qualityStatus": "unresolved",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 43번 엔트리를 마지막 진출 단계까지 추적했습니다. 고려대학교의 KUTC, PETC, KMTC 중 어느 동아리인지 대진표만으로 확인할 수 없습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "catholic-courtrang",
+      "sourceTeamName": "할렐야루",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 44번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "Petc B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 45번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "jeonbuk-ace",
+      "sourceTeamName": "전북대 Ace",
+      "teamLabel": "",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 46번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "Kuta B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 47번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "러비스 A [3]",
+      "teamLabel": "A",
+      "stage": "champion",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 48번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "hanyang-hytc",
+      "sourceTeamName": "Hytc A",
+      "teamLabel": "A",
+      "sourceEntryId": "slot-49",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 49번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "uos-approach",
+      "sourceTeamName": "Uostc A",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 50번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "kau-ace",
+      "sourceTeamName": "마일",
+      "teamLabel": "",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 51번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "kyunghee-engineering-impact",
+      "sourceTeamName": "임팩트 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 52번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "hanyang-hytc",
+      "sourceTeamName": "Hytc B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 53번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": null,
+      "sourceTeamName": "고려대 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "unresolved",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 54번 엔트리를 마지막 진출 단계까지 추적했습니다. 고려대학교의 KUTC, PETC, KMTC 중 어느 동아리인지 대진표만으로 확인할 수 없습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "hanyang-women-hytc",
+      "sourceTeamName": "Hytc A",
+      "teamLabel": "A",
+      "sourceEntryId": "slot-55",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 55번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "hannam-winners",
+      "sourceTeamName": "위너스 F5",
+      "teamLabel": "F5",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 56번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "catholic-courtrang",
+      "sourceTeamName": "마리아",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 57번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "ewha-smash",
+      "sourceTeamName": "스매시 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 58번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "jeonbuk-topspin",
+      "sourceTeamName": "전북대 Topspin A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 59번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "ewha-smash",
+      "sourceTeamName": "스매시 B",
+      "teamLabel": "B",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 60번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "inha-rapum",
+      "sourceTeamName": "인하대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 61번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "hanyang-erica-hitec",
+      "sourceTeamName": "하이텍 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 62번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "yanggu-2026-women",
+      "clubSlug": "hufs-ace",
+      "sourceTeamName": "한국외대 A [2]",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
+      "note": "2026 국토정중앙배 최종 대진표의 64번 엔트리를 마지막 진출 단계까지 추적했습니다."
     }
   ]
 }
