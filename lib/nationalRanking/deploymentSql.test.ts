@@ -39,7 +39,7 @@ describe("buildIncrementalNationalRankingDeploymentSql", () => {
 
     const formulaSql = stages.find((stage) => stage.name === "02-formula.sql")!
       .sql;
-    expect(formulaSql).toContain("'national-club-v8'");
+    expect(formulaSql).toContain("'national-club-v9'");
     expect(formulaSql).toContain("false");
     expect(formulaSql).not.toContain("set is_active = true");
 

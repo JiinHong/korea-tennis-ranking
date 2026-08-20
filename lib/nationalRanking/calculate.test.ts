@@ -4,6 +4,7 @@ import { calculateNationalRankings as calculateRankings } from "@/lib/nationalRa
 import {
   NATIONAL_FORMULA_V1,
   NATIONAL_FORMULA_V2,
+  NATIONAL_FORMULA_V9,
 } from "@/lib/nationalRanking/formula";
 import type { NationalRankingDataset } from "@/lib/nationalRanking/types";
 
@@ -374,7 +375,7 @@ describe("calculateNationalRankings", () => {
     });
   });
 
-  it("uses the integer 4:2:1 v8 formula by default", () => {
+  it("uses the integer 4:2:1 v9 formula by default", () => {
     const v3Dataset = {
       version: "integer-v3-test",
       clubs: [dataset.clubs[0]],
@@ -408,7 +409,7 @@ describe("calculateNationalRankings", () => {
       (row) => row.clubSlug === "alpha" && row.gender === "men"
     );
 
-    expect(result.formulaVersion).toBe("national-club-v8");
+    expect(result.formulaVersion).toBe("national-club-v9");
     expect(alphaMen?.totalPoints).toBe(660);
     expect(alphaMen?.contributions[0]).toMatchObject({
       tournamentUnits: 3,
@@ -426,6 +427,58 @@ describe("calculateNationalRankings", () => {
           )
       )
     ).toBe(true);
+  });
+
+  it("excludes WEMIX from points, honors, and representative results", () => {
+    const excludedTournamentDataset = {
+      version: "excluded-tournament-test",
+      clubs: [dataset.clubs[0]],
+      aliases: [],
+      tournaments: [
+        { slug: "yanggu", name: "양구", scope: "national" as const, scopeFactor: 1 },
+        { slug: "wemix", name: "WEMIX OPEN", scope: "national" as const, scopeFactor: 1 },
+      ],
+      editions: [
+        {
+          ...dataset.editions[0],
+          key: "yanggu-2025-men",
+          tournamentSlug: "yanggu",
+        },
+        {
+          ...dataset.editions[0],
+          key: "wemix-2025-men",
+          tournamentSlug: "wemix",
+        },
+      ],
+      results: [
+        {
+          ...dataset.results[0],
+          editionKey: "yanggu-2025-men",
+          sourceRef: "yanggu.pdf#alpha",
+        },
+        {
+          ...dataset.results[0],
+          editionKey: "wemix-2025-men",
+          sourceRef: "wemix.pdf#alpha",
+        },
+      ],
+    } satisfies NationalRankingDataset;
+
+    const result = calculateRankings(excludedTournamentDataset, NATIONAL_FORMULA_V9);
+    const alphaMen = result.rows.find(
+      (row) => row.clubSlug === "alpha" && row.gender === "men"
+    );
+
+    expect(alphaMen?.totalPoints).toBe(660);
+    expect(alphaMen?.contributions.map((item) => item.tournamentSlug)).toEqual([
+      "yanggu",
+    ]);
+    expect(alphaMen?.honors.map((item) => item.tournamentSlug)).toEqual([
+      "yanggu",
+    ]);
+    expect(alphaMen?.bestResults.map((item) => item.tournamentSlug)).toEqual([
+      "yanggu",
+    ]);
   });
 
   it("preserves an expired or non-scoreable title as one all-time honor", () => {

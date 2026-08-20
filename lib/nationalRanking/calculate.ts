@@ -5,7 +5,8 @@ import {
   getTournamentPrestigeFactor,
   getTournamentUnits,
   isUnitNationalFormula,
-  NATIONAL_FORMULA_V8,
+  isTournamentIncluded,
+  NATIONAL_FORMULA_V9,
   scoreVerifiedResult,
   usesFieldSizeUnits,
 } from "./formula";
@@ -63,8 +64,8 @@ function compareBestResults(
   if (stageDifference !== 0) return stageDifference;
 
   const tournamentUnitDifference =
-    (NATIONAL_FORMULA_V8.tournamentUnits[right.tournamentSlug] ?? 0) -
-    (NATIONAL_FORMULA_V8.tournamentUnits[left.tournamentSlug] ?? 0);
+    (NATIONAL_FORMULA_V9.tournamentUnits[right.tournamentSlug] ?? 0) -
+    (NATIONAL_FORMULA_V9.tournamentUnits[left.tournamentSlug] ?? 0);
   if (tournamentUnitDifference !== 0) return tournamentUnitDifference;
 
   const yearDifference = right.year - left.year;
@@ -309,7 +310,7 @@ function assertCalculatedRankingIntegrity(
 
 export function calculateNationalRankings(
   dataset: NationalRankingDataset,
-  formula: NationalFormula = NATIONAL_FORMULA_V8
+  formula: NationalFormula = NATIONAL_FORMULA_V9
 ): CalculatedNationalRanking {
   const clubsBySlug = new Map(dataset.clubs.map((club) => [club.slug, club]));
   const tournamentsBySlug = new Map(
@@ -329,12 +330,18 @@ export function calculateNationalRankings(
     }
   } else if (isUnitNationalFormula(formula)) {
     for (const tournament of dataset.tournaments) {
+      if (!isTournamentIncluded(tournament.slug, formula)) continue;
       getTournamentUnits(tournament.slug, formula);
     }
   }
 
   for (const edition of dataset.editions) {
-    if (edition.sourceStatus !== "verified") continue;
+    if (
+      edition.sourceStatus !== "verified" ||
+      !isTournamentIncluded(edition.tournamentSlug, formula)
+    ) {
+      continue;
+    }
 
     const divisionKey = getTournamentDivisionKey(
       edition.tournamentSlug,
@@ -364,7 +371,14 @@ export function calculateNationalRankings(
       ? tournamentsBySlug.get(edition.tournamentSlug)
       : undefined;
 
-    if (!club || !edition || !tournament) continue;
+    if (
+      !club ||
+      !edition ||
+      !tournament ||
+      !isTournamentIncluded(tournament.slug, formula)
+    ) {
+      continue;
+    }
 
     const honor: NationalRankingHonor = {
       editionKey: edition.key,
@@ -421,7 +435,13 @@ export function calculateNationalRankings(
       ? tournamentsBySlug.get(edition.tournamentSlug)
       : undefined;
 
-    if (!club || !edition || !tournament || edition.sourceStatus !== "verified") {
+    if (
+      !club ||
+      !edition ||
+      !tournament ||
+      edition.sourceStatus !== "verified" ||
+      !isTournamentIncluded(tournament.slug, formula)
+    ) {
       continue;
     }
 
@@ -497,6 +517,8 @@ export function calculateNationalRankings(
         `${result.sourceRef}: verified result references unknown tournament "${edition.tournamentSlug}"`
       );
     }
+
+    if (!isTournamentIncluded(tournament.slug, formula)) continue;
 
     const club = result.clubSlug ? clubsBySlug.get(result.clubSlug) : undefined;
     if (!club) {

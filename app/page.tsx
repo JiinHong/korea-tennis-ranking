@@ -42,10 +42,10 @@ export default async function Home() {
             <h1>전국 대학 테니스 동아리 랭킹</h1>
             <p className="national-header-description">
               <span>
-                최근 3년간 6개 대학 테니스 대회 성적을 반영한 랭킹입니다.
+                최근 3년간 5개 대학 테니스 대회 성적을 반영한 랭킹입니다.
               </span>
               <span className="national-header-tournaments">
-                양구 · 경인지구 · 춘천 · 인제 · 영월 · WEMIX OPEN
+                양구 · 춘천 · 경인지구 · 인제 · 영월
               </span>
             </p>
             <Link className="national-methodology-link" href="/methodology">

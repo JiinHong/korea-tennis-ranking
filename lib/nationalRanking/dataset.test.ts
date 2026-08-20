@@ -1822,7 +1822,7 @@ describe("loadNationalRankingDataset", () => {
     );
   });
 
-  it("publishes the approved v8 integer scale with the 2026 Yanggu results", () => {
+  it("publishes the approved v9 tournament tiers with the 2026 Yanggu results", () => {
     const rows = calculateNationalRankings(loadNationalRankingDataset()).rows;
     const men = rows
       .filter((row) => row.gender === "men")
@@ -1833,13 +1833,12 @@ describe("loadNationalRankingDataset", () => {
         .filter((row) => row.totalPoints > 1_000)
         .map((row) => [row.clubSlug, row.totalPoints])
     ).toEqual([
-      ["seoul-university", 1566],
-      ["sogang-sgtc", 1389],
-      ["seoultech-neutinamu", 1328],
+      ["seoultech-neutinamu", 1244],
+      ["sogang-sgtc", 1198],
       ["jeonbuk-ace", 1134],
-      ["korea-kutc", 1119],
+      ["korea-kutc", 1072],
     ]);
-    expect(men[3]).toMatchObject({
+    expect(men[2]).toMatchObject({
       clubSlug: "jeonbuk-ace",
       totalPoints: 1134,
     });
@@ -1851,7 +1850,7 @@ describe("loadNationalRankingDataset", () => {
       )
     ).toMatchObject({
       rank: 1,
-      totalPoints: 2644,
+      totalPoints: 2157,
     });
     expect(
       rows.find(
@@ -1860,7 +1859,7 @@ describe("loadNationalRankingDataset", () => {
       )
     ).toMatchObject({
       rank: 1,
-      totalPoints: 3972,
+      totalPoints: 3401,
     });
   });
 });

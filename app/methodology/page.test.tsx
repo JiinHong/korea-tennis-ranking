@@ -68,7 +68,7 @@ describe("MethodologyPage", () => {
     expect(screen.queryByText(/참가 팀 수 데이터/)).toBeNull();
   });
 
-  it("공식 v8의 피보나치 단계 점수와 대회별 위상 가중치를 공개한다", () => {
+  it("공식 v9의 피보나치 단계 점수와 대회별 위상 가중치를 공개한다", () => {
     render(<MethodologyPage />);
 
     [
@@ -84,9 +84,8 @@ describe("MethodologyPage", () => {
 
     [
       ["국토정중앙배(양구)", "1등급", "3"],
-      ["경인지구 연맹전", "2등급", "2"],
       ["춘천소양강배", "2등급", "2"],
-      ["WEMIX OPEN", "3등급", "1"],
+      ["경인지구 연맹전", "3등급", "1"],
       ["하늘내린인제", "3등급", "1"],
       ["영월 전국대학 동아리 테니스 대회", "3등급", "1"],
     ].forEach((cells) => expectRow("대회 위상별 가중치", cells));
@@ -101,6 +100,7 @@ describe("MethodologyPage", () => {
     ).toBeDefined();
     expect(within(prestigeTable).queryByText("주요")).toBeNull();
     expect(within(prestigeTable).queryByText("신흥")).toBeNull();
+    expect(within(prestigeTable).queryByText("WEMIX OPEN")).toBeNull();
   });
 
   it("연도 가중치 기준값을 표로 공개한다", () => {
@@ -156,7 +156,7 @@ describe("MethodologyPage", () => {
     expect(screen.queryByText(/오래된 왕관/)).toBeNull();
     expect(screen.getByText(/= 660점$/)).toBeDefined();
     expect(screen.getByText(/= 330점$/)).toBeDefined();
-    expect(screen.getByText(/= 272점$/)).toBeDefined();
+    expect(screen.getByText(/= 136점$/)).toBeDefined();
   });
 
   it("총점이 같을 때 적용하는 동점 처리 순서를 공개한다", () => {
@@ -185,8 +185,8 @@ describe("MethodologyPage", () => {
     expect(screen.queryByText("unresolved")).toBeNull();
     expect(screen.queryByText("missing")).toBeNull();
     expect(screen.queryByText("did_not_enter")).toBeNull();
-    expect(screen.queryByText("national-club-v8")).toBeNull();
-    expect(screen.queryByText("2026-08-11")).toBeNull();
+    expect(screen.queryByText("national-club-v9")).toBeNull();
+    expect(screen.queryByText("2026-08-20")).toBeNull();
   });
 
   it("안전한 외부 참고 링크와 전국 랭킹 복귀 링크를 제공한다", () => {
@@ -196,7 +196,6 @@ describe("MethodologyPage", () => {
       "ATP 랭킹 점수표",
       "BWF 세계 랭킹 시스템",
       "UEFA 클럽 랭킹",
-      "WEMIX OPEN 2025 공식 대회 요강",
       "solved.ac 도움말 UX 참고",
     ].map((name) => screen.getByRole("link", { name }));
 

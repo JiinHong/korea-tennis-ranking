@@ -9,6 +9,7 @@ import {
   NATIONAL_FORMULA_V5,
   NATIONAL_FORMULA_V6,
   NATIONAL_FORMULA_V7,
+  NATIONAL_FORMULA_V9,
   getFieldSizeFactor,
   getRecencyFactor,
   getRecencyUnits,
@@ -418,5 +419,45 @@ describe("national ranking formula v8", () => {
     expect(score(2025)).toBe(330);
     expect(score(2024)).toBe(165);
     expect(score(2023)).toBe(0);
+  });
+});
+
+describe("national ranking formula v9", () => {
+  it("applies the approved tournament tiers and excludes WEMIX", () => {
+    expect(NATIONAL_FORMULA_V9).toMatchObject({
+      version: "national-club-v9",
+      stageUnits: NATIONAL_FORMULA_V7.stageUnits,
+      tournamentUnits: {
+        yanggu: 3,
+        chuncheon: 2,
+        gyeongin: 1,
+        inje: 1,
+        yeongwol: 1,
+      },
+      excludedTournamentSlugs: ["wemix"],
+      recencyUnits: [4, 2, 1],
+    });
+    expect(NATIONAL_FORMULA_V9.tournamentUnits).not.toHaveProperty("wemix");
+  });
+
+  it.each([
+    ["yanggu", 660],
+    ["chuncheon", 440],
+    ["gyeongin", 220],
+    ["inje", 220],
+    ["yeongwol", 220],
+  ])("scores a current %s champion with the approved weight", (tournamentSlug, expected) => {
+    expect(
+      scoreVerifiedResult(
+        {
+          stage: "champion",
+          tournamentSlug,
+          actualEntrants: 64,
+          latestEditionYear: 2026,
+          editionYear: 2026,
+        },
+        NATIONAL_FORMULA_V9
+      )
+    ).toBe(expected);
   });
 });

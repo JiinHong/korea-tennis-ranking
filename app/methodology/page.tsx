@@ -3,7 +3,7 @@ import Link from "next/link";
 import { createMethodologyMetadata } from "@/lib/analytics/pageMetadata";
 import {
   getRecencyUnits,
-  NATIONAL_FORMULA_V8,
+  NATIONAL_FORMULA_V9,
 } from "@/lib/nationalRanking/formula";
 
 import MethodologyTableRegion from "./_components/MethodologyTableRegion";
@@ -23,9 +23,8 @@ const STAGE_ROWS = [
 
 const COMPETITION_PRESTIGE_ROWS = [
   ["국토정중앙배(양구)", "1등급", 3],
-  ["경인지구 연맹전", "2등급", 2],
   ["춘천소양강배", "2등급", 2],
-  ["WEMIX OPEN", "3등급", 1],
+  ["경인지구 연맹전", "3등급", 1],
   ["하늘내린인제", "3등급", 1],
   ["영월 전국대학 동아리 테니스 대회", "3등급", 1],
 ] as const;
@@ -52,11 +51,6 @@ const REFERENCE_LINKS = [
     label: "UEFA 클럽 랭킹",
     description: "여러 시즌의 클럽 성과를 집계하는 랭킹 사례",
     href: "https://www.uefa.com/nationalassociations/uefarankings/",
-  },
-  {
-    label: "WEMIX OPEN 2025 공식 대회 요강",
-    description: "2025 공식 대회 원자료 확인",
-    href: "https://wepublic.blob.core.windows.net/wemix-open/overview/contest_overview.pdf",
   },
   {
     label: "solved.ac 도움말 UX 참고",
@@ -131,7 +125,7 @@ export default function MethodologyPage() {
                 {STAGE_ROWS.map(([label, stage]) => (
                   <tr key={stage}>
                     <th scope="row">{label}</th>
-                    <td>{NATIONAL_FORMULA_V8.stageUnits[stage]}</td>
+                    <td>{NATIONAL_FORMULA_V9.stageUnits[stage]}</td>
                   </tr>
                 ))}
               </tbody>
@@ -147,9 +141,8 @@ export default function MethodologyPage() {
           <h2 id="prestige-title">대회 위상 가중치</h2>
           <p>
             전국·지역이라는 명칭만으로 일괄 감점하지 않고, 대학 동아리 대회로서의
-            권위와 축적된 역사를 반영해 대회별 가중치를 적용합니다. 양구는 1등급,
-            경인지구와 춘천은 2등급, WEMIX OPEN과 인제, 영월은 3등급으로
-            구분합니다.
+            권위와 축적된 역사를 반영해 대회별 가중치를 적용합니다. 양구는
+            1등급, 춘천은 2등급, 경인지구와 인제, 영월은 3등급으로 구분합니다.
           </p>
           <MethodologyTableRegion label="대회 위상별 가중치">
             <table className="methodology-table">
@@ -195,7 +188,7 @@ export default function MethodologyPage() {
                   <tr key={label}>
                     <th scope="row">{label}</th>
                     <td>
-                      {getRecencyUnits(2026, 2026 - age, NATIONAL_FORMULA_V8)}
+                      {getRecencyUnits(2026, 2026 - age, NATIONAL_FORMULA_V9)}
                     </td>
                   </tr>
                 ))}
@@ -273,7 +266,7 @@ export default function MethodologyPage() {
             </li>
             <li>
               <span>최신 개최연도 경인지구 연맹전 준우승</span>
-              <code>34 × 2 × 4 = 272점</code>
+              <code>34 × 1 × 4 = 136점</code>
             </li>
           </ol>
         </section>
