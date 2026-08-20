@@ -91,6 +91,11 @@ export type NationalFormulaV9 = UnitNationalFormulaBase & {
   readonly excludedTournamentSlugs: readonly string[];
 };
 
+export type NationalFormulaV10 = UnitNationalFormulaBase & {
+  readonly version: "national-club-v10";
+  readonly excludedTournamentSlugs: readonly string[];
+};
+
 export type NationalFormula =
   | NationalFormulaV1
   | NationalFormulaV2
@@ -100,7 +105,8 @@ export type NationalFormula =
   | NationalFormulaV6
   | NationalFormulaV7
   | NationalFormulaV8
-  | NationalFormulaV9;
+  | NationalFormulaV9
+  | NationalFormulaV10;
 
 type LegacyNationalFormula = NationalFormulaV1 | NationalFormulaV2;
 export type FieldSizeNationalFormula = NationalFormulaV3 | NationalFormulaV4;
@@ -110,7 +116,8 @@ export type UnitNationalFormula =
   | NationalFormulaV6
   | NationalFormulaV7
   | NationalFormulaV8
-  | NationalFormulaV9;
+  | NationalFormulaV9
+  | NationalFormulaV10;
 
 export const NATIONAL_FORMULA_V1: NationalFormulaV1 = Object.freeze({
   version: "national-club-v1",
@@ -243,6 +250,20 @@ export const NATIONAL_FORMULA_V9: NationalFormulaV9 = Object.freeze({
   recencyUnits: NATIONAL_FORMULA_V8.recencyUnits,
 });
 
+export const NATIONAL_FORMULA_V10: NationalFormulaV10 = Object.freeze({
+  version: "national-club-v10",
+  stageUnits: NATIONAL_FORMULA_V4.stageUnits,
+  tournamentUnits: Object.freeze({
+    yanggu: 6,
+    chuncheon: 5,
+    gyeongin: 4,
+    inje: 4,
+    yeongwol: 4,
+  }),
+  excludedTournamentSlugs: NATIONAL_FORMULA_V9.excludedTournamentSlugs,
+  recencyUnits: NATIONAL_FORMULA_V9.recencyUnits,
+});
+
 export function isUnitNationalFormula(
   formula: NationalFormula
 ): formula is UnitNationalFormula {
@@ -253,7 +274,8 @@ export function isUnitNationalFormula(
     formula.version === "national-club-v6" ||
     formula.version === "national-club-v7" ||
     formula.version === "national-club-v8" ||
-    formula.version === "national-club-v9"
+    formula.version === "national-club-v9" ||
+    formula.version === "national-club-v10"
   );
 }
 
@@ -261,10 +283,14 @@ export function isTournamentIncluded(
   tournamentSlug: string,
   formula: NationalFormula
 ): boolean {
-  return (
-    formula.version !== "national-club-v9" ||
-    !formula.excludedTournamentSlugs.includes(tournamentSlug)
-  );
+  if (
+    formula.version !== "national-club-v9" &&
+    formula.version !== "national-club-v10"
+  ) {
+    return true;
+  }
+
+  return !formula.excludedTournamentSlugs.includes(tournamentSlug);
 }
 
 export function usesFieldSizeUnits(
@@ -278,7 +304,7 @@ export function usesFieldSizeUnits(
 
 export function getStagePoints(
   stage: TournamentStage,
-  formula: NationalFormula = NATIONAL_FORMULA_V9
+  formula: NationalFormula = NATIONAL_FORMULA_V10
 ): number {
   return isUnitNationalFormula(formula)
     ? formula.stageUnits[stage]
@@ -359,7 +385,7 @@ export function getFieldSizeUnits(
 export function getRecencyUnits(
   latestEditionYear: number,
   editionYear: number,
-  formula: UnitNationalFormula = NATIONAL_FORMULA_V9
+  formula: UnitNationalFormula = NATIONAL_FORMULA_V10
 ): number {
   const age = latestEditionYear - editionYear;
 
@@ -375,7 +401,7 @@ export function getRecencyUnits(
 
 export function getTournamentUnits(
   tournamentSlug: string,
-  formula: UnitNationalFormula = NATIONAL_FORMULA_V9
+  formula: UnitNationalFormula = NATIONAL_FORMULA_V10
 ): number {
   const units = formula.tournamentUnits[tournamentSlug];
 
@@ -386,6 +412,10 @@ export function getTournamentUnits(
   return units;
 }
 
+export function scoreVerifiedResult(
+  input: FormulaV3Input,
+  formula?: NationalFormulaV10
+): number;
 export function scoreVerifiedResult(
   input: FormulaV3Input,
   formula?: NationalFormulaV9
@@ -429,7 +459,7 @@ export function scoreVerifiedResult(
 ): number;
 export function scoreVerifiedResult(
   input: FormulaInput,
-  formula: NationalFormula = NATIONAL_FORMULA_V9
+  formula: NationalFormula = NATIONAL_FORMULA_V10
 ): number {
   if (isUnitNationalFormula(formula)) {
     if (!("tournamentSlug" in input)) {

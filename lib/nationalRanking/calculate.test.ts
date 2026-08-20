@@ -4,7 +4,6 @@ import { calculateNationalRankings as calculateRankings } from "@/lib/nationalRa
 import {
   NATIONAL_FORMULA_V1,
   NATIONAL_FORMULA_V2,
-  NATIONAL_FORMULA_V9,
 } from "@/lib/nationalRanking/formula";
 import type { NationalRankingDataset } from "@/lib/nationalRanking/types";
 
@@ -375,7 +374,7 @@ describe("calculateNationalRankings", () => {
     });
   });
 
-  it("uses the integer 4:2:1 v9 formula by default", () => {
+  it("uses the balanced integer v10 formula by default", () => {
     const v3Dataset = {
       version: "integer-v3-test",
       clubs: [dataset.clubs[0]],
@@ -409,13 +408,13 @@ describe("calculateNationalRankings", () => {
       (row) => row.clubSlug === "alpha" && row.gender === "men"
     );
 
-    expect(result.formulaVersion).toBe("national-club-v9");
-    expect(alphaMen?.totalPoints).toBe(660);
+    expect(result.formulaVersion).toBe("national-club-v10");
+    expect(alphaMen?.totalPoints).toBe(504);
     expect(alphaMen?.contributions[0]).toMatchObject({
-      tournamentUnits: 3,
+      tournamentUnits: 6,
       recencyUnits: 4,
       actualEntrants: 64,
-      points: 660,
+      points: 504,
     });
     expect(alphaMen?.contributions[0].fieldSizeUnits).toBeUndefined();
     expect(
@@ -464,12 +463,12 @@ describe("calculateNationalRankings", () => {
       ],
     } satisfies NationalRankingDataset;
 
-    const result = calculateRankings(excludedTournamentDataset, NATIONAL_FORMULA_V9);
+    const result = calculateRankings(excludedTournamentDataset);
     const alphaMen = result.rows.find(
       (row) => row.clubSlug === "alpha" && row.gender === "men"
     );
 
-    expect(alphaMen?.totalPoints).toBe(660);
+    expect(alphaMen?.totalPoints).toBe(504);
     expect(alphaMen?.contributions.map((item) => item.tournamentSlug)).toEqual([
       "yanggu",
     ]);

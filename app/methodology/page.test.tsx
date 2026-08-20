@@ -68,26 +68,26 @@ describe("MethodologyPage", () => {
     expect(screen.queryByText(/참가 팀 수 데이터/)).toBeNull();
   });
 
-  it("공식 v9의 피보나치 단계 점수와 대회별 위상 가중치를 공개한다", () => {
+  it("공식 v10의 피보나치 단계 점수와 완만한 대회별 위상 가중치를 공개한다", () => {
     render(<MethodologyPage />);
 
     [
-      ["우승", "55"],
-      ["준우승", "34"],
-      ["4강", "21"],
-      ["8강", "13"],
-      ["16강", "8"],
-      ["32강", "5"],
-      ["64강", "3"],
+      ["우승", "21"],
+      ["준우승", "13"],
+      ["4강", "8"],
+      ["8강", "5"],
+      ["16강", "3"],
+      ["32강", "2"],
+      ["64강", "1"],
       ["실제로 치른 첫 경기 패배", "0"],
     ].forEach((cells) => expectRow("진출 단계별 점수", cells));
 
     [
-      ["국토정중앙배(양구)", "1등급", "3"],
-      ["춘천소양강배", "2등급", "2"],
-      ["경인지구 연맹전", "3등급", "1"],
-      ["하늘내린인제", "3등급", "1"],
-      ["영월 전국대학 동아리 테니스 대회", "3등급", "1"],
+      ["국토정중앙배(양구)", "1등급", "6"],
+      ["춘천소양강배", "2등급", "5"],
+      ["경인지구 연맹전", "3등급", "4"],
+      ["하늘내린인제", "3등급", "4"],
+      ["영월 전국대학 동아리 테니스 대회", "3등급", "4"],
     ].forEach((cells) => expectRow("대회 위상별 가중치", cells));
 
     const prestigeTable = screen.getByRole("table", {
@@ -154,9 +154,9 @@ describe("MethodologyPage", () => {
       )
     ).toBeDefined();
     expect(screen.queryByText(/오래된 왕관/)).toBeNull();
-    expect(screen.getByText(/= 660점$/)).toBeDefined();
-    expect(screen.getByText(/= 330점$/)).toBeDefined();
-    expect(screen.getByText(/= 136점$/)).toBeDefined();
+    expect(screen.getByText(/= 504점$/)).toBeDefined();
+    expect(screen.getByText(/= 252점$/)).toBeDefined();
+    expect(screen.getByText(/= 208점$/)).toBeDefined();
   });
 
   it("총점이 같을 때 적용하는 동점 처리 순서를 공개한다", () => {
@@ -185,7 +185,7 @@ describe("MethodologyPage", () => {
     expect(screen.queryByText("unresolved")).toBeNull();
     expect(screen.queryByText("missing")).toBeNull();
     expect(screen.queryByText("did_not_enter")).toBeNull();
-    expect(screen.queryByText("national-club-v9")).toBeNull();
+    expect(screen.queryByText("national-club-v10")).toBeNull();
     expect(screen.queryByText("2026-08-20")).toBeNull();
   });
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { createMethodologyMetadata } from "@/lib/analytics/pageMetadata";
 import {
   getRecencyUnits,
-  NATIONAL_FORMULA_V9,
+  NATIONAL_FORMULA_V10,
 } from "@/lib/nationalRanking/formula";
 
 import MethodologyTableRegion from "./_components/MethodologyTableRegion";
@@ -22,11 +22,11 @@ const STAGE_ROWS = [
 ] as const;
 
 const COMPETITION_PRESTIGE_ROWS = [
-  ["국토정중앙배(양구)", "1등급", 3],
-  ["춘천소양강배", "2등급", 2],
-  ["경인지구 연맹전", "3등급", 1],
-  ["하늘내린인제", "3등급", 1],
-  ["영월 전국대학 동아리 테니스 대회", "3등급", 1],
+  ["국토정중앙배(양구)", "1등급", 6],
+  ["춘천소양강배", "2등급", 5],
+  ["경인지구 연맹전", "3등급", 4],
+  ["하늘내린인제", "3등급", 4],
+  ["영월 전국대학 동아리 테니스 대회", "3등급", 4],
 ] as const;
 
 const RECENCY_ROWS = [
@@ -125,7 +125,7 @@ export default function MethodologyPage() {
                 {STAGE_ROWS.map(([label, stage]) => (
                   <tr key={stage}>
                     <th scope="row">{label}</th>
-                    <td>{NATIONAL_FORMULA_V9.stageUnits[stage]}</td>
+                    <td>{NATIONAL_FORMULA_V10.stageUnits[stage]}</td>
                   </tr>
                 ))}
               </tbody>
@@ -188,7 +188,7 @@ export default function MethodologyPage() {
                   <tr key={label}>
                     <th scope="row">{label}</th>
                     <td>
-                      {getRecencyUnits(2026, 2026 - age, NATIONAL_FORMULA_V9)}
+                      {getRecencyUnits(2026, 2026 - age, NATIONAL_FORMULA_V10)}
                     </td>
                   </tr>
                 ))}
@@ -258,15 +258,15 @@ export default function MethodologyPage() {
           <ol className="methodology-examples">
             <li>
               <span>최신 개최연도 국토정중앙배(양구) 우승</span>
-              <code>55 × 3 × 4 = 660점</code>
+              <code>21 × 6 × 4 = 504점</code>
             </li>
             <li>
               <span>1년 전 같은 대회 우승</span>
-              <code>55 × 3 × 2 = 330점</code>
+              <code>21 × 6 × 2 = 252점</code>
             </li>
             <li>
               <span>최신 개최연도 경인지구 연맹전 준우승</span>
-              <code>34 × 1 × 4 = 136점</code>
+              <code>13 × 4 × 4 = 208점</code>
             </li>
           </ol>
         </section>

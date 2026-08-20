@@ -461,3 +461,56 @@ describe("national ranking formula v9", () => {
     ).toBe(expected);
   });
 });
+
+describe("national ranking formula v10", () => {
+  it("balances tournament prestige with the compact integer stage scale", () => {
+    const formula = Reflect.get(nationalFormula, "NATIONAL_FORMULA_V10");
+
+    expect(formula).toMatchObject({
+      version: "national-club-v10",
+      stageUnits: {
+        champion: 21,
+        runner_up: 13,
+        semifinal: 8,
+        quarterfinal: 5,
+        round_of_16: 3,
+        round_of_32: 2,
+        round_of_64: 1,
+        first_match_loss: 0,
+      },
+      tournamentUnits: {
+        yanggu: 6,
+        chuncheon: 5,
+        gyeongin: 4,
+        inje: 4,
+        yeongwol: 4,
+      },
+      excludedTournamentSlugs: ["wemix"],
+      recencyUnits: [4, 2, 1],
+    });
+    expect(formula.tournamentUnits).not.toHaveProperty("wemix");
+  });
+
+  it.each([
+    ["yanggu", 504],
+    ["chuncheon", 420],
+    ["gyeongin", 336],
+    ["inje", 336],
+    ["yeongwol", 336],
+  ])("scores a current %s champion with the balanced weight", (tournamentSlug, expected) => {
+    const formula = Reflect.get(nationalFormula, "NATIONAL_FORMULA_V10");
+
+    expect(
+      scoreVerifiedResult(
+        {
+          stage: "champion",
+          tournamentSlug,
+          actualEntrants: 64,
+          latestEditionYear: 2026,
+          editionYear: 2026,
+        },
+        formula
+      )
+    ).toBe(expected);
+  });
+});

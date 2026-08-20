@@ -159,6 +159,7 @@ export type CalculatedNationalRanking = {
     | "national-club-v6"
     | "national-club-v7"
     | "national-club-v8"
-    | "national-club-v9";
+    | "national-club-v9"
+    | "national-club-v10";
   rows: CalculatedRankingRow[];
 };

@@ -32,6 +32,7 @@ const dataset = {
   tournaments: [
     { slug: "yanggu", name: "National", scope: "national", scopeFactor: 1 },
     { slug: "gyeongin", name: "Regional", scope: "regional", scopeFactor: 0.85 },
+    { slug: "wemix", name: "Excluded", scope: "national", scopeFactor: 1 },
   ],
   editions: [
     {
@@ -60,6 +61,15 @@ const dataset = {
       actualEntrants: 24,
       sourceStatus: "unresolved",
       sourceRefs: ["national-2024-men.pdf"],
+    },
+    {
+      key: "wemix-2025-men",
+      tournamentSlug: "wemix",
+      year: 2025,
+      gender: "men",
+      actualEntrants: 8,
+      sourceStatus: "verified",
+      sourceRefs: ["wemix-2025-men.pdf"],
     },
   ],
   results: [
@@ -104,6 +114,16 @@ const dataset = {
       sourceRef: "national-2024-men.pdf#alpha",
       note: "",
     },
+    {
+      editionKey: "wemix-2025-men",
+      clubSlug: "alpha",
+      sourceTeamName: "Alpha WEMIX",
+      teamLabel: "",
+      stage: "champion",
+      qualityStatus: "verified",
+      sourceRef: "wemix-2025-men.pdf#alpha",
+      note: "",
+    },
   ],
 } satisfies NationalRankingDataset;
 
@@ -113,22 +133,22 @@ describe("buildNationalRankingSeedPlan", () => {
 
     expect(plan.sourceRevision).toBe("revision-123");
     expect(plan.formula).toMatchObject({
-      version: "national-club-v9",
-      displayName: "National Club Ranking v9",
+      version: "national-club-v10",
+      displayName: "National Club Ranking v10",
       effectiveOn: "2026-08-20",
     });
     expect(plan.formula.config).toMatchObject({
-      version: "national-club-v9",
+      version: "national-club-v10",
       stageUnits: {
-        champion: 55,
-        runner_up: 34,
+        champion: 21,
+        runner_up: 13,
       },
       tournamentUnits: {
-        yanggu: 3,
-        chuncheon: 2,
-        gyeongin: 1,
-        inje: 1,
-        yeongwol: 1,
+        yanggu: 6,
+        chuncheon: 5,
+        gyeongin: 4,
+        inje: 4,
+        yeongwol: 4,
       },
       excludedTournamentSlugs: ["wemix"],
       recencyUnits: [4, 2, 1],
@@ -184,6 +204,7 @@ describe("buildNationalRankingSeedPlan", () => {
       expect.arrayContaining([
         expect.objectContaining({ sourceTeamName: "Unresolved Men" }),
         expect.objectContaining({ editionKey: "national-2024-men-unresolved" }),
+        expect.objectContaining({ tournamentSlug: "wemix" }),
       ])
     );
     expect(plan.rows.every((row) => Number.isInteger(row.totalPoints))).toBe(
