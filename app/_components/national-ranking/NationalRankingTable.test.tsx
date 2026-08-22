@@ -439,6 +439,57 @@ describe("NationalRankingTable", () => {
     ).toBeNull();
   });
 
+  it("왕관은 저장된 순서와 관계없이 늦게 열린 대회부터 표시한다", () => {
+    const rankingsWithUnsortedHonors: NationalRankingPageData["rankings"] = {
+      ...rankings,
+      men: [
+        {
+          ...rankings.men[0],
+          honors: [
+            {
+              editionKey: "yeongwol-2026-men",
+              tournamentSlug: "yeongwol",
+              tournamentName: "영월 전국대학 동아리 테니스 대회",
+              year: 2026,
+              gender: "men",
+              stage: "champion",
+            },
+            {
+              editionKey: "inje-2026-men",
+              tournamentSlug: "inje",
+              tournamentName: "하늘내린인제",
+              year: 2026,
+              gender: "men",
+              stage: "champion",
+            },
+            {
+              editionKey: "yanggu-2026-men",
+              tournamentSlug: "yanggu",
+              tournamentName: "국토정중앙배(양구)",
+              year: 2026,
+              gender: "men",
+              stage: "champion",
+            },
+          ],
+        },
+        ...rankings.men.slice(1),
+      ],
+    };
+
+    render(<NationalRankingTable rankings={rankingsWithUnsortedHonors} />);
+
+    const honors = screen.getAllByLabelText("최근 1년 수상 기록")[0];
+    expect(
+      within(honors)
+        .getAllByRole("button")
+        .map((button) => button.getAttribute("aria-label"))
+    ).toEqual([
+      "2026 양구 남자부 우승",
+      "2026 인제 남자부 우승",
+      "2026 영월 남자부 우승",
+    ]);
+  });
+
   it("동아리명과 왕관 묶음을 같은 하단 행에 배치한다", () => {
     render(<NationalRankingTable rankings={rankings} />);
 

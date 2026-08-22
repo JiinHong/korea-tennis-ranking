@@ -90,6 +90,35 @@ describe("getNationalClubResultsPageData", () => {
     });
   });
 
+  test("같은 연도의 성적은 늦게 열린 대회부터 정렬한다", async () => {
+    const data = await getNationalClubResultsPageData(
+      "seoultech-neutinamu",
+      createAdapter([
+        resultRow({
+          tournament_slug: "yeongwol",
+          tournament_name: "영월 전국대학 동아리 테니스 대회",
+          edition_year: 2026,
+        }),
+        resultRow({
+          tournament_slug: "inje",
+          tournament_name: "하늘내린인제",
+          edition_year: 2026,
+        }),
+        resultRow({
+          tournament_slug: "yanggu",
+          tournament_name: "국토정중앙배(양구)",
+          edition_year: 2026,
+        }),
+      ])
+    );
+
+    expect(data?.results.map((result) => result.tournamentSlug)).toEqual([
+      "yanggu",
+      "inje",
+      "yeongwol",
+    ]);
+  });
+
   test("16강 이상 성적이 없는 동아리도 빈 결과 페이지로 유지한다", async () => {
     await expect(
       getNationalClubResultsPageData(

@@ -21,7 +21,7 @@ function occurrence(year: number, tournamentSlug: string): Occurrence {
 }
 
 describe("tournament presentation", () => {
-  it("sorts tournaments in the usual within-year calendar order", () => {
+  it("sorts tournaments from the latest to the earliest within a year", () => {
     const results = [
       occurrence(2026, "wemix"),
       occurrence(2026, "yanggu"),
@@ -32,16 +32,16 @@ describe("tournament presentation", () => {
     ].sort(compareTournamentOccurrences);
 
     expect(results.map((result) => result.tournamentSlug)).toEqual([
-      "yeongwol",
-      "gyeongin",
-      "inje",
-      "yanggu",
-      "chuncheon",
       "wemix",
+      "chuncheon",
+      "yanggu",
+      "inje",
+      "gyeongin",
+      "yeongwol",
     ]);
   });
 
-  it("uses the actual 2025 tournament order", () => {
+  it("uses the reverse of the actual 2025 tournament order", () => {
     const results = [
       occurrence(2025, "wemix"),
       occurrence(2025, "gyeongin"),
@@ -52,12 +52,12 @@ describe("tournament presentation", () => {
     ].sort(compareTournamentOccurrences);
 
     expect(results.map((result) => result.tournamentSlug)).toEqual([
-      "yeongwol",
-      "inje",
-      "yanggu",
-      "chuncheon",
-      "gyeongin",
       "wemix",
+      "gyeongin",
+      "chuncheon",
+      "yanggu",
+      "inje",
+      "yeongwol",
     ]);
   });
 

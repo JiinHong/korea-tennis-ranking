@@ -5,21 +5,21 @@ type TournamentOccurrence = {
 };
 
 const DEFAULT_TOURNAMENT_ORDER = [
-  "yeongwol",
-  "gyeongin",
-  "inje",
-  "yanggu",
-  "chuncheon",
   "wemix",
+  "chuncheon",
+  "yanggu",
+  "inje",
+  "gyeongin",
+  "yeongwol",
 ] as const;
 
 const TOURNAMENT_ORDER_2025 = [
-  "yeongwol",
-  "inje",
-  "yanggu",
-  "chuncheon",
-  "gyeongin",
   "wemix",
+  "gyeongin",
+  "chuncheon",
+  "yanggu",
+  "inje",
+  "yeongwol",
 ] as const;
 
 const TOURNAMENT_SHORT_NAMES: Readonly<Record<string, string>> = {

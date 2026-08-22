@@ -11,6 +11,7 @@ import {
   isLatestTournamentEdition,
 } from "@/lib/nationalRanking/recentHonors";
 import type { NationalRankingPageData } from "@/lib/nationalRanking/repository";
+import { compareTournamentOccurrences } from "@/lib/nationalRanking/tournamentPresentation";
 import type { RankingGender } from "@/lib/nationalRanking/types";
 
 import NationalRankingExpandedResults from "./NationalRankingExpandedResults";
@@ -121,10 +122,11 @@ export default function NationalRankingTable({
               </tr>
             ) : (
               rows.map((row) => {
-                const displayedHonors = row.honors.filter(
-                  (honor) =>
+                const displayedHonors = row.honors
+                  .filter((honor) =>
                     isLatestTournamentEdition(honor, latestEditionYears)
-                );
+                  )
+                  .sort(compareTournamentOccurrences);
                 const isExpanded = expandedClubSlug === row.clubSlug;
                 const regionId = `national-ranking-${activeGender}-${row.clubSlug}-results`;
                 const campusRankingLink = getCampusRankingLink(row.clubSlug);
