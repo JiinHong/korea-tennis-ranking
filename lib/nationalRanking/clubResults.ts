@@ -212,6 +212,6 @@ export async function getNationalClubResultsPageData(
 
 export const getCachedNationalClubResultsPageData = unstable_cache(
   (clubSlug: string) => getNationalClubResultsPageData(clubSlug),
-  ["national-club-results-v2"],
+  ["national-club-results-v3"],
   { tags: ["national-club-results"], revalidate: 300 }
 );

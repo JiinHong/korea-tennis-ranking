@@ -214,4 +214,12 @@ describe("default national club results adapter", () => {
       nullsFirst: false,
     });
   });
+
+  test("정렬 규칙이 바뀐 결과는 새 캐시 버전으로 제공한다", () => {
+    expect(mocks.unstableCache).toHaveBeenCalledWith(
+      expect.any(Function),
+      ["national-club-results-v3"],
+      { tags: ["national-club-results"], revalidate: 300 }
+    );
+  });
 });
