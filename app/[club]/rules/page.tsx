@@ -61,14 +61,15 @@ export default async function ClubRulesPage({ params }: ClubRulesPageProps) {
   }
 
   const isSeoultech = club.slug === "seoultech";
-  const challengeDescription = isSeoultech
+  const usesChallengeGroups = isSeoultech || club.slug === "petc";
+  const challengeDescription = usesChallengeGroups
     ? "본인 묶음과 위 4묶음에 속한 상위 선수에게 도전할 수 있습니다. 이 기준으로 가능한 하위 선수의 도전에는 특별한 사유가 없다면 응해야 합니다."
     : CORE_RULES[0].description;
   const coreRules = CORE_RULES.map((rule) =>
     rule.number === "01"
       ? {
           ...rule,
-          title: isSeoultech ? "위 4묶음까지 도전" : rule.title,
+          title: usesChallengeGroups ? "위 4묶음까지 도전" : rule.title,
           description: challengeDescription,
         }
       : rule,
@@ -121,7 +122,7 @@ export default async function ClubRulesPage({ params }: ClubRulesPageProps) {
           aria-labelledby="challenge-title"
         >
           <h2 id="challenge-title">도전 상대와 순위 변동</h2>
-          {isSeoultech ? (
+          {usesChallengeGroups ? (
             <>
               <p>
                 이번 시즌 확정 경기가 있는 선수가 묶음의 시작이 됩니다. 그 아래에
@@ -146,7 +147,7 @@ export default async function ClubRulesPage({ params }: ClubRulesPageProps) {
           </p>
           <div className="methodology-formula club-rules-example" role="note">
             <code>
-              {isSeoultech
+              {usesChallengeGroups
                 ? "예: [1위 경기 + 2·3위 미경기] / [4위 경기 + 5·6위 미경기] → 각각 한 묶음"
                 : "예: 활동 순서 10위 선수 앞에 부상 선수가 1명 있다면, 부상 선수를 제외하고 위쪽의 활동 선수 4명까지 도전 가능"}
             </code>

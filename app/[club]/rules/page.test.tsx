@@ -102,18 +102,18 @@ describe("ClubRulesPage", () => {
     ).toBe("/seoultech");
   });
 
-  it("PETC에서는 공통 운영 규칙만 보여주고 서울과기대 기록은 노출하지 않는다", async () => {
+  it("PETC에도 같은 묶음 규칙을 안내하되 서울과기대 기록은 노출하지 않는다", async () => {
     await renderRulesPage("petc");
 
     expect(screen.getByText("고려대학교 체육교육과 PETC")).toBeDefined();
     expect(screen.queryByText("고려대학교 체육교육과 PETC · 현재")).toBeNull();
     expect(screen.queryByText(/37명의 선수/)).toBeNull();
     expect(screen.queryByText(/152경기/)).toBeNull();
-    expect(screen.queryByText(/본인 묶음과 위 4묶음/)).toBeNull();
+    expect(screen.getAllByText(/본인 묶음과 위 4묶음/).length).toBeGreaterThan(0);
     expect(
       within(
         screen.getByRole("region", { name: "도전 상대와 순위 변동" }),
-      ).getByText(/활동 중인 선수 기준으로 본인보다 위 4명/),
+      ).getByText(/이번 시즌.*묶음의 시작.*그 아래.*0경기.*같은 묶음/),
     ).toBeDefined();
     expect(
       screen

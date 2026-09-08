@@ -198,7 +198,7 @@ export async function GET(_request: Request, context: MatchRouteContext) {
     const challengePositions = getChallengePositions(
       validationContext.players,
       validationContext.previousMatches,
-      club.slug === "seoultech",
+      club.slug === "seoultech" || club.slug === "petc",
     );
     const players = validationContext.players
       .filter((player) => player.status === "active")

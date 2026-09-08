@@ -356,7 +356,7 @@ describe("GET /api/clubs/[club]/matches", () => {
 
   it.each([
     ["seoultech", [0, 0, 0, 1, 1, 1]],
-    ["petc", [0, 1, 2, 3, 4, 5]],
+    ["petc", [0, 0, 0, 1, 1, 1]],
   ])(
     "returns club-specific challenge positions without changing ranks for %s",
     async (club, expected) => {

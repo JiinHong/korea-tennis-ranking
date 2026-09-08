@@ -56,6 +56,7 @@ beforeAll(async () => {
   await db.exec(readMigration("20260710110954_guard_public_match_rpc.sql"));
   await db.exec(readMigration(migrationName));
   await db.exec(readMigration("20260908164305_correct_seoultech_challenge_group_direction.sql"));
+  await db.exec(readMigration("20260908165717_enable_petc_unplayed_challenge_groups.sql"));
 }, 30000);
 
 beforeEach(async () => {
@@ -126,9 +127,10 @@ describe("Seoultech unplayed challenge groups in Postgres", () => {
     },
   );
 
-  it("keeps ordinary four-player limits for PETC", async () => {
+  it("applies the same grouped four-position limit to PETC", async () => {
     await db.exec("update clubs set slug='petc';");
-    await expect(record(15, 1, "petc")).rejects.toThrow(
+    expect((await record(15, 1, "petc")).rows[0].result.rankChanged).toBe(false);
+    await expect(record(18, 1, "petc")).rejects.toThrow(
       "도전 가능한 순위 범위를 벗어났습니다.",
     );
   });
