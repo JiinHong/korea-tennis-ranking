@@ -11,6 +11,7 @@ export type RankingRuleConfig = {
   challengeRange: number;
   rematchCooldownDays: number;
   inactivityPenaltyDrop: number;
+  groupUnplayedPlayers?: boolean;
 };
 
 export type MatchInput = {
@@ -43,7 +44,10 @@ export function validateScore(input: MatchInput): RuleResult {
   const loserScore = Math.min(input.player1Score, input.player2Score);
 
   if (loserScore < 0 || loserScore > 5) {
-    return { ok: false, message: "패자의 점수는 0점부터 5점까지만 가능합니다." };
+    return {
+      ok: false,
+      message: "패자의 점수는 0점부터 5점까지만 가능합니다.",
+    };
   }
 
   return { ok: true };
@@ -58,7 +62,7 @@ export type ResolvedMatchRoles = {
 
 function findRankedPlayer(
   players: RankedPlayer[],
-  playerId: string
+  playerId: string,
 ): RankedPlayer {
   const player = players.find((candidate) => candidate.id === playerId);
 
@@ -71,7 +75,7 @@ function findRankedPlayer(
 
 export function resolveMatchRoles(
   players: RankedPlayer[],
-  input: MatchInput
+  input: MatchInput,
 ): ResolvedMatchRoles {
   const player1 = findRankedPlayer(players, input.player1Id);
   const player2 = findRankedPlayer(players, input.player2Id);
@@ -79,7 +83,8 @@ export function resolveMatchRoles(
   const defender = player1.rank < player2.rank ? player1 : player2;
   const winnerId =
     input.player1Score > input.player2Score ? input.player1Id : input.player2Id;
-  const loserId = winnerId === input.player1Id ? input.player2Id : input.player1Id;
+  const loserId =
+    winnerId === input.player1Id ? input.player2Id : input.player1Id;
 
   return {
     challenger,
@@ -93,7 +98,7 @@ export function applyMatchRanking(
   players: RankedPlayer[],
   challengerId: string,
   defenderId: string,
-  winnerId: string
+  winnerId: string,
 ): RankedPlayer[] {
   if (winnerId === defenderId) {
     return players;
@@ -117,29 +122,55 @@ export function applyMatchRanking(
     .sort((a, b) => a.rank - b.rank);
 }
 
-function activeRankIndex(players: RankedPlayer[], playerId: string): number {
-  return players
+// Only current-season confirmed matches belong in previousMatches.
+// Each run of unplayed players shares a position with the next played player.
+export function getChallengePositions(
+  players: RankedPlayer[],
+  previousMatches: PreviousMatch[],
+  groupUnplayedPlayers: boolean,
+): Map<string, number> {
+  const playedPlayerIds = new Set(
+    previousMatches.flatMap((match) => [match.playerAId, match.playerBId]),
+  );
+  const positions = new Map<string, number>();
+  let position = 0;
+
+  for (const player of players
     .filter((player) => player.status === "active")
-    .sort((a, b) => a.rank - b.rank)
-    .findIndex((player) => player.id === playerId);
+    .sort((a, b) => a.rank - b.rank)) {
+    positions.set(player.id, position);
+    if (!groupUnplayedPlayers || playedPlayerIds.has(player.id)) {
+      position += 1;
+    }
+  }
+
+  return positions;
 }
 
 export function validateChallengeRange(
   players: RankedPlayer[],
   challengerId: string,
   defenderId: string,
-  config: RankingRuleConfig
+  config: RankingRuleConfig,
+  previousMatches: PreviousMatch[] = [],
 ): RuleResult {
-  const challengerIndex = activeRankIndex(players, challengerId);
-  const defenderIndex = activeRankIndex(players, defenderId);
+  const positions = getChallengePositions(
+    players,
+    previousMatches,
+    config.groupUnplayedPlayers ?? false,
+  );
+  const challengerIndex = positions.get(challengerId);
+  const defenderIndex = positions.get(defenderId);
 
-  if (challengerIndex === -1 || defenderIndex === -1) {
+  if (challengerIndex === undefined || defenderIndex === undefined) {
     return { ok: false, message: "활동 중인 선수끼리만 경기할 수 있습니다." };
   }
 
   const distance = challengerIndex - defenderIndex;
+  const challenger = findRankedPlayer(players, challengerId);
+  const defender = findRankedPlayer(players, defenderId);
 
-  if (distance < 1 || distance > config.challengeRange) {
+  if (challenger.rank <= defender.rank || distance > config.challengeRange) {
     return { ok: false, message: "도전 가능한 순위 범위를 벗어났습니다." };
   }
 
@@ -148,7 +179,7 @@ export function validateChallengeRange(
 
 export function getRematchAvailableOn(
   playedOn: string,
-  cooldownDays: number
+  cooldownDays: number,
 ): string {
   const [year, month, day] = playedOn.split("-").map(Number);
   const available = new Date(Date.UTC(year, month - 1, day + cooldownDays));
@@ -172,7 +203,7 @@ function samePair(input: MatchInput, previousMatch: PreviousMatch): boolean {
 export function validateRematchCooldown(
   input: MatchInput,
   previousMatches: PreviousMatch[],
-  config: RankingRuleConfig
+  config: RankingRuleConfig,
 ): RuleResult {
   const hasRecentMatch = previousMatches.some((match) => {
     return (
@@ -184,7 +215,10 @@ export function validateRematchCooldown(
   });
 
   if (hasRecentMatch) {
-    return { ok: false, message: "동일 선수와는 2주 동안 재경기할 수 없습니다." };
+    return {
+      ok: false,
+      message: "동일 선수와는 2주 동안 재경기할 수 없습니다.",
+    };
   }
 
   return { ok: true };

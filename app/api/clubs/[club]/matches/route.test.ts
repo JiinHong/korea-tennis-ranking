@@ -63,7 +63,7 @@ describe("POST /api/clubs/[club]/matches", () => {
         player2Score: 6,
         sourceKey: "submission-1",
       }),
-      { params: Promise.resolve({ club: "seoultech" }) }
+      { params: Promise.resolve({ club: "seoultech" }) },
     );
     const body = await response.json();
 
@@ -78,7 +78,7 @@ describe("POST /api/clubs/[club]/matches", () => {
         player2Score: 6,
         playedOn: "2026-07-10",
       },
-      "submission-1"
+      "submission-1",
     );
     expect(body).toEqual({
       ok: true,
@@ -114,7 +114,7 @@ describe("POST /api/clubs/[club]/matches", () => {
         player2Score: 6,
         sourceKey: "submission-1",
       }),
-      { params: Promise.resolve({ club: "seoultech" }) }
+      { params: Promise.resolve({ club: "seoultech" }) },
     );
 
     expect(response.status).toBe(200);
@@ -134,7 +134,7 @@ describe("POST /api/clubs/[club]/matches", () => {
         player1Score: 4,
         player2Score: 6,
       }),
-      { params: Promise.resolve({ club: "seoultech" }) }
+      { params: Promise.resolve({ club: "seoultech" }) },
     );
 
     expect(response.status).toBe(400);
@@ -154,7 +154,7 @@ describe("POST /api/clubs/[club]/matches", () => {
         player2Score: 4,
         sourceKey: "submission-1",
       }),
-      { params: Promise.resolve({ club: "seoultech" }) }
+      { params: Promise.resolve({ club: "seoultech" }) },
     );
 
     expect(response.status).toBe(400);
@@ -174,7 +174,7 @@ describe("POST /api/clubs/[club]/matches", () => {
         player2Score: 4,
         sourceKey: "submission-1",
       }),
-      { params: Promise.resolve({ club: "seoultech" }) }
+      { params: Promise.resolve({ club: "seoultech" }) },
     );
     const body = await response.json();
 
@@ -188,7 +188,7 @@ describe("POST /api/clubs/[club]/matches", () => {
 
   it("rejects a challenge outside the allowed range", async () => {
     vi.mocked(recordSupabaseMatch).mockRejectedValue(
-      new Error("도전 가능한 순위 범위를 벗어났습니다.")
+      new Error("도전 가능한 순위 범위를 벗어났습니다."),
     );
 
     const response = await POST(
@@ -199,7 +199,7 @@ describe("POST /api/clubs/[club]/matches", () => {
         player2Score: 6,
         sourceKey: "submission-1",
       }),
-      { params: Promise.resolve({ club: "seoultech" }) }
+      { params: Promise.resolve({ club: "seoultech" }) },
     );
     const body = await response.json();
 
@@ -212,7 +212,7 @@ describe("POST /api/clubs/[club]/matches", () => {
 
   it("rejects a rematch within the cooldown window", async () => {
     vi.mocked(recordSupabaseMatch).mockRejectedValue(
-      new Error("동일 선수와는 2주 동안 재경기할 수 없습니다.")
+      new Error("동일 선수와는 2주 동안 재경기할 수 없습니다."),
     );
 
     const response = await POST(
@@ -223,7 +223,7 @@ describe("POST /api/clubs/[club]/matches", () => {
         player2Score: 6,
         sourceKey: "submission-1",
       }),
-      { params: Promise.resolve({ club: "seoultech" }) }
+      { params: Promise.resolve({ club: "seoultech" }) },
     );
     const body = await response.json();
 
@@ -236,7 +236,7 @@ describe("POST /api/clubs/[club]/matches", () => {
 
   it("tells an injured player to report recovery after the database rejects the match", async () => {
     vi.mocked(recordSupabaseMatch).mockRejectedValue(
-      new Error("활동 중인 선수끼리만 경기할 수 있습니다.")
+      new Error("활동 중인 선수끼리만 경기할 수 있습니다."),
     );
     vi.mocked(getSupabaseMatchValidationContext).mockResolvedValue({
       ...validContext,
@@ -254,7 +254,7 @@ describe("POST /api/clubs/[club]/matches", () => {
         player2Score: 4,
         sourceKey: "injured-submission",
       }),
-      { params: Promise.resolve({ club: "seoultech" }) }
+      { params: Promise.resolve({ club: "seoultech" }) },
     );
 
     expect(response.status).toBe(400);
@@ -267,7 +267,7 @@ describe("POST /api/clubs/[club]/matches", () => {
 
   it("keeps the generic database message for other non-active statuses", async () => {
     vi.mocked(recordSupabaseMatch).mockRejectedValue(
-      new Error("활동 중인 선수끼리만 경기할 수 있습니다.")
+      new Error("활동 중인 선수끼리만 경기할 수 있습니다."),
     );
     vi.mocked(getSupabaseMatchValidationContext).mockResolvedValue({
       ...validContext,
@@ -285,7 +285,7 @@ describe("POST /api/clubs/[club]/matches", () => {
         player2Score: 4,
         sourceKey: "inactive-submission",
       }),
-      { params: Promise.resolve({ club: "seoultech" }) }
+      { params: Promise.resolve({ club: "seoultech" }) },
     );
 
     expect(response.status).toBe(400);
@@ -304,7 +304,7 @@ describe("POST /api/clubs/[club]/matches", () => {
         player2Score: 6,
         sourceKey: "submission-1",
       }),
-      { params: Promise.resolve({ club: "unknown" }) }
+      { params: Promise.resolve({ club: "unknown" }) },
     );
     const body = await response.json();
 
@@ -346,13 +346,46 @@ describe("GET /api/clubs/[club]/matches", () => {
       challengeRange: 2,
       rematchCooldowns: [],
       players: [
-        { id: "p1", name: "오준석", rank: 1 },
-        { id: "p2", name: "김도훈", rank: 2 },
-        { id: "p3", name: "박정용", rank: 3 },
-        { id: "p4", name: "이민우", rank: 4 },
+        { id: "p1", name: "오준석", rank: 1, challengePosition: 0 },
+        { id: "p2", name: "김도훈", rank: 2, challengePosition: 0 },
+        { id: "p3", name: "박정용", rank: 3, challengePosition: 0 },
+        { id: "p4", name: "이민우", rank: 4, challengePosition: 0 },
       ],
     });
   });
+
+  it.each([
+    ["seoultech", [0, 0, 0, 1, 1, 1]],
+    ["petc", [0, 1, 2, 3, 4, 5]],
+  ])(
+    "returns club-specific challenge positions without changing ranks for %s",
+    async (club, expected) => {
+      vi.mocked(getSupabaseMatchValidationContext).mockResolvedValue({
+        ...validContext,
+        players: Array.from({ length: 6 }, (_, index) => ({
+          id: `p${index + 1}`,
+          name: `선수${index + 1}`,
+          rank: index + 1,
+          status: "active" as const,
+        })).reverse(),
+        previousMatches: [
+          { playerAId: "p3", playerBId: "p6", playedOn: "2026-07-01" },
+        ],
+      });
+      const response = await GET(new Request("https://example.com"), {
+        params: Promise.resolve({ club: club as string }),
+      });
+      const body = await response.json();
+      expect(
+        body.players.map(
+          (player: { challengePosition: number }) => player.challengePosition,
+        ),
+      ).toEqual(expected);
+      expect(
+        body.players.map((player: { rank: number }) => player.rank),
+      ).toEqual([1, 2, 3, 4, 5, 6]);
+    },
+  );
 
   it("returns only active rematch cooldowns using the latest completed match per pair", async () => {
     vi.mocked(getSupabaseMatchValidationContext).mockResolvedValue({

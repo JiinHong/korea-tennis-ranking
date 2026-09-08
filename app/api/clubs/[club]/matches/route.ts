@@ -1,9 +1,8 @@
 import { getClubConfig } from "@/lib/campusRanking/config";
 import { recordSupabaseMatch } from "@/lib/supabase/matchCommands";
+import { getSupabaseMatchValidationContext } from "@/lib/supabase/rankingRepository";
 import {
-  getSupabaseMatchValidationContext,
-} from "@/lib/supabase/rankingRepository";
-import {
+  getChallengePositions,
   getRematchAvailableOn,
   validateScore,
   type MatchInput,
@@ -52,7 +51,7 @@ function badRequest(message: string) {
     },
     {
       status: 400,
-    }
+    },
   );
 }
 
@@ -74,7 +73,9 @@ function getSeoulDate(now = new Date()): string {
   return `${year}-${month}-${day}`;
 }
 
-function parseMatchSubmission(body: PublicMatchBody): ParsedMatchSubmission | null {
+function parseMatchSubmission(
+  body: PublicMatchBody,
+): ParsedMatchSubmission | null {
   if (
     typeof body.player1Id !== "string" ||
     typeof body.player2Id !== "string" ||
@@ -107,20 +108,16 @@ function rejectIfInvalid(result: RuleResult): Response | null {
   return badRequest(result.message);
 }
 
-function publicPlayer(player: RankedPlayer) {
-  return { id: player.id, name: player.name, rank: player.rank };
-}
-
 function getActiveRematchCooldowns(
   players: RankedPlayer[],
   previousMatches: PreviousMatch[],
   rematchCooldownDays: number,
-  today: string
+  today: string,
 ): PublicRematchCooldown[] {
   const activePlayerIds = new Set(
     players
       .filter((player) => player.status === "active")
-      .map((player) => player.id)
+      .map((player) => player.id),
   );
   const cooldownsByPair = new Map<string, PublicRematchCooldown>();
 
@@ -135,7 +132,7 @@ function getActiveRematchCooldowns(
 
     const availableOn = getRematchAvailableOn(
       match.playedOn,
-      rematchCooldownDays
+      rematchCooldownDays,
     );
 
     if (availableOn <= today) {
@@ -152,14 +149,16 @@ function getActiveRematchCooldowns(
   }
 
   return [...cooldownsByPair.values()].sort((a, b) =>
-    `${a.playerAId}:${a.playerBId}`.localeCompare(`${b.playerAId}:${b.playerBId}`)
+    `${a.playerAId}:${a.playerBId}`.localeCompare(
+      `${b.playerAId}:${b.playerBId}`,
+    ),
   );
 }
 
 async function getMatchFailureMessage(
   clubSlug: string,
   input: MatchInput,
-  error: unknown
+  error: unknown,
 ): Promise<string> {
   const message = error instanceof Error ? error.message : String(error);
 
@@ -172,7 +171,7 @@ async function getMatchFailureMessage(
     const selectedPlayerIds = new Set([input.player1Id, input.player2Id]);
     const hasInjuredPlayer = validationContext.players.some(
       (player) =>
-        selectedPlayerIds.has(player.id) && player.status === "injured"
+        selectedPlayerIds.has(player.id) && player.status === "injured",
     );
 
     return hasInjuredPlayer ? injuredMatchMessage : message;
@@ -188,16 +187,28 @@ export async function GET(_request: Request, context: MatchRouteContext) {
   if (!club) {
     return Response.json(
       { ok: false, message: "등록되지 않은 동아리입니다." },
-      { status: 404 }
+      { status: 404 },
     );
   }
 
   try {
-    const validationContext = await getSupabaseMatchValidationContext(club.slug);
+    const validationContext = await getSupabaseMatchValidationContext(
+      club.slug,
+    );
+    const challengePositions = getChallengePositions(
+      validationContext.players,
+      validationContext.previousMatches,
+      club.slug === "seoultech",
+    );
     const players = validationContext.players
       .filter((player) => player.status === "active")
       .sort((a, b) => a.rank - b.rank)
-      .map(publicPlayer);
+      .map((player) => ({
+        id: player.id,
+        name: player.name,
+        rank: player.rank,
+        challengePosition: challengePositions.get(player.id),
+      }));
 
     return Response.json({
       ok: true,
@@ -207,7 +218,7 @@ export async function GET(_request: Request, context: MatchRouteContext) {
         validationContext.players,
         validationContext.previousMatches,
         validationContext.config.rematchCooldownDays,
-        getSeoulDate()
+        getSeoulDate(),
       ),
     });
   } catch (error) {
@@ -229,7 +240,7 @@ export async function POST(request: Request, context: MatchRouteContext) {
       },
       {
         status: 404,
-      }
+      },
     );
   }
 
@@ -275,7 +286,7 @@ export async function POST(request: Request, context: MatchRouteContext) {
       },
       {
         status: match.duplicate ? 200 : 201,
-      }
+      },
     );
   } catch (error) {
     return badRequest(await getMatchFailureMessage(club.slug, input, error));

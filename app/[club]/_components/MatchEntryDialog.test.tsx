@@ -26,7 +26,7 @@ function optionValues(label: string): string[] {
 function optionByValue(label: string, value: string): HTMLOptionElement {
   const select = screen.getByLabelText(label) as HTMLSelectElement;
   const option = Array.from(select.options).find(
-    (candidate) => candidate.value === value
+    (candidate) => candidate.value === value,
   );
 
   if (!option) {
@@ -45,6 +45,53 @@ beforeEach(() => {
 });
 
 describe("MatchEntryDialog", () => {
+  it.each([
+    ["선수 1", "선수 2"],
+    ["선수 2", "선수 1"],
+  ])(
+    "filters %s by grouped positions including the same group",
+    async (selectedLabel, opponentLabel) => {
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockResolvedValue({
+          ok: true,
+          json: async () => ({
+            ok: true,
+            players: rankedPlayers(12).map((player, index) => ({
+              ...player,
+              challengePosition: Math.floor(index / 3),
+            })),
+            challengeRange: 1,
+            rematchCooldowns: [],
+          }),
+        }),
+      );
+      render(
+        <MatchEntryDialog
+          clubSlug="seoultech"
+          open
+          onClose={vi.fn()}
+          onRecorded={vi.fn()}
+        />,
+      );
+      fireEvent.change(await screen.findByLabelText(selectedLabel), {
+        target: { value: "p6" },
+      });
+      expect(optionValues(opponentLabel)).toEqual([
+        "",
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5",
+        "p7",
+        "p8",
+        "p9",
+      ]);
+      expect(optionByValue(opponentLabel, "p1").textContent).toContain("1위");
+    },
+  );
+
   it("부상 종료는 관리자에게 보고해야 한다고 안내한다", async () => {
     vi.stubGlobal(
       "fetch",
@@ -56,7 +103,7 @@ describe("MatchEntryDialog", () => {
           challengeRange: 4,
           rematchCooldowns: [],
         }),
-      })
+      }),
     );
 
     render(
@@ -65,13 +112,13 @@ describe("MatchEntryDialog", () => {
         open
         onClose={vi.fn()}
         onRecorded={vi.fn()}
-      />
+      />,
     );
 
     expect(
       screen.getByText(
-        "부상 중인 선수는 경기 결과를 입력할 수 없습니다. 부상이 끝났다면 관리자에게 부상 종료를 보고해주세요."
-      )
+        "부상 중인 선수는 경기 결과를 입력할 수 없습니다. 부상이 끝났다면 관리자에게 부상 종료를 보고해주세요.",
+      ),
     ).toBeDefined();
   });
 
@@ -96,7 +143,7 @@ describe("MatchEntryDialog", () => {
         open
         onClose={vi.fn()}
         onRecorded={vi.fn()}
-      />
+      />,
     );
 
     const player1 = await screen.findByLabelText("선수 1");
@@ -108,12 +155,12 @@ describe("MatchEntryDialog", () => {
         open
         onClose={vi.fn()}
         onRecorded={vi.fn()}
-      />
+      />,
     );
 
     await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
     expect((screen.getByLabelText("선수 1") as HTMLSelectElement).value).toBe(
-      "p1"
+      "p1",
     );
   });
 
@@ -149,11 +196,11 @@ describe("MatchEntryDialog", () => {
         open
         onClose={onClose}
         onRecorded={onRecorded}
-      />
+      />,
     );
 
     expect(
-      screen.getByRole("dialog", { name: "경기 결과 입력" })
+      screen.getByRole("dialog", { name: "경기 결과 입력" }),
     ).toBeDefined();
     expect(screen.queryByLabelText(/입력자/)).toBeNull();
 
@@ -177,7 +224,7 @@ describe("MatchEntryDialog", () => {
       expect.objectContaining({
         method: "POST",
         headers: { "Content-Type": "application/json" },
-      })
+      }),
     );
     const postOptions = fetchMock.mock.calls[1][1] as RequestInit;
     const body = JSON.parse(String(postOptions.body));
@@ -192,7 +239,7 @@ describe("MatchEntryDialog", () => {
     expect(onClose).toHaveBeenCalledTimes(1);
     expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
       "Match Result Submitted",
-      { club_slug: "seoultech" }
+      { club_slug: "seoultech" },
     );
   });
 
@@ -221,7 +268,7 @@ describe("MatchEntryDialog", () => {
             ok: false,
             message: "동일 선수와는 2주 동안 재경기할 수 없습니다.",
           }),
-        })
+        }),
     );
 
     render(
@@ -230,7 +277,7 @@ describe("MatchEntryDialog", () => {
         open
         onClose={onClose}
         onRecorded={onRecorded}
-      />
+      />,
     );
 
     fireEvent.change(await screen.findByLabelText("선수 1"), {
@@ -248,13 +295,13 @@ describe("MatchEntryDialog", () => {
     fireEvent.click(screen.getByRole("button", { name: "결과 반영" }));
 
     expect(
-      await screen.findByText("동일 선수와는 2주 동안 재경기할 수 없습니다.")
+      await screen.findByText("동일 선수와는 2주 동안 재경기할 수 없습니다."),
     ).toBeDefined();
     expect(onRecorded).not.toHaveBeenCalled();
     expect(onClose).not.toHaveBeenCalled();
     expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
       "Match Result Submission Failed",
-      { club_slug: "seoultech" }
+      { club_slug: "seoultech" },
     );
   });
 
@@ -282,7 +329,7 @@ describe("MatchEntryDialog", () => {
             ok: true,
             message: "경기 결과가 반영되었습니다.",
           }),
-        })
+        }),
     );
 
     render(
@@ -291,7 +338,7 @@ describe("MatchEntryDialog", () => {
         open
         onClose={vi.fn()}
         onRecorded={onRecorded}
-      />
+      />,
     );
 
     fireEvent.change(await screen.findByLabelText("선수 1"), {
@@ -311,11 +358,11 @@ describe("MatchEntryDialog", () => {
     await waitFor(() => expect(onRecorded).toHaveBeenCalledTimes(1));
     expect(analytics.trackAmplitudeEvent).toHaveBeenCalledWith(
       "Match Result Submitted",
-      { club_slug: "seoultech" }
+      { club_slug: "seoultech" },
     );
     expect(analytics.trackAmplitudeEvent).not.toHaveBeenCalledWith(
       "Match Result Submission Failed",
-      { club_slug: "seoultech" }
+      { club_slug: "seoultech" },
     );
   });
 
@@ -330,7 +377,7 @@ describe("MatchEntryDialog", () => {
           challengeRange: 4,
           rematchCooldowns: [],
         }),
-      })
+      }),
     );
 
     render(
@@ -339,7 +386,7 @@ describe("MatchEntryDialog", () => {
         open
         onClose={vi.fn()}
         onRecorded={vi.fn()}
-      />
+      />,
     );
 
     fireEvent.change(await screen.findByLabelText("선수 1"), {
@@ -370,7 +417,7 @@ describe("MatchEntryDialog", () => {
           challengeRange: 4,
           rematchCooldowns: [],
         }),
-      })
+      }),
     );
 
     render(
@@ -379,7 +426,7 @@ describe("MatchEntryDialog", () => {
         open
         onClose={vi.fn()}
         onRecorded={vi.fn()}
-      />
+      />,
     );
 
     fireEvent.change(await screen.findByLabelText("선수 2"), {
@@ -410,7 +457,7 @@ describe("MatchEntryDialog", () => {
           challengeRange: 2,
           rematchCooldowns: [],
         }),
-      })
+      }),
     );
 
     render(
@@ -419,20 +466,14 @@ describe("MatchEntryDialog", () => {
         open
         onClose={vi.fn()}
         onRecorded={vi.fn()}
-      />
+      />,
     );
 
     fireEvent.change(await screen.findByLabelText("선수 1"), {
       target: { value: "p5" },
     });
 
-    expect(optionValues("선수 2")).toEqual([
-      "",
-      "p3",
-      "p4",
-      "p6",
-      "p7",
-    ]);
+    expect(optionValues("선수 2")).toEqual(["", "p3", "p4", "p6", "p7"]);
   });
 
   it("uses active-player order when ranking numbers have gaps", async () => {
@@ -453,7 +494,7 @@ describe("MatchEntryDialog", () => {
           challengeRange: 2,
           rematchCooldowns: [],
         }),
-      })
+      }),
     );
 
     render(
@@ -462,20 +503,14 @@ describe("MatchEntryDialog", () => {
         open
         onClose={vi.fn()}
         onRecorded={vi.fn()}
-      />
+      />,
     );
 
     fireEvent.change(await screen.findByLabelText("선수 1"), {
       target: { value: "p7" },
     });
 
-    expect(optionValues("선수 2")).toEqual([
-      "",
-      "p1",
-      "p3",
-      "p11",
-      "p20",
-    ]);
+    expect(optionValues("선수 2")).toEqual(["", "p1", "p3", "p11", "p20"]);
   });
 
   it("disables a cooldown opponent in player 2 after player 1 is selected", async () => {
@@ -495,7 +530,7 @@ describe("MatchEntryDialog", () => {
             },
           ],
         }),
-      })
+      }),
     );
 
     render(
@@ -504,7 +539,7 @@ describe("MatchEntryDialog", () => {
         open
         onClose={vi.fn()}
         onRecorded={vi.fn()}
-      />
+      />,
     );
 
     fireEvent.change(await screen.findByLabelText("선수 1"), {
@@ -535,7 +570,7 @@ describe("MatchEntryDialog", () => {
             },
           ],
         }),
-      })
+      }),
     );
 
     render(
@@ -544,7 +579,7 @@ describe("MatchEntryDialog", () => {
         open
         onClose={vi.fn()}
         onRecorded={vi.fn()}
-      />
+      />,
     );
 
     fireEvent.change(await screen.findByLabelText("선수 2"), {
@@ -580,7 +615,7 @@ describe("MatchEntryDialog", () => {
             },
           ],
         }),
-      })
+      }),
     );
 
     render(
@@ -589,7 +624,7 @@ describe("MatchEntryDialog", () => {
         open
         onClose={vi.fn()}
         onRecorded={vi.fn()}
-      />
+      />,
     );
 
     fireEvent.change(await screen.findByLabelText("선수 1"), {
@@ -614,10 +649,10 @@ describe("MatchEntryDialog", () => {
     expect(player1Description?.getAttribute("aria-live")).toBe("polite");
     expect(player2Description?.getAttribute("aria-live")).toBe("polite");
     expect(player1Description?.textContent).toContain(
-      "2위 · 선수2 · 7월 25일부터 가능"
+      "2위 · 선수2 · 7월 25일부터 가능",
     );
     expect(player2Description?.textContent).toContain(
-      "4위 · 선수4 · 7월 24일부터 가능"
+      "4위 · 선수4 · 7월 24일부터 가능",
     );
   });
 });

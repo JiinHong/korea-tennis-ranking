@@ -15,6 +15,7 @@ type MatchOption = {
   id: string;
   name: string;
   rank: number;
+  challengePosition?: number;
 };
 
 type RematchCooldown = {
@@ -54,36 +55,40 @@ function createSourceKey() {
 function opponentOptions(
   players: MatchOption[],
   selectedPlayerId: string,
-  challengeRange: number
+  challengeRange: number,
 ): MatchOption[] {
   if (!selectedPlayerId) {
     return players;
   }
 
   const selectedIndex = players.findIndex(
-    (player) => player.id === selectedPlayerId
+    (player) => player.id === selectedPlayerId,
   );
 
   if (selectedIndex === -1) {
     return players;
   }
 
-  return players.filter((_, index) => {
-    const distance = Math.abs(index - selectedIndex);
+  const selectedPosition =
+    players[selectedIndex].challengePosition ?? selectedIndex;
+  return players.filter((player, index) => {
+    const distance = Math.abs(
+      (player.challengePosition ?? index) - selectedPosition,
+    );
 
-    return distance >= 1 && distance <= challengeRange;
+    return player.id !== selectedPlayerId && distance <= challengeRange;
   });
 }
 
 function findRematchCooldown(
   rematchCooldowns: RematchCooldown[],
   playerId: string,
-  opponentId: string
+  opponentId: string,
 ): RematchCooldown | undefined {
   return rematchCooldowns.find(
     (cooldown) =>
       (cooldown.playerAId === playerId && cooldown.playerBId === opponentId) ||
-      (cooldown.playerAId === opponentId && cooldown.playerBId === playerId)
+      (cooldown.playerAId === opponentId && cooldown.playerBId === playerId),
   );
 }
 
@@ -96,17 +101,19 @@ function formatAvailableOn(value: string): string {
 function rematchCooldownSummary(
   options: MatchOption[],
   selectedOpponentId: string,
-  rematchCooldowns: RematchCooldown[]
+  rematchCooldowns: RematchCooldown[],
 ): string {
   const unavailableOpponents = options.flatMap((player) => {
     const cooldown = findRematchCooldown(
       rematchCooldowns,
       player.id,
-      selectedOpponentId
+      selectedOpponentId,
     );
 
     return cooldown
-      ? [`${player.rank}위 · ${player.name} · ${formatAvailableOn(cooldown.availableOn)}`]
+      ? [
+          `${player.rank}위 · ${player.name} · ${formatAvailableOn(cooldown.availableOn)}`,
+        ]
       : [];
   });
 
@@ -124,7 +131,7 @@ export default function MatchEntryDialog({
   const [players, setPlayers] = useState<MatchOption[]>([]);
   const [challengeRange, setChallengeRange] = useState(0);
   const [rematchCooldowns, setRematchCooldowns] = useState<RematchCooldown[]>(
-    []
+    [],
   );
   const [player1Id, setPlayer1Id] = useState("");
   const [player2Id, setPlayer2Id] = useState("");
@@ -170,7 +177,9 @@ export default function MatchEntryDialog({
         const data = (await response.json()) as MatchOptionsResponse;
 
         if (!response.ok || !data.ok) {
-          throw new Error(data.ok ? "선수 명단을 불러오지 못했습니다." : data.message);
+          throw new Error(
+            data.ok ? "선수 명단을 불러오지 못했습니다." : data.message,
+          );
         }
 
         if (active) {
@@ -220,7 +229,9 @@ export default function MatchEntryDialog({
       player1Id !== player2Id &&
       player1Score.length > 0 &&
       player2Score.length > 0 &&
-      scores.every((score) => Number.isInteger(score) && score >= 0 && score <= 6) &&
+      scores.every(
+        (score) => Number.isInteger(score) && score >= 0 && score <= 6,
+      ) &&
       !submitting
     );
   }, [player1Id, player1Score, player2Id, player2Score, submitting]);
@@ -229,12 +240,12 @@ export default function MatchEntryDialog({
   const player1CooldownSummary = rematchCooldownSummary(
     player1Options,
     player2Id,
-    rematchCooldowns
+    rematchCooldowns,
   );
   const player2CooldownSummary = rematchCooldownSummary(
     player2Options,
     player1Id,
-    rematchCooldowns
+    rematchCooldowns,
   );
 
   if (!open) {
@@ -338,7 +349,7 @@ export default function MatchEntryDialog({
                   const cooldown = findRematchCooldown(
                     rematchCooldowns,
                     player.id,
-                    player2Id
+                    player2Id,
                   );
 
                   return (
@@ -385,7 +396,7 @@ export default function MatchEntryDialog({
                   const cooldown = findRematchCooldown(
                     rematchCooldowns,
                     player.id,
-                    player1Id
+                    player1Id,
                   );
 
                   return (

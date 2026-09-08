@@ -61,6 +61,18 @@ export default async function ClubRulesPage({ params }: ClubRulesPageProps) {
   }
 
   const isSeoultech = club.slug === "seoultech";
+  const challengeDescription = isSeoultech
+    ? "본인 묶음과 위 4묶음에 속한 상위 선수에게 도전할 수 있습니다. 이 기준으로 가능한 하위 선수의 도전에는 특별한 사유가 없다면 응해야 합니다."
+    : CORE_RULES[0].description;
+  const coreRules = CORE_RULES.map((rule) =>
+    rule.number === "01"
+      ? {
+          ...rule,
+          title: isSeoultech ? "위 4묶음까지 도전" : rule.title,
+          description: challengeDescription,
+        }
+      : rule,
+  );
 
   return (
     <main className="methodology-page campus-rules-page">
@@ -84,10 +96,13 @@ export default async function ClubRulesPage({ params }: ClubRulesPageProps) {
           </p>
         </header>
 
-        <section className="methodology-section" aria-labelledby="core-rules-title">
+        <section
+          className="methodology-section"
+          aria-labelledby="core-rules-title"
+        >
           <h2 id="core-rules-title">핵심 규칙</h2>
           <ol className="club-rules-summary">
-            {CORE_RULES.map((rule) => (
+            {coreRules.map((rule) => (
               <li key={rule.number}>
                 <span className="club-rules-number" aria-hidden="true">
                   {rule.number}
@@ -101,24 +116,46 @@ export default async function ClubRulesPage({ params }: ClubRulesPageProps) {
           </ol>
         </section>
 
-        <section className="methodology-section" aria-labelledby="challenge-title">
+        <section
+          className="methodology-section"
+          aria-labelledby="challenge-title"
+        >
           <h2 id="challenge-title">도전 상대와 순위 변동</h2>
+          {isSeoultech ? (
+            <>
+              <p>
+                이번 시즌 확정 경기가 0경기인 선수들은 순위 순서대로 바로 다음의
+                경기한 선수와 한 묶음으로 계산합니다. 마지막에 미경기 선수만
+                남으면 그 선수들끼리 한 묶음이 됩니다.
+              </p>
+              <p>{challengeDescription}</p>
+              <p>
+                실제 순위는 그대로 유지하며, 묶음은 도전 가능 범위를 계산할 때만
+                사용합니다. 첫 경기가 확정되거나 기록·순위가 바뀌면 묶음도 다시
+                계산합니다. 지난 시즌 기록은 이 기준에 포함하지 않습니다.
+              </p>
+            </>
+          ) : (
+            <p>
+              활동 중인 선수 기준으로 본인보다 위 4명까지 도전할 수 있습니다.
+            </p>
+          )}
           <p>
-            활동 중인 선수 기준으로 본인보다 위 4명까지 도전할 수 있습니다.
             부상 선수는 도전 가능 범위를 계산할 때 건너뜁니다. 따라서 범위 안에
             부상 선수가 있으면 그 위의 활동 중인 선수까지 도전할 수 있습니다.
           </p>
           <div className="methodology-formula club-rules-example" role="note">
             <code>
-              예: 활동 순서 10위 선수 앞에 부상 선수가 1명 있다면, 부상 선수를
-              제외하고 위쪽의 활동 선수 4명까지 도전 가능
+              {isSeoultech
+                ? "예: [미경기 A·B + 경기한 C] / [미경기 D·E + 경기한 F] → 각각 한 묶음"
+                : "예: 활동 순서 10위 선수 앞에 부상 선수가 1명 있다면, 부상 선수를 제외하고 위쪽의 활동 선수 4명까지 도전 가능"}
             </code>
           </div>
           <p>
-            경기가 시작될 때 순위가 높은 선수가 방어자, 낮은 선수가 도전자입니다.
-            도전자가 승리하면 도전자는 방어자의 기존 순위로 올라가고, 방어자부터
-            도전자의 기존 순위 바로 위까지 한 계단씩 내려갑니다. 방어자가
-            승리하면 순위는 변하지 않습니다.
+            경기가 시작될 때 순위가 높은 선수가 방어자, 낮은 선수가
+            도전자입니다. 도전자가 승리하면 도전자는 방어자의 기존 순위로
+            올라가고, 방어자부터 도전자의 기존 순위 바로 위까지 한 계단씩
+            내려갑니다. 방어자가 승리하면 순위는 변하지 않습니다.
           </p>
         </section>
 
@@ -157,7 +194,10 @@ export default async function ClubRulesPage({ params }: ClubRulesPageProps) {
           </p>
         </section>
 
-        <section className="methodology-section" aria-labelledby="penalty-title">
+        <section
+          className="methodology-section"
+          aria-labelledby="penalty-title"
+        >
           <h2 id="penalty-title">월간 미참여 정산</h2>
           <p>
             한 달 동안 확정된 경기가 0경기인 선수는 다음 달 정산에서 2계단
@@ -190,12 +230,16 @@ export default async function ClubRulesPage({ params }: ClubRulesPageProps) {
           </p>
         </section>
 
-        <section className="methodology-section" aria-labelledby="etiquette-title">
+        <section
+          className="methodology-section"
+          aria-labelledby="etiquette-title"
+        >
           <h2 id="etiquette-title">경기 운영과 예절</h2>
           <p>
-            동아리 정기 대여 시간이나 코트 이용자가 많은 시간은 피하고, 가능한 한
-            여유 있는 코트에서 경기를 진행합니다. 방어자는 특별한 사유가 없다면
-            도전을 받아주고, 모든 참가자는 선후배와 관계없이 서로를 존중합니다.
+            동아리 정기 대여 시간이나 코트 이용자가 많은 시간은 피하고, 가능한
+            한 여유 있는 코트에서 경기를 진행합니다. 방어자는 특별한 사유가
+            없다면 도전을 받아주고, 모든 참가자는 선후배와 관계없이 서로를
+            존중합니다.
           </p>
           <p>
             이 랭킹의 목적은 단식 실력을 겨루는 동시에 구성원이 자연스럽게
