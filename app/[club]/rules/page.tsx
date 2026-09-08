@@ -124,9 +124,9 @@ export default async function ClubRulesPage({ params }: ClubRulesPageProps) {
           {isSeoultech ? (
             <>
               <p>
-                이번 시즌 확정 경기가 0경기인 선수들은 순위 순서대로 바로 다음의
-                경기한 선수와 한 묶음으로 계산합니다. 마지막에 미경기 선수만
-                남으면 그 선수들끼리 한 묶음이 됩니다.
+                이번 시즌 확정 경기가 있는 선수가 묶음의 시작이 됩니다. 그 아래에
+                연속으로 있는 이번 시즌 0경기 선수들을 같은 묶음으로 계산합니다.
+                맨 위에 미경기 선수들만 있으면 그 선수들끼리 별도 묶음이 됩니다.
               </p>
               <p>{challengeDescription}</p>
               <p>
@@ -147,7 +147,7 @@ export default async function ClubRulesPage({ params }: ClubRulesPageProps) {
           <div className="methodology-formula club-rules-example" role="note">
             <code>
               {isSeoultech
-                ? "예: [미경기 A·B + 경기한 C] / [미경기 D·E + 경기한 F] → 각각 한 묶음"
+                ? "예: [1위 경기 + 2·3위 미경기] / [4위 경기 + 5·6위 미경기] → 각각 한 묶음"
                 : "예: 활동 순서 10위 선수 앞에 부상 선수가 1명 있다면, 부상 선수를 제외하고 위쪽의 활동 선수 4명까지 도전 가능"}
             </code>
           </div>

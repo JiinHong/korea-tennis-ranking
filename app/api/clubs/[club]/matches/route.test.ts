@@ -369,7 +369,7 @@ describe("GET /api/clubs/[club]/matches", () => {
           status: "active" as const,
         })).reverse(),
         previousMatches: [
-          { playerAId: "p3", playerBId: "p6", playedOn: "2026-07-01" },
+          { playerAId: "p1", playerBId: "p4", playedOn: "2026-07-01" },
         ],
       });
       const response = await GET(new Request("https://example.com"), {

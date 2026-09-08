@@ -55,6 +55,7 @@ beforeAll(async () => {
   await db.exec(readMigration("20260710103925_record_public_match.sql"));
   await db.exec(readMigration("20260710110954_guard_public_match_rpc.sql"));
   await db.exec(readMigration(migrationName));
+  await db.exec(readMigration("20260908164305_correct_seoultech_challenge_group_direction.sql"));
 }, 30000);
 
 beforeEach(async () => {
@@ -71,7 +72,7 @@ beforeEach(async () => {
     insert into rule_configs(club_id,season_id,challenge_range) values('${id(100)}','${id(101)}',4);
     insert into matches(club_id,season_id,played_on,challenger_player_id,defender_player_id,challenger_rank_before,defender_rank_before,winner_player_id,loser_player_id,winner_score,loser_score,defense_result,source)
       select '${id(100)}','${id(101)}','2026-07-01','${id(19)}',player_id,19,current_rank,player_id,'${id(19)}',6,0,'방어 성공','import'
-      from season_players where current_rank % 3 = 0;
+      from season_players where current_rank % 3 = 1;
   `);
 });
 afterEach(async () => {
@@ -82,6 +83,15 @@ afterAll(async () => {
 });
 
 describe("Seoultech unplayed challenge groups in Postgres", () => {
+  it("includes the played leader and their unplayed followers", async () => {
+    await db.exec("update rule_configs set challenge_range=1;");
+    expect((await record(6, 1)).rows[0].result.duplicate).toBe(false);
+  });
+
+  it("starts a new group at the next played player", async () => {
+    await db.exec("update rule_configs set challenge_range=1;");
+    await expect(record(7, 3)).rejects.toThrow("도전 가능한 순위 범위를 벗어났습니다.");
+  });
   it("accepts every player in the fourth group without changing ranks on a defense win", async () => {
     expect((await record(15, 1)).rows[0].result.rankChanged).toBe(false);
     expect(
@@ -145,15 +155,15 @@ describe("Seoultech unplayed challenge groups in Postgres", () => {
 
   it("agrees with TypeScript for every pairing, excluding injured boundaries", async () => {
     await db.exec(
-      `update season_players set status='injured' where player_id='${id(3)}';`,
+      `update season_players set status='injured' where player_id='${id(4)}';`,
     );
     const players = Array.from({ length: 18 }, (_, i) => ({
       id: id(i + 1),
       name: `p${i + 1}`,
       rank: i + 1,
-      status: i === 2 ? ("injured" as const) : ("active" as const),
+      status: i === 3 ? ("injured" as const) : ("active" as const),
     }));
-    const matches = [3, 6, 9, 12, 15, 18].map((rank) => ({
+    const matches = [1, 4, 7, 10, 13, 16].map((rank) => ({
       playerAId: id(rank),
       playerBId: id(19),
       playedOn: "2026-07-01",

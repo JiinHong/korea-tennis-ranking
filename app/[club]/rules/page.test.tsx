@@ -29,7 +29,7 @@ describe("ClubRulesPage", () => {
     ).toBeDefined();
     expect(
       within(challengeSection).getByText(
-        /이번 시즌.*0경기.*바로 다음.*한 묶음/,
+        /이번 시즌.*묶음의 시작.*그 아래.*0경기.*같은 묶음/,
       ),
     ).toBeDefined();
     expect(

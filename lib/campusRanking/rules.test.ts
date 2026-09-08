@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import {
   applyMatchRanking,
+  getChallengePositions,
   getRematchAvailableOn,
   resolveMatchRoles,
   validateChallengeRange,
@@ -100,13 +101,14 @@ describe("validateChallengeRange", () => {
     rank: index + 1,
     status: "active" as const,
   }));
-  const currentMatches = [3, 6, 9, 12, 15, 18].map((rank) => ({
+  const currentMatches = [1, 4, 7, 10, 13, 16].map((rank) => ({
     playerAId: `g${rank}`,
     playerBId: "opponent-outside-roster",
     playedOn: "2026-09-01",
   }));
 
-  test("groups unplayed A/B with played C, then unplayed D/E with played F", () => {
+  test("groups played 1 with unplayed 2/3, then played 4 with unplayed 5/6", () => {
+    expect([...getChallengePositions(groupedPlayers.slice(0, 6), currentMatches, true).values()]).toEqual([0, 0, 0, 1, 1, 1]);
     for (const defenderId of ["g1", "g2", "g3", "g4", "g5"]) {
       expect(
         validateChallengeRange(
@@ -203,14 +205,14 @@ describe("validateChallengeRange", () => {
 
   test("does not count injured players as group boundaries or accept them as opponents", () => {
     const injured = groupedPlayers.map((player) =>
-      player.id === "g3" ? { ...player, status: "injured" as const } : player,
+      player.id === "g4" ? { ...player, status: "injured" as const } : player,
     );
     expect(
       validateChallengeRange(injured, "g9", "g1", groupedConfig, currentMatches)
         .ok,
     ).toBe(true);
     expect(
-      validateChallengeRange(injured, "g9", "g3", groupedConfig, currentMatches)
+      validateChallengeRange(injured, "g9", "g4", groupedConfig, currentMatches)
         .ok,
     ).toBe(false);
   });

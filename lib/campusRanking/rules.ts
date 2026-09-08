@@ -123,7 +123,7 @@ export function applyMatchRanking(
 }
 
 // Only current-season confirmed matches belong in previousMatches.
-// Each run of unplayed players shares a position with the next played player.
+// A played player starts a group with the unplayed players immediately below.
 export function getChallengePositions(
   players: RankedPlayer[],
   previousMatches: PreviousMatch[],
@@ -138,10 +138,10 @@ export function getChallengePositions(
   for (const player of players
     .filter((player) => player.status === "active")
     .sort((a, b) => a.rank - b.rank)) {
-    positions.set(player.id, position);
-    if (!groupUnplayedPlayers || playedPlayerIds.has(player.id)) {
+    if (positions.size > 0 && (!groupUnplayedPlayers || playedPlayerIds.has(player.id))) {
       position += 1;
     }
+    positions.set(player.id, position);
   }
 
   return positions;
