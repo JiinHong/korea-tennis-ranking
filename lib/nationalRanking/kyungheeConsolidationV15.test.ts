@@ -79,7 +79,7 @@ describe("경희대학교 대회 결과 통합", () => {
       (result) => result.clubSlug === KYUNGHEE_ENGINEERING_SLUG
     );
 
-    expect(generalResults).toHaveLength(87);
+    expect(generalResults).toHaveLength(90);
     expect(impactResults).toHaveLength(16);
     expect(
       [...generalResults, ...impactResults].every(
@@ -172,6 +172,6 @@ describe("경희대학교 대회 결과 통합", () => {
   it("통합 결과를 새 데이터 버전으로 관리한다", async () => {
     const dataset = await loadDataset();
 
-    expect(dataset.version).toBe("sources-2026-08-20-v20");
+    expect(dataset.version).toBe("sources-2026-09-13-v21");
   });
 });

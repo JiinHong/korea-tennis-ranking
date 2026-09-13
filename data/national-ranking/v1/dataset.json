@@ -1,5 +1,5 @@
 {
-  "version": "sources-2026-08-20-v20",
+  "version": "sources-2026-09-13-v21",
   "clubs": [
     {
       "slug": "catholic-courtrang",
@@ -2548,6 +2548,16 @@
       "clubSlug": "hallym-tiebreak",
       "normalizedAlias": "한림대학교 한림대",
       "sourceLabel": "한림대"
+    },
+    {
+      "clubSlug": "ajou-tennis",
+      "normalizedAlias": "아주대학교 아주대 ams",
+      "sourceLabel": "아주대 ams"
+    },
+    {
+      "clubSlug": "yonsei-yutt",
+      "normalizedAlias": "연세대학교 연세대 치대 테니스부",
+      "sourceLabel": "연세대 치대 테니스부"
     }
   ],
   "tournaments": [
@@ -2883,6 +2893,36 @@
       "sourceRefs": [
         "경인지구/2025/여자/KakaoTalk_Photo_2026-07-08-05-17-28 002.jpeg",
         "경인지구/2025/여자/KakaoTalk_Photo_2026-07-08-05-17-28 001.png"
+      ]
+    },
+    {
+      "key": "gyeongin-2026-men",
+      "tournamentSlug": "gyeongin",
+      "year": 2026,
+      "gender": "men",
+      "actualEntrants": 30,
+      "sourceStatus": "verified",
+      "sourceRefs": [
+        "경인지구/2026/남자/IMG_4784.PNG",
+        "경인지구/2026/남자/IMG_4785.PNG",
+        "경인지구/2026/남자/IMG_4786.PNG",
+        "경인지구/2026/남자/IMG_4787.PNG",
+        "경인지구/2026/남자/IMG_4788.PNG"
+      ]
+    },
+    {
+      "key": "gyeongin-2026-women",
+      "tournamentSlug": "gyeongin",
+      "year": 2026,
+      "gender": "women",
+      "actualEntrants": 32,
+      "sourceStatus": "verified",
+      "sourceRefs": [
+        "경인지구/2026/여자/IMG_4789.PNG",
+        "경인지구/2026/여자/IMG_4790.PNG",
+        "경인지구/2026/여자/IMG_4791.PNG",
+        "경인지구/2026/여자/IMG_4792.PNG",
+        "경인지구/2026/여자/IMG_4793.PNG"
       ]
     },
     {
@@ -17126,6 +17166,626 @@
       "qualityStatus": "verified",
       "sourceRef": "양구/2026/여자/Draw 제40회 국토정중앙배 전국대학동아리 테니스대회 Final.pdf#page=1",
       "note": "2026 국토정중앙배 최종 대진표의 64번 엔트리를 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대학교 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4784.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 서울대학교 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "konkuk-ktc",
+      "sourceTeamName": "건국대학교 KTC A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4784.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 건국대학교 KTC A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "서울과기대 A",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4788.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 서울과기대 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대학교 D",
+      "teamLabel": "D",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4784.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 서울대학교 D의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "gachon-tiebreak",
+      "sourceTeamName": "가천대 타이브레이크 A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4786.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 가천대 타이브레이크 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "inu-uitc",
+      "sourceTeamName": "인천대학교 UITC",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4784.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 인천대학교 UITC의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대학교 B",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4784.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 서울대학교 B의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "hanyang-hytc",
+      "sourceTeamName": "한양대 HYTC A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4786.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 한양대 HYTC A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "고려대학교 PETC A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4784.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 고려대학교 PETC A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "hufs-ace",
+      "sourceTeamName": "한국외대 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4784.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 한국외대 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "ajou-tennis",
+      "sourceTeamName": "아주대 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4784.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 아주대 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대학교 KUTC A",
+      "teamLabel": "A",
+      "stage": "champion",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4788.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 고려대학교 KUTC A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "chungang-love4t",
+      "sourceTeamName": "중앙대 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4784.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 중앙대 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "연세대 진리",
+      "teamLabel": "진리",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4784.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 연세대 진리의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "soongsil-sstc",
+      "sourceTeamName": "숭실대학교 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4784.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 숭실대학교 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "gyeonggi-ktf",
+      "sourceTeamName": "경기대학교 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4784.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 경기대학교 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 KUTA A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4784.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 경희대 KUTA A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "sejong-stc",
+      "sourceTeamName": "세종대 STC",
+      "teamLabel": "",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4788.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 세종대 STC의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대학교 KUTC B",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4785.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 고려대학교 KUTC B의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "sungkyunkwan-stc",
+      "sourceTeamName": "성균관대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4785.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 성균관대 B의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "dongguk-dutc",
+      "sourceTeamName": "동국대학교 정진",
+      "teamLabel": "정진",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4787.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 동국대학교 정진의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "ajou-tennis",
+      "sourceTeamName": "아주대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4785.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 아주대 B의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "uos-approach",
+      "sourceTeamName": "서울시립대학교 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4785.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 서울시립대학교 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "inha-rapum",
+      "sourceTeamName": "인하대학교 라폼 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4785.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 인하대학교 라폼 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "sungkyunkwan-stc",
+      "sourceTeamName": "성균관대 A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4787.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 성균관대 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "hanyang-erica-hitec",
+      "sourceTeamName": "한양대 에리카 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4785.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 한양대 에리카 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 러비스 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4785.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 경희대 러비스 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "sogang-sgtc",
+      "sourceTeamName": "서강대학교 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4785.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 서강대학교 B의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "sogang-sgtc",
+      "sourceTeamName": "서강대 A",
+      "teamLabel": "A",
+      "stage": "runner_up",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4788.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 서강대 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-men",
+      "clubSlug": "kau-ace",
+      "sourceTeamName": "항공대 ACE",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/남자/IMG_4785.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 항공대 ACE의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "서울과기대 느티나무 A",
+      "teamLabel": "A",
+      "stage": "champion",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4793.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 서울과기대 느티나무 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 KUTA",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4789.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 경희대 KUTA의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "hongik-hitc",
+      "sourceTeamName": "홍익대학교 HITC",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4789.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 홍익대학교 HITC의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "ajou-tennis",
+      "sourceTeamName": "아주대 ams",
+      "teamLabel": "ams",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4789.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 아주대 ams의 마지막 진출 단계까지 추적했습니다. 관리자 확인에 따라 Ajou Medi Serve(AMS)를 아주대학교 ATC 랭킹에 포함했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "dongguk-dutc",
+      "sourceTeamName": "동국대 DUTC",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4789.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 동국대 DUTC의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "고려대 PETC B",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4789.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 고려대 PETC B의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "ewha-smash",
+      "sourceTeamName": "이화여대 스매시 A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4791.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 이화여대 스매시 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "hufs-ace",
+      "sourceTeamName": "한국외대 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4789.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 한국외대 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "연세대 진리",
+      "teamLabel": "진리",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4791.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 연세대 진리의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대 KUTC B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4789.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 고려대 KUTC B의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "고려대 PETC A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4789.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 고려대 PETC A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "inha-rapum",
+      "sourceTeamName": "인하대 라폼 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4789.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 인하대 라폼 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "sungkyunkwan-stc",
+      "sourceTeamName": "성균관대 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4789.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 성균관대 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "느티나무 B",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4789.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 느티나무 B의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "gachon-tiebreak",
+      "sourceTeamName": "가천대 타이브레이크",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4789.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 가천대 타이브레이크의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "hanyang-erica-hitec",
+      "sourceTeamName": "에리카 A",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4793.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 에리카 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "chungang-love4t",
+      "sourceTeamName": "중앙대학교",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4790.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 중앙대학교의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "연세대 치대 테니스부",
+      "teamLabel": "치대",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4789.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 연세대 치대 테니스부의 마지막 진출 단계까지 추적했습니다. 관리자 확인에 따라 연세대학교 치과대학 테니스부 성적을 연세대학교 YUTT 랭킹에 포함했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대 KUTC A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4792.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 고려대 KUTC A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "hanyang-hytc",
+      "sourceTeamName": "한양대 HYTC B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4789.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 한양대 HYTC B의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대학교 A",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4793.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 서울대학교 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "hanyang-erica-hitec",
+      "sourceTeamName": "에리카 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4789.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 에리카 B의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "kwangwoon-kwtc",
+      "sourceTeamName": "광운대 KWTC A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4790.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 광운대 KWTC A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "inha-rapum",
+      "sourceTeamName": "인하대 라폼 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4790.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 인하대 라폼 B의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대학교 C",
+      "teamLabel": "C",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4790.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 서울대학교 C의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "ewha-smash",
+      "sourceTeamName": "이화여대 스매시 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4790.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 이화여대 스매시 B의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "sogang-sgtc",
+      "sourceTeamName": "서강대학교 SGTC",
+      "teamLabel": "",
+      "stage": "runner_up",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4793.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 서강대학교 SGTC의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대학교 D",
+      "teamLabel": "D",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4790.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 서울대학교 D의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "hanyang-hytc",
+      "sourceTeamName": "한양대 HYTC A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4790.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 한양대 HYTC A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대학교 B",
+      "teamLabel": "B",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4792.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 서울대학교 B의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "uos-approach",
+      "sourceTeamName": "서울시립대 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4790.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 서울시립대 A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "gyeongin-2026-women",
+      "clubSlug": "gyeonggi-ktf",
+      "sourceTeamName": "경기대 KTF A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "경인지구/2026/여자/IMG_4790.PNG",
+      "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 경기대 KTF A의 마지막 진출 단계까지 추적했습니다."
     }
   ]
 }

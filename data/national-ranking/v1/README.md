@@ -1,25 +1,25 @@
 # National ranking source dataset v1
 
 `dataset.json` is the canonical, visually verified source manifest for the
-national university club ranking. Version `sources-2026-08-20-v20` contains the
+national university club ranking. Version `sources-2026-09-13-v21` contains the
 complete Yanggu, Gyeongin, Inje, Chuncheon, WEMIX, and Yeongwol source program:
-38 editions and 1,405 terminal result records.
+40 editions and 1,467 terminal result records.
 
 ## Expected source units
 
-The complete source program contains 38 edition/gender units. Every unit is a
+The complete source program contains 40 edition/gender units. Every unit is a
 separate men's or women's draw:
 
 | Tournament | Expected units |
 | --- | --- |
 | Yanggu | `yanggu-2023-men`, `yanggu-2023-women`, `yanggu-2024-men`, `yanggu-2024-women`, `yanggu-2025-men`, `yanggu-2025-women`, `yanggu-2026-men`, `yanggu-2026-women` |
-| Gyeongin | `gyeongin-2023-men`, `gyeongin-2023-women`, `gyeongin-2024-men`, `gyeongin-2024-women`, `gyeongin-2025-men`, `gyeongin-2025-women` |
+| Gyeongin | `gyeongin-2023-men`, `gyeongin-2023-women`, `gyeongin-2024-men`, `gyeongin-2024-women`, `gyeongin-2025-men`, `gyeongin-2025-women`, `gyeongin-2026-men`, `gyeongin-2026-women` |
 | Inje | `inje-2023-men`, `inje-2023-women`, `inje-2024-men`, `inje-2024-women`, `inje-2025-men`, `inje-2025-women`, `inje-2026-men`, `inje-2026-women` |
 | Chuncheon | `chuncheon-2023-men`, `chuncheon-2023-women`, `chuncheon-2024-men`, `chuncheon-2024-women`, `chuncheon-2025-men`, `chuncheon-2025-women` |
 | WEMIX | `wemix-2025-men`, `wemix-2025-women` |
 | Yeongwol | `yeongwol-2023-men`, `yeongwol-2023-women`, `yeongwol-2024-men`, `yeongwol-2024-women`, `yeongwol-2025-men`, `yeongwol-2025-women`, `yeongwol-2026-men`, `yeongwol-2026-women` |
 
-WEMIX is the only 2025-only exception. All 38 units above are present.
+WEMIX is the only 2025-only exception. All 40 units above are present.
 
 ## Source references
 
@@ -142,6 +142,12 @@ Version `sources-2026-08-20-v20` adds the visually verified 2026 Yanggu draws:
 generic Korea University women's labels remain unresolved because the source
 does not distinguish KUTC, PETC, or KMTC.
 
+Version `sources-2026-09-13-v21` adds the five connected mobile-bracket images
+for each division of the 2026 Gyeongin tournament: 30 men's entrants and 32
+women's entrants. All 62 identities are verified. Administrator confirmation
+assigns `아주대 ams` (Ajou Medi Serve) to the existing 아주대학교 ATC ranking
+and `연세대 치대 테니스부` to the existing 연세대학교 YUTT ranking.
+
 Canonical clubs consolidate visually explicit spellings plus the
 administrator-confirmed team-name families documented in the 2026-07-13
 design. These include 경기대학교 `KTF`/`Kft`/`테토남`, 연세대학교
@@ -205,7 +211,7 @@ The two editions and all 20 terminal rows are therefore verified and scoreable.
 
 ## Unresolved mapping log
 
-The policy above leaves 33 of 1,405 rows unresolved. Version
+The policy above leaves 33 of 1,467 rows unresolved. Version
 `sources-2026-07-24-v9` assigned 332 previously unresolved university-only team
 labels to the university's sole public ranking club. Version
 `sources-2026-07-24-v10` applied the administrator-reviewed Yanggu memo
@@ -230,6 +236,7 @@ rows under the approved two-group rule.
 Version `sources-2026-08-08-v19` adds 100 fully assigned Yeongwol rows.
 Version `sources-2026-08-20-v20` adds 133 verified Yanggu rows and keeps two
 generic Korea University labels unresolved.
+Version `sources-2026-09-13-v21` adds 62 fully assigned Gyeongin rows.
 
 | Edition | Entrants/results | Verified rows | Unresolved rows | Reason summary |
 | --- | ---: | ---: | ---: | --- |
@@ -255,6 +262,8 @@ generic Korea University labels unresolved.
 | `gyeongin-2024-women` | 38 | 36 | 2 | Kyunghee labels are assigned; other generic labels remain. |
 | `gyeongin-2025-men` | 22 | 22 | 0 | All identities are assigned. |
 | `gyeongin-2025-women` | 26 | 24 | 2 | Generic club-only and multi-club university labels remain. |
+| `gyeongin-2026-men` | 30 | 30 | 0 | All identities are assigned. |
+| `gyeongin-2026-women` | 32 | 32 | 0 | AMS and the Yonsei dental-school team use the administrator-confirmed ranking assignments. |
 | `chuncheon-2023-men` | 50 | 48 | 2 | Kyunghee labels are assigned; other generic labels remain. |
 | `chuncheon-2023-women` | 42 | 39 | 3 | Kyunghee labels are assigned; other generic labels remain. |
 | `chuncheon-2024-men` | 68 | 65 | 3 | Kyunghee labels are assigned; other generic labels remain. |

@@ -531,6 +531,16 @@ describe("loadNationalRankingDataset", () => {
       resultCount: 26,
       sourceStatus: "verified",
     },
+    "gyeongin-2026-men": {
+      actualEntrants: 30,
+      resultCount: 30,
+      sourceStatus: "verified",
+    },
+    "gyeongin-2026-women": {
+      actualEntrants: 32,
+      resultCount: 32,
+      sourceStatus: "verified",
+    },
     "chuncheon-2023-men": {
       actualEntrants: 50,
       resultCount: 50,
@@ -623,11 +633,11 @@ describe("loadNationalRankingDataset", () => {
     },
   } as const;
 
-  it("loads the complete 38-edition source manifest", () => {
+  it("loads the complete 40-edition source manifest", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-08-20-v20");
+    expect(dataset.version).toBe("sources-2026-09-13-v21");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -644,7 +654,7 @@ describe("loadNationalRankingDataset", () => {
     expect(dataset.editions.map((edition) => edition.key).sort()).toEqual(
       Object.keys(expectedEditions).sort()
     );
-    expect(dataset.editions).toHaveLength(38);
+    expect(dataset.editions).toHaveLength(40);
     const wemixEditions = dataset.editions.filter(
       (edition) => edition.tournamentSlug === "wemix"
     );
@@ -669,11 +679,11 @@ describe("loadNationalRankingDataset", () => {
     }
 
     expect(dataset.clubs).toHaveLength(66);
-    expect(dataset.aliases).toHaveLength(430);
-    expect(dataset.results).toHaveLength(1_405);
+    expect(dataset.aliases).toHaveLength(432);
+    expect(dataset.results).toHaveLength(1_467);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
-    ).toHaveLength(1_372);
+    ).toHaveLength(1_434);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
     ).toHaveLength(33);
@@ -860,6 +870,127 @@ describe("loadNationalRankingDataset", () => {
         stage: "round_of_32",
       },
     ]);
+  });
+
+  it("records the confirmed 2026 Gyeongin men's and women's draws", () => {
+    const dataset = loadNationalRankingDataset();
+    const gyeongin2026Results = dataset.results.filter((result) =>
+      result.editionKey.startsWith("gyeongin-2026-")
+    );
+    const stageCounts = (editionKey: string) =>
+      Object.fromEntries(
+        Object.entries(
+          gyeongin2026Results
+            .filter((result) => result.editionKey === editionKey)
+            .reduce<Record<string, number>>((counts, result) => {
+              const stage = result.stage ?? "unknown";
+              counts[stage] = (counts[stage] ?? 0) + 1;
+              return counts;
+            }, {})
+        ).sort(([left], [right]) => left.localeCompare(right))
+      );
+
+    expect(gyeongin2026Results).toHaveLength(62);
+    expect(stageCounts("gyeongin-2026-men")).toEqual({
+      champion: 1,
+      first_match_loss: 14,
+      quarterfinal: 4,
+      round_of_16: 8,
+      runner_up: 1,
+      semifinal: 2,
+    });
+    expect(stageCounts("gyeongin-2026-women")).toEqual({
+      champion: 1,
+      first_match_loss: 16,
+      quarterfinal: 4,
+      round_of_16: 8,
+      runner_up: 1,
+      semifinal: 2,
+    });
+
+    expect(
+      gyeongin2026Results
+        .filter(
+          (result) =>
+            result.editionKey === "gyeongin-2026-men" &&
+            ["champion", "runner_up", "semifinal", "quarterfinal"].includes(
+              result.stage ?? ""
+            )
+        )
+        .map(({ sourceTeamName, stage }) => `${stage}:${sourceTeamName}`)
+        .sort()
+    ).toEqual(
+      [
+        "champion:고려대학교 KUTC A",
+        "quarterfinal:가천대 타이브레이크 A",
+        "quarterfinal:동국대학교 정진",
+        "quarterfinal:성균관대 A",
+        "quarterfinal:한양대 HYTC A",
+        "runner_up:서강대 A",
+        "semifinal:서울과기대 A",
+        "semifinal:세종대 STC",
+      ].sort()
+    );
+    expect(
+      gyeongin2026Results
+        .filter(
+          (result) =>
+            result.editionKey === "gyeongin-2026-women" &&
+            ["champion", "runner_up", "semifinal", "quarterfinal"].includes(
+              result.stage ?? ""
+            )
+        )
+        .map(({ sourceTeamName, stage }) => `${stage}:${sourceTeamName}`)
+        .sort()
+    ).toEqual(
+      [
+        "champion:서울과기대 느티나무 A",
+        "quarterfinal:고려대 KUTC A",
+        "quarterfinal:서울대학교 B",
+        "quarterfinal:연세대 진리",
+        "quarterfinal:이화여대 스매시 A",
+        "runner_up:서강대학교 SGTC",
+        "semifinal:서울대학교 A",
+        "semifinal:에리카 A",
+      ].sort()
+    );
+
+    expect(
+      gyeongin2026Results.find(
+        (result) =>
+          result.editionKey === "gyeongin-2026-women" &&
+          result.sourceTeamName === "아주대 ams"
+      )
+    ).toMatchObject({
+      clubSlug: "ajou-tennis",
+      stage: "first_match_loss",
+      qualityStatus: "verified",
+    });
+    expect(
+      gyeongin2026Results.find(
+        (result) =>
+          result.editionKey === "gyeongin-2026-women" &&
+          result.sourceTeamName === "연세대 치대 테니스부"
+      )
+    ).toMatchObject({
+      clubSlug: "yonsei-yutt",
+      stage: "first_match_loss",
+      qualityStatus: "verified",
+    });
+    expect(
+      dataset.aliases.find((alias) => alias.sourceLabel === "아주대 ams")
+    ).toMatchObject({
+      clubSlug: "ajou-tennis",
+      normalizedAlias: "아주대학교 아주대 ams",
+    });
+    expect(
+      dataset.aliases.find(
+        (alias) => alias.sourceLabel === "연세대 치대 테니스부"
+      )
+    ).toMatchObject({
+      clubSlug: "yonsei-yutt",
+      normalizedAlias: "연세대학교 연세대 치대 테니스부",
+    });
   });
 
   it("preserves the exact approved Task 4 ordered content", () => {
@@ -1833,16 +1964,15 @@ describe("loadNationalRankingDataset", () => {
         .filter((row) => row.totalPoints > 1_000)
         .map((row) => [row.clubSlug, row.totalPoints])
     ).toEqual([
-      ["sogang-sgtc", 1454],
-      ["seoultech-neutinamu", 1220],
+      ["sogang-sgtc", 1506],
+      ["korea-kutc", 1305],
+      ["seoultech-neutinamu", 1284],
       ["jeonbuk-ace", 1151],
-      ["seoul-university", 1141],
-      ["korea-kutc", 1021],
       ["kyungpook-kutc", 1002],
     ]);
     expect(men[2]).toMatchObject({
-      clubSlug: "jeonbuk-ace",
-      totalPoints: 1151,
+      clubSlug: "seoultech-neutinamu",
+      totalPoints: 1284,
     });
 
     expect(
@@ -1852,7 +1982,7 @@ describe("loadNationalRankingDataset", () => {
       )
     ).toMatchObject({
       rank: 1,
-      totalPoints: 2291,
+      totalPoints: 2407,
     });
     expect(
       rows.find(
@@ -1861,7 +1991,7 @@ describe("loadNationalRankingDataset", () => {
       )
     ).toMatchObject({
       rank: 1,
-      totalPoints: 3511,
+      totalPoints: 3691,
     });
   });
 });
