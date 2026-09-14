@@ -38,6 +38,7 @@ function createAdapter(): SupabaseRankingAdapter {
     ]),
     listConfirmedMatches: vi.fn().mockResolvedValue([
       {
+        sequenceNo: 11,
         seasonId: "season-3",
         seasonName: "시즌3",
         playedOn: "2026-07-08",
@@ -52,6 +53,7 @@ function createAdapter(): SupabaseRankingAdapter {
         source: "public_form",
       },
       {
+        sequenceNo: 7,
         seasonId: "season-2",
         seasonName: "시즌2",
         playedOn: "2026-05-26",
@@ -106,6 +108,7 @@ describe("getSupabaseRankingTables", () => {
       ],
       matches: [
         {
+          sequenceNo: 11,
           date: "2026. 7. 8",
           challenger: "김도훈",
           challengerRank: 2,
@@ -118,6 +121,7 @@ describe("getSupabaseRankingTables", () => {
       ],
       historicalMatches: [
         {
+          sequenceNo: 7,
           date: "2026. 5. 26",
           challenger: "김도훈",
           challengerRank: 4,

@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import { getClubConfig } from "@/lib/campusRanking/config";
 import { getRankingDataForClub } from "@/lib/campusRanking/rankingData";
+import type { MatchRecord } from "@/lib/googleSheets/currentMatches";
 
 import MatchesPage from "./page";
 
@@ -210,5 +211,54 @@ describe("MatchesPage", () => {
     expect(within(playerRow as HTMLElement).getByText("(–)")).toBeDefined();
     expect(screen.getByText("기권")).toBeDefined();
     expect(screen.queryByLabelText("승자")).toBeNull();
+  });
+
+  it("같은 날 경기한 경우 나중에 입력한 경기를 먼저 보여준다", async () => {
+    const matches = [
+      {
+        sequenceNo: 2,
+        date: "2026. 9. 12",
+        challenger: "정민재",
+        challengerRank: 7,
+        defender: "장현석",
+        defenderRank: 5,
+        winner: "정민재",
+        score: "6:3",
+        defenseResult: "방어 실패",
+      },
+      {
+        sequenceNo: 1,
+        date: "2026. 9. 12",
+        challenger: "국민석",
+        challengerRank: 8,
+        defender: "홍순범",
+        defenderRank: 6,
+        winner: "국민석",
+        score: "6:4",
+        defenseResult: "방어 실패",
+      },
+    ] satisfies Array<MatchRecord & { sequenceNo: number }>;
+
+    vi.mocked(getClubConfig).mockReturnValue(club);
+    vi.mocked(getRankingDataForClub).mockResolvedValue({
+      club,
+      players: [],
+      summary: {
+        totalMatches: 2,
+        recent30Matches: 2,
+      },
+      matches,
+      detailsByPlayer: {},
+    });
+
+    const ui = await MatchesPage({
+      params: Promise.resolve({ club: "seoultech" }),
+    });
+
+    render(ui);
+
+    const matchCards = screen.getAllByRole("listitem");
+    expect(within(matchCards[0]).getByText("정민재")).toBeDefined();
+    expect(within(matchCards[1]).getByText("국민석")).toBeDefined();
   });
 });

@@ -10,6 +10,7 @@ import {parseRank} from "@/lib/campusRanking/rank";
 
 // export type은 "이 타입을 다른 파일에서도 import해서 쓸 수 있게 공개한다"는 뜻이다.
 export type MatchRecord = {
+    sequenceNo?: number;
     date: string;
     challenger: string;
     challengerRank: number | null;

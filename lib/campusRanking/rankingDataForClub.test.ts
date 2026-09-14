@@ -303,6 +303,60 @@ describe("getRankingDataForClub", () => {
     ]);
   });
 
+  it("과거 시즌의 같은 날 경기도 입력 번호 순으로 동그라미를 배치한다", async () => {
+    const club = getClubConfig("seoultech");
+    process.env.RANKING_DATA_SOURCE = "supabase";
+
+    vi.mocked(getSupabaseRankingTables).mockResolvedValue({
+      currentSeasonName: "시즌3",
+      ranking: [
+        { rank: 1, name: "오준석", note: "" },
+        { rank: 2, name: "김도훈", note: "" },
+      ],
+      matches: [],
+      historicalMatches: [
+        {
+          sequenceNo: 1,
+          date: "2026. 6. 30",
+          challenger: "김도훈",
+          challengerRank: 2,
+          defender: "오준석",
+          defenderRank: 1,
+          winner: "오준석",
+          score: "6:4",
+          defenseResult: "방어 성공",
+          season: "시즌2",
+          sourceNote: "import",
+        },
+        {
+          sequenceNo: 2,
+          date: "2026. 6. 30",
+          challenger: "김도훈",
+          challengerRank: 2,
+          defender: "오준석",
+          defenderRank: 1,
+          winner: "김도훈",
+          score: "6:3",
+          defenseResult: "방어 실패",
+          season: "시즌2",
+          sourceNote: "import",
+        },
+      ],
+      rankChanges: {},
+    });
+
+    if (!club) {
+      throw new Error("seoultech club config should exist");
+    }
+
+    const data = await getRankingDataForClub(club);
+
+    expect(data.players[0]?.recentForm).toEqual([
+      { result: "W", season: "시즌2", isHistorical: true },
+      { result: "L", season: "시즌2", isHistorical: true },
+    ]);
+  });
+
   it("RANKING_DATA_SOURCE가 supabase이면 시트 대신 Supabase repository에서 랭킹 원천 데이터를 읽는다", async () => {
     const club = getClubConfig("seoultech");
     process.env.RANKING_DATA_SOURCE = "supabase";

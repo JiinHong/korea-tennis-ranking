@@ -58,6 +58,7 @@ type RankingSummary = {
 };
 
 type MatchRecord = {
+  sequenceNo?: number;
   date: string;
   challenger: string;
   challengerRank: number | null;

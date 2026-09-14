@@ -1,4 +1,5 @@
 import type { MatchRecord } from "@/lib/googleSheets/currentMatches";
+import { compareMatchesRecentFirst } from "@/lib/campusRanking/matchOrder";
 import { ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
 
@@ -11,25 +12,14 @@ type MatchListSectionProps = {
   moreHref?: string;
 };
 
-function parseMatchDate(date: string) {
-  const numbers = date.match(/\d+/g)?.map(Number) ?? [];
-  const [year, month, day] = numbers;
-
-  if (!year || !month || !day) {
-    return 0;
-  }
-
-  return new Date(year, month - 1, day).getTime();
-}
-
 function sortRecentMatches(matches: MatchRecord[]) {
   return matches
     .map((match, index) => ({ match, index }))
     .sort((a, b) => {
-      const dateDiff = parseMatchDate(b.match.date) - parseMatchDate(a.match.date);
+      const matchOrder = compareMatchesRecentFirst(a.match, b.match);
 
-      if (dateDiff !== 0) {
-        return dateDiff;
+      if (matchOrder !== 0) {
+        return matchOrder;
       }
 
       return b.index - a.index;

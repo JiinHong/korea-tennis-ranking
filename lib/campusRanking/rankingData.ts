@@ -7,6 +7,10 @@ import {buildPlayerDetails} from "@/lib/campusRanking/playerDetails";
 import {getRankingTable} from "@/lib/googleSheets/currentRanking";
 import type {RankingData} from "@/lib/googleSheets/currentRanking";
 import type {PlayerStatus} from "@/lib/campusRanking/rules";
+import {
+    compareMatchesChronological,
+    compareMatchesRecentFirst,
+} from "@/lib/campusRanking/matchOrder";
 
 type RankingSourceTables = {
     currentSeasonName: string;
@@ -81,19 +85,23 @@ function buildRecentForm(
     const historicalLimit = Math.max(0, 5 - currentForm.length);
 
     const historicalForm = historicalMatches
-        .map((match) => ({ match, result: getMatchResult(player.name, match) }))
+        .map((match, index) => ({
+            match,
+            index,
+            result: getMatchResult(player.name, match),
+        }))
         .filter(
             (entry): entry is {
                 match: (typeof historicalMatches)[number];
+                index: number;
                 result: "W" | "L";
             } => entry.result !== null
         )
-        .sort((a, b) => {
-            const aTime = parseMatchDate(a.match.date)?.getTime() ?? 0;
-            const bTime = parseMatchDate(b.match.date)?.getTime() ?? 0;
-
-            return bTime - aTime;
-        })
+        .sort(
+            (a, b) =>
+                compareMatchesRecentFirst(a.match, b.match) ||
+                b.index - a.index
+        )
         .slice(0, historicalLimit)
         .reverse()
         .map(({ match, result }) => ({
@@ -206,12 +214,7 @@ export function buildPlayer(
         };
     }
 
-    const chronologicalMatches = [...matches].sort((a, b) => {
-        const aTime = parseMatchDate(a.date)?.getTime() ?? 0;
-        const bTime = parseMatchDate(b.date)?.getTime() ?? 0;
-
-        return aTime - bTime;
-    });
+    const chronologicalMatches = [...matches].sort(compareMatchesChronological);
 
     for (const match of chronologicalMatches) {
         // 기록지의 이름이 실시간랭킹표에 없으면 continue

@@ -144,4 +144,60 @@ describe("buildPlayerDetails", () => {
       },
     ]);
   });
+
+  it("같은 날 경기한 경우 나중에 입력한 경기를 최근 전적에서 먼저 보여준다", () => {
+    const players: Player[] = [
+      {
+        rank: 1,
+        name: "오준석",
+        note: "",
+        rankChange: 0,
+        wins: 1,
+        losses: 1,
+        matches: 2,
+        recent5: ["W", "L"],
+      },
+      {
+        rank: 2,
+        name: "김도훈",
+        note: "",
+        rankChange: 0,
+        wins: 1,
+        losses: 1,
+        matches: 2,
+        recent5: ["L", "W"],
+      },
+    ];
+    const currentMatches = [
+      {
+        sequenceNo: 1,
+        date: "2026. 7. 2",
+        challenger: "김도훈",
+        challengerRank: 2,
+        defender: "오준석",
+        defenderRank: 1,
+        winner: "오준석",
+        score: "6:4",
+        defenseResult: "방어 성공",
+      },
+      {
+        sequenceNo: 2,
+        date: "2026. 7. 2",
+        challenger: "김도훈",
+        challengerRank: 2,
+        defender: "오준석",
+        defenderRank: 1,
+        winner: "김도훈",
+        score: "6:3",
+        defenseResult: "방어 실패",
+      },
+    ] satisfies Array<MatchRecord & { sequenceNo: number }>;
+
+    const details = buildPlayerDetails(players, currentMatches, [], "시즌3");
+
+    expect(details["오준석"].recentMatches.map((match) => match.result)).toEqual([
+      "L",
+      "W",
+    ]);
+  });
 });

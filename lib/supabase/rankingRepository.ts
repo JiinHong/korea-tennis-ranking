@@ -37,6 +37,7 @@ export type SupabaseSeasonPlayerRow = {
 };
 
 export type SupabaseMatchRow = {
+  sequenceNo: number;
   seasonId: string;
   seasonName: string;
   playedOn: string;
@@ -104,6 +105,7 @@ function formatDate(date: string): string {
 
 function toMatchRecord(match: SupabaseMatchRow): MatchRecord {
   return {
+    sequenceNo: match.sequenceNo,
     date: formatDate(match.playedOn),
     challenger: displayName(match.challenger),
     challengerRank: match.challengerRank,
@@ -327,6 +329,7 @@ export function createSupabaseRankingAdapter(): SupabaseRankingAdapter {
         .select(
           `
           season_id,
+          sequence_no,
           played_on,
           challenger_rank_before,
           defender_rank_before,
@@ -342,7 +345,8 @@ export function createSupabaseRankingAdapter(): SupabaseRankingAdapter {
         )
         .eq("club_id", clubId)
         .eq("status", "confirmed")
-        .order("played_on", { ascending: false });
+        .order("played_on", { ascending: false })
+        .order("sequence_no", { ascending: false });
 
       if (error) {
         throw error;
@@ -359,6 +363,7 @@ export function createSupabaseRankingAdapter(): SupabaseRankingAdapter {
         }
 
         return {
+          sequenceNo: row.sequence_no,
           seasonId: row.season_id,
           seasonName: season.name,
           playedOn: row.played_on,

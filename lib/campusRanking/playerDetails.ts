@@ -1,6 +1,7 @@
 import type { HistoricalMatchRecord } from "@/lib/googleSheets/historicalMatches";
 import type { MatchRecord } from "@/lib/googleSheets/currentMatches";
 import type { Player } from "@/lib/campusRanking/rankingData";
+import { compareMatchesRecentFirst } from "@/lib/campusRanking/matchOrder";
 
 export type MatchResult = "W" | "L";
 export type MatchRole = "도전자" | "방어자";
@@ -83,10 +84,6 @@ function parseDateValue(date: string): number {
   return new Date(year, month - 1, day).getTime();
 }
 
-function compareMatchDateDesc(a: { date: string }, b: { date: string }) {
-  return parseDateValue(b.date) - parseDateValue(a.date);
-}
-
 function seasonSortValue(season: string): number {
   const seasonNumber = season.match(/\d+/)?.[0];
 
@@ -162,7 +159,13 @@ export function buildPlayerDetails(
       ...match,
       season: match.season,
     })),
-  ].sort(compareMatchDateDesc);
+  ]
+    .map((match, index) => ({ match, index }))
+    .sort(
+      (a, b) =>
+        compareMatchesRecentFirst(a.match, b.match) || b.index - a.index
+    )
+    .map(({ match }) => match);
 
   const details: Record<string, PlayerDetail> = {};
 
