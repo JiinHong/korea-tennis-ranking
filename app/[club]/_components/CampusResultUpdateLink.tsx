@@ -13,7 +13,7 @@ const resultLinkLabels: Readonly<Record<string, string>> = {
 };
 
 export const CAMPUS_RESULT_UPDATE_TITLE =
-  "2026 국토정중앙배 결과가 반영됐어요";
+  "2026 경인지구 연맹전 결과가 반영됐어요";
 
 export default function CampusResultUpdateLink({
   clubSlug,

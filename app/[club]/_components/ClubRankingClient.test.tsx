@@ -131,7 +131,9 @@ describe("ClubRankingClient", () => {
     const seoultechLink = await screen.findByRole("link", {
       name: "느티나무 대회 기록 확인하기",
     });
-    expect(screen.getByText("2026 국토정중앙배 결과가 반영됐어요")).toBeDefined();
+    expect(
+      screen.getByText("2026 경인지구 연맹전 결과가 반영됐어요")
+    ).toBeDefined();
     expect(seoultechLink.getAttribute("href")).toBe(
       "/clubs/seoultech-neutinamu?gender=women"
     );
