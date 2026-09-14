@@ -21,7 +21,7 @@ function occurrence(year: number, tournamentSlug: string): Occurrence {
 }
 
 describe("tournament presentation", () => {
-  it("sorts tournaments from the latest to the earliest within a year", () => {
+  it("sorts the default annual schedule from the latest to the earliest", () => {
     const results = [
       occurrence(2026, "wemix"),
       occurrence(2026, "yanggu"),
@@ -32,12 +32,12 @@ describe("tournament presentation", () => {
     ].sort(compareTournamentOccurrences);
 
     expect(results.map((result) => result.tournamentSlug)).toEqual([
-      "wemix",
       "chuncheon",
+      "gyeongin",
       "yanggu",
       "inje",
-      "gyeongin",
       "yeongwol",
+      "wemix",
     ]);
   });
 

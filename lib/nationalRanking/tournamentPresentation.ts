@@ -5,12 +5,12 @@ type TournamentOccurrence = {
 };
 
 const DEFAULT_TOURNAMENT_ORDER = [
-  "wemix",
   "chuncheon",
+  "gyeongin",
   "yanggu",
   "inje",
-  "gyeongin",
   "yeongwol",
+  "wemix",
 ] as const;
 
 const TOURNAMENT_ORDER_2025 = [
