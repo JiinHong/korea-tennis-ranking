@@ -86,6 +86,6 @@ describe("Jeonbuk National University club confirmation", () => {
   it("bumps the managed dataset version after applying the DM confirmation", async () => {
     const dataset = await loadDataset();
 
-    expect(dataset.version).toBe("sources-2026-09-13-v21");
+    expect(dataset.version).toBe("sources-2026-10-11-v22");
   });
 });

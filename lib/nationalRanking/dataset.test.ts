@@ -571,6 +571,16 @@ describe("loadNationalRankingDataset", () => {
       resultCount: 28,
       sourceStatus: "verified",
     },
+    "chuncheon-2026-men": {
+      actualEntrants: 106,
+      resultCount: 106,
+      sourceStatus: "verified",
+    },
+    "chuncheon-2026-women": {
+      actualEntrants: 52,
+      resultCount: 52,
+      sourceStatus: "verified",
+    },
     "wemix-2025-men": {
       actualEntrants: 8,
       resultCount: 8,
@@ -633,11 +643,11 @@ describe("loadNationalRankingDataset", () => {
     },
   } as const;
 
-  it("loads the complete 40-edition source manifest", () => {
+  it("loads the complete 42-edition source manifest", () => {
     const dataset = loadNationalRankingDataset();
     const clubs = new Set(dataset.clubs.map((club) => club.slug));
 
-    expect(dataset.version).toBe("sources-2026-09-13-v21");
+    expect(dataset.version).toBe("sources-2026-10-11-v22");
     expect(dataset.tournaments).toEqual([
       { slug: "yanggu", name: "국토정중앙배(양구)", scope: "national", scopeFactor: 1 },
       { slug: "gyeongin", name: "경인지구 연맹전", scope: "regional", scopeFactor: 0.85 },
@@ -654,7 +664,7 @@ describe("loadNationalRankingDataset", () => {
     expect(dataset.editions.map((edition) => edition.key).sort()).toEqual(
       Object.keys(expectedEditions).sort()
     );
-    expect(dataset.editions).toHaveLength(40);
+    expect(dataset.editions).toHaveLength(42);
     const wemixEditions = dataset.editions.filter(
       (edition) => edition.tournamentSlug === "wemix"
     );
@@ -678,15 +688,15 @@ describe("loadNationalRankingDataset", () => {
       expect(results, editionKey).toHaveLength(expected.resultCount);
     }
 
-    expect(dataset.clubs).toHaveLength(66);
-    expect(dataset.aliases).toHaveLength(432);
-    expect(dataset.results).toHaveLength(1_467);
+    expect(dataset.clubs).toHaveLength(67);
+    expect(dataset.aliases).toHaveLength(438);
+    expect(dataset.results).toHaveLength(1_625);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "verified")
-    ).toHaveLength(1_434);
+    ).toHaveLength(1_593);
     expect(
       dataset.results.filter((result) => result.qualityStatus === "unresolved")
-    ).toHaveLength(33);
+    ).toHaveLength(32);
 
     expect(
       dataset.results.find(
@@ -1530,7 +1540,7 @@ describe("loadNationalRankingDataset", () => {
     }
   });
 
-  it("uses exact relative source refs listed by each edition", () => {
+  it("uses exact archive-relative or HTTPS source refs listed by each edition", () => {
     const dataset = loadNationalRankingDataset();
     const editionsByKey = new Map(
       dataset.editions.map((edition) => [edition.key, edition])
@@ -1547,6 +1557,10 @@ describe("loadNationalRankingDataset", () => {
       (edition) => edition.sourceRefs
     )) {
       for (const referencePart of sourceRef.split("; ")) {
+        if (referencePart.startsWith("https://")) {
+          expect(new URL(referencePart).hostname).toBe("www.tennisgame.co.kr");
+          continue;
+        }
         const relativePath = referencePart.split("#", 1)[0];
 
         expect(relativePath.startsWith("/"), sourceRef).toBe(false);
@@ -1566,6 +1580,7 @@ describe("loadNationalRankingDataset", () => {
         (edition) => edition.sourceRefs
       )) {
         for (const referencePart of sourceRef.split("; ")) {
+          if (referencePart.startsWith("https://")) continue;
           const relativePath = referencePart.split("#", 1)[0];
 
           expect(existsSync(resolve(sourceRoot, relativePath)), sourceRef).toBe(
@@ -1757,6 +1772,11 @@ describe("loadNationalRankingDataset", () => {
     expect(seoulResults.length).toBeGreaterThan(0);
 
     for (const result of seoulResults) {
+      if (result.sourceTeamName === "서울대학교 IMPACT") {
+        expect(result.clubSlug, result.sourceRef).toBe("seoul-social-impact");
+        expect(result.qualityStatus, result.sourceRef).toBe("verified");
+        continue;
+      }
       expect(result.clubSlug, result.sourceRef).toBe(
         /TNT/i.test(result.sourceTeamName)
           ? "seoul-tnt"
@@ -1964,15 +1984,14 @@ describe("loadNationalRankingDataset", () => {
         .filter((row) => row.totalPoints > 1_000)
         .map((row) => [row.clubSlug, row.totalPoints])
     ).toEqual([
-      ["sogang-sgtc", 1506],
-      ["korea-kutc", 1305],
-      ["seoultech-neutinamu", 1284],
-      ["jeonbuk-ace", 1151],
-      ["kyungpook-kutc", 1002],
+      ["sogang-sgtc", 1781],
+      ["seoultech-neutinamu", 1384],
+      ["korea-kutc", 1310],
+      ["jeonbuk-ace", 1131],
     ]);
-    expect(men[2]).toMatchObject({
+    expect(men[1]).toMatchObject({
       clubSlug: "seoultech-neutinamu",
-      totalPoints: 1284,
+      totalPoints: 1384,
     });
 
     expect(
@@ -1982,7 +2001,7 @@ describe("loadNationalRankingDataset", () => {
       )
     ).toMatchObject({
       rank: 1,
-      totalPoints: 2407,
+      totalPoints: 2327,
     });
     expect(
       rows.find(
@@ -1991,7 +2010,7 @@ describe("loadNationalRankingDataset", () => {
       )
     ).toMatchObject({
       rank: 1,
-      totalPoints: 3691,
+      totalPoints: 3711,
     });
   });
 });

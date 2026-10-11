@@ -1,13 +1,13 @@
 # National ranking source dataset v1
 
 `dataset.json` is the canonical, visually verified source manifest for the
-national university club ranking. Version `sources-2026-09-13-v21` contains the
+national university club ranking. Version `sources-2026-10-11-v22` contains the
 complete Yanggu, Gyeongin, Inje, Chuncheon, WEMIX, and Yeongwol source program:
-40 editions and 1,467 terminal result records.
+42 editions and 1,625 terminal result records.
 
 ## Expected source units
 
-The complete source program contains 40 edition/gender units. Every unit is a
+The complete source program contains 42 edition/gender units. Every unit is a
 separate men's or women's draw:
 
 | Tournament | Expected units |
@@ -15,17 +15,17 @@ separate men's or women's draw:
 | Yanggu | `yanggu-2023-men`, `yanggu-2023-women`, `yanggu-2024-men`, `yanggu-2024-women`, `yanggu-2025-men`, `yanggu-2025-women`, `yanggu-2026-men`, `yanggu-2026-women` |
 | Gyeongin | `gyeongin-2023-men`, `gyeongin-2023-women`, `gyeongin-2024-men`, `gyeongin-2024-women`, `gyeongin-2025-men`, `gyeongin-2025-women`, `gyeongin-2026-men`, `gyeongin-2026-women` |
 | Inje | `inje-2023-men`, `inje-2023-women`, `inje-2024-men`, `inje-2024-women`, `inje-2025-men`, `inje-2025-women`, `inje-2026-men`, `inje-2026-women` |
-| Chuncheon | `chuncheon-2023-men`, `chuncheon-2023-women`, `chuncheon-2024-men`, `chuncheon-2024-women`, `chuncheon-2025-men`, `chuncheon-2025-women` |
+| Chuncheon | `chuncheon-2023-men`, `chuncheon-2023-women`, `chuncheon-2024-men`, `chuncheon-2024-women`, `chuncheon-2025-men`, `chuncheon-2025-women`, `chuncheon-2026-men`, `chuncheon-2026-women` |
 | WEMIX | `wemix-2025-men`, `wemix-2025-women` |
 | Yeongwol | `yeongwol-2023-men`, `yeongwol-2023-women`, `yeongwol-2024-men`, `yeongwol-2024-women`, `yeongwol-2025-men`, `yeongwol-2025-women`, `yeongwol-2026-men`, `yeongwol-2026-women` |
 
-WEMIX is the only 2025-only exception. All 40 units above are present.
+WEMIX is the only 2025-only exception. All 42 units above are present.
 
 ## Source references
 
 The extraction archive used for this manifest was `~/Documents/테니스 랭킹`,
-but tests do not assume that personal path. All committed `sourceRefs` are
-relative to the archive root; absolute machine paths are forbidden. A PNG
+but tests do not assume that personal path. Committed `sourceRefs` are either
+relative to the archive root or an exact public HTTPS draw URL; absolute machine paths are forbidden. A PNG
 result or edition references the image path. Every PDF reference at both the
 edition and result level appends a one-based page anchor, for example
 `양구/2025/남자/2025 양구 남자.pdf#page=3`.
@@ -33,9 +33,14 @@ XLSX references append the structurally parsed sheet name, for example
 `춘천/2025/남자/2025년_남자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진`.
 Every result reference is an exact member of its edition's `sourceRefs`.
 
-Normal tests verify those relative-reference and membership contracts
+The 2026 Chuncheon gold draws use these public source URLs, inspected on 2026-10-11:
+
+- Men (106 entrants): https://www.tennisgame.co.kr/dashboard/onair/tm/415/978
+- Women (52 entrants): https://www.tennisgame.co.kr/dashboard/onair/tm/415/980
+
+Normal tests verify those reference and membership contracts
 hermetically. To additionally verify that every referenced source file exists
-in a local archive, opt in with an explicit absolute root:
+in a local archive (excluding HTTPS references), opt in with an explicit absolute root:
 
 ```bash
 NATIONAL_RANKING_SOURCE_ROOT="/absolute/path/to/테니스 랭킹" \
@@ -148,6 +153,19 @@ women's entrants. All 62 identities are verified. Administrator confirmation
 assigns `아주대 ams` (Ajou Medi Serve) to the existing 아주대학교 ATC ranking
 and `연세대 치대 테니스부` to the existing 연세대학교 YUTT ranking.
 
+Version `sources-2026-10-11-v22` adds the 2026-10-10 Chuncheon gold-division
+draws: 106 men's entrants and 52 women's entrants. The full visible round
+sequence was checked, excluding BYEs and recording first played-match losses
+as `first_match_loss`. Men: 서강대A defeated 서울대A 2–1. Women: 연세대 진리
+defeated 서울과기대 느티나무 A 2–1. Existing approved aliases and campus
+rules apply; `연세대 치대 사랑니` is included in YUTT. Administrator confirmation
+assigns `단대치대A` (and the historical `단대치대 A`) to 단국대학교 치과대학 ACE,
+`서울대 PnC` to 서울대학교 테니스부, `서울대학교 IMPACT` to the separate
+서울대학교 사회대학 IMPACT club, and the women's `강원대` to 강원대학교 백령.
+The 백령 display name is shared across both genders; 삼척캠퍼스 SHOT stays separate.
+All original entrant labels remain unchanged.
+Silver-division draws are not included.
+
 Canonical clubs consolidate visually explicit spellings plus the
 administrator-confirmed team-name families documented in the 2026-07-13
 design. These include 경기대학교 `KTF`/`Kft`/`테토남`, 연세대학교
@@ -211,7 +229,7 @@ The two editions and all 20 terminal rows are therefore verified and scoreable.
 
 ## Unresolved mapping log
 
-The policy above leaves 33 of 1,467 rows unresolved. Version
+The policy above leaves 32 of 1,625 rows unresolved. Version
 `sources-2026-07-24-v9` assigned 332 previously unresolved university-only team
 labels to the university's sole public ranking club. Version
 `sources-2026-07-24-v10` applied the administrator-reviewed Yanggu memo
@@ -237,6 +255,8 @@ Version `sources-2026-08-08-v19` adds 100 fully assigned Yeongwol rows.
 Version `sources-2026-08-20-v20` adds 133 verified Yanggu rows and keeps two
 generic Korea University labels unresolved.
 Version `sources-2026-09-13-v21` adds 62 fully assigned Gyeongin rows.
+Version `sources-2026-10-11-v22` adds 158 fully assigned Chuncheon rows and
+resolves the historical `단대치대 A` identity under administrator confirmation.
 
 | Edition | Entrants/results | Verified rows | Unresolved rows | Reason summary |
 | --- | ---: | ---: | ---: | --- |

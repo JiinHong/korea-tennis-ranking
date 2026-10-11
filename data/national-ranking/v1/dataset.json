@@ -1,5 +1,5 @@
 {
-  "version": "sources-2026-09-13-v21",
+  "version": "sources-2026-10-11-v22",
   "clubs": [
     {
       "slug": "catholic-courtrang",
@@ -388,14 +388,20 @@
     {
       "slug": "kangwon-baekryeong",
       "universityName": "강원대학교",
-      "clubName": "백령테니스",
-      "displayName": "강원대학교 백령테니스"
+      "clubName": "백령",
+      "displayName": "강원대학교 백령"
     },
     {
       "slug": "hallym-tiebreak",
       "universityName": "한림대학교",
       "clubName": "Tie-break",
       "displayName": "한림대학교 Tie-break"
+    },
+    {
+      "slug": "seoul-social-impact",
+      "universityName": "서울대학교 사회대학",
+      "clubName": "IMPACT",
+      "displayName": "서울대학교 사회대학 IMPACT"
     }
   ],
   "aliases": [
@@ -2558,6 +2564,36 @@
       "clubSlug": "yonsei-yutt",
       "normalizedAlias": "연세대학교 연세대 치대 테니스부",
       "sourceLabel": "연세대 치대 테니스부"
+    },
+    {
+      "clubSlug": "dankook-ace",
+      "normalizedAlias": "단국대학교 치과대학 단대치대a",
+      "sourceLabel": "단대치대A"
+    },
+    {
+      "clubSlug": "dankook-ace",
+      "normalizedAlias": "단국대학교 치과대학 단대치대 a",
+      "sourceLabel": "단대치대 A"
+    },
+    {
+      "clubSlug": "seoul-university",
+      "normalizedAlias": "서울대학교 서울대 pnc",
+      "sourceLabel": "서울대 PnC"
+    },
+    {
+      "clubSlug": "seoul-social-impact",
+      "normalizedAlias": "서울대학교 사회대학 서울대학교 impact",
+      "sourceLabel": "서울대학교 IMPACT"
+    },
+    {
+      "clubSlug": "kangwon-baekryeong",
+      "normalizedAlias": "강원대학교 강원대",
+      "sourceLabel": "강원대"
+    },
+    {
+      "clubSlug": "gangwon-shot",
+      "normalizedAlias": "강원대학교 삼척캠퍼스 강원대(shot)",
+      "sourceLabel": "강원대(SHOT)"
     }
   ],
   "tournaments": [
@@ -2999,6 +3035,28 @@
       "sourceStatus": "verified",
       "sourceRefs": [
         "춘천/2025/여자/2025년_여자부_32강부터_결승_전체대진.xlsx#sheet=전체 대진"
+      ]
+    },
+    {
+      "key": "chuncheon-2026-men",
+      "tournamentSlug": "chuncheon",
+      "year": 2026,
+      "gender": "men",
+      "actualEntrants": 106,
+      "sourceStatus": "verified",
+      "sourceRefs": [
+        "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978"
+      ]
+    },
+    {
+      "key": "chuncheon-2026-women",
+      "tournamentSlug": "chuncheon",
+      "year": 2026,
+      "gender": "women",
+      "actualEntrants": 52,
+      "sourceStatus": "verified",
+      "sourceRefs": [
+        "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980"
       ]
     },
     {
@@ -13707,13 +13765,13 @@
     },
     {
       "editionKey": "chuncheon-2025-men",
-      "clubSlug": null,
+      "clubSlug": "dankook-ace",
       "sourceTeamName": "단대치대 A",
       "teamLabel": "A",
       "stage": "first_match_loss",
-      "qualityStatus": "unresolved",
+      "qualityStatus": "verified",
       "sourceRef": "춘천/2025/남자/2025년_남자부_64강부터_결승_전체대진.xlsx#sheet=전체 대진",
-      "note": "Rendered 64강 row 29 shows a 0-2 loss to 고려대PETC A."
+      "note": "Rendered 64강 row 29 shows a 0-2 loss to 고려대PETC A. 관리자 확인에 따라 단국대학교 치과대학 ACE로 배정했습니다."
     },
     {
       "editionKey": "chuncheon-2025-men",
@@ -17786,6 +17844,1586 @@
       "qualityStatus": "verified",
       "sourceRef": "경인지구/2026/여자/IMG_4790.PNG",
       "note": "2026 경인지구 연맹전 모바일 최종 대진표의 연속 화면을 이어 경기대 KTF A의 마지막 진출 단계까지 추적했습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "kyungpook-kutc",
+      "sourceTeamName": "경북대 KUTC  C",
+      "teamLabel": "C",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "gachon-tiebreak",
+      "sourceTeamName": "가천대 타이브레이크 A",
+      "teamLabel": "A",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "sogang-sgtc",
+      "sourceTeamName": "서강대A",
+      "teamLabel": "A",
+      "stage": "champion",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다. 결승: 서강대A 2-1 서울대A."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "dankook-ace",
+      "sourceTeamName": "단대치대A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다. 관리자 확인에 따라 단국대학교 치과대학 ACE로 배정했습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "kau-ace",
+      "sourceTeamName": "항공대 ACE 보라매",
+      "teamLabel": "보라매",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "sungkyunkwan-stc",
+      "sourceTeamName": "성균관대 맹자",
+      "teamLabel": "맹자",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "kaist-stroke",
+      "sourceTeamName": "카이스트 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "서울과학기술대학교 느티나무D",
+      "teamLabel": "D",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "hanbat-masters",
+      "sourceTeamName": "한밭대 마스터즈 B",
+      "teamLabel": "B",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "gachon-tiebreak",
+      "sourceTeamName": "가천대 타이브레이크 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "dongguk-dutc",
+      "sourceTeamName": "동국대 DUTC 정진",
+      "teamLabel": "정진",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 오건일체",
+      "teamLabel": "오건일체",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "hallym-tiebreak",
+      "sourceTeamName": "한림대 타이브레이크",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "catholic-courtrang",
+      "sourceTeamName": "가톨릭대학교 B",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대C",
+      "teamLabel": "C",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "연세대 사랑",
+      "teamLabel": "사랑",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "paichai-prima",
+      "sourceTeamName": "배재대 프리마A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "연세대 정의",
+      "teamLabel": "정의",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 얼간이들",
+      "teamLabel": "얼간이들",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "dankook-cheonan-dkutc",
+      "sourceTeamName": "단국대(천안) DKUTC C",
+      "teamLabel": "C",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 러비스A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "myongji-mjta-mtc",
+      "sourceTeamName": "명지대a",
+      "teamLabel": "a",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "ajou-tennis",
+      "sourceTeamName": "아주대 ATC B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "kyungpook-kutc",
+      "sourceTeamName": "경북대 KUTC B",
+      "teamLabel": "B",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "sungkyunkwan-stc",
+      "sourceTeamName": "성균관대 주자",
+      "teamLabel": "주자",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "yonsei-kookdas",
+      "sourceTeamName": "연세대 쿠크다스 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "연세대 믿음",
+      "teamLabel": "믿음",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "dankook-cheonan-dkutc",
+      "sourceTeamName": "단국대(천안) DKUTC B",
+      "teamLabel": "B",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "hannam-winners",
+      "sourceTeamName": "한남대 위너스 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "jeonbuk-ace",
+      "sourceTeamName": "전북대 ACE B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "sungkyunkwan-stc",
+      "sourceTeamName": "성균관대 노자",
+      "teamLabel": "노자",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "연세대 자유",
+      "teamLabel": "자유",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "chungang-love4t",
+      "sourceTeamName": "중앙대 U",
+      "teamLabel": "U",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "고려대학교 PETC B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "연세대 진리",
+      "teamLabel": "진리",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "hanyang-hytc",
+      "sourceTeamName": "한양대학교 HYTC A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대B",
+      "teamLabel": "B",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "hufs-ace",
+      "sourceTeamName": "한국외대 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대학교 KUTC A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "서울과학기술대학교 느티나무A",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "dankook-jukjeon-dkutc",
+      "sourceTeamName": "DKUTC 범정",
+      "teamLabel": "범정",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다.기존 승인된 캠퍼스 미표기 DKUTC 배정 규칙(여자 천안·남자 죽전)을 적용했습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "dankook-jukjeon-dkutc",
+      "sourceTeamName": "단국대(죽전)DKUTC A",
+      "teamLabel": "A",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대학교 KUTC B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "koreatech-tennis",
+      "sourceTeamName": "한기대 SMASH",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대학교 KUTC C",
+      "teamLabel": "C",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "hanbat-masters",
+      "sourceTeamName": "한밭대 마스터즈 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "dankook-cheonan-dkutc",
+      "sourceTeamName": "단국대(천안) DKUTC A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "gyeonggi-ktf",
+      "sourceTeamName": "경기대학교 KTF A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 러비스D",
+      "teamLabel": "D",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "chungang-love4t",
+      "sourceTeamName": "중앙대 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "konkuk-ktc",
+      "sourceTeamName": "건국대 KTC B",
+      "teamLabel": "B",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "ulsan-utc",
+      "sourceTeamName": "울산대학교UTC",
+      "teamLabel": "",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "sejong-stc",
+      "sourceTeamName": "세종대 stc b",
+      "teamLabel": "b",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대A",
+      "teamLabel": "A",
+      "stage": "runner_up",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "hanyang-erica-hitec",
+      "sourceTeamName": "한양대에리카A",
+      "teamLabel": "A",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "sungkyunkwan-stc",
+      "sourceTeamName": "성균관대 순자",
+      "teamLabel": "순자",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "hanyang-erica-hitec",
+      "sourceTeamName": "한양대에리카B",
+      "teamLabel": "B",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "kangwon-baekryeong",
+      "sourceTeamName": "강원대 백령 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "konkuk-ktc",
+      "sourceTeamName": "건국대 KTC A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "ajou-tennis",
+      "sourceTeamName": "아주대 ATC A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "kaist-stroke",
+      "sourceTeamName": "카이스트 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "sangji-ace",
+      "sourceTeamName": "상지대 ace A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "고려대학교 PETC A",
+      "teamLabel": "A",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "hanyang-erica-hitec",
+      "sourceTeamName": "한양대에리카C",
+      "teamLabel": "C",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "ajou-tennis",
+      "sourceTeamName": "아주대 ATC C",
+      "teamLabel": "C",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "uos-approach",
+      "sourceTeamName": "시립대 B",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "kyungpook-kutc",
+      "sourceTeamName": "경북대 KUTC A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "dongguk-dutc",
+      "sourceTeamName": "동국대 DUTC 자비",
+      "teamLabel": "자비",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 굿샷 흑마",
+      "teamLabel": "흑마",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "kumoh-kotc",
+      "sourceTeamName": "금오공대 KOTC",
+      "teamLabel": "",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "연세대 지혜",
+      "teamLabel": "지혜",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "sejong-stc",
+      "sourceTeamName": "세종대 STC A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "ajou-tennis",
+      "sourceTeamName": "아주대 ATC D",
+      "teamLabel": "D",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "sangmyung-tesla",
+      "sourceTeamName": "상명대 테슬라",
+      "teamLabel": "",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "연세대 치대 사랑니",
+      "teamLabel": "사랑니",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다.관리자 확인에 따라 연세대 치대 성적을 YUTT에 포함했습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "kau-ace",
+      "sourceTeamName": "항공대 ACE 송골매",
+      "teamLabel": "송골매",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "hufs-ace",
+      "sourceTeamName": "한국외대 A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "chungang-love4t",
+      "sourceTeamName": "중앙대C",
+      "teamLabel": "C",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "sungkyunkwan-stc",
+      "sourceTeamName": "성균관대 공자",
+      "teamLabel": "공자",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "uos-approach",
+      "sourceTeamName": "시립대 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "hanyang-hytc",
+      "sourceTeamName": "한양대학교 HYTC C",
+      "teamLabel": "C",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "연세대 평화",
+      "teamLabel": "평화",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "inu-uitc",
+      "sourceTeamName": "인천대A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "kangwon-baekryeong",
+      "sourceTeamName": "강원대 백령 A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "ajou-tennis",
+      "sourceTeamName": "아주대 ATC E",
+      "teamLabel": "E",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대 PnC",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다. 관리자 확인에 따라 서울대학교 테니스부로 배정했습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "hongik-hitc",
+      "sourceTeamName": "홍익대 HITC A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "sogang-sgtc",
+      "sourceTeamName": "서강대B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "seoul-social-impact",
+      "sourceTeamName": "서울대학교 IMPACT",
+      "teamLabel": "",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다. 관리자 확인에 따라 별도 동아리 서울대학교 사회대학 IMPACT로 배정했습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "konkuk-ktc",
+      "sourceTeamName": "건국대 KTC C",
+      "teamLabel": "C",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "hanbat-masters",
+      "sourceTeamName": "한밭대 마스터즈 C",
+      "teamLabel": "C",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "gyeonggi-ktf",
+      "sourceTeamName": "경기대 새싹",
+      "teamLabel": "새싹",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 굿샷 백마",
+      "teamLabel": "백마",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "서울과학기술대학교 느티나무C",
+      "teamLabel": "C",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 러비스C",
+      "teamLabel": "C",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "서울과학기술대학교 느티나무b",
+      "teamLabel": "b",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "konkuk-ktc",
+      "sourceTeamName": "건국대 KTC D",
+      "teamLabel": "D",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "jeonbuk-ace",
+      "sourceTeamName": "전북대 ace a",
+      "teamLabel": "a",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "yonsei-kookdas",
+      "sourceTeamName": "연세대 쿠크다스 B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "suwon-ace",
+      "sourceTeamName": "수원대 ACE",
+      "teamLabel": "",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "catholic-courtrang",
+      "sourceTeamName": "가톨릭대학교 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "jeonbuk-topspin",
+      "sourceTeamName": "전북대 탑스핀",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "gangwon-shot",
+      "sourceTeamName": "강원대(SHOT)",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다. 관리자 확인에 따라 강원대학교 삼척캠퍼스 SHOT으로 배정했습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "chungbuk-ace",
+      "sourceTeamName": "충북대A",
+      "teamLabel": "A",
+      "stage": "round_of_64",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "myongji-mjta-mtc",
+      "sourceTeamName": "명지대B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-men",
+      "clubSlug": "hanyang-hytc",
+      "sourceTeamName": "한양대학교 HYTC B",
+      "teamLabel": "B",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/978",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "hanyang-hytc",
+      "sourceTeamName": "한양대학교 HYTC A",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "hanyang-hytc",
+      "sourceTeamName": "한양대학교 HYTC B",
+      "teamLabel": "B",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "연세대 평화",
+      "teamLabel": "평화",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "hongik-hitc",
+      "sourceTeamName": "홍익대 HITC B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "dankook-cheonan-dkutc",
+      "sourceTeamName": "DKUTC",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다.기존 승인된 캠퍼스 미표기 DKUTC 배정 규칙(여자 천안·남자 죽전)을 적용했습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "hannam-winners",
+      "sourceTeamName": "한남대학교 위너스A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대러비스A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "서울과기대 느티나무B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "hanyang-erica-hitec",
+      "sourceTeamName": "한양대에리카A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "sungkyunkwan-stc",
+      "sourceTeamName": "성균관대 맹자",
+      "teamLabel": "맹자",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "ajou-tennis",
+      "sourceTeamName": "아주대 ATC B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "catholic-courtrang",
+      "sourceTeamName": "가톨릭대 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "jeonbuk-ace",
+      "sourceTeamName": "전북대 ACE",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 굿샷B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "ewha-tennis",
+      "sourceTeamName": "이화여대 이화테니스 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "seoul-university",
+      "sourceTeamName": "서울대A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "chungnam-goodshot",
+      "sourceTeamName": "충남대 굿샷A",
+      "teamLabel": "A",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "inu-uitc",
+      "sourceTeamName": "인천대 UITC A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "ajou-tennis",
+      "sourceTeamName": "아주대 ATC A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "dankook-cheonan-dkutc",
+      "sourceTeamName": "단국대(천안) DKUTC A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "hanyang-erica-hitec",
+      "sourceTeamName": "한양대에리카B",
+      "teamLabel": "B",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대러비스 C",
+      "teamLabel": "C",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "hufs-ace",
+      "sourceTeamName": "한국외대",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "연세대 진리",
+      "teamLabel": "진리",
+      "stage": "champion",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다. 결승: 연세대 진리 2-1 서울과기대 느티나무 A."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "ajou-tennis",
+      "sourceTeamName": "아주대 ATC C",
+      "teamLabel": "C",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "chungang-love4t",
+      "sourceTeamName": "중앙대A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "kau-ace",
+      "sourceTeamName": "항공대",
+      "teamLabel": "",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "konkuk-ktc",
+      "sourceTeamName": "건국대A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "dankook-cheonan-dkutc",
+      "sourceTeamName": "단국대(천안) DKUTC B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "yonsei-kookdas",
+      "sourceTeamName": "연세대 쿠크다스 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "sogang-sgtc",
+      "sourceTeamName": "서강대B",
+      "teamLabel": "B",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대러비스B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "seoultech-neutinamu",
+      "sourceTeamName": "서울과기대 느티나무 A",
+      "teamLabel": "A",
+      "stage": "runner_up",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "gachon-tiebreak",
+      "sourceTeamName": "가천대 타이브레이크 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "sejong-stc",
+      "sourceTeamName": "세종대학교 STC A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "ewha-smash",
+      "sourceTeamName": "이화여대 스매시",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "연세대 정의",
+      "teamLabel": "정의",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "dongguk-dutc",
+      "sourceTeamName": "동국대 DUTC",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "suwon-ace",
+      "sourceTeamName": "수원대 ACE",
+      "teamLabel": "",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "sogang-sgtc",
+      "sourceTeamName": "서강대A",
+      "teamLabel": "A",
+      "stage": "quarterfinal",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "korea-petc",
+      "sourceTeamName": "고려대학교 PETC",
+      "teamLabel": "",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대 KUTC B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "jeonbuk-topspin",
+      "sourceTeamName": "전북대 탑스핀",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "yonsei-yutt",
+      "sourceTeamName": "연세대 자유",
+      "teamLabel": "자유",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "kangwon-baekryeong",
+      "sourceTeamName": "강원대",
+      "teamLabel": "",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다. 관리자 확인에 따라 강원대학교 백령으로 배정했습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "sungkyunkwan-stc",
+      "sourceTeamName": "성균관대 공자",
+      "teamLabel": "공자",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "paichai-prima",
+      "sourceTeamName": "배재대 프리마 A",
+      "teamLabel": "A",
+      "stage": "round_of_32",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "hanbat-masters",
+      "sourceTeamName": "한밭대 마스터즈 A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "kyunghee-kuta-lovice",
+      "sourceTeamName": "경희대 KUTA",
+      "teamLabel": "",
+      "stage": "round_of_16",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "hongik-hitc",
+      "sourceTeamName": "홍익대 HITC A",
+      "teamLabel": "A",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "korea-kutc",
+      "sourceTeamName": "고려대학교 KUTC A",
+      "teamLabel": "A",
+      "stage": "semifinal",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
+    },
+    {
+      "editionKey": "chuncheon-2026-women",
+      "clubSlug": "ewha-tennis",
+      "sourceTeamName": "이화여대 이화테니스B",
+      "teamLabel": "B",
+      "stage": "first_match_loss",
+      "qualityStatus": "verified",
+      "sourceRef": "https://www.tennisgame.co.kr/dashboard/onair/tm/415/980",
+      "note": "2026-10-10 춘천소양강배 대학부 금배부의 전체 본선 라운드를 2026-10-11 확인해 마지막 진출 단계를 기록했습니다. 부전승은 실제 경기 승수에 포함하지 않았습니다."
     }
   ]
 }

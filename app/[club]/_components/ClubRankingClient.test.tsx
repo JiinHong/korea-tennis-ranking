@@ -132,7 +132,7 @@ describe("ClubRankingClient", () => {
       name: "느티나무 대회 기록 확인하기",
     });
     expect(
-      screen.getByText("2026 경인지구 연맹전 결과가 반영됐어요")
+      screen.getByText("2026 춘천소양강배 결과가 반영됐어요")
     ).toBeDefined();
     expect(seoultechLink.getAttribute("href")).toBe(
       "/clubs/seoultech-neutinamu?gender=women"
