@@ -4,15 +4,11 @@ import { describe, expect, it } from "vitest";
 import SiteFooter from "./SiteFooter";
 
 describe("SiteFooter", () => {
-  it("운영자와 랭킹 데이터 문의 경로를 모든 페이지에서 안내한다", () => {
+  it("운영자 서명 없이 랭킹 데이터 문의 경로를 안내한다", () => {
     render(<SiteFooter />);
 
-    expect(screen.getByText("koreatennisranking.com")).toBeTruthy();
-    expect(
-      screen.getByRole("link", { name: "Jinhong Park" }).getAttribute("href")
-    ).toBe(
-      "https://billowy-nape-057.notion.site/Park-Jin-Hong-3ab70abb9b0980dfba4dd310a3439f3a?source=copy_link"
-    );
+    expect(screen.queryByText("koreatennisranking.com")).toBeNull();
+    expect(screen.queryByText("Jinhong Park")).toBeNull();
     expect(
       screen
         .getByRole("link", { name: "랭킹 데이터 관련 문의" })

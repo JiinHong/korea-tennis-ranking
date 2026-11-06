@@ -6392,16 +6392,6 @@ button:disabled {
   margin: 0;
 }
 
-.site-footer-credit {
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.site-footer-credit strong {
-  color: #f5f7f6;
-  font-weight: 800;
-}
-
 .site-footer a {
   color: inherit;
   text-decoration-color: rgba(255, 255, 255, 0.45);
@@ -6428,7 +6418,6 @@ button:disabled {
 
 .site-footer-inquiry {
   display: inline-block;
-  margin-top: 12px;
   font-size: 12px;
   font-weight: 650;
 }
@@ -6443,10 +6432,6 @@ button:disabled {
   .site-footer-inner {
     width: min(100% - 32px, 1120px);
     padding: 30px 0 34px;
-  }
-
-  .site-footer-credit {
-    font-size: 12px;
   }
 
   .site-footer-bottom {
